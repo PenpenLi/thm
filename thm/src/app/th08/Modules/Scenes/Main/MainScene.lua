@@ -12,6 +12,13 @@ function MainScene:onCreate()
         :move(display.cx, display.cy + 200)
         :addTo(self)
 
+    local titleLabel = thstg.UI.newLabel({
+        text = "Label 的 一个测试",
+        x = 110,
+        y = 30,   
+    })
+    :addTo(self)
+
 end
 
 return MainScene
