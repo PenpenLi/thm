@@ -13,9 +13,12 @@ function MainScene:onCreate()
         :addTo(self)
 
     local titleLabel = thstg.UI.newLabel({
-        text = "Label 的 一个测试",
+        text = "Label 的 一XX个测试",
         x = 110,
-        y = 30,   
+        y = 30, 
+        style = {
+            --font = "Arial",
+        }
     })
     :addTo(self)
 

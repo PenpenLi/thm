@@ -59,8 +59,7 @@ HTML_COLOR_GRAY_D = "#DDDDDD"
 HTML_COLOR_GRAY_E = "#EEEEEE"
 
 ----字体相关--------------------------------
---FIXME:因为没有ResManager,所以先注释掉
---FONT_FACE = ResManager.getResSub(ResType.FONT, FontType.TTF, "default")
+FONT_FACE = "Arial" --使用cocos2d默认字体 --ResManager.getResSub(ResType.FONT, FontType.TTF, "default")
 
 FONT_SIZE_SMALLER = 16
 FONT_SIZE_SMALL = 18

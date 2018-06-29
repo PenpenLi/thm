@@ -15,19 +15,17 @@
 
 ]]
 
---[[基础部件basic]]--
---Style
+--[[控件样式]]--
 require "thstg.UI.Style"
 
---Label
+--[[基础部件basic]]--
+require "thstg.UI.basic.ControlButton"
 require "thstg.UI.basic.Label"
-
--- Image
 require "thstg.UI.basic.Image"
-
+require "thstg.UI.basic.TabBar"
 
 --[[扩展部件extends]]--
-
+require "thstg.UI.extends.ToggleButton"
 
 --[[公共部件public]]--
 

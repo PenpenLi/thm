@@ -11,7 +11,7 @@ function ccLabel:updateCommomStyle(style)
 	end
 	if style.outline then
 		if style.outline > 0 then
-			local outlineColor = style.outlineColor or thstg.UI.COLOR_BLACK
+			local outlineColor = style.outlineColor or COLOR_BLACK
 			self:enableOutline(cc.c4b(outlineColor.r, outlineColor.g, outlineColor.b, outlineColor.a), style.outline)
 		end
 	end
@@ -25,7 +25,7 @@ function ccLabel:updateCommomStyle(style)
 		self:setAdditionalKerning(style.additionalKerning)
 	end
 	if style.shadow then
-		local defaultStyle = thstg.UI.newTextStyle()
+		local defaultStyle = newTextStyle()
 		self:enableShadow(style.shadowColor or defaultStyle.shadowColor, style.shadowOffset or  defaultStyle.shadowOffset, style.shadowBlurRadius or defaultStyle.shadowBlurRadius)
 	end
 end
@@ -36,8 +36,8 @@ LABEL_DEFAULT_PARAMS = {
 	y = 0,
 	width = 0,
 	height = 0,
-	anchorPoint = thstg.UI.POINT_LEFT_BOTTOM,
-	style = thstg.UI.newTextStyle()
+	anchorPoint = POINT_LEFT_BOTTOM,
+	style = newTextStyle()
 }
 
 --几种不同类型Label的通用初始化部分
@@ -181,7 +181,7 @@ function newLabel(params)
 
 	function label:setColor(value)
 		if type(value) == "string" then
-			value = thstg.UI.getColorHtml(value)
+			value = getColorHtml(value)
 		end
 		label:setTextColor(value)
 	end
