@@ -10,13 +10,14 @@
  */
  ]]
 
+ 
 --核心
 require "thstg.core.THStg"
 
 --通用库
 
 --UI库
-require "thstg.UI.init"
+require "thstg.ui.Init"
 
 --辅助库
 require "thstg.utils.FileUtil"
