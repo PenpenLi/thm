@@ -39,6 +39,9 @@ luac.out
 *.x86_64
 *.hex
 
+._.DS_Store
+.DS_Store
+
 .vscode
 .settings
 .history
@@ -47,3 +50,4 @@ luac.out
 .cocos-project.json
 frameworks
 runtime
+simulator
