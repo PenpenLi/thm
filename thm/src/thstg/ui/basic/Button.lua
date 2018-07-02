@@ -1,4 +1,4 @@
-﻿module("thstg.UI", package.seeall)
+﻿module("THSTG.UI", package.seeall)
 
 --默认皮肤
 BUTTON_DEFAULT_PARAMS = {

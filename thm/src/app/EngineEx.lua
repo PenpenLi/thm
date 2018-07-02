@@ -1,50 +1,53 @@
-local EngineEx = class("EngineEx")
+local M = class("EngineEx")
 
-function AppBase:createView(name)
-    for _, root in ipairs(self.configs_.viewsRoot) do
-        local packageName = string.format("%s.%s", root, name)
-        local status, view = xpcall(function()
-                return require(packageName)
-            end, function(msg)
-            if not string.find(msg, string.format("'%s' not found:", packageName)) then
-                print("load view error: ", msg)
-            end
-        end)
-        local t = type(view)
-        if status and (t == "table" or t == "userdata") then
-            return view:create(self, name)
-        end
+function M:ctor(configs)
+    self._configs = self._configs or {}
+
+    for k, v in pairs(configs or {}) do
+        self._configs[k] = v
     end
-    error(string.format("AppBase:createView() - not found view \"%s\" in search paths \"%s\"",
-        name, table.concat(self.configs_.viewsRoot, ",")), 0)
+
+    if DEBUG > 1 then
+        dump(self._configs, "AppBase configs")
+    end
+
+    if CC_SHOW_FPS then
+        cc.Director:getInstance():setDisplayStats(true)
+    end
+
 end
 
-function EngineEx:showWithScene(transition, time, more)
-    self:setVisible(true)
-    local scene = display.newScene(self.name_)
-    scene:addChild(self)
-    display.runScene(scene, transition, time, more)
-    return self
-end
+
+-- function M:showWithScene(transition, time, more)
+--     self:setVisible(true)
+--     local scene = display.newScene(self.name_)
+--     scene:addChild(self)
+--     display.runScene(scene, transition, time, more)
+--     return self
+-- end
 
 
-function EngineEx:enterScene(scene)
-    local view = self:createView(sceneName)
-    view:showWithScene(transition, time, more)
-    return view
-end
+-- function M:enterScene(scene)
+--     local view = self:createView(sceneName)
+--     view:showWithScene(transition, time, more)
+--     return view
+-- end
 
 --TODO:游戏
 
-function EngineEx:run(gameName)
-    local gamepath = "app" .. gameName .. "Game"
-    local game = require(gamepath)
+function M:run()
+    local gamePath = self._configs.gameRoot .. "." ..self._configs.defaultGameName
+    local game = require(gamePath):create()
 
     --初始化环境
-
-
+    local state = game:createEnv(self._configs.gameRoot)
     --创建场景
-    local mainScene = game:onScene()
+    local mainScene,transition = game:createScene()
 
-    self:enterScene(initSceneName)
+    --运行
+    mainScene:showWithScene(transition)
+    
+
 end
+
+return M

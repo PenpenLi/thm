@@ -1,4 +1,4 @@
-﻿module("thstg.UI", package.seeall)
+﻿module("THSTG.UI", package.seeall)
 
 --常用的AnchorPoint------------------------------------
 --居中
@@ -112,15 +112,15 @@ function newTextStyle(params)
 
 	local format = {}
 	--字体[string]
-	format.font = params.font or thstg.UI.FONT_FACE
+	format.font = params.font or FONT_FACE
 	--字号[number]
-	format.size = params.size or thstg.UI.FONT_SIZE_SMALL
+	format.size = params.size or FONT_SIZE_SMALL
 	--颜色[table]
-	format.color = params.color or clone(thstg.UI.COLOR_WHITE_F3)
+	format.color = params.color or clone(COLOR_WHITE_F3)
 	--水平对齐方式[cocos type]
-	format.halign = params.halign or thstg.UI.TEXT_HALIGN_LEFT
+	format.halign = params.halign or TEXT_HALIGN_LEFT
 	--垂直对齐方式[cocos type]
-	format.valign = params.valign or thstg.UI.TEXT_VALIGN_CENTER
+	format.valign = params.valign or TEXT_VALIGN_CENTER
 	--行间距[boolean, number]，为false时表示默认行距，为数值时表示指定行距
 	format.lineHeight = params.lineHeight or false
 	--字间距[boolean, number]，为false时表示默认字距，为数值时表示指定字距
@@ -130,10 +130,10 @@ function newTextStyle(params)
 	--描边大小[number]，为0时表示不描边
 	format.outline = params.outline or 0
 	--描边颜色[table]
-	format.outlineColor = params.outlineColor or clone(thstg.UI.COLOR_BLACK)
+	format.outlineColor = params.outlineColor or clone(COLOR_BLACK)
 	--投影
 	format.shadow = params.shadow or false
-	format.shadowColor = params.shadowColor or thstg.UI.getColorHtml("#121212")
+	format.shadowColor = params.shadowColor or getColorHtml("#121212")
 	format.shadowOffset = params.shadowOffset or cc.size(2, -2)
 	format.shadowBlurRadius = params.shadowBlurRadius or 20
 
@@ -202,7 +202,7 @@ end
 --将html格式的颜色字符串转换成c3b格式的颜色对象，如：UI.htmlColor2C3b("#FFFFFF") -> {r=255, g=255, b=255}
 function htmlColor2C3b(htmlColor)
 	local len = #htmlColor
-	assert((len == 7 or len == 9) and string.sub(htmlColor, 1, 1) == "#", "thstg.UI.htmlColor2C3b format error!"..tostring(htmlColor))
+	assert((len == 7 or len == 9) and string.sub(htmlColor, 1, 1) == "#", "htmlColor2C3b format error!"..tostring(htmlColor))
 
 	local r = tonumber("0x"..string.sub(htmlColor, 2, 3))
 	local g = tonumber("0x"..string.sub(htmlColor, 4, 5))
@@ -214,7 +214,7 @@ end
 --将html格式的颜色字符串转换成c3b格式的颜色对象，如：UI.htmlColor2C4b("#FFFFFFFF") -> {r=255, g=255, b=255, a=255}
 function htmlColor2C4b(htmlColor)
 	local len = #htmlColor
-	assert((len == 7 or len == 9) and string.sub(htmlColor, 1, 1) == "#", "thstg.UI.htmlColor2C4b format error!")
+	assert((len == 7 or len == 9) and string.sub(htmlColor, 1, 1) == "#", "htmlColor2C4b format error!")
 
 	local r = tonumber("0x"..string.sub(htmlColor, 2, 3))
 	local g = tonumber("0x"..string.sub(htmlColor, 4, 5))

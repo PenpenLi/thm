@@ -1,4 +1,4 @@
-module("thstg.UI", package.seeall)
+module("THSTG.UI", package.seeall)
 
 TOUCH_DOWN = "touch_down"
 DRAG_INSIDE = "drag_inside"

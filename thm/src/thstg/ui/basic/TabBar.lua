@@ -1,4 +1,4 @@
-module("thstg.UI", package.seeall)
+module("THSTG.UI", package.seeall)
 
 --横向处于界面上方
 TABBAR_DIRECTION_HT = 1
@@ -79,7 +79,7 @@ TABBAR_DEFAULT_PARAMS = {
 			label = newTabbarTextStyle()
 		},
 		disabled = {
-			label = newTabbarTextStyle({color = thstg.COLOR_GRAY_C, })
+			label = newTabbarTextStyle({color = COLOR_GRAY_C, })
 		},
 	},
 }

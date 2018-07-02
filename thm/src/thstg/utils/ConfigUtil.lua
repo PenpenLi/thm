@@ -1,1 +1,1 @@
-﻿module("thstg.ConfigUtil", package.seeall)
+﻿module("THSTG.UTILS.ConfigUtil", package.seeall)

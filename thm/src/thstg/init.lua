@@ -9,10 +9,14 @@
  * @Last Modified log: 
  */
  ]]
+THSTG = THSTG or {}
+THSTG.Game = require "thstg.Game"
 
- 
 --核心
-require "thstg.core.THStg"
+require "thstg.core.THSTG"
+
+--MVC
+require "thstg.mvc.Init"
 
 --通用库
 

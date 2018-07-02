@@ -1,4 +1,4 @@
-﻿module("thstg.UI", package.seeall)
+﻿module("THSTG.UI", package.seeall)
 
 --扩展cc.Label
 local ccLabel = cc.Label
@@ -101,7 +101,7 @@ function newLabel(params)
 	assert(type(params) == "table", "[UI] newLabel() invalid params")
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
-	thstg.TableUtil.mergeA2B(params, finalParams)
+	THSTG.UTILS.TableUtil.mergeA2B(params, finalParams)
 
 	-- local label = cc.Label:createWithTTF(
 	-- 	finalParams.text,

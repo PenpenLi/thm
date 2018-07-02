@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 /**
  * @Author: cnscj 
  * @Version: v1.0 
@@ -16,16 +16,17 @@
 ]]
 
 --[[控件样式]]--
-require "thstg.UI.Style"
+require "thstg.ui.Style"
 
 --[[基础部件basic]]--
-require "thstg.UI.basic.ControlButton"
-require "thstg.UI.basic.Label"
-require "thstg.UI.basic.Image"
-require "thstg.UI.basic.TabBar"
+require "thstg.ui.basic.CCComponent"
+require "thstg.ui.basic.ControlButton"
+require "thstg.ui.basic.Label"
+require "thstg.ui.basic.Image"
+require "thstg.ui.basic.TabBar"
 
 --[[扩展部件extends]]--
-require "thstg.UI.extends.ToggleButton"
+require "thstg.ui.extends.ToggleButton"
 
 --[[公共部件public]]--
 

@@ -1,4 +1,4 @@
-﻿module("thstg.TableUtil", package.seeall)
+﻿module("THSTG.UTILS.TableUtil", package.seeall)
 
 
 -- 如果a和b的key值都有，a的值会覆盖b的值。
