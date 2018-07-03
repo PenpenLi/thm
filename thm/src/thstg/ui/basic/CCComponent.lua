@@ -36,6 +36,13 @@ function newSprite(params)
 		sp:setScaleY(params.height / size.height)
 		--print(168, params.height, size.height)
 	end
+	if params.frame then
+		sp:setTextureRect(params.frame)
+	end
+
+	function sp:setRect(frame)
+		sp:setTextureRect(frame)
+	end
 	function sp:setSource(src)
 		sp:setTexture(src)
 	end
@@ -72,7 +79,7 @@ function newScale9Sprite(params)
 	assert(type(params) == "table", "[UI] newScale9Sprite() invalid params")
 	params.style = params.style or {}
 	local scale9Rect = params.style.scale9Rect or {left = 0, top = 0, right = 0, bottom = 0}
-	local src = params.style.src or ResManager.getEmptyImg()
+	local src = params.style.src or ""--ResManager.getEmptyImg()
 
 	--默认
 	local skinSize = {}
