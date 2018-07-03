@@ -1,4 +1,4 @@
-local M = class("THSTG.MVC.View")
+local M = class("View")
 
 function M:ctor()
 	--显示时被添加到的父级对象

@@ -1,4 +1,4 @@
-local M = class("Controller",THSTG.MVC.Controller)
+local M = class("Controller",THSTG.Controller)
 
 
 return M

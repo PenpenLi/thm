@@ -9,16 +9,12 @@
  * @Last Modified log: 
  */
  ]]
-THSTG = THSTG or {}
-THSTG.Game = require "thstg.Game"
 
 --核心
-require "thstg.core.THSTG"
+require "thstg.core.Init"
 
 --MVC
 require "thstg.mvc.Init"
-
---通用库
 
 --UI库
 require "thstg.ui.Init"
@@ -26,3 +22,4 @@ require "thstg.ui.Init"
 --辅助库
 require "thstg.utils.FileUtil"
 require "thstg.utils.TableUtil"
+require "thstg.utils.UIDUtil"

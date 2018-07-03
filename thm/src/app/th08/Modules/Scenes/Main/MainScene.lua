@@ -30,6 +30,8 @@ function MainScene:onCreate()
     })
     :addTo(self)
 
+    print("Event Type:",EventType.GAME_TEST)
+    --THSTG.Dispatcher:dispatchEvent(EventType.GAME_TEST)
 end
 
 return MainScene

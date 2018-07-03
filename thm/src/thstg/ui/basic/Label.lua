@@ -101,7 +101,7 @@ function newLabel(params)
 	assert(type(params) == "table", "[UI] newLabel() invalid params")
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
-	THSTG.UTILS.TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	-- local label = cc.Label:createWithTTF(
 	-- 	finalParams.text,

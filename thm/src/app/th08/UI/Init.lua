@@ -1,1 +1,1 @@
-require "UI.Basic.Label"
+require "UI.Label"
