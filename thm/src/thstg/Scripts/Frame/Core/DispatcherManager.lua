@@ -1,4 +1,4 @@
-local EventDispatcher = require "thstg.core.EventDispatcher"
+local EventDispatcher = require "thstg.Scripts.Frame.Core.EventDispatcher"
 
 local M = {}
 

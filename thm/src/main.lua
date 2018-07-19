@@ -9,7 +9,6 @@ local function main()
     require("app.EngineEx"):create({
         gameRoot = "app.th08",
         defaultGameName = "TH08"
-
     }):run()
 end
 

@@ -15,8 +15,8 @@ BUTTON_DEFAULT_PARAMS = {
 			label = newTextStyle({
 				size = FONT_SIZE_SMALL,
 				color = getColorType("color_white"),
-			-- outline = 1,
-			-- outlineColor = getColorHtml("#f0e6a9"),
+			outline = 1,
+			outlineColor = getColorHtml("#f0e6a9"),
 			}),
 			skin = {
 				-- src = ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
@@ -27,8 +27,8 @@ BUTTON_DEFAULT_PARAMS = {
 			label = newTextStyle({
 				size = FONT_SIZE_SMALL,
 				color = getColorType("color_white"),
-			-- outline = 1,
-			-- outlineColor = getColorHtml("#f0e6a9"),
+			outline = 1,
+			outlineColor = getColorHtml("#f0e6a9"),
 			}),
 			skin = {
 				-- src = ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
@@ -39,8 +39,8 @@ BUTTON_DEFAULT_PARAMS = {
 			label = newTextStyle({
 				size = FONT_SIZE_SMALL,
 				color = getColorHtml("#5c5c5a"),
-			-- outline = 1,
-			-- outlineColor = getColorHtml("#cdc8c8"),
+			outline = 1,
+			outlineColor = getColorHtml("#cdc8c8"),
 			}),
 			skin = {
 				src = "",
@@ -449,8 +449,8 @@ blueFlowerStyle = {
 		label = newTextStyle({
 			size = FONT_SIZE_NORMAL,
 			color = getColorType("btn_blue"),
-		-- outline = 1,
-		-- outlineColor = getColorHtml("#aac4d2"),
+		outline = 1,
+		outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
@@ -461,8 +461,8 @@ blueFlowerStyle = {
 		label = newTextStyle({
 			size = FONT_SIZE_NORMAL,
 			color = getColorType("btn_blue"),
-		-- outline = 1,
-		-- outlineColor = getColorHtml("#aac4d2"),
+		outline = 1,
+		outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
@@ -803,7 +803,7 @@ function newButton(params)
 		playSound = params.playSound
 	end
 
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	if default_flag == false and params.style then
 		local paramsStyleNormal = params.style.normal

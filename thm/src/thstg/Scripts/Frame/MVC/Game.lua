@@ -1,3 +1,4 @@
+
 local M = class("Game")
 
 function M:ctor()

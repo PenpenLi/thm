@@ -232,7 +232,7 @@ getColorHtml = htmlColor2C3b
 local t_color_style = nil
 function getColorType(key)
 	if not t_color_style then
-		t_color_style = require("Configs.Handwork.ColorStyle")
+		t_color_style = require("thstg.Scripts.Config.ColorStyle")
 	end
 	local color = t_color_style[key] or t_color_style.text_normal1
 	if t_color_style[key] == nil then
@@ -242,7 +242,7 @@ end
 
 function getColorTypeEx(key)
 	if not t_color_style then
-		t_color_style = require("Configs.Handwork.ColorStyle")
+		t_color_style = require("thstg.Scripts.Config.ColorStyle")
 	end
 	return t_color_style[key] or t_color_style.text_normal1
 end

@@ -279,3 +279,8 @@ function mergeNTable(...)
 	end
 	return whole
 end
+
+--是否为空表
+function isTableEmpty(t)
+	return _G.next(t) == nil
+end
