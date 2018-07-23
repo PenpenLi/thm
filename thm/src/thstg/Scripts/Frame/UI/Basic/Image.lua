@@ -50,7 +50,7 @@ function newImage(params)
 		resType = ccui.TextureResType.localType,
 		scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 	}
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 	finalParams.width = params.width
 	finalParams.height = params.height
 	if params.style then

@@ -172,14 +172,16 @@ function newButton(params)
 	local function onTouch(sender, eventType)
 		local event = {x = 0, y = 0}
         event.target = sender
-        
+		--获取起始坐标
+		local beganPos = sender:getTouchBeganPosition()
+		event.x,event.y = beganPos.x,beganPos.y
+
         if eventType == ccui.TouchEventType.began then
-            --获取起始坐标
-            local beganPos = sender:getTouchBeganPosition()
 			event.name = "began"
-        elseif eventType == ccui.TouchEventType.moved then
-            --获取移动坐标
-            local curPos = sender:getTouchMovePosition()
+		elseif eventType == ccui.TouchEventType.moved then
+			--获取移动坐标
+			local curPos = sender:getTouchMovePosition()
+			event.x,event.y = curPos.x,curPos.y
 			event.name = "moved"
 		elseif eventType == ccui.TouchEventType.ended then	
 			event.name = "ended"
