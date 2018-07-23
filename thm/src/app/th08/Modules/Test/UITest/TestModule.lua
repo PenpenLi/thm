@@ -83,7 +83,7 @@ function M:onCreate()
 			event.name = "cancelled"
         end
         --OnTouch
-        
+        dump(15,event)
     end
     )
 	btn2:setEnabled(true)

@@ -28,3 +28,6 @@ require "thstg.Scripts.Frame.Utils.FileUtil"
 require "thstg.Scripts.Frame.Utils.TableUtil"
 require "thstg.Scripts.Frame.Utils.UIDUtil"
 require "thstg.Scripts.Frame.Utils.DebugUtil"
+
+--常用函数替换
+require "thstg.Scripts.Function"

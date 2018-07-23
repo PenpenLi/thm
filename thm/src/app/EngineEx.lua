@@ -33,7 +33,6 @@ end
 --     return view
 -- end
 
---TODO:游戏
 
 function M:run()
     local gamePath = self._configs.gameRoot .. "." ..self._configs.defaultGameName
