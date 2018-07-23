@@ -1,4 +1,4 @@
-﻿module("THSTG.UI", package.seeall)
+module("THSTG.UI", package.seeall)
 
 --扩展cc.Label
 local ccLabel = cc.Label

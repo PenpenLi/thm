@@ -1,4 +1,4 @@
-﻿module("THSTG.UI", package.seeall)
+module("THSTG.UI", package.seeall)
 
 --默认皮肤
 BUTTON_DEFAULT_PARAMS = {
@@ -15,36 +15,36 @@ BUTTON_DEFAULT_PARAMS = {
 			label = newTextStyle({
 				size = FONT_SIZE_SMALL,
 				color = getColorType("color_white"),
-			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+				outline = 1,
+				outlineColor = getColorHtml("#f0e6a9"),
 			}),
 			skin = {
-				-- src = ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
-				-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+				src = "",
+				scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 			}
 		},
 		selected = {
 			label = newTextStyle({
 				size = FONT_SIZE_SMALL,
 				color = getColorType("color_white"),
-			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+				outline = 1,
+				outlineColor = getColorHtml("#f0e6a9"),
 			}),
 			skin = {
-				-- src = ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
-				-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+				src = "",
+				scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 			}
 		},
 		disabled = {
 			label = newTextStyle({
 				size = FONT_SIZE_SMALL,
 				color = getColorHtml("#5c5c5a"),
-			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+				outline = 1,
+				outlineColor = getColorHtml("#cdc8c8"),
 			}),
 			skin = {
 				src = "",
-				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+				scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 			}
 		},
 	}
@@ -927,7 +927,7 @@ function newButton(params)
 	function btn:updateSkinStyle(style)
 
 		local tmpParams = clone(BUTTON_DEFAULT_PARAMS)
-		TableUtil.mergeA2B(style, tmpParams.style)
+		THSTG.TableUtil.mergeA2B(style, tmpParams.style)
 
 		local skin = tmpParams.style.normal.skin
 
@@ -958,20 +958,7 @@ function newButton(params)
 	end
 
 	local buttonEffectNode
-	function btn:showButtonEffect(show)
-		if show and not buttonEffectNode then
-			buttonEffectNode = newParticleSquare{
-				node = btn,
-				offsetL = 3,
-				offsetR = 3,
-				offsetT = 3,
-				offsetB = 2,
-			}
-		end
-		if buttonEffectNode then
-			buttonEffectNode:setVisible(show)
-		end
-	end
+	
 
 	btn:setTouchEnabled(true)
 	if params.isTouchAction ~= nil then
@@ -982,18 +969,18 @@ function newButton(params)
 	btn:setAnchorPoint(finalParams.anchorPoint)
 	btn:setPosition(finalParams.x, finalParams.y)
 
-	local normalCapInsets = skin2CapInsets(styleNormal.skin)
+	local normalCapInsets = THSTG.UI.skin2CapInsets(styleNormal.skin)
 	if normalCapInsets then
 		btn:setCapInsets(normalCapInsets)
 		btn:setScale9Enabled(true)
 	end
 
-	local pressedCapInsets = skin2CapInsets(styleSelected.skin)
+	local pressedCapInsets = THSTG.UI.skin2CapInsets(styleSelected.skin)
 	if pressedCapInsets then
 		btn:setCapInsetsPressedRenderer(pressedCapInsets)
 	end
 
-	local disabledCapInsets = skin2CapInsets(styleDisabled.skin)
+	local disabledCapInsets = THSTG.UI.skin2CapInsets(styleDisabled.skin)
 	if disabledCapInsets then
 		btn:setCapInsetsDisabledRenderer(disabledCapInsets)
 	end
@@ -1038,7 +1025,8 @@ function newButton(params)
 
 
 			if type(playSound) == "string" then
-				SoundManager.playSound(playSound)
+				--TODO:点击音效
+				--SoundManager.playSound(playSound)
 			end
 
 			if type(params.onClick) == "function" then
@@ -1061,89 +1049,6 @@ function newButton(params)
 	btn:addTouchEventListener(onTouch)
 	btn:setEnabled(finalParams.enabled)
 
-	-- 显示粒子效果，缩放按钮不影响表现
-	local particleContainer = false
-	function btn:showParticleSquare(isShow)
-		if isShow and not particleContainer then
-			local size = btn:getContentSize()
-			local textSize = btn:getTitleRenderer():getContentSize()
-			particleContainer = newNode{
-				x = textSize.width * 0.5,
-				y = textSize.height * 0.5 + 2,
-				width = size.width + 2,
-				height = size.height + 2,
-				anchorPoint = cc.p(0.5, 0.5)
-			}
-			btn:getTitleRenderer():addChild(particleContainer)
-
-			newParticleSquare{
-				node = particleContainer,
-				offsetL = 3,
-				offsetR = 3,
-				offsetT = 3,
-				offsetB = 2,
-			}
-
-		elseif not isShow and particleContainer then
-			particleContainer:removeFromParent()
-			particleContainer = false
-		end
-	end
-
-	-- 粒子特效，这个好看一些，会有些变形
-	local particleEffect = false
-	function btn:showParticleEffect(isShow)
-		if isShow and not particleEffect then
-			local size = self:getTitleRenderer():getContentSize()
-			particleEffect = GlobalUtil.playEffect({
-				x = size.width * 0.5,
-				y = size.height * 0.5 + 1,
-				isLoop = true,
-				father = self:getTitleRenderer(),
-				src = {"EffectSystem/Effect/cc_ui_sz_vip_an.effect"},
-			})
-
-			size = self:getContentSize()
-			particleEffect:getChildren()[1]:setScale(size.height / 58)
-			particleEffect:setScaleX(size.width / 160 * 58 / size.height)
-		elseif not isShow and particleEffect then
-			particleEffect:removeFromParent()
-			particleEffect = false
-		end
-	end
-
-	function btn:addRedDot(args)
-		if redDot then
-			redDot:setKeys(args.redDotData)
-			return
-		end
-		redDot = UIPublic.newRedDot(args.redDotData)
-		redOffsetPos = args.redOffsetPos or cc.p(-16, -14)
-		btn:getTitleRenderer():addChild(redDot)
-		local btnSize = btn:getContentSize()
-		local labelSize = btn:getTitleRenderer():getContentSize()
-		redDot:setPosition(cc.p(
-			labelSize.width / 2 + btnSize.width / 2 + redOffsetPos.x,
-			labelSize.height / 2 + btnSize.height / 2 + redOffsetPos.y))
-		return redDot
-	end
-
-	function btn:setRedDot(args)
-		if not redDot then
-			btn:addRedDot(args)
-		else
-			redDot:setKeys(args.redDotData)
-		end
-	end
-
-	function btn:removeRedDot(...)
-		if(redDot)then
-			redDot:setKeys({
-				key1 = "none_button",
-			})
-		end
-	end
-
 	btn:setTouchEnabled(true)
 
 	if params.redDotData then
@@ -1156,23 +1061,7 @@ function newButton(params)
 	end
 
 
-	if __PRINT_TRACK__ then
-		local info = getTraceback()
-		if params.onClick or params.onTouch then
-		else
-			btn:onClick(function ()
-				print(__PRINT_TYPE__, info)
-				if params.mornFile then
-					print(__PRINT_TYPE__, "mornFile - ", params.mornFile)
-				end
-				if params.mornName then
-					print(__PRINT_TYPE__, "mornName - ", params.mornName)
-				end
-			end)
-		end
-	end
-
-	setHitFactor(btn, params.hitLen)
+	THSTG.UI.setHitFactor(btn, params.hitLen)
 
 	return btn
 end

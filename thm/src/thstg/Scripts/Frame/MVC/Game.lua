@@ -8,6 +8,7 @@ end
 function M:onCreate()
 
 end
+
 function M:createScene()
     return self:onScene()
 end

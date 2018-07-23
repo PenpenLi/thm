@@ -25,7 +25,7 @@ function M:onCreate()
     })
     :addTo(self)
 
-    local titleLabel = THSTG.UI.newLabel({
+    local titleLabel = UI.newLabel({
         text = "Label 的 一XX个测试",
         x = 110,
         y = 30, 
@@ -46,28 +46,49 @@ function M:onCreate()
 
 
     local btn = THSTG.UI.newButton({
-		text = "btn_AA",
 		x = 50,
 		y = display.cy,
-		width = 100, --height=40,
-		anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
-		-- zoomScale=0.6,
-		style = {
-			normal = {
-				label = {size = THSTG.UI.FONT_SIZE_NORMAL, color = UI.COLOR_RED, outline = 1},
-				skin = {src = "res/th08/close.png"}
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        style = {
+            normal ={
+                skin = {src = "res/close.png"}
+            },
+            selected = {
+				skin = {src = "res/open.png"}
 			},
-			selected = {
-				label = {size = 12, color = THSTG.UI.COLOR_YELLOW, outline = 2, outlineColor = THSTG.UI.COLOR_BLUE},
-				skin = {src = "res/th08/open.png"}
-			},
-			disabled = {
-				label = {size = THSTG.UI.FONT_SIZE_BIGGEST, color = THSTG.UI.COLOR_GRAY_C, outline = 3},
-				skin = {src = "res/th08/open.png"}
-			}
-		},
+        }
 	})
-	:addTo(self)
+    :addTo(self)
+    
+    --一个按钮
+    local btn2 = ccui.Button:create("res/close.png", "res/open.png")
+    btn2:setPosition(display.cx,display.cy)
+    btn2:setAnchorPoint(cc.p(0.5,0.5))
+    btn2:ignoreContentAdaptWithSize(false)
+    btn2:addTouchEventListener(function(sender, eventType)
+        local event = {x = 0, y = 0}
+        event.target = sender
+        
+        if eventType == ccui.TouchEventType.began then
+            --获取起始坐标
+            local beganPos = sender:getTouchBeganPosition()
+			event.name = "began"
+        elseif eventType == ccui.TouchEventType.moved then
+            --获取移动坐标
+            local curPos = sender:getTouchMovePosition()
+			event.name = "moved"
+		elseif eventType == ccui.TouchEventType.ended then	
+			event.name = "ended"
+		elseif eventType == ccui.TouchEventType.canceled then
+			event.name = "cancelled"
+        end
+        --OnTouch
+        
+    end
+    )
+	btn2:setEnabled(true)
+    self:addChild(btn2)
+
     --一个Window
 
     --一个LayerStack

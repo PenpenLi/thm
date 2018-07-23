@@ -1,4 +1,4 @@
-﻿module("THSTG.UI", package.seeall)
+module("THSTG.UI", package.seeall)
 
 -- IMAGE_DEFAULT_FILE = ResManager.getUIRes(UIType.IMAGE, "default")
 
