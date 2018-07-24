@@ -104,6 +104,19 @@ function M:onCreate()
 	btn2:setEnabled(true)
     self:addChild(btn2)
 
+    --一个ScrollView
+    local sv2 = THSTG.UI.newScrollView({
+		x = 500, y = 310,
+		width = 200, height = 200,
+		innerWidth = 300, innerHeight = 300,
+		bounceEnabled = false,
+		anchorPoint = THSTG.UI.POINT_CENTER,
+		direction = ccui.ScrollViewDir.vertical,
+		style = {
+			bgColor = THSTG.UI.COLOR_WHITE,
+		}
+	})
+	self:addChild(sv2)
     
     --一个Window
 
@@ -113,30 +126,30 @@ function M:onCreate()
 
 
     --事件监听
-    local function onKeyPressed(keyCode, event)
-        if keyCode == cc.KeyCode.KEY_W then
-            print("Pressed W !") 
-        elseif keyCode == cc.KeyCode.KEY_S then
-            print("Pressed S !")
-        elseif keyCode == cc.KeyCode.KEY_A then
-            print("Pressed A !")
-        elseif keyCode == cc.KeyCode.KEY_D then
-            print("Pressed D !")
-        end
-    end
- 
-    local function onKeyReleased(keyCode, event)
-        
-    end
-    
     -- -- 注册键盘事件
     local dispatcher = THSTG.EVENT.getEventDispatcher()
     local listener = THSTG.EVENT.newKeyboardListener({
-        onPressed = onKeyPressed,
-        onReleased = onKeyReleased,
+        onPressed = function(keyCode, event)
+            if keyCode == cc.KeyCode.KEY_W then
+                print("Pressed W !") 
+            elseif keyCode == cc.KeyCode.KEY_S then
+                print("Pressed S !")
+            elseif keyCode == cc.KeyCode.KEY_A then
+                print("Pressed A !")
+            elseif keyCode == cc.KeyCode.KEY_D then
+                print("Pressed D !")
+            elseif keyCode == cc.KeyCode.KEY_H then
+                print("Pressed H !")
+            elseif keyCode == cc.KeyCode.KEY_J then
+                print("Pressed J !")
+            elseif keyCode == cc.KeyCode.KEY_K then
+                print("Pressed K !")
+            elseif keyCode == cc.KeyCode.KEY_LEFT_SHIFT then
+                print("Pressed Left Shift !")
+            end
+        end,
     })
-     
-    dispatcher:addEventListenerWithSceneGraphPriority(listener, self)
+
 
 end
 

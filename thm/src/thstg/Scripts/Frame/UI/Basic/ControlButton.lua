@@ -16,8 +16,8 @@ local default = {
 			width = 100,
 			height = 30,
 			style = {
-				src = ResManager.getUIRes(UIType.BUTTON, "default_normal"),
-				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10},
+				src = "",
+				scale9Rect = {left = 0, right = 0, top = 0, bottom = 0},
 			},
 		})
 	end,

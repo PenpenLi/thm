@@ -65,11 +65,12 @@ function newMouseListener(params)
 end
 
 function newAccelerationListener(params)
-    local function onAccelerationEvent(event, x, y, z, timestamp)
-    end
-
     params = params or {}
-    params.onAcceleration = params.onAcceleration or onAccelerationEvent
+    params.onAcceleration = params.onAcceleration or function(event,acceleration,timestamp) end
+    local function onAccelerationEvent(event, x, y, z, timestamp)
+        local args = {x=x,y=y,z=z}
+        params.onAcceleration(event,args,timestamp)
+    end
     -- 直接传入 响应函数 作为参数
     local listener = cc.EventListenerAcceleration:create(onAccelerationEvent)
     

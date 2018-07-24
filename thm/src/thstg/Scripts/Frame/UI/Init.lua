@@ -25,6 +25,7 @@ require "thstg.Scripts.Frame.UI.Basic.Label"
 require "thstg.Scripts.Frame.UI.Basic.Image"
 require "thstg.Scripts.Frame.UI.Basic.TabBar"
 require "thstg.Scripts.Frame.UI.Basic.Button"
+require "thstg.Scripts.Frame.UI.Basic.ScrollView"
 --[[扩展部件extends]]--
 require "thstg.Scripts.Frame.UI.Extends.ToggleButton"
 
