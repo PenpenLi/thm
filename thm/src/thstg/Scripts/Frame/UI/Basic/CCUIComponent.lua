@@ -521,3 +521,16 @@ function newTouchLayer(params)
 
 	return layer
 end
+
+--CCAnimation组件
+--param x           	#number     x坐标
+--param y           	#number     y坐标
+--param anchorPoint 	#cc.p		anchorPoint
+
+function newAnimation(params)
+	params = params or {}
+	assert(type(params) == "table", "[UI] newSprite() invalid params")
+	--TODO:
+
+	return nil
+end
