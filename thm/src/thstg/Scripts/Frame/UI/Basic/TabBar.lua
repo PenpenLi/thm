@@ -11,43 +11,43 @@ TABBAR_DIRECTION_VR = 4
 
 --横向布局上方的标签栏皮肤样式
 TABBAR_DEFAULT_HT_NORMAL_SKIN = {
-	-- src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
-	-- scale9Rect = {left = 8, right = 8, top = 2, bottom = 5}
+	src = "",
+	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 }
 TABBAR_DEFAULT_HT_SELECTED_SKIN = {
-	-- src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"),
-	-- scale9Rect = {left = 8, right = 8, top = 2, bottom = 5}
+	src = "",
+	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 }
 TABBAR_DEFAULT_HT_DISABLED_SKIN = {
-	-- src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
-	-- sscale9Rect = {left = 8, right = 8, top = 2, bottom = 5}
+	src = "",
+	sscale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 }
 
 --横向布局下方的三个默认皮肤
 TABBAR_DEFAULT_HB_NORMAL_SKIN = {
-	-- src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
-	-- scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
+	src = "",
+	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 }
 TABBAR_DEFAULT_HB_SELECTED_SKIN = {
-	-- src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"),
-	-- scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
+	src = "",
+	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 }
 TABBAR_DEFAULT_HB_DISABLED_SKIN = {
-	-- src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
-	-- scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
+	src = "",
+	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 }
 --纵向处于界面左方的三个默认皮肤
 TABBAR_DEFAULT_VL_NORMAL_SKIN = {
-	-- src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
-	-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+	src = "",
+	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 }
 TABBAR_DEFAULT_VL_SELECTED_SKIN = {
-	-- src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"),
-	-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+	src = "",
+	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 }
 TABBAR_DEFAULT_VL_DISABLED_SKIN = {
-	-- src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
-	-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+	src = "",
+	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 }
 
 

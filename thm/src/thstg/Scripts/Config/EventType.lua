@@ -1,0 +1,1 @@
+module("THSTG.EventType", package.seeall)

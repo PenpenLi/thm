@@ -19,7 +19,7 @@
 require "thstg.Scripts.Frame.UI.Style"
 
 --[[基础部件basic]]--
-require "thstg.Scripts.Frame.UI.Basic.CCComponent"
+require "thstg.Scripts.Frame.UI.Basic.CCUIComponent"
 require "thstg.Scripts.Frame.UI.Basic.ControlButton"
 require "thstg.Scripts.Frame.UI.Basic.Label"
 require "thstg.Scripts.Frame.UI.Basic.Image"

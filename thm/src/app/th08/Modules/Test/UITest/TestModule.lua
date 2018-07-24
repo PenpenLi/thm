@@ -44,7 +44,6 @@ function M:onCreate()
     })
     :addTo(self)
 
-
     local btn = UI.newButton({
 		x = 50,
 		y = display.cy,
@@ -66,11 +65,9 @@ function M:onCreate()
         x = display.cx-100,
         y = display.cy-100,
         style = {
-            src = "res/th08/title01.png",
+            src = "res/th08/eff03b.png",
             scale9Rect = {left= 0,top = 0,right =100,bottom=100},
         }
-
-      
     })
     :addTo(self)
 
@@ -113,6 +110,34 @@ function M:onCreate()
     --一个LayerStack
 
     --一个TabBar
+
+
+    --事件监听
+    local function onKeyPressed(keyCode, event)
+        if keyCode == cc.KeyCode.KEY_W then
+            print("Pressed W !") 
+        elseif keyCode == cc.KeyCode.KEY_S then
+            print("Pressed S !")
+        elseif keyCode == cc.KeyCode.KEY_A then
+            print("Pressed A !")
+        elseif keyCode == cc.KeyCode.KEY_D then
+            print("Pressed D !")
+        end
+    end
+ 
+    local function onKeyReleased(keyCode, event)
+        
+    end
+    
+    -- -- 注册键盘事件
+    local dispatcher = THSTG.EVENT.getEventDispatcher()
+    local listener = THSTG.EVENT.newKeyboardListener({
+        onPressed = onKeyPressed,
+        onReleased = onKeyReleased,
+    })
+     
+    dispatcher:addEventListenerWithSceneGraphPriority(listener, self)
+
 end
 
 return M
