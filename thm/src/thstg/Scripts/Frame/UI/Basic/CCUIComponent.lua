@@ -63,7 +63,7 @@ function newSprite(params)
 
 	if __PRINT_NODE_TRACK__ then
 		local info = getTraceback()
-		UI.setClick(sp, function ()
+		THSTG.UI.setClick(sp, function ()
 			print(__PRINT_TYPE__, info)
 		end, false)
 	end
@@ -85,7 +85,7 @@ function newScale9Sprite(params)
 	local skinSize = {}
 	skinSize.width = params.style.width
 	skinSize.height = params.style.height
-	local textureSize = UI.getSkinSize(src)
+	local textureSize = THSTG.UI.getSkinSize(src)
 	if not skinSize.width or not skinSize.height then
 		skinSize.width = skinSize.width or textureSize.width
 		skinSize.height = skinSize.height or textureSize.height
@@ -115,7 +115,7 @@ function newScale9Sprite(params)
 
 	if __PRINT_NODE_TRACK__ then
 		local info = getTraceback()
-		UI.setClick(node, function ()
+		THSTG.UI.setClick(node, function ()
 			print(__PRINT_TYPE__, info)
 		end, false)
 	end
@@ -129,7 +129,7 @@ function newQuickScale9Sprite(src,scaleRect)
 	
 	local scaleGridRect = scaleRect or {left=0, top=0, right=0, bottom=0}
 	--默认
-	local skinSize = UI.getSkinSize(src)
+	local skinSize = THSTG.UI.getSkinSize(src)
 	insetRectX = scaleGridRect.left
 	insetRectY = scaleGridRect.top
 	insetRectW = skinSize.width - insetRectX - scaleGridRect.right
@@ -143,7 +143,7 @@ function newSimpleScale9Sprite(src, scaleRect)
 
 	local scaleGridRect = scaleRect or {left = 0, top = 0, right = 0, bottom = 0}
 	--默认
-	local skinSize = UI.getSkinSize(src)
+	local skinSize = THSTG.UI.getSkinSize(src)
 	insetRectX = scaleGridRect.left
 	insetRectY = scaleGridRect.top
 	insetRectW = skinSize.width - insetRectX - scaleGridRect.right
@@ -188,8 +188,8 @@ function newLayerGesture(params)
 	params.height = params.height or 100
 
 	--根节点
-	params.color = params.showColor and UI.htmlColor2C4b("#00000088") or UI.htmlColor2C4b("#00000000")
-	local layer = UI.newLayerColor(params)
+	params.color = params.showColor and THSTG.UI.htmlColor2C4b("#00000088") or THSTG.UI.htmlColor2C4b("#00000000")
+	local layer = THSTG.UI.newLayerColor(params)
 	layer:setPosition(params.x, params.y)
 	if params.anchorPoint then
 		layer:setAnchorPoint(params.anchorPoint)
@@ -303,7 +303,7 @@ function newWidget(params)
 	local finalParams = {
 		x = 0, y = 0,
 		width = 0, height = 0,
-		anchorPoint = clone(UI.POINT_CENTER),
+		anchorPoint = clone(THSTG.UI.POINT_CENTER),
 		touchEnabled = false,
 		swallowTouches = false,
 	}
@@ -363,7 +363,7 @@ function newProgressTimer(params)
 	params = params or {}
 	params.style = params.style or {}
 
-	local mask = UI.newSprite({
+	local mask = THSTG.UI.newSprite({
 		src = params.src or ResManager.getRes(ResType.MAIN_UI, "icon_skill_cd_small"),
 	})
 
@@ -458,8 +458,8 @@ function newTouchLayer(params)
 	params.height = params.height or 100
 
 	--根节点
-	-- params.color = params.showColor and UI.htmlColor2C4b("#00000088") or UI.htmlColor2C4b("#00000000")
-	local layer = UI.newLayerColor(params)
+	-- params.color = params.showColor and THSTG.UI.htmlColor2C4b("#00000088") or THSTG.UI.htmlColor2C4b("#00000000")
+	local layer = THSTG.UI.newLayerColor(params)
 	layer:setPosition(params.x, params.y)
 	if params.anchorPoint then
 		layer:setAnchorPoint(params.anchorPoint)
@@ -520,6 +520,12 @@ function newTouchLayer(params)
 	dispatcher:addEventListenerWithSceneGraphPriority(listener, layer)
 
 	return layer
+end
+
+
+--CCMenu组件
+function newMenu()
+
 end
 
 --CCAnimation组件
