@@ -105,7 +105,7 @@ function M.create(params)
 	btn2:setEnabled(true)
     layer:addChild(btn2)
 
-
+    
 
     return layer
 end

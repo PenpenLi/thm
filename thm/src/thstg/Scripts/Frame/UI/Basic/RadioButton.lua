@@ -49,7 +49,7 @@ function newRadioButton(params)
 	end
 
 	local finalParams = clone(RADIO_BUTTON_DEFAULT_PARAMS)
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	local radioButton = ccui.RadioButton:create(finalParams.style.skin.bgNormal, finalParams.style.skin.cross)
 	radioButton:loadTextureBackGroundDisabled(finalParams.style.skin.bgDisabled)
@@ -164,7 +164,7 @@ function newRadioGroup(params)
 		allowedNoSelection = false,
 		style = clone(RADIO_BUTTON_DEFAULT_PARAMS.style)
 	}
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	local rbg = ccui.RadioButtonGroup:create()
 	rbg:setPosition(finalParams.x, finalParams.y)

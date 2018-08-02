@@ -524,10 +524,56 @@ end
 
 
 --CCMenu组件
-function newMenu()
+--param x           	#number     x坐标
+--param y           	#number     y坐标
+--param isVertical    	#bool       是否垂直排布,否则为水平
+--param padding         #number     间隔,默认为nil为auto
+local function newMenu(params)
+	params = params or {}
 
+	local menu = cc.Menu:create()
+	menu:setPosition(params.x,params.y)
+	
+	local addChild = menu.addChild
+	function menu:addChild(node,...)
+		addChild(self,node,...)
+
+		--设置水平竖直
+		if params.isVertical then 
+			--params.isVertical then
+			if padding then 
+				menu:alignItemsVerticallyWithPadding(padding)
+			else 
+				menu:alignItemsVertically()
+			end
+		else 
+			if padding then 
+				menu:alignItemsHorizontallyWithPadding(padding)
+			else 
+				menu:alignItemsHorizontally() 
+			end
+		end
+	end
+
+	return menu
 end
 
+function newSpriteMenu(params)
+	local menu = newMenu(params)
+
+	return menu
+end
+
+-- --@param text      [string]     文字
+-- --@param onClick   [function]   回调
+-- --@param style     [table]      样式
+-- function newMenuItemFont(params)
+-- 	params = params or {}
+-- 	params.text = params.text or ""
+
+
+-- 	THSTG.TableUtil.mergeA2B(params.style, newTextStyle())
+-- end
 --CCAnimation组件
 --param x           	#number     x坐标
 --param y           	#number     y坐标

@@ -70,7 +70,63 @@ function M.create(params)
     toggleMenu:alignItemsVertically()           --居中排列
     layer:addChild(toggleMenu)
 
-   
+   -- 菜单测试第二部分
+   local spriteMenu=cc.Menu:create()      --添加到menu中，不需要最后加null
+   spriteMenu:setPosition(200,20)
+
+   layer:addChild(spriteMenu)
+
+   local s1=cc.Sprite:create("res/close.png")
+   local s2=cc.Sprite:create("res/open.png")
+   local spriteBtn1=cc.MenuItemSprite:create(s1,s2)  --一个菜单项
+   local function spriteBtnCA(sender) 
+       print("精灵菜单项1")
+   end
+   spriteBtn1:registerScriptTapHandler(spriteBtnCA)
+   spriteMenu:addChild(spriteBtn1)
+
+   local s1=cc.Sprite:create("res/open.png")
+   local s2=cc.Sprite:create("res/close.png")
+   local spriteBtn2=cc.MenuItemSprite:create(s1,s2)  --一个菜单项
+   local function spriteBtnCB(sender) 
+       print("精灵菜单项2")
+   end
+   spriteBtn2:registerScriptTapHandler(spriteBtnCB)
+   spriteMenu:addChild(spriteBtn2)
+
+   local s1=cc.Sprite:create("res/open.png")
+   local s2=cc.Sprite:create("res/close.png")
+   local spriteBtn=cc.MenuItemSprite:create(s1,s2)  --一个菜单项
+   local function spriteOnClick(sender) 
+       print("精灵菜单项3")
+   end
+   spriteBtn:registerScriptTapHandler(spriteOnClick)
+   spriteMenu:addChild(spriteBtn)
+
+   spriteMenu:alignItemsHorizontally()             --必须在后边
+
+   --
+   local spriteMenu=THSTG.UI.newSpriteMenu({
+        x = 200,
+        y = 400,
+    })
+    layer:addChild(spriteMenu)
+
+   local s1 = THSTG.UI.newSprite({
+        src = "res/th08/title01.png",
+        frame = {x= 0,y = 0,width =100,height=100},
+    })   
+    local s2 = THSTG.UI.newSprite({
+        src = "res/th08/title01.png",
+        frame = {x= 100,y = 0,width =100,height=100},
+    })
+    local spriteItem=cc.MenuItemSprite:create(s1,s2)  --一个菜单项
+    local function spriteOnClick(sender) 
+        print("精灵菜单项1")
+    end
+    spriteItem:registerScriptTapHandler(spriteOnClick)
+    spriteMenu:addChild(spriteItem)
+
 
 
     return layer
