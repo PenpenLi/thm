@@ -25,9 +25,10 @@ __DEBUG_RESOURCES__ = false
 __DEBUG_TRACE_BACK__ = false
 
 -------------------------------------------------
-
+CCPrint = _G.print	--貌似下面的不好使
 --local logFunc = CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID and LuaLogE or LuaLog
-local logFunc = _G.print
+local logFunc = CCPrint
+
 --打印
 if not __DEBUG__ then
 	print = function (...) end

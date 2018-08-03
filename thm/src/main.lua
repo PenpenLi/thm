@@ -6,7 +6,7 @@ require "cocos.init"
 require "thstg.init"
 
 local function main()
-    require("app.EngineEx"):create({
+    THSTG.EngineEx:create({
         gameRoot = "app.th08",
         defaultGameName = "TH08"
     }):run()

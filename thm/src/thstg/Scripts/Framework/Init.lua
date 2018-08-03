@@ -10,7 +10,8 @@
  */
  ]]
  THSTG = THSTG or {}
-
+ THSTG.EngineEx = require "thstg.Scripts.Framework.EngineEx"
+ 
  --常规全局
  require "thstg.Scripts.Framework.Common.Init"
  
