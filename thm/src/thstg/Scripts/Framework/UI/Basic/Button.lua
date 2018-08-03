@@ -14,7 +14,7 @@ BUTTON_DEFAULT_PARAMS = {
 		normal = {
 			label = newTextStyle({
 				size = FONT_SIZE_SMALL,
-				color = getColorType("color_white"),
+				color = getColorHtml("#ffffff"),
 				outline = 1,
 				outlineColor = getColorHtml("#f0e6a9"),
 			}),
@@ -26,7 +26,7 @@ BUTTON_DEFAULT_PARAMS = {
 		selected = {
 			label = newTextStyle({
 				size = FONT_SIZE_SMALL,
-				color = getColorType("color_white"),
+				color = getColorHtml("#ffffff"),
 				outline = 1,
 				outlineColor = getColorHtml("#f0e6a9"),
 			}),
@@ -54,7 +54,7 @@ yellowStyle = {
 	normal = {
 		label = newTextStyle({
 			size = FONT_SIZE_SMALL,
-			color = getColorType("btn_yellow"),
+			color = getColorHtml("#6c3e26"),
 			outline = 1,
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
@@ -66,7 +66,7 @@ yellowStyle = {
 	selected = {
 		label = newTextStyle({
 			size = FONT_SIZE_SMALL,
-			color = getColorType("btn_yellow"),
+			color = getColorHtml("#6c3e26"),
 			outline = 1,
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
@@ -93,7 +93,7 @@ blueStyle = {
 	normal = {
 		label = newTextStyle({
 			size = FONT_SIZE_SMALL,
-			color = getColorType("btn_blue"),
+			color = getColorHtml("#1f3057"),
 			outline = 1,
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
@@ -105,7 +105,7 @@ blueStyle = {
 	selected = {
 		label = newTextStyle({
 			size = FONT_SIZE_SMALL,
-			color = getColorType("btn_blue"),
+			color = getColorHtml("#1f3057"),
 			outline = 1,
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
@@ -289,7 +289,7 @@ yellowExStyle = {
 	normal = {
 		label = newTextStyle({
 			size = FONT_SIZE_BIG,
-			color = getColorType("btn_yellow"),
+			color = getColorHtml("#6c3e26"),
 			outline = 1,
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
@@ -301,7 +301,7 @@ yellowExStyle = {
 	selected = {
 		label = newTextStyle({
 			size = FONT_SIZE_BIG,
-			color = getColorType("btn_yellow"),
+			color = getColorHtml("#6c3e26"),
 			outline = 1,
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
@@ -328,7 +328,7 @@ blueExStyle = {
 	normal = {
 		label = newTextStyle({
 			size = FONT_SIZE_BIG,
-			color = getColorType("btn_blue"),
+			color = getColorHtml("#1f3057"),
 			outline = 1,
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
@@ -340,7 +340,7 @@ blueExStyle = {
 	selected = {
 		label = newTextStyle({
 			size = FONT_SIZE_BIG,
-			color = getColorType("btn_blue"),
+			color = getColorHtml("#1f3057"),
 			outline = 1,
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
@@ -448,7 +448,7 @@ blueFlowerStyle = {
 	normal = {
 		label = newTextStyle({
 			size = FONT_SIZE_NORMAL,
-			color = getColorType("btn_blue"),
+			color = getColorHtml("#1f3057"),
 		outline = 1,
 		outlineColor = getColorHtml("#aac4d2"),
 		}),
@@ -460,7 +460,7 @@ blueFlowerStyle = {
 	selected = {
 		label = newTextStyle({
 			size = FONT_SIZE_NORMAL,
-			color = getColorType("btn_blue"),
+			color = getColorHtml("#1f3057"),
 		outline = 1,
 		outlineColor = getColorHtml("#aac4d2"),
 		}),
@@ -527,7 +527,7 @@ activityStyle = {
 	normal = {
 		label = newTextStyle({
 			size = FONT_SIZE_BIGGER,
-			color = getColorType("text_key1"),
+			color = getColorHtml("#394847"),
 			outline = 1,
 			outlineColor = getColorHtml("#efefcb"),
 		}),
@@ -539,7 +539,7 @@ activityStyle = {
 	selected = {
 		label = newTextStyle({
 			size = FONT_SIZE_BIGGER,
-			color = getColorType("text_key1"),
+			color = getColorHtml("#394847"),
 			outline = 1,
 			outlineColor = getColorHtml("#efefcb"),
 		}),

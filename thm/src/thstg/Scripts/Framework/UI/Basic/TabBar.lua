@@ -313,7 +313,7 @@ function newTabBar(params)
 						anchorPoint = POINT_CENTER,
 						style = style.normal.label or {
 							size = FONT_SIZE_BIG,
-							color = getColorType("tab_normal"),
+							color = getColorHtml("#31315e"),
 							additionalKerning = additionalKerning,
 						},
 					})
@@ -343,7 +343,7 @@ function newTabBar(params)
 						anchorPoint = POINT_CENTER,
 						style = style.pressed.label or {
 							size = FONT_SIZE_BIG,
-							color = getColorType("tab_select"),
+							color = getColorHtml("#6c3e26"),
 							outline = 1,
 							outlineColor = getColorHtml("#f0e6a9"),
 							additionalKerning = additionalKerning,

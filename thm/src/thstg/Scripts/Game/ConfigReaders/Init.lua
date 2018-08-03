@@ -1,0 +1,1 @@
+require "thstg.Scripts.Game.ConfigReaders.ColorStyleConfig"

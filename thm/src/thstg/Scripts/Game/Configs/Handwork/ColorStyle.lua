@@ -72,13 +72,13 @@ return {
 	chat_level_2          = "#ca4cff", -- 聊天 - 等级
 	chat_line_2           = "#4ad474", -- 聊天 - 下划线
 
-	-- chat_pet           = "#dbdb00", -- 聊天_宠物名字
-	-- chat_mount         = "#e38b00", -- 聊天_坐骑名字
-	-- chat_boss          = "#e38b00", -- 聊天_BOSS名字
-	-- chat_number        = "#e38b00", -- 聊天_数值
-	-- chat_time          = "#00c525", -- 聊天_时间
-	-- chat_copy          = "#e38b00", -- 聊天_副本名字
-	-- chat_map           = "#00c525", -- 聊天_地图名字
+	chat_pet           = "#dbdb00", -- 聊天_宠物名字
+	chat_mount         = "#e38b00", -- 聊天_坐骑名字
+	chat_boss          = "#e38b00", -- 聊天_BOSS名字
+	chat_number        = "#e38b00", -- 聊天_数值
+	chat_time          = "#00c525", -- 聊天_时间
+	chat_copy          = "#e38b00", -- 聊天_副本名字
+	chat_map           = "#00c525", -- 聊天_地图名字
 
 	--等级投资
 	invest_level          = "#ffefa2",
