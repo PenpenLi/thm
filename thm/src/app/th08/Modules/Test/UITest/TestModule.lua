@@ -22,30 +22,29 @@ function M:onCreate()
         end
     end
 
-    local dispatcher = THSTG.EVENT.getEventDispatcher()
     local listener = THSTG.EVENT.newKeyboardListener({
         onPressed = function(keyCode, event)
             changeTest(keyCode - cc.KeyCode.KEY_1 + 1)
             if keyCode == cc.KeyCode.KEY_Q then
-                changeTest(10)
-            elseif keyCode == cc.KeyCode.KEY_W then
                 changeTest(11)
-            elseif keyCode == cc.KeyCode.KEY_E then
+            elseif keyCode == cc.KeyCode.KEY_W then
                 changeTest(12)
-            elseif keyCode == cc.KeyCode.KEY_R then
+            elseif keyCode == cc.KeyCode.KEY_E then
                 changeTest(13)
-            elseif keyCode == cc.KeyCode.KEY_T then
+            elseif keyCode == cc.KeyCode.KEY_R then
                 changeTest(14)
-            elseif keyCode == cc.KeyCode.KEY_Y then
+            elseif keyCode == cc.KeyCode.KEY_T then
                 changeTest(15)
-            elseif keyCode == cc.KeyCode.KEY_U then
+            elseif keyCode == cc.KeyCode.KEY_Y then
                 changeTest(16)
-            elseif keyCode == cc.KeyCode.KEY_I then
+            elseif keyCode == cc.KeyCode.KEY_U then
                 changeTest(17)
+            elseif keyCode == cc.KeyCode.KEY_I then
+                changeTest(18)
             end
         end,
     })
-    dispatcher:addEventListenerWithSceneGraphPriority(listener, self)
+    THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
 
     changeTest(1)
 end

@@ -14,8 +14,11 @@ THSTG = THSTG or {}
 --加载全局宏
 require "thstg.Scripts.Test"
 
---核心
-require "thstg.Scripts.Frame.Core.Init"
+--常规
+require "thstg.Scripts.Frame.Common.Init"
+
+--组件
+require "thstg.Scripts.Frame.Component.Init"
 
 --MVC
 require "thstg.Scripts.Frame.MVC.Init"
@@ -27,7 +30,3 @@ require "thstg.Scripts.Frame.UI.Init"
 require "thstg.Scripts.Frame.Utils.FileUtil"
 require "thstg.Scripts.Frame.Utils.TableUtil"
 require "thstg.Scripts.Frame.Utils.UIDUtil"
-require "thstg.Scripts.Frame.Utils.DebugUtil"
-
---常用函数替换
-require "thstg.Scripts.Function"

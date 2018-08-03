@@ -109,25 +109,43 @@ function M.create(params)
    local spriteMenu=THSTG.UI.newSpriteMenu({
         x = 200,
         y = 400,
+        isVertical = false,
     })
     layer:addChild(spriteMenu)
 
-   local s1 = THSTG.UI.newSprite({
-        src = "res/th08/title01.png",
-        frame = {x= 0,y = 0,width =100,height=100},
-    })   
-    local s2 = THSTG.UI.newSprite({
-        src = "res/th08/title01.png",
-        frame = {x= 100,y = 0,width =100,height=100},
+    local spriteItem= THSTG.UI.newItemSprite({
+        onClick = function()
+            print("菜单THSTG1")
+        end,
+        style = {
+            normal = {
+                src = "res/th08/title01.png",
+                frame = {x= 0,y = 0,width =100,height=100},
+            },
+            selected = {
+                src = "res/th08/title01.png",
+                frame = {x= 100,y = 0,width =100,height=100},
+            },
+        }
     })
-    local spriteItem=cc.MenuItemSprite:create(s1,s2)  --一个菜单项
-    local function spriteOnClick(sender) 
-        print("精灵菜单项1")
-    end
-    spriteItem:registerScriptTapHandler(spriteOnClick)
     spriteMenu:addChild(spriteItem)
 
-
+    local spriteItem= THSTG.UI.newItemSprite({
+        onClick = function()
+            print("菜单THSTG2")
+        end,
+        style = {
+            normal = {
+                src = "res/th08/title01.png",
+                frame = {x= 0,y = 0,width =100,height=100},
+            },
+            selected = {
+                src = "res/th08/title01.png",
+                frame = {x= 100,y = 0,width =100,height=100},
+            },
+        }
+    })
+    spriteMenu:addChild(spriteItem)
 
     return layer
 end

@@ -189,7 +189,7 @@ function newLayerGesture(params)
 
 	--根节点
 	params.color = params.showColor and THSTG.UI.htmlColor2C4b("#00000088") or THSTG.UI.htmlColor2C4b("#00000000")
-	local layer = THSTG.UI.newLayerColor(params)
+	local layer = newLayerColor(params)
 	layer:setPosition(params.x, params.y)
 	if params.anchorPoint then
 		layer:setAnchorPoint(params.anchorPoint)
@@ -363,7 +363,7 @@ function newProgressTimer(params)
 	params = params or {}
 	params.style = params.style or {}
 
-	local mask = THSTG.UI.newSprite({
+	local mask = newSprite({
 		src = params.src or ResManager.getRes(ResType.MAIN_UI, "icon_skill_cd_small"),
 	})
 
@@ -526,10 +526,29 @@ end
 --CCMenu组件
 --param x           	#number     x坐标
 --param y           	#number     y坐标
---param isVertical    	#bool       是否垂直排布,否则为水平
+--param isVertical    	#bool       是否垂直排布,否则为水平, 默认
+--param isHorizontal    #bool       是否水平排布,否则为竖直
 --param padding         #number     间隔,默认为nil为auto
 local function newMenu(params)
 	params = params or {}
+
+	if params.isVertical then
+		if params.isHorizontal then
+			params.isVertical = true
+			params.isHorizontal = false
+		else
+			params.isVertical = params.isVertical
+			params.isHorizontal = not params.isVertical
+		end
+	else
+		if params.isHorizontal then
+			params.isVertical = not params.isHorizontal
+			params.isHorizontal = params.isHorizontal
+		else
+			params.isVertical = true
+			params.isHorizontal = false
+		end
+	end
 
 	local menu = cc.Menu:create()
 	menu:setPosition(params.x,params.y)
@@ -564,6 +583,61 @@ function newSpriteMenu(params)
 	return menu
 end
 
+--[[
+--param onClick         [function]     点击回调
+--@param	style		[table]		样式，结构如：
+	{
+			normal = {
+			}, 
+			selected = 
+			}, 
+			disabled = {	
+			}
+	}	
+]]
+function newItemSprite(params)
+	params = params or {}
+	params.onClick = params.onClick or function() end
+
+
+	local normalSprite = nil
+	local selectedSprite = nil
+	local disabledSprite = nil
+
+	if params.style.normal then
+		if type(params.style.normal) == "userdata" then
+			normalSprite = params.style.normal
+		elseif type(params.style.normal) == "table" then
+			normalSprite = newSprite(params.style.normal)
+		end
+	end
+	if params.style.selected then
+		if type(params.style.selected) == "userdata" then
+			selectedSprite = params.style.selected
+		elseif type(params.style.selected) == "table" then
+			selectedSprite = newSprite(params.style.selected)
+		end
+	end
+	if params.style.disabled then
+		if type(params.style.disabled) == "userdata" then
+			disabledSprite = params.style.disabled
+		elseif type(params.style.disabled) == "table" then
+			disabledSprite = newSprite(params.style.disabled)
+		end
+	end
+
+	 --一个菜单项
+	local spriteItem = cc.MenuItemSprite:create(normalSprite,selectedSprite,disabledSprite)
+
+	function spriteItem:onClick(func)
+		params.onClick = func or function() end
+	end
+
+	spriteItem:registerScriptTapHandler(params.onClick)
+	
+	return spriteItem
+end
+
 -- --@param text      [string]     文字
 -- --@param onClick   [function]   回调
 -- --@param style     [table]      样式
@@ -581,7 +655,6 @@ end
 
 function newAnimation(params)
 	params = params or {}
-	assert(type(params) == "table", "[UI] newSprite() invalid params")
 	--TODO:
 
 	return nil

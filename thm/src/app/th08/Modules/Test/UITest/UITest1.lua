@@ -72,6 +72,21 @@ function M.create(params)
     })
     :addTo(layer)
 
+    --
+    local label = THSTG.UI.newAtlasLabel({
+        text = "12345",
+        x = display.cx+80,
+        y = display.cy+100,
+        style = {
+            font = {
+                src = "res/pvp_shu2.png", 
+                itemWidth = 34.6,
+                itemHeight = 53,
+            }
+        }
+    })  
+    layer:addChild(label)
+    --
     --一个按钮
     local btn2 = ccui.Button:create("res/close.png", "res/open.png")
     btn2:setPosition(50,display.cy-100)
@@ -105,8 +120,7 @@ function M.create(params)
 	btn2:setEnabled(true)
     layer:addChild(btn2)
 
-    
-
+    --
     return layer
 end
 return M

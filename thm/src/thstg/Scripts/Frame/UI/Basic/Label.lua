@@ -243,7 +243,7 @@ function newBMFontLabel(params)
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
 	finalParams.style.font = ResManager.getResSub(ResType.FONT, FontType.FNT, "arial")
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	-- local label = cc.Label:createWithBMFont(
 	-- 	finalParams.style.font,
@@ -280,7 +280,7 @@ function newCharMapLabel(params)
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
 	finalParams.style.font = ResManager.getResSub(ResType.FONT, FontType.CHAR_MAP, "tuffy")
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	print(5, "finalParams.style.font", finalParams.style.font)
 
@@ -297,4 +297,51 @@ function newCharMapLabel(params)
 	commonInit(label, finalParams)
 
 	return label
+end
+
+--[[
+-----------------------------
+-- 创建一个使用charmap格式的png文件的文本
+-- @param	text			[string]	显示的文字
+-- @param	x				[number]	x坐标
+-- @param	y				[number]	y坐标
+-- @param	width			[number]	宽度
+-- @param	height			[number]	高度
+-- @param	anchorPoint		[cc.p]		锚点(如UI.POINT_LEFT_BOTTOM)
+-- @param	style			[table]		文字格式(参考Style文件中的newTextStyle()方法)，注：style下的（描边、字号）相关属性无效，color无透明度
+	--@@param  font				[table]		字体
+		-- @@@param	src				[string]	关联的字符集的图片。
+		-- @@@param	itemWidth		[number]	每一字符图片占用的宽度px。
+		-- @@@param	itemHeight		[number]	每个字符图片占用的高度px
+		-- @@@param	startChar		[number]	图片开始的字符的ASCII码。
+]]
+function newAtlasLabel(params)
+	assert(type(params) == "table", "[UI] newLabel() invalid params")
+
+	local finalParams = clone(LABEL_DEFAULT_PARAMS)
+	-- finalParams.style.font = ResManager.getResSub(ResType.FONT, FontType.CHAR_MAP, "tuffy")
+	THSTG.TableUtil.mergeA2B(params, finalParams)
+
+	local startCharMap = ((type(finalParams.style.font.startChar) == "string") and {string.byte(finalParams.style.font.startChar)} or {finalParams.style.font.startChar or 48})[1]
+	local label = cc.LabelAtlas:create(
+		finalParams.text, 
+		finalParams.style.font.src,
+		finalParams.style.font.itemWidth, 
+		finalParams.style.font.itemHeight, 
+		startCharMap)
+
+	local color = finalParams.style.color
+	label:setColor(cc.c3b(color.r, color.g, color.b))
+
+	if finalParams.width > 0 or finalParams.height > 0 then
+		local oriSize = label:getContentSize()
+		local dWidthPerc = (finalParams.width or oriSize.width) / oriSize.width
+		local dHeightPerc = (finalParams.height or oriSize.height) / oriSize.height
+		label:setScale(dWidthPerc,dHeightPerc)
+	end
+
+	commonInit(label, finalParams)
+
+	return label
+
 end
