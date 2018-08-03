@@ -1,4 +1,4 @@
-﻿module("THSTG.UI", package.seeall)
+module("THSTG.UI", package.seeall)
 
 --常用的AnchorPoint------------------------------------
 --居中

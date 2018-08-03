@@ -15,18 +15,18 @@ THSTG = THSTG or {}
 require "thstg.Scripts.Test"
 
 --常规
-require "thstg.Scripts.Frame.Common.Init"
+require "thstg.Scripts.Framework.Common.Init"
 
 --组件
-require "thstg.Scripts.Frame.Component.Init"
+require "thstg.Scripts.Framework.Component.Init"
 
 --MVC
-require "thstg.Scripts.Frame.MVC.Init"
+require "thstg.Scripts.Framework.MVC.Init"
 
 --UI库
-require "thstg.Scripts.Frame.UI.Init"
+require "thstg.Scripts.Framework.UI.Init"
 
 --辅助库
-require "thstg.Scripts.Frame.Utils.FileUtil"
-require "thstg.Scripts.Frame.Utils.TableUtil"
-require "thstg.Scripts.Frame.Utils.UIDUtil"
+require "thstg.Scripts.Framework.Utils.FileUtil"
+require "thstg.Scripts.Framework.Utils.TableUtil"
+require "thstg.Scripts.Framework.Utils.UIDUtil"
