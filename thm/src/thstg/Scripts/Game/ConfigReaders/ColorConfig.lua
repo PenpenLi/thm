@@ -1,4 +1,4 @@
-module("THSTG.ColorStyleConfig", package.seeall)
+module("THSTG.ColorConfig", package.seeall)
 
 local t_color_style = nil
 function getColorType(key)
