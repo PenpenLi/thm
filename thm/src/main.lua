@@ -6,7 +6,10 @@ require "cocos.init"
 require "thstg.init"
 
 local function main()
-    require("app.MyApp"):create():run()
+    THSTG.EngineEx:create({
+        gameRoot = "app.th08",
+        defaultGameName = "TH08"
+    }):run()
 end
 
 local status, msg = xpcall(main, __G__TRACKBACK__)

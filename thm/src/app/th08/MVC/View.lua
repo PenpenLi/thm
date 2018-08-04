@@ -1,86 +1,68 @@
-local M = class("View")
 
-function M:ctor()
-	--显示时被添加到的父级对象
-	self.__parent__ = false
-	--真实的cc显示对象
-	self.__realView__ = false
+local M = class("View", cc.Node)
+
+function M:ctor(app, name)
+    self:enableNodeEvents()
+    self.app_ = app
+    self.name_ = name
+
+    -- check CSB resource file
+    local res = rawget(self.class, "RESOURCE_FILENAME")
+    if res then
+        self:createResourceNode(res)
+    end
+
+    local binding = rawget(self.class, "RESOURCE_BINDING")
+    if res and binding then
+        self:createResourceBinding(binding)
+    end
+
+    if self.onCreate then self:onCreate() end
 end
 
-----public functions---------------------
-
---显示
-function M:show(...)
-	if not self:isShow() then
-		assert(self.__parent__, "[View] Wanna show this, you must run setLayer with a CCNode object for this view!")
-
-		self.__realView__ = self:_initRealView(...)
-		assert(self:isRealViewExist(), "[View] the _initRealView function must return a CCNode object!")
-		self.__realView__:onNodeEvent("cleanup", handler(self, self._onRealViewDestroy))
-
-		self.__parent__:addChild(self.__realView__)
-	end
+function M:getApp()
+    return self.app_
 end
 
---隐藏
-function M:hide()
-	if self:isShow() then
-		self.__realView__:removeFromParent()
-		self.__realView__ = false
-	end
+function M:getName()
+    return self.name_
 end
 
---是否已显示
-function M:isShow()
-	if self:isRealViewExist() and self.__realView__:isRunning() then
-		return true
-	end
-	return false
+function M:getResourceNode()
+    return self.resourceNode_
 end
 
---设置父级对象
-function M:getLayer() return self.__parent__ end
-function M:setLayer(value)
-	assert(tolua.cast(value, "cc.Node"), "[View] the setLayer function param value must be a CCNode object!")
-	self.__parent__ = value
+function M:createResourceNode(resourceFilename)
+    if self.resourceNode_ then
+        self.resourceNode_:removeSelf()
+        self.resourceNode_ = nil
+    end
+    self.resourceNode_ = cc.CSLoader:createNode(resourceFilename)
+    assert(self.resourceNode_, string.format("M:createResourceNode() - load resouce node from file \"%s\" failed", resourceFilename))
+    self:addChild(self.resourceNode_)
 end
 
---获取cc显示对象，可能为空
-function M:getRealView(...)
-	return self.__realView__
+function M:createResourceBinding(binding)
+    assert(self.resourceNode_, "M:createResourceBinding() - not load resource node")
+    for nodeName, nodeBinding in pairs(binding) do
+        local node = self.resourceNode_:getChildByName(nodeName)
+        if nodeBinding.varname then
+            self[nodeBinding.varname] = node
+        end
+        for _, event in ipairs(nodeBinding.events or {}) do
+            if event.event == "touch" then
+                node:onTouch(handler(self, self[event.method]))
+            end
+        end
+    end
 end
 
-function M:update(reason, data, ...)
-
-end
-
-function M:dispose()
-	if self:isShow() then
-		self.__realView__:removeFromParent()
-		self.__realView__ = false
-	end
-end
-
---判断realView是否真实存在
-function M:isRealViewExist()
-	if self.__realView__ and not tolua.isnull(self.__realView__) then
-		return true
-	end
-	return false
-end
-
-----protected functions---------------------
-
---待子类重写，需要return一个cc显示对象
-function M:_initRealView(...)
-	error("[View] Wanna show me the _initRealView function must be overrided!")
-	return false
-end
-
---realView执行析构时的回调
-function M:_onRealViewDestroy()
-
+function M:showWithScene(transition, time, more)
+    self:setVisible(true)
+    local scene = display.newScene(self.name_)
+    scene:addChild(self)
+    display.runScene(scene, transition, time, more)
+    return self
 end
 
 return M
-

@@ -1,1 +1,1 @@
-﻿
+﻿require "Configs.Types.EventType"
