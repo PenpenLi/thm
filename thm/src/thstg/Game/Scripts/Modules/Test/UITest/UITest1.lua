@@ -3,7 +3,6 @@ module(..., package.seeall)
 local M = {}
 function M.create(params)
     local layer = THSTG.UI.newLayer()
-
     -- add background image
     THSTG.UI.newSprite({
         x = display.cx,
@@ -62,9 +61,9 @@ function M.create(params)
                 }
 			},
         }
-	})
+    })
     :addTo(layer)
-    
+
     --一张图片
     local iamge1 = THSTG.UI.newImage({
         x = display.cx-100,
@@ -89,6 +88,21 @@ function M.create(params)
             }
         }
     })  
+    layer:addChild(label)
+
+    --
+    local label = THSTG.UI.newBMFontLabel({
+        x = display.cx+80,
+        y = display.cy+80,
+        text = "王圣田",
+        anchorPoint = THSTG.UI.POINT_CENTER_TOP,
+        style = {
+            font = ResManager.getResSub(ResType.FONT, FontType.FNT, "activity_yeqian"),
+            additionalKerning = -4,
+            -- lineHeight = 28
+        }
+    })
+
     layer:addChild(label)
     --
     --一个按钮

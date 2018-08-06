@@ -19,7 +19,14 @@ function M:createEnv(gameRoot)
 end
 
 --[[以下函数由子类重载]]--
-function M:onEnv(gameRoot)
+function M:onEnv(gameRoot)  
+    --添加LUA包含路径
+    local newPath = string.gsub(gameRoot, ".", "/") 
+    package.path = package.path .. ';' .. newPath .. '/?.lua'
+
+    --添加资源路径
+    cc.FileUtils:getInstance():addSearchPath("src/" .. newPath .. "/")
+
     --初始化游戏
     return true
 end

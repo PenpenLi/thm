@@ -242,7 +242,7 @@ function newBMFontLabel(params)
 	assert(type(params) == "table", "[UI] newLabel() invalid params")
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
-	finalParams.style.font = ResManager.getResSub(ResType.FONT, FontType.FNT, "arial")
+	finalParams.style.font = "Arial"
 	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	-- local label = cc.Label:createWithBMFont(
@@ -323,7 +323,7 @@ function newAtlasLabel(params)
 	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	local startCharMap = ((type(finalParams.style.font.startChar) == "string") and {string.byte(finalParams.style.font.startChar)} or {finalParams.style.font.startChar or 48})[1]
-	local label = cc.LabelAtlas:create(
+	local label = cc.LabelAtlas:_create(
 		finalParams.text, 
 		finalParams.style.font.src,
 		finalParams.style.font.itemWidth, 

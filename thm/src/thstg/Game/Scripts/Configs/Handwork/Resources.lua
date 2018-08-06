@@ -1,7 +1,7 @@
 return {
     font = {
         ttf = {
-            WenQuanYiMicroHei = "Assets/Font/WenQuanYiMicroHei.ttf",
+            default = "Assets/Font/WenQuanYiMicroHei.ttf",
         },
         fnt = {
             activity_yeqian = "Assets/Font/activity_yeqian.fnt",

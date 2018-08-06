@@ -167,7 +167,7 @@ function getSkinSize(src)
 
 		skinSize = {width = 2, height = 2}
 		if cc.FileUtils:getInstance():isFileExist(src) then
-			local tmpSkin = cc.TextureCache:getInstance():addImage(src)
+			local tmpSkin = cc.Director:getInstance():getTextureCache():addImage(src)
 			local size = tmpSkin:getContentSize()
 			skinSize.width = size.width
 			skinSize.height = size.height
