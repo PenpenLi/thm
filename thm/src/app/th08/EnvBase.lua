@@ -6,3 +6,6 @@ require "UI.Init"
 
 --配置文件
 require "Configs.Init"
+
+--配置文件
+require "Test"

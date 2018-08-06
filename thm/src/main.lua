@@ -7,8 +7,8 @@ require "thstg.init"
 
 local function main()
     THSTG.EngineEx:create({
-        gameRoot = "app.th08",
-        defaultGameName = "TH08"
+        gameRoot = "thstg.Game",
+        gameName = "THSTG"
     }):run()
 end
 

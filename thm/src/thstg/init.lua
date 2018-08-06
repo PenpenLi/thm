@@ -2,8 +2,9 @@
 --全局配置
 require "thstg.Config"
 
---东方STG核心库
-require "thstg.Scripts.Framework.Init"
+--引擎扩展
+require "thstg.EngineEx"
 
---Demo框架
-require "thstg.Scripts.Game.Init"
+--东方STG核心库
+require "thstg.Framework.Init"
+
