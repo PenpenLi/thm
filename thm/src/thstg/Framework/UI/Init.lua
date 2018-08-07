@@ -19,7 +19,6 @@
 require "thstg.Framework.UI.Style"
 
 --[[基础部件basic]]--
-require "thstg.Framework.UI.Basic.CCUIComponent"
 require "thstg.Framework.UI.Basic.ControlButton"
 require "thstg.Framework.UI.Basic.Label"
 require "thstg.Framework.UI.Basic.Image"

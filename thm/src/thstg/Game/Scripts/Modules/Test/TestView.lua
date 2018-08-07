@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("TestModule", View)
+local M = class("TestView", View)
 
 function M:onCreate()
     local win = UI.newWindow({

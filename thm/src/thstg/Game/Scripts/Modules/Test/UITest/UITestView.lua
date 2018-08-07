@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("TestModule", View)
+local M = class("UITestView", View)
 
 local testUI = nil
 
@@ -9,7 +9,6 @@ function M:onCreate()
         require("Scripts.Modules.Test.UITest.UITest1"),     --按钮文字测试
         require("Scripts.Modules.Test.UITest.UITest2"),     --View测试
         require("Scripts.Modules.Test.UITest.UITest3"),     --菜单测试
-        require("Scripts.Modules.Test.UITest.UITest4"),     --动画测试
     }
     --事件监听
     -- -- 注册键盘事件

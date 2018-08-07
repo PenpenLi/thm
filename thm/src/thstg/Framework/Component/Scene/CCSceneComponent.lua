@@ -1,5 +1,6 @@
 module("THSTG.SCENE", package.seeall)
 
+local display = display
 --在lua中对CC组件进行再封装是为了与UI组件创建方法的统一，方便UI编辑器配置的编写
 
 --CCNode组件
@@ -17,10 +18,10 @@ end
 --CCSprite组件
 function newSprite(params)
 	params = params or {}
-	assert(type(params) == "table", "[UI] newSprite() invalid params")
+	assert(type(params) == "table", "[Scene] newSprite() invalid params")
 
-	local src = params.src or ""--ResManager.getEmptyImg()
-	local sp = cc.Sprite:create(src)
+	-- local src = params.src or ""--ResManager.getEmptyImg()
+	local sp = display.newSprite(src)
 	if params.anchorPoint then
 		sp:setAnchorPoint(params.anchorPoint)
 	end
@@ -36,12 +37,12 @@ function newSprite(params)
 		sp:setScaleY(params.height / size.height)
 		--print(168, params.height, size.height)
 	end
-	if params.frame then
-		sp:setTextureRect(params.frame)
+	if params.rect then
+		sp:setTextureRect(params.rect)
 	end
 
-	function sp:setRect(frame)
-		sp:setTextureRect(frame)
+	function sp:setRect(rect)
+		sp:setTextureRect(rect)
 	end
 	function sp:setSource(src)
 		sp:setTexture(src)
@@ -62,96 +63,131 @@ function newSprite(params)
 	end
 
 	if __PRINT_NODE_TRACK__ then
-		local info = getTraceback()
-		THSTG.UI.setClick(sp, function ()
-			print(__PRINT_TYPE__, info)
-		end, false)
+		-- local info = getTraceback()
+		-- THSTG.UI.setClick(sp, function ()
+		-- 	print(__PRINT_TYPE__, info)
+		-- end, false)
 	end
 
-	-- debugUI(sp)
 	return sp
 end
 
---CCScale9Sprite组件
-function newScale9Sprite(params)
-	params = clone(params)
+--创建精灵帧
+function newSpriteFrame(params)
 	params = params or {}
-	assert(type(params) == "table", "[UI] newScale9Sprite() invalid params")
-	params.style = params.style or {}
-	local scale9Rect = params.style.scale9Rect or {left = 0, top = 0, right = 0, bottom = 0}
-	local src = params.style.src or ""--ResManager.getEmptyImg()
-
-	--默认
-	local skinSize = {}
-	skinSize.width = params.style.width
-	skinSize.height = params.style.height
-	local textureSize = THSTG.UI.getSkinSize(src)
-	if not skinSize.width or not skinSize.height then
-		skinSize.width = skinSize.width or textureSize.width
-		skinSize.height = skinSize.height or textureSize.height
-	end
-
-	local insetRectX = math.min(textureSize.width, scale9Rect.left)
-	local insetRectY = math.min(textureSize.height, scale9Rect.top)
-	local insetRectW = math.max(0, textureSize.width - insetRectX - scale9Rect.right)
-	local insetRectH = math.max(0, textureSize.height - insetRectY - scale9Rect.bottom)
-
-	local rect = cc.rect(0, 0, 0, 0)
-	TableUtil.mergeA2B(params.rect, rect)
-
-	local frameRect = cc.rect(0 + rect.x, 0 + rect.y, skinSize.width + rect.width, skinSize.height + rect.height)
-	local scaleRect = cc.rect(insetRectX, insetRectY, insetRectW, insetRectH)
-	local node = ccui.Scale9Sprite:create(src, frameRect, scaleRect)
-
-	node:setPosition(params.x or 0, params.y or 0)
-	if params.anchorPoint then
-		node:setAnchorPoint(params.anchorPoint)
-	end
-	skinSize.width = params.width or skinSize.width
-	skinSize.height = params.height or skinSize.height
-	node:setContentSize(skinSize)
-
-	node:setInvert(params.invert or false)
-
-	if __PRINT_NODE_TRACK__ then
-		local info = getTraceback()
-		THSTG.UI.setClick(node, function ()
-			print(__PRINT_TYPE__, info)
-		end, false)
-	end
-
-	-- debugUI(node)
-	return node
+	local src = params.src or ""--ResManager.getEmptyImg()
+	return display.newSpriteFrame(params.src,params.rect)
 end
 
-function newQuickScale9Sprite(src,scaleRect)
-	local tmpSkin, skinSize, insetRectX, insetRectY, insetRectW, insetRectH
+
+--创建精灵帧数组
+function newFrames(params)
+	params = params or {}
+	params.begin = params.begin or 1
+	params.isReversed = params.isReversed or false
+
+	return display.newFrames(params.pattern, params.begin, params.length, params.isReversed)
+end
+
+--自定义的精灵帧创建
+local function newHVFrames(params ,isVertical)
+	params = params or {}
+	isVertical = isVertical or params.isVertical or false
+	params.source = params.source or ""
+	params.length = params.length or 0
+	params.isReversed = params.isReversed or false
+
+	local source = params.source
+	local length = params.length
+	local isReversed = params.isReversed
+
+	local frames = {}
+	local step = 1
+	local begin = 1
+	local last = begin + length - 1
+	if isReversed then
+		last, begin = begin, last
+		step = -1
+	end
+
+	local texture,texRect = loadTexture(source)
 	
-	local scaleGridRect = scaleRect or {left=0, top=0, right=0, bottom=0}
-	--默认
-	local skinSize = THSTG.UI.getSkinSize(src)
-	insetRectX = scaleGridRect.left
-	insetRectY = scaleGridRect.top
-	insetRectW = skinSize.width - insetRectX - scaleGridRect.right
-	insetRectH = skinSize.height - insetRectY - scaleGridRect.bottom
-	return ccui.Scale9Sprite:create(src, cc.rect(0,0,skinSize.width, skinSize.height), cc.rect(insetRectX, insetRectY, insetRectW, insetRectH))
+	local frameSize = cc.size(texRect.width,texRect.height)
+	if isVertical then
+		frameSize.height = frameSize.height / length
+	else
+		frameSize.width = frameSize.width / length
+	end
+	
+	local frameRect = cc.rect(texRect.x,texRect.y,frameSize.width,frameSize.height)
+	for index = begin, last, step do
+		if isVertical then
+			frameRect.y = texRect.y + frameRect.height * (index - 1)
+		else
+			frameRect.x = texRect.x + frameRect.width * (index - 1)
+		end
+		
+		local frame = cc.SpriteFrame:createWithTexture(texture, frameRect)
+
+		frames[#frames + 1] = frame
+	end
+	return frames
 end
 
-
-function newSimpleScale9Sprite(src, scaleRect)
-	local tmpSkin, skinSize, insetRectX, insetRectY, insetRectW, insetRectH
-
-	local scaleGridRect = scaleRect or {left = 0, top = 0, right = 0, bottom = 0}
-	--默认
-	local skinSize = THSTG.UI.getSkinSize(src)
-	insetRectX = scaleGridRect.left
-	insetRectY = scaleGridRect.top
-	insetRectW = skinSize.width - insetRectX - scaleGridRect.right
-	insetRectH = skinSize.height - insetRectY - scaleGridRect.bottom
-	return ccui.Scale9Sprite:create(src, cc.rect(0, 0, skinSize.width, skinSize.height), cc.rect(insetRectX, insetRectY, insetRectW, insetRectH))
+--水平切割
+function newHFrames(params)
+	return createHVFrames(params, false)
+end
+--竖直切割
+function newVFrames(params)
+	return createHVFrames(params, true)
 end
 
+--[[
+--新建动画
 
+]]
+function newAnimation(params)
+	params = params or {}
+
+	local frames 
+	if ( type(params.frames) == "table" ) then
+		if(params.frames.pattern) then
+			frames = newFrames(params.frames)
+		elseif params.frames.source then
+			frames = newHVFrames(params.frames)
+		else
+			frames = params.frames
+		end
+	else
+		error("newAnimation() - invalid params:frames")
+	end
+	local time = params.time or (1/(#frames or 1))
+	local animation,sprite = display.newAnimation(frames,time)
+
+	if params.father then
+		--TODO:停止
+		params.father:playAnimationForever(animation)
+	end
+
+	return animation,sprite
+end
+
+function newAnimationSprite(params)
+	params = params or {}
+	params.father = nil
+
+	local sprite = newSprite(params)
+	local animation = newAnimation(params)
+
+	if sprite and animation then
+		
+		sprite:playAnimationForever(animation)
+	end
+
+	return sprite
+end
+--------------------------------------------
 --CCLayer组件
 function newLayer(params)
 	params = params or {}
@@ -419,33 +455,7 @@ function newTouchLayer(params)
 	return layer
 end
 
--- --[[
--- --新建动画
--- --@param data 			[string] 		plist文件路径
--- --@param img 			[string] 		plist文件对应图片路径
--- --@param onCallback 	[function] 		回调函数
--- ]]
--- function newAnimation(params)
--- 	params = params or {}
--- 	local animation = nil
--- 	if( type(params.frames) == "userdata" ) then
--- 		animation = display.newAnimation(params.frames,params.time)
--- 	elseif ( type(params.frames) == "table" ) then
--- 		animation = display.newAnimation(params.pattern, params.begin, params.length, params.isReversed,params.time)
--- 	else
--- 		error("newAnimation() - invalid params:frames")
--- 	end
-
--- 	return animation
--- end
-
---[[
---加载Plist纹理
---@param data 			[string] 		plist文件路径
---@param img 			[string] 		plist文件对应图片路径
---@param onCallback 	[function] 		回调函数
-]]
-function loadPlist(params)
+function loadPlistFrames(params)
 	params = params or {}
 
 	if params.data then
@@ -458,11 +468,68 @@ function loadPlist(params)
 
 end
 
-function removePlist(params)
+function removePlistFrames(params)
 	params = params or {}
 
 	display.removeSpriteFrames(params.data, params.img)
 end
 
-
 --
+function loadTexture(source)
+	local texture = nil
+	local texRect = nil
+
+	if type(source) == "string" then
+		if string.byte(source) == 35 then -- 第一个字符是 #
+			--因为plist使用的纹理是一张大图,所以需要取得精灵
+			local spriteFrame = cc.SpriteFrameCache:getInstance():getSpriteFrameByName(string.sub(source, 2))    
+			if spriteFrame then
+				texRect = spriteFrame:getRect()
+				texture = spriteFrame:getTexture()
+			else
+				error(string.format("loadTexture() - invalid frame name \"%s\"", tostring(source)), 0)
+				return nil,nil
+			end
+		else
+			texture = display.loadImage(source)
+			local textureSize = texture:getContentSize()
+			texRect = cc.rect(0,0,textureSize.width,textureSize.height)
+		end
+
+	elseif tolua.type(source) == "cc.SpriteFrame" then
+		texRect = source:getRect()
+		texture = source:getTexture()
+
+	elseif tolua.type(source) == "cc.Texture2D" then
+		texture = source
+		local textureSize = texture:getContentSize()
+		texRect = cc.rect(0,0,textureSize.width,textureSize.height)
+
+	else
+		error("createFrame() - invalid parameters", 0)
+	end
+
+	return texture,texRect
+end
+
+function removeTexture(scource)
+	if type(source) == "string" then
+		if string.byte(source) == 35 then 
+			display.removeSpriteFrame(source)
+		else
+			display.removeImage(source)
+		end
+
+	elseif tolua.type(source) == "cc.SpriteFrame" then
+		display.removeSpriteFrame(source)
+
+	elseif tolua.type(source) == "cc.Texture2D" then
+		cc.SpriteFrameCache:getInstance():removeSpriteFramesFromTexture(source)
+
+	elseif scource == nil then
+		cc.SpriteFrameCache:getInstance():removeUnusedSpriteFrames()
+	else
+		error("createFrame() - invalid parameters", 0)
+	end
+
+end
