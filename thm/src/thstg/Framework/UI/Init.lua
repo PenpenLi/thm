@@ -26,9 +26,9 @@ require "thstg.Framework.UI.Basic.Image"
 require "thstg.Framework.UI.Basic.TabBar"
 require "thstg.Framework.UI.Basic.Button"
 require "thstg.Framework.UI.Basic.ScrollView"
-
+require "thstg.Framework.UI.Basic.ToggleButton"
 --[[扩展部件extends]]--
-require "thstg.Framework.UI.Extends.ToggleButton"
+
 
 --[[公共部件public]]--
 

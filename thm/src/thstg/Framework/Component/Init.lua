@@ -7,3 +7,4 @@ THSTG.CCDispatcher = THSTG.EVENT.getEventDispatcher()
 
 THSTG.Scheduler = require "thstg.Framework.Component.Schedule.Scheduler"
 
+require "thstg.Framework.Component.Scene.CCSceneComponent"

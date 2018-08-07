@@ -5,8 +5,8 @@ function M.create(params)
     local layer = THSTG.UI.newLayer()
 
     --精灵菜单的使用
-    local s1=cc.Sprite:create("res/close.png")
-    local s2=cc.Sprite:create("res/open.png")
+    local s1=cc.Sprite:create("Assets/UI/Button/power1_close.png")
+    local s2=cc.Sprite:create("Assets/UI/Button/power1_open.png")
     local spriteBtn=cc.MenuItemSprite:create(s1,s2)
     local function spriteBtnCB(sender) 
         print("精灵菜单")
@@ -34,13 +34,13 @@ function M.create(params)
     layer:addChild(itemMenu)
 
     --图片菜单的使用
-    local ImageBtn1=cc.MenuItemImage:create("res/close.png","res/open.png")
+    local ImageBtn1=cc.MenuItemImage:create("Assets/UI/Button/power1_close.png","Assets/UI/Button/power1_open.png")
     local function imageBtnCB(sender) 
         print("图片菜单1")
     end
     ImageBtn1:registerScriptTapHandler(imageBtnCB)
 
-    local ImageBtn2=cc.MenuItemImage:create("res/close.png","res/open.png")
+    local ImageBtn2=cc.MenuItemImage:create("Assets/UI/Button/power1_close.png","Assets/UI/Button/power1_open.png")
     local function imageBtnCB(sender) 
         print("图片菜单2")
     end
@@ -51,12 +51,12 @@ function M.create(params)
 
 
     --开关菜单的使用
-    local spriteTBtn=cc.MenuItemSprite:create(cc.Sprite:create("res/open.png"),cc.Sprite:create("res/close.png"))
+    local spriteTBtn=cc.MenuItemSprite:create(cc.Sprite:create("Assets/UI/Button/power1_open.png"),cc.Sprite:create("Assets/UI/Button/power1_close.png"))
     local function spriteBtnCBT(sender) 
         print("开关精灵菜单")
     end
     spriteTBtn:registerScriptTapHandler(spriteBtnCBT)
-    local ImageTBtn=cc.MenuItemImage:create("res/close.png","res/open.png")
+    local ImageTBtn=cc.MenuItemImage:create("Assets/UI/Button/power1_close.png","Assets/UI/Button/power1_open.png")
     local function imageBtnCBT(sender) 
         print("开关图片菜单")
     end
@@ -76,8 +76,8 @@ function M.create(params)
 
    layer:addChild(spriteMenu)
 
-   local s1=cc.Sprite:create("res/close.png")
-   local s2=cc.Sprite:create("res/open.png")
+   local s1=cc.Sprite:create("Assets/UI/Button/power1_close.png")
+   local s2=cc.Sprite:create("Assets/UI/Button/power1_open.png")
    local spriteBtn1=cc.MenuItemSprite:create(s1,s2)  --一个菜单项
    local function spriteBtnCA(sender) 
        print("精灵菜单项1")
@@ -85,8 +85,8 @@ function M.create(params)
    spriteBtn1:registerScriptTapHandler(spriteBtnCA)
    spriteMenu:addChild(spriteBtn1)
 
-   local s1=cc.Sprite:create("res/open.png")
-   local s2=cc.Sprite:create("res/close.png")
+   local s1=cc.Sprite:create("Assets/UI/Button/power1_open.png")
+   local s2=cc.Sprite:create("Assets/UI/Button/power1_close.png")
    local spriteBtn2=cc.MenuItemSprite:create(s1,s2)  --一个菜单项
    local function spriteBtnCB(sender) 
        print("精灵菜单项2")
@@ -94,8 +94,8 @@ function M.create(params)
    spriteBtn2:registerScriptTapHandler(spriteBtnCB)
    spriteMenu:addChild(spriteBtn2)
 
-   local s1=cc.Sprite:create("res/open.png")
-   local s2=cc.Sprite:create("res/close.png")
+   local s1=cc.Sprite:create("Assets/UI/Button/power1_open.png")
+   local s2=cc.Sprite:create("Assets/UI/Button/power1_close.png")
    local spriteBtn=cc.MenuItemSprite:create(s1,s2)  --一个菜单项
    local function spriteOnClick(sender) 
        print("精灵菜单项3")

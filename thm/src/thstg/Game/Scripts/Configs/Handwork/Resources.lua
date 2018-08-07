@@ -22,4 +22,11 @@ return {
         empty = "Assets/Public/empty.png",
 		black = "Assets/Public/black.png",
     },
+
+    texture = {
+        plist = {
+            dragon = "Assets/Texture/Dragon.plist",
+        }
+
+    },
 }

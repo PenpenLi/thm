@@ -7,3 +7,6 @@ UI = "ui"
 
 --公共资源
 PUBLIC = "public"
+
+--纹理资源
+TEXTURE = "texture"

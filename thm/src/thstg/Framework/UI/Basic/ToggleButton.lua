@@ -77,7 +77,7 @@ function newToggleButton(params)
 
 	local finalParams = {
 		x = 0, y = 0,
-		anchorPoint = clone(UI.POINT_CENTER),
+		anchorPoint = clone(POINT_CENTER),
 		enabled = true,
 		isToggle = true,
 	}

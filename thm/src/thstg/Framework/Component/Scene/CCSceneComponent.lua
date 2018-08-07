@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("THSTG.SCENE", package.seeall)
 
 --在lua中对CC组件进行再封装是为了与UI组件创建方法的统一，方便UI编辑器配置的编写
 
@@ -288,109 +288,6 @@ function newScene()
 	return cc.Scene:create()
 end
 
---CCWidget组件
---param x           	#number     x坐标
---param y           	#number     y坐标
---param anchorPoint 	#cc.p		anchorPoint
---param touchEnabled 	#boolean	是否接受点击事件
---param swallowTouches 	#boolean	是否吞噬事件
---param onClick		 	#function	点击事件回调函数
---param onTouch		 	#function	整个触摸事件回调函数
-function newWidget(params)
-	params = params or {}
-	assert(type(params) == "table", "[UI] newWidget() invalid params")
-
-	local finalParams = {
-		x = 0, y = 0,
-		width = 0, height = 0,
-		anchorPoint = clone(THSTG.UI.POINT_CENTER),
-		touchEnabled = false,
-		swallowTouches = false,
-	}
-	TableUtil.mergeA2B(params, finalParams)
-
-	local widget = ccui.Widget:create()
-	widget:setPosition(cc.p(finalParams.x, finalParams.y))
-	widget:setContentSize(cc.size(finalParams.width, finalParams.height))
-	widget:setAnchorPoint(finalParams.anchorPoint)
-	widget:setTouchEnabled(finalParams.touchEnabled)
-
-
-	if type(params.onTouch) == "function" or type(params.onClick) == "function" then
-		local function onTouch(sender, eventCode)
-			if type(params.onTouch) == "function" then
-				params.onTouch(sender, eventCode)
-			end
-			if eventCode == cc.EventCode.ENDED then
-				if type(params.onClick) == "function" then
-					params.onClick(sender)
-				end
-			end
-		end
-		widget:setTouchEnabled(true)
-		widget:addTouchEventListener(onTouch)
-	end
-	widget:setSwallowTouches(finalParams.swallowTouches)
-
-	function widget:onClick(func)
-		if type(func) == "function" then
-			local function onTouch(sender, eventCode)
-				if eventCode == cc.EventCode.ENDED then
-					func()
-				end
-			end
-			widget:setTouchEnabled(true)
-			widget:addTouchEventListener(onTouch)
-		end
-	end
-
-	return widget
-end
-
-
---[[processTimer
-@param   isReverse   [boolean]  是否反方向
-@param   progressType        [number]  类型, cc.PROGRESS_TIMER_TYPE_RADIAL 和 cc.PROGRESS_TIMER_TYPE_BAR
-@param   percentage  [number]  百分比
-@param   style
-				{
-					src
-}
-]]
-
-function newProgressTimer(params)
-	params = clone(params)
-	params = params or {}
-	params.style = params.style or {}
-
-	local mask = newSprite({
-		src = params.src or ResManager.getRes(ResType.MAIN_UI, "icon_skill_cd_small"),
-	})
-
-	local node = cc.ProgressTimer:create(mask)
-	if params.anchorPoint then
-		node:setAnchorPoint(params.anchorPoint)
-	end
-	if params.isReverse then
-		node:setReverseDirection(true)
-	end
-	if params.progressType then
-		node:setType(params.progressType)
-	end
-	if params.percentage then
-		node:setPercentage(params.percentage)
-	end
-	local size = node:getContentSize()
-	if params.width then
-		node:setScaleX(params.width / size.width)
-	end
-	if params.height then
-		node:setScaleY(params.height / size.height)
-	end
-	node:setPosition(cc.p(params.x or 0, params.y or 0))
-	return node
-end
-
 --[[ClippingNode
 ]]
 function newClippingNode(params)
@@ -522,119 +419,50 @@ function newTouchLayer(params)
 	return layer
 end
 
+-- --[[
+-- --新建动画
+-- --@param data 			[string] 		plist文件路径
+-- --@param img 			[string] 		plist文件对应图片路径
+-- --@param onCallback 	[function] 		回调函数
+-- ]]
+-- function newAnimation(params)
+-- 	params = params or {}
+-- 	local animation = nil
+-- 	if( type(params.frames) == "userdata" ) then
+-- 		animation = display.newAnimation(params.frames,params.time)
+-- 	elseif ( type(params.frames) == "table" ) then
+-- 		animation = display.newAnimation(params.pattern, params.begin, params.length, params.isReversed,params.time)
+-- 	else
+-- 		error("newAnimation() - invalid params:frames")
+-- 	end
 
---CCMenu组件
---param x           	#number     x坐标
---param y           	#number     y坐标
---param isVertical    	#bool       是否垂直排布,否则为水平, 默认
---param isHorizontal    #bool       是否水平排布,否则为竖直
---param padding         #number     间隔,默认为nil为auto
-local function newMenu(params)
-	params = params or {}
-
-	if params.isVertical then
-		if params.isHorizontal then
-			params.isVertical = true
-			params.isHorizontal = false
-		else
-			params.isVertical = params.isVertical
-			params.isHorizontal = not params.isVertical
-		end
-	else
-		if params.isHorizontal then
-			params.isVertical = not params.isHorizontal
-			params.isHorizontal = params.isHorizontal
-		else
-			params.isVertical = true
-			params.isHorizontal = false
-		end
-	end
-
-	local menu = cc.Menu:create()
-	menu:setPosition(params.x,params.y)
-	
-	local addChild = menu.addChild
-	function menu:addChild(node,...)
-		addChild(self,node,...)
-
-		--设置水平竖直
-		if params.isVertical then 
-			--params.isVertical then
-			if padding then 
-				menu:alignItemsVerticallyWithPadding(padding)
-			else 
-				menu:alignItemsVertically()
-			end
-		else 
-			if padding then 
-				menu:alignItemsHorizontallyWithPadding(padding)
-			else 
-				menu:alignItemsHorizontally() 
-			end
-		end
-	end
-
-	return menu
-end
-
-function newSpriteMenu(params)
-	local menu = newMenu(params)
-
-	return menu
-end
+-- 	return animation
+-- end
 
 --[[
---param onClick         [function]     点击回调
---@param	style		[table]		样式，结构如：
-	{
-			normal = {
-			}, 
-			selected = 
-			}, 
-			disabled = {	
-			}
-	}	
+--加载Plist纹理
+--@param data 			[string] 		plist文件路径
+--@param img 			[string] 		plist文件对应图片路径
+--@param onCallback 	[function] 		回调函数
 ]]
-function newItemSprite(params)
+function loadPlist(params)
 	params = params or {}
-	params.onClick = params.onClick or function() end
 
-
-	local normalSprite = nil
-	local selectedSprite = nil
-	local disabledSprite = nil
-
-	if params.style.normal then
-		if type(params.style.normal) == "userdata" then
-			normalSprite = params.style.normal
-		elseif type(params.style.normal) == "table" then
-			normalSprite = newSprite(params.style.normal)
-		end
-	end
-	if params.style.selected then
-		if type(params.style.selected) == "userdata" then
-			selectedSprite = params.style.selected
-		elseif type(params.style.selected) == "table" then
-			selectedSprite = newSprite(params.style.selected)
-		end
-	end
-	if params.style.disabled then
-		if type(params.style.disabled) == "userdata" then
-			disabledSprite = params.style.disabled
-		elseif type(params.style.disabled) == "table" then
-			disabledSprite = newSprite(params.style.disabled)
+	if params.data then
+		if params.img then
+			display.loadSpriteFrames(params.data, params.img, params.onCallback)
+		else
+			cc.SpriteFrameCache:getInstance():addSpriteFrames(params.data)
 		end
 	end
 
-	 --一个菜单项
-	local spriteItem = cc.MenuItemSprite:create(normalSprite,selectedSprite,disabledSprite)
-
-	function spriteItem:onClick(func)
-		params.onClick = func or function() end
-	end
-
-	spriteItem:registerScriptTapHandler(params.onClick)
-	
-	return spriteItem
 end
 
+function removePlist(params)
+	params = params or {}
+
+	display.removeSpriteFrames(params.data, params.img)
+end
+
+
+--

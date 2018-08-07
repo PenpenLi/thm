@@ -18,7 +18,7 @@ function M:onCreate()
 		onClose = handler(self, self.__onClose),
 	})
 
-	local UITest1 = require "Game.Modules.Test.UITest1"
+	local UITest1 = require "Scripts.Modules.Test.UITest.UITest1"
 	local ls = UI.newLayerStack({
 		layers = {
 			{data = "基础组件1", creator = UITest1.create},

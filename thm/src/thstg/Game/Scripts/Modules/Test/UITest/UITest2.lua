@@ -25,10 +25,10 @@ function M.create(params)
         isTouchAction = false,
         style = {
             normal ={
-                skin = {src = "res/close.png"}
+                skin = {src = "Assets/UI/Button/power1_close.png"}
             },
             selected = {
-                skin = {src = "res/open.png"}
+                skin = {src = "Assets/UI/Button/power1_open.png"}
             },
         }
     })

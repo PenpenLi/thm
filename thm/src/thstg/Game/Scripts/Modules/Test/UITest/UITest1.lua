@@ -8,7 +8,7 @@ function M.create(params)
         x = display.cx,
         y = display.cy,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        src = "HelloWorld.png"
+        src = "Assets/HelloWorld.png"
     })
     :addTo(layer)
 
@@ -82,7 +82,7 @@ function M.create(params)
         y = display.cy+100,
         style = {
             font = {
-                src = "res/pvp_shu2.png", 
+                src = "Assets/Font/pvp_shu2.png", 
                 itemWidth = 34.6,
                 itemHeight = 53,
             }
@@ -106,7 +106,7 @@ function M.create(params)
     layer:addChild(label)
     --
     --一个按钮
-    local btn2 = ccui.Button:create("res/close.png", "res/open.png")
+    local btn2 = ccui.Button:create("Assets/UI/Button/power1_close.png", "Assets/UI/Button/power1_open.png")
     btn2:setPosition(50,display.cy-100)
     btn2:setAnchorPoint(cc.p(0.5,0.5))
     btn2:ignoreContentAdaptWithSize(false)
