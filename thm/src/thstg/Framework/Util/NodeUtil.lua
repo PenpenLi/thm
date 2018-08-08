@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("THSTG.NodeUtil", package.seeall)
 
 -- 设置至中心
 function makeMeCenter(node)

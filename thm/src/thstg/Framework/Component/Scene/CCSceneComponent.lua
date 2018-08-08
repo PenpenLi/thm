@@ -63,10 +63,10 @@ function newSprite(params)
 	end
 
 	if __PRINT_NODE_TRACK__ then
-		-- local info = getTraceback()
-		-- THSTG.UI.setClick(sp, function ()
-		-- 	print(__PRINT_TYPE__, info)
-		-- end, false)
+		local info = getTraceback()
+		THSTG.NodeUtil.setClick(sp, function ()
+			print(__PRINT_TYPE__, info)
+		end, false)
 	end
 
 	return sp

@@ -550,13 +550,14 @@ function transTime(time)
 	return day, hour, min, sec
 end
 
+local timeStr = "%d天%d时%d分%d秒"
 function transDayTimeStr(time)
 	local day = math.floor(time / 3600 / 24)
 	local hour = math.floor(time / 3600 % 24)
 	local min = math.floor(time / 60 % 60)
 	local sec = math.floor(time % 60)
 
-	return Language.getString(200002, day, hour, min, sec)
+	return string.format(timeStr, day, hour, min, sec)
 end
 
 
@@ -640,6 +641,16 @@ function transCopyTimeStr(time, type)
 	return str
 end
 
+local activityTimeStr = 
+{
+	[200807] = "本轮活动倒计时：%s",
+	[200808] = "%s天%s时%s分%s秒",
+	[200809] = "%s天",
+	[200810] = "%s时",
+	[200811] = "%s分",
+	[200812] = "%s秒",
+}
+
 function transActivityTime(time)
 	local b = math.floor(time / 3600)
 	local c = math.floor(time / 60 % 60)
@@ -653,20 +664,20 @@ function transActivityTime(time)
 		if b < 10 then
 			bStr = "0" .. bStr
 		end
-		bStr = Language.getString(200810,bStr)
+		bStr = string.format(activityTimeStr[200810],bStr)
 	end
 
 	cStr = tostring(c)
 	if c < 10 then
 		cStr = "0" .. cStr
 	end
-	cStr = Language.getString(200811,cStr)
+	cStr = string.format(activityTimeStr[200811],cStr)
 
 	dStr = tostring(d)
 	if d < 10 then
 		dStr = "0" .. dStr
 	end
-	dStr = Language.getString(200812,dStr)
+	dStr = string.format(activityTimeStr[200812],dStr)
 
 	local str = bStr..cStr..dStr
 
@@ -690,7 +701,7 @@ function transActivityTimeStr(time, type)
 		if a < 10 then
 			aStr = "0" .. aStr
 		end
-		aStr = Language.getString(200809,aStr)
+		aStr = string.format(activityTimeStr[200809],aStr)
 	end
 
 	if b > 0 then
@@ -698,20 +709,20 @@ function transActivityTimeStr(time, type)
 		if b < 10 then
 			bStr = "0" .. bStr
 		end
-		bStr = Language.getString(200810,bStr)
+		bStr = string.format(activityTimeStr[200810],bStr)
 	end
 
 	cStr = tostring(c)
 	if c < 10 then
 		cStr = "0" .. cStr
 	end
-	cStr = Language.getString(200811,cStr)
+	cStr = string.format(activityTimeStr[200811],cStr)
 
 	dStr = tostring(d)
 	if d < 10 then
 		dStr = "0" .. dStr
 	end
-	dStr = Language.getString(200812,dStr)
+	dStr = string.format(activityTimeStr[200812],dStr)
 
 	local str = aStr..bStr..cStr..dStr
 
@@ -736,26 +747,26 @@ function transActivityTimeStrShowControl(time, type)
 	if a < 10 then
 		aStr = "0" .. aStr
 	end
-	aStr = Language.getString(200809,aStr)
+	aStr = string.format(activityTimeStr[200809],aStr)
 
 	bStr = tostring(b)
 	if b < 10 then
 		bStr = "0" .. bStr
 	end
-	bStr = Language.getString(200810,bStr)
+	bStr = string.format(activityTimeStr[200810],bStr)
 	
 
 	cStr = tostring(c)
 	if c < 10 then
 		cStr = "0" .. cStr
 	end
-	cStr = Language.getString(200811,cStr)
+	cStr = string.format(activityTimeStr[200811],cStr)
 
 	dStr = tostring(d)
 	if d < 10 then
 		dStr = "0" .. dStr
 	end
-	dStr = Language.getString(200812,dStr)
+	dStr = string.format(activityTimeStr[200812],dStr)
 	local str = aStr..bStr..cStr..dStr
 	if type == "d" then
 		str = aStr
@@ -767,6 +778,15 @@ function transActivityTimeStrShowControl(time, type)
 	return str
 end
 
+local timeText =
+{
+	-- 时间
+	[100080] = "天",
+	[100081] = "时",
+	[100082] = "分",
+	[100083] = "秒",
+	[100084] = "小时",
+}
 function transTimeText(time)
 
 	local a, b, c, d = transTime(time)
@@ -775,16 +795,16 @@ function transTimeText(time)
 	local cText = ""
 	local dText = ""
 	if a > 0 then
-		aText = a .. Language.getString(100080)
+		aText = a .. string.format(timeText[100080])
 	end
 	if b > 0 then
-		bText = b .. Language.getString(100084)
+		bText = b .. string.format(timeText[100084])
 	end
 	if c > 0 then
-		cText = c .. Language.getString(100082)
+		cText = c .. string.format(timeText[100082])
 	end
 	if true or d > 0 then
-		dText = d .. Language.getString(100083)
+		dText = d .. string.format(timeText[100083])
 	end
 	local text = aText .. bText .. cText .. dText
 
@@ -793,19 +813,19 @@ end
 
 
 local chnNum =
-	{
-		[0] = Language.getString(100020),
-		[1] = Language.getString(100021),
-		[2] = Language.getString(100022),
-		[3] = Language.getString(100023),
-		[4] = Language.getString(100024),
-		[5] = Language.getString(100025),
-		[6] = Language.getString(100026),
-		[7] = Language.getString(100027),
-		[8] = Language.getString(100028),
-		[9] = Language.getString(100029),
-		[10] = Language.getString(100030),
-	}
+{
+	[0] = "零",
+	[1] = "一",
+	[2] = "二",
+	[3] = "三",
+	[4] = "四",
+	[5] = "五",
+	[6] = "六",
+	[7] = "七",
+	[8] = "八",
+	[9] = "九",
+	[10] = "十",
+}
 
 -- 字符串 转 字符串
 -- 阿拉伯0-99 转换 中文
@@ -880,12 +900,17 @@ function getTimeByString2(dateStr)
 end
 
 
+local unitChar =
+{
+	[0] = "万",
+    [1] = "亿",
+}
 function transValue(value)
 	if value >= 1 then
 		if value >= 100000000 then
-			value = string.format("%.2f%s", value / 100000000, Language.getString(100034))
+			value = string.format("%.2f%s", value / 100000000, unitChar[1])
 		elseif value >= 10000 then
-			value = string.format("%.2f%s", value / 10000, Language.getString(100033))
+			value = string.format("%.2f%s", value / 10000, unitChar[0])
 		end
 	else
 		value = 0

@@ -63,7 +63,7 @@ function newSprite(params)
 
 	if __PRINT_NODE_TRACK__ then
 		local info = getTraceback()
-		THSTG.UI.setClick(sp, function ()
+		THSTG.NodeUtil.setClick(sp, function ()
 			print(__PRINT_TYPE__, info)
 		end, false)
 	end
@@ -115,7 +115,7 @@ function newScale9Sprite(params)
 
 	if __PRINT_NODE_TRACK__ then
 		local info = getTraceback()
-		THSTG.UI.setClick(node, function ()
+		THSTG.NodeUtil.setClick(node, function ()
 			print(__PRINT_TYPE__, info)
 		end, false)
 	end
