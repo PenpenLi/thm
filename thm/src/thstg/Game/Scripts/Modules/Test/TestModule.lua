@@ -12,6 +12,11 @@ function M:onCreate()
         require("Scripts.Modules.Test.UITest.UITest1"),         --按钮文字测试
         require("Scripts.Modules.Test.UITest.UITest2"),         --View测试
         require("Scripts.Modules.Test.UITest.UITest3"),         --菜单测试
+        require("Scripts.Modules.Test.UITest.UITest4"),         --TileList测试
+        require("Scripts.Modules.Test.UITest.UITest5"),         --Accordion测试
+        require("Scripts.Modules.Test.UITest.UITest6"),         --Box测试
+        require("Scripts.Modules.Test.UITest.UITest7"),         --Progress测试
+        require("Scripts.Modules.Test.UITest.UITest8"),         --RadioButton测试
         require("Scripts.Modules.Test.SceneTest.SceneTest1"),   --动画测试
     }
     --事件监听

@@ -196,7 +196,7 @@ function newTabBar(params)
 		finalParams.style.disabled.skin = finalParams.style.disabled.skin or clone(TABBAR_DEFAULT_HT_DISABLED_SKIN)
 	end
 
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	local paramsStyle = clone(params.style) or {}
 	paramsStyle.normal = paramsStyle.normal or {}
@@ -287,7 +287,7 @@ function newTabBar(params)
 			local contentY = backSize.height / 2
 
 			local namePosX = params.namePosX or (backSize.width / 2 - 3)
-			local nameLength = StringUtil.getLength(src.name)
+			local nameLength = THSTG.StringUtil.getLength(src.name)
 			local name
 			if normal then
 				local additionalKerning = 20

@@ -89,6 +89,9 @@ BUTTON_ADDITIONKERNING = 8
 BUTTON_SIZE = cc.size(104, 44)
 -------------------------------------------------
 
+--裁剪相关
+CLIPPINT_STENCIL = 0
+CLIPPINT_SCISSOR = 1
 
 --[[
 创建文字样式

@@ -1,9 +1,9 @@
 module("THSTG.UI", package.seeall)
 
 --页标点正常状态资源
-PAGE_VIEW_PAGE_POINT_NORMAL_SKIN_SRC = ResManager.getUIRes(UIType.PAGE_VIEW, "page_point_normal")
+PAGE_VIEW_PAGE_POINT_NORMAL_SKIN_SRC = ""--ResManager.getUIRes(UIType.PAGE_VIEW, "page_point_normal")
 --页标点选中状态资源
-PAGE_VIEW_PAGE_POINT_SELECTED_SKIN_SRC = ResManager.getUIRes(UIType.PAGE_VIEW, "page_point_selected")
+PAGE_VIEW_PAGE_POINT_SELECTED_SKIN_SRC = ""--ResManager.getUIRes(UIType.PAGE_VIEW, "page_point_selected")
 --默认宽度
 PAGE_VIEW_DEFAULT_WIDTH = 300
 --默认高度
@@ -12,7 +12,7 @@ PAGE_VIEW_DEFAULT_HEIGHT = 300
 
 
 local function createPagePoints(params)
-	local node = UI.newNode()
+	local node = newNode()
 	node:setVisible(params.showPagePoint)
 
 	--保存页码点尺寸
@@ -25,7 +25,7 @@ local function createPagePoints(params)
 	--默认创建未选中点
 	local function createPoint()
 		local sp = cc.Sprite:create(params.style.pagePoint.normalSkinSrc)
-		sp:setAnchorPoint(UI.POINT_CENTER_BOTTOM)
+		sp:setAnchorPoint(POINT_CENTER_BOTTOM)
 		sp.selected = false
 		return sp
 	end
@@ -132,8 +132,8 @@ end
 @param	style			[table]		样式
 {
 	pagePoint = {
-		selectedSkin = "a.png", [string]	选中页标资源路径
-		unselectedSkin = "b.png", [string]	未选中页标资源路径
+		selectedSkinSrc = "a.png", [string]	选中页标资源路径
+		normalSkinSrc = "b.png", [string]	未选中页标资源路径
 		gap = 8, [number]	页标间隔
 		offsetY = 30					[number]	页标栏y坐标偏离值
 }
@@ -148,7 +148,7 @@ function newPageView(params)
 	local finalParams = {
 		x = 0, y = 0,
 		width = 0, height = 0,
-		anchorPoint = clone(UI.POINT_LEFT_BOTTOM),
+		anchorPoint = clone(POINT_LEFT_BOTTOM),
 		showPagePoint = true,
 		numPages = 1,
 		defaultPage = 1,
@@ -159,12 +159,12 @@ function newPageView(params)
 				gap = 10,
 				offsetX = 0,
 				offsetY = 0,
-				normalSkinSrc = UI.PAGE_VIEW_PAGE_POINT_NORMAL_SKIN_SRC,
-				selectedSkinSrc = UI.PAGE_VIEW_PAGE_POINT_SELECTED_SKIN_SRC,
+				normalSkinSrc = PAGE_VIEW_PAGE_POINT_NORMAL_SKIN_SRC,
+				selectedSkinSrc = PAGE_VIEW_PAGE_POINT_SELECTED_SKIN_SRC,
 			}
 		}
 	}
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 
 	--总页数
@@ -173,7 +173,7 @@ function newPageView(params)
 	local _prevPage = 0
 
 
-	local node = UI.newNode()
+	local node = newNode()
 
 	--翻页容器
 	local pageView = ccui.PageView:create()
@@ -208,7 +208,7 @@ function newPageView(params)
 	---------------------------------------------------
 
 	local function onChange(sender)
-		local curPageIdx = sender:getCurPageIndex() + 1
+		local curPageIdx = sender:getCurrentPageIndex() + 1
 		if _prevPage ~= curPageIdx then
 			if type(params.onChange) == "function" then
 				params.onChange(sender, curPageIdx, _prevPage)
@@ -260,19 +260,19 @@ function newPageView(params)
 			return
 		end
 
-		if idx < node:getCurPageIndex() then
+		if idx < node:getCurrentPageIndex() then
 			_prevPage = _prevPage - 1
-		elseif idx == node:getCurPageIndex() then
+		elseif idx == node:getCurrentPageIndex() then
 			_prevPage = _prevPage + 1
 		end
 
 		pageView:removePageAtIndex(idx-1)
 		_numPages = _numPages - 1
-		-- print(1, "~~~~~111~~~~~", node:getCurPageIndex())
+		-- print(1, "~~~~~111~~~~~", node:getCurrentPageIndex())
 
 		pointContainer:removePointAtIndex(idx)
 
-		_prevPage = node:getCurPageIndex()
+		_prevPage = node:getCurrentPageIndex()
 		if _numPages <= 0 then
 			_prevPage = 0
 		end
@@ -299,8 +299,8 @@ function newPageView(params)
 	end
 
 	--获取当前页索引
-	function node:getCurPageIndex()
-		return pageView:getCurPageIndex() + 1
+	function node:getCurrentPageIndex()
+		return pageView:getCurrentPageIndex() + 1
 	end
 
 	--获取当前页索引
@@ -309,7 +309,7 @@ function newPageView(params)
 			return nil
 		end
 
-		return pageView:getPage(idx - 1)
+		return pageView:getItem(idx - 1)
 	end
 
 	-----------------------------------------------------------

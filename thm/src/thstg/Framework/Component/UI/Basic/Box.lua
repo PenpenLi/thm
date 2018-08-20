@@ -1,4 +1,4 @@
-module("UI", package.seeall)
+module("THSTG.UI", package.seeall)
 
 --默认参数
 BOX_DEFAULT_PARAMS = {
@@ -6,7 +6,7 @@ BOX_DEFAULT_PARAMS = {
 	y = 0,
 	width = 0,
 	height = 0,
-	anchorPoint = UI.POINT_LEFT_BOTTOM,
+	anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
 	margin = 0,
 	autoSize = false,
 	linearGravity = ccui.LinearGravity.left
@@ -155,7 +155,7 @@ function newMultiHBox(params)
 	local col = tonumber(params.col) and params.col or 1
 	local yGap = params.yGap or 0
 	local xGap = params.xGap or 8
-	local node = UI.newVBox({
+	local node = THSTG.UI.newVBox({
 		autoSize = true,
 		anchorPoint = params.anchorPoint,
 		x = params.x, y = params.y,
@@ -170,7 +170,7 @@ function newMultiHBox(params)
 	function node:addChild(child)
 		local row = math.ceil(childNum / col)
 		if not curBox or row ~= math.ceil((childNum + 1) / col) then
-			curBox = UI.newHBox({
+			curBox = THSTG.UI.newHBox({
 				autoSize = true,
 				linearGravity = params.linearGravity2,
 				margin = xGap,

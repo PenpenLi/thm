@@ -9,8 +9,8 @@ PAGE_TILE_LIST_DEFAULT_STYLE = {
 	paddingX = 5,
 	paddingY = 0,
 	pageTab = {
-		-- selectedSkin = ResManager.getComponentRes(ComponentTypes.TILE_LIST, "pageTabSelected"),
-		-- unselectedSkin = ResManager.getComponentRes(ComponentTypes.TILE_LIST, "pageTabUnselected"),
+		selectedSkin = "",--ResManager.getComponentRes(ComponentTypes.TILE_LIST, "pageTabSelected"),
+		unselectedSkin = "",--ResManager.getComponentRes(ComponentTypes.TILE_LIST, "pageTabUnselected"),
 		gap = 30,
 		height = 26
 	}

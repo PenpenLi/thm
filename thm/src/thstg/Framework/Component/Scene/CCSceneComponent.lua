@@ -20,7 +20,7 @@ function newSprite(params)
 	params = params or {}
 	assert(type(params) == "table", "[Scene] newSprite() invalid params")
 
-	-- local src = params.src or ""--ResManager.getEmptyImg()
+	local src = params.src or nil --ResManager.getEmptyImg()
 	local sp = display.newSprite(src)
 	if params.anchorPoint then
 		sp:setAnchorPoint(params.anchorPoint)

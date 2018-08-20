@@ -148,7 +148,7 @@ function newAutoHideNode(params)
 			if k >= 1 then
 				local contentNode = params.itemTemplate(params.itemTemplateParams)
 				if contentNode then
-					local trect = UI.newWidget({
+					local trect = THSTG.UI.newWidget({
 						touchEnabled = true,
 						swallowTouches = params.swallowTouches == nil and true or params.swallowTouches,
 						onClick = privateData.clickEventhandler,
@@ -798,7 +798,7 @@ end
 
 TILELIST_DEFAULT_STYLE = {
 	bgColorType = ccui.LayoutBackGroundColorType.none,
-	bgColor = UI.COLOR_WHITE,
+	bgColor = THSTG.UI.COLOR_WHITE,
 }
 --[[
 创建列表，列表的每项的索引值为1到n，也就是1到n的tile节点对应dataProvider的1到n的项
@@ -824,7 +824,7 @@ TILELIST_DEFAULT_STYLE = {
 								默认值为false
 @param  style              [table]  样式
 		style.bgColorType   [number]   背景类型，ccui.LayoutBackGroundColorType之一, 默认ccui.LayoutBackGroundColorType.none
-		style.bgColor       [number]   背景颜色， UI.COLOR_WHITE等值，其中style.bgColorType不能为ccui.LayoutBackGroundColorType.none, 否则设置的值无效
+		style.bgColor       [number]   背景颜色， THSTG.UI.COLOR_WHITE等值，其中style.bgColorType不能为ccui.LayoutBackGroundColorType.none, 否则设置的值无效
 		
 @param  onSelectedIndexChange      [function(this, selectedNode, selectedPos, lastNode, lastPos)]选中回调函数，值不可能同时为nil但都可能为nil
 									selecteNode: 	选中的节点， 可能为nil
@@ -1016,7 +1016,7 @@ function newTileList(params)
 	local  viewS = cc.size(params.width or 200, params.height or 200)
 	local isVertical = (direction == ccui.ListViewDirection.vertical)
 	local viewSInit = true
-	tilelist = UI.newScrollView({
+	tilelist = THSTG.UI.newScrollView({
 		width = viewS.width,
 		height = viewS.height,
 		x = params.x, y = params.y,
@@ -1025,7 +1025,7 @@ function newTileList(params)
 		direction = direction,
 		style = params.style,
 	})
-	local hideNode = UI.newAutoHideNode({
+	local hideNode = THSTG.UI.newAutoHideNode({
 		itemNum = tilenum,
 		x = padding.left,
 		y = padding.bottom,

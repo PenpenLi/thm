@@ -97,7 +97,7 @@ function newScale9Sprite(params)
 	local insetRectH = math.max(0, textureSize.height - insetRectY - scale9Rect.bottom)
 
 	local rect = cc.rect(0, 0, 0, 0)
-	TableUtil.mergeA2B(params.rect, rect)
+	THSTG.TableUtil.mergeA2B(params.rect, rect)
 
 	local frameRect = cc.rect(0 + rect.x, 0 + rect.y, skinSize.width + rect.width, skinSize.height + rect.height)
 	local scaleRect = cc.rect(insetRectX, insetRectY, insetRectW, insetRectH)
@@ -307,7 +307,7 @@ function newWidget(params)
 		touchEnabled = false,
 		swallowTouches = false,
 	}
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	local widget = ccui.Widget:create()
 	widget:setPosition(cc.p(finalParams.x, finalParams.y))
