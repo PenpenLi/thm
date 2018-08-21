@@ -36,6 +36,17 @@ function M.create(params)
     })
     :addTo(layer)
 
+    local titleLabel = THSTG.UI.newRichText({
+        text = "RichText,<font style={color=ColorConfig.getColorType('qua_green')}>帽子绿</font>,<font style={color=ColorConfig.getColorType('qua_red')}>姨妈红</font>",
+        x = 310,
+        y = 30, 
+   
+        style = {
+            --font = "Arial",
+        }
+    })
+    :addTo(layer)
+
     local sprite = THSTG.UI.newSprite({
         x = display.cx,
         y = display.cy,
@@ -139,6 +150,41 @@ function M.create(params)
     layer:addChild(btn2)
 
     --
+
+    local togglebutton = THSTG.UI.newToggleButton({
+		x = 500, y = 120,
+		onClick = function (sender, isToggle, customNode)
+			print("state: "..tostring(isToggle))
+		end,
+		width = 100, height = 100,
+		toggleNode = THSTG.UI.newLabel({
+			text = "Toggle",
+			x = 50, y = 50,
+			anchorPoint = THSTG.UI.POINT_CENTER,
+		}),
+		distoggleNode = THSTG.UI.newLabel({
+			text = "disToggle",
+			x = 50, y = 50,
+			anchorPoint = THSTG.UI.POINT_CENTER,
+        }),
+        style = {
+			toggle = {
+				normal = {
+					skin = {
+						src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_open")
+					},
+				}
+			},
+			distoggle = {
+				normal = {
+					skin = {
+						src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_close")
+					},
+				}
+			},
+		},
+	})
+	layer:addChild(togglebutton)
     return layer
 end
 return M

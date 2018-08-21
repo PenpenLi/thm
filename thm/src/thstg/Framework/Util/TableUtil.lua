@@ -44,7 +44,7 @@ function mergeAllTable(a, b, isInit)
 end
 
 --[[
-将a，b两者融合，如果有a则值为a，否则值为b
+将a，b两者融合，如果有a则值为a，否则值为b(注意,B中不能有值为nil的字段,否则无法融合)
 如：
 a = {a = 1, b = {c = 1}, e = "aaa"}
 b = {a = 2, b = {c = 2, d = "ddd"}, e="eee"}

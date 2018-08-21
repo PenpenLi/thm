@@ -12,4 +12,4 @@ THSTG.Scheduler = require "thstg.Framework.Component.Schedule.Scheduler"
 require "thstg.Framework.Component.Scene.CCSceneComponent"
 
 --UI组件
-require "thstg.Framework.Component.UI.CCUIComponent"
+require "thstg.Framework.Component.UI.Init"

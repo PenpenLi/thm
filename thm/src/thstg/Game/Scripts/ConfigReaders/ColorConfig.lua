@@ -8,7 +8,7 @@ function getColorType(key)
 	local color = t_color_style[key] or t_color_style.text_normal1
 	if t_color_style[key] == nil then
 	end
-	return htmlColor2C3b(color)
+	return THSTG.UI.htmlColor2C3b(color)
 end
 
 function getColorTypeEx(key)

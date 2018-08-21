@@ -20,7 +20,7 @@ function newSprite(params)
 	params = params or {}
 	assert(type(params) == "table", "[Scene] newSprite() invalid params")
 
-	-- local src = params.src or ""--ResManager.getEmptyImg()
+	local src = params.src or nil --ResManager.getEmptyImg()
 	local sp = display.newSprite(src)
 	if params.anchorPoint then
 		sp:setAnchorPoint(params.anchorPoint)
@@ -63,10 +63,10 @@ function newSprite(params)
 	end
 
 	if __PRINT_NODE_TRACK__ then
-		-- local info = getTraceback()
-		-- THSTG.UI.setClick(sp, function ()
-		-- 	print(__PRINT_TYPE__, info)
-		-- end, false)
+		local info = getTraceback()
+		THSTG.NodeUtil.setClick(sp, function ()
+			print(__PRINT_TYPE__, info)
+		end, false)
 	end
 
 	return sp

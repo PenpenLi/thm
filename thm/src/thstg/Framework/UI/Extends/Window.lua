@@ -1,1 +1,0 @@
-module("THSTG.UI", package.seeall)

@@ -1,1 +1,0 @@
-module("THSTG.CollisionUtil", package.seeall)

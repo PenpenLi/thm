@@ -1,29 +1,37 @@
+--是否调试版
+__DEBUG__ = __DEBUG__ or true
+
 -- 是否打印 下推命令
-__PRINT_PUSH__ = false
+__PRINT_PUSH__ = __PRINT_PUSH__ or false
 
 -- 是否打印 请求命令
-__PRINT_REQUEST__ = false
+__PRINT_REQUEST__ = __PRINT_REQUEST__ or  false
 
 -- 是否打印 回调命令
-__PRINT_RESPONSE__ = false
+__PRINT_RESPONSE__ = __PRINT_RESPONSE__ or  false
 
 -- 是否打印 按钮点击回调的文件位置
-__PRINT_ONCLICK__ = true
+__PRINT_ONCLICK__ = __PRINT_ONCLICK__ or true
 
 -- 是否打印 控件创建时的堆栈
-__PRINT_TRACK__ = false
+__PRINT_TRACK__ = __PRINT_TRACK__ or false
 
 -- 是否打印 ccnode节点创建时的堆栈
-__PRINT_NODE_TRACK__ = false
+__PRINT_NODE_TRACK__ = __PRINT_NODE_TRACK__ or false
 
 -- 颜色，测出无用的颜色
-__DEBUG_COLOR__ = false
+__DEBUG_COLOR__ =__DEBUG_COLOR__ or false
 
 -- 资源，测出无用的资源
-__DEBUG_RESOURCES__ = false
+__DEBUG_RESOURCES__ = __DEBUG_RESOURCES__ or false
 
-__DEBUG_TRACE_BACK__ = false
+__DEBUG_TRACE_BACK__ = __DEBUG_TRACE_BACK__ or false
 
+--调用print时是否显示文件和等号
+__PRINT_WITH_FILE_LINE__ = __PRINT_WITH_FILE_LINE__ or false
+
+--每个人定义一个自己的类型，用于屏蔽其他人写的打印log，为0时打印所有
+__PRINT_TYPE__ = __PRINT_TYPE__ or 0
 -------------------------------------------------
 CCPrint = _G.print	--貌似下面的不好使
 --local logFunc = CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID and LuaLogE or LuaLog
