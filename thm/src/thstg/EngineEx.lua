@@ -1,7 +1,14 @@
+__ENGINE_VERSION__ = 10000
+
+-----
 THSTG = THSTG or {}
 THSTG.EngineEx = class("EngineEx")
 
 local M = THSTG.EngineEx
+
+
+
+
 function M:ctor(configs)
     self._configs = self._configs or {}
 
@@ -18,7 +25,6 @@ function M:ctor(configs)
     end
 
 end
-
 
 function M:run()
     local gamePath = self._configs.gameRoot .. "." ..self._configs.gameName

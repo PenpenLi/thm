@@ -22,10 +22,12 @@ require "thstg.Framework.Component.UI.Style"
 require "thstg.Framework.Component.UI.CCUIComponent"
 
 --[[基础部件basic]]--
-require "thstg.Framework.Component.UI.Basic.ControlButton"
-require "thstg.Framework.Component.UI.Basic.Label"
-require "thstg.Framework.Component.UI.Basic.Image"
 require "thstg.Framework.Component.UI.Basic.Button"
+require "thstg.Framework.Component.UI.Basic.ControlButton"
+require "thstg.Framework.Component.UI.Basic.ToggleButton"
+require "thstg.Framework.Component.UI.Basic.Label"
+require "thstg.Framework.Component.UI.Basic.RichText.RichText"
+require "thstg.Framework.Component.UI.Basic.Image"
 require "thstg.Framework.Component.UI.Basic.ScrollView"
 require "thstg.Framework.Component.UI.Basic.PageView"
 require "thstg.Framework.Component.UI.Basic.PageTileView"
@@ -34,8 +36,12 @@ require "thstg.Framework.Component.UI.Basic.TileList"
 require "thstg.Framework.Component.UI.Basic.Accordion"
 require "thstg.Framework.Component.UI.Basic.Box"
 require "thstg.Framework.Component.UI.Basic.ProgressBar"
--- require "thstg.Framework.Component.UI.Basic.TabBar"
--- require "thstg.Framework.Component.UI.Basic.ToggleButton"
+
+require "thstg.Framework.Component.UI.Basic.Slider"
+require "thstg.Framework.Component.UI.Basic.ScrollBar"
+require "thstg.Framework.Component.UI.Basic.RadioButton"
+require "thstg.Framework.Component.UI.Basic.TabBar"
+
 --[[扩展部件extends]]--
 
 

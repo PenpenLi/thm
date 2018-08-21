@@ -66,10 +66,7 @@ function M.create(params)
                 outline = 1,
                 outlineColor = THSTG.UI.getColorHtml("#b25d32"),
             }),
-            bgSkin = {
-                src = "Assets/UI/ProgressBar/prog_bar_bg2.png", 
-                scale9Rect = {left=5, right=5, top=5, bottom=5}
-            },
+            bgSkin = false,
             progressSkin = {
                 src = "Assets/UI/ProgressBar/prog_bar_item2.png", 
                 scale9Rect = {left=5, right=5, top=5, bottom=5}
@@ -126,8 +123,9 @@ function M.create(params)
     s1 = THSTG.Scheduler.schedule(function()
         time = time + 1
         progressBar:setValue(time)
-        if time == 100 then 
+        if time >= 100 then 
             THSTG.Scheduler.unschedule(s1)
+            s1 = nil
         end
     end, 1/20)
     

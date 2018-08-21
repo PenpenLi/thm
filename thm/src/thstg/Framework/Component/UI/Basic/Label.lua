@@ -279,7 +279,7 @@ function newCharMapLabel(params)
 	assert(type(params) == "table", "[UI] newLabel() invalid params")
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
-	finalParams.style.font = ResManager.getResSub(ResType.FONT, FontType.CHAR_MAP, "tuffy")
+	-- finalParams.style.font = ResManager.getResSub(ResType.FONT, FontType.CHAR_MAP, "tuffy")
 	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	print(5, "finalParams.style.font", finalParams.style.font)

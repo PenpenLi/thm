@@ -2,7 +2,7 @@ module("THSTG.UI", package.seeall)
 
 require "thstg.Framework.Component.UI.Basic.RichText.RichHtmlReader"
 
-local s_style = newTextStyle()
+local s_style = THSTG.UI.newTextStyle()
 s_style.verticalSpace = 0
 
 RICH_TEXT_DEFAULT_PARAMS = {
@@ -124,10 +124,10 @@ function newRichText(params)
 						scaleY = v.params.height / sp:getContentSize().height
 					end
 				end
-				if __ENGINE_VERSION__ < 50 then
-					sp:setScaleX(scaleX)
-					sp:setScaleY(scaleY)
-				end
+				-- if __ENGINE_VERSION__ < 50 then
+				-- 	sp:setScaleX(scaleX)
+				-- 	sp:setScaleY(scaleY)
+				-- end
 				sp:setContentSize(cc.size(sp:getContentSize().width * scaleX, sp:getContentSize().height * scaleY))
 
 				if v.params.discolored then

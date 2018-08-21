@@ -292,7 +292,7 @@ function newProgressBar(params)
 						y = size.height,
 
 						style = {
-							font = ResManager.getResSub(ResType.FONT, FontType.FNT, "get_exp"),
+							font = "",--ResManager.getResSub(ResType.FONT, FontType.FNT, "get_exp"),
 							additionalKerning = -6,
 						}
 					})

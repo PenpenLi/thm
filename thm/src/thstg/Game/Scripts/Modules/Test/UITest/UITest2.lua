@@ -6,6 +6,38 @@ function M.create(params)
 
     --ScrollView
     local sv2 = THSTG.UI.newScrollView({
+        x = 100, y = 310,
+        width = 200, height = 200,
+        innerWidth = 300, innerHeight = 300,
+        bounceEnabled = false,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        direction = ccui.ScrollViewDir.horizontal,
+        style = {
+            bgColor = THSTG.UI.COLOR_WHITE,
+        }
+    })
+    layer:addChild(sv2)
+
+    local btnSv1 = THSTG.UI.newButton({
+        x = 50,
+        y = display.cy,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        isTouchAction = false,
+        style = {
+            normal ={
+                skin = {src = "Assets/UI/Button/power1_close.png"}
+            },
+            selected = {
+                skin = {src = "Assets/UI/Button/power1_open.png"}
+            },
+        }
+    })
+    sv2:addChild(btnSv1)
+
+
+
+    --ScrollView
+    local sv2 = THSTG.UI.newScrollView({
         x = 500, y = 310,
         width = 200, height = 200,
         innerWidth = 300, innerHeight = 300,

@@ -3,19 +3,19 @@ module("THSTG.UI", package.seeall)
 RADIO_BUTTON_DEFAULT_PARAMS = {
 	x = 0,
 	y = 0,
-	anchorPoint = UI.POINT_CENTER,
+	anchorPoint = THSTG.UI.POINT_CENTER,
 	selected = false,
 	enabled = true,
 	style = {
 		skin = {
-			-- bgNormal = ResManager.getUIRes(UIType.RADIO_BUTTON, "bg_normal"), --未选中状态底图
-			-- bgDisabled = ResManager.getUIRes(UIType.RADIO_BUTTON, "bg_disabled"), --不可用状态底图
-			-- cross = ResManager.getUIRes(UIType.RADIO_BUTTON, "cross"), --选中状态覆盖图
-			-- crossDisabled = ResManager.getUIRes(UIType.RADIO_BUTTON, "cross_disabled"), --选中不可用状态
+			bgNormal = "",-- ResManager.getUIRes(UIType.RADIO_BUTTON, "bg_normal"), --未选中状态底图
+			bgDisabled ="",-- ResManager.getUIRes(UIType.RADIO_BUTTON, "bg_disabled"), --不可用状态底图
+			cross = "",--ResManager.getUIRes(UIType.RADIO_BUTTON, "cross"), --选中状态覆盖图
+			crossDisabled ="",-- ResManager.getUIRes(UIType.RADIO_BUTTON, "cross_disabled"), --选中不可用状态
 		},
 		label = {
-			normal = UI.newTextStyle(),
-			disabled = UI.newTextStyle({color = UI.COLOR_GRAY_9}),
+			normal = THSTG.UI.newTextStyle(),
+			disabled = THSTG.UI.newTextStyle({color = THSTG.UI.COLOR_GRAY_9}),
 		},
 		labelOffset = {x = 5, y = 0},
 	}
@@ -33,7 +33,7 @@ local function onChange(sender, isSelected)
 	printf("~~~111~~~ sender:%s isSelected:%s", tostring(sender), tostring(isSelected))
 end
 
-local cb1 = UI.newRadioButton({
+local cb1 = THSTG.UI.newRadioButton({
 	x = 300, y = 240, 
 	onChange = onChange, 
 	enabled = false, 
@@ -50,7 +50,7 @@ function newRadioButton(params)
 
 	local finalParams = clone(RADIO_BUTTON_DEFAULT_PARAMS)
 	THSTG.TableUtil.mergeA2B(params, finalParams)
-
+	
 	local radioButton = ccui.RadioButton:create(finalParams.style.skin.bgNormal, finalParams.style.skin.cross)
 	radioButton:loadTextureBackGroundDisabled(finalParams.style.skin.bgDisabled)
 	radioButton:loadTextureFrontCrossDisabled(finalParams.style.skin.crossDisabled)
@@ -92,17 +92,17 @@ function newRadioButton(params)
 	function radioButton:setText(str)
 		if not radioButton.label then
 
-			radioButton.label = UI.newLabel({
+			radioButton.label = THSTG.UI.newLabel({
 				text = params.text,
 				x = radioButtonSize.width + finalParams.style.labelOffset.x,
 				y = radioButtonSize.height / 2 + finalParams.style.labelOffset.y,
-				anchorPoint = UI.POINT_LEFT_CENTER,
+				anchorPoint = THSTG.UI.POINT_LEFT_CENTER,
 				style = finalParams.style.label.normal,
 			})
-			radioButton.labelBtn = UI.newControlButton({
+			radioButton.labelBtn = THSTG.UI.newControlButton({
 				x = radioButtonSize.width + finalParams.style.labelOffset.x,
 				y = radioButtonSize.height / 2 + finalParams.style.labelOffset.y,
-				anchorPoint = UI.POINT_LEFT_CENTER,
+				anchorPoint = THSTG.UI.POINT_LEFT_CENTER,
 				curFaceNode = radioButton.label,
 				onClick = function (...)
 					if not tolua.isnull(params.father) and type(params.index) == "number" then
@@ -165,7 +165,7 @@ function newRadioGroup(params)
 		style = clone(RADIO_BUTTON_DEFAULT_PARAMS.style)
 	}
 	THSTG.TableUtil.mergeA2B(params, finalParams)
-
+	
 	local rbg = ccui.RadioButtonGroup:create()
 	rbg:setPosition(finalParams.x, finalParams.y)
 	rbg:setAllowedNoSelection(finalParams.allowedNoSelection)

@@ -59,8 +59,8 @@ yellowStyle = {
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "",--ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -71,8 +71,8 @@ yellowStyle = {
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "",--ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -98,8 +98,8 @@ blueStyle = {
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -110,8 +110,8 @@ blueStyle = {
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -122,8 +122,8 @@ blueStyle = {
 			outlineColor = getColorHtml("#cdc8c8"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 }
@@ -137,8 +137,8 @@ bigYellowStyle = {
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
-			-- scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
+			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
 	selected = {
@@ -149,8 +149,8 @@ bigYellowStyle = {
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
-			-- scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
+			src = "", -- ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
+			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
 	disabled = {
@@ -176,8 +176,8 @@ bigBlueStyle = {
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
-			-- scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
+			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
 	selected = {
@@ -188,8 +188,8 @@ bigBlueStyle = {
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
-			-- scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
+			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
 	disabled = {
@@ -215,8 +215,8 @@ biggestYellowStyle = {
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
-			-- scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
+			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
 	selected = {
@@ -227,8 +227,8 @@ biggestYellowStyle = {
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
-			-- scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
+			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
 	disabled = {
@@ -254,8 +254,8 @@ biggestBlueStyle = {
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
-			-- scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
+			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
 	selected = {
@@ -266,8 +266,8 @@ biggestBlueStyle = {
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
-			-- scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
+			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
 	disabled = {
@@ -294,8 +294,8 @@ yellowExStyle = {
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_login_enter"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_login_enter"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -306,8 +306,8 @@ yellowExStyle = {
 			outlineColor = getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_login_enter"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_login_enter"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -333,8 +333,8 @@ blueExStyle = {
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getRes(ResType.NEWBIE, "vip_button"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getRes(ResType.NEWBIE, "vip_button"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -345,8 +345,8 @@ blueExStyle = {
 			outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getRes(ResType.NEWBIE, "vip_button"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getRes(ResType.NEWBIE, "vip_button"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -373,8 +373,8 @@ yellowFlowerStyle = {
 			outlineColor = getColorHtml("#8b0922"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower_yellow"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_yellow"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -385,8 +385,8 @@ yellowFlowerStyle = {
 			outlineColor = getColorHtml("#8b0922"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower_yellow"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_yellow"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -412,8 +412,8 @@ flowerStyle = {
 			outlineColor = getColorHtml("#ffe1a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -424,8 +424,8 @@ flowerStyle = {
 			outlineColor = getColorHtml("#ffe1a9"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -453,8 +453,8 @@ blueFlowerStyle = {
 		outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", -- ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -465,8 +465,8 @@ blueFlowerStyle = {
 		outlineColor = getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", -- ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -493,8 +493,8 @@ greenFlowerStyle = {
 			outlineColor = getColorHtml("#8b0922"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower_green"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_green"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -505,8 +505,8 @@ greenFlowerStyle = {
 			outlineColor = getColorHtml("#8b0922"),
 		}),
 		skin = {
-			-- src = ResManager.getUIRes(UIType.BUTTON, "btn_flower_green"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_green"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -532,8 +532,8 @@ activityStyle = {
 			outlineColor = getColorHtml("#efefcb"),
 		}),
 		skin = {
-			-- src = ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -544,8 +544,8 @@ activityStyle = {
 			outlineColor = getColorHtml("#efefcb"),
 		}),
 		skin = {
-			-- src = ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -571,8 +571,8 @@ activitySmallStyle = {
 			outlineColor = getColorHtml("#ffdf99"),
 		}),
 		skin = {
-			-- src = ResManager.getRes(ResType.ACTIVITY, "celebration_small_yellow_btn"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_small_yellow_btn"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	selected = {
@@ -583,8 +583,8 @@ activitySmallStyle = {
 			outlineColor = getColorHtml("#ffdf99"),
 		}),
 		skin = {
-			-- src = ResManager.getRes(ResType.ACTIVITY, "celebration_small_yellow_btn"),
-			-- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+			src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_small_yellow_btn"),
+			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
 	disabled = {
@@ -611,8 +611,8 @@ activityBigStyle =
 	            outlineColor = getColorHtml("#ffdf99"),
             }),
         skin = {
-            -- src = ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
-            -- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+            src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
+            scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
         }
     },
     selected = {
@@ -623,8 +623,8 @@ activityBigStyle =
 	        outlineColor = getColorHtml("#ffdf99"),
         }),
         skin = {
-            -- src = ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
-            -- scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
+            src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
+            scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
         }
     },
     disabled = {

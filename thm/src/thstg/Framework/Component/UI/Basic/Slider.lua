@@ -2,17 +2,17 @@ module("THSTG.UI", package.seeall)
 
 --滑动条默认背景皮肤
 SLIDER_BG_SKIN = {
-	src = ResManager.getUIRes(UIType.SLIDER, "slider_bg1"),
+	src = "",--ResManager.getUIRes(UIType.SLIDER, "slider_bg1"),
 	scale9Rect = {left = 10, right = 10, top = 5, bottom = 5}
 }
 --滑动条默认进度皮肤
 SLIDER_PROGRESS_SKIN = {
-	src = ResManager.getUIRes(UIType.SLIDER, "slider_sel1"),
+	src = "",--ResManager.getUIRes(UIType.SLIDER, "slider_sel1"),
 	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 --滑动条默认滑动点皮肤
 SLIDER_THUMB_SKIN = {
-	src = ResManager.getUIRes(UIType.SLIDER, "slider_btn1"),
+	src = "",--ResManager.getUIRes(UIType.SLIDER, "slider_btn1"),
 }
 
 --[[
@@ -27,9 +27,9 @@ Slider组件
 @param	onChange			[function]	进度变更时的回调函数，如：local function onChange(sender, percent) print(sender, percent) end
 @param	style            	[table]     
 		{
-			bgSkin = UI.SLIDER_BG_SKIN, 背景皮肤
-			progressSkin = UI.SLIDER_PROGRESS_SKIN, 进度皮肤
-			thumbSkin = UI.SLIDER_THUMB_SKIN				移动块皮肤
+			bgSkin = THSTG.UI.SLIDER_BG_SKIN, 背景皮肤
+			progressSkin = THSTG.UI.SLIDER_PROGRESS_SKIN, 进度皮肤
+			thumbSkin = THSTG.UI.SLIDER_THUMB_SKIN				移动块皮肤
 }
 ]]
 function newSlider(params)
@@ -44,16 +44,16 @@ function newSlider(params)
 		y = 0,
 		width = 200, 
 		height = 100,
-		anchorPoint = clone(UI.POINT_CENTER),
+		anchorPoint = clone(THSTG.UI.POINT_CENTER),
 		percent = 0,
 		enabled = true,
 		style = {
-			bgSkin = clone(UI.SLIDER_BG_SKIN),
-			progressSkin = clone(UI.SLIDER_PROGRESS_SKIN),
-			thumbSkin = clone(UI.SLIDER_THUMB_SKIN),
+			bgSkin = clone(THSTG.UI.SLIDER_BG_SKIN),
+			progressSkin = clone(THSTG.UI.SLIDER_PROGRESS_SKIN),
+			thumbSkin = clone(THSTG.UI.SLIDER_THUMB_SKIN),
 		}
 	}
-	TableUtil.mergeA2B(params, finalParams)
+	THSTG.TableUtil.mergeA2B(params, finalParams)
 
 	local slider = ccui.Slider:create(finalParams.style.bgSkin.src, finalParams.style.thumbSkin.src)
 	slider:loadProgressBarTexture(finalParams.style.progressSkin.src)
@@ -63,7 +63,7 @@ function newSlider(params)
 	slider:setContentSize(cc.size(finalParams.width, finalParams.height))
 	slider:setAnchorPoint(finalParams.anchorPoint)
 
-	local capInsets = UI.skin2CapInsets(finalParams.style.progressSkin)
+	local capInsets = THSTG.UI.skin2CapInsets(finalParams.style.progressSkin)
 	if capInsets then
 		slider:setScale9Enabled(true)
 		slider:setCapInsets(capInsets)

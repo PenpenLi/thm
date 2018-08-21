@@ -11,49 +11,49 @@ TABBAR_DIRECTION_VR = 4
 
 --横向布局上方的标签栏皮肤样式
 TABBAR_DEFAULT_HT_NORMAL_SKIN = {
-	src = "",
-	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	scale9Rect = {left = 8, right = 8, top = 2, bottom = 5}
 }
 TABBAR_DEFAULT_HT_SELECTED_SKIN = {
-	src = "",
-	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"),
+	scale9Rect = {left = 8, right = 8, top = 2, bottom = 5}
 }
 TABBAR_DEFAULT_HT_DISABLED_SKIN = {
-	src = "",
-	sscale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	sscale9Rect = {left = 8, right = 8, top = 2, bottom = 5}
 }
 
 --横向布局下方的三个默认皮肤
 TABBAR_DEFAULT_HB_NORMAL_SKIN = {
-	src = "",
-	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 }
 TABBAR_DEFAULT_HB_SELECTED_SKIN = {
-	src = "",
-	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"),
+	scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 }
 TABBAR_DEFAULT_HB_DISABLED_SKIN = {
-	src = "",
-	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 }
 --纵向处于界面左方的三个默认皮肤
 TABBAR_DEFAULT_VL_NORMAL_SKIN = {
-	src = "",
-	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 TABBAR_DEFAULT_VL_SELECTED_SKIN = {
-	src = "",
-	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"),
+	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 TABBAR_DEFAULT_VL_DISABLED_SKIN = {
-	src = "",
-	scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 
 
 local function newTabbarTextStyle(params)
 	params = params or {}
-	local style = newTextStyle(params)
+	local style = THSTG.UI.newTextStyle(params)
 	style.artFont = params.artFont or false
 	style.artWidth = params.artWidth or false
 	style.artHeight = params.artHeight or  false
@@ -63,8 +63,8 @@ end
 TABBAR_DEFAULT_PARAMS = {
 	x = 0, 
 	y = 0,
-	anchorPoint = clone(POINT_CENTER),
-	direction = TABBAR_DIRECTION_HT,
+	anchorPoint = clone(THSTG.UI.POINT_CENTER),
+	direction = THSTG.UI.TABBAR_DIRECTION_HT,
 	itemGap = 5,
 	paddingX = 15,
 	paddingY = 5,
@@ -79,7 +79,7 @@ TABBAR_DEFAULT_PARAMS = {
 			label = newTabbarTextStyle()
 		},
 		disabled = {
-			label = newTabbarTextStyle({color = COLOR_GRAY_C, })
+			label = newTabbarTextStyle({color = THSTG.UI.COLOR_GRAY_C, })
 		},
 	},
 }
@@ -113,7 +113,7 @@ end
 创建tabBar
 
 params中可用参数：
-@param	direction			设置位置各开口朝向，取值[TABBAR_DIRECTION_HT, TABBAR_DIRECTION_HB, TABBAR_DIRECTION_VL, TABBAR_DIRECTION_VR]
+@param	direction			设置位置各开口朝向，取值[THSTG.UI.TABBAR_DIRECTION_HT, THSTG.UI.TABBAR_DIRECTION_HB, THSTG.UI.TABBAR_DIRECTION_VL, THSTG.UI.TABBAR_DIRECTION_VR]
 @param  tabBarKey           每一项的关键字索引
 @param	dataProvider		数据源
 {
@@ -175,25 +175,25 @@ function newTabBar(params)
 
 	local finalParams = clone(TABBAR_DEFAULT_PARAMS)
 	
-	if params.direction == TABBAR_DIRECTION_HB then
-		finalParams.style.normal.skin = clone(TABBAR_DEFAULT_HB_NORMAL_SKIN)
-		finalParams.style.pressed.skin = clone(TABBAR_DEFAULT_HB_SELECTED_SKIN)
-		finalParams.style.disabled.skin = clone(TABBAR_DEFAULT_HB_DISABLED_SKIN)
+	if params.direction == THSTG.UI.TABBAR_DIRECTION_HB then
+		finalParams.style.normal.skin = clone(THSTG.UI.TABBAR_DEFAULT_HB_NORMAL_SKIN)
+		finalParams.style.pressed.skin = clone(THSTG.UI.TABBAR_DEFAULT_HB_SELECTED_SKIN)
+		finalParams.style.disabled.skin = clone(THSTG.UI.TABBAR_DEFAULT_HB_DISABLED_SKIN)
 
-	elseif params.direction == TABBAR_DIRECTION_VL then
-		finalParams.style.normal.skin = clone(TABBAR_DEFAULT_VL_NORMAL_SKIN)
-		finalParams.style.pressed.skin = clone(TABBAR_DEFAULT_VL_SELECTED_SKIN)
-		finalParams.style.disabled.skin = clone(TABBAR_DEFAULT_VL_DISABLED_SKIN)
+	elseif params.direction == THSTG.UI.TABBAR_DIRECTION_VL then
+		finalParams.style.normal.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_NORMAL_SKIN)
+		finalParams.style.pressed.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_SELECTED_SKIN)
+		finalParams.style.disabled.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_DISABLED_SKIN)
 
-	elseif params.direction == TABBAR_DIRECTION_VR then
-		finalParams.style.normal.skin = clone(TABBAR_DEFAULT_VL_NORMAL_SKIN)
-		finalParams.style.pressed.skin = clone(TABBAR_DEFAULT_VL_SELECTED_SKIN)
-		finalParams.style.disabled.skin = clone(TABBAR_DEFAULT_VL_DISABLED_SKIN)
+	elseif params.direction == THSTG.UI.TABBAR_DIRECTION_VR then
+		finalParams.style.normal.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_NORMAL_SKIN)
+		finalParams.style.pressed.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_SELECTED_SKIN)
+		finalParams.style.disabled.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_DISABLED_SKIN)
 
 	else
-		finalParams.style.normal.skin = finalParams.style.normal.skin or clone(TABBAR_DEFAULT_HT_NORMAL_SKIN)
-		finalParams.style.pressed.skin = finalParams.style.pressed.skin or clone(TABBAR_DEFAULT_HT_SELECTED_SKIN)
-		finalParams.style.disabled.skin = finalParams.style.disabled.skin or clone(TABBAR_DEFAULT_HT_DISABLED_SKIN)
+		finalParams.style.normal.skin = finalParams.style.normal.skin or clone(THSTG.UI.TABBAR_DEFAULT_HT_NORMAL_SKIN)
+		finalParams.style.pressed.skin = finalParams.style.pressed.skin or clone(THSTG.UI.TABBAR_DEFAULT_HT_SELECTED_SKIN)
+		finalParams.style.disabled.skin = finalParams.style.disabled.skin or clone(THSTG.UI.TABBAR_DEFAULT_HT_DISABLED_SKIN)
 	end
 
 	THSTG.TableUtil.mergeA2B(params, finalParams)
@@ -256,21 +256,21 @@ function newTabBar(params)
 				scale9Rect = style.pressed.scale9Rect or style.pressed.skin.scale9Rect or {left = 7, right = 7, top = 5, bottom = 5}
 			end
 
-			local root = newNode({})
-			-- local root = newWidget({
+			local root = THSTG.UI.newNode({})
+			-- local root = THSTG.UI.newWidget({
 			-- 	onClick=function( ... )
 			-- 		print(77,"i am widget")
 			-- 	end
 			-- })
 
-			local back = newImage({
+			local back = THSTG.UI.newImage({
 				width = params.itemWidth,
 				height = params.itemHeight,
 				style = {
 					src = backSrc,
 					scale9Rect = scale9Rect,
 				},
-				anchorPoint = POINT_LEFT_BOTTOM,
+				anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
 				-- onClick=function ( ... )
 				-- 	print(77,"i am image~~~")
 				-- end
@@ -287,7 +287,7 @@ function newTabBar(params)
 			local contentY = backSize.height / 2
 
 			local namePosX = params.namePosX or (backSize.width / 2 - 3)
-			local nameLength = THSTG.StringUtil.getLength(src.name)
+			local nameLength = StringUtil.getLength(src.name)
 			local name
 			if normal then
 				local additionalKerning = 20
@@ -298,22 +298,22 @@ function newTabBar(params)
 				end
 
 				if finalParams.isBMFontLabel then
-					name = newBMFontLabel({
+					name = THSTG.UI.newBMFontLabel({
 						text = src.name,
 						x = namePosX,
 						y = contentY - 5,
-						anchorPoint = POINT_CENTER,
+						anchorPoint = THSTG.UI.POINT_CENTER,
 						style = style.label or style.normal.label,
 					})
 				else
-					name = newLabel({
+					name = THSTG.UI.newLabel({
 						text = src.name,
 						x = namePosX,
 						y = contentY,
-						anchorPoint = POINT_CENTER,
+						anchorPoint = THSTG.UI.POINT_CENTER,
 						style = style.normal.label or {
-							size = FONT_SIZE_BIG,
-							color = getColorHtml("#31315e"),
+							size = THSTG.UI.FONT_SIZE_BIG,
+							color = THSTG.UI.getColorType("tab_normal"),
 							additionalKerning = additionalKerning,
 						},
 					})
@@ -328,24 +328,24 @@ function newTabBar(params)
 				end
 
 				if finalParams.isBMFontLabel then
-					name = newBMFontLabel({
+					name = THSTG.UI.newBMFontLabel({
 						text = src.name,
 						x = namePosX,
 						y = contentY - 5,
-						anchorPoint = POINT_CENTER,
+						anchorPoint = THSTG.UI.POINT_CENTER,
 						style = style.label or style.pressed.label,
 					})
 				else
-					name = newLabel({
+					name = THSTG.UI.newLabel({
 						text = src.name,
 						x = namePosX,
 						y = contentY,
-						anchorPoint = POINT_CENTER,
+						anchorPoint = THSTG.UI.POINT_CENTER,
 						style = style.pressed.label or {
-							size = FONT_SIZE_BIG,
-							color = getColorHtml("#6c3e26"),
+							size = THSTG.UI.FONT_SIZE_BIG,
+							color = THSTG.UI.getColorType("tab_select"),
 							outline = 1,
-							outlineColor = getColorHtml("#f0e6a9"),
+							outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
 							additionalKerning = additionalKerning,
 						},
 					})
@@ -393,7 +393,7 @@ function newTabBar(params)
 		local container = false
 
 		local textOffsetX = params.tabBarStyle[itemParams.index].textOffsetX or style.x
-		local item = newSelectedButton({
+		local item = THSTG.UI.newSelectedButton({
 			width = params.itemWidth,
 			height = params.itemHeight,
 			hitLen = params.tabBarForceHeight,
@@ -432,7 +432,7 @@ function newTabBar(params)
 			disabledNode = curNode.disabledNode,
 			sharedNode = curNode.sharedNode,
 		})
-
+		
 		--扩大button点击区域
 		if(params.tabBarForceHeight)then
 			setHitFactor(item,params.tabBarForceHeight)
@@ -441,7 +441,7 @@ function newTabBar(params)
 
 		-- 容器包裹，方便新手指引
 		local size = item:getContentSize()
-		container = newWidget{
+		container = THSTG.UI.newWidget{
 			width = size.width,
 			height = size.height,
 		}
@@ -472,8 +472,8 @@ function newTabBar(params)
 
 	function privateData.init()
 		
-		if params.direction == TABBAR_DIRECTION_VL 
-			or params.direction == TABBAR_DIRECTION_VR 
+		if params.direction == THSTG.UI.TABBAR_DIRECTION_VL 
+			or params.direction == THSTG.UI.TABBAR_DIRECTION_VR 
 		then
 			-- 垂直
 			menu:setDirection(ccui.ScrollViewDir.vertical)
