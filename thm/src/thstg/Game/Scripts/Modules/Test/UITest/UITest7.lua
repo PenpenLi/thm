@@ -128,7 +128,13 @@ function M.create(params)
             s1 = nil
         end
     end, 1/20)
-    
+
+    --节点退出时移除定时器
+    layer:onNodeEvent("exit", function ()
+        if s1 then
+            THSTG.Scheduler.unschedule(s1)
+        end
+    end)
 
     return layer
 end
