@@ -4,11 +4,37 @@ local M = {}
 function M.create(params)
     local layer = THSTG.UI.newLayer()
 
+
+    local layerData = {}
+    local function createLayer(params)
+		local layer = THSTG.UI.newLayerColor(params)
+		layer:setPosition(math.random(0, display.cx), math.random(0, display.cy))
+
+		local function nodeEventHandler(state)
+			printf("~~~~~~~LayerStack layer %s~~~~~~~~~:%s", state, tostring(layer))
+		end
+		layer:registerScriptHandler(nodeEventHandler)
+
+		return layer
+	end
+    local layerStack = THSTG.UI.newLayerStack{
+		layers = {
+            {data = "Layer1", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_RED, width = 100, height = 100}},
+			{data = "Layer2", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_GREEN, width = 100, height = 150}},
+			{data = "Layer3", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_BLUE, width = 200, height = 100}},
+			{data = "Layer4", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_BLACK, width = 100, height = 200}},
+			{data = "Layer5", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_WHITE, width = 300, height = 300}},
+        }
+	}
+    layer:addChild(layerStack)
+
     local function onChange(sender, curIndex, prevIndex)
         --printf("~~~222~~~ sender:%s curIndex:%s prevIndex:%s", tostring(sender), tostring(curIndex), tostring(prevIndex))
+        layerStack:setSelectedIndex(curIndex)
     end
     local function onChange1(sender, curIndex, prevIndex)
         printf("~~~333~~~ sender:%s curIndex:%s prevIndex:%s", tostring(sender), tostring(curIndex), tostring(prevIndex))
+        layerStack:setSelectedIndex(curIndex)
     end
     local tabBar = THSTG.UI.newTabBar({
         dataProvider = {
@@ -131,6 +157,9 @@ function M.create(params)
         anchorPoint = THSTG.UI.POINT_CENTER,
 
     })
+    layer:addChild(tabBarHB)
+
+
 
     return layer
 end
