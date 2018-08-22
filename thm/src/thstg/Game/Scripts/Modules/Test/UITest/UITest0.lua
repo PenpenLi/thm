@@ -22,8 +22,8 @@ function M.create(params)
             {data = "Layer1", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_RED, width = 100, height = 100}},
 			{data = "Layer2", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_GREEN, width = 100, height = 150}},
 			{data = "Layer3", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_BLUE, width = 200, height = 100}},
-			{data = "Layer4", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_BLACK, width = 100, height = 200}},
-			{data = "Layer5", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_WHITE, width = 300, height = 300}},
+			{data = "Layer4", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_WHITE, width = 100, height = 200}},
+			{data = "Layer5", creator = createLayer, creatorParams = {color = THSTG.UI.COLOR_BLACK, width = 300, height = 300}},
         }
 	}
     layer:addChild(layerStack)

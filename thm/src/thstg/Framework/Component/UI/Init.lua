@@ -40,6 +40,7 @@ require "thstg.Framework.Component.UI.Basic.ProgressBar"
 require "thstg.Framework.Component.UI.Basic.Slider"
 require "thstg.Framework.Component.UI.Basic.ScrollBar"
 require "thstg.Framework.Component.UI.Basic.RadioButton"
+require "thstg.Framework.Component.UI.Basic.CheckBox"
 require "thstg.Framework.Component.UI.Basic.TabBar"
 require "thstg.Framework.Component.UI.Basic.LayerStack"
 

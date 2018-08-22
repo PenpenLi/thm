@@ -20,6 +20,14 @@ function M:onCreate()
         require("Scripts.Modules.Test.UITest.UITest9"),         --RadioButton测试
   
         require("Scripts.Modules.Test.SceneTest.SceneTest1"),   --动画测试
+        require("Scripts.Modules.Test.SceneTest.SceneTest2"),   --场景转换测试
+        require("Scripts.Modules.Test.SceneTest.SceneTest3"),   --跳跃测试
+        require("Scripts.Modules.Test.SceneTest.SceneTest4"),   --动作测试
+        require("Scripts.Modules.Test.SceneTest.SceneTest5"),   --计划任务测试
+        -- require("Scripts.Modules.Test.SceneTest.SceneTest6"),   --碰撞测试
+        -- require("Scripts.Modules.Test.SceneTest.SceneTest7"),   --特效测试
+        -- require("Scripts.Modules.Test.SceneTest.SceneTest8"),   --跟踪测试
+        -- require("Scripts.Modules.Test.SceneTest.SceneTest9"),   --粒子测试   
     }
     --事件监听
     --注册键盘事件

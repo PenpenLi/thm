@@ -135,7 +135,7 @@ function newControlButton(params)
 			end
 
 			extendEvent.position = controlButton:getTouchMovePosition()
-			local isTouchMoveInside = controlButton:hitTest(extendEvent.position)
+			local isTouchMoveInside = controlButton:hitTest(extendEvent.position,nil,nil)
 			if isTouchMoveInside and not privateData.isInside then
 				extendEvent.name = DRAG_ENTER
 			elseif isTouchMoveInside and privateData.isInside then
@@ -148,7 +148,8 @@ function newControlButton(params)
 			privateData.isInside = isTouchMoveInside
 		elseif event.name == "ended" then
 			extendEvent.position = controlButton:getTouchEndPosition()
-			local isTouchMoveInside = controlButton:hitTest(extendEvent.position)
+			--TODO:ccui.Widget:hitTest has wrong number of arguments: 1, was expecting 3 
+			local isTouchMoveInside = controlButton:hitTest(extendEvent.position,nil,nil)
 			if isTouchMoveInside then
 				extendEvent.name = TOUCH_UP_INSIDE
 			else
@@ -156,7 +157,7 @@ function newControlButton(params)
 			end
 
 			if type(playSound) == "string" then
-				SoundManager.playSound(playSound)
+				-- SoundManager.playSound(playSound)
 			end
 
 			if type(params.onClick) == "function" and not privateData.isLongClick then
