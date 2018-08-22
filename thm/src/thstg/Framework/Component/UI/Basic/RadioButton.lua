@@ -55,7 +55,6 @@ function newRadioButton(params)
 	radioButton:loadTextureBackGroundDisabled(finalParams.style.skin.bgDisabled)
 	radioButton:loadTextureFrontCrossDisabled(finalParams.style.skin.crossDisabled)
 
-
 	radioButton:setSelected(finalParams.selected)
 	radioButton:setPosition(finalParams.x, finalParams.y)
 	radioButton:setAnchorPoint(finalParams.anchorPoint)
@@ -211,13 +210,30 @@ function newRadioGroup(params)
 			self:setSelectedButtonIndex(value)
 		else
 			__setSelectedButton(self, value)
+			
 		end
 	end
 
 	--增加明确的设置index的方法
 	function rbg:setSelectedButtonIndex(value)
 		if value > 0 and value <= self:getNumberOfRadioButtons() then
+			--下面函数对Enabled(true)的按钮不起作用,得重新设置状态
 			__setSelectedButton(self, value - 1)
+			
+			--重设状态
+			local function setAllRadioButtonsEnabled(state)
+				local total = self:getNumberOfRadioButtons()
+				for i = 1,total do
+					local radioButton = __getRadioButtonByIndex(self, i - 1)
+					radioButton:setEnabled(state)
+				end
+			end
+			local curRadioButton = __getRadioButtonByIndex(self, value - 1)
+			if not curRadioButton:isEnabled() then
+				setAllRadioButtonsEnabled(true)
+				curRadioButton:setSelected(true)
+				setAllRadioButtonsEnabled(false)
+			end
 		end
 	end
 
