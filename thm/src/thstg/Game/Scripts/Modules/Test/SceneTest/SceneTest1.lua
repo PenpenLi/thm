@@ -142,8 +142,13 @@ function M.create(params)
     layer:addChild(animationSprite)
 
 
-
-
+    local sprite = THSTG.SCENE.newSprite({
+        x = 40,
+        y = 40,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        src = "#drag_walk_down_01.png"
+    })
+    layer:addChild(sprite)
 
     return layer
 end

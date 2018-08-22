@@ -7,44 +7,44 @@ BUTTON_DEFAULT_PARAMS = {
 	y = 0,
 	width = 0,
 	height = 0,
-	anchorPoint = POINT_CENTER,
+	anchorPoint = THSTG.UI.POINT_CENTER,
 	zoomScale = 0.1,
 	enabled = true,
 	style = {
 		normal = {
-			label = newTextStyle({
-				size = FONT_SIZE_SMALL,
-				color = getColorHtml("#ffffff"),
+			label = THSTG.UI.newTextStyle({
+				size = THSTG.UI.FONT_SIZE_SMALL,
+				color = THSTG.UI.getColorHtml("#ffffff"),
 				outline = 1,
 				outlineColor = getColorHtml("#f0e6a9"),
 			}),
 			skin = {
-				src = "",
-				scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+				src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		},
 		selected = {
-			label = newTextStyle({
-				size = FONT_SIZE_SMALL,
-				color = getColorHtml("#ffffff"),
+			label = THSTG.UI.newTextStyle({
+				size = THSTG.UI.FONT_SIZE_SMALL,
+				color = THSTG.UI.getColorHtml("#ffffff"),
 				outline = 1,
 				outlineColor = getColorHtml("#f0e6a9"),
 			}),
 			skin = {
-				src = "",
-				scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+				src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		},
 		disabled = {
-			label = newTextStyle({
-				size = FONT_SIZE_SMALL,
-				color = getColorHtml("#5c5c5a"),
+			label = THSTG.UI.newTextStyle({
+				size = THSTG.UI.FONT_SIZE_SMALL,
+				color = THSTG.UI.getColorHtml("#5c5c5a"),
 				outline = 1,
-				outlineColor = getColorHtml("#cdc8c8"),
+				outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 			}),
 			skin = {
 				src = "",
-				scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
+				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		},
 	}
@@ -52,11 +52,11 @@ BUTTON_DEFAULT_PARAMS = {
 
 yellowStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_SMALL,
-			color = getColorHtml("#6c3e26"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_SMALL,
+			color = THSTG.UI.getColorHtml("#6c3e26"),
 			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+			outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
 			src = "",--ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
@@ -64,11 +64,11 @@ yellowStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_SMALL,
-			color = getColorHtml("#6c3e26"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_SMALL,
+			color = THSTG.UI.getColorHtml("#6c3e26"),
 			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+			outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
 			src = "",--ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
@@ -76,11 +76,11 @@ yellowStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_SMALL,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_SMALL,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -91,11 +91,11 @@ yellowStyle = {
 
 blueStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_SMALL,
-			color = getColorHtml("#1f3057"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_SMALL,
+			color = THSTG.UI.getColorHtml("#1f3057"),
 			outline = 1,
-			outlineColor = getColorHtml("#aac4d2"),
+			outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
@@ -103,11 +103,11 @@ blueStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_SMALL,
-			color = getColorHtml("#1f3057"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_SMALL,
+			color = THSTG.UI.getColorHtml("#1f3057"),
 			outline = 1,
-			outlineColor = getColorHtml("#aac4d2"),
+			outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
@@ -115,11 +115,11 @@ blueStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_SMALL,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_SMALL,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
@@ -130,11 +130,11 @@ blueStyle = {
 
 bigYellowStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#6d6833"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#6d6833"),
 			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+			outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
@@ -142,11 +142,11 @@ bigYellowStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#6d6833"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#6d6833"),
 			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+			outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
 			src = "", -- ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
@@ -154,11 +154,11 @@ bigYellowStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -169,11 +169,11 @@ bigYellowStyle = {
 
 bigBlueStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#334c6d"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#334c6d"),
 			outline = 1,
-			outlineColor = getColorHtml("#aac4d2"),
+			outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
@@ -181,11 +181,11 @@ bigBlueStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#334c6d"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#334c6d"),
 			outline = 1,
-			outlineColor = getColorHtml("#aac4d2"),
+			outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
@@ -193,11 +193,11 @@ bigBlueStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -208,11 +208,11 @@ bigBlueStyle = {
 
 biggestYellowStyle = {
 	normal = {
-		label = newTextStyle({
+		label = THSTG.UI.newTextStyle({
 			size = 28,
-			color = getColorHtml("#6d6833"),
+			color = THSTG.UI.getColorHtml("#6d6833"),
 			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+			outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
@@ -220,11 +220,11 @@ biggestYellowStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
+		label = THSTG.UI.newTextStyle({
 			size = 28,
-			color = getColorHtml("#6d6833"),
+			color = THSTG.UI.getColorHtml("#6d6833"),
 			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+			outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
@@ -232,11 +232,11 @@ biggestYellowStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
+		label = THSTG.UI.newTextStyle({
 			size = 28,
-			color = getColorHtml("#5c5c5a"),
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -247,11 +247,11 @@ biggestYellowStyle = {
 
 biggestBlueStyle = {
 	normal = {
-		label = newTextStyle({
+		label = THSTG.UI.newTextStyle({
 			size = 28,
-			color = getColorHtml("#334c6d"),
+			color = THSTG.UI.getColorHtml("#334c6d"),
 			outline = 1,
-			outlineColor = getColorHtml("#aac4d2"),
+			outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
@@ -259,11 +259,11 @@ biggestBlueStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
+		label = THSTG.UI.newTextStyle({
 			size = 28,
-			color = getColorHtml("#334c6d"),
+			color = THSTG.UI.getColorHtml("#334c6d"),
 			outline = 1,
-			outlineColor = getColorHtml("#aac4d2"),
+			outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
@@ -271,11 +271,11 @@ biggestBlueStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
+		label = THSTG.UI.newTextStyle({
 			size = 28,
-			color = getColorHtml("#5c5c5a"),
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -287,11 +287,11 @@ biggestBlueStyle = {
 
 yellowExStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#6c3e26"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#6c3e26"),
 			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+			outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_login_enter"),
@@ -299,11 +299,11 @@ yellowExStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#6c3e26"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#6c3e26"),
 			outline = 1,
-			outlineColor = getColorHtml("#f0e6a9"),
+			outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_login_enter"),
@@ -311,11 +311,11 @@ yellowExStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -326,11 +326,11 @@ yellowExStyle = {
 
 blueExStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#1f3057"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#1f3057"),
 			outline = 1,
-			outlineColor = getColorHtml("#aac4d2"),
+			outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", --ResManager.getRes(ResType.NEWBIE, "vip_button"),
@@ -338,11 +338,11 @@ blueExStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#1f3057"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#1f3057"),
 			outline = 1,
-			outlineColor = getColorHtml("#aac4d2"),
+			outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", --ResManager.getRes(ResType.NEWBIE, "vip_button"),
@@ -350,11 +350,11 @@ blueExStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -366,11 +366,11 @@ blueExStyle = {
 
 yellowFlowerStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIGGER,
-			color = getColorHtml("#fefefe"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIGGER,
+			color = THSTG.UI.getColorHtml("#fefefe"),
 			outline = 1,
-			outlineColor = getColorHtml("#8b0922"),
+			outlineColor = THSTG.UI.getColorHtml("#8b0922"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_yellow"),
@@ -378,11 +378,11 @@ yellowFlowerStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIGGER,
-			color = getColorHtml("#fefefe"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIGGER,
+			color = THSTG.UI.getColorHtml("#fefefe"),
 			outline = 1,
-			outlineColor = getColorHtml("#8b0922"),
+			outlineColor = THSTG.UI.getColorHtml("#8b0922"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_yellow"),
@@ -390,11 +390,11 @@ yellowFlowerStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIGGER,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIGGER,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -405,11 +405,11 @@ yellowFlowerStyle = {
 
 flowerStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#852600"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#852600"),
 			outline = 1,
-			outlineColor = getColorHtml("#ffe1a9"),
+			outlineColor = THSTG.UI.getColorHtml("#ffe1a9"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower"),
@@ -417,11 +417,11 @@ flowerStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#852600"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#852600"),
 			outline = 1,
-			outlineColor = getColorHtml("#ffe1a9"),
+			outlineColor = THSTG.UI.getColorHtml("#ffe1a9"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower"),
@@ -429,11 +429,11 @@ flowerStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIG,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIG,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -446,11 +446,11 @@ flowerStyle = {
 
 blueFlowerStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_NORMAL,
-			color = getColorHtml("#1f3057"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_NORMAL,
+			color = THSTG.UI.getColorHtml("#1f3057"),
 		outline = 1,
-		outlineColor = getColorHtml("#aac4d2"),
+		outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", -- ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
@@ -458,11 +458,11 @@ blueFlowerStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_NORMAL,
-			color = getColorHtml("#1f3057"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_NORMAL,
+			color = THSTG.UI.getColorHtml("#1f3057"),
 		outline = 1,
-		outlineColor = getColorHtml("#aac4d2"),
+		outlineColor = THSTG.UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
 			src = "", -- ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
@@ -470,11 +470,11 @@ blueFlowerStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_NORMAL,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_NORMAL,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -486,11 +486,11 @@ blueFlowerStyle = {
 
 greenFlowerStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIGGER,
-			color = getColorHtml("#fefefe"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIGGER,
+			color = THSTG.UI.getColorHtml("#fefefe"),
 			outline = 1,
-			outlineColor = getColorHtml("#8b0922"),
+			outlineColor = THSTG.UI.getColorHtml("#8b0922"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_green"),
@@ -498,11 +498,11 @@ greenFlowerStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIGGER,
-			color = getColorHtml("#fefefe"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIGGER,
+			color = THSTG.UI.getColorHtml("#fefefe"),
 			outline = 1,
-			outlineColor = getColorHtml("#8b0922"),
+			outlineColor = THSTG.UI.getColorHtml("#8b0922"),
 		}),
 		skin = {
 			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_green"),
@@ -510,11 +510,11 @@ greenFlowerStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIGGER,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIGGER,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -525,11 +525,11 @@ greenFlowerStyle = {
 
 activityStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIGGER,
-			color = getColorHtml("#394847"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIGGER,
+			color = THSTG.UI.getColorHtml("#394847"),
 			outline = 1,
-			outlineColor = getColorHtml("#efefcb"),
+			outlineColor = THSTG.UI.getColorHtml("#efefcb"),
 		}),
 		skin = {
 			src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
@@ -537,11 +537,11 @@ activityStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIGGER,
-			color = getColorHtml("#394847"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIGGER,
+			color = THSTG.UI.getColorHtml("#394847"),
 			outline = 1,
-			outlineColor = getColorHtml("#efefcb"),
+			outlineColor = THSTG.UI.getColorHtml("#efefcb"),
 		}),
 		skin = {
 			src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
@@ -549,11 +549,11 @@ activityStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_BIGGER,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_BIGGER,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -564,11 +564,11 @@ activityStyle = {
 
 activitySmallStyle = {
 	normal = {
-		label = newTextStyle({
-			size = FONT_SIZE_NORMAL,
-			color = getColorHtml("#4d2200"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_NORMAL,
+			color = THSTG.UI.getColorHtml("#4d2200"),
 			outline = 1,
-			outlineColor = getColorHtml("#ffdf99"),
+			outlineColor = THSTG.UI.getColorHtml("#ffdf99"),
 		}),
 		skin = {
 			src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_small_yellow_btn"),
@@ -576,11 +576,11 @@ activitySmallStyle = {
 		}
 	},
 	selected = {
-		label = newTextStyle({
-			size = FONT_SIZE_NORMAL,
-			color = getColorHtml("#4d2200"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_NORMAL,
+			color = THSTG.UI.getColorHtml("#4d2200"),
 			outline = 1,
-			outlineColor = getColorHtml("#ffdf99"),
+			outlineColor = THSTG.UI.getColorHtml("#ffdf99"),
 		}),
 		skin = {
 			src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_small_yellow_btn"),
@@ -588,11 +588,11 @@ activitySmallStyle = {
 		}
 	},
 	disabled = {
-		label = newTextStyle({
-			size = FONT_SIZE_NORMAL,
-			color = getColorHtml("#5c5c5a"),
+		label = THSTG.UI.newTextStyle({
+			size = THSTG.UI.FONT_SIZE_NORMAL,
+			color = THSTG.UI.getColorHtml("#5c5c5a"),
 			outline = 1,
-			outlineColor = getColorHtml("#cdc8c8"),
+			outlineColor = THSTG.UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
 			src = "",
@@ -604,11 +604,11 @@ activitySmallStyle = {
 activityBigStyle = 
 {
     normal = {
-        label = newTextStyle({
-        	size = FONT_SIZE_BIGGER,
-                color = getColorHtml("#4d2200"),
+        label = THSTG.UI.newTextStyle({
+        	size = THSTG.UI.FONT_SIZE_BIGGER,
+                color = THSTG.UI.getColorHtml("#4d2200"),
                 outline = 1,
-	            outlineColor = getColorHtml("#ffdf99"),
+	            outlineColor = THSTG.UI.getColorHtml("#ffdf99"),
             }),
         skin = {
             src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
@@ -616,11 +616,11 @@ activityBigStyle =
         }
     },
     selected = {
-        label = newTextStyle({
-            size = FONT_SIZE_BIGGER,
-            color = getColorHtml("#4d2200"),
+        label = THSTG.UI.newTextStyle({
+            size = THSTG.UI.FONT_SIZE_BIGGER,
+            color = THSTG.UI.getColorHtml("#4d2200"),
             outline = 1,
-	        outlineColor = getColorHtml("#ffdf99"),
+	        outlineColor = THSTG.UI.getColorHtml("#ffdf99"),
         }),
         skin = {
             src = "", --ResManager.getRes(ResType.ACTIVITY, "celebration_yellow_btn"),
@@ -628,9 +628,9 @@ activityBigStyle =
         }
     },
     disabled = {
-        label = newTextStyle({
-        	size = FONT_SIZE_BIGGER,
-        	color = getColorHtml("#5c5c5a"),
+        label = THSTG.UI.newTextStyle({
+        	size = THSTG.UI.FONT_SIZE_BIGGER,
+        	color = THSTG.UI.getColorHtml("#5c5c5a"),
        	}),
         skin = {
           	src = "",
@@ -684,7 +684,7 @@ params中可用参数：
 		print("Clicked:", target, event)
 	end
 
-	local btn = newButton({
+	local btn = THSTG.UI.newButton({
 		text = "FullStyle", 
 		style = {
 			normal = {
@@ -933,14 +933,14 @@ function newButton(params)
 
 		btn:loadTextureNormal(skin.src)
 		btn:loadTexturePressed(skin.src)
-		local normalCapInsets = skin2CapInsets(skin)
+		local normalCapInsets = THSTG.UI.skin2CapInsets(skin)
 		if normalCapInsets then
 			btn:setCapInsets(normalCapInsets)
 			btn:setScale9Enabled(true)
 			btn:setCapInsetsPressedRenderer(normalCapInsets)
 		end
 
-		local skinSize = skin2OrgSize(skin)
+		local skinSize = THSTG.UI.skin2OrgSize(skin)
 		btn:setContentSize(skinSize)
 		updateContentSize()
 	end
@@ -1051,9 +1051,9 @@ function newButton(params)
 
 	btn:setTouchEnabled(true)
 
-	if params.redDotData then
-		btn:addRedDot(params)
-	end
+	-- if params.redDotData then
+	-- 	btn:addRedDot(params)
+	-- end
 
 	if params.yellowFlowerStyle or params.greenFlowerStyle then
 		local label = btn:getTitleRenderer()
