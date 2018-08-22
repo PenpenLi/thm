@@ -402,7 +402,7 @@ function newTabBar(params)
 			onChange = function (event)
 				if event.value then
 					if event.isClick and params.isPlaySound and curSelectedItem ~= event.container then
-						SoundManager.playSound("button")
+						-- SoundManager.playSound("button")
 					end
 					menu:setSelectedIndex(menu:getIndex(container) + 1)
 				end

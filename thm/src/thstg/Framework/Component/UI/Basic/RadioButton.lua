@@ -221,18 +221,24 @@ function newRadioGroup(params)
 			__setSelectedButton(self, value - 1)
 			
 			--重设状态
-			local function setAllRadioButtonsEnabled(state)
-				local total = self:getNumberOfRadioButtons()
-				for i = 1,total do
-					local radioButton = __getRadioButtonByIndex(self, i - 1)
-					radioButton:setEnabled(state)
-				end
-			end
 			local curRadioButton = __getRadioButtonByIndex(self, value - 1)
 			if not curRadioButton:isEnabled() then
-				setAllRadioButtonsEnabled(true)
+				local total = self:getNumberOfRadioButtons()
+				local steteMap = {}
+				for i = 1,total do
+					local radioButton = __getRadioButtonByIndex(self, i - 1)
+					local oldStete = radioButton:isEnabled()
+					radioButton:setEnabled(true)
+					steteMap[i] = oldStete
+				end
+
 				curRadioButton:setSelected(true)
-				setAllRadioButtonsEnabled(false)
+				
+				for i = 1,total do
+					local radioButton = __getRadioButtonByIndex(self, i - 1)
+					radioButton:setEnabled(steteMap[i])
+				end
+				
 			end
 		end
 	end
