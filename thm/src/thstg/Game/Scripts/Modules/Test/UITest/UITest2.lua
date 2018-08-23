@@ -202,7 +202,8 @@ function M.create(params)
         {},
         {},
     })
-
+    pageTileView:scrollToPage(1)
+    
     return layer
 end
 return M
