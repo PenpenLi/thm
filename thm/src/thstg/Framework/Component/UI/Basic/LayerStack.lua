@@ -182,7 +182,7 @@ function newLayerStack(params)
 		ls:onNodeEvent("cleanup", oncleanup)
 	else
 		ls:onNodeEvent("cleanup", function()
-			Scheduler.scheduleNextFrame(oncleanup)
+			THSTG.Scheduler.scheduleNextFrame(oncleanup)
 		end)
 	end
 

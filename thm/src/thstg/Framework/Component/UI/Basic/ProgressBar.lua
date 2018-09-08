@@ -278,7 +278,7 @@ function newProgressBar(params)
 			local newPercent = _maxValue == 0 and 100 or _value / _maxValue * 100
 			
 			if timer then
-				Scheduler.unschedule(timer)
+				THSTG.Scheduler.unschedule(timer)
 				timer = false
 			end 
 			if needAction then
@@ -313,7 +313,7 @@ function newProgressBar(params)
 					if _value<preValue then
 						needShowMax = 1
 					end
-					timer = Scheduler.schedule(function ( t )
+					timer = THSTG.Scheduler.schedule(function ( t )
 						if needShowMax > 0 then
 								bar:setPercent(100)
 								needShowMax = needShowMax - 1
@@ -327,7 +327,7 @@ function newProgressBar(params)
 						end 
 						local cur = oldPercent+pr
 						if cur >= newPercent then
-							Scheduler.unschedule(timer)
+							THSTG.Scheduler.unschedule(timer)
 							timer = false
 							bar:setPercent(newPercent)
 						else
@@ -345,7 +345,7 @@ function newProgressBar(params)
 	end
 	node:onNodeEvent("exit",function ( ... )
 		if timer then
-			Scheduler.unschedule(timer)
+			THSTG.Scheduler.unschedule(timer)
 		end 
 	end)
 	--最大值
