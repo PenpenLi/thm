@@ -184,7 +184,23 @@ function M.create(params)
 			},
 		},
 	})
-	layer:addChild(togglebutton)
+    layer:addChild(togglebutton)
+    
+
+
+    local tintoLabel = THSTG.UI.newTintoLabel({
+        x = 100,y = 100,
+        text = "这是一个颜色从上到下渐变的\"文本\"",
+        topColor = "#fbf047",
+        bottomColor = "#42cdeb",
+        style = {
+            size = 30
+        }
+    })
+    layer:addChild(tintoLabel)
+
+
+
     return layer
 end
 return M

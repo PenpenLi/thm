@@ -259,7 +259,7 @@ function newControlButton(params)
 			--print(168, "triggerLongClick",privateData.oldPropageValue ~= false)
 		end
 		if type(params.onLongClick) == "function" then
-			privateData.scheduleId = Scheduler.schedule(function ()
+			privateData.scheduleId = THSTG.Scheduler.schedule(function ()
 				privateData.scheduleId = nil
 				controlButton:setHighlighted(false)
 				privateData.applyTouchAction()
@@ -274,7 +274,7 @@ function newControlButton(params)
 	--[[长按事件取消]]
 	function privateData.cancelLongClick(event)
 		if privateData.scheduleId then
-			Scheduler.unschedule(privateData.scheduleId)
+			THSTG.Scheduler.unschedule(privateData.scheduleId)
 			privateData.scheduleId = nil
 			--print(168, "cancelLongClick")
 		end

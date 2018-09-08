@@ -175,7 +175,7 @@ function private.sendPost(params)
 				if params.retryDelay <= 0 then
 					doSendPost()
 				else
-					Scheduler.scheduleOnce(params.retryDelay, doSendPost)
+					THSTG.Scheduler.scheduleOnce(params.retryDelay, doSendPost)
 				end
 			end
 		end

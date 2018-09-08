@@ -345,3 +345,139 @@ function newAtlasLabel(params)
 	return label
 
 end
+
+
+local function getTintoGlProgram(topColor,bottomColor)
+	topColor = topColor or  "#000000"
+	bottomColor = bottomColor or "#ffffff"
+	local shaderKey = topColor..bottomColor
+	local glProgramCache = cc.GLProgramCache:getInstance()
+	local glProgram = glProgramCache:getGLProgram(shaderKey)
+
+	if not glProgram then
+		local vertex = [[
+			attribute vec4 a_position;
+			attribute vec2 a_texCoord;
+			attribute vec4 a_color;
+			#ifdef GL_ES
+			varying lowp vec4 v_fragmentColor;
+			varying mediump vec2 v_texCoord;
+			#else
+			varying vec4 v_fragmentColor;
+			varying vec2 v_texCoord;
+			#endif
+						
+			uniform vec4 topColor;
+			uniform vec4 bottomColor;
+
+			void main()
+			{
+				gl_Position = CC_PMatrix * a_position;
+				v_texCoord = a_texCoord;
+
+				vec3 tintColor = topColor.xyz*v_texCoord.y + bottomColor.xyz*(1.0-v_texCoord.y);
+				v_fragmentColor = vec4(tintColor.xyz,0);
+			}
+		]]
+		local fragment= [[
+			#ifdef GL_ES
+			precision mediump float;
+			#endif
+			varying vec4 v_fragmentColor;
+			varying vec2 v_texCoord;
+			
+			void main(void)
+			{
+				vec4 c = texture2D(CC_Texture0, v_texCoord);
+				gl_FragColor = vec4(v_fragmentColor.xyz,c.a);
+			}
+		]]
+		glProgram = cc.GLProgram:createWithByteArrays(vertex , fragment)
+		if not glProgram then return end
+		local glProgramState = cc.GLProgramState:getOrCreateWithGLProgram(glProgram)
+		local topColorTb = UI.getColorHtml(topColor)
+		local bottomColorTb = UI.getColorHtml(bottomColor)
+		local topColorVec4 = cc.vec4(topColorTb.r/255,topColorTb.g/255,topColorTb.b/255,0)
+		local bottomColorVec4 = cc.vec4(bottomColorTb.r/255,bottomColorTb.g/255,bottomColorTb.b/255,0)
+		glProgramState:setUniformVec4("topColor",topColorVec4)
+		glProgramState:setUniformVec4("bottomColor",bottomColorVec4)
+		glProgramCache:addGLProgram(glProgram, shaderKey)
+	end
+	return glProgram
+end
+
+--[[
+-----------------------------
+-- 创建一个拥有渐变色的Label
+-- @param	text			[string]	显示的文字
+-- @param	x				[number]	x坐标
+-- @param	y				[number]	y坐标
+-- @param	width			[number]	宽度
+-- @param	height			[number]	高度
+-- @param	anchorPoint		[cc.p]		锚点(如UI.POINT_LEFT_BOTTOM)
+-- @param	topColor		[cc.p]		顶部颜色
+-- @param	bottomColor		[cc.p]		底部颜色
+-- @param	style			[table]		文字格式(参考Style文件中的newTextStyle()方法)，注：style下的（描边、字号）相关属性无效，color无透明度
+]]
+function newTintoLabel(params)	
+	local node = THSTG.UI.newWidget({
+		x = params.x or 0,
+		y = params.y or 0
+	})
+	local anchorPoint = params.anchorPoint or THSTG.UI.POINT_LEFT_BOTTOM
+	node:setAnchorPoint(cc.p(anchorPoint.x,anchorPoint.y))
+	if params.style then
+		params.style.outline = 0
+	end 
+
+	local label = THSTG.UI.newLabel({
+		text = params.text or "",
+		style = params.style
+	})
+	label:retain()
+	local labelSize = label:getContentSize()
+	node:setContentSize(labelSize)
+	if params.anchorPoint then
+		node:setAnchorPoint(params.anchorPoint)
+	end 
+	local sprite = false
+	local scheduler = false
+	local function addSprite()
+		local renderTexture = cc.RenderTexture:create(labelSize.width,labelSize.height)
+		renderTexture:beginWithClear(0,0,0,0)
+		if params.underline then
+			local nodeLine = cc.DrawNode:create()
+			nodeLine:setAnchorPoint(POINT_CENTER_BOTTOM)
+			nodeLine:drawLine(cc.p(0, 0), cc.p(labelSize.width, 0), cc.c4f(1,1,1,1))
+			nodeLine:setContentSize(cc.size(labelSize.width, 1))
+			nodeLine:setPosition(cc.p(labelSize.width/2, 1))
+			label:addChild(nodeLine)
+		end
+		label:visit()
+		renderTexture:endToLua()
+		sprite = THSTG.UI.newSprite({
+			x = labelSize.width/2,
+			y = labelSize.height/2
+		})
+		sprite:setSpriteFrame(renderTexture:getSprite():getSpriteFrame())
+		sprite:setFlippedY(true)
+		local glProgram = getTintoGlProgram(params.topColor,params.bottomColor)
+		sprite:setGLProgram(glProgram)		
+		node:addChild(sprite)
+	end
+	node:onNodeEvent("enter",function ()
+		if not sprite and not scheduler then
+			scheduler = THSTG.Scheduler.scheduleNextFrame(addSprite)
+		end
+	end)
+	node:onNodeEvent("exit",function ()
+		if scheduler then
+			THSTG.Scheduler.unschedule(scheduler)
+			scheduler = false
+		end
+		if not tolua.isnull(label) then
+			label:release()
+		end
+	end)
+	return node
+end

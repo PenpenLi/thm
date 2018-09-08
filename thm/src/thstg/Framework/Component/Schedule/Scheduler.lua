@@ -1,4 +1,4 @@
-local M = {}
+module(..., package.seeall)
 
 local scheduler = cc.Director:getInstance():getScheduler()
 local stack = {}
@@ -11,7 +11,7 @@ local stack = {}
 --@param    #boolean    isPaused    创建时是否处于停止状态，默认为false
 --@param    #boolean    cleanup     切换帐号是否需要清除，默认为true
 --@return   #uint   定时器id
-function M.schedule(listener, interval, repeatCount, isPaused, cleanup)
+function schedule(listener, interval, repeatCount, isPaused, cleanup)
 	if type(isPaused) ~= "boolean" then isPaused = false end
 	if type(cleanup) ~= "boolean" then cleanup = true end
 
@@ -39,14 +39,14 @@ end
 -------------------------------------------------------
 --停止定时器
 --@param    #uint   handle  定时器id
-function M.unschedule(handle)
+function unschedule(handle)
 	scheduler:unscheduleScriptEntry(handle)
 	stack[handle] = nil
 end
 
 -------------------------------------------------------
 --停止所有定时器(部分被标记为不清除的除外)
-function M.unscheduleAll()
+function unscheduleAll()
 	local oldStack = stack
 	stack = {}
 	for k, v in pairs(oldStack) do
@@ -60,7 +60,7 @@ end
 
 -------------------------------------------------------
 --停止所有定时器
-function M.clear()
+function clear()
 	for k, v in pairs(stack) do
 		scheduler:unscheduleScriptEntry(k)
 	end
@@ -71,26 +71,26 @@ end
 --延时指定时间后执行一次
 --@param    #uint       time        多久后执行，传0时表示下一帧(s)
 --@param    #function   listener    完成时回调函数
-function M.scheduleOnce(time, listener)
+function scheduleOnce(time, listener)
 	return schedule(listener, time, 1)
 end
 
 ----------------------------------------------
 --下一帧执行一次
 --@param    #function   listener    回调函数
-function M.scheduleNextFrame(listener)
+function scheduleNextFrame(listener)
 	return schedule(listener, 0, 1)
 end
 
 ----------------------------------------------
 --每帧执行一次
 --@param    #function   listener    回调函数
-function M.scheduleEachFrame(listener)
+function scheduleEachFrame(listener)
 	return schedule(listener, 0)
 end
 
 --用于测试
-function M.size()
+function size()
 	return table.nums(stack)
 end
 
