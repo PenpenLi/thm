@@ -19,8 +19,14 @@ function newSprite(params)
 	params = params or {}
 	assert(type(params) == "table", "[UI] newSprite() invalid params")
 
-	local src = params.src or ""--ResManager.getEmptyImg()
-	local sp = cc.Sprite:create(src)
+	local src = params.src --ResManager.getEmptyImg()
+	local sp = nil
+	if not src then
+		sp = cc.Sprite:create()
+	else
+		sp = cc.Sprite:create(src)
+	end
+	
 	if params.anchorPoint then
 		sp:setAnchorPoint(params.anchorPoint)
 	end
