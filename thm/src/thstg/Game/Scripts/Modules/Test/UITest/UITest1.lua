@@ -4,6 +4,18 @@ local M = {}
 function M.create(params)
     local layer = THSTG.UI.newLayer()
     -- add background image
+
+    local tintoLabel = THSTG.UI.newTintoLabel({
+        x = 100,y = 100,
+        text = "这是一个颜色从上到下渐变的\"文本\"",
+        topColor = "#fbf047",
+        bottomColor = "#42cdeb",
+        style = {
+            size = 10
+        }
+    })
+    layer:addChild(tintoLabel)
+
     THSTG.UI.newSprite({
         x = display.cx,
         y = display.cy,
@@ -185,21 +197,6 @@ function M.create(params)
 		},
 	})
     layer:addChild(togglebutton)
-    
-
-
-    local tintoLabel = THSTG.UI.newTintoLabel({
-        x = 100,y = 100,
-        text = "这是一个颜色从上到下渐变的\"文本\"",
-        topColor = "#fbf047",
-        bottomColor = "#42cdeb",
-        style = {
-            size = 30
-        }
-    })
-    layer:addChild(tintoLabel)
-
-
 
     return layer
 end
