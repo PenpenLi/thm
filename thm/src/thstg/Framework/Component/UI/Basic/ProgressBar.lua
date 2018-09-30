@@ -661,3 +661,109 @@ function newMultiProgressBar(params)
 
 	return node
 end
+
+
+--环形进度条
+--[[
+@params  x					[number]    进度条整体X坐标
+@params  y					[number]    进度条整体Y坐标
+@params  width 				[number]	进度条需要拉伸宽度
+@params  height				[number]	进度条需要拉伸高度
+@params  anchorPoint		[cc.p]		锚点，默认UI.PONIT_CENTER
+@params  value 				[number] 	值
+@params  maxValue 			[number]	最大值
+@params  minValue 			[number]	最小值
+@params  midPoint 			[number] 	圆心位置
+@params  isReverse  		[bool] 		是否逆时针
+@params  debug  			[bool] 		方便对位置用
+@params  style				[table]     各组件部分样式
+{
+	bgSkin = {
+		src = "aa.png", 
+	}
+	progressSkin = {
+		src = "bb.png", 
+	}
+}
+]]--
+function newRadialProgressBar(params)
+
+	assert(type(params) == "table", "[UI] newRadialProgressBar() invalid params")
+	local paramsStyle = params.style or {}
+	local finalParams = clone(PROGRESS_RADIAL_DEFAULT_PARAMS)
+	
+	TableUtil.mergeA2B(params, finalParams)
+
+	local node = UI.newWidget()
+	node:setAnchorPoint(finalParams.anchorPoint)
+	node:setPosition(finalParams.x, finalParams.y)
+
+	if finalParams.style.bgSkin then
+		local bg_sprite = cc.Sprite:create(finalParams.style.bgSkin.src)
+		-- bg_sprite:setOpacity(255)
+		node:addChild(bg_sprite,-10)
+	end
+
+	local hp_sprite = cc.Sprite:create(finalParams.style.progressSkin.src)
+    local radialProgressBar = cc.ProgressTimer:create(hp_sprite)
+	radialProgressBar:setType(cc.PROGRESS_TIMER_TYPE_RADIAL)
+	node:addChild(radialProgressBar)
+
+	radialProgressBar:setReverseProgress(finalParams.isReverse)
+	radialProgressBar:setMidpoint(finalParams.midPoint)
+	
+	local debugProg = nil
+	if finalParams.debug then
+		local function createColorSprite(size,color)
+			local render = cc.RenderTexture:create(size.width,size.height)
+			render:beginWithClear(color.r, color.g, color.b, color.a)
+			render:visit()
+			render:endToLua()
+			return cc.Sprite:createWithTexture(render:getSprite():getTexture())
+		end
+		local debugHp = createColorSprite(radialProgressBar:getContentSize(),{r=1,g=0,b=0,a=0.5})
+		debugProg = cc.ProgressTimer:create(debugHp)
+		debugProg:setType(cc.PROGRESS_TIMER_TYPE_RADIAL)
+		node:addChild(debugProg)
+
+		debugProg:setReverseProgress(finalParams.isReverse)
+		debugProg:setMidpoint(finalParams.midPoint)
+	
+	end
+	--
+	function node:setPercentage(val)
+		radialProgressBar:setPercentage(val)
+	end
+	function node:getPercentage()
+		return radialProgressBar:getPercentage()
+	end
+
+	function node:setValue(val)
+		local allowValue = 	finalParams.maxValue - finalParams.minValue
+		local finalValue = finalParams.minValue + allowValue * val * 0.01
+		finalValue = math.max(finalValue,finalParams.minValue)
+		finalValue = math.min(finalValue,finalParams.maxValue)
+		radialProgressBar:setPercentage(finalValue)
+
+		if debugProg then
+			debugProg:setPercentage(finalValue)
+		end
+	end
+	function node:getValue()
+		local allowValue = 	finalParams.maxValue - finalParams.minValue
+		local finalValue = self:getPercentage()
+		local val = (finalValue - finalParams.minValue) / (allowValue * 0.01)
+
+		return val
+	end
+
+	function node:refresh(value, maxValue)
+		self:setValue(100 * value/maxValue)
+	end
+
+	
+	node:setContentSize(finalParams.width, finalParams.height)
+	node:setValue(finalParams.value)
+
+	return node
+end
