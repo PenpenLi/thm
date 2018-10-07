@@ -1,4 +1,4 @@
-﻿module("thstg.ResManager", package.seeall)
+﻿module("ResManager", package.seeall)
 local Resources = require "Configs.Resources"
 
 --[[

@@ -694,7 +694,7 @@ function newRadialProgressBar(params)
 	
 	TableUtil.mergeA2B(params, finalParams)
 
-	local node = UI.newWidget()
+	local node = THSTG.UI.newWidget()
 	node:setAnchorPoint(finalParams.anchorPoint)
 	node:setPosition(finalParams.x, finalParams.y)
 

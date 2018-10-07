@@ -1,0 +1,1 @@
+module("UIType", package.seeall)

@@ -1,17 +1,9 @@
 ﻿return {
-    Font = {
+    font = {
 
     },
     
-    Sound = {
-
-    },
-
-    Image = {
-
-    },
-
-    Language = {
+    sound = {
 
     },
 
