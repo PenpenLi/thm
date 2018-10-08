@@ -467,12 +467,12 @@ function newTintoLabel(params)
 	end
 	node:onNodeEvent("enter",function ()
 		if not sprite and not scheduler then
-			scheduler = THSTG.Scheduler.scheduleNextFrame(addSprite)
+			addSprite()-- scheduler = THSTG.Scheduler.scheduleNextFrame(addSprite)
 		end
 	end)
 	node:onNodeEvent("exit",function ()
 		if scheduler then
-			THSTG.Scheduler.unschedule(scheduler)
+			-- THSTG.Scheduler.unschedule(scheduler)
 			scheduler = false
 		end
 		if not tolua.isnull(label) then

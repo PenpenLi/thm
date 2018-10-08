@@ -32,6 +32,34 @@ PROGRESS_BAR_DEFAULT_PARAMS = {
 	}
 }
 
+PROGRESS_RADIAL_DEFAULT_PARAMS = {
+	x = 0,
+	y = 0,
+	width = 0,
+	height = 0,
+	anchorPoint = clone(THSTG.UI.POINT_CENTER),
+	value = 100,
+	maxValue = 100,
+	minValue = 0,
+	midPoint = cc.p(0.5,0.5),	--(0.5,0.5)
+	isReverse = false,
+	debug = false,
+	style = {
+		--背景皮肤
+		bgSkin = {
+			src = "",
+			-- src = ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_radial_bg"),
+			
+		},
+		--进度条皮肤
+		progressSkin = {
+			src = "",
+			-- src = ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_radial_hp"),
+			
+		}
+	}
+}
+
 --[[
 --ProgressBar组件
 @params  x					[number]    进度条整体X坐标
