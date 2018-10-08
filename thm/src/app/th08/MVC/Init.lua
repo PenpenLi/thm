@@ -1,3 +1,3 @@
-Controller = require "MVC.Controller"
-View = require "MVC.View"
+Controller = require "MVC.Core.Controller"
+View = require "MVC.Core.View"
 

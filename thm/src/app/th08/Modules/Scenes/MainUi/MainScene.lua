@@ -1,19 +1,13 @@
 ﻿local M = class("StartScene", View)
 
 function M:onCreate()
-    -- -- add background image
-    -- display.newSprite("HelloWorld.png")
-    -- :move(display.center)
-    -- :addTo(self)
 
-    -- -- add HelloWorld label
-    -- cc.Label:createWithSystemFont("Hello World", "Arial", 40)
-    --     :move(display.cx, display.cy + 200)
-    --     :addTo(self)
+    --背景图
     local mainBg = THSTG.UI.newImage({
-        x = 0,
-        y = 0,
-        src = ResManager.getRes()
+        x = display.cx,
+        y = display.cy,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        src = ResManager.getRes(ResType.MAIN_SCENE, "") --TODO:
 
     })
 

@@ -8,4 +8,7 @@ require "UI.Init"
 require "Configs.Init"
 
 --配置文件
+require "ConfigReaders.Init"
+
+--配置文件
 require "Test"
