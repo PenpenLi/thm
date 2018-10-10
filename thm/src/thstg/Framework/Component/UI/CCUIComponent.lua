@@ -583,12 +583,6 @@ local function newMenu(params)
 	return menu
 end
 
-function newSpriteMenu(params)
-	local menu = newMenu(params)
-
-	return menu
-end
-
 --[[
 --param onClick         [function]     点击回调
 --@param	style		[table]		样式，结构如：
@@ -635,6 +629,7 @@ function newItemSprite(params)
 	 --一个菜单项
 	local spriteItem = cc.MenuItemSprite:create(normalSprite,selectedSprite,disabledSprite)
 
+	--
 	function spriteItem:onClick(func)
 		params.onClick = func or function() end
 	end
@@ -644,3 +639,27 @@ function newItemSprite(params)
 	return spriteItem
 end
 
+
+--[[
+--param 	onClick         [function]     点击回调
+--@param	text			[table]		文字
+
+]]
+function newItemFont(params)
+	params = params or {}
+	params.onClick = params.onClick or function() end
+	params.text = params.text or ""
+
+	local item = cc.MenuItemFont:create(params.text)
+
+	if params.onClick and type(params.onClick) == "function" then
+		item1:registerScriptTapHandler(params.onClick) --注册回调函数
+	end
+
+	--
+	function item:onClick(func)
+		params.onClick = func or function() end
+	end
+
+	return item
+end

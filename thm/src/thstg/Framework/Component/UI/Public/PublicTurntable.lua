@@ -1,4 +1,4 @@
-module("UIPublic", package.seeall)
+module("THSTG.UIPublic", package.seeall)
 
  -- 顶点shader
  --Author : zlb
