@@ -1,2 +1,2 @@
 --配置读取器
-require "Scripts.ConfigReaders.Init"
+require "Scripts.Managers.Init"

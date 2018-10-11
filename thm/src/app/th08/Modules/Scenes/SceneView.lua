@@ -1,4 +1,4 @@
-﻿local M = class("MainScene", View)
+local M = class("SceneView", View)
 
 function M:onCreate()
     local mainLayer = require ("Modules.Scene.MainUi.Layer.MenuLayer").create()

@@ -1,0 +1,1 @@
+require "Scripts.Managers.Caches.TestCache"

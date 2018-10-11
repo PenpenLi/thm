@@ -46,17 +46,17 @@ function M.create(params)
         style = {
             normal = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_close")
+                    src = ResManager.getUIRes(UIType.BUTTON,"power1_close")
                 } 
             },
             pressed = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_open") 
+                    src = ResManager.getUIRes(UIType.BUTTON,"power1_open")
                 }
             },
             disabled = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_close")
+                    src = ResManager.getUIRes(UIType.BUTTON,"power1_close")
                 } 
             },
         },
@@ -75,17 +75,17 @@ function M.create(params)
         style = {
             normal = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_close")
+                    src = ResManager.getUIRes(UIType.BUTTON,"power1_close")
                 } 
             },
             pressed = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_open") 
+                    src = ResManager.getUIRes(UIType.BUTTON,"power1_open") 
                 }
             },
             disabled = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_close")
+                    src = ResManager.getUIRes(UIType.BUTTON,"power1_close")
                 } 
             },
         },
@@ -105,14 +105,14 @@ function M.create(params)
         style = {
             normal = {
                 normal = {label = {artFont = "arial"}},
-                skin = {src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_close")}
+                skin = {src = ResManager.getUIRes(UIType.BUTTON,"power1_close")}
             },
             pressed = {
                 label = {color = THSTG.UI.COLOR_RED},
-                skin = {src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_open")}
+                skin = {src = ResManager.getUIRes(UIType.BUTTON,"power1_open")}
             },
             disabled = {
-                skin = {src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_close")}
+                skin = {src = ResManager.getUIRes(UIType.BUTTON,"power1_close")}
             },
         },
         x = display.cx - 300, y = display.cy-40,
@@ -133,19 +133,19 @@ function M.create(params)
             normal = {
                 label = {artFont =  "arial"},
                 skin = {
-                    src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_close")
+                    src = ResManager.getUIRes(UIType.BUTTON,"power1_close")
 
                 } 
             },
             pressed = {
                 label = {color = THSTG.UI.COLOR_RED},
                 skin = {
-                    src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_open") 
+                    src = ResManager.getUIRes(UIType.BUTTON,"power1_open") 
                 }
             },
             disabled = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UI,UIType.BUTTON,"power1_close")
+                    src = ResManager.getUIRes(UIType.BUTTON,"power1_close")
                 } 
             },
         },

@@ -20,12 +20,17 @@ function newSprite(params)
 	assert(type(params) == "table", "[UI] newSprite() invalid params")
 
 	local src = params.src --ResManager.getEmptyImg()
-	local sp = nil
-	if not src then
-		sp = cc.Sprite:create()
-	else
-		sp = cc.Sprite:create(src)
-	end
+	local sp = display.newSprite(src)
+	-- if not src then
+	-- 	sp = cc.Sprite:create()
+	-- else
+	-- 	if string.byte(src) == 35 then -- 第一个字符是 #
+	-- 		sp = display.newSprite(src)
+	-- 	else
+	-- 		sp = cc.Sprite:create(src)
+	-- 	end
+		
+	-- end
 	
 	if params.anchorPoint then
 		sp:setAnchorPoint(params.anchorPoint)
@@ -289,11 +294,6 @@ function newLayerColor(params)
 	return node
 end
 
---CCScene组件
-function newScene()
-	return cc.Scene:create()
-end
-
 --CCWidget组件
 --param x           	#number     x坐标
 --param y           	#number     y坐标
@@ -370,7 +370,7 @@ function newProgressTimer(params)
 	params.style = params.style or {}
 
 	local mask = newSprite({
-		src = params.src or ResManager.getRes(ResType.MAIN_UI, "icon_skill_cd_small"),
+		src = params.src or "" --ResManager.getRes(ResType.MAIN_UI, "icon_skill_cd_small"),
 	})
 
 	local node = cc.ProgressTimer:create(mask)
@@ -528,138 +528,3 @@ function newTouchLayer(params)
 	return layer
 end
 
-
---CCMenu组件
---param x           	#number     x坐标
---param y           	#number     y坐标
---param isVertical    	#bool       是否垂直排布,否则为水平, 默认
---param isHorizontal    #bool       是否水平排布,否则为竖直
---param padding         #number     间隔,默认为nil为auto
-local function newMenu(params)
-	params = params or {}
-
-	if params.isVertical then
-		if params.isHorizontal then
-			params.isVertical = true
-			params.isHorizontal = false
-		else
-			params.isVertical = params.isVertical
-			params.isHorizontal = not params.isVertical
-		end
-	else
-		if params.isHorizontal then
-			params.isVertical = not params.isHorizontal
-			params.isHorizontal = params.isHorizontal
-		else
-			params.isVertical = true
-			params.isHorizontal = false
-		end
-	end
-
-	local menu = cc.Menu:create()
-	menu:setPosition(params.x,params.y)
-	
-	local addChild = menu.addChild
-	function menu:addChild(node,...)
-		addChild(self,node,...)
-
-		--设置水平竖直
-		if params.isVertical then 
-			--params.isVertical then
-			if padding then 
-				menu:alignItemsVerticallyWithPadding(padding)
-			else 
-				menu:alignItemsVertically()
-			end
-		else 
-			if padding then 
-				menu:alignItemsHorizontallyWithPadding(padding)
-			else 
-				menu:alignItemsHorizontally() 
-			end
-		end
-	end
-
-	return menu
-end
-
---[[
---param onClick         [function]     点击回调
---@param	style		[table]		样式，结构如：
-	{
-			normal = {
-			}, 
-			selected = 
-			}, 
-			disabled = {	
-			}
-	}	
-]]
-function newItemSprite(params)
-	params = params or {}
-	params.onClick = params.onClick or function() end
-
-
-	local normalSprite = nil
-	local selectedSprite = nil
-	local disabledSprite = nil
-
-	if params.style.normal then
-		if type(params.style.normal) == "userdata" then
-			normalSprite = params.style.normal
-		elseif type(params.style.normal) == "table" then
-			normalSprite = newSprite(params.style.normal)
-		end
-	end
-	if params.style.selected then
-		if type(params.style.selected) == "userdata" then
-			selectedSprite = params.style.selected
-		elseif type(params.style.selected) == "table" then
-			selectedSprite = newSprite(params.style.selected)
-		end
-	end
-	if params.style.disabled then
-		if type(params.style.disabled) == "userdata" then
-			disabledSprite = params.style.disabled
-		elseif type(params.style.disabled) == "table" then
-			disabledSprite = newSprite(params.style.disabled)
-		end
-	end
-
-	 --一个菜单项
-	local spriteItem = cc.MenuItemSprite:create(normalSprite,selectedSprite,disabledSprite)
-
-	--
-	function spriteItem:onClick(func)
-		params.onClick = func or function() end
-	end
-
-	spriteItem:registerScriptTapHandler(params.onClick)
-	
-	return spriteItem
-end
-
-
---[[
---param 	onClick         [function]     点击回调
---@param	text			[table]		文字
-
-]]
-function newItemFont(params)
-	params = params or {}
-	params.onClick = params.onClick or function() end
-	params.text = params.text or ""
-
-	local item = cc.MenuItemFont:create(params.text)
-
-	if params.onClick and type(params.onClick) == "function" then
-		item1:registerScriptTapHandler(params.onClick) --注册回调函数
-	end
-
-	--
-	function item:onClick(func)
-		params.onClick = func or function() end
-	end
-
-	return item
-end

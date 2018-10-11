@@ -105,47 +105,7 @@ function M.create(params)
 
    spriteMenu:alignItemsHorizontally()             --必须在后边
 
-   --
-   local spriteMenu=THSTG.UI.newSpriteMenu({
-        x = 200,
-        y = 400,
-        isVertical = false,
-    })
-    layer:addChild(spriteMenu)
 
-    local spriteItem= THSTG.UI.newItemSprite({
-        onClick = function()
-            print("菜单THSTG1")
-        end,
-        style = {
-            normal = {
-                src = "res/th08/title01.png",
-                frame = {x= 0,y = 0,width =100,height=100},
-            },
-            selected = {
-                src = "res/th08/title01.png",
-                frame = {x= 100,y = 0,width =100,height=100},
-            },
-        }
-    })
-    spriteMenu:addChild(spriteItem)
-
-    local spriteItem= THSTG.UI.newItemSprite({
-        onClick = function()
-            print("菜单THSTG2")
-        end,
-        style = {
-            normal = {
-                src = "res/th08/title01.png",
-                frame = {x= 0,y = 0,width =100,height=100},
-            },
-            selected = {
-                src = "res/th08/title01.png",
-                frame = {x= 100,y = 0,width =100,height=100},
-            },
-        }
-    })
-    spriteMenu:addChild(spriteItem)
 
     return layer
 end

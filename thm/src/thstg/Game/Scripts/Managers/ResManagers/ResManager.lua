@@ -8,7 +8,7 @@ local Resources = require "Scripts.Configs.Handwork.Resources"
 @return 资源路径
 ]]
 function getRes(resType, resName)
-	--ResourceManager:getInstance():getDefaultLoadingImage() -- 重置加载图
+	-- ResourceManager:getInstance():getDefaultLoadingImage() -- 重置加载图
 
 	local path = nil
 
@@ -28,7 +28,7 @@ function getRes(resType, resName)
 end
 
 --------------------------
--- 多层资源获取
+-- 二层资源获取
 -- @param	resType		[string]	资源类型
 -- @param	subType		[string]	子级资源类型
 -- @param	resName		[string]	资源名
@@ -48,6 +48,30 @@ function getResSub(resType, subType, resName)
 	return path
 end
 
+--------------------------
+-- 多层资源获取
+-- @param	...		[string]	资源类型
+-- @return	资源路径
+function getResMul(...)
+	
+	local path = nil
+	local params = {...}
+	local pathStr = ""
+	for i = 1, #params do
+		path = path and path[params[i]] or Resources[params[i]]
+		if not path then
+			if __DEBUG_RESOURCES__ then
+				error(string.format("ResManager.getRes ERROR: can't found: %s",pathStr))
+			end
+			break
+		else
+			pathStr = pathStr .. "." ..  params[i]
+		end
+	end
+	
+	return path
+end
+
 
 function getResTable(resType, subType)
 	local res = Resources[resType]
@@ -57,6 +81,8 @@ function getResTable(resType, subType)
 
 	return res or {}
 end
+
+
 
 --------------------------
 --[[
@@ -69,8 +95,21 @@ function getUIRes(uiType, resName)
 	return getResSub(ResType.UI, uiType, resName)
 end
 
+--[[
+获取组件资源
+@param	texType		[string]组件类型	(对应TexType中的项)
+@param	resName		[string]资源名
+@return 资源路径
+--]]
+function getTexRes(texType, resName)
+	return getResSub(ResType.TEXTURE, texType, resName)
+end
+
+---
 -- --获取空图片的资源路径
--- function getEmptyImg()
--- 	TextureManager:getInstance():getDefaultLoadingImage() -- 重置加载图
--- 	return getRes(ResType.PUBLIC, "empty")
--- end
+function getEmptyImg()
+	TextureManager:getInstance():getDefaultLoadingImage() -- 重置加载图
+	return getRes(ResType.PUBLIC, "empty")
+end
+
+--

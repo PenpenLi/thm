@@ -4,7 +4,7 @@ local M = {}
 function M.create(params)
     local layer = THSTG.UI.newLayer()
     --载入plist
-    cc.SpriteFrameCache:getInstance():addSpriteFrames("Assets/Texture/dragon.plist")
+    cc.SpriteFrameCache:getInstance():addSpriteFrames(ResManager.getResMul(ResType.TEXTURE,TexType.PLIST,"dragon"))
     -- display.loadSpriteFrames("Assets/Texture/Dragon.plist","Assets/Texture/dragon.png")
 
     --FIXME:代码逻辑混乱
@@ -93,18 +93,13 @@ function M.create(params)
     sprite:align(display.CENTER,display.cx,display.cy-60)
     sprite:addTo(layer)
 
-    local frames = createHFrames("Assets/Role/Dragon/drag_walk_down.png",8)
+    local frames = createHFrames(ResManager.getTexRes(TexType.SHEET,"dragon_walk_down"),8)
     local animation = display.newAnimation(frames,1/4)     --1s里面播放4帧
     sprite:playAnimationForever(animation)
 
     local sprite = display.newSprite()
     sprite:align(display.CENTER,display.cx,display.cy+60)
     sprite:addTo(layer)
-
-    local frames = createHFrames("Assets/Role/Dragon/drag_walk_up.png",8)
-    local animation = display.newAnimation(frames,1/4)     --1s里面播放4帧
-    sprite:playAnimationForever(animation)
-
     ----
 
     local sprite = display.newSprite()
@@ -126,27 +121,31 @@ function M.create(params)
 
     -----------------------------
     --加载plist文件
-    THSTG.SCENE.loadPlistFrames("Assets/Texture/dragon.plist")
+    THSTG.SCENE.loadPlistFrames(ResManager.getResMul(ResType.TEXTURE,TexType.PLIST,"dragon"))
 
-    local animationSprite = THSTG.SCENE.newAnimationSprite({
+    local animationFrame = THSTG.SCENE.newFileFrames({
+        pattern = "drag_walk_down_%02d.png",
+        begin = 1,
+        length = 8,
+    })
+    local animition = THSTG.SCENE.newAnimation({
+        time = 1/8,
+        frames = animationFrame ,
+    })
+    local animationSprite = THSTG.UI.newSprite({
         x = display.cx,
         y = display.cy +180,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        time = 1/8,
-        frames = {
-            pattern = "drag_walk_down_%02d.png",
-            begin = 1,
-            length = 8,
-        },
     })
     layer:addChild(animationSprite)
+    animationSprite:playAnimationForever(animition)
 
 
-    local sprite = THSTG.SCENE.newSprite({
+    local sprite = THSTG.UI.newSprite({
         x = 40,
         y = 40,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        src = "#drag_walk_down_01.png"
+        src = "#drag_walk_down_01.png",
     })
     layer:addChild(sprite)
 

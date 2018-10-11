@@ -16,7 +16,7 @@ function M:onEnv(gameRoot)
 end
 
 function M:onScene()
-    local mainScene = require("Scripts.Modules.Test.TestModule"):create()
+    local mainScene = require("Scripts.Modules.Test.TestView"):create()
     return mainScene
 end
 
