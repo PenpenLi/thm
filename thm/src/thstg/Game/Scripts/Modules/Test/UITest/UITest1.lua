@@ -31,8 +31,12 @@ function M.create(params)
         text = "Hello World",
         anchorPoint = THSTG.UI.POINT_CENTER,
         style = {
-            font = "Arial",
-            size = 40,
+            color = THSTG.UI.COLOR_YELLOW,
+			size = THSTG.UI.FONT_SIZE_NORMAL,
+			halign = THSTG.UI.TEXT_HALIGN_LEFT,
+			valign = THSTG.UI.TEXT_VALIGN_BOTTOM,
+			outline = 2,
+			outlineColor = THSTG.UI.COLOR_BLUE,
         }
     })
     :addTo(layer)

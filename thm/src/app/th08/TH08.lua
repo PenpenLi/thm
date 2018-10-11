@@ -3,7 +3,6 @@ local M = class("TH08",THSTG.Game)
 function M:onEnv()
     --初始化环境
     require "EnvBase"
-
     require "EnvGame"
 
     return true

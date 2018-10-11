@@ -35,7 +35,7 @@ function M.create(params)
     end
     --
 
-     --背景图
+     --大背景
      local mainBg = THSTG.UI.newImage({
         x = display.cx,
         y = display.cy,

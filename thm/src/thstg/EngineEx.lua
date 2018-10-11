@@ -1,13 +1,9 @@
+
+module("THSTG", package.seeall)
+
 __ENGINE_VERSION__ = 10000
 
------
-THSTG = THSTG or {}
-THSTG.EngineEx = class("EngineEx")
-
-local M = THSTG.EngineEx
-
-
-
+local M = class("EngineEx")
 
 function M:ctor(configs)
     self._configs = self._configs or {}
@@ -40,5 +36,5 @@ function M:run()
     
 
 end
-
+_G.EngineEx = M
 return M

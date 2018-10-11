@@ -8,20 +8,20 @@
     },
 
     ui = {
-
+        main_scene ={
+            main_bg = "res/th08/"
+           
+        },
+    
+        game_scene = {
+    
+        },
 
 
     },
 
     -----
-    main_scene ={
-        main_bg = "res/th08/"
-       
-    },
 
-    game_scene = {
-
-    },
 
 
 }
