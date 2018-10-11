@@ -15,7 +15,7 @@
  
  --组件
  require "thstg.Framework.Component.Init"
- 
+
  --MVC
  require "thstg.Framework.MVC.Init"
  
@@ -26,3 +26,6 @@
  require "thstg.Framework.Util.TimeUtil"
  require "thstg.Framework.Util.UIDUtil"
  require "thstg.Framework.Util.NodeUtil"
+
+ --引擎驱动
+ require "thstg.Framework.Game"

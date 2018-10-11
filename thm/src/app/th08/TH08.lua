@@ -1,15 +1,10 @@
 local M = class("TH08",THSTG.Game)
 
 function M:onEnv()
-    --添加包含路径
-    package.path = package.path ..';app/th08/?.lua'
-
     --初始化环境
     require "EnvBase"
 
     require "EnvGame"
-
-
 
     return true
 end

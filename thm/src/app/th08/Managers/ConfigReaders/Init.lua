@@ -1,1 +1,1 @@
-require "Managers.Caches.SceneConfig"
+require "Managers.ConfigReaders.SceneConfig"

@@ -1,4 +1,4 @@
-
+module("THSTG", package.seeall)
 local M = class("Game")
 
 function M:ctor()
@@ -38,4 +38,5 @@ function M:onScene()
     return nil,nil
 end
 
+_G.Game = M
 return M
