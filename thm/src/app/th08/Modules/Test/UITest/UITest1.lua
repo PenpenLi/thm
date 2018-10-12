@@ -13,36 +13,34 @@ function M.create(params)
 
     local function createTemplate()
         local node = THSTG.UI.newWidget({
-            width = 100,
+            width = 200,
             height = 25,
         })
 
-        local title = THSTG.UI.newLabel({
+        local title = THSTG.UI.newBMFontLabel({
             x = node:getContentSize().width/2,
             y = node:getContentSize().height/2,
-            text = "测试",
             anchorPoint = THSTG.UI.POINT_CENTER,
             style = {
-                color = THSTG.UI.COLOR_YELLOW,
-                size = THSTG.UI.FONT_SIZE_NORMAL,
+                font = ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_white"),
             }
         })
         node:addChild(title)
         
         --
         function node:setState(data, pos)
+
+            title:setText(data.title)
+
+
             if data.__isClick == true then
-                
             else
-                
             end
         end
 
         function node:_onCellClick(data)
             if data.value.__isClick == true then
-               
             else
-                
             end
         end
         return node
@@ -60,10 +58,10 @@ function M.create(params)
     -- node:addChild(mainBg)
 
     _uiTitleList = THSTG.UI.newTileList({
-        x = display.cx,
-        y = display.cy,
-        width = 582, 
-        height = 348, 
+        x = 138,
+        y = 286,
+        width = 250, 
+        height = 280, 
         -- itemWidth = 558,
         -- itemHeight = 94,
         anchorPoint = THSTG.UI.POINT_CENTER_TOP,
@@ -77,15 +75,16 @@ function M.create(params)
 
     })
     node:addChild(_uiTitleList)
-    debugUI(_uiTitleList)
     --------Control--------
     function node.updateLayer()
-        _uiTitleList:setDataProvider({
-            {},
-            {},
-            {},
-            {},
-        })
+        local infos = MainSceneConfig.getMainMenuInfo()
+        local newInfos = {}
+        for _,v in ipairs(infos) do
+            local info = clone(v)
+            info.__isClick = false
+            table.insert(newInfos,info)
+        end
+        _uiTitleList:setDataProvider(infos)
         
     end
     node:onNodeEvent("enter", function ()

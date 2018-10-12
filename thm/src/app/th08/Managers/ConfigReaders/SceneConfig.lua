@@ -1,1 +1,0 @@
-module("SceneConfig", package.seeall)
