@@ -981,7 +981,7 @@ function newTileList(params)
 								target = tilelist,
 								pos = selectedPos,
 								force = force,
-							})
+							},selectedValue.__isClick)
 						end
 					end
 				end
@@ -993,7 +993,7 @@ function newTileList(params)
 								target = tilelist,
 								pos = lastPos,
 								force = force,
-							})
+							},lastValue.__isClick)
 						end
 					end
 				end

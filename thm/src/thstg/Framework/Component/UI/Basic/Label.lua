@@ -260,6 +260,19 @@ function newBMFontLabel(params)
 		renderText:setMaxLineWidth(params.width)
 	end
 
+	function label:updateStyle(style)
+		if type(style.font) == "string" then
+			self:setFntFile(style.font)
+		end
+		
+		if type(style.additionalKerning) == "number" then
+			local renderText = tolua.cast(self:getVirtualRenderer(), "cc.Label")
+			if renderText then
+				renderText:setAdditionalKerning(style.additionalKerning)
+			end
+		end
+	end
+
 	-- function label:getContentSize()
 	-- 	return label:getVirtualRendererSize()
 	-- end

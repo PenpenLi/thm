@@ -11,6 +11,7 @@ function M.create(params)
     --------View--------
     local node = THSTG.UI.newNode()
 
+    local _data = nil
     local function createTemplate()
         local node = THSTG.UI.newWidget({
             width = 200,
@@ -22,27 +23,27 @@ function M.create(params)
             y = node:getContentSize().height/2,
             anchorPoint = THSTG.UI.POINT_CENTER,
             style = {
-                font = ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_white"),
+                font = ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_black"),
             }
         })
         node:addChild(title)
         
         --
         function node:setState(data, pos)
+            _data = data
 
             title:setText(data.title)
+            --TODO:偏移动作
 
-
-            if data.__isClick == true then
-            else
-            end
         end
-        function node:setSelected()
+        function node:getData()
+            return _data
         end
-
-        function node:_onCellClick(data)
-            if data.value.__isClick == true then
+        function node:_onCellClick(data,isClick)
+            if isClick == true then
+                title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_white"))
             else
+                title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_black"))
             end
         end
 
@@ -73,26 +74,20 @@ function M.create(params)
         direction = ccui.ListViewDirection.vertical,
         itemTemplate = createTemplate,
         onSelectedIndexChange = function (sender,node, index, value, lastIndex, lastValue)
-            node:setSelected()
             return _selectedChangedHandle(sender,node, index, value, lastIndex, lastValue)
         end,
     })
     node:addChild(_uiTitleList)
     --------Control--------
     _selectedChangedHandle = function (sender,node, index, value, lastIndex, lastValue)
-        print(15,index)
+        local data = node:getData()
+        
     end
 
     function node.updateLayer()
         local infos = MainSceneConfig.getMainMenuInfo()
-        local newInfos = {}
-        for _,v in ipairs(infos) do
-            local info = clone(v)
-            info.__isClick = false
-            table.insert(newInfos,info)
-        end
         _uiTitleList:setDataProvider(infos)
-        
+        _uiTitleList:setSelected(1)
     end
     node:onNodeEvent("enter", function ()
         node.updateLayer()
