@@ -25,7 +25,7 @@ function ccLabel:updateCommomStyle(style)
 		self:setAdditionalKerning(style.additionalKerning)
 	end
 	if style.shadow then
-		local defaultStyle = newTextStyle()
+		local defaultStyle = THSTG.UI.newTextStyle()
 		self:enableShadow(style.shadowColor or defaultStyle.shadowColor, style.shadowOffset or  defaultStyle.shadowOffset, style.shadowBlurRadius or defaultStyle.shadowBlurRadius)
 	end
 end
@@ -37,7 +37,7 @@ LABEL_DEFAULT_PARAMS = {
 	width = 0,
 	height = 0,
 	anchorPoint = POINT_LEFT_BOTTOM,
-	style = newTextStyle()
+	style = THSTG.UI.newTextStyle()
 }
 
 --几种不同类型Label的通用初始化部分

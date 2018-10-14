@@ -46,6 +46,9 @@ require "thstg.Framework.Component.UI.Basic.LayerStack"
 
 --[[扩展部件extends]]--
 
+--[[自定义部件custom]]--
+require "thstg.Framework.Component.UI.Custom.DropDown"
+require "thstg.Framework.Component.UI.Custom.Turntable"
 
 --[[公共部件public]]--
 

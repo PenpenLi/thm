@@ -1,4 +1,4 @@
-module(..., package.seeall)
+﻿module(..., package.seeall)
 
 local M = {}
 function M.create(params)
@@ -7,7 +7,7 @@ function M.create(params)
 
 
 
-
+    local _selectedChangedHandle = nil
     --------View--------
     local node = THSTG.UI.newNode()
 
@@ -37,17 +37,20 @@ function M.create(params)
             else
             end
         end
+        function node:setSelected()
+        end
 
         function node:_onCellClick(data)
             if data.value.__isClick == true then
             else
             end
         end
+
         return node
     end
     --
 
-     --大背景
+    --  大背景
     --  local mainBg = THSTG.UI.newImage({
     --     x = display.cx,
     --     y = display.cy,
@@ -62,20 +65,24 @@ function M.create(params)
         y = 286,
         width = 250, 
         height = 280, 
-        -- itemWidth = 558,
-        -- itemHeight = 94,
         anchorPoint = THSTG.UI.POINT_CENTER_TOP,
         colCount = 1,
-        -- itemRowGap = 10,
         itemColGap = 5,
-        bounceable = false,
+        bounceEnabled = false,
         -- padding = {left= 0,right=0,top=0,bottom =5},
         direction = ccui.ListViewDirection.vertical,
         itemTemplate = createTemplate,
-
+        onSelectedIndexChange = function (sender,node, index, value, lastIndex, lastValue)
+            node:setSelected()
+            return _selectedChangedHandle(sender,node, index, value, lastIndex, lastValue)
+        end,
     })
     node:addChild(_uiTitleList)
     --------Control--------
+    _selectedChangedHandle = function (sender,node, index, value, lastIndex, lastValue)
+        print(15,index)
+    end
+
     function node.updateLayer()
         local infos = MainSceneConfig.getMainMenuInfo()
         local newInfos = {}

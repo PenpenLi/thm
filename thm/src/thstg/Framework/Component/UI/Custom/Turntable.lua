@@ -1,4 +1,4 @@
-module("THSTG.UIPublic", package.seeall)
+module("THSTG.UICustom", package.seeall)
 
  -- 顶点shader
  --Author : zlb
@@ -88,12 +88,12 @@ TURNTABLE_DEFAULT_PARAMS = {
     y = 0,
     width = 0,
     height = 0,
-    anchorPoint = clone(UI.POINT_CENTER),
+    anchorPoint = clone(THSTG.UI.POINT_CENTER),
     value = 1,
     sectors = 4,
     midPoint = cc.p(0.5,0.5),
     offset = 0,
-    fgSrc = ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_radial_hp"),
+    fgSrc = "", --ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_radial_hp"),
     bgSrc = false,
 }
 
@@ -128,18 +128,18 @@ function newTurntable(params)
         return ret
     end
 
-    local node = UI.newNode(finalParams)
-    local fgSprite = UI.newSprite({
+    local node = THSTG.UI.newNode(finalParams)
+    local fgSprite = THSTG.UI.newSprite({
 		src = finalParams.fgSrc,
-		anchorPoint = UI.POINT_CENTER,
+		anchorPoint = THSTG.UI.POINT_CENTER,
     })
     node:addChild(fgSprite)
 
     local bgSprite = nil
     if finalParams.bgSrc then
-        bgSprite= UI.newSprite({
+        bgSprite= THSTG.UI.newSprite({
             src = finalParams.bgSrc,
-            anchorPoint = UI.POINT_CENTER,
+            anchorPoint = THSTG.UI.POINT_CENTER,
         })
     end
 
