@@ -4,14 +4,13 @@ local M = {}
 function M.create(params)
     --------Model--------
     local _uiTitleList = nil 
-
+    local _uiDescText = nil 
 
 
     local _selectedChangedHandle = nil
     --------View--------
     local node = THSTG.UI.newNode()
 
-    local _data = nil
     local function createTemplate()
         local node = THSTG.UI.newWidget({
             width = 200,
@@ -30,17 +29,33 @@ function M.create(params)
         
         --
         function node:setState(data, pos)
-            _data = data
 
             title:setText(data.title)
             --TODO:偏移动作
+            title:runAction(cc.Sequence:create({
+                cc.DelayTime:create(2.0),	--预备时间
+                cc.CallFunc:create(function()
+                    title:runAction(cc.RepeatForever:create(cc.Sequence:create({
+                        cc.DelayTime:create(1.0),
+                        cc.CallFunc:create(function ()
+                            --TODO:
+                        end),
+                    })))
+                end),
+            }))
 
+            --
+            if data.__isClick == true then
+                title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_white"))
+            else
+                title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_black"))
+            end
         end
         function node:getData()
             return _data
         end
-        function node:_onCellClick(data,isClick)
-            if isClick == true then
+        function node:_onCellClick(data)
+            if data.value.__isClick == true then
                 title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_white"))
             else
                 title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_black"))
@@ -78,10 +93,23 @@ function M.create(params)
         end,
     })
     node:addChild(_uiTitleList)
+
+
+    _uiDescText = THSTG.UI.newRichText({
+		x = 200,
+		y = 20,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+		style = {
+			size = THSTG.UI.FONT_SIZE_SMALLER,
+			color = THSTG.UI.getColorHtml("#fcf5c2")
+		}
+	})
+	node:addChild(_uiDescText)
+
     --------Control--------
     _selectedChangedHandle = function (sender,node, index, value, lastIndex, lastValue)
-        local data = node:getData()
-        
+        local data = _uiTitleList:getDataProvider()[index]
+        _uiDescText:setText(data.desc)
     end
 
     function node.updateLayer()

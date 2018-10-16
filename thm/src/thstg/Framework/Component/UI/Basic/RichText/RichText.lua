@@ -73,6 +73,20 @@ function newRichText(params)
 		self:removeAllElements()
 		self:appendText(htmlText)
 	end
+	--重写pushBack函数,记录下子元素
+	local oldPushBackElement = richText.pushBackElement
+	local elementsList = {}
+	function richText:pushBackElement(element)
+		oldPushBackElement(self,element)
+		elementsList[#elementsList + 1] = element
+	end
+
+	function richText:removeAllElements()
+		for _,v in ipairs(elementsList) do
+			self:removeElement(v)
+		end
+		elementsList = {}
+	end
 	--添加文本到后面，如果只是往文本后面增加内容，请使用该接口
 	function richText:appendText(htmlText)
 		if not htmlText then return end
