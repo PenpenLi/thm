@@ -11,5 +11,5 @@ end
 
 function getMainMenuInfo()
     local dict = getDict()
-    return dict.main_menu
+    return dict.main_menu.menus
 end

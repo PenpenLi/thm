@@ -3,10 +3,14 @@
 local M = {}
 function M.create(params)
     --------Model--------
+    local DELAY_TIME = 8
     local _uiTitleList = nil 
     local _uiDescText = nil 
 
+    local _timerCheckMove = nil
 
+    local _varIsCanMove = true
+    local _varLstTime = 0
     local _selectedChangedHandle = nil
     --------View--------
     local node = THSTG.UI.newNode()
@@ -26,23 +30,30 @@ function M.create(params)
             }
         })
         node:addChild(title)
-        
+
         --
         function node:setState(data, pos)
 
             title:setText(data.title)
-            --TODO:偏移动作
-            title:runAction(cc.Sequence:create({
-                cc.DelayTime:create(2.0),	--预备时间
-                cc.CallFunc:create(function()
+            local newPos = cc.p(title:getPositionX()  + data.offsetPos.x ,title:getPositionY()  + data.offsetPos.y )
+            title:setPosition(newPos)
+
+            local nextMoveBy = data.moveBy
+            title:stopAllActions()
+            -- title:runAction(cc.Sequence:create({
+                -- cc.DelayTime:create(2.0),	--预备时间
+                -- cc.CallFunc:create(function()
                     title:runAction(cc.RepeatForever:create(cc.Sequence:create({
-                        cc.DelayTime:create(1.0),
+                        cc.DelayTime:create(DELAY_TIME),
                         cc.CallFunc:create(function ()
-                            --TODO:
+                            if _varIsCanMove then
+                                title:runAction(cc.MoveBy:create(2, nextMoveBy))
+                                nextMoveBy = cc.p(-nextMoveBy.x,-nextMoveBy.y)
+                            end
                         end),
                     })))
-                end),
-            }))
+                -- end),
+            -- }))
 
             --
             if data.__isClick == true then
@@ -79,7 +90,7 @@ function M.create(params)
     _uiTitleList = THSTG.UI.newTileList({
         x = 138,
         y = 286,
-        width = 250, 
+        width = 350, 
         height = 280, 
         anchorPoint = THSTG.UI.POINT_CENTER_TOP,
         colCount = 1,
@@ -104,12 +115,25 @@ function M.create(params)
 			color = THSTG.UI.getColorHtml("#fcf5c2")
 		}
 	})
-	node:addChild(_uiDescText)
+    node:addChild(_uiDescText)
+    
+    --用于检查是否能够移动
+    _timerCheckMove = THSTG.Scheduler.schedule(function ()
+        if not _varIsCanMove then
+            _varLstTime = _varLstTime + 1
+            if _varLstTime >= DELAY_TIME then
+                _varIsCanMove = true
+                _varLstTime = 0
+            end
+        end    
+    end, 1)
 
     --------Control--------
     _selectedChangedHandle = function (sender,node, index, value, lastIndex, lastValue)
         local data = _uiTitleList:getDataProvider()[index]
         _uiDescText:setText(data.desc)
+        _varIsCanMove = false
+        _varLstTime = 0
     end
 
     function node.updateLayer()
@@ -117,12 +141,19 @@ function M.create(params)
         _uiTitleList:setDataProvider(infos)
         _uiTitleList:setSelected(1)
     end
+
+    function node.destoyTimer()
+        if _timerCheckMove then
+            THSTG.Scheduler.unschedule(_timerCheckMove)
+            _timerCheckMove = nil
+        end
+    end
     node:onNodeEvent("enter", function ()
         node.updateLayer()
 	end)
 
 	node:onNodeEvent("exit", function ()
-        
+        node.destoyTimer()
     end)
 
     return node
