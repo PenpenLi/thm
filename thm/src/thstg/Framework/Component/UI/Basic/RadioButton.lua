@@ -150,7 +150,8 @@ RadioGroup组件
 @param	enabled				#boolean		是否可用
 @param	allowedNoSelection	#boolean		是否允许未选中
 @param	selectedButtonIndex	#number			默认选中的按钮索引，(1-N)
-@param	onChange			#function		变更选择时的回调
+@param	onSelectedIndexChange #function(this, selectedNode, selectedIndex, lastNode, lastIndex,eventType)选中回调函数，值不可能同时为nil但都可能为nil
+-- @param	onChange			#function		变更选择时的回调	--过时函数,不建议使用
 @param	style				#table			每个子对象的样式
 ]]
 function newRadioGroup(params)
@@ -169,11 +170,23 @@ function newRadioGroup(params)
 	rbg:setPosition(finalParams.x, finalParams.y)
 	rbg:setAllowedNoSelection(finalParams.allowedNoSelection)
 
+	local _lastNode = nil
+	local _lastIndex = nil
+	local _isCanExec = true
 	local function onChange(sender, index, eventType)
+		_lastNode = sender
+		_lastIndex = index
+
+		if not _isCanExec then return end
+
 		-- print(1, string.format("~~~~~~ sender:%s index:%s eventType:%s", tostring(sender), tostring(index), tostring(eventType)))
 		if type(params.onChange) == "function" then
 			params.onChange(sender, index + 1, eventType)
 		end
+		if type(params.onSelectedIndexChange) == "function" then
+			params.onSelectedIndexChange(rbg,sender, index + 1,_lastNode,(_lastIndex ~= nil and _lastIndex + 1 or _lastIndex),eventType)
+		end	
+		
 	end
 	rbg:addEventListener(onChange)
 
@@ -215,13 +228,19 @@ function newRadioGroup(params)
 	end
 
 	--增加明确的设置index的方法
-	function rbg:setSelectedButtonIndex(value)
-		if value > 0 and value <= self:getNumberOfRadioButtons() then
+	--[[
+		change:
+		nil - 若和之前状态相同，则不触发onChange
+		true - 必定onChange 
+		false - 不触发onChange
+	]]--
+	function rbg:setSelectedButtonIndex(value,change)
+		local function newSelectedButtonIndex(val)
 			--下面函数对Enabled(true)的按钮不起作用,得重新设置状态
-			__setSelectedButton(self, value - 1)
+			__setSelectedButton(self, val - 1)
 			
 			--重设状态
-			local curRadioButton = __getRadioButtonByIndex(self, value - 1)
+			local curRadioButton = __getRadioButtonByIndex(self, val - 1)
 			if not curRadioButton:isEnabled() then
 				local total = self:getNumberOfRadioButtons()
 				local steteMap = {}
@@ -238,7 +257,22 @@ function newRadioGroup(params)
 					local radioButton = __getRadioButtonByIndex(self, i - 1)
 					radioButton:setEnabled(steteMap[i])
 				end
+			end
+		end
+		if value > 0 and value <= self:getNumberOfRadioButtons() then
+			if change == true then
+				newSelectedButtonIndex(value)
+			elseif change == false then
+				_isCanExec = false
+				newSelectedButtonIndex(value)
+				_isCanExec = true
+			else
+				local selectedIndex = self:getSelectedButtonIndex()
+				if selectedIndex == value then
+					return
+				end
 				
+				newSelectedButtonIndex(value)
 			end
 		end
 	end

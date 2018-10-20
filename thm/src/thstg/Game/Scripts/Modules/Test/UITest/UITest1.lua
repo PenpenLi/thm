@@ -66,7 +66,7 @@ function M.create(params)
     local sprite = THSTG.UI.newSprite({
         x = display.cx,
         y = display.cy,
-        src = "res/th08/title01.png",
+        src = "Assets/HelloWorld.png",
         frame = {x= 0,y = 0,width =100,height=100},
     })
     :addTo(layer)

@@ -284,3 +284,22 @@ end
 function isTableEmpty(t)
 	return _G.next(t) == nil
 end
+
+----
+--安全取得key内容
+function getSafeValue(default,table,...)
+	local params = {...}
+	if table then
+		if type(table) == "table" then
+			local value = table
+			for i,v in pairs(params) do
+				value = value[v]
+				if not value then
+					return default
+				end
+			end
+			return value
+		end
+	end
+	return default
+end
