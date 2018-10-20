@@ -27,7 +27,8 @@ function M.create(params)
             anchorPoint = THSTG.UI.POINT_CENTER,
             style = {
                 font = ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_black"),
-            }
+            },
+            
         })
         node:addChild(title)
 
@@ -54,6 +55,8 @@ function M.create(params)
                     })))
                 -- end),
             -- }))
+
+                    
 
             --
             if data.__isClick == true then
