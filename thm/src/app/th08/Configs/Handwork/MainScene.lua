@@ -8,8 +8,9 @@ return {
                 desc = Language.getString(100111), 
                 offsetPos = cc.p(0,0),
                 moveBy = cc.p(20,0) ,
+                file = "Modules.Scenes.MainUi.Layer.StartLayer",
                 onClick = function ()
-                
+                    
                 end,
             },
             {
@@ -17,6 +18,7 @@ return {
                 desc = Language.getString(100112), 
                 offsetPos = cc.p(0,0),
                 moveBy = cc.p(-20,0) ,
+                file = "",
                 onClick = function ()
                 
                 end,
@@ -26,6 +28,7 @@ return {
                 desc = Language.getString(100113), 
                 offsetPos = cc.p(0,0),
                 moveBy = cc.p(15,0) ,
+                file = "",
                 onClick = function ()
                 
                 end,
@@ -35,6 +38,7 @@ return {
                 desc = Language.getString(100114), 
                 offsetPos = cc.p(0,0),
                 moveBy = cc.p(-15,0) ,
+                file = "",
                 onClick = function ()
                 
                 end,
@@ -44,6 +48,7 @@ return {
                 desc = Language.getString(100115), 
                 offsetPos = cc.p(0,0),
                 moveBy = cc.p(20,0) ,
+                file = "",
                 onClick = function ()
                 
                 end,
@@ -53,6 +58,7 @@ return {
                 desc = Language.getString(100116), 
                 offsetPos = cc.p(0,0),
                 moveBy = cc.p(-15,0) ,
+                file = "",
                 onClick = function ()
                 
                 end,
@@ -62,6 +68,7 @@ return {
                 desc = Language.getString(100117), 
                 offsetPos = cc.p(0,0),
                 moveBy = cc.p(20,0) ,
+                file = "",
                 onClick = function ()
                 
                 end,
@@ -71,6 +78,7 @@ return {
                 desc = Language.getString(100118), 
                 offsetPos = cc.p(0,0),
                 moveBy = cc.p(-15,0) ,
+                file = "",
                 onClick = function ()
                 
                 end,
@@ -80,6 +88,7 @@ return {
                 desc = Language.getString(100119), 
                 offsetPos = cc.p(0,0),
                 moveBy = cc.p(20,0) ,
+                file = "",
                 onClick = function ()
                 
                 end,

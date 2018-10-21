@@ -59,6 +59,7 @@ function M.create(params)
                     
 
             --
+            --只是选中,并非进入
             if data.__isClick == true then
                 title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_white"))
             else
@@ -99,6 +100,8 @@ function M.create(params)
         colCount = 1,
         itemColGap = 5,
         bounceEnabled = false,
+
+        isOnChange = true,
         -- padding = {left= 0,right=0,top=0,bottom =5},
         direction = ccui.ListViewDirection.vertical,
         itemTemplate = createTemplate,
@@ -137,6 +140,19 @@ function M.create(params)
         _uiDescText:setText(data.desc)
         _varIsCanMove = false
         _varLstTime = 0
+       
+        --当且仅当二次选中后进入
+        if index == lastIndex then
+            if data.onClick then
+                data.onClick(sender)
+            end
+            if data.file and  data.file ~= "" then
+                --TODO:需要一个全局Layer,进行 入栈出栈操作的那种,这个layer 进别的层时先 入栈
+                local file = require (data.file)
+                local layer = file.create()
+                self:addChild(layer)
+            end
+        end
     end
 
     function node.updateLayer()

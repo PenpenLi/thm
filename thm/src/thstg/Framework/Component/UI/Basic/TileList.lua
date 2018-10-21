@@ -820,6 +820,8 @@ TILELIST_DEFAULT_STYLE = {
 @param height    	[number]	可视区域的高度, 当direction == ccui.ListViewDirection.horizontal无效 
 @param width         [number]   可视区域的宽度，当direction == ccui.ListViewDirection.vertical无效 
 @param padding       [{left, top, right, bottom}], padding
+@params isOnChange   [bool]		true,一直返回onSelectedIndexChange,false,selectedPos和lastPos只有不相同时返回onSelectedIndexChange
+								
 @param isCancelState [bool]     是否支持点击取消状态，值为真的时候selectedPos和lastPos相同时返回onSelectedIndexChange（nil, nil, lastNode, lastPos），
 								默认值为false
 @param  style              [table]  样式
@@ -890,6 +892,7 @@ function newTileList(params)
 	privateData.selectedState = {}   --保存各个位置的选中状态
 	privateData.onSlideChange = params.onSlideChange
 	privateData.isCancelState = params.isCancelState or false
+	privateData.isOnChange = params.isCancelState or params.isOnChange or false
 
 	local function getLastSelectedValue (referrencePos)
 		local dp = tilelist:getDataProvider()
@@ -946,14 +949,16 @@ function newTileList(params)
 			local selectedValue = tilelist:getDataProvider()[selectedPos]
 			local lastValue = nil
 			lastValue, lastNode, lastPos = getLastSelectedValue(lastPos)
-			if privateData.isCancelState then
-				if selectedNode == lastNode then
-					if type(selectedValue) == "table" and rawget(selectedValue,"__isClick") then
-						selectedPos, selectedNode, selectedValue = nil, nil, nil
-					else
-						lastPos, lastNode, lastValue = nil, nil, nil
+			if privateData.isOnChange then
+				if privateData.isCancelState then
+					if selectedNode == lastNode then
+						if type(selectedValue) == "table" and rawget(selectedValue,"__isClick") then
+							selectedPos, selectedNode, selectedValue = nil, nil, nil
+						else
+							lastPos, lastNode, lastValue = nil, nil, nil
+						end
+	
 					end
-
 				end
 			else
 				if selectedNode == lastNode and type(selectedValue) == "table" and rawget(selectedValue,"__isClick") then
@@ -965,12 +970,13 @@ function newTileList(params)
 
 				end
 			end
+			
 			if selectedPos or lastPos then
-				if type(selectedValue) == "table" then
-					rawset(selectedValue, "__isClick", true)
-				end
 				if type(lastValue) == "table" then
 					rawset(lastValue, "__isClick", false)
+				end
+				if type(selectedValue) == "table" then
+					rawset(selectedValue, "__isClick", true)
 				end
 				privateData.onSelectedIndexChange(tilelist, selectedNode, selectedPos, lastNode, lastPos)
 				if selectedValue then
