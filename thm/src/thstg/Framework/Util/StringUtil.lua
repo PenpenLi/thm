@@ -8,7 +8,7 @@
 	声明: 该软件为自由软件，遵循GPL协议。如果你需要为xstr增加函数，请在func_list中添加函数名，并在help函数中为其撰写帮助文档
 	帮助: xstr:dir() 列出命名空间下的函数列表。xstr:help("func")查看func的帮助文档
 --]]
-module("THSTG.StringUtil", package.seeall)
+module("StringUtil", package.seeall)
 
 func_list = "trim, capitalize, count, startswith, endswith, expendtabs, isalnum, isalpha, isdigit, islower, isupper, join, lower, upper, partition, zfill, ljust, rjust, center, dir, help"
 --[[去除str中的所有空格。成功返回去除空格后的字符串，失败返回nil和失败信息]]

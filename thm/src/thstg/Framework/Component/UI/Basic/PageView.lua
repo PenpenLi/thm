@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --页标点正常状态资源
 PAGE_VIEW_PAGE_POINT_NORMAL_SKIN_SRC = ""--ResManager.getUIRes(UIType.PAGE_VIEW, "page_point_normal")
@@ -164,7 +164,7 @@ function newPageView(params)
 			}
 		}
 	}
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 
 	--总页数

@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 function newDialogBox(params)
 

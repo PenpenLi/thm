@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 local KIND_FROM_POS_P = "<%s*([_%a][_%w]*)()"
 local FONT_TO_POS_P = "()%s*>"

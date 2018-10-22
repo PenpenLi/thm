@@ -1,9 +1,9 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 ACCORDION_DEFAULT_WIDTH = 300
 ACCORDION_DEFAULT_HEIGHT = 600
 --默认锚点
-ACCORDION_DEFAULT_ANCHOR_POINT = THSTG.UI.POINT_LEFT_BOTTOM
+ACCORDION_DEFAULT_ANCHOR_POINT = UI.POINT_LEFT_BOTTOM
 --默认是否开启动作
 ACCORDION_DEFAULT_ACTION_ENABLED = true
 --默认两个临近项的间隔
@@ -12,7 +12,7 @@ ACCORDION_DEFAULT_GAP = 4
 ACCORDION_DEFAULT_HEAD_HEIGHT = 56
 --默认头部
 ACCORDION_DEFAULT_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline, isDrawArrow, imageType, exData,callback)
-	local btn = THSTG.UI.newWidget({
+	local btn = UI.newWidget({
 		width = w, height = h,
 	})
 
@@ -28,26 +28,26 @@ ACCORDION_DEFAULT_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline, isDr
 		imageSelectedName = "win_frame11"
 	end
 
-	local selectedBtn = THSTG.UI.newBaseButton({
+	local selectedBtn = UI.newBaseButton({
 		text = title,
 		zoomScale = zoomScale,
 		style = {
 			normal = {
-				label = {size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.getColorHtml("#15233d")},
+				label = {size = UI.FONT_SIZE_NORMAL, color = UI.getColorHtml("#15233d")},
 				skin = {
 					src = "",--ResManager.getUIRes(UIType.WINDOW, imageNormalName),
 					scale9Rect = {left = 20, right = 20, top = 20, bottom = 20},
 				}
 			},
 			selected = {
-				label = {size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.getColorHtml("#15233d")},
+				label = {size = UI.FONT_SIZE_NORMAL, color = UI.getColorHtml("#15233d")},
 				skin = {
 					src = "",--ResManager.getUIRes(UIType.WINDOW, imageSelectedName),
 					scale9Rect = {left = 20, right = 20, top = 20, bottom = 20}
 				}
 			},
 			disabled = {
-				label = {size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.COLOR_GRAY_C, outline = outline or 1},
+				label = {size = UI.FONT_SIZE_NORMAL, color = UI.COLOR_GRAY_C, outline = outline or 1},
 				skin = {
 					src = "",--ResManager.getUIRes(UIType.ACCORDION, "accord_disa1"),
 					scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
@@ -63,11 +63,11 @@ ACCORDION_DEFAULT_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline, isDr
 
 	--箭头
 	if isArrow then
-		local arrow = THSTG.UI.newImage({
+		local arrow = UI.newImage({
 			source = "",--ResManager.getRes(ResType.PUBLIC, "img_arrow"),
 			x = w-15,
 			y = h / 2,
-			anchorPoint = THSTG.UI.POINT_RIGHT_CENTER
+			anchorPoint = UI.POINT_RIGHT_CENTER
 		})
 		btn:addChild(arrow, 2, 2)
 		arrow:setFlippedY(true)
@@ -99,17 +99,17 @@ ACCORDION_DEFAULT_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline, isDr
 end
 
 ACCORDION_TEAM_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline)
-	local btn = THSTG.UI.newWidget({
+	local btn = UI.newWidget({
 		width = w,
 		height = h,
 	})
 
 	local function createNode(isNormal)
-		local node = THSTG.UI.newNode()
+		local node = UI.newNode()
 		local bg = false
 		local text = false
 		if isNormal then
-			bg = THSTG.UI.newImage({
+			bg = UI.newImage({
 				x = w / 2,
 				y = h / 2,
 				style = {
@@ -117,30 +117,30 @@ ACCORDION_TEAM_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline)
 					scale9Rect = {left = 10, right = 10, top = 10, bottom = 10},
 				}
 			})
-			text = THSTG.UI.newLabel({
-				anchorPoint = THSTG.UI.POINT_CENTER,
+			text = UI.newLabel({
+				anchorPoint = UI.POINT_CENTER,
 				text = title,
 				x = w / 2, y = h / 2,
 				style = {
-					size = THSTG.UI.FONT_SIZE_BIGGER,
-					color = THSTG.UI.htmlColor2C3b("#d7d6c9"),
+					size = UI.FONT_SIZE_BIGGER,
+					color = UI.htmlColor2C3b("#d7d6c9"),
 					outline = outline or 1
 				}
 			})
 		else
-			bg = THSTG.UI.newImage({
+			bg = UI.newImage({
 				x = w / 2, y = h / 2,
 				style = {
 					src = "",--ResManager.getUIRes(UIType.ACCORDION, "accord_sel1"),
 					scale9Rect = {left = 10, right = 10, top = 10, bottom = 10},
 				}
 			})
-			text = THSTG.UI.newBMFontLabel({
-				anchorPoint = THSTG.UI.POINT_CENTER,
+			text = UI.newBMFontLabel({
+				anchorPoint = UI.POINT_CENTER,
 				text = title,
 				x = w / 2, y = h / 2,
 				style = {
-					size = THSTG.UI.FONT_SIZE_BIGGER,
+					size = UI.FONT_SIZE_BIGGER,
 					font = "",--ResManager.getResSub(ResType.FONT, FontType.FNT, "tap_sel")
 				}
 			})
@@ -151,7 +151,7 @@ ACCORDION_TEAM_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline)
 		return node
 	end
 
-	local selectedBtn = THSTG.UI.newBaseButton({
+	local selectedBtn = UI.newBaseButton({
 		zoomScale = zoomScale,
 		normalNode = createNode(true),
 		selectedNode = createNode(),
@@ -194,8 +194,8 @@ end
 @param  gap             [number]   item间的间隔距离
 
 @param style = {[table]   背景皮肤
-				bgColor = clone(THSTG.UI.COLOR_WHITE), 
-				bgSkin = clone(THSTG.UI.TABBAR_DEFAULT_HT_NORMAL_SKIN)
+				bgColor = clone(UI.COLOR_WHITE), 
+				bgSkin = clone(UI.TABBAR_DEFAULT_HT_NORMAL_SKIN)
 }
 ]]
 function newAccordion(params)
@@ -206,22 +206,22 @@ function newAccordion(params)
 	local finalParam = {
 		x = 0,
 		y = 0,
-		width = THSTG.UI.ACCORDION_DEFAULT_WIDTH,
-		height = THSTG.UI.ACCORDION_DEFAULT_HEIGHT,
-		anchorPoint = clone(THSTG.UI.ACCORDION_DEFAULT_ANCHOR_POINT),
-		gap = THSTG.UI.ACCORDION_DEFAULT_GAP, --间隔
+		width = UI.ACCORDION_DEFAULT_WIDTH,
+		height = UI.ACCORDION_DEFAULT_HEIGHT,
+		anchorPoint = clone(UI.ACCORDION_DEFAULT_ANCHOR_POINT),
+		gap = UI.ACCORDION_DEFAULT_GAP, --间隔
 		isCanCancel = true,
 		onChange = function (node, curPosition, lastPosition)
 
 		end,
 	-- style={
 	-- 	bgColor=false,
-	-- 	bgSkin=clone(THSTG.UI.TABBAR_DEFAULT_HT_NORMAL_SKIN)
+	-- 	bgSkin=clone(UI.TABBAR_DEFAULT_HT_NORMAL_SKIN)
 	-- }
 	}
-	THSTG.TableUtil.mergeA2B(params, finalParam)
+	TableUtil.mergeA2B(params, finalParam)
 
-	local accordion = THSTG.UI.newScrollView({
+	local accordion = UI.newScrollView({
 		x = finalParam.x,
 		y = finalParam.y,
 		width = finalParam.width,

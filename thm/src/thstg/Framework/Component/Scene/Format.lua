@@ -1,3 +1,3 @@
-module("THSTG.SCENE", package.seeall)
+module("SCENE", package.seeall)
 
 --精灵动画相关

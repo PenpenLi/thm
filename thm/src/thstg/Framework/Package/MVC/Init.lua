@@ -1,4 +1,4 @@
-module("THSTG.MVC", package.seeall)
+module("MVC", package.seeall)
 
 
 Controller = require "thstg.Framework.Package.Core.Controller"

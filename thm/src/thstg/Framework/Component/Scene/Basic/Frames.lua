@@ -1,4 +1,4 @@
-module("THSTG.SCENE", package.seeall)
+module("SCENE", package.seeall)
 
 --自定义的精灵帧创建
 local function newHVFrames(params ,isVertical)
@@ -21,7 +21,7 @@ local function newHVFrames(params ,isVertical)
 		step = -1
 	end
 
-	local texture,texRect = THSTG.SCENE.loadTexture(source)
+	local texture,texRect = SCENE.loadTexture(source)
 	
 	local frameSize = cc.size(texRect.width,texRect.height)
 	if isVertical then

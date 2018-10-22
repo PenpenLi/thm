@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 -- IMAGE_DEFAULT_FILE = ResManager.getUIRes(UIType.IMAGE, "default")
 
@@ -50,7 +50,7 @@ function newImage(params)
 		resType = ccui.TextureResType.localType,
 		scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}
 	}
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 	finalParams.width = params.width
 	finalParams.height = params.height
 	if params.style then

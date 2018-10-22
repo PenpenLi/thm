@@ -1,4 +1,4 @@
-﻿module("THSTG.FileUtil", package.seeall)
+﻿module("FileUtil", package.seeall)
 
 local fileUtils = cc.FileUtils:getInstance()
 

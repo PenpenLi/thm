@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --滚动条皮肤
 HSCROLLBAR_SCROLL_SKIN = {
@@ -54,9 +54,9 @@ SCROLLBAR_CLICK_HIGHLIGHT_SKIN = {
 @parmas onChange   [function]    滚动条位置改变事件
 @parmas style   	[table]    滚动条样式
 	= {
-			clickStyle = THSTG.UI.HSCROLLBAR_CLICK_SKIN
-			scrollBgStyle = THSTG.UI.HSCROLLBAR_BG_SKIN
-			scrollFrontStyle = THSTG.UI.HSCROLLBAR_SCROLL_SKIN
+			clickStyle = UI.HSCROLLBAR_CLICK_SKIN
+			scrollBgStyle = UI.HSCROLLBAR_BG_SKIN
+			scrollFrontStyle = UI.HSCROLLBAR_SCROLL_SKIN
 	}
 ]]
 function newScrollBar(params)
@@ -64,7 +64,7 @@ function newScrollBar(params)
 		print("newScrollBar: "..str)
 	end
 
-	local rootFather = THSTG.UI.newWidget()
+	local rootFather = UI.newWidget()
 
 	local root = nil
 
@@ -74,22 +74,22 @@ function newScrollBar(params)
 		curPercent = 0,
 		onChange = function() end,
 		direction = ccui.ScrollViewDir.vertical,
-		anchorPoint = clone(THSTG.UI.POINT_LEFT_BOTTOM),
+		anchorPoint = clone(UI.POINT_LEFT_BOTTOM),
 		style = {
-			clickStyle = clone(THSTG.UI.HSCROLLBAR_CLICK_SKIN),
-			scrollBgStyle = clone(THSTG.UI.HSCROLLBAR_BG_SKIN),
-			scrollFrontStyle = clone(THSTG.UI.HSCROLLBAR_SCROLL_SKIN),
+			clickStyle = clone(UI.HSCROLLBAR_CLICK_SKIN),
+			scrollBgStyle = clone(UI.HSCROLLBAR_BG_SKIN),
+			scrollFrontStyle = clone(UI.HSCROLLBAR_SCROLL_SKIN),
 		}
 	}
 
-	THSTG.TableUtil.mergeA2B(params, finalParam)
+	TableUtil.mergeA2B(params, finalParam)
 	
 	if finalParam.direction == ccui.ScrollViewDir.vertical then
 		root = ccui.VBox:create()
 	else
 		root = ccui.HBox:create()
 	end
-	root:setAnchorPoint(THSTG.UI.POINT_LEFT_BOTTOM)
+	root:setAnchorPoint(UI.POINT_LEFT_BOTTOM)
 	rootFather:addChild(root)
 
 	local privateData = {}
@@ -113,18 +113,18 @@ function newScrollBar(params)
 		local flippedFunc = "setFlippedX"
 		local isV = false
 		if finalParam.direction == ccui.ScrollViewDir.vertical then
-			clickStyle = clickStyle or THSTG.UI.VSCROLLBAR_CLICK_SKIN
-			scrollBgStyle = scrollBgStyle or THSTG.UI.VSCROLLBAR_BG_SKIN
-			scrollFrontStyle = scrollFrontStyle or THSTG.UI.VSCROLLBAR_SCROLL_SKIN
+			clickStyle = clickStyle or UI.VSCROLLBAR_CLICK_SKIN
+			scrollBgStyle = scrollBgStyle or UI.VSCROLLBAR_BG_SKIN
+			scrollFrontStyle = scrollFrontStyle or UI.VSCROLLBAR_SCROLL_SKIN
 			flippedFunc = "setFlippedY"
 			isV = true
 		else
-			clickStyle = clickStyle or THSTG.UI.HSCROLLBAR_CLICK_SKIN
-			scrollBgStyle = scrollBgStyle or THSTG.UI.HSCROLLBAR_BG_SKIN
-			scrollFrontStyle = scrollFrontStyle or THSTG.UI.HSCROLLBAR_SCROLL_SKIN
+			clickStyle = clickStyle or UI.HSCROLLBAR_CLICK_SKIN
+			scrollBgStyle = scrollBgStyle or UI.HSCROLLBAR_BG_SKIN
+			scrollFrontStyle = scrollFrontStyle or UI.HSCROLLBAR_SCROLL_SKIN
 		end
 
-		local nodeStepToStart = THSTG.UI.newButton({
+		local nodeStepToStart = UI.newButton({
 			text = "",
 			x = 0, y = 0,
 			style = clickStyle,
@@ -132,7 +132,7 @@ function newScrollBar(params)
 		})
 		--nodeStepToStart:setPressedActionEnabled(true)
 		nodeStepToStart[flippedFunc](nodeStepToStart, true)
-		local nodeStepToEnd = THSTG.UI.newButton({
+		local nodeStepToEnd = UI.newButton({
 			text = "",
 			x = 0, y = 0,
 			style = clickStyle,
@@ -141,20 +141,20 @@ function newScrollBar(params)
 		--nodeStepToEnd:setPressedActionEnabled(true)
 
 
-		local bgCapInsets, bgOrgSize = THSTG.UI.skin2CapInsets(scrollBgStyle)
+		local bgCapInsets, bgOrgSize = UI.skin2CapInsets(scrollBgStyle)
 		local nodeBackScroll = ccui.ImageView:create(scrollBgStyle.src)
 		nodeBackScroll:setScale9Enabled(true)
 		nodeBackScroll:setCapInsets(bgCapInsets)
 
-		local frontbgCapInsets, frontbgOrgSize = THSTG.UI.skin2CapInsets(scrollFrontStyle)
+		local frontbgCapInsets, frontbgOrgSize = UI.skin2CapInsets(scrollFrontStyle)
 		local nodeFrontScroll = ccui.ImageView:create(scrollFrontStyle.src)
 		nodeFrontScroll:setScale9Enabled(true)
 		nodeFrontScroll:setCapInsets(frontbgCapInsets)
 		if isV then
-			nodeFrontScroll:setAnchorPoint(THSTG.UI.POINT_CENTER_BOTTOM)
+			nodeFrontScroll:setAnchorPoint(UI.POINT_CENTER_BOTTOM)
 			nodeFrontScroll:setPosition(cc.p(bgOrgSize.width / 2, 0))
 		else
-			nodeFrontScroll:setAnchorPoint(THSTG.UI.POINT_LEFT_CENTER)
+			nodeFrontScroll:setAnchorPoint(UI.POINT_LEFT_CENTER)
 			nodeFrontScroll:setPosition(cc.p(0, bgOrgSize.height / 2))
 		end
 

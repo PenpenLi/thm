@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 -----------------------------
 -- 创建一个使用ttf字体文件的文本

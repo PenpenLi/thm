@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --[[
 ScrollView可滚动裁剪容器
@@ -54,7 +54,7 @@ function newScrollView(params)
 			bgSkin = {src = false, scale9Rect = {left = 0, right = 0, top = 0, bottom = 0}},
 		}
 	}
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	local scrollView = ccui.ScrollView:create()
 	scrollView:setPosition(finalParams.x, finalParams.y)

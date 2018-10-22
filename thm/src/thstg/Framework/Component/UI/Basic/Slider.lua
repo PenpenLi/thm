@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --滑动条默认背景皮肤
 SLIDER_BG_SKIN = {
@@ -27,9 +27,9 @@ Slider组件
 @param	onChange			[function]	进度变更时的回调函数，如：local function onChange(sender, percent) print(sender, percent) end
 @param	style            	[table]     
 		{
-			bgSkin = THSTG.UI.SLIDER_BG_SKIN, 背景皮肤
-			progressSkin = THSTG.UI.SLIDER_PROGRESS_SKIN, 进度皮肤
-			thumbSkin = THSTG.UI.SLIDER_THUMB_SKIN				移动块皮肤
+			bgSkin = UI.SLIDER_BG_SKIN, 背景皮肤
+			progressSkin = UI.SLIDER_PROGRESS_SKIN, 进度皮肤
+			thumbSkin = UI.SLIDER_THUMB_SKIN				移动块皮肤
 }
 ]]
 function newSlider(params)
@@ -44,16 +44,16 @@ function newSlider(params)
 		y = 0,
 		width = 200, 
 		height = 100,
-		anchorPoint = clone(THSTG.UI.POINT_CENTER),
+		anchorPoint = clone(UI.POINT_CENTER),
 		percent = 0,
 		enabled = true,
 		style = {
-			bgSkin = clone(THSTG.UI.SLIDER_BG_SKIN),
-			progressSkin = clone(THSTG.UI.SLIDER_PROGRESS_SKIN),
-			thumbSkin = clone(THSTG.UI.SLIDER_THUMB_SKIN),
+			bgSkin = clone(UI.SLIDER_BG_SKIN),
+			progressSkin = clone(UI.SLIDER_PROGRESS_SKIN),
+			thumbSkin = clone(UI.SLIDER_THUMB_SKIN),
 		}
 	}
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	local slider = ccui.Slider:create(finalParams.style.bgSkin.src, finalParams.style.thumbSkin.src)
 	slider:loadProgressBarTexture(finalParams.style.progressSkin.src)
@@ -63,7 +63,7 @@ function newSlider(params)
 	slider:setContentSize(cc.size(finalParams.width, finalParams.height))
 	slider:setAnchorPoint(finalParams.anchorPoint)
 
-	local capInsets = THSTG.UI.skin2CapInsets(finalParams.style.progressSkin)
+	local capInsets = UI.skin2CapInsets(finalParams.style.progressSkin)
 	if capInsets then
 		slider:setScale9Enabled(true)
 		slider:setCapInsets(capInsets)

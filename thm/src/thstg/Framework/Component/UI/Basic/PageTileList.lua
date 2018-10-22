@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --默认页标是否可见
 PAGE_TILE_LIST_DEFAULT_PAGE_TAB_VISIBLE = true
@@ -73,7 +73,7 @@ function newPageTileList(params)
 	local pageTabVisible = PAGE_TILE_LIST_DEFAULT_PAGE_TAB_VISIBLE
 	if type(params.pageTabVisible) == "boolean" then pageTabVisible = params.pageTabVisible end
 
-	local style = THSTG.TableUtil.mergeA2B(params.style, PAGE_TILE_LIST_DEFAULT_STYLE)
+	local style = TableUtil.mergeA2B(params.style, PAGE_TILE_LIST_DEFAULT_STYLE)
 	--每页格子数
 	local numCellsPerPage = colCount * rowCount
 

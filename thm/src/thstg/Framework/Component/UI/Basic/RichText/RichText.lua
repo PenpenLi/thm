@@ -1,8 +1,8 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 require "thstg.Framework.Component.UI.Basic.RichText.RichHtmlReader"
 
-local s_style = THSTG.UI.newTextStyle()
+local s_style = UI.newTextStyle()
 s_style.verticalSpace = 0
 
 RICH_TEXT_DEFAULT_PARAMS = {
@@ -46,7 +46,7 @@ function newRichText(params)
 	end
 
 	local finalParams = clone(RICH_TEXT_DEFAULT_PARAMS)
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 	-- dump(finalParams)
 	local text = ""
 
@@ -107,7 +107,7 @@ function newRichText(params)
 						v.params.style.outlineColor = htmlColor2C4b(v.params.style.outlineColor)
 					end
 				end
-				THSTG.TableUtil.mergeA2B(v.params.style, style)
+				TableUtil.mergeA2B(v.params.style, style)
 				local lb = ccui.RichElementText:create(0, cc.c3b(style.color.r, style.color.g, style.color.b), 255, v.params.text, style.font, style.size)
 				if style.outline > 0 then
 					local outlineColor = style.outlineColor

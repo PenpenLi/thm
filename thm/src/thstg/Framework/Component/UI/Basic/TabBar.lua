@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --横向处于界面上方
 TABBAR_DIRECTION_HT = 1
@@ -53,7 +53,7 @@ TABBAR_DEFAULT_VL_DISABLED_SKIN = {
 
 local function newTabbarTextStyle(params)
 	params = params or {}
-	local style = THSTG.UI.newTextStyle(params)
+	local style = UI.newTextStyle(params)
 	style.artFont = params.artFont or false
 	style.artWidth = params.artWidth or false
 	style.artHeight = params.artHeight or  false
@@ -63,8 +63,8 @@ end
 TABBAR_DEFAULT_PARAMS = {
 	x = 0, 
 	y = 0,
-	anchorPoint = clone(THSTG.UI.POINT_CENTER),
-	direction = THSTG.UI.TABBAR_DIRECTION_HT,
+	anchorPoint = clone(UI.POINT_CENTER),
+	direction = UI.TABBAR_DIRECTION_HT,
 	itemGap = 5,
 	paddingX = 15,
 	paddingY = 5,
@@ -79,7 +79,7 @@ TABBAR_DEFAULT_PARAMS = {
 			label = newTabbarTextStyle()
 		},
 		disabled = {
-			label = newTabbarTextStyle({color = THSTG.UI.COLOR_GRAY_C, })
+			label = newTabbarTextStyle({color = UI.COLOR_GRAY_C, })
 		},
 	},
 }
@@ -113,7 +113,7 @@ end
 创建tabBar
 
 params中可用参数：
-@param	direction			设置位置各开口朝向，取值[THSTG.UI.TABBAR_DIRECTION_HT, THSTG.UI.TABBAR_DIRECTION_HB, THSTG.UI.TABBAR_DIRECTION_VL, THSTG.UI.TABBAR_DIRECTION_VR]
+@param	direction			设置位置各开口朝向，取值[UI.TABBAR_DIRECTION_HT, UI.TABBAR_DIRECTION_HB, UI.TABBAR_DIRECTION_VL, UI.TABBAR_DIRECTION_VR]
 @param  tabBarKey           每一项的关键字索引
 @param	dataProvider		数据源
 {
@@ -175,28 +175,28 @@ function newTabBar(params)
 
 	local finalParams = clone(TABBAR_DEFAULT_PARAMS)
 	
-	if params.direction == THSTG.UI.TABBAR_DIRECTION_HB then
-		finalParams.style.normal.skin = clone(THSTG.UI.TABBAR_DEFAULT_HB_NORMAL_SKIN)
-		finalParams.style.pressed.skin = clone(THSTG.UI.TABBAR_DEFAULT_HB_SELECTED_SKIN)
-		finalParams.style.disabled.skin = clone(THSTG.UI.TABBAR_DEFAULT_HB_DISABLED_SKIN)
+	if params.direction == UI.TABBAR_DIRECTION_HB then
+		finalParams.style.normal.skin = clone(UI.TABBAR_DEFAULT_HB_NORMAL_SKIN)
+		finalParams.style.pressed.skin = clone(UI.TABBAR_DEFAULT_HB_SELECTED_SKIN)
+		finalParams.style.disabled.skin = clone(UI.TABBAR_DEFAULT_HB_DISABLED_SKIN)
 
-	elseif params.direction == THSTG.UI.TABBAR_DIRECTION_VL then
-		finalParams.style.normal.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_NORMAL_SKIN)
-		finalParams.style.pressed.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_SELECTED_SKIN)
-		finalParams.style.disabled.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_DISABLED_SKIN)
+	elseif params.direction == UI.TABBAR_DIRECTION_VL then
+		finalParams.style.normal.skin = clone(UI.TABBAR_DEFAULT_VL_NORMAL_SKIN)
+		finalParams.style.pressed.skin = clone(UI.TABBAR_DEFAULT_VL_SELECTED_SKIN)
+		finalParams.style.disabled.skin = clone(UI.TABBAR_DEFAULT_VL_DISABLED_SKIN)
 
-	elseif params.direction == THSTG.UI.TABBAR_DIRECTION_VR then
-		finalParams.style.normal.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_NORMAL_SKIN)
-		finalParams.style.pressed.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_SELECTED_SKIN)
-		finalParams.style.disabled.skin = clone(THSTG.UI.TABBAR_DEFAULT_VL_DISABLED_SKIN)
+	elseif params.direction == UI.TABBAR_DIRECTION_VR then
+		finalParams.style.normal.skin = clone(UI.TABBAR_DEFAULT_VL_NORMAL_SKIN)
+		finalParams.style.pressed.skin = clone(UI.TABBAR_DEFAULT_VL_SELECTED_SKIN)
+		finalParams.style.disabled.skin = clone(UI.TABBAR_DEFAULT_VL_DISABLED_SKIN)
 
 	else
-		finalParams.style.normal.skin = finalParams.style.normal.skin or clone(THSTG.UI.TABBAR_DEFAULT_HT_NORMAL_SKIN)
-		finalParams.style.pressed.skin = finalParams.style.pressed.skin or clone(THSTG.UI.TABBAR_DEFAULT_HT_SELECTED_SKIN)
-		finalParams.style.disabled.skin = finalParams.style.disabled.skin or clone(THSTG.UI.TABBAR_DEFAULT_HT_DISABLED_SKIN)
+		finalParams.style.normal.skin = finalParams.style.normal.skin or clone(UI.TABBAR_DEFAULT_HT_NORMAL_SKIN)
+		finalParams.style.pressed.skin = finalParams.style.pressed.skin or clone(UI.TABBAR_DEFAULT_HT_SELECTED_SKIN)
+		finalParams.style.disabled.skin = finalParams.style.disabled.skin or clone(UI.TABBAR_DEFAULT_HT_DISABLED_SKIN)
 	end
 
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	local paramsStyle = clone(params.style) or {}
 	paramsStyle.normal = paramsStyle.normal or {}
@@ -256,21 +256,21 @@ function newTabBar(params)
 				scale9Rect = style.pressed.scale9Rect or style.pressed.skin.scale9Rect or {left = 7, right = 7, top = 5, bottom = 5}
 			end
 
-			local root = THSTG.UI.newNode({})
-			-- local root = THSTG.UI.newWidget({
+			local root = UI.newNode({})
+			-- local root = UI.newWidget({
 			-- 	onClick=function( ... )
 			-- 		print(77,"i am widget")
 			-- 	end
 			-- })
 
-			local back = THSTG.UI.newImage({
+			local back = UI.newImage({
 				width = params.itemWidth,
 				height = params.itemHeight,
 				style = {
 					src = backSrc,
 					scale9Rect = scale9Rect,
 				},
-				anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
+				anchorPoint = UI.POINT_LEFT_BOTTOM,
 				-- onClick=function ( ... )
 				-- 	print(77,"i am image~~~")
 				-- end
@@ -298,22 +298,22 @@ function newTabBar(params)
 				end
 
 				if finalParams.isBMFontLabel then
-					name = THSTG.UI.newBMFontLabel({
+					name = UI.newBMFontLabel({
 						text = src.name,
 						x = namePosX,
 						y = contentY - 5,
-						anchorPoint = THSTG.UI.POINT_CENTER,
+						anchorPoint = UI.POINT_CENTER,
 						style = style.label or style.normal.label,
 					})
 				else
-					name = THSTG.UI.newLabel({
+					name = UI.newLabel({
 						text = src.name,
 						x = namePosX,
 						y = contentY,
-						anchorPoint = THSTG.UI.POINT_CENTER,
+						anchorPoint = UI.POINT_CENTER,
 						style = style.normal.label or {
-							size = THSTG.UI.FONT_SIZE_BIG,
-							color = THSTG.UI.getColorType("tab_normal"),
+							size = UI.FONT_SIZE_BIG,
+							color = UI.getColorType("tab_normal"),
 							additionalKerning = additionalKerning,
 						},
 					})
@@ -328,24 +328,24 @@ function newTabBar(params)
 				end
 
 				if finalParams.isBMFontLabel then
-					name = THSTG.UI.newBMFontLabel({
+					name = UI.newBMFontLabel({
 						text = src.name,
 						x = namePosX,
 						y = contentY - 5,
-						anchorPoint = THSTG.UI.POINT_CENTER,
+						anchorPoint = UI.POINT_CENTER,
 						style = style.label or style.pressed.label,
 					})
 				else
-					name = THSTG.UI.newLabel({
+					name = UI.newLabel({
 						text = src.name,
 						x = namePosX,
 						y = contentY,
-						anchorPoint = THSTG.UI.POINT_CENTER,
+						anchorPoint = UI.POINT_CENTER,
 						style = style.pressed.label or {
-							size = THSTG.UI.FONT_SIZE_BIG,
-							color = THSTG.UI.getColorType("tab_select"),
+							size = UI.FONT_SIZE_BIG,
+							color = UI.getColorType("tab_select"),
 							outline = 1,
-							outlineColor = THSTG.UI.getColorHtml("#f0e6a9"),
+							outlineColor = UI.getColorHtml("#f0e6a9"),
 							additionalKerning = additionalKerning,
 						},
 					})
@@ -393,7 +393,7 @@ function newTabBar(params)
 		local container = false
 
 		local textOffsetX = params.tabBarStyle[itemParams.index].textOffsetX or style.x
-		local item = THSTG.UI.newSelectedButton({
+		local item = UI.newSelectedButton({
 			width = params.itemWidth,
 			height = params.itemHeight,
 			hitLen = params.tabBarForceHeight,
@@ -441,7 +441,7 @@ function newTabBar(params)
 
 		-- 容器包裹，方便新手指引
 		local size = item:getContentSize()
-		container = THSTG.UI.newWidget{
+		container = UI.newWidget{
 			width = size.width,
 			height = size.height,
 		}
@@ -472,8 +472,8 @@ function newTabBar(params)
 
 	function privateData.init()
 		
-		if params.direction == THSTG.UI.TABBAR_DIRECTION_VL 
-			or params.direction == THSTG.UI.TABBAR_DIRECTION_VR 
+		if params.direction == UI.TABBAR_DIRECTION_VL 
+			or params.direction == UI.TABBAR_DIRECTION_VR 
 		then
 			-- 垂直
 			menu:setDirection(ccui.ScrollViewDir.vertical)

@@ -1,5 +1,8 @@
 ﻿
+--
+module("THSTG", package.seeall)
 
+--
 --全局配置
 require "thstg.Config"
 

@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --默认样式
 SLIDE_SWITCH_DEFAULT_PARAMS = {
@@ -6,7 +6,7 @@ SLIDE_SWITCH_DEFAULT_PARAMS = {
 	y = 0,
 	width = 200,
 	height = 52,
-	anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
+	anchorPoint = UI.POINT_LEFT_BOTTOM,
 	itemGap = 4,
 	isOn = true,
 	textON = "ON",
@@ -22,16 +22,16 @@ SLIDE_SWITCH_DEFAULT_PARAMS = {
 			scale9Rect = {left = 5, right = 5, top = 5, bottom = 5}
 		},
 		text = {
-			normal = {color = THSTG.UI.HTML_COLOR_GRAY_A, size = THSTG.UI.FONT_SIZE_BIGGER},
-			selected = {color = THSTG.UI.HTML_COLOR_WHITE, size = THSTG.UI.FONT_SIZE_BIGGER},
+			normal = {color = UI.HTML_COLOR_GRAY_A, size = UI.FONT_SIZE_BIGGER},
+			selected = {color = UI.HTML_COLOR_WHITE, size = UI.FONT_SIZE_BIGGER},
 		}
 	},
 	itemTemplate = function(data, size, labelStyle)
 		local node = cc.Node:create()
 		node:setContentSize(size)
 
-		local label = THSTG.UI.newLabel({
-			anchorPoint = THSTG.UI.POINT_CENTER,
+		local label = UI.newLabel({
+			anchorPoint = UI.POINT_CENTER,
 			text = (data or "label"),
 			x = size.width / 2, y = size.height / 2,
 			style = labelStyle,
@@ -64,7 +64,7 @@ local function newSlideSwitchNode(params)
 
 	local backNode = params.backNode
 	local slideNode = params.slideNode
-	slideNode:setAnchorPoint(THSTG.UI.POINT_LEFT_BOTTOM)
+	slideNode:setAnchorPoint(UI.POINT_LEFT_BOTTOM)
 	slideNode:setPosition(padding.left, padding.bottom)
 
 	local slideSwitchNode = nil
@@ -153,7 +153,7 @@ local function newSlideSwitchNode(params)
 		end
 	end
 
-	slideSwitchNode = THSTG.UI.newControlButton({
+	slideSwitchNode = UI.newControlButton({
 		x = params.x, y = params.y,
 		isTouchAction = false,
 		onTouch = privateData.onTouch,
@@ -229,12 +229,12 @@ function newSlideSwitch(params)
 		finalParams.style.padding.bottom
 	)
 
-	local bgNode = params.backNode or THSTG.UI.newScale9Sprite({
+	local bgNode = params.backNode or UI.newScale9Sprite({
 		width = w, height = h,
 		style = finalParams.style.bgSkin
 	})
 
-	local thumbNode = params.slideNode or THSTG.UI.newScale9Sprite({
+	local thumbNode = params.slideNode or UI.newScale9Sprite({
 		width = itemSize.width,
 		height = itemSize.height,
 		style = finalParams.style.thumbSkin

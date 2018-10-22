@@ -1,5 +1,5 @@
 			
-module("THSTG.UIPublic", package.seeall)
+module("UIPublic", package.seeall)
 
 --[[创建带tabBar的窗口,例如排行榜窗口
 --params  winParams  [table] 窗口参数

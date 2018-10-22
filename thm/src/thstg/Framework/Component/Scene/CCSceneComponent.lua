@@ -1,4 +1,4 @@
-module("THSTG.SCENE", package.seeall)
+module("SCENE", package.seeall)
 
 --CCScene组件
 function newScene()

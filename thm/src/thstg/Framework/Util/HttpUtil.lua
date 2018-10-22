@@ -1,4 +1,4 @@
-module("THSTG.HttpUtil", package.seeall)
+module("HttpUtil", package.seeall)
 
 local URLDecode = string.urldecode
 

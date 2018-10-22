@@ -3,12 +3,12 @@
 ------------------------------------------------------------------
 
 --测试状态用来隐藏测试按钮
-__HIDE_TEST__ = false
+THSTG.__HIDE_TEST__ = false
 
 --每个人定义一个自己的类型，用于屏蔽其他人写的打印log，为0时打印所有
-__PRINT_TYPE__ = 0
+THSTG.__PRINT_TYPE__ = 0
 
 --调用print时是否显示文件和等号
-__PRINT_WITH_FILE_LINE__ = false
+THSTG.__PRINT_WITH_FILE_LINE__ = false
 
 --------------------------------------------------

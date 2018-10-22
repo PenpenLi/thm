@@ -1,4 +1,4 @@
-module("THSTG.UIDUtil", package.seeall)
+module("UIDUtil", package.seeall)
 
 local _eventId = 100000000000
 

@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 TOGGLEBUTTON_DEFAULT = {
 	size = cc.size(60, 60),
@@ -81,7 +81,7 @@ function newToggleButton(params)
 		enabled = true,
 		isToggle = true,
 	}
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	local togglebutton = ccui.Widget:create()
 

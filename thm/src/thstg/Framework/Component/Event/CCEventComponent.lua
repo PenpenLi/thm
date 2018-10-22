@@ -1,4 +1,4 @@
-module("THSTG.EVENT", package.seeall)
+module("EVENT", package.seeall)
 
 function getEventDispatcher()
     return cc.Director:getInstance():getEventDispatcher()

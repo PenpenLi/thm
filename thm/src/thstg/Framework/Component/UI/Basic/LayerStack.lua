@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --[[
 创建用于提供给TabBar使用的层容器
@@ -11,7 +11,7 @@ module("THSTG.UI", package.seeall)
 @return	返回cc.Node对象
 
 @example
-	local win = THSTG.UI.newWindow()
+	local win = UI.newWindow()
 	local FRButtonTest = require "MainGame.Module.UITest.Tests.FRButtonTest"
 	local FRLabelTest = require "MainGame.Module.UITest.Tests.FRLabelTest"
 	local FRWindowTest = require "MainGame.Module.UITest.Tests.FRWindowTest"
@@ -20,7 +20,7 @@ module("THSTG.UI", package.seeall)
 	local FRScrollViewTest = require "MainGame.Module.UITest.Tests.FRScrollViewTest"
 	local FRImageTest = require "MainGame.Module.UITest.Tests.FRImageTest"
 	
-	local ls = THSTG.UI.newLayerStack({
+	local ls = UI.newLayerStack({
 		x = 5, y = 5, 
 		layers = {
 			{data = "label", creator = ButtonTest.create, creatorParams = {a = 11}}, 
@@ -182,7 +182,7 @@ function newLayerStack(params)
 		ls:onNodeEvent("cleanup", oncleanup)
 	else
 		ls:onNodeEvent("cleanup", function()
-			THSTG.Scheduler.scheduleNextFrame(oncleanup)
+			Scheduler.scheduleNextFrame(oncleanup)
 		end)
 	end
 

@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 --[[
 PageTileView的布局：
 colCount = 4
@@ -30,7 +30,7 @@ rowCount = 2
 									其中event格式如：{currentPage:当前页[1-N], lastPage = 变更前选择的页[1-N], tag = 对应TileList的tag}
 @param  style              [table]  样式
 		style.bgColorType   [number]   背景类型，ccui.LayoutBackGroundColorType之一, 默认ccui.LayoutBackGroundColorType.none
-		style.bgColor       [number]   背景颜色， THSTG.UI.COLOR_WHITE等值，其中style.bgColorType不能为ccui.LayoutBackGroundColorType.none, 否则设置的值无效
+		style.bgColor       [number]   背景颜色， UI.COLOR_WHITE等值，其中style.bgColorType不能为ccui.LayoutBackGroundColorType.none, 否则设置的值无效
 		style.pagePoint = {
 				selectedSkin = "a.png", [string]	选中页标资源路径
 				unselectedSkin = "b.png", [string]	未选中页标资源路径
@@ -172,7 +172,7 @@ function newPageTileView(params)
 	local style = params.style or {}
 	style.pagePoint = style.pagePoint or {}
 	style.pagePoint.offsetY = style.pagePoint.offsetY or -20
-	tilelist = THSTG.UI.newPageView({
+	tilelist = UI.newPageView({
 		x = params.x, y = params.y,
 		anchorPoint = params.anchorPoint,
 		showPagePoint = params.showPagePoint,
@@ -192,7 +192,7 @@ function newPageTileView(params)
 	padding.bottom = padding.bottom or itemColGap / 2
 
 	local viewSInit = true
-	local hideNode = THSTG.UI.newAutoHideNode({
+	local hideNode = UI.newAutoHideNode({
 		itemNum = tilenum,
 		x = padding.left,
 		y = padding.bottom,

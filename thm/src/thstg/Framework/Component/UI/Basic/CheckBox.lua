@@ -1,9 +1,9 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 CHECK_BOX_DEFAULT_PARAMS = {
 	x = 0,
 	y = 0,
-	anchorPoint = THSTG.UI.POINT_CENTER,
+	anchorPoint = UI.POINT_CENTER,
 	selected = false,
 	enabled = true,
 	margin = 10,
@@ -15,8 +15,8 @@ CHECK_BOX_DEFAULT_PARAMS = {
 			crossDisabled = "",--ResManager.getUIRes(UIType.CHECK_BOX, "check_box_dis1"), --选中不可用状态
 		},
 		label = {
-			normal = THSTG.UI.newTextStyle({color = THSTG.UI.getColorHtml("#394847")}),
-			disabled = THSTG.UI.newTextStyle({color = THSTG.UI.COLOR_GRAY_9}),
+			normal = UI.newTextStyle({color = UI.getColorHtml("#394847")}),
+			disabled = UI.newTextStyle({color = UI.COLOR_GRAY_9}),
 		},
 		labelOffset = {x = -5, y = 0},
 	}
@@ -41,8 +41,8 @@ CheckBox组件
 			crossDisabled = ResManager.getUIRes(UIType.CHECK_BOX, "cross_disabled"), --选中不可用状态
 }, 
 		label = {
-			normal = THSTG.UI.newTextStyle(), 文本皮肤
-			disabled = THSTG.UI.newTextStyle({color = THSTG.UI.COLOR_GRAY_9}), 
+			normal = UI.newTextStyle(), 文本皮肤
+			disabled = UI.newTextStyle({color = UI.COLOR_GRAY_9}), 
 }, 
 		labelOffset = {x = 5, y = 0}, 标签偏移
 }
@@ -51,7 +51,7 @@ local function onChange(sender, isSelected)
 	printf("~~~111~~~ sender:%s isSelected:%s", tostring(sender), tostring(isSelected))
 end
 
-local cb1 = THSTG.UI.newCheckBox({
+local cb1 = UI.newCheckBox({
 	x = 300, y = 240, 
 	onChange = onChange, 
 	enabled = false, 
@@ -62,7 +62,7 @@ parent:addChild(cb1)
 
 function newCheckBox(params)
 	if params then
-		assert(type(params) == "table", "[THSTG.UI] newCheckBox() invalid params")
+		assert(type(params) == "table", "[UI] newCheckBox() invalid params")
 	else
 		params = {}
 	end
@@ -73,9 +73,9 @@ function newCheckBox(params)
 		params.tag = 0
 	end
 
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
-	local node = THSTG.UI.newHBox({
+	local node = UI.newHBox({
 		autoSize = params.autoSize,
 		x = finalParams.x, 
 		y = finalParams.y,
@@ -143,23 +143,23 @@ function newCheckBox(params)
 		if not checkBox.label then
 
 			if params.isRichText then
-				checkBox.label = THSTG.UI.newRichText({
+				checkBox.label = UI.newRichText({
 					text = params.text,
 					x = checkBoxSize.width + finalParams.style.labelOffset.x,
 					y = checkBoxSize.height / 2 + finalParams.style.labelOffset.y,
-					anchorPoint = THSTG.UI.POINT_LEFT_CENTER,
+					anchorPoint = UI.POINT_LEFT_CENTER,
 					style = finalParams.style.label.normal,
 				})
 			else
-				checkBox.label = THSTG.UI.newLabel({
+				checkBox.label = UI.newLabel({
 					text = params.text,
 					x = checkBoxSize.width + finalParams.style.labelOffset.x,
 					y = checkBoxSize.height / 2 + finalParams.style.labelOffset.y,
-					anchorPoint = THSTG.UI.POINT_LEFT_CENTER,
+					anchorPoint = UI.POINT_LEFT_CENTER,
 					style = finalParams.style.label.normal,
 				})
 			end
-			checkBox.labelControlBtn = THSTG.UI.newControlButton({
+			checkBox.labelControlBtn = UI.newControlButton({
 				curFaceNode = checkBox.label,
 				onClick = function (...)
 					node:setSelected(not checkBox:isSelected())

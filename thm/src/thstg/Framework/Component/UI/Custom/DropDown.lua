@@ -1,4 +1,4 @@
-module("THSTG.UICustom", package.seeall)
+module("UICustom", package.seeall)
 
 --[[
 params:

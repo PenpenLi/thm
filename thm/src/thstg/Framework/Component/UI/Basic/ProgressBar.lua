@@ -1,11 +1,11 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 PROGRESS_BAR_DEFAULT_PARAMS = {
 	x = 0,
 	y = 0,
 	width = 0,
 	height = 0,
-	anchorPoint = clone(THSTG.UI.POINT_CENTER),
+	anchorPoint = clone(UI.POINT_CENTER),
 	value = 100,
 	maxValue = 100,
 	showLabel = false,
@@ -17,8 +17,8 @@ PROGRESS_BAR_DEFAULT_PARAMS = {
 	addProgressOffset = cc.p(0, 0),
 	style = {
 		--文本默认样式
-		label = THSTG.UI.newTextStyle({size = THSTG.UI.FONT_SIZE_SMALL}),
-		labelAnchorPoint = THSTG.UI.POINT_CENTER,
+		label = UI.newTextStyle({size = UI.FONT_SIZE_SMALL}),
+		labelAnchorPoint = UI.POINT_CENTER,
 		--背景皮肤
 		bgSkin = {
 			src = "",--ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_bar_bg2"),
@@ -37,7 +37,7 @@ PROGRESS_RADIAL_DEFAULT_PARAMS = {
 	y = 0,
 	width = 0,
 	height = 0,
-	anchorPoint = clone(THSTG.UI.POINT_CENTER),
+	anchorPoint = clone(UI.POINT_CENTER),
 	value = 100,
 	maxValue = 100,
 	minValue = 0,
@@ -77,7 +77,7 @@ PROGRESS_RADIAL_DEFAULT_PARAMS = {
 							end
 @params  style				[table]     各组件部分样式
     {
-    	label = THSTG.UI.newTextStyle(), 
+    	label = UI.newTextStyle(), 
     	bgSkin = {
     		src = "aa.png", 
     		scale9Rect = {left = 1, right = 1, top = 1, bottom = 1}
@@ -110,12 +110,12 @@ function newProgressBar(params)
 			finalParams.progressPadding.y = 0
 		end
 	end
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	local _value, _maxValue, _addValue = 100, 100, 0
 	local _bloodNum = 0
 
-	local node = THSTG.UI.newWidget()
+	local node = UI.newWidget()
 	node:setAnchorPoint(finalParams.anchorPoint)
 	node:setPosition(finalParams.x, finalParams.y)
 
@@ -123,7 +123,7 @@ function newProgressBar(params)
 	--背景块（可为空）
 	local bg = nil
 
-	local bgCapInsets, bgOrgSize = THSTG.UI.skin2CapInsets(finalParams.style.bgSkin)
+	local bgCapInsets, bgOrgSize = UI.skin2CapInsets(finalParams.style.bgSkin)
 	if bgCapInsets then
 		bg = ccui.Scale9Sprite:create(finalParams.style.bgSkin.src, cc.rect(0, 0, bgOrgSize.width, bgOrgSize.height), bgCapInsets)
 		if finalParams.width <= 0 then
@@ -146,7 +146,7 @@ function newProgressBar(params)
 
 	if bg then
 		node:addChild(bg)
-		bg:setAnchorPoint(THSTG.UI.POINT_LEFT_BOTTOM)
+		bg:setAnchorPoint(UI.POINT_LEFT_BOTTOM)
 		bg:setContentSize(cc.size(finalParams.width, finalParams.height))
 	end
 
@@ -154,19 +154,19 @@ function newProgressBar(params)
 	local addbar = nil
 	if paramsStyle.addSkin then
 		addbar = ccui.LoadingBar:create(paramsStyle.addSkin.src, _value / _maxValue * 100)
-		addbar:setAnchorPoint(THSTG.UI.POINT_LEFT_BOTTOM)
+		addbar:setAnchorPoint(UI.POINT_LEFT_BOTTOM)
 		addbar:setPercent(0)
 		node:addChild(addbar)
 	end
 
 	local bar = ccui.LoadingBar:create(finalParams.style.progressSkin.src, _value / _maxValue * 100)
-	bar:setAnchorPoint(THSTG.UI.POINT_LEFT_BOTTOM)
+	bar:setAnchorPoint(UI.POINT_LEFT_BOTTOM)
 	node:addChild(bar)
 
 
 	local function initBar(info)
 		info = info or {}
-		local barCapInsets, barOrgSize = THSTG.UI.skin2CapInsets(info.skin)
+		local barCapInsets, barOrgSize = UI.skin2CapInsets(info.skin)
 		if barCapInsets then
 			info.bar:setScale9Enabled(true)
 			info.bar:setCapInsets(barCapInsets)
@@ -210,11 +210,11 @@ function newProgressBar(params)
 	--进度文本
 	local label = nil
 	if finalParams.showLabel then
-		label = THSTG.UI.newLabel({
+		label = UI.newLabel({
 			text = tostring(_value / _maxValue * 100).."%",
 			x = params.labelOffsetX or finalParams.width / 2 + (params.labelPyx or 0),
 			y = params.labelOffsetY or finalParams.height / 2 + (params.labelPyy or 0),
-			anchorPoint = finalParams.style.labelAnchorPoint or THSTG.UI.POINT_CENTER,
+			anchorPoint = finalParams.style.labelAnchorPoint or UI.POINT_CENTER,
 			style = finalParams.style.label,
 		})
 		node:addChild(label)
@@ -229,16 +229,16 @@ function newProgressBar(params)
 			fontSize = finalParams.bloodStyle.size
 			bloodX = finalParams.bloodStyle.x
 		end
-		bloodLabel = THSTG.UI.newLabel({
+		bloodLabel = UI.newLabel({
 			text = "X1",
 			x = bloodX,
 			y = params.labelOffsetY or finalParams.height / 2 + (params.labelPyy or 0),
-			anchorPoint = THSTG.UI.POINT_RIGHT_CENTER,
+			anchorPoint = UI.POINT_RIGHT_CENTER,
 			style = {
 
-				color = THSTG.UI.htmlColor2C3b("#ffffff"),
+				color = UI.htmlColor2C3b("#ffffff"),
 				size = fontSize,
-				outlineColor = THSTG.UI.htmlColor2C3b("#535551"),
+				outlineColor = UI.htmlColor2C3b("#535551"),
 				outline = 1,
 			},
 		})
@@ -274,10 +274,10 @@ function newProgressBar(params)
 	-- 设置自定义文字
 	function node:setText(str)
 		if(not label)then
-			label = THSTG.UI.newLabel({
+			label = UI.newLabel({
 				x = params.labelOffsetX or finalParams.width / 2 + (params.labelPyx or 0),
 				y = params.labelOffsetY or finalParams.height / 2 + (params.labelPyy or 0),
-				anchorPoint = finalParams.style.labelAnchorPoint or THSTG.UI.POINT_CENTER,
+				anchorPoint = finalParams.style.labelAnchorPoint or UI.POINT_CENTER,
 				style = finalParams.style.label,
 			})
 			node:addChild(label)
@@ -306,14 +306,14 @@ function newProgressBar(params)
 			local newPercent = _maxValue == 0 and 100 or _value / _maxValue * 100
 			
 			if timer then
-				THSTG.Scheduler.unschedule(timer)
+				Scheduler.unschedule(timer)
 				timer = false
 			end 
 			if needAction then
 				local size = bar:getContentSize() 
 				if _value > preValue then
 					
-					local lb =  THSTG.UI.newBMFontLabel({
+					local lb =  UI.newBMFontLabel({
 						text =  string.format("+%s",msgNum or (_value-preValue)),
 						anchorPoint = ccp(1,0),
 						x = size.width,
@@ -341,7 +341,7 @@ function newProgressBar(params)
 					if _value<preValue then
 						needShowMax = 1
 					end
-					timer = THSTG.Scheduler.schedule(function ( t )
+					timer = Scheduler.schedule(function ( t )
 						if needShowMax > 0 then
 								bar:setPercent(100)
 								needShowMax = needShowMax - 1
@@ -355,7 +355,7 @@ function newProgressBar(params)
 						end 
 						local cur = oldPercent+pr
 						if cur >= newPercent then
-							THSTG.Scheduler.unschedule(timer)
+							Scheduler.unschedule(timer)
 							timer = false
 							bar:setPercent(newPercent)
 						else
@@ -373,7 +373,7 @@ function newProgressBar(params)
 	end
 	node:onNodeEvent("exit",function ( ... )
 		if timer then
-			THSTG.Scheduler.unschedule(timer)
+			Scheduler.unschedule(timer)
 		end 
 	end)
 	--最大值
@@ -493,11 +493,11 @@ function newProgressBar(params)
 
 	function node:updateStyle(style)
 		style = style or {}
-		local barCapInsets, barOrgSize = THSTG.UI.skin2CapInsets(style.progressSkin)
+		local barCapInsets, barOrgSize = UI.skin2CapInsets(style.progressSkin)
 		if style.progressSkin and style.progressSkin.src then
 			bar:loadTexture(style.progressSkin.src)
 		end
-		barCapInsets, barOrgSize = THSTG.UI.skin2CapInsets(style.bgSkin)
+		barCapInsets, barOrgSize = UI.skin2CapInsets(style.bgSkin)
 		if style.bgSkin and style.bgSkin.src then
 			if bg then
 				bg:loadTexture(style.bgSkin.src)
@@ -532,7 +532,7 @@ function newMultiProgressBar(params)
 	params = params or {}
 
 	local data = params.data or {}
-	local node = THSTG.UI.newWidget({
+	local node = UI.newWidget({
 		x = params.x,
 		y = params.y,
 		anchorPoint = params.anchorPoint,
@@ -541,7 +541,7 @@ function newMultiProgressBar(params)
 	local bar1, bar2
 
 	if type(data.bg1) == "table" then
-		bg1 = THSTG.UI.newScale9Sprite(data.bg1)
+		bg1 = UI.newScale9Sprite(data.bg1)
 		node:addChild(bg1)
 	end
 
@@ -553,8 +553,8 @@ function newMultiProgressBar(params)
 	if barNum >= 1 then
 		local info = data.bar[1]
 		local bar1Params, bar2Params = info.bar1, info.bar2
-		bar2 = THSTG.UI.newProgressBar({
-			anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
+		bar2 = UI.newProgressBar({
+			anchorPoint = UI.POINT_LEFT_BOTTOM,
 			style = {
 				bgSkin = false,
 				progressSkin = bar2Params.progressSkin,
@@ -562,8 +562,8 @@ function newMultiProgressBar(params)
 		})
 		node:addChild(bar2, 2)
 
-		bar1 = THSTG.UI.newProgressBar({
-			anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
+		bar1 = UI.newProgressBar({
+			anchorPoint = UI.POINT_LEFT_BOTTOM,
 			showLabel = params.showLabel,
 			showBlood = params.showBlood,
 			bloodStyle = params.bloodStyle,
@@ -655,9 +655,9 @@ function newMultiProgressBar(params)
 					if bg2 and not tolua.isnull(bg2) then
 						bg2:removeFromParentAndCleanup(true)
 					end
-					bg2 = THSTG.UI.newScale9Sprite({
+					bg2 = UI.newScale9Sprite({
 						style = bgParam.progressSkin,
-						anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
+						anchorPoint = UI.POINT_LEFT_BOTTOM,
 					})
 					node:addChild(bg2)
 				end
@@ -722,7 +722,7 @@ function newRadialProgressBar(params)
 	
 	TableUtil.mergeA2B(params, finalParams)
 
-	local node = THSTG.UI.newWidget()
+	local node = UI.newWidget()
 	node:setAnchorPoint(finalParams.anchorPoint)
 	node:setPosition(finalParams.x, finalParams.y)
 

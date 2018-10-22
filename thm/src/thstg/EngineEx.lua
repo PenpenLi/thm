@@ -1,6 +1,4 @@
 
-module("THSTG", package.seeall)
-
 __ENGINE_VERSION__ = 10000
 
 local M = class("EngineEx")
@@ -24,6 +22,7 @@ end
 
 function M:run()
     local gamePath = self._configs.gameRoot .. "." ..self._configs.gameName
+ 
     local game = require(gamePath):create()
 
     --初始化环境
@@ -36,5 +35,6 @@ function M:run()
     
 
 end
-_G.EngineEx = M
+
+EngineEx = M
 return M

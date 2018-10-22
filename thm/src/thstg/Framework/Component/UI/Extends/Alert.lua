@@ -1,1 +1,1 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)

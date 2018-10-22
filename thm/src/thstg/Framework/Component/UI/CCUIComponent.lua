@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --在lua中对CC组件进行再封装是为了与UI组件创建方法的统一，方便UI编辑器配置的编写
 
@@ -74,7 +74,7 @@ function newSprite(params)
 
 	if __PRINT_NODE_TRACK__ then
 		local info = getTraceback()
-		THSTG.NodeUtil.setClick(sp, function ()
+		NodeUtil.setClick(sp, function ()
 			print(__PRINT_TYPE__, info)
 		end, false)
 	end
@@ -96,7 +96,7 @@ function newScale9Sprite(params)
 	local skinSize = {}
 	skinSize.width = params.style.width
 	skinSize.height = params.style.height
-	local textureSize = THSTG.UI.getSkinSize(src)
+	local textureSize = UI.getSkinSize(src)
 	if not skinSize.width or not skinSize.height then
 		skinSize.width = skinSize.width or textureSize.width
 		skinSize.height = skinSize.height or textureSize.height
@@ -108,7 +108,7 @@ function newScale9Sprite(params)
 	local insetRectH = math.max(0, textureSize.height - insetRectY - scale9Rect.bottom)
 
 	local rect = cc.rect(0, 0, 0, 0)
-	THSTG.TableUtil.mergeA2B(params.rect, rect)
+	TableUtil.mergeA2B(params.rect, rect)
 
 	local frameRect = cc.rect(0 + rect.x, 0 + rect.y, skinSize.width + rect.width, skinSize.height + rect.height)
 	local scaleRect = cc.rect(insetRectX, insetRectY, insetRectW, insetRectH)
@@ -126,7 +126,7 @@ function newScale9Sprite(params)
 
 	if __PRINT_NODE_TRACK__ then
 		local info = getTraceback()
-		THSTG.NodeUtil.setClick(node, function ()
+		NodeUtil.setClick(node, function ()
 			print(__PRINT_TYPE__, info)
 		end, false)
 	end
@@ -140,7 +140,7 @@ function newQuickScale9Sprite(src,scaleRect)
 	
 	local scaleGridRect = scaleRect or {left=0, top=0, right=0, bottom=0}
 	--默认
-	local skinSize = THSTG.UI.getSkinSize(src)
+	local skinSize = UI.getSkinSize(src)
 	insetRectX = scaleGridRect.left
 	insetRectY = scaleGridRect.top
 	insetRectW = skinSize.width - insetRectX - scaleGridRect.right
@@ -154,7 +154,7 @@ function newSimpleScale9Sprite(src, scaleRect)
 
 	local scaleGridRect = scaleRect or {left = 0, top = 0, right = 0, bottom = 0}
 	--默认
-	local skinSize = THSTG.UI.getSkinSize(src)
+	local skinSize = UI.getSkinSize(src)
 	insetRectX = scaleGridRect.left
 	insetRectY = scaleGridRect.top
 	insetRectW = skinSize.width - insetRectX - scaleGridRect.right
@@ -199,7 +199,7 @@ function newLayerGesture(params)
 	params.height = params.height or 100
 
 	--根节点
-	params.color = params.showColor and THSTG.UI.htmlColor2C4b("#00000088") or THSTG.UI.htmlColor2C4b("#00000000")
+	params.color = params.showColor and UI.htmlColor2C4b("#00000088") or UI.htmlColor2C4b("#00000000")
 	local layer = newLayerColor(params)
 	layer:setPosition(params.x, params.y)
 	if params.anchorPoint then
@@ -309,11 +309,11 @@ function newWidget(params)
 	local finalParams = {
 		x = 0, y = 0,
 		width = 0, height = 0,
-		anchorPoint = clone(THSTG.UI.POINT_CENTER),
+		anchorPoint = clone(UI.POINT_CENTER),
 		touchEnabled = false,
 		swallowTouches = false,
 	}
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	local widget = ccui.Widget:create()
 	widget:setPosition(cc.p(finalParams.x, finalParams.y))
@@ -464,8 +464,8 @@ function newTouchLayer(params)
 	params.height = params.height or 100
 
 	--根节点
-	-- params.color = params.showColor and THSTG.UI.htmlColor2C4b("#00000088") or THSTG.UI.htmlColor2C4b("#00000000")
-	local layer = THSTG.UI.newLayerColor(params)
+	-- params.color = params.showColor and UI.htmlColor2C4b("#00000088") or UI.htmlColor2C4b("#00000000")
+	local layer = UI.newLayerColor(params)
 	layer:setPosition(params.x, params.y)
 	if params.anchorPoint then
 		layer:setAnchorPoint(params.anchorPoint)

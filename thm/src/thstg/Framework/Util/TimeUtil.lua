@@ -1,4 +1,4 @@
-module("THSTG.TimeUtil", package.seeall)
+module("TimeUtil", package.seeall)
 
 -- 获取与服务器时间差值：秒
 function getOffsetTime(seconds)

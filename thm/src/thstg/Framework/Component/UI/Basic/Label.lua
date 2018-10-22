@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --扩展cc.Label
 local ccLabel = cc.Label
@@ -25,7 +25,7 @@ function ccLabel:updateCommomStyle(style)
 		self:setAdditionalKerning(style.additionalKerning)
 	end
 	if style.shadow then
-		local defaultStyle = THSTG.UI.newTextStyle()
+		local defaultStyle = UI.newTextStyle()
 		self:enableShadow(style.shadowColor or defaultStyle.shadowColor, style.shadowOffset or  defaultStyle.shadowOffset, style.shadowBlurRadius or defaultStyle.shadowBlurRadius)
 	end
 end
@@ -37,7 +37,7 @@ LABEL_DEFAULT_PARAMS = {
 	width = 0,
 	height = 0,
 	anchorPoint = POINT_LEFT_BOTTOM,
-	style = THSTG.UI.newTextStyle()
+	style = UI.newTextStyle()
 }
 
 --几种不同类型Label的通用初始化部分
@@ -101,7 +101,7 @@ function newLabel(params)
 	assert(type(params) == "table", "[UI] newLabel() invalid params")
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	-- local label = cc.Label:createWithTTF(
 	-- 	finalParams.text,
@@ -243,7 +243,7 @@ function newBMFontLabel(params)
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
 	finalParams.style.font = "Arial"
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	-- local label = cc.Label:createWithBMFont(
 	-- 	finalParams.style.font,
@@ -293,7 +293,7 @@ function newCharMapLabel(params)
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
 	-- finalParams.style.font = ResManager.getResSub(ResType.FONT, FontType.CHAR_MAP, "tuffy")
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	print(5, "finalParams.style.font", finalParams.style.font)
 
@@ -333,7 +333,7 @@ function newAtlasLabel(params)
 
 	local finalParams = clone(LABEL_DEFAULT_PARAMS)
 	-- finalParams.style.font = ResManager.getResSub(ResType.FONT, FontType.CHAR_MAP, "tuffy")
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	local startCharMap = ((type(finalParams.style.font.startChar) == "string") and {string.byte(finalParams.style.font.startChar)} or {finalParams.style.font.startChar or 48})[1]
 	local label = cc.LabelAtlas:_create(
@@ -408,8 +408,8 @@ local function getTintoGlProgram(topColor,bottomColor)
 		glProgram = cc.GLProgram:createWithByteArrays(vertex , fragment)
 		if not glProgram then return end
 		local glProgramState = cc.GLProgramState:getOrCreateWithGLProgram(glProgram)
-		local topColorTb = THSTG.UI.getColorHtml(topColor)
-		local bottomColorTb = THSTG.UI.getColorHtml(bottomColor)
+		local topColorTb = UI.getColorHtml(topColor)
+		local bottomColorTb = UI.getColorHtml(bottomColor)
 		local topColorVec4 = cc.vec4(topColorTb.r/255,topColorTb.g/255,topColorTb.b/255,0)
 		local bottomColorVec4 = cc.vec4(bottomColorTb.r/255,bottomColorTb.g/255,bottomColorTb.b/255,0)
 		glProgramState:setUniformVec4("topColor",topColorVec4)
@@ -433,17 +433,17 @@ end
 -- @param	style			[table]		文字格式(参考Style文件中的newTextStyle()方法)，注：style下的（描边、字号）相关属性无效，color无透明度
 ]]
 function newTintoLabel(params)	
-	local node = THSTG.UI.newWidget({
+	local node = UI.newWidget({
 		x = params.x or 0,
 		y = params.y or 0
 	})
-	local anchorPoint = params.anchorPoint or THSTG.UI.POINT_LEFT_BOTTOM
+	local anchorPoint = params.anchorPoint or UI.POINT_LEFT_BOTTOM
 	node:setAnchorPoint(cc.p(anchorPoint.x,anchorPoint.y))
 	if params.style then
 		params.style.outline = 0
 	end 
 
-	local label = THSTG.UI.newLabel({
+	local label = UI.newLabel({
 		text = params.text or "",
 		style = params.style
 	})
@@ -468,7 +468,7 @@ function newTintoLabel(params)
 		end
 		label:visit()
 		renderTexture:endToLua()
-		sprite = THSTG.UI.newSprite({
+		sprite = UI.newSprite({
 			x = labelSize.width/2,
 			y = labelSize.height/2
 		})
@@ -480,12 +480,12 @@ function newTintoLabel(params)
 	end
 	node:onNodeEvent("enter",function ()
 		if not sprite and not scheduler then
-			addSprite()-- scheduler = THSTG.Scheduler.scheduleNextFrame(addSprite)
+			addSprite()-- scheduler = Scheduler.scheduleNextFrame(addSprite)
 		end
 	end)
 	node:onNodeEvent("exit",function ()
 		if scheduler then
-			-- THSTG.Scheduler.unschedule(scheduler)
+			-- Scheduler.unschedule(scheduler)
 			scheduler = false
 		end
 		if not tolua.isnull(label) then

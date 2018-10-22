@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 TOUCH_DOWN = "touch_down"
 DRAG_INSIDE = "drag_inside"
@@ -12,7 +12,7 @@ TOUCH_CANCEL = "touch_cancel"
 local default = {
 	actionTime = 0.05,
 	face = function ()
-		return THSTG.UI.newImage({
+		return UI.newImage({
 			width = 100,
 			height = 30,
 			style = {
@@ -90,10 +90,10 @@ function newControlButton(params)
 		controlButton:setScale9Enabled(true)
 		controlButton:onTouch(privateData.onTouch)
 		controlButton:setPosition(cc.p(params.x or 0, params.y or 0))
-		controlButton:setAnchorPoint(params.anchorPoint or THSTG.UI.POINT_LEFT_BOTTOM)
+		controlButton:setAnchorPoint(params.anchorPoint or UI.POINT_LEFT_BOTTOM)
 		privateData.container = ccui.Widget:create()
 		privateData.container:setCascadeOpacityEnabled(true)
-		privateData.container:setAnchorPoint(params.scaleAnchorPoint or THSTG.UI.POINT_CENTER)
+		privateData.container:setAnchorPoint(params.scaleAnchorPoint or UI.POINT_CENTER)
 		--修复此类按钮点击跳转到其它标签（仅从父节点移除未回收），再跳回来时按钮会播放缩小动画的bug
 		privateData.container:onNodeEvent("exit", function()
 			privateData.container:stopAllActions()
@@ -244,7 +244,7 @@ function newControlButton(params)
 		privateData.setContentSize(controlButton, s)
 		privateData.container:setContentSize(s)
 
-		local ar = params.scaleAnchorPoint or THSTG.UI.POINT_CENTER
+		local ar = params.scaleAnchorPoint or UI.POINT_CENTER
 		privateData.container:setPosition(cc.p(ar.x * s.width, ar.y * s.height))
 		--tipLog("updateContentSize: w: "..tostring(s.width).." h: "..tostring(s.height))
 
@@ -259,7 +259,7 @@ function newControlButton(params)
 			--print(168, "triggerLongClick",privateData.oldPropageValue ~= false)
 		end
 		if type(params.onLongClick) == "function" then
-			privateData.scheduleId = THSTG.Scheduler.schedule(function ()
+			privateData.scheduleId = Scheduler.schedule(function ()
 				privateData.scheduleId = nil
 				controlButton:setHighlighted(false)
 				privateData.applyTouchAction()
@@ -274,7 +274,7 @@ function newControlButton(params)
 	--[[长按事件取消]]
 	function privateData.cancelLongClick(event)
 		if privateData.scheduleId then
-			THSTG.Scheduler.unschedule(privateData.scheduleId)
+			Scheduler.unschedule(privateData.scheduleId)
 			privateData.scheduleId = nil
 			--print(168, "cancelLongClick")
 		end
@@ -430,28 +430,28 @@ BASEBUTTON_DEFAULT = {
 	selectedKey = 4,
 	style = {
 		normal = {
-			label = THSTG.UI.newTextStyle({size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.htmlColor2C4b("#b5c8df")}),
+			label = UI.newTextStyle({size = UI.FONT_SIZE_NORMAL, color = UI.htmlColor2C4b("#b5c8df")}),
 			skin = {
 				src = "",-- ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
 				scale9Rect = {left = 30, right = 30, top = 12, bottom = 17}
 			}
 		},
 		pressed = {
-			label = THSTG.UI.newTextStyle({size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.htmlColor2C4b("#b5c8df")}),
+			label = UI.newTextStyle({size = UI.FONT_SIZE_NORMAL, color = UI.htmlColor2C4b("#b5c8df")}),
 			skin = {
 				src = "",-- ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
 				scale9Rect = {left = 30, right = 30, top = 12, bottom = 17}
 			}
 		},
 		disabled = {
-			label = THSTG.UI.newTextStyle({size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.COLOR_GRAY_C}),
+			label = UI.newTextStyle({size = UI.FONT_SIZE_NORMAL, color = UI.COLOR_GRAY_C}),
 			skin = {
 				src = "",-- "",
 				scale9Rect = {left = 30, right = 30, top = 12, bottom = 17}
 			}
 		},
 		selected = {
-			label = THSTG.UI.newTextStyle({size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.htmlColor2C4b("#b5c8df")}),
+			label = UI.newTextStyle({size = UI.FONT_SIZE_NORMAL, color = UI.htmlColor2C4b("#b5c8df")}),
 			skin = {
 				src = "",-- ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
 				scale9Rect = {left = 30, right = 30, top = 12, bottom = 17}
@@ -591,11 +591,11 @@ function newBaseButton(params)
 		controlButtonParams.height = nil
 		controlButtonParams.curFaceNode = params.normalNode
 		controlButtonParams.hitLen=params.hitLen
-		baseButton = THSTG.UI.newControlButton(controlButtonParams)
+		baseButton = UI.newControlButton(controlButtonParams)
 
 		if tolua.cast(params.sharedNode, "cc.Node") then
 			baseButton:addChild(params.sharedNode)
-			params.sharedNode:setAnchorPoint(THSTG.UI.POINT_CENTER)
+			params.sharedNode:setAnchorPoint(UI.POINT_CENTER)
 			privateData.sharedNode = params.sharedNode
 		end
 
@@ -612,10 +612,10 @@ function newBaseButton(params)
 			privateData.text = ccui.Text:create()
 
 		end
-		privateData.text:setAnchorPoint(THSTG.UI.POINT_CENTER)
+		privateData.text:setAnchorPoint(UI.POINT_CENTER)
 		local render = privateData.text:getVirtualRenderer()
 		tolua.cast(render, "cc.label")
-		render:setHorizontalAlignment(THSTG.UI.TEXT_HALIGN_CENTER)
+		render:setHorizontalAlignment(UI.TEXT_HALIGN_CENTER)
 		local container = baseButton:getInnerContainer()
 		container:addChild(privateData.text, 1)
 
@@ -636,12 +636,12 @@ function newBaseButton(params)
 	function privateData.initface(style, info)
 		local bg = nil
 		if style.skin then
-			local bgCapInsets, bgOrgSize = THSTG.UI.skin2CapInsets(params.style.normal.skin)
+			local bgCapInsets, bgOrgSize = UI.skin2CapInsets(params.style.normal.skin)
 			if not bgOrgSize then
-				bgOrgSize = THSTG.UI.skin2OrgSize(params.style.normal.skin)
+				bgOrgSize = UI.skin2OrgSize(params.style.normal.skin)
 				if not bgOrgSize then
 					params.style.normal.skin = BASEBUTTON_DEFAULT.style.normal.skin
-					bgCapInsets, bgOrgSize = THSTG.UI.skin2CapInsets(params.style.normal.skin)
+					bgCapInsets, bgOrgSize = UI.skin2CapInsets(params.style.normal.skin)
 				end
 			end
 			bg = ccui.Scale9Sprite:create(style.skin.src, cc.rect(0, 0, bgOrgSize.width, bgOrgSize.height), bgCapInsets or cc.rect(0, 0, 0, 0))
@@ -719,7 +719,7 @@ function newBaseButton(params)
 			local size = privateData.text:getVirtualRendererSize()
 			tipLog("textS： "..tostring(size.width).." "..tostring(size.height))
 			privateData.text:setContentSize(cc.size(style.artWidth or size.width, style.artHeight or size.height))
-			privateData.text:setColor(style.color or THSTG.UI.COLOR_WHITE)
+			privateData.text:setColor(style.color or UI.COLOR_WHITE)
 		else
 			privateData.text:setFontName(style.font or default.font)
 			privateData.text:setFontSize(style.size or default.size)
@@ -878,7 +878,7 @@ function newSimpleButton(params)
 		local baseButtonParams = clone(params)
 		baseButtonParams.onTouch = privateData.onTouch
 		baseButtonParams.onClick = nil
-		simpleButton = THSTG.UI.newBaseButton(baseButtonParams)
+		simpleButton = UI.newBaseButton(baseButtonParams)
 	end
 
 	function privateData.onTouch(event)
@@ -916,7 +916,7 @@ ARTBUTTON_DEFAULT = {
 		normal = {
 			label = {
 				artFont = "Arial",--ResManager.getResSub(ResType.FONT, FontType.FNT, "arial"),
-				color = THSTG.UI.COLOR_WHITE,
+				color = UI.COLOR_WHITE,
 			},
 			skin = {
 				src = "",-- ResManager.getUIRes(UIType.BUTTON, "default_normal"),
@@ -925,7 +925,7 @@ ARTBUTTON_DEFAULT = {
 		},
 		pressed = {
 			label = {
-				color = THSTG.UI.COLOR_YELLOW,
+				color = UI.COLOR_YELLOW,
 			},
 			skin = {
 				src = "",-- ResManager.getUIRes(UIType.BUTTON, "default_selected"),
@@ -934,7 +934,7 @@ ARTBUTTON_DEFAULT = {
 		},
 		disabled = {
 			label = {
-				color = THSTG.UI.COLOR_GRAY_C,
+				color = UI.COLOR_GRAY_C,
 			},
 			skin = {
 				src = "",-- ResManager.getUIRes(UIType.BUTTON, "default_disabled"),
@@ -998,14 +998,14 @@ function newArtButton(params)
 
 	params = clone(params)
 	local style = clone(ARTBUTTON_DEFAULT.style)
-	THSTG.TableUtil.mergeA2B(style, params.style)
+	TableUtil.mergeA2B(style, params.style)
 
 	local artButton = nil
 
 	local privateData = {}
 
 	function privateData.init()
-		artButton = THSTG.UI.newBaseButton({
+		artButton = UI.newBaseButton({
 			x = params.x, y = params.y,
 			anchorPoint = params.anchorPoint,
 			width = params.width,
@@ -1055,21 +1055,21 @@ SELECTEDBUTTON_DEFAULT = {
 	style = {
 		normal = {
 			skin = TABBAR_DEFAULT_HT_NORMAL_SKIN,
-			label = THSTG.UI.newTextStyle({
-				color = THSTG.UI.COLOR_WHITE,
+			label = UI.newTextStyle({
+				color = UI.COLOR_WHITE,
 			}),
 		},
 		disabled = {
 			skin = TABBAR_DEFAULT_HT_DISABLED_SKIN,
-			label = THSTG.UI.newTextStyle({
-				color = THSTG.UI.COLOR_GRAY_C,
+			label = UI.newTextStyle({
+				color = UI.COLOR_GRAY_C,
 			}),
 		},
 		selected = {
 			skin = TABBAR_DEFAULT_HT_SELECTED_SKIN,
-			label = THSTG.UI.newTextStyle({
-				size = THSTG.UI.FONT_SIZE_NORMAL,
-				color = THSTG.UI.COLOR_YELLOW,
+			label = UI.newTextStyle({
+				size = UI.FONT_SIZE_NORMAL,
+				color = UI.COLOR_YELLOW,
 			}),
 		},
 	},
@@ -1146,7 +1146,7 @@ function newSelectedButton(params)
 	style.disabled.skin = clone(TABBAR_DEFAULT_HT_DISABLED_SKIN)
 	style.selected.skin = clone(TABBAR_DEFAULT_HT_SELECTED_SKIN)
 
-	THSTG.TableUtil.mergeA2B(params.style, style)
+	TableUtil.mergeA2B(params.style, style)
 
 	-- style.normal.skin.scale9Rect = params.style.normal.skin.scale9Rect
 	-- style.disabled.skin.scale9Rect = params.style.disabled.skin.scale9Rect
@@ -1157,7 +1157,7 @@ function newSelectedButton(params)
 	local  privateData = {}
 	privateData.isSelected = false
 	function privateData.init()
-		selectedButton = THSTG.UI.newBaseButton({
+		selectedButton = UI.newBaseButton({
 			x = params.x,
 			y = params.y,
 			anchorPoint = params.anchorPoint,

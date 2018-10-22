@@ -1,4 +1,4 @@
-module("THSTG.UI", package.seeall)
+module("UI", package.seeall)
 
 --默认参数
 BOX_DEFAULT_PARAMS = {
@@ -6,7 +6,7 @@ BOX_DEFAULT_PARAMS = {
 	y = 0,
 	width = 0,
 	height = 0,
-	anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
+	anchorPoint = UI.POINT_LEFT_BOTTOM,
 	margin = 0,
 	autoSize = false,
 	linearGravity = ccui.LinearGravity.left
@@ -29,7 +29,7 @@ function newHBox(params)
 
 	local finalParams = clone(BOX_DEFAULT_PARAMS)
 	finalParams.linearGravity = ccui.LinearGravity.top
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	local box = ccui.HBox:create()
 	box:setPosition(finalParams.x, finalParams.y)
@@ -65,7 +65,7 @@ function newHBox(params)
 				local layoutParameter = ccui.LinearLayoutParameter:create()
 				layoutParameter:setGravity(layoutParams.linearGravity or  finalParams.linearGravity)
 				local margin = {left = 0, top = 0, right = 0, bottom = 0}
-				THSTG.TableUtil.mergeA2B(layoutParams.margin, margin)
+				TableUtil.mergeA2B(layoutParams.margin, margin)
 				layoutParameter:setMargin(margin)
 				child:setLayoutParameter(layoutParameter)
 			end
@@ -92,7 +92,7 @@ function newVBox(params)
 	assert(params == nil or type(params) == "table", "[UI] newVBox() invalid params")
 
 	local finalParams = clone(BOX_DEFAULT_PARAMS)
-	THSTG.TableUtil.mergeA2B(params, finalParams)
+	TableUtil.mergeA2B(params, finalParams)
 
 	local box = ccui.VBox:create()
 	box:setPosition(finalParams.x, finalParams.y)
@@ -128,7 +128,7 @@ function newVBox(params)
 				local layoutParameter = ccui.LinearLayoutParameter:create()
 				layoutParameter:setGravity(layoutParams.linearGravity or finalParams.linearGravity)
 				local margin = {left = 0, top = 0, right = 0, bottom = 0}
-				THSTG.TableUtil.mergeA2B(layoutParams.margin, margin)
+				TableUtil.mergeA2B(layoutParams.margin, margin)
 				layoutParameter:setMargin(margin)
 				child:setLayoutParameter(layoutParameter)
 				--printTable(168, layoutParams)
@@ -155,7 +155,7 @@ function newMultiHBox(params)
 	local col = tonumber(params.col) and params.col or 1
 	local yGap = params.yGap or 0
 	local xGap = params.xGap or 8
-	local node = THSTG.UI.newVBox({
+	local node = UI.newVBox({
 		autoSize = true,
 		anchorPoint = params.anchorPoint,
 		x = params.x, y = params.y,
@@ -170,7 +170,7 @@ function newMultiHBox(params)
 	function node:addChild(child)
 		local row = math.ceil(childNum / col)
 		if not curBox or row ~= math.ceil((childNum + 1) / col) then
-			curBox = THSTG.UI.newHBox({
+			curBox = UI.newHBox({
 				autoSize = true,
 				linearGravity = params.linearGravity2,
 				margin = xGap,
