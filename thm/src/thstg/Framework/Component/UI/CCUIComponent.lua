@@ -21,17 +21,7 @@ function newSprite(params)
 
 	local src = params.src --ResManager.getEmptyImg()
 	local sp = display.newSprite(src)
-	-- if not src then
-	-- 	sp = cc.Sprite:create()
-	-- else
-	-- 	if string.byte(src) == 35 then -- 第一个字符是 #
-	-- 		sp = display.newSprite(src)
-	-- 	else
-	-- 		sp = cc.Sprite:create(src)
-	-- 	end
-		
-	-- end
-	
+
 	if params.anchorPoint then
 		sp:setAnchorPoint(params.anchorPoint)
 	end
@@ -41,11 +31,9 @@ function newSprite(params)
 	local size = sp:getContentSize()
 	if params.width then
 		sp:setScaleX(params.width / size.width)
-		--print(168, params.width, size.width)
 	end
 	if params.height then
 		sp:setScaleY(params.height / size.height)
-		--print(168, params.height, size.height)
 	end
 	if params.frame then
 		sp:setTextureRect(params.frame)
@@ -55,7 +43,13 @@ function newSprite(params)
 		sp:setTextureRect(frame)
 	end
 	function sp:setSource(src)
-		sp:setTexture(src)
+		if type(src) == "string" then
+			if string.byte(src) == 35 then -- first char is #
+				sp:setSpriteFrame(string.sub(src, 2))
+			else
+				sp:setTexture(src)
+			end
+		end
 	end
 	function sp:clone()
 		local cloneSpr = cc.Sprite:createWithTexture(self:getTexture())

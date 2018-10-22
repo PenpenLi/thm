@@ -10,7 +10,7 @@ function M:onCreate()
 end
 
 function M:createScene()
-    return self:onScene()
+    return self:_onScene()
 end
 
 function M:createEnv(gameRoot)
@@ -22,18 +22,18 @@ function M:createEnv(gameRoot)
     cc.FileUtils:getInstance():addSearchPath("src/" .. newPath .. "/")
 
     --子类初始化
-    return self:onEnv(gameRoot)
+    return self:_onEnv(gameRoot)
 
 end
 
 --[[以下函数由子类重载]]--
-function M:onEnv(gameRoot)  
+function M:_onEnv(gameRoot)  
 
     --初始化游戏
     return true
 end
 
-function M:onScene()
+function M:_onScene()
     -- 返回测试窗口
     return nil,nil
 end

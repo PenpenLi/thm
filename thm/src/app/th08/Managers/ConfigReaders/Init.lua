@@ -1,1 +1,1 @@
-require "Managers.ConfigReaders.MenuConfig"
+require "Managers.ConfigReaders.MainMenuConfig"

@@ -57,6 +57,14 @@ function removePlistFrames(params)
 	display.removeSpriteFrames(params.data, params.img)
 end
 
+
+function loadPlistFile(path)
+	return loadPlistFrames({data = path})
+end
+
+function removePlistFile(path)
+	return removePlistFrames({data = path})
+end
 --
 function loadTexture(source)
 	local texture = nil

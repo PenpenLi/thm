@@ -3,4 +3,4 @@ require "Configs.Types.ModuleType"
 require "Configs.Types.ResType"
 require "Configs.Types.FontType"
 require "Configs.Types.UIType"
-
+require "Configs.Types.TexType"

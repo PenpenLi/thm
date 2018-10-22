@@ -4,5 +4,7 @@ FONT = "font"
 
 SOUND = "sound"
 
+TEXTURE = "texture"
+
 UI = "ui"
 

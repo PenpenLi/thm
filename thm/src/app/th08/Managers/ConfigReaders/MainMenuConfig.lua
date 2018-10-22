@@ -1,10 +1,10 @@
-module("MenuConfig", package.seeall)
+module("MainMenuConfig", package.seeall)
 
 local _Dict = false
 
 local function getDict()
     if not _Dict then
-        _Dict = require("Configs.Handwork.MenuMisc")
+        _Dict = require("Configs.Handwork.MainMenuMisc")
     end
     return _Dict
 end

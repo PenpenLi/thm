@@ -66,9 +66,6 @@ function M.create(params)
                 title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_black"))
             end
         end
-        function node:getData()
-            return _data
-        end
         function node:_onCellClick(data)
             if data.value.__isClick == true then
                 title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_white"))
@@ -150,7 +147,7 @@ function M.create(params)
                 --TODO:需要一个全局Layer,进行 入栈出栈操作的那种,这个layer 进别的层时先 入栈
                 local file = require (data.file)
                 local layer = file.create()
-                node:setVisible(false)
+                -- node:setVisible(false)
                 node:addChild(layer)
                 
             end
@@ -158,7 +155,7 @@ function M.create(params)
     end
 
     function node.updateLayer()
-        local infos = MenuConfig.getMainMenuInfo()
+        local infos = MainMenuConfig.getMainMenuInfo()
         _uiTitleList:setDataProvider(infos)
         _uiTitleList:setSelected(1)
     end

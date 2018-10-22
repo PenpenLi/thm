@@ -48,6 +48,28 @@ function getResSub(resType, subType, resName)
 	return path
 end
 
+-- 多层资源获取
+-- @param	...		[string]	资源类型
+-- @return	资源路径
+function getResMul(...)
+	
+	local path = nil
+	local params = {...}
+	local pathStr = ""
+	for i = 1, #params do
+		path = path and path[params[i]] or Resources[params[i]]
+		if not path then
+			if __DEBUG_RESOURCES__ then
+				error(string.format("ResManager.getRes ERROR: can't found: %s",pathStr))
+			end
+			break
+		else
+			pathStr = pathStr .. "." ..  params[i]
+		end
+	end
+	
+	return path
+end
 
 function getResTable(resType, subType)
 	local res = Resources[resType]

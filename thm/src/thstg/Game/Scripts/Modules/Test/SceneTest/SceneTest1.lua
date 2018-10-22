@@ -121,7 +121,7 @@ function M.create(params)
 
     -----------------------------
     --加载plist文件
-    THSTG.SCENE.loadPlistFrames(ResManager.getResMul(ResType.TEXTURE,TexType.PLIST,"dragon"))
+    THSTG.SCENE.loadPlistFile(ResManager.getResMul(ResType.TEXTURE,TexType.PLIST,"dragon"))
 
     local animationFrame = THSTG.SCENE.newFileFrames({
         pattern = "drag_walk_down_%02d.png",

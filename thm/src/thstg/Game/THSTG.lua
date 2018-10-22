@@ -2,7 +2,7 @@
 local M = class("Game",THSTG.Game)
 
 --[[以下函数由子类重载]]--
-function M:onEnv(gameRoot)
+function M:_onEnv(gameRoot)
     --初始化环境
     require "Scripts.EnvBase"
     require "Scripts.EnvGame"
@@ -13,7 +13,7 @@ function M:onEnv(gameRoot)
     return true
 end
 
-function M:onScene()
+function M:_onScene()
     local mainScene = require("Scripts.Modules.Test.TestView"):create()
     return mainScene
 end

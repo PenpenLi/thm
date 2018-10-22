@@ -1,0 +1,3 @@
+module("TexType")
+
+PLIST = "plist"
