@@ -135,7 +135,7 @@ function M.create(params)
     end, 1)
 
     --------Control--------
-    _selectedChangedHandle = function (sender,node, index, value, lastIndex, lastValue)
+    _selectedChangedHandle = function (sender,tnode, index, value, lastIndex, lastValue)
         local data = _uiTitleList:getDataProvider()[index]
         _uiDescText:setText(data.desc)
         _varIsCanMove = false
@@ -150,13 +150,15 @@ function M.create(params)
                 --TODO:需要一个全局Layer,进行 入栈出栈操作的那种,这个layer 进别的层时先 入栈
                 local file = require (data.file)
                 local layer = file.create()
-                self:addChild(layer)
+                node:setVisible(false)
+                node:addChild(layer)
+                
             end
         end
     end
 
     function node.updateLayer()
-        local infos = MainSceneConfig.getMainMenuInfo()
+        local infos = MenuConfig.getMainMenuInfo()
         _uiTitleList:setDataProvider(infos)
         _uiTitleList:setSelected(1)
     end

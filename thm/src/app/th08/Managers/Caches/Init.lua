@@ -1,1 +1,1 @@
-require "Managers.Caches.SceneCache"
+require "Managers.Caches.Cache"

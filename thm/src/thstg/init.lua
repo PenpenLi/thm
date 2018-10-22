@@ -1,4 +1,5 @@
 ﻿
+
 --全局配置
 require "thstg.Config"
 

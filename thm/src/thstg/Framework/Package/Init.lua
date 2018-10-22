@@ -1,0 +1,1 @@
+require "thstg.Framework.Package.MVC.Init"

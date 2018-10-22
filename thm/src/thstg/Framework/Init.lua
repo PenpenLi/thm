@@ -16,8 +16,8 @@
  --组件
  require "thstg.Framework.Component.Init"
 
- --MVC
- require "thstg.Framework.MVC.Init"
+ --架构模式
+ require "thstg.Framework.Package.Init"
  
  --辅助库
  require "thstg.Framework.Util.StringUtil"
