@@ -189,8 +189,8 @@ function newLayerGesture(params)
 	params = params or {}
 	params.x = params.x or 0
 	params.y = params.y or 0
-	params.width = params.width or 100
-	params.height = params.height or 100
+	params.width = params.width or display.width
+	params.height = params.height or display.height
 
 	--根节点
 	params.color = params.showColor and UI.htmlColor2C4b("#00000088") or UI.htmlColor2C4b("#00000000")

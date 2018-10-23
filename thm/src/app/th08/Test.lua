@@ -12,3 +12,5 @@ THSTG.__PRINT_TYPE__ = 0
 THSTG.__PRINT_WITH_FILE_LINE__ = false
 
 --------------------------------------------------
+_G.print = THSTG.print
+_G.dump = THSTG.dumpTable

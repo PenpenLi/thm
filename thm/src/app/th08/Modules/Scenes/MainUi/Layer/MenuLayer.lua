@@ -147,8 +147,9 @@ function M.create(params)
                 --TODO:需要一个全局Layer,进行 入栈出栈操作的那种,这个layer 进别的层时先 入栈
                 local file = require (data.file)
                 local layer = file.create()
+                cc.Director:getInstance():replaceScene(layer)
                 -- node:setVisible(false)
-                node:addChild(layer)
+                -- node:addChild(layer)
                 
             end
         end

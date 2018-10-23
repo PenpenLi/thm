@@ -1,8 +1,10 @@
 ﻿local M = class("MainScene", View)
 
 function M:onCreate()
-    local mainLayer = require ("Modules.Scenes.MainUi.Layer.SelectDifficultyLayer").create()
-    self:addChild(mainLayer)
+
+    local layer = require ("Modules.Scenes.MainUi.Layer.MenuLayer").create()
+    self:addChild(layer)
+    
 end
 
 return M

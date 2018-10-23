@@ -1,4 +1,1 @@
-
-
-
 require "UI.Public.PublicComponent"

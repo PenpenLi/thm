@@ -8,3 +8,5 @@ TEXTURE = "texture"
 
 UI = "ui"
 
+---
+SCENE = "scene"
