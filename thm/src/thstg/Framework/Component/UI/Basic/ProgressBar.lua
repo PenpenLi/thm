@@ -42,6 +42,7 @@ PROGRESS_RADIAL_DEFAULT_PARAMS = {
 	maxValue = 100,
 	minValue = 0,
 	midPoint = cc.p(0.5,0.5),	--(0.5,0.5)
+	offset = 0,
 	isReverse = false,
 	debug = false,
 	style = {
@@ -701,7 +702,8 @@ end
 @params  value 				[number] 	值
 @params  maxValue 			[number]	最大值
 @params  minValue 			[number]	最小值
-@params  midPoint 			[number] 	圆心位置
+@params  midPoint 			[cc.p] 		圆心位置
+@params  offset				[number]	起始偏移角度值
 @params  isReverse  		[bool] 		是否逆时针
 @params  debug  			[bool] 		方便对位置用
 @params  style				[table]     各组件部分样式
@@ -731,15 +733,32 @@ function newRadialProgressBar(params)
 		-- bg_sprite:setOpacity(255)
 		node:addChild(bg_sprite,-10)
 	end
+	--关于offset原理:旋转纹理,旋转prog
+	local tempHpSprite = cc.Sprite:create()
+	local size = UI.getSkinSize(finalParams.style.progressSkin.src)
+	local render = cc.RenderTexture:create(size.width,size.height)
+	render:beginWithClear(0,0,0,0)
 
-	local hp_sprite = cc.Sprite:create(finalParams.style.progressSkin.src)
+	tempHpSprite:setTexture(finalParams.style.progressSkin.src)
+	tempHpSprite:setAnchorPoint(cc.p(0.5,0.5))
+	tempHpSprite:setPosition(size.width/2,size.height/2)
+	tempHpSprite:setRotation(finalParams.offset)
+	tempHpSprite:setFlippedY(true)--渲染到renderTeX的纹理都是上下颠倒的
+	--注:这里在测试面板看不到,是因为渲染循序可能有问题,就是说还没渲染到renderTeX上就已经创建hp_sprite了,所以导致看不到效果,需要先按T(重新加载),在打开测试面板
+	--:实际是正常的,为了保险还是先保证renderTeX渲染完成在创建hp_sprite,就是在下一帧时创建hp_sprite和组件
+	tempHpSprite:visit()
+
+	render:endToLua()
+
+	local hp_sprite = cc.Sprite:createWithTexture(render:getSprite():getTexture())
     local radialProgressBar = cc.ProgressTimer:create(hp_sprite)
 	radialProgressBar:setType(cc.PROGRESS_TIMER_TYPE_RADIAL)
 	node:addChild(radialProgressBar)
 
 	radialProgressBar:setReverseProgress(finalParams.isReverse)
 	radialProgressBar:setMidpoint(finalParams.midPoint)
-	
+	radialProgressBar:setRotation(finalParams.offset)
+
 	local debugProg = nil
 	if finalParams.debug then
 		local function createColorSprite(size,color)
@@ -752,35 +771,54 @@ function newRadialProgressBar(params)
 		local debugHp = createColorSprite(radialProgressBar:getContentSize(),{r=1,g=0,b=0,a=0.5})
 		debugProg = cc.ProgressTimer:create(debugHp)
 		debugProg:setType(cc.PROGRESS_TIMER_TYPE_RADIAL)
-		node:addChild(debugProg)
-
 		debugProg:setReverseProgress(finalParams.isReverse)
 		debugProg:setMidpoint(finalParams.midPoint)
-	
+		debugProg:setRotation(finalParams.offset)
+		node:addChild(debugProg)
 	end
 	--
 	function node:setPercentage(val)
 		radialProgressBar:setPercentage(val)
+		if debugProg then
+			debugProg:setPercentage(val)
+		end
 	end
 	function node:getPercentage()
 		return radialProgressBar:getPercentage()
 	end
 
-	function node:setValue(val)
+	function node:setAngle(val)
+		self:setPercentage(5*val/18)
+	end
+
+	function node:getAngle()
+		return 18*self:getPercentage()/5
+	end
+
+	local function getFixValue(val)
 		local allowValue = 	finalParams.maxValue - finalParams.minValue
 		local finalValue = finalParams.minValue + allowValue * val * 0.01
 		finalValue = math.max(finalValue,finalParams.minValue)
 		finalValue = math.min(finalValue,finalParams.maxValue)
-		radialProgressBar:setPercentage(finalValue)
+		return finalValue
+	end
 
-		if debugProg then
-			debugProg:setPercentage(finalValue)
-		end
+	local function getOriValue(finalValue)
+		local allowValue = 	finalParams.maxValue - finalParams.minValue
+		local val = (finalValue - finalParams.minValue) / (allowValue * 0.01)
+
+		return val
+	end
+
+	function node:setValue(val)
+		local finalValue = getFixValue(val)
+		self:setPercentage(finalValue)
+
+		
 	end
 	function node:getValue()
-		local allowValue = 	finalParams.maxValue - finalParams.minValue
 		local finalValue = self:getPercentage()
-		local val = (finalValue - finalParams.minValue) / (allowValue * 0.01)
+		local val = getOriValue(finalValue)
 
 		return val
 	end
@@ -789,6 +827,11 @@ function newRadialProgressBar(params)
 		self:setValue(100 * value/maxValue)
 	end
 
+	function node:progressFromTo(time,from,to)
+		local finalFromValue = getFixValue(from)
+		local finalToValue = getFixValue(to)
+		radialProgressBar:runAction(cc.ProgressFromTo:create(time,finalFromValue,finalToValue))
+	end
 	
 	node:setContentSize(finalParams.width, finalParams.height)
 	node:setValue(finalParams.value)
