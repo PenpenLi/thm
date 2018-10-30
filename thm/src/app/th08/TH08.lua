@@ -10,7 +10,7 @@ end
 
 function M:_onScene()
     --创建第一个场景
-    local mainScene = require("Modules.Scenes.MainUi.MainScene"):create()
+    local mainScene = require("Modules.Scene.MainUi.MainScene"):create()
     -- local mainScene = require("Modules.Test.TestModule"):create()
     return mainScene
 end

@@ -2,7 +2,7 @@
 
 function M:onCreate()
 
-    local layer = require ("Modules.Scenes.MainUi.Layer.MenuLayer").create()
+    local layer = require ("Modules.Scene.MainUi.Layer.MenuLayer").create()
     self:addChild(layer)
     
 end

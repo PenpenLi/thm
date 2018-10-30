@@ -1,5 +1,6 @@
 -- 水平方向上循环
 -- 而且没测过很多情况，可能存在很多bug,慎用
+module("UI", package.seeall)
 local M = ccclass("loopScrollView", cc.layout)
 
 function M:ctor(params)

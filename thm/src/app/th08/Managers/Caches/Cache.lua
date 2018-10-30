@@ -1,7 +1,8 @@
 module("Cache", package.seeall)
 
-sceneCache = require("Modules.Scenes.SceneCache")
+gameCache = require("Modules.Game.GameCache")
 
 ---
 function clear()
+    gameCache.clear()
 end

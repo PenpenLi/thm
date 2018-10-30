@@ -1,4 +1,4 @@
-module("UICustom", package.seeall)
+module("UI", package.seeall)
 
  -- 顶点shader
  --Author : zlb

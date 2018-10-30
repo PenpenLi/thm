@@ -136,6 +136,25 @@ function M.create(params)
         end
     end)
 
+
+	Scheduler.scheduleNextFrame(function()
+		local radialProgBar = THSTG.UI.newRadialProgressBar({
+			x = display.cx,
+			y = display.cy,
+            offset = 90,
+            style = {
+                bgSkin = {
+                    src = ResManager.getUIRes(UIType.PROGRESSBAR,"prog_radial_bg")
+                },
+                progressSkin = {
+                    src = ResManager.getUIRes(UIType.PROGRESSBAR,"prog_radial_hp")
+                }
+            }
+		})
+		layer:addChild(radialProgBar)
+		radialProgBar:progressFromTo(5,0,90)
+	end)
+
     return layer
 end
 return M

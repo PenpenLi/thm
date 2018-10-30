@@ -1,8 +1,8 @@
 --MVC模块
 require "MVC.Init"
 
---UI模块
-require "UI.Init"
+--组件模块
+require "Component.Init"
 
 --配置文件
 require "Configs.Init"

@@ -303,3 +303,29 @@ function getSafeValue(default,table,...)
 	end
 	return default
 end
+
+--pairs顺序遍历 table(按key从小到大遍历) 
+--迭代器
+function pairsByKeys(t,desc)
+    local a = {}
+    for n in pairs(t) do
+        a[#a+1] = n
+    end
+	table.sort(a,function (a,b)
+		if desc then return (a > b)
+		else return (a < b)
+		end
+    end)
+    local i = 0
+    return function()
+	    i = i + 1
+	    return a[i], t[a[i]]
+    end
+end
+
+--取得table真实长度
+function getLength(t)
+	local length = 0
+	for _,_ in pairs(t) do length = length + 1 end
+	return length
+end

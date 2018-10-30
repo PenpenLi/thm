@@ -37,7 +37,21 @@ function newAnimation(params)
 	return animation
 end
 
+
+
 ----
+--TODO:
+--交换场景,当前场景入栈
+function swapScene()
+
+end
+
+--替换场景,释放当前场景
+function replaceScene()
+
+end
+
+
 function loadPlistFrames(params)
 	params = params or {}
 

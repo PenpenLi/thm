@@ -51,7 +51,7 @@ end
 -- @param	isVertical		[boolean]	是否垂直的	默认为false
 -- @param	isReversed		[boolean]	是否翻转	默认为false
 
-function newSheetFrames(params)
+function newFramesBySheet(params)
 	params = params or {}
 	assert(type(params.pattern) == "string", "[UI] newSheetFrames() invalid params")
 	params.length = params.length or 0
@@ -66,7 +66,7 @@ end
 -- @param	begin				[number]	开始下标	默认为1
 -- @param	length				[number]	长度	
 -- @param	isReversed			[boolean]	是否翻转	默认为false
-function newFileFrames(params)
+function newFramesByPattern(params)
 	params = params or {}
 	assert(type(params.pattern) == "string", "[UI] newFileFrames() invalid params")
 	params.begin = params.begin or 1
@@ -81,7 +81,7 @@ end
 -- @param	begin				[number]	开始下标	默认为1
 -- @param	length				[number]	长度		默认数组长度
 -- @param	isReversed			[boolean]	是否翻转	默认为false
-function newArrayFrames(params)
+function newFramesByFiles(params)
 	params = params or {}
 	assert(type(params.array) == "table", "[UI] newArrayFrames() invalid params")
 	params.begin = params.begin or 1
