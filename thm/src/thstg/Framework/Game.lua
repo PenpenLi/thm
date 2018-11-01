@@ -14,6 +14,8 @@ function M:createScene()
 end
 
 function M:createEnv(gameRoot)
+
+    -------------------------
     --添加LUA包含路径
     local newPath = string.gsub(gameRoot, "%.", "/")    --转移
     package.path = package.path .. ';' .. newPath .. '/?.lua'
@@ -34,9 +36,21 @@ function M:_onEnv(gameRoot)
 end
 
 function M:_onScene()
+    local scene = SCENE.newScene()
+    local label = UI.newLabel({
+        x = display.cx,
+        y = display.cy,
+        anchorPoint = UI.POINT_CENTER,
+        text = "THSTG"
+    })
+    scene:addChild(label)
+    --------
+
+
     -- 返回测试窗口
-    return nil,nil
+    return scene,nil
 end
+
 
 Game = M
 return M

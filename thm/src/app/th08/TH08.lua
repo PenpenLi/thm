@@ -5,14 +5,17 @@ function M:_onEnv()
     require "EnvBase"
     require "EnvGame"
 
+    --初始化管理器
+    ControllerHandler.init()
+
     return true
 end
 
 function M:_onScene()
     --创建第一个场景
-    local mainScene = require("Modules.Scene.MainUi.MainScene"):create()
+    local mainView = require("Modules.Game.GameModule"):create()
     -- local mainScene = require("Modules.Test.TestModule"):create()
-    return mainScene
+    return mainView
 end
 
 return M

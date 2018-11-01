@@ -1,4 +1,4 @@
-module("GameProxy", package.seeall)
+module("ProxyHandler", package.seeall)
 
 local _proxies = {}
 

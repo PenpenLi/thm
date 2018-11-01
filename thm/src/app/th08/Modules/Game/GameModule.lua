@@ -1,14 +1,10 @@
 
 local M = class("GameModule", View)
 
-function M:ctor()
-	self:setLayer(LayerManager.windowLayer)
-end
+function M:onCreate(params)
 
-function M:_initRealView(params)
-
-	local window = require("Game.Modules.Activity.ActivityDice.ActivityDiceLayer").create(params)
-    return window
+	local scene = require("Modules.Scene.MainUi.MainMenuScene").create(params)
+    self:addChild(scene)
     
 end
 

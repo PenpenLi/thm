@@ -23,17 +23,18 @@ end
 function M:run()
     local gamePath = self._configs.gameRoot .. "." ..self._configs.gameName
  
-    local game = require(gamePath):create()
+    local Game = require(gamePath):create()
 
     --初始化环境
-    local state = game:createEnv(self._configs.gameRoot)
-    --创建场景
-    local mainScene,transition = game:createScene()
+    if Game:createEnv(self._configs.gameRoot) then
 
-    --运行
-    mainScene:showWithScene(transition)
-    
+         --创建场景
+        local mainScene,transition = Game:createScene()
 
+        --运行
+        mainScene:showWithScene(transition)
+    end
+   
 end
 
 EngineEx = M

@@ -1,3 +1,3 @@
 module("EventType", package.seeall)
 
-GAME_TEST = THSTG.UIDUtil.getEventUID()
+GAME_TEST_PRINT = THSTG.UIDUtil.getEventUID()

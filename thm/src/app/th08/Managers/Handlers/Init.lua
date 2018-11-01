@@ -1,2 +1,2 @@
-require "Managers.Handlers.GameController"
-require "Managers.Handlers.GameProxy"
+require "Managers.Handlers.ControllerHandler"
+require "Managers.Handlers.ProxyHandler"

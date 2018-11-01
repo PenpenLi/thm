@@ -42,14 +42,14 @@ end
 ----
 --TODO:
 --交换场景,当前场景入栈
-function swapScene()
+-- function swapScene(scene)
 
-end
+-- end
 
---替换场景,释放当前场景
-function replaceScene()
-
-end
+-- --替换场景,释放当前场景
+-- function replaceScene(scene)
+-- 	return cc.Director:getInstance():replaceScene(scene)
+-- end
 
 
 function loadPlistFrames(params)

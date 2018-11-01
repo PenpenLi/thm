@@ -7,7 +7,7 @@ return {
             desc = Language.getString(100111), 
             offsetPos = cc.p(0,0),
             moveBy = cc.p(20,0) ,
-            file = "Modules.Scene.MainUi.Layer.SelectDifficultyLayer",
+            file = "Modules.Scene.MainUi.SelectDifficultyScene",
             onClick = function ()
                 
             end,
