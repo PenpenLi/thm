@@ -89,7 +89,8 @@ return {
             moveBy = cc.p(20,0) ,
             file = "",
             onClick = function ()
-            
+                --退出游戏
+                cc.Director:getInstance():endToLua()
             end,
         },
     },  
