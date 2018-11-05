@@ -8,5 +8,7 @@ TEXTURE = "texture"
 
 UI = "ui"
 
----
-SCENE = "scene"
+--
+MAIN_UI = "main_ui"
+
+PUBLIC_UI = "public_ui"
