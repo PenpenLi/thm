@@ -3,8 +3,11 @@ module("SCENE", package.seeall)
 --自定义的精灵帧创建
 local function newHVFrames(params ,isVertical)
 	params = params or {}
+
+
 	isVertical = isVertical or params.isVertical or false
 	params.source = params.source or ""
+	params.rect = params.rect or nil
 	params.length = params.length or 0
 	params.isReversed = params.isReversed or false
 
@@ -21,8 +24,9 @@ local function newHVFrames(params ,isVertical)
 		step = -1
 	end
 
-	local texture,texRect = SCENE.loadTexture(source)
-	
+	local texture,oriTexRect = SCENE.loadTexture(source)
+	local texRect = params.rect or oriTexRect
+
 	local frameSize = cc.size(texRect.width,texRect.height)
 	if isVertical then
 		frameSize.height = frameSize.height / length
@@ -48,16 +52,15 @@ end
 --创建Sheet精灵帧
 -- @param	source			[string]	资源路径
 -- @param	length			[number]	长度
+-- @param	rect			[table]		矩形
 -- @param	isVertical		[boolean]	是否垂直的	默认为false
 -- @param	isReversed		[boolean]	是否翻转	默认为false
 
 function newFramesBySheet(params)
 	params = params or {}
-	assert(type(params.pattern) == "string", "[UI] newSheetFrames() invalid params")
-	params.length = params.length or 0
-	params.isVertical = params.isReversed or false
+	assert(type(params.source) == "string", "[UI] newSheetFrames() invalid params")
 	params.isReversed = params.isReversed or false
-	
+
 	return newHVFrames(params,params.isVertical)
 end
 

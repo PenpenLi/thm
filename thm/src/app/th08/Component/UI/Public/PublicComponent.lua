@@ -1,207 +1,43 @@
 module("UIPublic", package.seeall)
---[[
-@param	x				[number]	x坐标
-@param	y				[number]	y坐标
-@param	width			[number]	宽度
-@param	height			[number]	高度
-@param	anchorPoint		[cc.p]		锚点(如UI.POINT_CENTER)
-@param	margin  		[number]	item之间的间隔
-@param	autoSize		[boolean]	自适应大小
-@param	linearGravity	[ccui.LinearGravity]	对齐方式，请参考ccui.LinearGravity枚举[top, centerVertical, bottom]
-@param  itemTemplate	[function]	子项目创建模板，需返回一个显示对象，并且这个对象具有setState（dataProvider[pos]）方法
-@params  itemTemplateParams [any]       模块参数
-@params isOnChange   [bool]		true,一直返回onSelectedIndexChange,false,selectedPos和lastPos只有不相同时返回onSelectedIndexChange
-								
-@param isCancelState [bool]     是否支持点击取消状态，值为真的时候selectedPos和lastPos相同时返回onSelectedIndexChange（nil, nil, lastNode, lastPos），
-                                默认值为false
-                                
-@param  onSelectedIndexChange      [function(this, selectedNode, selectedPos, lastNode, lastPos)]选中回调函数，值不可能同时为nil但都可能为nil
-                                    selecteNode: 	选中的节点， 可能为nil
-                                    selectedPos：	选中的位置， 可能为nil
-                                    lastNode： 		上次选中的节点，可能为nil
-                                    lastPos： 		上次选中的位置，可能为nil
-                                    node 可以包含_onCellClick({target, value})函数, 点击会触发节点的_onCellClick函数
-]]
-function newTileBox(params)
+
+function newRotateIcon(params)
     params = params or {}
-
-    local privateData = {}
-    privateData.dataProvider = {}
-    privateData.viewNode = {}
-	privateData.onSelectedIndexChange = params.onSelectedIndexChange
-	-- privateData.selectedState = {}   --保存各个位置的选中状态
-	privateData.isCancelState = params.isCancelState or false
-	privateData.isOnChange = params.isCancelState or params.isOnChange or false
-
-    local box = THSTG.UI.newVBox(params)
-
-    --用于判断点击
-    local lastNode = nil
-    local lastPos = nil
-    local function onChange(node,pos)
-
-        if privateData.isOnChange then
-            if privateData.isCancelState then
-                if node == lastNode then
-                    node, pos = nil, nil
-                end
-            end
-        end
-
-        if pos or lastPos then
-            if privateData.onSelectedIndexChange then
-                return privateData.onSelectedIndexChange(box,node,pos,lastNode,lastPos)
-            end
-        end
-
-        lastNode = node
-        lastPos = pos
-    end
-
-    function box:getDataProvider()
-        return privateData.dataProvider
-    end
-
-    function box:setDataProvider(dataProvider, clearClick)
-        self:removeAllChildren()
-        viewNode = {}
-        for i,v in ipairs(dataProvider) do
-            if params.itemTemplate then
-                local item = params.itemTemplate(params.itemTemplateParams)
-                
-                if item then
-                    item:setState(v,i)
-                    self:addChild(item)
-                end
-            end
-        end
-        self:forceDoLayout()
-        privateData.dataProvider = dataProvider
-    end
-    
-    local oldAddChild = box.addChild
-    function box:addChild(item)
-        local pos = #viewNode + 1
-        local node = UI.newWidget({
-            width = item:getContentSize().width,
-            height = item:getContentSize().height,
-            onClick = function (sender)
-                return onChange(item,pos)
-            end,
-        })
-        node:addChild(item)
-        viewNode[pos] = item
-        oldAddChild(self,node)
-    end
-
-    function box:setSelected(index)
-        --TODO:设置选择
-        onChange(privateData.viewNode[index],index)
-    end
-
-    return box
-end
-
-
-
---[[
---生成垂直列表
-@param	x				[number]	x坐标
-@param	y				[number]	y坐标
-@param	width			[number]	宽度
-@param	height			[number]	高度
-@param	anchorPoint		[cc.p]		锚点(如UI.POINT_CENTER)
-@params  colCount    		[number]  列数    
-@params  rowCount 			[number]  行数
-@params  itemColGap         [number]  纵列节点间的间隔
-@params  itemRowGap         [number]  横排节点间的间隔
-@param	autoSize		[boolean]	自适应大小
-@param	linearGravity	[ccui.LinearGravity]	对齐方式，请参考ccui.LinearGravity枚举[top, centerVertical, bottom]
-@param  itemTemplate	[function]	子项目创建模板，需返回一个显示对象，并且这个对象具有setState（dataProvider[pos]）方法
-@params  itemTemplateParams [any]       模块参数
-@params isOnChange   [bool]		true,一直返回onSelectedIndexChange,false,selectedPos和lastPos只有不相同时返回onSelectedIndexChange
-								
-@param isCancelState [bool]     是否支持点击取消状态，值为真的时候selectedPos和lastPos相同时返回onSelectedIndexChange（nil, nil, lastNode, lastPos），
-                                默认值为false
-                                
-@param  onSelectedIndexChange      [function(this, selectedNode, selectedPos, lastNode, lastPos)]选中回调函数，值不可能同时为nil但都可能为nil
-                                    selecteNode: 	选中的节点， 可能为nil
-                                    selectedPos：	选中的位置， 可能为nil
-                                    lastNode： 		上次选中的节点，可能为nil
-                                    lastPos： 		上次选中的位置，可能为nil
-                                    node 可以包含_onCellClick({target, value})函数, 点击会触发节点的_onCellClick函数
-]]
-function newAdapterList()
-    local _dataProvider = {}
-    local _itemTemplate = params.itemTemplate
-    local _nodeList = {}
-    -----View_______
+    params.x = params.x or 0
+    params.y = params.y or 0
+    params.anchorPoint = params.anchorPoint or THSTG.UI.POINT_CENTER
+    params.time = params.time or -1
+    params.speed = params.speed or false
+    params.source = params.source or ResManager.getRes(ResType.PUBLIC_UI,"loading_icon_1")
+    -----
     local node = THSTG.UI.newNode({
         x = params.x,
         y = params.y,
-        anchorPoint = params.anchorPoint
+        anchorPoint = params.anchorPoint,
     })
+    local icon = THSTG.UI.newImage({
+        x = node:getContentSize().width/2,
+        y = node:getContentSize().height/2,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        source = params.source
+    })
+    node:addChild(icon)
 
-    ---
-     --用于判断点击
-     local lastNode = nil
-     local lastPos = nil
-     local function onChange(node,pos)
- 
-         if privateData.isOnChange then
-             if privateData.isCancelState then
-                 if node == lastNode then
-                     node, pos = nil, nil
-                 end
-             end
-         end
- 
-         if pos or lastPos then
-             if privateData.onSelectedIndexChange then
-                 return privateData.onSelectedIndexChange(box,node,pos,lastNode,lastPos)
-             end
-         end
- 
-         lastNode = node
-         lastPos = pos
-     end
-
-    function node:setDataProvider(dataProvider)
-        _dataProvider = dataProvider or {}
-        node:removeAllChildren()
-        _nodeList = {}
-        for i,v in ipairs(_dataProvider) do
-            local item = _itemTemplate()
-            if item then
-                if item.setState and type(item.setState) == "function" then
-                    item:setState(v,i)
-                end
-
-               self:addChild(item)
-            end
-            
+    function node.updateLayer()
+        if params.time <0 then
+            icon:runAction(cc.RepeatForever:create(
+                cc.RotateBy:create(1,params.speed)
+            ))
+        else
+            icon:runAction(cc.RotateBy:create(params.time,params.time*params.speed))
         end
     end
 
-    function node:getDataProvider(index)
-        return _dataProvider
-    end
+    node:onNodeEvent("enter", function ()
+        node.updateLayer()
+    end)
 
-    local oldAddChild = node.addChild
-    function node:addChild(item)
-        --TODO:位置调整x,y
-        local pos = #_nodeList + 1
-        local node = UI.newWidget({
-            width = item:getContentSize().width,
-            height = item:getContentSize().height,
-            onClick = function (sender)
-                return onChange(item,pos)
-            end,
-        })
-        node:addChild(item)
-        _nodeList[pos] = item
-        oldAddChild(self,node)
-    end
-
+    node:onNodeEvent("exit", function ()
+        
+    end)
     return node
 end

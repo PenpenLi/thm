@@ -10,6 +10,8 @@ function M.create(params)
     --------View--------
     local node = THSTG.SCENE.newScene()
 
+
+    
     local _selectDiff = SelectDifficultyLayer.create({
         onClick = function(sender)
             return _selectedClickHandle(sender)
@@ -25,10 +27,10 @@ function M.create(params)
     _selectedClickHandle = function(sender)
         if sender then
             --TODO:位置不对
-            local destPos = cc.p(20,20)
+            local destPos = cc.p(400,80)
             local srcPos = sender:convertToWorldSpace(cc.p(sender:getPosition()))
             local moveVec2 = cc.p(destPos.x - srcPos.x,destPos.y - srcPos.y)
-            _varMoveBy = cc.MoveBy:create(0.3,moveVec2)
+            _varMoveBy = cc.MoveTo:create(0.3,moveVec2)
             sender:runAction(_varMoveBy)
         end
     end

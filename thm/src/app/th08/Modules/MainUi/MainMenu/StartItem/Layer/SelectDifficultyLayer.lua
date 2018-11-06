@@ -60,11 +60,11 @@ function M.create(params)
     node:addChild(_uiTitle)
 
     --TODO:这个控件由于存在宽高,导致边界的存在
-    _uiTitleList = THSTG.UI.newTileList({
+    _uiTitleList = UI.newAdapterList({--THSTG.UI.newTileList({
         x = display.cx,
         y = display.cy * 2 - 80,
-        width = 950, 
-        height = 535, 
+        width = display.width,
+        height = display.height - 80,
         anchorPoint = THSTG.UI.POINT_CENTER_TOP,
         colCount = 1,
         itemColGap = 10,

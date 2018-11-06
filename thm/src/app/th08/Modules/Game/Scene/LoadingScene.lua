@@ -4,7 +4,7 @@ function M.create(params)
     local scene = THSTG.SCENE.newScene()
 
     
-    local layer = require("Modules.PublicUi.LoadingLayer").create(params)
+    local layer = require("Modules.PublicUi.Loading.LoadingLayer").create(params)
     scene:addChild(layer)
 
 

@@ -6,15 +6,17 @@ local testUI = nil
 
 function M:onCreate()
     local TestTb = {
-        require("Modules.Test.UITest.UITest0"),         --TabBar测试
-        require("Modules.Test.UITest.UITest1"),         --按钮文字测试
+        require("Modules.Test.UITest.UITest0"),         --欢迎界面
+        require("Modules.Test.UITest.UITest1"),         --Sheet测试
     }
     --事件监听
     --注册键盘事件
     local function changeTest(index)
         if TestTb[index] then
             if testUI then 
-                testUI:removeFromParent()
+                if not tolua.isnull(testUI) then
+                    testUI:removeFromParent()
+                end
             end
             testUI = TestTb[index].create()
             self:addChild(testUI)
@@ -23,7 +25,6 @@ function M:onCreate()
 
     local listener = THSTG.EVENT.newKeyboardListener({
         onPressed = function(keyCode, event)
-            changeTest(keyCode - cc.KeyCode.KEY_0 + 1)
             if keyCode == cc.KeyCode.KEY_Q then
                 changeTest(11)
             elseif keyCode == cc.KeyCode.KEY_W then
@@ -44,12 +45,16 @@ function M:onCreate()
                 changeTest(19)
             elseif keyCode == cc.KeyCode.KEY_P then
                 changeTest(20)
+            else
+                if  keyCode >= cc.KeyCode.KEY_0 and keyCode <= cc.KeyCode.KEY_9 then
+                    changeTest(keyCode - cc.KeyCode.KEY_0 + 1)
+                end
             end
         end,
     })
     THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
 
-    changeTest(2)
+    changeTest(1)
 end
 
 return M
