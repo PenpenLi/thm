@@ -29,8 +29,9 @@ function M.create(params)
             --TODO:位置不对
             local destPos = cc.p(400,80)
             local srcPos = sender:convertToWorldSpace(cc.p(sender:getPosition()))
+    
             local moveVec2 = cc.p(destPos.x - srcPos.x,destPos.y - srcPos.y)
-            _varMoveBy = cc.MoveTo:create(0.3,moveVec2)
+            _varMoveBy = cc.MoveTo:create(0.3,destPos)
             sender:runAction(_varMoveBy)
         end
     end

@@ -3,6 +3,11 @@ module(..., package.seeall)
 local M = {}
 function M.create(params)
     --------Model--------
+    local ROLES_INFO = {
+        {mode = 1,}
+    }
+
+    local _ui = {}
 
     local _slideLeftHandle = nil
     local _slideRightHandle = nil
@@ -11,7 +16,7 @@ function M.create(params)
 
     --需要一个能够判断滑动方向的View
     local slideLayer = THSTG.UI.newLayerGesture({
-        showColor = true,
+        showColor = false,
         slideLeft = function ()
             _slideLeftHandle()
         end,

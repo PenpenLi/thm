@@ -11,7 +11,7 @@ function M.create(params)
     local frames = THSTG.SCENE.newFramesBySheet({
         source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),
         length = 4,
-        rect = {x = 0,y = 48,width = 128,height = 48}
+        rect = {x = 0,y = 0,width = 128,height = 48}
     })
     local animation = THSTG.SCENE.newAnimation({frames = frames})
 

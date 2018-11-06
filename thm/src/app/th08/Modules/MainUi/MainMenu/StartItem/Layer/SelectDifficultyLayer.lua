@@ -5,8 +5,10 @@ function M.create(params)
     local _onClick = params.onClick
 
     --------Model--------
-    local _uiTitle = nil
-    local _uiTitleList = nil
+    local _ui = {}
+    _ui.title = nil
+    _ui.tileList = nil
+    _ui.diffNodes = {}
 
     local _selectedChangedHandle = nil
 
@@ -51,34 +53,22 @@ function M.create(params)
     end
     local node = THSTG.UI.newNode()
 
-    local _uiTitle = THSTG.UI.newSprite({
+    _ui.title = THSTG.UI.newSprite({
         x = display.cx,
         y = display.cy * 2,
         anchorPoint = THSTG.UI.POINT_CENTER,
         src = ResManager.getRes(ResType.MAIN_UI,"diff_title"),
     })
-    node:addChild(_uiTitle)
+    node:addChild(_ui.title)
 
-    --TODO:这个控件由于存在宽高,导致边界的存在
-    _uiTitleList = UI.newAdapterList({--THSTG.UI.newTileList({
-        x = display.cx,
-        y = display.cy * 2 - 80,
-        width = display.width,
-        height = display.height - 80,
-        anchorPoint = THSTG.UI.POINT_CENTER_TOP,
-        colCount = 1,
-        itemColGap = 10,
-        bounceEnabled = false,
+    local diffInfos = SelectDiffConfig.getInfos()
+    for _,v in ipairs(diffInfos) do
+        local node = createTemplate()
+        --TODO:
 
-        isOnChange = true,
-        -- padding = {left= 0,right=0,top=0,bottom =5},
-        direction = ccui.ListViewDirection.vertical,
-        itemTemplate = createTemplate,
-        onSelectedIndexChange = function (sender,selectedNode, selectedPos, lastNode, lastPos)
-            return _selectedChangedHandle(sender,selectedNode, selectedPos, lastNode, lastPos)
-        end,
-    })
-    node:addChild(_uiTitleList)
+
+    end
+   
 
     --------Control--------
     _selectedChangedHandle = function(sender,selectedNode, selectedPos, lastNode, lastPos)
@@ -95,9 +85,8 @@ function M.create(params)
     end
 
     function node.updateLayer()
-        _uiTitle:runAction(cc.MoveBy:create(0.1, cc.p(0,-40)))
-        _uiTitleList:setDataProvider(SelectDiffConfig.getInfos())
-        _uiTitleList:setSelected(1)
+        _ui.title:runAction(cc.MoveBy:create(0.1, cc.p(0,-40)))
+
     end
     ---
 

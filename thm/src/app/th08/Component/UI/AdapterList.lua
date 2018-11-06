@@ -1,15 +1,5 @@
 module("UI", package.seeall)
-ADAPTER_LIST_PARAMS = {
-    x = 0,
-    y = 0,
-    anchorPoint = THSTG.UI.POINT_CENTER,
-    colCount = 1,
-    rowCount = 1,
 
-
-
-
-}
 --[[
 --生成垂直列表
 @param	x				[number]	x坐标
@@ -52,13 +42,19 @@ function newAdapterList(params)
     privateData.itemRowGap = params.itemRowGap or 0
     privateData.colCount = params.colCount or 1
     privateData.rowCount = params.rowCount or 1
+
+    privateData.x = params.x or 0
+    privateData.y = params.y or 0
+    privateData.width = params.width or nil
+    privateData.height = params.height or nil
+    privateData.anchorPoint = params.anchorPoint or THSTG.UI.POINT_CENTER
     -----View------
     local node = THSTG.UI.newNode({
-        x = params.x,
-        y = params.y,
-        width = params.width,
-        height = params.height,
-        anchorPoint = params.anchorPoint
+        x = privateData.x,
+        y = privateData.y,
+        width = privateData.width,
+        height = privateData.height,
+        anchorPoint = privateData.anchorPoint
     })
     ---
     --用于判断点击
@@ -144,6 +140,7 @@ function newAdapterList(params)
         local index = #privateData.viewNodes + 1
         local posX = node:getPositionX() 
         local posY = node:getPositionY() 
+        local topPosY = (1.0 - privateData.anchorPoint.y) * privateData.height  + posY
         if privateData.direction == ccui.ListViewDirection.vertical then
             posY = node:getPositionY() - (index * itemHeight + privateData.itemColGap)  --因为绘图起点在左下角缘故
         else
