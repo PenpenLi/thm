@@ -10,7 +10,7 @@ function M.create(params)
 
     
 
-   -------
+    --------Controller--------
   
     node:onNodeEvent("enter", function ()
         THSTG.CCDispatcher:addEventListenerWithFixedPriority(_varKeyboardListener, 1)

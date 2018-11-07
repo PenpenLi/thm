@@ -3,110 +3,98 @@
 local M = {}
 function M.create(params)
     --------Model--------
-   
+    local SHEET_INFO = {
+        {name = "rm_normal",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 4,rect = {x = 0,y = 0,width = 128,height = 48},time = 1/8},
+        {name = "rm_move_left",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 7,rect = {x = 0,y = 48,width = 7*32,height = 48},time = 1/14},
+        {name = "rm_move_left_start",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 2,rect = {x = 0,y = 48,width = 2*32,height = 48},time = 1/8},
+        {name = "rm_move_left_sustain",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 5,rect = {x = 2*32,y = 48,width = 5*32,height = 48},time = 1/10},
+
+        {name = "zm_normal",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 4,rect = {x = 4*32,y = 0,width = 4*32,height = 48},time = 1/8},
+        {name = "zm_move_left",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 7,rect = {x = 0,y = 2*48,width = 7*32,height = 48},time = 1/8},
+        {name = "zm_move_left_start",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 2,rect = {x = 0,y = 2*48,width = 2*32,height = 48},time = 1/8},
+        {name = "zm_move_left_sustain",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 5,rect = {x = 2*32,y = 2*48,width = 5*32,height = 48},time = 1/8},
+
+        {name = "rm_speel_card1",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 1,rect = {x = 0,y = 3*48,width = 2*32,height = 16},time = 1/2},
+    }
+    local ANIMATION_TB = {}
     local _varKeyboardListener = nil
     --------View--------
     local node = THSTG.UI.newNode()
+    local function createSheetAnimation(i)
+        local info = SHEET_INFO[i]
+        local animation = THSTG.SCENE.newAnimation({
+            frames = THSTG.SCENE.newFramesBySheet({
+                source = info.source,
+                length = info.length,
+                rect = info.rect,
+            }),
+            time = info.time
+        })
+        return animation
+    end
 
-    local normalAnimation = THSTG.SCENE.newAnimation({
-        frames = THSTG.SCENE.newFramesBySheet({
-            source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),
-            length = 4,
-            rect = {x = 0,y = 0,width = 128,height = 48}
-        }),
-        time = 1/8
-    })
+    local function showAnimationEx()
+        local oriFrameWidth = SHEET_INFO[1].rect.width/SHEET_INFO[1].length
+        local oriFrameHeight = SHEET_INFO[1].rect.height
+        
+        local curFrameWidth = oriFrameWidth
+        local curFrameHeight = oriFrameHeight
+        local lastFrameWidth = oriFrameWidth
+        local lastFrameHeight = oriFrameHeight
 
-    local leftAnimation = THSTG.SCENE.newAnimation({
-        frames = THSTG.SCENE.newFramesBySheet({
-            source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),
-            length = 7,
-            rect = {x = 0,y = 48,width = 7*32,height = 48}
-        }),
-        time = 1/14
-    })
-    --帧拆解
-    local leftAnimation_start = THSTG.SCENE.newAnimation({
-        frames = THSTG.SCENE.newFramesBySheet({
-            source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),
-            length = 2,
-            rect = {x = 0,y = 48,width = 2*32,height = 48}
-        }),
-        time = 1/14
-    })
+        local posX = -lastFrameWidth/2
+        local posY = display.height - oriFrameHeight/2
+        for i,v in ipairs(SHEET_INFO) do
+            curFrameWidth = v.rect.width/v.length
+            curFrameHeight = v.rect.height
 
-    local leftAnimation_left = THSTG.SCENE.newAnimation({
-        frames = THSTG.SCENE.newFramesBySheet({
-            source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),
-            length = 5,
-            rect = {x = 2*32,y = 48,width = 5*32,height = 48}
-        }),
-        time = 1/14
-    })
+            posX = posX + curFrameWidth/2 + lastFrameWidth/2
+            if posX>= display.width then
+                posX = curFrameWidth/2
+                posY = posY - oriFrameHeight
+            end
 
+            local animation = createSheetAnimation(i)
+            local sprite = THSTG.UI.newSprite({
+                x = posX,
+                y = posY,
+                anchorPoint = THSTG.UI.POINT_CENTER,
+                
+            })
+ 
+            local clickNode = THSTG.UI.newWidget({
+                x = curFrameWidth/2,
+                y = curFrameHeight/2,
+                width = curFrameWidth,
+                height = curFrameHeight,
+                anchorPoint = THSTG.UI.POINT_CENTER,
+                onClick = function()
+                    dump(15,v.rect,v.name)
+                end,
+            })
+            sprite:addChild(clickNode)
+            
+            sprite:playAnimationForever(animation)
+            node:addChild(sprite)
+            ANIMATION_TB[v.name] = animation
 
+            
 
+            lastFrameWidth = curFrameWidth
+            lastFrameHeight = lastFrameHeight
+        end
+    end
+    showAnimationEx()
 
-    --应该有一种反向的吧,生成Animate然后反向
-    local leftAnimation_res = THSTG.SCENE.newAnimation({
-        frames = THSTG.SCENE.newFramesBySheet({
-            source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),
-            length = 7,
-            rect = {x = 0,y = 48,width = 7*32,height = 48},
-            isReversed = true,
-        }),
-        time = 1/14
-    })
-  
     ---
-   
     local sprite = THSTG.UI.newSprite({
         x = display.cx,
         y = display.cy-32,
         anchorPoint = THSTG.UI.POINT_CENTER,
     })
-    sprite:playAnimationForever(normalAnimation)
+    sprite:playAnimationForever(ANIMATION_TB["rm_normal"])
     node:addChild(sprite)
 
-    local sprite1 = THSTG.UI.newSprite({
-        x = display.cx-32,
-        y = display.cy,
-        anchorPoint = THSTG.UI.POINT_CENTER,
-    })
-    sprite1:playAnimationForever(normalAnimation)
-    node:addChild(sprite1)
-
-    local sprite2 = THSTG.UI.newSprite({
-        x = display.cx+32,
-        y = display.cy,
-        anchorPoint = THSTG.UI.POINT_CENTER,
-    })
-    sprite2:playAnimationForever(leftAnimation)
-    node:addChild(sprite2)
-
-    local sprite3 = THSTG.UI.newSprite({
-        x = display.cx+64,
-        y = display.cy,
-        anchorPoint = THSTG.UI.POINT_CENTER,
-    })
-    sprite3:playAnimationForever(leftAnimation_res)
-    node:addChild(sprite3)
-
-    local sprite4 = THSTG.UI.newSprite({
-        x = display.cx-64,
-        y = display.cy,
-        anchorPoint = THSTG.UI.POINT_CENTER,
-    })
-    sprite4:playAnimationForever(leftAnimation_start)
-    node:addChild(sprite4)
-
-    local sprite5 = THSTG.UI.newSprite({
-        x = display.cx-96,
-        y = display.cy,
-        anchorPoint = THSTG.UI.POINT_CENTER,
-    })
-    sprite5:playAnimationForever(leftAnimation_left)
-    node:addChild(sprite5)
 
 
 
@@ -118,10 +106,10 @@ function M.create(params)
                 sprite:setFlippedX(false)
                 sprite:stopAllActions()
                 sprite:runAction(cc.Sequence:create({
-                    cc.Animate:create(leftAnimation_start),
+                    cc.Animate:create(ANIMATION_TB["rm_move_left_start"]),
                     cc.CallFunc:create(function() 
                         -- sprite:stopAllActions()
-                        sprite:runAction(cc.RepeatForever:create(cc.Animate:create(leftAnimation_left)))
+                        sprite:runAction(cc.RepeatForever:create(cc.Animate:create(ANIMATION_TB["rm_move_left_sustain"])))
                     end)
                 }))
 
@@ -132,10 +120,10 @@ function M.create(params)
                 sprite:setFlippedX(true)
                 sprite:stopAllActions()
                 sprite:runAction(cc.Sequence:create({
-                    cc.Animate:create(leftAnimation_start),
+                    cc.Animate:create(ANIMATION_TB["rm_move_left_start"]),
                     cc.CallFunc:create(function() 
                         -- sprite:stopAllActions()
-                        sprite:runAction(cc.RepeatForever:create(cc.Animate:create(leftAnimation_left)))
+                        sprite:runAction(cc.RepeatForever:create(cc.Animate:create(ANIMATION_TB["rm_move_left_sustain"])))
                     end)
                 }))
             end
@@ -148,12 +136,11 @@ function M.create(params)
             -- animate:reverse()
 
             sprite:runAction(cc.Sequence:create({
-				cc.Animate:create(leftAnimation):reverse(),
+				cc.Animate:create(ANIMATION_TB["rm_move_left"]):reverse(),
                 cc.CallFunc:create(function() 
-                    
+                    -- sprite:stopAllActions()
                     sprite:setFlippedX(false)
-                    sprite:stopAllActions()
-                    sprite:playAnimationForever(normalAnimation)
+                    sprite:playAnimationForever(ANIMATION_TB["rm_normal"])
                 end)
             }))
            
