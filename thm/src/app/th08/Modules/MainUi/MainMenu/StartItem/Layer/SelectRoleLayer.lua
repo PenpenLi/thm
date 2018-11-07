@@ -8,7 +8,7 @@ function M.create(params)
     }
 
     local _ui = {}
-
+    local _varKeyboardListener = nil
     local _slideLeftHandle = nil
     local _slideRightHandle = nil
     --------View--------
@@ -26,7 +26,9 @@ function M.create(params)
     })
     node:addChild(slideLayer)
 
-
+    display.newSprite("HelloWorld.png")
+    :move(display.center)
+    :addTo(node)
     --------Control--------
     _slideLeftHandle = function ()
         print(15,":left")
@@ -35,12 +37,31 @@ function M.create(params)
         print(15,":right")
     end
 
+    _varKeyboardListener = THSTG.EVENT.newKeyboardListener({
+        onPressed = function (keyCode, event)
+            if _varIsEnabled then
+                if keyCode == cc.KeyCode.KEY_ESCAPE then
+                    --返回上层的动画
+                    THSTG.Dispatcher.dispatchEvent(EventType.STARTITEM_SELECTROLE_CANCEL)
+
+                end
+            end
+        end,
+    })
+
+
+    function node:setEnabled(status)
+        _varIsEnabled = status
+        
+    end
+
     node:onNodeEvent("enter", function ()
-       
+        THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(_varKeyboardListener, node)
 	end)
 
-	node:onNodeEvent("exit", function ()
-        
+    node:onNodeEvent("exit", function ()
+        print(15,"dsdsdsdsExit")
+        THSTG.CCDispatcher:removeEventListener(_varKeyboardListener)
     end)
 
     return node

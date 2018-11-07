@@ -127,6 +127,10 @@ function newCheckBox(params)
 			end
 		end
 	end
+	
+	function node:isEnabled()
+		return checkBox:isEnabled()
+	end
 
 	--
 	function node:setLabelZoomScale(value)

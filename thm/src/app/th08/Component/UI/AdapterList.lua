@@ -134,7 +134,7 @@ function newAdapterList(params)
 
     local oldAddChild = node.addChild
     function node:addChild(item)
-        --TODO:位置调整x,y
+        --TODO:位置调整x,y,colCount与linearGravity关系
         local itemWidth = item:getContentSize().width
         local itemHeight = item:getContentSize().height
         local index = #privateData.viewNodes + 1
@@ -142,14 +142,14 @@ function newAdapterList(params)
         local posY = node:getPositionY() 
         local topPosY = (1.0 - privateData.anchorPoint.y) * privateData.height  + posY
         if privateData.direction == ccui.ListViewDirection.vertical then
-            posY = node:getPositionY() - (index * itemHeight + privateData.itemColGap)  --因为绘图起点在左下角缘故
+            posY = node:getPositionY() - (index * (itemHeight + privateData.itemColGap))  --因为绘图起点在左下角缘故
         else
-            posX = index * itemWidth + privateData.itemRowGap
+            posX = index * (itemWidth + privateData.itemRowGap)
         end
 
-        local node = UI.newWidget({
-            x = posX,
-            y = posY,
+        local clickNode = UI.newWidget({
+            x = itemWidth/2,
+            y = itemHeight/2,
             width = itemWidth,
             height = itemHeight,
             anchorPoint = THSTG.UI.POINT_CENTER,
@@ -157,13 +157,13 @@ function newAdapterList(params)
                 return onChange(item,index)
             end,
         })
-
-        item:setPositionX(itemWidth/2)
-        item:setPositionY(itemHeight/2)
+        item:setPositionX(posX)
+        item:setPositionY(posY)
         item:setAnchorPoint(THSTG.UI.POINT_CENTER)
-        node:addChild(item)
+        item:addChild(clickNode,100)
+        
         privateData.viewNodes[index] = item
-        oldAddChild(self,node)
+        oldAddChild(self,item)
     end
 
     local oldRemoveAllChildren = node.removeAllChildren
@@ -176,6 +176,25 @@ function newAdapterList(params)
         if index <= #privateData.viewNodes then
             onChange(privateData.viewNodes[index],index)
         end
+    end
+
+    function node:getNode(position)
+		if type(position) == "number" then
+			local minPos = 1
+			local maxPos = #privateData.viewNodes
+			local tarPos = position
+			if tarPos < maxPos and tarPos > minPos then
+				return privateData.viewNodes[tarPos]
+			else
+				warnLog("getNode position is wrong value is : "..tostring(position).." max: "..(maxPos).." min: "..minPos)
+			end
+		else
+			warnLog("getNode position is not number")
+		end
+	end
+
+    function node:getNodes()
+        return privateData.viewNodes
     end
 
     return node

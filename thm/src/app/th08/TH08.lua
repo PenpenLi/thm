@@ -5,6 +5,9 @@ function M:_onEnv()
     require "EnvBase"
     require "EnvGame"
 
+    --随机数种子
+    math.randomseed(os.time())
+
     --初始化管理器
     ControllerHandler.init()
 
