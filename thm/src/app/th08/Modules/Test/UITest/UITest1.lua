@@ -4,7 +4,7 @@ local M = {}
 function M.create(params)
     --------Model--------
     local SHEET_INFO = {
-        {name = "rm_normal",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 4,rect = {x = 0,y = 0,width = 128,height = 48},time = 1/8},
+        {name = "rm_normal",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 4,rect = {x = 0,y = 0,width = 4*32,height = 48},time = 1/8},
         {name = "rm_move_left",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 7,rect = {x = 0,y = 48,width = 7*32,height = 48},time = 1/14},
         {name = "rm_move_left_start",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 2,rect = {x = 0,y = 48,width = 2*32,height = 48},time = 1/8},
         {name = "rm_move_left_sustain",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 5,rect = {x = 2*32,y = 48,width = 5*32,height = 48},time = 1/10},
@@ -134,23 +134,21 @@ function M.create(params)
 
             -- local animate = cc.Animate:create(leftAnimation):reverse()
             -- animate:reverse()
+            
+            local actions = {}
+            if keyCode == cc.KeyCode.KEY_A or keyCode == cc.KeyCode.KEY_D then
+                table.insert( actions,cc.Animate:create(ANIMATION_TB["rm_move_left"]):reverse())
+                table.insert( actions,cc.CallFunc:create(function() 
+                    sprite:setFlippedX(not sprite:isFlippedX())
+                end))
+            end
+            table.insert( actions,cc.CallFunc:create(function() 
+                -- sprite:stopAllActions()   
+                sprite:playAnimationForever(ANIMATION_TB["rm_normal"])
+            end))
 
-            sprite:runAction(cc.Sequence:create({
-				cc.Animate:create(ANIMATION_TB["rm_move_left"]):reverse(),
-                cc.CallFunc:create(function() 
-                    -- sprite:stopAllActions()
-                    sprite:setFlippedX(false)
-                    sprite:playAnimationForever(ANIMATION_TB["rm_normal"])
-                end)
-            }))
+            sprite:runAction(cc.Sequence:create(actions))
            
-            -- sprite:playAnimationOnce(leftAnimation_res,{
-            --     onComplete = function()
-            --         sprite:stopAllActions()
-            --         sprite:playAnimationForever(normalAnimation)
-            --     end
-            -- })
-            --TODO:进入的时候居然执行这个
             print(15,"Release")
         end
     })

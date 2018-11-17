@@ -1,6 +1,6 @@
 module(..., package.seeall)
-local SelectDifficultyLayer = require("Modules.MainUi.MainMenu.StartItem.Layer.SelectDifficultyLayer")
-local SelectRoleLayer = require("Modules.MainUi.MainMenu.StartItem.Layer.SelectRoleLayer")
+local SelectDifficultyLayer = require("Modules.GUI.MainUi.MainMenu.StartItem.Layer.SelectDifficultyLayer")
+local SelectRoleLayer = require("Modules.GUI.MainUi.MainMenu.StartItem.Layer.SelectRoleLayer")
 local M = {}
 function M.create(params)
     --------Model--------
@@ -30,7 +30,7 @@ function M.create(params)
         x = display.cx,
         y = display.height,
         anchorPoint = THSTG.UI.POINT_CENTER_TOP,
-        src = ResManager.getRes(ResType.MAIN_UI,"diff_title"),
+        src = ResManager.getResSub(ResType.GUI,GUIType.MAIN_UI,"diff_title"),
     })
     _uiTitle:setPositionY(display.height + _uiTitle:getContentSize().height)
     node:addChild(_uiTitle)
