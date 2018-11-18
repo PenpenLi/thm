@@ -52,7 +52,7 @@ function M.create(params)
 
     function node:setEnabled(status)
         _varIsEnabled = status
-        
+        slideLayer:setEnabled(status)
     end
 
     node:onNodeEvent("enter", function ()

@@ -1,5 +1,5 @@
 module("ScenePublic", package.seeall)
 
-function newMoveAnimate()
+function newMoveAnimate(params)
     
 end

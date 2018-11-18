@@ -14,7 +14,7 @@ function M.create(params)
         {name = "zm_move_left_start",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 2,rect = {x = 0,y = 2*48,width = 2*32,height = 48},time = 1/8},
         {name = "zm_move_left_sustain",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 5,rect = {x = 2*32,y = 2*48,width = 5*32,height = 48},time = 1/8},
 
-        {name = "rm_speel_card1",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 1,rect = {x = 0,y = 3*48,width = 2*32,height = 16},time = 1/2},
+        -- {name = "rm_speel_card1",source = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),length = 1,rect = {x = 0,y = 3*48,width = 2*32,height = 16},time = 1/2},
     }
     local ANIMATION_TB = {}
     local _varKeyboardListener = nil
@@ -100,7 +100,8 @@ function M.create(params)
 
    -------
     _varKeyboardListener = THSTG.EVENT.newKeyboardListener({
-        --TODO:动画应该放入Cache中,不然回调时对象已经被释放
+        --动画应该放入Cache中,不然回调时对象已经被释放-
+        --可以用retain()增加引用
         onPressed = function (keyCode, event)
             if keyCode == cc.KeyCode.KEY_A then
                 sprite:setFlippedX(false)
@@ -130,7 +131,7 @@ function M.create(params)
         end,
         onReleased = function(keyCode, event)
             
-            sprite:stopAllActions()
+           
 
             -- local animate = cc.Animate:create(leftAnimation):reverse()
             -- animate:reverse()
@@ -146,7 +147,9 @@ function M.create(params)
                 -- sprite:stopAllActions()   
                 sprite:playAnimationForever(ANIMATION_TB["rm_normal"])
             end))
-
+    
+            --TODO:如果之前的动作就是正常状态,那么就不需要停止动作
+            sprite:stopAllActions()
             sprite:runAction(cc.Sequence:create(actions))
            
             print(15,"Release")
@@ -154,7 +157,7 @@ function M.create(params)
     })
 
     node:onNodeEvent("enter", function ()
-        THSTG.CCDispatcher:addEventListenerWithFixedPriority(_varKeyboardListener, 1)
+        THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(_varKeyboardListener, node)
 	end)
 
 	node:onNodeEvent("exit", function ()

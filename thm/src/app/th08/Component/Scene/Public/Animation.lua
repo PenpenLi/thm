@@ -35,3 +35,15 @@ function newAnimation(texType,resName)
     end
 
 end
+
+function newAnimationBySheet(resName)
+    return newAnimation(TexType.SHEET,resName)
+end
+
+function newAnimationByPlist(resName)
+    return newAnimation(TexType.PLIST,resName)
+end
+
+function newAnimationByFiles(resName)
+    return newAnimation(TexType.IMAGE,resName)
+end
