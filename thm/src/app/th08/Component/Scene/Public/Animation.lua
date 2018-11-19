@@ -1,7 +1,7 @@
 module("ScenePublic", package.seeall)
 
 function newAnimation(texType,resName)
-    local info = AnimationConfig.getResInfo(texType,resName)
+    local info = AnimationConfig.getRes(texType,resName)
     if texType == TexType.SHEET then
         local animation = THSTG.SCENE.newAnimation({
             frames = THSTG.SCENE.newFramesBySheet({

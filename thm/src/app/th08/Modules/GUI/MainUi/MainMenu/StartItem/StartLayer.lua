@@ -9,7 +9,8 @@ function M.create(params)
     local _uiTitle = nil
     local _selectDiffLayer = nil
     local _selectRoleLayer = nil
-    local _varTitleAction = nil
+
+    local _varIsActionDone = nil
 
     local _varMoveBy = nil
 
@@ -36,40 +37,45 @@ function M.create(params)
     node:addChild(_uiTitle)
 
     --------Control--------
+    local function runTileAction(actions)
+        
+        table.insert(actions,cc.CallFunc:create(function() _varIsActionDone = true  end))
+        local seqAction = cc.Sequence:create(actions)
+        _varIsActionDone = false
+        _uiTitle:runAction(seqAction)
 
+    end
     function node.swapLayer(_,e,params)
-        --TODO:有可能还在执行行为的时候接收到消息
-        --现在也是有问题
-        if not tolua.isnull(_varTitleAction) and not _varTitleAction:isDone() then
+        if not _varIsActionDone then
             return 
         end
+
         if e == EventType.STARTITEM_SELECTDIFF_SELECT then
             --的使能
             _selectRoleLayer:setVisible(true)
             _selectRoleLayer:setEnabled(true)
             _selectDiffLayer:setEnabled(false)
-            _varTitleAction = cc.Sequence:create({
+            local actions = {
                 cc.MoveBy:create(0.2, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
                 cc.MoveBy:create(0.2, cc.p(0,-(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y)))    
-            })
-            _uiTitle:runAction(_varTitleAction)
+            }
+            runTileAction(actions)
             
         elseif e == EventType.STARTITEM_SELECTROLE_CANCEL then
             _selectRoleLayer:setVisible(false)
             _selectRoleLayer:setEnabled(false)
             _selectDiffLayer:setEnabled(true)
-            _varTitleAction = cc.Sequence:create({
+            local actions = {
                 cc.MoveBy:create(0.2, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
                 cc.MoveBy:create(0.2, cc.p(0,-(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y)))
-            })
-            _uiTitle:runAction(_varTitleAction)
+            }
+            runTileAction(actions)
         elseif e == EventType.STARTITEM_SELECTDIFF_CANCEL then
             _selectDiffLayer:setEnabled(false)
-            _varTitleAction = cc.Sequence:create({
+            local actions = {
                 cc.MoveBy:create(0.2, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
-              
-            })
-            _uiTitle:runAction(_varTitleAction)
+            }
+            runTileAction(actions)
             --返回主菜单
             -- THSTG.Dispatcher.dispatchEvent(EventType.GAME_REPLACE_SCENE,{type = SceneType.MAIN_SCENE})
             
@@ -77,12 +83,12 @@ function M.create(params)
     end
 
     function node.updateLayer()
-        _varTitleAction = cc.Sequence:create({
+        local actions = {
             -- cc.MoveBy:create(0.1, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
             -- cc.DelayTime:create(1.0),
             cc.MoveBy:create(0.1, cc.p(0,-(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y)))
-        })
-        _uiTitle:runAction(_varTitleAction)
+        }
+        runTileAction(actions)
     end
 
     node:onNodeEvent("enter", function ()

@@ -4,6 +4,7 @@ local M = class("EntityData")
 
 function M:ctor()
     self._collisionRect = false --碰撞矩形
+
 end
 
 

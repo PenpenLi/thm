@@ -10,5 +10,8 @@ require "Configs.Init"
 --资源管理器
 require "Managers.Init"
 
+--模块初始化
+require "Modules.Init"
+
 --配置文件
 require "Test"

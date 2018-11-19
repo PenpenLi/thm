@@ -100,7 +100,7 @@ function newLayerStack(params)
 			if prevNode and prevNode:getParent() then
 				--这里必须调用这个并且传入false
 				-- prevNode:removeFromParent()
-				prevNode:removeFromParentAndCleanup(false)
+				prevNode:removeFromParent(false)
 			end
 
 			local node = children[selectedIndex]

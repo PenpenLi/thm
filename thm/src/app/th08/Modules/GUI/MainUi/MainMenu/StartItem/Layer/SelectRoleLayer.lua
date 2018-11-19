@@ -18,9 +18,13 @@ function M.create(params)
     local slideLayer = THSTG.UI.newLayerGesture({
         showColor = false,
         slideLeft = function ()
+            if not _varIsEnabled then return end
+
             _slideLeftHandle()
         end,
         slideRight = function ()
+            if not _varIsEnabled then return end
+
             _slideRightHandle()
         end,
     })
@@ -30,29 +34,38 @@ function M.create(params)
     :move(display.center)
     :addTo(node)
     --------Control--------
-    _slideLeftHandle = function ()
+    local function leftSelect()
         print(15,":left")
     end
-    _slideRightHandle = function ()
+
+    local function rightSelect()
         print(15,":right")
+    end
+
+
+    _slideLeftHandle = function ()
+        leftSelect()
+    end
+    _slideRightHandle = function ()
+        rightSelect()
     end
 
     _varKeyboardListener = THSTG.EVENT.newKeyboardListener({
         onPressed = function (keyCode, event)
-            if _varIsEnabled then
-                if keyCode == cc.KeyCode.KEY_ESCAPE then
-                    --返回上层的动画
-                    THSTG.Dispatcher.dispatchEvent(EventType.STARTITEM_SELECTROLE_CANCEL)
+            if not _varIsEnabled then return end
+            if keyCode == cc.KeyCode.KEY_ESCAPE then
+                --返回上层的动画
+                THSTG.Dispatcher.dispatchEvent(EventType.STARTITEM_SELECTROLE_CANCEL)
 
-                end
             end
+           
         end,
     })
 
 
     function node:setEnabled(status)
         _varIsEnabled = status
-        slideLayer:setEnabled(status)
+        -- slideLayer:setEnabled(status)
     end
 
     node:onNodeEvent("enter", function ()
@@ -60,7 +73,6 @@ function M.create(params)
 	end)
 
     node:onNodeEvent("exit", function ()
-        print(15,"dsdsdsdsExit")
         THSTG.CCDispatcher:removeEventListener(_varKeyboardListener)
     end)
 

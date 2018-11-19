@@ -321,7 +321,7 @@ local function s_createSelecter(params)
 
 			local selected = nil
 			if #labels > 0 then
-				if node:hitTest(ptTouch) then
+				if node:hitTest(ptTouch,nil,nil) then
 					local ptLocal = node:convertToNodeSpace(ptTouch)
 					local y = ptLocal.y - scrollView:getInnerContainerPosition().y
 					selected = cc.clampf(math.ceil(y / itemHeight), 1, #labels)

@@ -654,7 +654,7 @@ function newMultiProgressBar(params)
 				if bgParam ~= preBgParams then
 					preBgParams = bgParam
 					if bg2 and not tolua.isnull(bg2) then
-						bg2:removeFromParentAndCleanup(true)
+						bg2:removeFromParent(true)
 					end
 					bg2 = UI.newScale9Sprite({
 						style = bgParam.progressSkin,
@@ -665,7 +665,7 @@ function newMultiProgressBar(params)
 			else
 				if bg2 and not tolua.isnull(bg2) then
 					preBgParams = false
-					bg2:removeFromParentAndCleanup(true)
+					bg2:removeFromParent(true)
 				end
 				bg2 = false
 			end

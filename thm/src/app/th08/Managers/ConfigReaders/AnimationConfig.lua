@@ -1,14 +1,12 @@
 module("AnimationConfig", package.seeall)
 local Animation = require "Configs.Handwork.Animation"
 
-function getResDict(texType)
-    local t = Animation[texType]
+function getDict(texType)
+	local t = Animation[texType]
     return t
 end
 
-function getResInfo(texType,resName)
-    local t = getResDict(texType)
-    if t then
-        return t[resName]
-    end
+function getRes(texType,resName)
+	local t = getDict(texType)
+    return t[resName]
 end

@@ -8,7 +8,8 @@ function M:onCreate()
     local TestTb = {
         require("Modules.Test.UITest.UITest0"),         --测试面板
         require("Modules.Test.UITest.UITest1"),         --Sheet测试
-        require("Modules.Test.UITest.UITest2"),         --测试
+        require("Modules.Test.UITest.UITest2"),         --所有动画测试
+        require("Modules.Test.UITest.UITest3"),         --地图测试
     }
     --事件监听
     --注册键盘事件
@@ -55,7 +56,7 @@ function M:onCreate()
     })
     THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
 
-    changeTest(2)
+    changeTest(3)
 end
 
 return M

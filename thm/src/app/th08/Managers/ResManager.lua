@@ -91,6 +91,29 @@ function getUIRes(uiType, resName)
 	return getResSub(ResType.UI, uiType, resName)
 end
 
+
+--------------------------
+--[[
+获取纹理组件资源
+@param	texType		[string]组件类型	(对应TexType中的项)
+@param	resName		[string]资源名
+@return 资源路径
+--]]
+function getTexRes(texType,resName,subName)
+	local res = getResSub(ResType.Texture, texType, resName)
+	if res then
+		if texType == TexType.SHEET then
+			local info = Sheet[subName]
+			return info
+		elseif texType == TexType.PLIST then
+			THSTG.SCENE.loadPlistFile(res)
+			return subName
+		elseif texType == TexType.IMAGE then
+			return res
+		end
+	end
+end
+
 -- --获取空图片的资源路径
 -- function getEmptyImg()
 -- 	TextureManager:getInstance():getDefaultLoadingImage() -- 重置加载图

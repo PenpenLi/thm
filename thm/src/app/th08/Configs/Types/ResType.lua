@@ -1,5 +1,7 @@
 module("ResType", package.seeall)
 
+PUBLIC = "public"
+
 FONT = "font"
 
 SOUND = "sound"
