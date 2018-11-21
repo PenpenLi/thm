@@ -1,5 +1,11 @@
 module("TimeUtil", package.seeall)
 
+-- 获取高精度时间
+function getHighPrecisionTime()
+	local socket = require "socket"
+	return socket.gettime() * 1000
+end
+
 -- 获取与服务器时间差值：秒
 function getOffsetTime(seconds)
 	return math.abs(Cache.serverTimeCache.getServerTime() - seconds)

@@ -160,12 +160,12 @@ function getSkinSize(src)
         
         --FIXME:不知何用,先注释掉
 		-- if __ENGINE_VERSION__ >= 50 then
-		-- 	-- 去预先记录列表找
-		-- 	local size = ResManager:getInstance():getImageSize(src)
-		-- 	if size.width > 0 and size.height > 0 then
-		-- 		CACHED_SKIN_SIZE[src] = size
-		-- 		return size	
-		-- 	end
+			-- 去预先记录列表找
+			-- local size = ResManager:getInstance():getImageSize(src)
+			-- if size.width > 0 and size.height > 0 then
+			-- 	CACHED_SKIN_SIZE[src] = size
+			-- 	return size	
+			-- end
 		-- end
 
 		skinSize = {width = 2, height = 2}

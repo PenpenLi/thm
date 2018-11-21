@@ -41,3 +41,38 @@ function newRotateIcon(params)
     end)
     return node
 end
+
+function newSheetImage(params)
+    local sheet = params.sheet 
+    local image = THSTG.UI.newImage(params)
+
+    function image:setSheetInfo(sheetKey)
+        local info = SheetConfig.getRes(sheetKey)
+        image:setSource(info.src)
+        image:setTextureRect(info.rect)
+        local size = cc.size(params.width or info.rect.width,params.height or info.rect.height)
+        image:setContentSize(size)
+    end
+
+    image:setSheetInfo(sheet)
+
+    return image
+end
+
+function newSheetSprite(params)
+    local sheet = params.sheet 
+    local sprite = THSTG.UI.newSprite(params)
+
+    function sprite:setSheetInfo(sheetKey)
+        local info = SheetConfig.getRes(sheetKey)
+        sprite:setSource(info.src)
+        sprite:setRect(info.rect)
+        local size = cc.size(params.width or info.rect.width,params.height or info.rect.height)
+        sprite:setContentSize(size)
+    end
+    
+
+    sprite:setSheetInfo(sheet)
+
+    return sprite
+end

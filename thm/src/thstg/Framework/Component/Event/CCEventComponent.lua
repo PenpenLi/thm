@@ -20,7 +20,7 @@ end
 function newTouchOneByOneListener(params)
     params = params or {}
     params.onBegan = params.onBegan or function(touch, event) end
-    params.onMoved = params.onMove or function(touch, event) end
+    params.onMoved = params.onMoved or function(touch, event) end
     params.onEnded = params.onEnded or function(touch, event) end
 
     local listener = cc.EventListenerTouchOneByOne:create()
@@ -35,7 +35,7 @@ end
 function newTouchAllAtOnceListener(params)
     params = params or {}
     params.onBegan = params.onBegan or function(touches, event) end
-    params.onMoved = params.onMove or function(touches, event) end
+    params.onMoved = params.onMoved or function(touches, event) end
     params.onEnded = params.onEnded or function(touches, event) end
 
     local listener = cc.EventListenerTouchAllAtOnce:create()

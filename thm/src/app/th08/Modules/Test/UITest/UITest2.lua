@@ -54,7 +54,7 @@ function M.create(params)
                 height = spriteSize.height,
                 anchorPoint = THSTG.UI.POINT_CENTER,
                 onClick = function()
-                    dump(15,v.rect,k)
+                    dump(0,v.rect,k)
                 end,
             })
             sprite:addChild(clickNode)
@@ -119,8 +119,6 @@ function M.create(params)
         end,
     })
     node:addChild(tabBar)
-
-    
 
     --------Controller--------
   

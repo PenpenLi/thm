@@ -9,7 +9,7 @@ return {
     texture = {
         sheet  ={
             player00 = "th08/Texture/Sheet/player00.png" ,
-
+            stg1bg = "th08/Texture/Sheet/stg1bg.png" ,
         },
         plist = {
             select_diff = "th08/Texture/Plist/select_diff.plist" ,

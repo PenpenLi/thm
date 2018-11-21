@@ -1,1 +1,2 @@
-require "Utils.Init"
+--配置文件
+require "Test"
