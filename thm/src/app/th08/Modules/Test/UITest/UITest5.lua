@@ -16,7 +16,7 @@ function M.create(params)
     node:onNodeEvent("exit", function ()
         
     end)
-    
+
     return node
 end
 

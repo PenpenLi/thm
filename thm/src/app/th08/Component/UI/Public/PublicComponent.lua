@@ -66,7 +66,7 @@ function newSheetSprite(params)
     function sprite:setSheetInfo(sheetKey)
         local info = SheetConfig.getRes(sheetKey)
         sprite:setSource(info.src)
-        sprite:setRect(info.rect)
+        sprite:setTextureRect(info.rect)
         local size = cc.size(params.width or info.rect.width,params.height or info.rect.height)
         sprite:setContentSize(size)
     end

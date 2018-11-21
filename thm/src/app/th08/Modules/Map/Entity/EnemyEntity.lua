@@ -1,8 +1,8 @@
 module(..., package.seeall)
 
-local M = class("EnemyEntity", MapDef.BaseEntity)
+local M = class("EnemyEntity", MapDef.LivedEntity)
 function M:ctor()
-    self.speed = 0
+
     
 end
 

@@ -21,6 +21,11 @@ function newSprite(params)
 
 	local src = params.src --ResManager.getEmptyImg()
 	local sp = display.newSprite(src)
+	-- if src then
+	-- 	sp = display.newSprite(src)
+	-- else
+	-- 	sp = cc.Sprite:create()
+	-- end
 
 	if params.anchorPoint then
 		sp:setAnchorPoint(params.anchorPoint)
@@ -35,13 +40,10 @@ function newSprite(params)
 	if params.height then
 		sp:setScaleY(params.height / size.height)
 	end
-	if params.frame then
-		sp:setTextureRect(params.frame)
+	if params.rect then
+		sp:setTextureRect(params.rect)
 	end
 
-	function sp:setRect(frame)
-		sp:setTextureRect(frame)
-	end
 	function sp:setSource(src)
 		if type(src) == "string" then
 			if string.byte(src) == 35 then -- first char is #

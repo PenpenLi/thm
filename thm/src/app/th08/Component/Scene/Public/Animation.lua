@@ -1,6 +1,6 @@
 module("ScenePublic", package.seeall)
 
-function newAnimation(texType,resName)
+function newAnimation(texType,resName,time)
     local info = AnimationConfig.getRes(texType,resName)
     if texType == TexType.SHEET then
         local animation = THSTG.SCENE.newAnimation({
@@ -9,7 +9,7 @@ function newAnimation(texType,resName)
                 length = info.length,
                 rect = info.rect,
             }),
-            time = info.time
+            time = time or 1/info.length
         })
         return animation
     elseif texType == TexType.PLIST then
@@ -19,7 +19,7 @@ function newAnimation(texType,resName)
                 begin = info.begin,
                 length = info.length,
             }),
-            time = info.time
+            time = time or 1/info.length
         })
         return animation
     elseif texType == TexType.IMAGE then
@@ -29,21 +29,21 @@ function newAnimation(texType,resName)
                 begin = info.begin,
                 length = info.length,
             }),
-            time = info.time
+            time = time or 1/info.length
         })
         return animation
     end
 
 end
 
-function newAnimationBySheet(resName)
-    return newAnimation(TexType.SHEET,resName)
+function newAnimationBySheet(resName,time)
+    return newAnimation(TexType.SHEET,resName,time)
 end
 
 function newAnimationByPlist(resName)
-    return newAnimation(TexType.PLIST,resName)
+    return newAnimation(TexType.PLIST,resName,time)
 end
 
 function newAnimationByFiles(resName)
-    return newAnimation(TexType.IMAGE,resName)
+    return newAnimation(TexType.IMAGE,resName,time)
 end

@@ -7,9 +7,12 @@ local testUI = nil
 function M:onCreate()
     local TestTb = {
         require("Modules.Test.UITest.UITest0"),         --测试面板
-        require("Modules.Test.UITest.UITest1"),         --控制器测试
+        require("Modules.Test.UITest.UITest1"),         --动画测试
         require("Modules.Test.UITest.UITest2"),         --所有动画测试
-        require("Modules.Test.UITest.UITest3"),         --地图测试
+        require("Modules.Test.UITest.UITest3"),         --背景测试
+        require("Modules.Test.UITest.UITest4"),         --控制测试
+        require("Modules.Test.UITest.UITest5"),         --对话框测试
+        require("Modules.Test.UITest.UITest6"),         --时间表测试
     }
     --事件监听
     --注册键盘事件
@@ -48,7 +51,7 @@ function M:onCreate()
             elseif keyCode == cc.KeyCode.KEY_P then
                 changeTest(20)
             else
-                if  keyCode >= cc.KeyCode.KEY_0 and keyCode <= cc.KeyCode.KEY_9 then
+                if keyCode >= cc.KeyCode.KEY_0 and keyCode <= cc.KeyCode.KEY_9 then
                     changeTest(keyCode - cc.KeyCode.KEY_0 + 1)
                 end
             end
@@ -56,7 +59,8 @@ function M:onCreate()
     })
     THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
 
-    changeTest(4)
+    -- changeTest(#TestTb)
+    changeTest(4 + 1)
 end
 
 return M

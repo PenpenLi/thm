@@ -1,6 +1,6 @@
 module(..., package.seeall)
-local SelectDifficultyLayer = require("Modules.GUI.MainUi.MainMenu.StartItem.Layer.SelectDifficultyLayer")
-local SelectRoleLayer = require("Modules.GUI.MainUi.MainMenu.StartItem.Layer.SelectRoleLayer")
+local SelectDifficultyLayer = require("Modules.GUI.MainUi.MainMenu.StartSelectDifficultyLayer")
+local SelectRoleLayer = require("Modules.GUI.MainUi.MainMenu.StartSelectRoleLayer")
 local M = {}
 function M.create(params)
     --------Model--------
@@ -56,8 +56,8 @@ function M.create(params)
             _selectRoleLayer:setEnabled(true)
             _selectDiffLayer:setEnabled(false)
             local actions = {
-                cc.MoveBy:create(0.2, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
-                cc.MoveBy:create(0.2, cc.p(0,-(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y)))    
+                cc.MoveBy:create(0.3, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
+                cc.MoveBy:create(0.3, cc.p(0,-(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y)))    
             }
             runTileAction(actions)
             
@@ -66,14 +66,14 @@ function M.create(params)
             _selectRoleLayer:setEnabled(false)
             _selectDiffLayer:setEnabled(true)
             local actions = {
-                cc.MoveBy:create(0.2, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
-                cc.MoveBy:create(0.2, cc.p(0,-(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y)))
+                cc.MoveBy:create(0.3, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
+                cc.MoveBy:create(0.3, cc.p(0,-(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y)))
             }
             runTileAction(actions)
         elseif e == EventType.STARTITEM_SELECTDIFF_CANCEL then
             _selectDiffLayer:setEnabled(false)
             local actions = {
-                cc.MoveBy:create(0.2, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
+                cc.MoveBy:create(0.3, cc.p(0,(_uiTitle:getContentSize().height+TITLE_MOVE_OFFSET_Y))),
             }
             runTileAction(actions)
             --返回主菜单

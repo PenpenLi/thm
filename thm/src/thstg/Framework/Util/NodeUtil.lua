@@ -68,19 +68,13 @@ function isTouchInsideNode(node,pTouch)
     local nodeSize = node:getContentSize()
     local touchPoint = cc.p(pTouch:getLocation().x, pTouch:getLocation().y)
     local anchorPoint = node:getAnchorPoint()
-    --注:对于特效来说debugUI后其左下角坐标就是中心点,与anchorPoint无关
-    --既anchorPoint为(0,0)时,nodePos即为特效中点
+
     local touchRect = cc.rect(
         nodePos.x - (anchorPoint.x) * nodeSize.width ,
         nodePos.y - (anchorPoint.y) * nodeSize.height ,
         nodeSize.width ,
         nodeSize.height
     )
-    -- if node:getName() == "EffectNode" then
-        --求出左下角的点,既特效中点,在做平移
-        -- touchRect.x = touchRect.x - nodeSize.width/2
-        -- touchRect.y = touchRect.y - nodeSize.height/2
-    -- end
 
     if cc.rectContainsPoint(touchRect, touchPoint) then
         return true

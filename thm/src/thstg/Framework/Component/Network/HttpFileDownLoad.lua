@@ -1,18 +1,17 @@
---FIXME:这里写成ccclass时,onReadyStateChanged()回调有可能被析构,在execute()返回前执行一次延时操作可以减少析构率
---原因不明,待高人指出错误
-local HttpFileDownLoad = {}--ccclass("HttpFileDownLoad")
---如果为ccclass,下面的构造函数要去掉
-function HttpFileDownLoad.new()
-    HttpFileDownLoad:ctor()
-    return HttpFileDownLoad
-end
+
+-- local HttpFileDownLoad = {}
+-- --如果为ccclass,下面的构造函数要去掉
+-- function HttpFileDownLoad.new()
+--     HttpFileDownLoad:ctor()
+--     return HttpFileDownLoad
+-- end
 
 --[[构造函数
     url:网络路径
     id:任务id，用于回调时区分任务
 --]]
 
--- local HttpFileDownLoad = ccclass("HttpFileDownLoad")
+local HttpFileDownLoad = class("HttpFileDownLoad")
 
 function HttpFileDownLoad:ctor()
     self:initData()
@@ -92,7 +91,7 @@ function HttpFileDownLoad:execute()
     xhr.responseType = cc.XMLHTTPREQUEST_RESPONSE_ARRAY_BUFFER
     xhr:open("GET", self.url)
     
-    -- XXX:该函数回调时貌似把self销毁了,不知为何为何
+    -- 该函数回调时貌似把self销毁了,不知为何为何
     -- 可能是回调时,对象已经被销毁,但是仍不知道在哪里被销毁的
     local function onReadyStateChanged()
         if type(self) == "userdata" and tolua.isnull(self) then 
@@ -174,23 +173,6 @@ function HttpFileDownLoad:split_str(str, delimiter)
     string.gsub(str, '[^' .. delimiter ..']+', function(w) table.insert(resultStrsList, w) end )
     return resultStrsList
 end
-
-
-----
-local M = {}
-local mInstance = nil
-function M:getInstance()
-    if mInstance == nil then
-        mInstance = HttpFileDownLoad.new()
-    end
-    return mInstance
-end
-
-function M:new()
-    return clone(HttpFileDownLoad.new())
-end
-
-return M
 
 ---------------------------------------代码结束了--------------------------------------------------
 

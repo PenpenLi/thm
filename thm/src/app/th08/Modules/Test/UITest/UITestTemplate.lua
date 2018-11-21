@@ -3,7 +3,6 @@ module(..., package.seeall)
 local M = {}
 function M.create(params)
     -------Model-------
-
    
     -------View-------
     local node = THSTG.UI.newNode()
@@ -16,7 +15,7 @@ function M.create(params)
     node:onNodeEvent("exit", function ()
         
     end)
-    
+
     return node
 end
 
