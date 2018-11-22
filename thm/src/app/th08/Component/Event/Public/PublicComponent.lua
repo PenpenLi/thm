@@ -36,12 +36,12 @@ function newKeyboardExListener(params)
             return 
         end
         if next(_keyCache) ~= nil then
-            if type(params.onHandled) == "function" then
-                params.onHandled(_keyCache)     --长处理
-            end
+            params.onHandled(_keyCache)
         end
     end
-    _varScheduler = THSTG.Scheduler.scheduleEachFrame(onHandled)
+    if type(params.onHandled) == "function" then
+        _varScheduler = THSTG.Scheduler.scheduleEachFrame(onHandled)
+    end
 
     return listener
 end
