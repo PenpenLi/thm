@@ -1,4 +1,4 @@
-module("Enums", package.seeall)
+module("Messages.Public", package.seeall)
 
 EGameKeyType = {
     MoveUp = 1,
@@ -10,5 +10,4 @@ EGameKeyType = {
     Wipe = 6,
     Skill = 7,
 }
-
 

@@ -1,0 +1,1 @@
+require "Scripts.Messages.Public.GameDef"

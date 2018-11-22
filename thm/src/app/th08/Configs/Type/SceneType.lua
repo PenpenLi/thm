@@ -1,4 +1,4 @@
-module("SceneType", package.seeall)
+module("SceneType")
 
 MAIN_SCENE = "main_scene"
 

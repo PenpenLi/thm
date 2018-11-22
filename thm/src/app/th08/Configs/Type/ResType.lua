@@ -1,4 +1,4 @@
-module("ResType", package.seeall)
+module("ResType")
 
 PUBLIC = "public"
 

@@ -57,7 +57,7 @@ function newTouchAllAtOnceExListener(params)
     _private.longInteral = 1000
     _private.shakeFreq = 50
     _private.shakeInteral = 100
-    _private.shakeSpeed = 150
+    _private.shakeSpeed = 180
 
     _private.onDoubleClick = params.onDoubleClick or function(touches, event) end
     _private.onShaked = params.onShaked or function(touches, event) end

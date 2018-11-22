@@ -1,6 +1,4 @@
-﻿require "Configs.Enum.Enums"
-----
-require "Configs.Type.EventType"
+﻿require "Configs.Type.EventType"
 require "Configs.Type.ModuleType"
 require "Configs.Type.ResType"
 require "Configs.Type.FontType"

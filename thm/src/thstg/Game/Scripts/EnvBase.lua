@@ -4,6 +4,9 @@ require "Scripts.Test"
 --全局配置
 require "Scripts.Configs.Init"
 
+--消息配置
+require "Scripts.Messages.Init"
+
 --MVC模块
 require "Scripts.MVC.Init"
 

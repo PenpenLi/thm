@@ -1,3 +1,3 @@
-module("UIType", package.seeall)
+module("UIType")
 
 BUTTON = "button"

@@ -1,4 +1,4 @@
-module("ModuleType", package.seeall)
+module("ModuleType")
 
 TEST = "test"
 
