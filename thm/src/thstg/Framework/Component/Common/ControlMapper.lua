@@ -1,39 +1,68 @@
 module("COMMON", package.seeall)
 
-local M = class("ControlMapper")
-
-function M:ctor()
+local ControlMapper = class("ControlMapper")
+function ControlMapper:ctor()
+    self._varTypeToKeyMap = {}
     self._varKeyToTypeMap = {}
     self._varCountChache = {}
 end
 
-function M:registerKey(keyCode,keyType)
+function ControlMapper:registerKey(keyCode,keyType)
     self._varKeyToTypeMap[keyCode] = keyType
-
+    self._varTypeToKeyMap[keyType] = self._varTypeToKeyMap[keyType] or {}
+    self._varTypeToKeyMap[keyType][keyCode] = false
+    
 end
-function M:resetAllKeys()
+function ControlMapper:resetAllKeys()
     self._varCountChache = {}
 end
 
-function M:resetKey(type)
-    self._varCountChache[type] = 0
-end
-function M:isKeyDown(type)
-    return self._varCountChache[type] and self._varCountChache[type] > 0
-end
-function M:pressKey(keyCode)
-    local keyType = self._varKeyToTypeMap[keyCode]
-    if keyType then self._varCountChache[keyType] = (self._varCountChache[keyType] or 0) + 1 end
-end
-function M:pressKeyOnce(keyCode)
-    local keyType = self._varKeyToTypeMap[keyCode]
-    if not isKeyDown(keyType) then
-        pressKey(keyCode)
+function ControlMapper:resetKey(keyType)
+    self._varCountChache[keyType] = 0
+    local keyMap = self._varTypeToKeyMap[keyType]
+    if keyMap then
+        for k,_ in pairs(keyMap) do
+            self:releaseKey(k)
+        end
     end
 end
-function M:releaseKey(keyCode)
+function ControlMapper:isKeyDown(keyType)
+    return self._varCountChache[keyType] and self._varCountChache[keyType] > 0
+end
+function ControlMapper:getKeyType(keyCode)
     local keyType = self._varKeyToTypeMap[keyCode]
-    if keyType then self._varCountChache[keyType] = math.max((self._varCountChache[keyType] or 0) - 1,0) end
+    return keyType
+end
+function ControlMapper:pressKeyAgain(keyCode)
+    local keyType = self:getKeyType(keyCode)
+    if keyType then 
+        self._varCountChache[keyType] = (self._varCountChache[keyType] or 0) + 1 
+        self._varTypeToKeyMap[keyType][keyCode] = true
+    end
+end
+function ControlMapper:pressKey(keyCode)
+    local keyType = self:getKeyType(keyCode)
+    if keyType then
+        if not self._varTypeToKeyMap[keyType][keyCode] then
+            self:pressKeyAgain(keyCode)
+        end
+    end
+end
+function ControlMapper:releaseKey(keyCode,callback)
+    local keyType = self:getKeyType(keyCode)
+    if keyType then 
+        self._varCountChache[keyType] = math.max((self._varCountChache[keyType] or 0) - 1,0) 
+        self._varTypeToKeyMap[keyType][keyCode] = false
+    end
 end
 
-return M
+-----
+
+function newControlMapper(params)
+    params = params or {}
+    local controlMapper = ControlMapper:create()
+    for k,v in pairs(params) do
+        controlMapper:registerKey(k,v)
+    end
+    return controlMapper
+end

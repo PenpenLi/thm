@@ -4,7 +4,7 @@ local M = {}
 function M.create(params)
     -------Model-------
     local STEP_KEY_VAL = 2
-    local STEP_TOUCH_VAL = 5
+    local STEP_TOUCH_VAL = 10
     local _uiPlayer = nil
     local _varKeyboardListener = nil
     local _varTouchAllListener = nil
@@ -12,6 +12,7 @@ function M.create(params)
     local _varMoveStep = {x = 0,y = 0}
 
     local _varDestPos = false
+    local _cmpControlMapper = THSTG.COMMON.newControlMapper()
   
     -------View-------
     local node = THSTG.UI.newNode()
@@ -25,40 +26,172 @@ function M.create(params)
         anchorPoint = THSTG.UI.POINT_CENTER,
     })
     debugUI(_uiPlayer)
+    function _uiPlayer:init()
+        self.__bullets = {} --缓存池
+        self.__isStateWipe = false
+        self.__tickClock = THSTG.COMMON.newTickClock()
+        self.__isWipeEffectNode =  THSTG.UI.newNode({
+            x = self:getContentSize().width/2,
+            y = self:getContentSize().height/2,
+            anchorPoint = THSTG.UI.POINT_CENTER,
+            width = 80,
+            height = 80,
+        })
+        self.__isWipeEffectNode:setVisible(false)
+        self:addChild(self.__isWipeEffectNode)
+        debugUI(self.__isWipeEffectNode)
+
+    end
+
+    function _uiPlayer:shot()
+
+        if self.__tickClock:getElpased() < 150 then
+            return 
+        end
+
+        --生成/或从缓存池中取出3个精灵
+        local function makeAction(node)
+            local actions = {}
+            table.insert( actions, cc.MoveBy:create(1.0,cc.p(0,display.height)))
+            table.insert( actions,cc.CallFunc:create(function ()
+                node:removeFromParent()
+            end))
+            
+            return cc.Sequence:create(actions)
+        end
+        --FIXME:需要一个粒子系统
+        local bullet = THSTG.UI.newNode({
+            x = self:getPositionX(),
+            y = self:getPositionY() + self:getContentSize().height + 10,
+            anchorPoint = THSTG.UI.POINT_CENTER,
+            width = 5,
+            height = 5,
+        })
+
+        debugUI(bullet)
+        bullet:runAction(makeAction(bullet))
+        node:addChild(bullet)
+
+        self.__tickClock:resume()
+    end
+
+    function _uiPlayer:skill()
+        local function makeAction(node)
+            local actions = {}
+            node:setScale(0)
+            table.insert(actions,cc.Spawn:create({
+                cc.RotateBy:create(1.0, 360),
+                cc.ScaleTo:create(1.0,1),
+            }))
+            table.insert(actions,cc.DelayTime:create(2.0))
+            table.insert(actions,cc.Spawn:create({
+                cc.RotateBy:create(1.0, -360),
+                cc.ScaleTo:create(1.0,0),
+            }))
+
+            table.insert(actions,cc.CallFunc:create(function ()
+                node:removeFromParent()
+            end))
+            
+            return cc.Sequence:create(actions)
+        end
+
+        local effectNode = THSTG.UI.newNode({
+            x = self:getContentSize().width/2,
+            y = self:getContentSize().height/2,
+            anchorPoint = THSTG.UI.POINT_CENTER,
+            width = 80,
+            height = 80,
+        })
+        debugUI(effectNode)
+        effectNode:runAction(makeAction(effectNode))
+        self:addChild(effectNode)
+    end
+
+    function _uiPlayer:wipeOpen()
+        local function makeAction(node)
+            local actions = {}
+            node:setScale(0)
+            node:setVisible(true)
+            table.insert(actions,cc.Spawn:create({
+                cc.RotateBy:create(1.0, 360),
+                cc.ScaleTo:create(1.0,1),
+            }))
+          
+            return cc.Sequence:create(actions)
+        end
+
+        self.__isWipeEffectNode:stopAllActions()
+        self.__isWipeEffectNode:runAction(makeAction(self.__isWipeEffectNode))
+
+    end
+
+    function _uiPlayer:wipeClose()
+        local function makeAction(node)
+            local actions = {}
+            table.insert(actions,cc.Spawn:create({
+                cc.RotateBy:create(1.0, -360),
+                cc.ScaleTo:create(1.0,0),
+            }))
+
+            table.insert(actions,cc.CallFunc:create(function ()
+                self.__isWipeEffectNode:setVisible(false)
+
+            end))
+          
+            return cc.Sequence:create(actions)
+        end
+        self.__isWipeEffectNode:stopAllActions()
+        self.__isWipeEffectNode:runAction(makeAction(self.__isWipeEffectNode))
+
+    end
+
+
+    function _uiPlayer:wipe(state)
+        if self.__isStateWipe ~= state then
+            if state then 
+                self:wipeOpen()
+            else
+                self:wipeClose()
+            end
+        end
+        self.__isStateWipe = state
+    end
+
+
+    function _uiPlayer:move(isShift)
+
+    end
+
+    function _uiPlayer:update()
+
+    end
+    _uiPlayer:init()
     node:addChild(_uiPlayer)
 
     -------Controller-------
-    local _varKeyToTypeMap = {}
-    -- local _varTypeToKeyMap = {}
-    local _varCountChache = {}
+   
     local function registerKey(keyCode,keyType)
-        _varKeyToTypeMap[keyCode] = keyType
-        -- _varTypeToKeyMap[keyType] = _varTypeToKeyMap[keyType] or {}
-        -- _varTypeToKeyMap[keyType][keyCode] = 0
+        return _cmpControlMapper:registerKey(keyCode,keyType)
     end
     local function resetAllKeys()
-        _varCountChache = {}
+        return _cmpControlMapper:resetAllKeys()
     end
 
     local function resetKey(type)
-        _varCountChache[type] = 0
+        return _cmpControlMapper:resetKey(type)
     end
     local function isKeyDown(type)
-        return _varCountChache[type] and _varCountChache[type] > 0
+        return _cmpControlMapper:isKeyDown(type)
     end
     local function pressKey(keyCode)
-        local keyType = _varKeyToTypeMap[keyCode]
-        if keyType then _varCountChache[keyType] = (_varCountChache[keyType] or 0) + 1 end
+        return _cmpControlMapper:pressKey(keyCode)
     end
     local function pressKeyOnce(keyCode)
-        local keyType = _varKeyToTypeMap[keyCode]
-        if not isKeyDown(keyType) then
-            pressKey(keyCode)
-        end
+        return _cmpControlMapper:pressKeyOnce(keyCode)
     end
     local function releaseKey(keyCode)
-        local keyType = _varKeyToTypeMap[keyCode]
-        if keyType then _varCountChache[keyType] = math.max((_varCountChache[keyType] or 0) - 1,0) end
+        return _cmpControlMapper:releaseKey(keyCode)
     end
     registerKey(cc.KeyCode.KEY_W,EGameKeyType.MoveUp)
     registerKey(cc.KeyCode.KEY_UP_ARROW,EGameKeyType.MoveUp)
@@ -118,15 +251,13 @@ function M.create(params)
     local function playerHitHandle()
         if isKeyDown(EGameKeyType.Attack) then
             -- print(15,"攻击")
-           
+            _uiPlayer:shot()
         end
     end
 
     local function playerWipeHandle()
-        if isKeyDown(EGameKeyType.Wipe) then
-            print(15,"擦弹")
-        end
-        
+        --一方面是因为要检查是否按了开启按键,另一方面还要检查时间
+        _uiPlayer:wipe(isKeyDown(EGameKeyType.Wipe))
     end
 
     local function playerSkillHandle()
@@ -134,7 +265,7 @@ function M.create(params)
             print(15,"SpellCard")
 
 
-
+            _uiPlayer:skill()
             resetKey(EGameKeyType.Skill)
         end
     end
@@ -188,13 +319,10 @@ function M.create(params)
         end,
         --
         onDoubleClick = function(touches, event)
-            pressKeyOnce("TouchSkill")
+            pressKey("TouchSkill")
         end,
         onShaked = function(touches, event)
-            pressKeyOnce("TouchWipe")
-        end,
-        onLongClick = function(touches, event)
-            -- print(15,"长按")
+            pressKey("TouchWipe")
         end,
 
     })
