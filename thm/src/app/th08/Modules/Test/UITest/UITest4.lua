@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local EGameKeyType = Messages.Public.EGameKeyType
+local EGameKeyType = Configs.Define.EGameKeyType
 local M = {}
 function M.create(params)
     -------Model-------
@@ -201,12 +201,18 @@ function M.create(params)
     registerKey(cc.KeyCode.KEY_LEFT_ARROW,EGameKeyType.MoveLeft)
     registerKey(cc.KeyCode.KEY_D,EGameKeyType.MoveRight)
     registerKey(cc.KeyCode.KEY_RIGHT_ARROW,EGameKeyType.MoveRight)
+
     registerKey(cc.KeyCode.KEY_Z,EGameKeyType.Attack)
     registerKey("TouchAttack",EGameKeyType.Attack)
+    registerKey(cc.KeyCode.KEY_H,EGameKeyType.Attack)
+
     registerKey(cc.KeyCode.KEY_X,EGameKeyType.Wipe)
     registerKey("TouchWipe",EGameKeyType.Wipe)
+    registerKey(cc.KeyCode.KEY_J,EGameKeyType.Wipe)
+
     registerKey(cc.KeyCode.KEY_C,EGameKeyType.Skill)
     registerKey("TouchSkill",EGameKeyType.Skill)
+    registerKey(cc.KeyCode.KEY_K,EGameKeyType.Skill)
     ---
     local function playerKeyMoveHandle()
         if isKeyDown(EGameKeyType.MoveLeft) then

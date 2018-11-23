@@ -1,0 +1,1 @@
+require "Configs.Define.GameDef"

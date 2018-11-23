@@ -49,7 +49,7 @@ function M.create(params)
 
     local TASK_TABLE = {
         {
-            time = 2,
+            time = 1,
             callback  = function (sender,task)
                 local node = sender:getUserData().node
                 --左边生成三个小怪,并向下移动
@@ -91,7 +91,7 @@ function M.create(params)
         },
         {
             time = 4,
-            callback = function (sender)
+            callback = function (sender,task)
                 local node = sender:getUserData().node
                 --从左往右
                 for i = 1,6 do
@@ -114,11 +114,12 @@ function M.create(params)
                     
                     critter:runAction(cc.Sequence:create(actions))
                 end
+                dump(15,task)
             end,  
         },
         {
-            time = 2.3,
-            callback = function (sender)
+            time = 2,
+            callback = function (sender,task)
                 local node = sender:getUserData().node
                 --从右往左
                 for i = 1,6 do
@@ -178,9 +179,7 @@ function M.create(params)
         },
     }
     _scheduledTask:setTasks(TASK_TABLE)
-    _scheduledTask:setUserData({
-        node = node
-    })
+    _scheduledTask:setUserData({node = node})
     ----
     local function updateFrame()
         _scheduledTask:poll()

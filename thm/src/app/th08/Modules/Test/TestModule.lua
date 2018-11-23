@@ -13,6 +13,8 @@ function M:onCreate()
         require("Modules.Test.UITest.UITest4"),         --控制测试
         require("Modules.Test.UITest.UITest5"),         --对话框测试
         require("Modules.Test.UITest.UITest6"),         --时间表测试
+        require("Modules.Test.UITest.UITest7"),         --特效测试
+        require("Modules.Test.UITest.UITest8"),         --图片效果测试
     }
     --事件监听
     --注册键盘事件

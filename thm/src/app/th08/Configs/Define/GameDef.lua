@@ -1,4 +1,4 @@
-module("Messages.Public", package.seeall)
+module("Configs.Define", package.seeall)
 
 EGameKeyType = {
     MoveUp = 1,
@@ -10,4 +10,3 @@ EGameKeyType = {
     Wipe = 6,
     Skill = 7,
 }
-
