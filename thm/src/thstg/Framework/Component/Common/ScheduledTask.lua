@@ -171,7 +171,6 @@ function ScheduledTask:setTasks(tasks)
     for _,v in ipairs(tasks) do
         self:push(v)
     end
-    dump(15,tasks)
 end
 
 function ScheduledTask:getTasks()
@@ -214,11 +213,12 @@ function ScheduledTask:poll()
             local funsTb = self._varTaskQueue[self._varCurTime]
             if funsTb then
                 local function exec(funsTb)
-                    -- for i,v in ipairs(funsTb) do
-                    local num = #funsTb
-                    for i = 1,#funsTb do
-                        local ret = funsTb[1].callback(self,funsTb[1])
-                        table.remove(funsTb, 1) --FIXME:循环状态不能对数组操作
+                    while true do
+                        if not next(funsTb) then break end
+                        local i = next(funsTb)
+                    
+                        local ret = funsTb[i].callback(self,funsTb[i])
+                        table.remove(funsTb, i) --循环状态不能对数组操作
   
                         if self:isPause() then --如果在某个回调里暂停了时间
                             if ret == true then

@@ -114,11 +114,10 @@ function M.create(params)
                     
                     critter:runAction(cc.Sequence:create(actions))
                 end
-                dump(15,task)
             end,  
         },
         {
-            time = 2,
+            time = 4,
             callback = function (sender,task)
                 local node = sender:getUserData().node
                 --从右往左
