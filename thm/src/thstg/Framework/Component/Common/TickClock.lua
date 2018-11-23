@@ -53,7 +53,7 @@ function TickClock:setTimeScale(fTimeScale)
     self._varTimeScale = fTimeScale
 end
 
-
+----
 function newTickClock(params)
     return TickClock:create()
 end
