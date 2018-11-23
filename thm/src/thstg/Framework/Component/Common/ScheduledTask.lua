@@ -20,9 +20,13 @@ function ScheduledTask:ctor()
 
     self._varCurTime = 0
     self._varIsPause = false
+    self._varUserData = nil
 
     self._varTaskUID = 10000
 
+end
+local function getFixTime(self,time)
+   return math.ceil(1000/self._varInterval*time)
 end
 local function pushTaskTable(self,taskInfo)
     local id = taskInfo.__id
@@ -31,33 +35,43 @@ end
 
 local function pushTaskQueue(self,taskInfo)
     local time = taskInfo.time
-    self._varTaskQueue[time] = self._varTaskQueue[time] or {}
-    table.insert(self._varTaskQueue[time], taskInfo)
+    local fixTime = getFixTime(self,time)
+    self._varTaskQueue[fixTime] = self._varTaskQueue[fixTime] or {}
+    table.insert(self._varTaskQueue[fixTime], taskInfo)
 end
 
 function ScheduledTask:push(time,callback,tag)
-    local function makeTask(time,callback,tag,id)
-        local fixTime = math.ceil(1000/self._varInterval*time)
-        local info = {
-            time = fixTime,
-            callback = callback,
-            tag = tag,
-            __id = id
-        }
-        return info
+    local taskInfo = nil
+    if type(time) == "table" then
+        if type(time.callback) == "function" and type(time.time) == "number" and time.time >=0 then
+            taskInfo = time
+        else
+            return -1
+        end
+        
+    elseif  type(callback) == "function" and type(time) == "number" and time.time >=0 then
+        local function makeTask(time,callback,tag)
+            local info = {
+                time = time,
+                callback = callback,
+                tag = tag,
+            }
+            return info
+        end
 
+        taskInfo = makeTask(time,callback,tag)
+    else
+        return -1
     end
-    if type(callback) == "function" then
-        self._varTaskUID = self._varTaskUID + 1
-        local taskInfo = makeTask(time,callback,tag,self._varTaskUID)
 
-        pushTaskTable(self,taskInfo)
-        pushTaskQueue(self,taskInfo)
 
-        return self._varTaskUID
-    end
+    self._varTaskUID = self._varTaskUID + 1
+    rawset(taskInfo,"__id",self._varTaskUID)
+    pushTaskTable(self,taskInfo)
+    pushTaskQueue(self,taskInfo)
 
-    return -1
+    return self._varTaskUID
+  
 end
 
 function ScheduledTask:tickTime()
@@ -66,7 +80,7 @@ end
 
 function ScheduledTask:time()
     return self._varCurTime/(1000/self._varInterval)
- end
+end
 
 function ScheduledTask:pause()
     self._varIsPause = true
@@ -94,7 +108,8 @@ function ScheduledTask:removeByTag(tag,isRelease)
     if tag == nil then return end
     for k,v in pairs(self._varTaskTable) do
         if v.tag == tag then
-            local timeTb = self._varTaskQueue[v.time]
+            local fixTime = getFixTime(self,v.time)
+            local timeTb = self._varTaskQueue[fixTime]
             if timeTb then
                 for i,vv in ipairs(timeTb) do
                     if vv.tag == tag then
@@ -114,10 +129,11 @@ function ScheduledTask:removeById(id,isRelease)
     if info then
 
         local time = info.time
-        local timeTb = self._varTaskQueue[time]
+        local fixTime = getFixTime(self,time)
+        local timeTb = self._varTaskQueue[fixTime]
         for i,v in ipairs(timeTb) do
             if v.__id == info.__id then
-                table.remove(self._varTaskQueue[time], i )
+                table.remove(self._varTaskQueue[fixTime], i )
             end
         end
 
@@ -130,9 +146,10 @@ function ScheduledTask:removeByTime(time,isRelease)
     if type(time) ~= "number" then return end
     for k,v in pairs(self._varTaskTable) do
         if v.time == time then
-            local timeTb = self._varTaskQueue[v.time]
+            local fixTime = getFixTime(self,v.time)
+            local timeTb = self._varTaskQueue[fixTime]
             if timeTb then
-                self._varTaskQueue[v.time]= nil
+                self._varTaskQueue[fixTime]= nil
             end
             if isRelease then self._varTaskTable[k] = nil end
         end
@@ -152,12 +169,25 @@ function ScheduledTask:setTasks(tasks)
     tasks = tasks or {}
     self:clear()
     for _,v in ipairs(tasks) do
-        self:push(v.time,v.callback,v.tag)
+        self:push(v)
     end
 end
 
 function ScheduledTask:getTasks()
     return self._varTaskQueue
+end
+
+function ScheduledTask:getTasksByTag(tag)
+    if tag == nil then return end
+
+    local tasks = {}
+    for _,v in pairs(self._varTaskQueue) do
+        if v.tag == tag then
+            table.insert( tasks, v )
+        end
+    end
+
+    return tasks
 end
 
 function ScheduledTask:getInterval()
@@ -168,6 +198,14 @@ function ScheduledTask:setInterval(interval)
     self._varInterval = interval
 end
 
+function ScheduledTask:getUserData()
+    return self._varUserData
+end
+
+function ScheduledTask:setUserData(data)
+    self._varUserData = data
+end
+
 --轮询函数
 function ScheduledTask:poll()
     if self._pollClock:getElpased() >= self._varInterval then
@@ -176,7 +214,7 @@ function ScheduledTask:poll()
             if funsTb then
                 local function exec(funsTb)
                     for i,v in ipairs(funsTb) do
-                        local ret = v.callback(self)
+                        local ret = v.callback(self,v)
                         table.remove(funsTb, i)
                         
                         if self:isPause() then --如果在某个回调里暂停了时间

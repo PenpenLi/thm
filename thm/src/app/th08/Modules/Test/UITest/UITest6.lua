@@ -49,8 +49,9 @@ function M.create(params)
 
     local TASK_TABLE = {
         {
-            time = 1,
-            callback  = function (sender)
+            time = 2,
+            callback  = function (sender,task)
+                local node = sender:getUserData().node
                 --左边生成三个小怪,并向下移动
                 for i = 1,3 do
                     local critter = THSTG.UI.newNode({
@@ -91,6 +92,7 @@ function M.create(params)
         {
             time = 4,
             callback = function (sender)
+                local node = sender:getUserData().node
                 --从左往右
                 for i = 1,6 do
                     local critter = THSTG.UI.newNode({
@@ -117,6 +119,7 @@ function M.create(params)
         {
             time = 2.3,
             callback = function (sender)
+                local node = sender:getUserData().node
                 --从右往左
                 for i = 1,6 do
                     local critter = THSTG.UI.newNode({
@@ -150,7 +153,7 @@ function M.create(params)
             time = 1,
             callback = function (sender)
                 -- 右边生成2个小怪,向上移动
-
+                local node = sender:getUserData().node
                  for i = 1,2 do
                     local critter = THSTG.UI.newNode({
                         x = display.width - 40,
@@ -175,7 +178,9 @@ function M.create(params)
         },
     }
     _scheduledTask:setTasks(TASK_TABLE)
- 
+    _scheduledTask:setUserData({
+        node = node
+    })
     ----
     local function updateFrame()
         _scheduledTask:poll()
