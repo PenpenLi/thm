@@ -13,9 +13,9 @@ function M:_onEnv(gameRoot)
     return true
 end
 
-function M:_onScene()
-    local mainScene = require("Scripts.Modules.Test.TestView"):create()
-    return mainScene
+function M:_onRun()
+    local mainView,transition = require("Scripts.Modules.Test.TestView"):create()
+    mainView:showWithScene(transition)
 end
 
 return M

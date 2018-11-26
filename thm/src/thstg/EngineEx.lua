@@ -27,12 +27,7 @@ function M:run()
 
     --初始化环境
     if Game:createEnv(self._configs.gameRoot) then
-
-         --创建场景
-        local mainScene,transition = Game:createScene()
-
-        --运行
-        mainScene:showWithScene(transition)
+        Game:run()
     end
    
 end

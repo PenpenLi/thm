@@ -2,16 +2,15 @@
 local M = class("Game")
 
 function M:ctor()
-    self:onCreate()
-end
-
-function M:onCreate()
 
 end
 
-function M:createScene()
-    return self:_onScene()
+function M:run()
+    if self:_onInit() then
+        self:_onRun()
+    end
 end
+
 
 function M:createEnv(gameRoot)
 
@@ -35,20 +34,21 @@ function M:_onEnv(gameRoot)
     return true
 end
 
+function M:_onInit()
+    --初始化游戏
+    return true
+end
+
 function M:_onScene()
-    local scene = SCENE.newScene()
-    local label = UI.newLabel({
-        x = display.cx,
-        y = display.cy,
-        anchorPoint = UI.POINT_CENTER,
-        text = "THSTG"
-    })
-    scene:addChild(label)
-    --------
+    return display.newScene()
+end
 
+function M:_onRun()
+    --创建场景
+    local mainScene,transition = self:_onScene()
 
-    -- 返回测试窗口
-    return scene,nil
+    --运行
+    display.runScene(mainScene)
 end
 
 

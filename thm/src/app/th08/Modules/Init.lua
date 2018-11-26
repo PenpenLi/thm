@@ -1,2 +1,0 @@
-require("Modules.Map.MapDef")
-

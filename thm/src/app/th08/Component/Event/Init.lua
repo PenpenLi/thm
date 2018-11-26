@@ -1,1 +1,0 @@
-require "Component.Event.Public.PublicComponent"

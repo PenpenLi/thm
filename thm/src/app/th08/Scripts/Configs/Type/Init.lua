@@ -1,0 +1,8 @@
+require "Scripts.Configs.Type.EventType"
+require "Scripts.Configs.Type.ModuleType"
+require "Scripts.Configs.Type.ResType"
+require "Scripts.Configs.Type.FontType"
+require "Scripts.Configs.Type.UIType"
+require "Scripts.Configs.Type.TexType"
+require "Scripts.Configs.Type.SceneType"
+require "Scripts.Configs.Type.GUIType"
