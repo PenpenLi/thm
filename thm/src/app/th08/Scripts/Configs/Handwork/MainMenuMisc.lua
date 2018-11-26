@@ -7,7 +7,7 @@ return {
             desc = Language.getString(100111), 
             offsetPos = cc.p(0,0),
             moveBy = cc.p(20,0) ,
-            file = "Scripts.Modules.GUI.MainUi.MainMenu.StartLayer",
+            file = "Scripts.Modules.GUI.GameUi.StartMenu.StartLayer",
             onClick = function ()
                 
             end,

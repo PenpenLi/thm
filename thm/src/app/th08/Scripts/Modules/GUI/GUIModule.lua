@@ -1,17 +1,18 @@
 
 local M = class("GameModule", View)
+--TODO:这是一个Scene,不应该存在多个Scene
+function M:onCreate(params)
 
-function M:ctor()
-    --TODO:决定进模块放到那个层
-	self:setLayer(LayerManager.windowLayer)
+
+    --菜单
+    self.__menuLayer = require("Scripts.Modules.GUI.GameUi.StartMenu.MainMenuLayer").create(params)
+    self:addChild(self.__menuLayer)
+
+    -- --loading
+    -- self.__loadingLayer = require("Scripts.Modules.GUI.PublicUi.LoadingLayer").create(params)
+    -- self:addChild(self.__loadingLayer)
+
+
 end
-
-function M:_initRealView(params)
-    --启动第一个UI
-	local layer = require("Scripts.Modules.GUI.MainUi.MainMenu.MainMenuLayer").create(params)
-    return layer
-    
-end
-
 
 return M

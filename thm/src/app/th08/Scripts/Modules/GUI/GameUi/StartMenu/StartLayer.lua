@@ -31,7 +31,7 @@ function M.create(params)
         x = display.cx,
         y = display.height,
         anchorPoint = THSTG.UI.POINT_CENTER_TOP,
-        src = ResManager.getResSub(ResType.GUI,GUIType.MAIN_UI,"diff_title"),
+        src = ResManager.getResSub(ResType.GUI,GUIType.GAME_UI,"diff_title"),
     })
     _uiTitle:setPositionY(display.height + _uiTitle:getContentSize().height)
     node:addChild(_uiTitle)

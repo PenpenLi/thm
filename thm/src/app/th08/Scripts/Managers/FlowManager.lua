@@ -12,7 +12,7 @@ function run()
 	LayerManager.init()
 
 	--TODO:进入模块场景,进入初始化的那个
-	enterMainScene()
+	-- enterMainScene()
 end
 
 --关闭游戏
