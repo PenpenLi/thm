@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local EGameKeyType = Definitions.Public.EGameKeyType
+local EGameKeyType = Definition.Public.EGameKeyType
 local M = {}
 function M.create(params)
     -------Model-------

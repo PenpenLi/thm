@@ -1,0 +1,1 @@
+require "Scripts.Game.Handlers.Caches.TestCache"

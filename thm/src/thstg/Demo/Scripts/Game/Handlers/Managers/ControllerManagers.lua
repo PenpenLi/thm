@@ -1,4 +1,4 @@
-module("ControllerHandler", package.seeall)
+module("ControllerManagers", package.seeall)
 
 local _ctrls = {}
 
@@ -12,12 +12,10 @@ end
 function init()
     --模块注册
 	register(ModuleType.TEST, "Scripts.Game.Modules.Test.TestController")
-	register(ModuleType.GAME, "Scripts.Game.Modules.Game.GameController")
-	register(ModuleType.ROLE, "Scripts.Game.Modules.Role.RoleController")
-	register(ModuleType.GUI, "Scripts.Game.Modules.GUI.GUIController")
 end
 
 function getCtrl(moduleType)
+	-- print(120,"moduleType: ",moduleType)
 	return _ctrls[moduleType]
 end
 

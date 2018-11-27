@@ -14,7 +14,7 @@ function M:_onInit()
     math.randomseed(os.time())
 
     --初始化管理器
-	ControllerHandler.init()
+	ControllerManager.init()
 	LayerManager.init()
 
     return true

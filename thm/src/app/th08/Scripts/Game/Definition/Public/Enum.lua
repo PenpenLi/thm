@@ -1,4 +1,4 @@
-module("Definitions.Public", package.seeall)
+module("Definition.Public", package.seeall)
 
 EGameKeyType = {
     MoveUp = 1,

@@ -1,8 +1,0 @@
-require "Scripts.Game.Definitions.Type.EventType"
-require "Scripts.Game.Definitions.Type.ModuleType"
-require "Scripts.Game.Definitions.Type.ResType"
-require "Scripts.Game.Definitions.Type.FontType"
-require "Scripts.Game.Definitions.Type.UIType"
-require "Scripts.Game.Definitions.Type.TexType"
-require "Scripts.Game.Definitions.Type.SceneType"
-require "Scripts.Game.Definitions.Type.GUIType"

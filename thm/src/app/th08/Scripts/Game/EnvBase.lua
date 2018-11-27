@@ -9,10 +9,10 @@ require "Scripts.Game.Utils.Init"
 require "Scripts.Game.Component.Init"
 
 --定义文件
-require "Scripts.Game.Definitions.Init"
+require "Scripts.Game.Definition.Init"
 
 --资源管理器
-require "Scripts.Game.Managers.Init"
+require "Scripts.Game.Handler.Init"
 
 --模块初始化
 require "Scripts.Game.Modules.Init"
