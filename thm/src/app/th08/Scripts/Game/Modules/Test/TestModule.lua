@@ -15,6 +15,10 @@ function M:onCreate()
         require("Scripts.Game.Modules.Test.UITest.UITest6"),         --时间表测试
         require("Scripts.Game.Modules.Test.UITest.UITest7"),         --特效测试
         require("Scripts.Game.Modules.Test.UITest.UITest8"),         --图片效果测试
+
+
+        require("Scripts.Game.Modules.Test.GameTest.GameScene"),         --图片效果测试
+
     }
     --事件监听
     --注册键盘事件
@@ -62,7 +66,7 @@ function M:onCreate()
     THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
 
     -- changeTest(#TestTb)
-    changeTest(8 + 1)
+    changeTest(9 + 1)
 end
 
 return M

@@ -12,7 +12,7 @@ EGameKeyType = {
 }
 
 ETouchType = {
-    OneClick = 1,
+    OnceClick = 1,
     DoubleClick = 2,
     LongClick = 3,
     Shake = 4,
