@@ -2,8 +2,8 @@ local M = class("TH08",THSTG.Game)
 
 function M:_onEnv()
     --初始化环境
-    require "Scripts.EnvBase"
-    require "Scripts.EnvGame"
+    require "Scripts.Game.EnvBase"
+    require "Scripts.Game.EnvGame"
 
     return true
 end
@@ -27,8 +27,8 @@ function M:_onRun()
     -- FlowManager.run()
 
 
-    local mainView,transition = require("Scripts.Modules.GUI.GUIModule"):create()
-	-- local mainScene = require("Modules.Test.TestModule"):create()
+    local mainView,transition = require("Scripts.Game.Modules.GUI.GUIModule"):create()
+	-- local mainScene = require("Scripts.Game.Modules.Test.TestModule"):create()
 	mainView:showWithScene(transition)
 end
 

@@ -1,9 +1,9 @@
 
 __ENGINE_VERSION__ = 10000
 
-local M = class("EngineEx")
+EngineEx = class("EngineEx")
 
-function M:ctor(configs)
+function EngineEx:ctor(configs)
     self._configs = self._configs or {}
 
     for k, v in pairs(configs or {}) do
@@ -20,7 +20,7 @@ function M:ctor(configs)
 
 end
 
-function M:run()
+function EngineEx:run()
     local gamePath = self._configs.gameRoot .. "." ..self._configs.gameName
  
     local Game = require(gamePath):create()
@@ -32,5 +32,4 @@ function M:run()
    
 end
 
-EngineEx = M
-return M
+return EngineEx

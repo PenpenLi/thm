@@ -1,18 +1,18 @@
 
-local M = class("Game")
+Game = class("Game")
 
-function M:ctor()
+function Game:ctor()
 
 end
 
-function M:run()
+function Game:run()
     if self:_onInit() then
         self:_onRun()
     end
 end
 
 
-function M:createEnv(gameRoot)
+function Game:createEnv(gameRoot)
 
     -------------------------
     --添加LUA包含路径
@@ -28,22 +28,22 @@ function M:createEnv(gameRoot)
 end
 
 --[[以下函数由子类重载]]--
-function M:_onEnv(gameRoot)  
+function Game:_onEnv(gameRoot)  
 
     --初始化游戏
     return true
 end
 
-function M:_onInit()
+function Game:_onInit()
     --初始化游戏
     return true
 end
 
-function M:_onScene()
+function Game:_onScene()
     return display.newScene()
 end
 
-function M:_onRun()
+function Game:_onRun()
     --创建场景
     local mainScene,transition = self:_onScene()
 
@@ -51,6 +51,4 @@ function M:_onRun()
     display.runScene(mainScene)
 end
 
-
-Game = M
-return M
+return Game
