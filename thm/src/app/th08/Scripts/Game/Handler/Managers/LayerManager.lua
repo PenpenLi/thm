@@ -15,7 +15,7 @@ orthographicCamera = false
 --持久UI层
 endureUILayer = false
 --界面UI
-mainUILayer = false
+GUILayer = false
 --窗口
 windowLayer = false
 --加载层
@@ -61,10 +61,10 @@ function init()
 	-- 普通层
 	s_setupCamera(scene, cc.CameraFlag.USER3)
 
-	endureUILayer = s_setupLayer(scene, cc.CameraFlag.USER3, 6000) -- 最后
-	mainUILayer = s_setupLayer(scene, cc.CameraFlag.USER3, 6000) -- 最后
-	windowLayer = s_setupLayer(scene, cc.CameraFlag.USER3, 6000)
-	loadingLayer = s_setupLayer(scene, cc.CameraFlag.USER3, 6000)
+	endureUILayer = s_setupLayer(scene, cc.CameraFlag.USER3, 0) -- 最后
+	GUILayer = s_setupLayer(scene, cc.CameraFlag.USER3, 0) -- 最后
+	windowLayer = s_setupLayer(scene, cc.CameraFlag.USER3, 0)
+	loadingLayer = s_setupLayer(scene, cc.CameraFlag.USER3, 0)
 	
 
 	if saveLayer then
@@ -80,8 +80,12 @@ function init()
 	-- end
 end
 
-function add2MainUILayer(view)
-	mainUILayer:addChild(view)
+function add2EndureUILayer(view)
+	endureUILayer:addChild(view)
+end
+
+function add2GUILayer(view)
+	GUILayer:addChild(view)
 end
 
 function add2WindowLayer(view)

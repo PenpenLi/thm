@@ -1,4 +1,4 @@
 
-local M = class("View", cc.load("mvc").ViewBase)
+local M = class("View", THSTG.MVC.View)
 
 return M

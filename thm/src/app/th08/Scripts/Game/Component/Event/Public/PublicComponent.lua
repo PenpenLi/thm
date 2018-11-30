@@ -92,7 +92,7 @@ function newTouchAllAtOnceExListener(params)
             local curShift = cc.pSub(curPos,_lastMoveState.pos)
             local angle = cc.pGetAngle(curShift,_lastMoveState.shift)
             local speed = cc.pGetLength(curShift) / dTime * 100
-            
+            --FIXME:平移加速时会被认为抖动..而且最大速度被限死也会有问题
             if speed >= _private.shakeSpeed then
                 if _lastMoveState.speedCheck then
                     local dTime = curTime - _lastMoveState.speedCheck.startTime 

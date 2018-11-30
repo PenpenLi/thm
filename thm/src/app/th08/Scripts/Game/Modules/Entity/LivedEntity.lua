@@ -1,7 +1,7 @@
 --玩家实体
 module(..., package.seeall)
 
-local M = class("LivedEntity", MapDef.BaseEntity)
+local M = class("LivedEntity", EntityDef.BaseEntity)
 function M:ctor()
 
     

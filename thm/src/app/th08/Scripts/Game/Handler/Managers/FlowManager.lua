@@ -8,11 +8,10 @@ local s_needClear = false
 
 --开始运行
 function run()
-	ControllerHandler.init()
+	
 	LayerManager.init()
+	ControllerManager.init()
 
-	--TODO:进入模块场景,进入初始化的那个
-	-- enterMainScene()
 end
 
 --关闭游戏
@@ -34,21 +33,8 @@ function clear()
 
 	Cache.clear()
 	ModuleManager.closeAll()
-	ControllerHandler.clear()
-	ControllerHandler.init()
+	ControllerManager.clear()
+	ControllerManager.init()
 	LayerManager.init()
 
-end
-
-function enterMainScene()
-	--创建第一个场景
-	local mainView,transition = require("Scripts.Modules.Game.GameModule"):create()
-	-- local mainScene = require("Modules.Test.TestModule"):create()
-	mainView:showWithScene(transition)
-end
-
-function enterGameScene()
-	ModuleManager.closeAll()
-	print("2: 进入游戏场景！")
-	ModuleManager.open(ModuleType.GUI, {isResident = true})
 end

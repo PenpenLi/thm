@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("BaseEntity")
+local M = class("BaseEntity",cc.Node)
 function M:ctor()
     self._entityData = false
 

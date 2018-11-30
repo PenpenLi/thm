@@ -23,3 +23,13 @@ EBusyType = {
     Loading = 2,
     Waiting = 3,
 }
+
+EPlayerActionStatus = {
+    Normal = 0,
+    MoveLeft = 1,
+    MoveRight = 2,
+    MoveUp = 4,
+    MoveDown = 8,
+    Shot = 16,
+    Skill = 32,
+}

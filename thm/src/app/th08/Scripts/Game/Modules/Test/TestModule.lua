@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("TestModule", View)
+local M = class("TestModule", cc.load("mvc").ViewBase)
 
 local testUI = nil
 

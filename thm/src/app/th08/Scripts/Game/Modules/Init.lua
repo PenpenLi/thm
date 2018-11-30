@@ -1,2 +1,3 @@
-require("Scripts.Game.Modules.Map.MapDef")
+require("Scripts.Game.Modules.Entity.EntityDef")
+require("Scripts.Game.Modules.Stage.StageDef")
 
