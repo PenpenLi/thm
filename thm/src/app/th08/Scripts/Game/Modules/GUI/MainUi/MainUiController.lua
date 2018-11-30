@@ -1,7 +1,8 @@
 module(..., package.seeall)
-local M = class("SettingController", Controller)
+local M = class("MainUiController", Controller)
 
 function M:_onInit()
+
 
 end
 

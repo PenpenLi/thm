@@ -1,14 +1,20 @@
 module(..., package.seeall)
-local M = class("GameController", Controller)
+local M = class("GUIController", Controller)
 
 function M:_onInit()
-    self:_initView()
-    
+    self.__guiControllers = {
+        require("Scripts.Game.Modules.GUI.MainUi.MainUiController").new(),
+        require("Scripts.Game.Modules.GUI.GameUi.GameUiController").new(),
+    }
 end
 
-function M:_initView()
-    self.__gameUiLayer = require("Scripts.Game.Modules.GUI.GameUi.GameUiLayer").create(params)
-    LayerManager.add2GUILayer(self.__gameUiLayer)
+function M:dispose()
+	for _, controller in ipairs(self.__guiControllers) do
+		controller:hide()
+		controller:dispose()
+	end
+	self:super("Controller", "dispose")
 end
+
 
 return M

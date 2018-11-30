@@ -1,7 +1,5 @@
 module("EventType", package.seeall)
 
-GAME_TEST_PRINT = UIDUtil.getEventUID()
-GAME_REPLACE_SCENE = UIDUtil.getEventUID()
 --开始菜单项
 STARTITEM_SELECTDIFF_SELECT = UIDUtil.getEventUID()
 STARTITEM_SELECTDIFF_CANCEL = UIDUtil.getEventUID()
