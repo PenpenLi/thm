@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local StartMenu = require("Scripts.Game.Modules.GUI.GameUi.StartMenu.MainMenuLayer")
+local StartMenu = require("Scripts.Game.Modules.GUI.GameUI.StartMenu.MainMenuLayer")
 local M = {}
 function M.create(params)
     -------Model-------

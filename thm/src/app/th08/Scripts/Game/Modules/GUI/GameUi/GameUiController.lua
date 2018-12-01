@@ -7,7 +7,7 @@ function M:_onInit()
 end
 
 function M:_initView()
-    self.__gameUiLayer = require("Scripts.Game.Modules.GUI.GameUi.GameUiView").create(params)
+    self.__gameUiLayer = require("Scripts.Game.Modules.GUI.GameUI.GameUiView").create(params)
     LayerManager.add2GUILayer(self.__gameUiLayer)
 end
 

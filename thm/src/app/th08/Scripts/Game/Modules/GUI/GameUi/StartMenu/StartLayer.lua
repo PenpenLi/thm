@@ -1,6 +1,6 @@
 module(..., package.seeall)
-local SelectDifficultyLayer = require("Scripts.Game.Modules.GUI.GameUi.StartMenu.StartSelectDifficultyLayer")
-local SelectRoleLayer = require("Scripts.Game.Modules.GUI.GameUi.StartMenu.StartSelectRoleLayer")
+local SelectDifficultyLayer = require("Scripts.Game.Modules.GUI.GameUI.StartMenu.StartSelectDifficultyLayer")
+local SelectRoleLayer = require("Scripts.Game.Modules.GUI.GameUI.StartMenu.StartSelectRoleLayer")
 local M = {}
 function M.create(params)
     --------Model--------

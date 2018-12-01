@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local LoadingIcon = require("Scripts.Game.Modules.GUI.MainUi.Component.LoadingIcon")
+local LoadingIcon = require("Scripts.Game.Modules.GUI.MainUI.Component.LoadingIcon")
 local M = {}
 function M.create(params)
     -------Model-------
