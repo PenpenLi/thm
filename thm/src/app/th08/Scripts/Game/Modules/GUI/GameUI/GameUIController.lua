@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local M = class("GameUiController", Controller)
+local M = class("GameUIController", Controller)
 
 function M:_onInit()
     self:_initView()

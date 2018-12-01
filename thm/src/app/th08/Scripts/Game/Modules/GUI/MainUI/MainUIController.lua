@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local M = class("MainUiController", Controller)
+local M = class("MainUIController", Controller)
 
 function M:_onInit()
 

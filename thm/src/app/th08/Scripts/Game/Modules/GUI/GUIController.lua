@@ -3,8 +3,8 @@ local M = class("GUIController", Controller)
 
 function M:_onInit()
     self.__guiControllers = {
-        require("Scripts.Game.Modules.GUI.MainUI.MainUiController").new(),
-        require("Scripts.Game.Modules.GUI.GameUI.GameUiController").new(),
+        require("Scripts.Game.Modules.GUI.MainUI.MainUIController").new(),
+        require("Scripts.Game.Modules.GUI.GameUI.GameUIController").new(),
     }
 end
 
