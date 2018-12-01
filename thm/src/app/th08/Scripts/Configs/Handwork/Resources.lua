@@ -77,11 +77,11 @@ return {
         },
     
         public_ui = {
-            loading_icon_1 = "Assets/GUI/PublicUi/Loading/loading_icon_1.png" ,
-            loading_icon_2 = "Assets/GUI/PublicUi/Loading/loading_icon_2.png" ,
-            loading_logo = "Assets/GUI/PublicUi/Loading/loading_logo.jpg" ,
-            loading_word_cn = "Assets/GUI/PublicUi/Loading/loading_word_cn.png" ,
-            loading_word_en = "Assets/GUI/PublicUi/Loading/loading_word_en.png" ,
+            loading_icon_1 = "Assets/GUI/PublicUI/Loading/loading_icon_1.png" ,
+            loading_icon_2 = "Assets/GUI/PublicUI/Loading/loading_icon_2.png" ,
+            loading_logo = "Assets/GUI/PublicUI/Loading/loading_logo.jpg" ,
+            loading_word_cn = "Assets/GUI/PublicUI/Loading/loading_word_cn.png" ,
+            loading_word_en = "Assets/GUI/PublicUI/Loading/loading_word_en.png" ,
     
         },
     }
