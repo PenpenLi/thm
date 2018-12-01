@@ -12,8 +12,7 @@ end
 function init()
     --模块注册
 	register(ModuleType.TEST, "Scripts.Game.Modules.Test.TestController")
-	register(ModuleType.GAME, "Scripts.Game.Modules.Game.GameController")
-	register(ModuleType.GUI, "Scripts.Game.Modules.GUI.GUIController")
+	register(ModuleType.MENU, "Scripts.Game.Modules.Menu.MenuController")
 end
 
 function getCtrl(moduleType)

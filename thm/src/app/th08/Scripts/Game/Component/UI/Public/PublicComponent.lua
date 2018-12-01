@@ -7,7 +7,7 @@ function newRotateIcon(params)
     params.anchorPoint = params.anchorPoint or THSTG.UI.POINT_CENTER
     params.time = params.time or -1
     params.speed = params.speed or false
-    params.source = params.source or ResManager.getRes(ResType.PUBLIC_UI,"loading_icon_1")
+    params.source = params.source or ResManager.getRes(ResType.LOADING,"loading_icon_1")
     -----
     local node = THSTG.UI.newNode({
         x = params.x,

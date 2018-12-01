@@ -1,10 +1,11 @@
 module("Cache", package.seeall)
 
 testCache = require("Scripts.Game.Modules.Test.TestCache")
-gameCache = require("Scripts.Game.Modules.Game.GameCache")
-
+settingCache = require("Scripts.Game.Modules.Setting.SettingCache")
+roleCache = require("Scripts.Game.Modules.Role.RoleCache")
 ---
 function clear()
     testCache.clear()
-    gameCache.clear()
+    settingCache.clear()
+    roleCache.clear()
 end

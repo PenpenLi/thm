@@ -11,11 +11,10 @@ end
 function M:__keyBoadrControl(keyCode, event)
     if keyCode == cc.KeyCode.KEY_F1 then
         if not self._module then
-            --TODO:
-            self._module = require("Scripts.Game.Modules.Test.TestModule"):create() 
+            self._module = require("Scripts.Game.Modules.Test.TestView"):create() 
             self._module:showWithScene()
         else
-            --切换回原场景
+            --切换回原场景--TODO:
             self._module = false
             local scene = require("Scripts.Game.Modules.GUI.GUIModule"):create()
             scene:showWithScene()  

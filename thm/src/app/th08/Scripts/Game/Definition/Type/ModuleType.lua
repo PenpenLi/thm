@@ -2,11 +2,8 @@ module("ModuleType")
 
 TEST = "test"
 
-SCENE = "scene"
+MENU = "menu"
 
-GAME = "game"
-
----
 ROLE = "role"
 
-GUI = "gui"
+LOADING = "loading"

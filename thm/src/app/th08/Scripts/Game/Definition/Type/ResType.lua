@@ -9,5 +9,11 @@ SOUND = "sound"
 TEXTURE = "texture"
 
 UI = "ui"
+---
+MAINUI = "main_ui"
 
-GUI = "gui"
+MENU = "menu"
+
+ROLE = "role"
+
+LOADING = "loading"
