@@ -79,14 +79,14 @@ function M.create(params)
     --
 
     --  大背景
-    --  local mainBg = THSTG.UI.newImage({
-    --     x = display.cx,
-    --     y = display.cy,
-    --     anchorPoint = THSTG.UI.POINT_CENTER,
-    --     src = ResManager.getUIRes(UIType.MAIN_SCENE, "") --TODO:
+     local mainBg = THSTG.UI.newImage({
+        x = display.cx,
+        y = display.cy,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        src = ResManager.getResSub(ResType.MENU,MenuType.MAIN_MENU, "main_bg") --TODO:
 
-    -- })
-    -- node:addChild(mainBg)
+    })
+    node:addChild(mainBg)
 
     _uiTitleList = THSTG.UI.newTileList({
         x = 138,

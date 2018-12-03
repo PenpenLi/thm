@@ -6,8 +6,9 @@ local Scenario = require("Scripts.Game.Modules.Test.GameTest.Misc.Scenario")
 local M = {}
 function M.create(params)
     -------Model-------
+    --键盘与触屏移动只能同时一个
     local STEP_KEY_VAL = 2
-    local STEP_TOUCH_VAL = 10
+    local STEP_TOUCH_VAL = 2
 
     local _varKeyboardListener = nil
     local _varTouchAllListener = nil
@@ -108,8 +109,11 @@ function M.create(params)
     local function playerActionHandle()
         playerHitHandle()
         playerWipeHandle()
+
+        --TODO:键盘与触屏移动只能同时一个
         playerKeyMoveHandle()
         playerTouchMoveHandle()
+
         playerSkillHandle()
     end
     ----------

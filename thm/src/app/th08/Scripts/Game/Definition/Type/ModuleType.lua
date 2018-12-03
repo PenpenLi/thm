@@ -9,3 +9,5 @@ ROLE = "role"
 LOADING = "loading"
 
 SELECTION = "selection"
+
+STAGE = "stage"

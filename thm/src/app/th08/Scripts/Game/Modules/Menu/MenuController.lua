@@ -8,4 +8,12 @@ function M:_onInit()
 end
 
 
+function M:dispose()
+	for _, controller in ipairs(self.__menuControllers) do
+		controller:hide()
+		controller:dispose()
+	end
+	self.super.dispose(self)
+end
+
 return M

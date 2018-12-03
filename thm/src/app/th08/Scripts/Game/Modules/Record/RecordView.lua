@@ -6,8 +6,7 @@ function M:_onInit()
 end
 
 function M:_initRealView(params)
-    local layer = require("Scripts.Game.Modules.Menu.MainMenu.Layer.MainMenuLayer").create(params)
-    return layer
+    return nil
 end
 
 return M

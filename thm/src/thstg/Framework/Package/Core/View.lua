@@ -5,6 +5,8 @@ function M:ctor()
 	self.__parent__ = false
 	--真实的cc显示对象
 	self.__realView__ = false
+
+	self:_onInit()
 end
 
 ----public functions---------------------
@@ -70,6 +72,11 @@ function M:isRealViewExist()
 end
 
 ----protected functions---------------------
+
+--类初始化
+function M:_onInit()
+
+end
 
 --待子类重写，需要return一个cc显示对象
 function M:_initRealView(...)

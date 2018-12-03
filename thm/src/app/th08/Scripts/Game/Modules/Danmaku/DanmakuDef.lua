@@ -1,1 +1,0 @@
-module("DanmakuDef", package.seeall)
