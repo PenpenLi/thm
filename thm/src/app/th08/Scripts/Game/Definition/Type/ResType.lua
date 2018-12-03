@@ -17,3 +17,5 @@ MENU = "menu"
 ROLE = "role"
 
 LOADING = "loading"
+
+SELECTION = "selection"

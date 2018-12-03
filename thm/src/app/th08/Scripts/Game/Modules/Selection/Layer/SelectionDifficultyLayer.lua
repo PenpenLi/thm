@@ -120,7 +120,8 @@ function M.create(params)
     end
 
     function node.updateLayer()
-        _ui.tileList:setDataProvider(SelectDiffConfig.getInfos())
+        local infos = Cache.selectionCache.getDiffSelInfos()
+        _ui.tileList:setDataProvider(infos)
         _ui.tileList:setSelected(1)
         for i,v in ipairs(_ui.tileList:getNodes()) do
             _varAcitonsPos[i] = cc.p(v:getPosition())

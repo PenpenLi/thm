@@ -31,41 +31,54 @@ return {
     -----
 
     role = {
-        start_item_bg = "Assets/",
-        
-        diff_1_off = "Assets/Role/SelectDifficulty/diff_1_off.png" ,
-        diff_1_on = "Assets/Role/SelectDifficulty/diff_1_on.png" ,
-        diff_2_off = "Assets/Role/SelectDifficulty/diff_2_off.png" ,
-        diff_2_on = "Assets/Role/SelectDifficulty/diff_2_on.png" ,
-        diff_3_off = "Assets/Role/SelectDifficulty/diff_3_off.png" ,
-        diff_3_on = "Assets/Role/SelectDifficulty/diff_3_on.png" ,
-        diff_4_off = "Assets/Role/SelectDifficulty/diff_4_off.png" ,
-        diff_4_on = "Assets/Role/SelectDifficulty/diff_4_on.png" ,
-        diff_5_off = "Assets/Role/SelectDifficulty/diff_5_off.png" ,
-        diff_5_on = "Assets/Role/SelectDifficulty/diff_5_on.png" ,
-        diff_title = "Assets/Role/SelectDifficulty/diff_title.png" ,
 
-        sl_pl00a = "Assets/Role/SelectRole/sl_pl00a.png" ,
-        sl_pl00h = "Assets/Role/SelectRole/sl_pl00h.png" ,
-        sl_pl01a = "Assets/Role/SelectRole/sl_pl01a.png" ,
-        sl_pl01h = "Assets/Role/SelectRole/sl_pl01h.png" ,
-        sl_pl02a = "Assets/Role/SelectRole/sl_pl02a.png" ,
-        sl_pl02h = "Assets/Role/SelectRole/sl_pl02h.png" ,
-        sl_pl03a = "Assets/Role/SelectRole/sl_pl03a.png" ,
-        sl_pl03h = "Assets/Role/SelectRole/sl_pl03h.png" ,
-        sl_pltxt0 = "Assets/Role/SelectRole/sl_pltxt0.png" ,
-        sl_pltxt1 = "Assets/Role/SelectRole/sl_pltxt1.png" ,
-        sl_pltxt2 = "Assets/Role/SelectRole/sl_pltxt2.png" ,
-        sl_pltxt3 = "Assets/Role/SelectRole/sl_pltxt3.png" ,
-        sl_pltxt4 = "Assets/Role/SelectRole/sl_pltxt4.png" ,
-        sl_pltxt5 = "Assets/Role/SelectRole/sl_pltxt5.png" ,
-        sl_pltxt6 = "Assets/Role/SelectRole/sl_pltxt6.png" ,
-        sl_pltxt7 = "Assets/Role/SelectRole/sl_pltxt7.png" ,
-        sl_pltxt8 = "Assets/Role/SelectRole/sl_pltxt8.png" ,
-        sl_pltxt9 = "Assets/Role/SelectRole/sl_pltxt9.png" ,
-        sl_pltxt10 = "Assets/Role/SelectRole/sl_pltxt10.png" ,
-        sl_pltxt11 = "Assets/Role/SelectRole/sl_pltxt11.png" ,
-        sl_text = "Assets/Role/SelectRole/sl_text.png" ,
+    },
+
+    menu = {
+
+        main_menu = {
+            main_bg = "",
+        },
+
+    },
+
+    selection = {
+        selection_bg = "Assets/Selection/selection_bg",
+        
+        diff_1_off = "Assets/Selection/SelectDifficulty/diff_1_off.png" ,
+        diff_1_on = "Assets/Selection/SelectDifficulty/diff_1_on.png" ,
+        diff_2_off = "Assets/Selection/SelectDifficulty/diff_2_off.png" ,
+        diff_2_on = "Assets/Selection/SelectDifficulty/diff_2_on.png" ,
+        diff_3_off = "Assets/Selection/SelectDifficulty/diff_3_off.png" ,
+        diff_3_on = "Assets/Selection/SelectDifficulty/diff_3_on.png" ,
+        diff_4_off = "Assets/Selection/SelectDifficulty/diff_4_off.png" ,
+        diff_4_on = "Assets/Selection/SelectDifficulty/diff_4_on.png" ,
+        diff_5_off = "Assets/Selection/SelectDifficulty/diff_5_off.png" ,
+        diff_5_on = "Assets/Selection/SelectDifficulty/diff_5_on.png" ,
+        diff_title = "Assets/Selection/SelectDifficulty/diff_title.png" ,
+
+        sl_pl00a = "Assets/Selection/SelectRole/sl_pl00a.png" ,
+        sl_pl00h = "Assets/Selection/SelectRole/sl_pl00h.png" ,
+        sl_pl01a = "Assets/Selection/SelectRole/sl_pl01a.png" ,
+        sl_pl01h = "Assets/Selection/SelectRole/sl_pl01h.png" ,
+        sl_pl02a = "Assets/Selection/SelectRole/sl_pl02a.png" ,
+        sl_pl02h = "Assets/Selection/SelectRole/sl_pl02h.png" ,
+        sl_pl03a = "Assets/Selection/SelectRole/sl_pl03a.png" ,
+        sl_pl03h = "Assets/Selection/SelectRole/sl_pl03h.png" ,
+        sl_pltxt0 = "Assets/Selection/SelectRole/sl_pltxt0.png" ,
+        sl_pltxt1 = "Assets/Selection/SelectRole/sl_pltxt1.png" ,
+        sl_pltxt2 = "Assets/Selection/SelectRole/sl_pltxt2.png" ,
+        sl_pltxt3 = "Assets/Selection/SelectRole/sl_pltxt3.png" ,
+        sl_pltxt4 = "Assets/Selection/SelectRole/sl_pltxt4.png" ,
+        sl_pltxt5 = "Assets/Selection/SelectRole/sl_pltxt5.png" ,
+        sl_pltxt6 = "Assets/Selection/SelectRole/sl_pltxt6.png" ,
+        sl_pltxt7 = "Assets/Selection/SelectRole/sl_pltxt7.png" ,
+        sl_pltxt8 = "Assets/Selection/SelectRole/sl_pltxt8.png" ,
+        sl_pltxt9 = "Assets/Selection/SelectRole/sl_pltxt9.png" ,
+        sl_pltxt10 = "Assets/Selection/SelectRole/sl_pltxt10.png" ,
+        sl_pltxt11 = "Assets/Selection/SelectRole/sl_pltxt11.png" ,
+        sl_text = "Assets/Selection/SelectRole/sl_text.png" ,
+
     },
 
     main_ui = {

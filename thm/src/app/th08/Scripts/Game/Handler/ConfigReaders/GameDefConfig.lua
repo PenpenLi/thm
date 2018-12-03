@@ -1,1 +1,0 @@
-module("GameDefConfig", package.seeall)

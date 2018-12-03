@@ -1,7 +1,7 @@
 --玩家实体
 module(..., package.seeall)
 
-local M = class("LivedEntity", EntityDef.BaseEntity)
+local M = class("LivedEntity", StageDef.BaseEntity)
 function M:ctor()
 
     

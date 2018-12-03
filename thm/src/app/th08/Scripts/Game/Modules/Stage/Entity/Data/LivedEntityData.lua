@@ -2,7 +2,7 @@
 --实体基类
 module(..., package.seeall)
 
-local M = class("LivedEntityData", EntityDef.EntityData)
+local M = class("LivedEntityData", StageDef.EntityData)
 
 function M:ctor()
     self._speed = 0

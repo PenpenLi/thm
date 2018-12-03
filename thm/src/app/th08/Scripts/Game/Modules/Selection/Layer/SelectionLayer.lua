@@ -1,6 +1,6 @@
 module(..., package.seeall)
-local SelectDifficultyLayer = require("Scripts.Game.Modules.Role.Layer.SelectDifficultyLayer")
-local SelectRoleLayer = require("Scripts.Game.Modules.Role.Layer.SelectRoleLayer")
+local SelectDifficultyLayer = require("Scripts.Game.Modules.Selection.Layer.SelectionDifficultyLayer")
+local SelectRoleLayer = require("Scripts.Game.Modules.Selection.Layer.SelectionRoleLayer")
 local M = {}
 function M.create(params)
     --------Model--------
@@ -31,7 +31,7 @@ function M.create(params)
         x = display.cx,
         y = display.height,
         anchorPoint = THSTG.UI.POINT_CENTER_TOP,
-        src = ResManager.getRes(ResType.ROLE,"diff_title"),
+        src = ResManager.getRes(ResType.SELECTION,"diff_title"),
     })
     _uiTitle:setPositionY(display.height + _uiTitle:getContentSize().height)
     node:addChild(_uiTitle)

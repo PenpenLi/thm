@@ -4,3 +4,5 @@ require "Scripts.Game.Definition.Type.ResType"
 require "Scripts.Game.Definition.Type.FontType"
 require "Scripts.Game.Definition.Type.UIType"
 require "Scripts.Game.Definition.Type.TexType"
+
+require "Scripts.Game.Definition.Type.MenuType"

@@ -15,7 +15,7 @@ orthographicCamera = false
 --持久UI层
 endureUILayer = false
 --界面UI
-GUILayer = false
+guiLayer = false
 --窗口
 windowLayer = false
 --加载层
@@ -62,7 +62,7 @@ function init()
 	s_setupCamera(scene, cc.CameraFlag.USER3)
 
 	endureUILayer = s_setupLayer(scene, cc.CameraFlag.USER3, 0) -- 最后
-	GUILayer = s_setupLayer(scene, cc.CameraFlag.USER3, 0) -- 最后
+	guiLayer = s_setupLayer(scene, cc.CameraFlag.USER3, 0) -- 最后
 	windowLayer = s_setupLayer(scene, cc.CameraFlag.USER3, 0)
 	loadingLayer = s_setupLayer(scene, cc.CameraFlag.USER3, 0)
 	
@@ -85,7 +85,7 @@ function add2EndureUILayer(view)
 end
 
 function add2GUILayer(view)
-	GUILayer:addChild(view)
+	guiLayer:addChild(view)
 end
 
 function add2WindowLayer(view)
