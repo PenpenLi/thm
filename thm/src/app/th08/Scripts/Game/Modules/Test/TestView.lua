@@ -1,10 +1,16 @@
 module(..., package.seeall)
 
-local M = class("TestModule", cc.load("mvc").ViewBase)
+local M = class("TestModule", View)
 
 local testUI = nil
 
-function M:onCreate()
+function M:_onInit()
+    self:setLayer(LayerManager.guiLayer)
+end
+
+function M:_initRealView(params)
+    local layer = cc.Layer:create()
+
     local TestTb = {
         require("Scripts.Game.Modules.Test.UITest.UITest0"),         --测试面板
         require("Scripts.Game.Modules.Test.UITest.UITest1"),         --动画测试
@@ -30,7 +36,7 @@ function M:onCreate()
                 end
             end
             testUI = TestTb[index].create()
-            self:addChild(testUI)
+            layer:addChild(testUI)
         end
     end
 
@@ -63,10 +69,13 @@ function M:onCreate()
             end
         end,
     })
-    THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
+    THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, layer)
 
     -- changeTest(#TestTb)
     changeTest(9 + 1)
+
+
+    return layer
 end
 
 return M

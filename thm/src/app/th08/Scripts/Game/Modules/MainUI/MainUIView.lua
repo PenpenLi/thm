@@ -1,26 +1,12 @@
 module(..., package.seeall)
-local LoadingIcon = require("Scripts.Game.Modules.GUI.MainUI.Component.LoadingIcon")
-local M = {}
-function M.create(params)
-    -------Model-------
-    local _uiLoadingIcon = nil
-   
-    -------View-------
-    local node = THSTG.UI.newNode()
+local M = class("MainUIView", View)
 
-    _uiLoadingIcon = LoadingIcon.create()
-    node:addChild(_uiLoadingIcon)
+function M:_onInit()
+    self:setLayer(LayerManager.guiLayer)
+end
 
-    -------Controller-------
-    node:onNodeEvent("enter", function ()
-        
-    end)
-
-    node:onNodeEvent("exit", function ()
-        
-    end)
-    
-    return node
+function M:_initRealView(params)
+    return cc.Layer:create()
 end
 
 return M

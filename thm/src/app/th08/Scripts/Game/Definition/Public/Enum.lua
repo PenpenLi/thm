@@ -9,6 +9,7 @@ EGameKeyType = {
     Attack = 5,
     Wipe = 6,
     Skill = 7,
+    Slow = 8,
 }
 
 ETouchType = {
@@ -16,6 +17,7 @@ ETouchType = {
     DoubleClick = 2,
     LongClick = 3,
     Shake = 4,
+    MultiTouch = 5,
 }
 
 EBusyType = {

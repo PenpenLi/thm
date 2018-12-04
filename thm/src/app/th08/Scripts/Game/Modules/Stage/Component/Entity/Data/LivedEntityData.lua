@@ -5,7 +5,7 @@ module(..., package.seeall)
 local M = class("LivedEntityData", StageDef.EntityData)
 
 function M:ctor()
-    self._speed = 0
+    self._speed = StageDef.Speed.new()
 end
 
 return M

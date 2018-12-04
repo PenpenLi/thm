@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local M = class("MainMenuView", View)
+local M = class("MenuView", View)
 
 function M:_onInit()
     self:setLayer(LayerManager.guiLayer)

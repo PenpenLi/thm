@@ -6,12 +6,18 @@ function M:_initViewClass()
 end
 
 function M:_onInit()
-    THSTG.Dispatcher.addEventListener(EventType.STAGE_ENTER, self.__enterSection, self)
-    -- self:show()
+    THSTG.Dispatcher.addEventListener(EventType.STAGE_ENTER, self.__enterStage, self)
+    THSTG.Dispatcher.addEventListener(EventType.STAGE_EXIT, self.__exitStage, self)
 end
 
-function M:__enterSection(e,params)
-    self:show(params)
+function M:__enterStage(e,params)
+
+
+end
+
+function M:__exitStage(e,params)
+
+
 end
 
 return M

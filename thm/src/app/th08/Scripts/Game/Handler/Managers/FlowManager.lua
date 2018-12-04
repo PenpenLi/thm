@@ -9,9 +9,11 @@ local s_needClear = false
 --开始运行
 function run()
 	
+	SceneManager.init()
 	LayerManager.init()
 	ControllerManager.init()
 
+	ModuleManager.enterMenuScene()
 end
 
 --关闭游戏
@@ -33,8 +35,9 @@ function clear()
 
 	Cache.clear()
 	ModuleManager.closeAll()
+	LayerManager.init()
 	ControllerManager.clear()
 	ControllerManager.init()
-	LayerManager.init()
 
 end
+

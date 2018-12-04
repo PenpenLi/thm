@@ -10,6 +10,7 @@ function M.create(params)
     local STEP_KEY_VAL = 2
     local STEP_TOUCH_VAL = 2
 
+
     local _varKeyboardListener = nil
     local _varTouchAllListener = nil
 
@@ -48,6 +49,9 @@ function M.create(params)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_C,EGameKeyType.Skill)
         _cmpControlMapper:registerKey(ETouchType.DoubleClick,EGameKeyType.Skill)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_K,EGameKeyType.Skill)
+
+        _cmpControlMapper:registerKey(ETouchType.MultiTouch,EGameKeyType.Slow)
+        _cmpControlMapper:registerKey(cc.KeyCode.KEY_SHIFT,EGameKeyType.Slow)
     end
 
     ---
@@ -105,16 +109,27 @@ function M.create(params)
         end
     end
 
+    local function playerSlowHandle()
+        if _cmpControlMapper:isKeyDown(EGameKeyType.Slow) then
+            print(15,"低速模式")
+            _cmpControlMapper:resetKey(EGameKeyType.Slow)
+        end
+    end
+
+    local function playerMoveHandle()
+        --TODO:同一个方向的移动只能有一次
+        playerKeyMoveHandle()
+        playerTouchMoveHandle()
+
+    end
+
     
     local function playerActionHandle()
         playerHitHandle()
         playerWipeHandle()
-
-        --TODO:键盘与触屏移动只能同时一个
-        playerKeyMoveHandle()
-        playerTouchMoveHandle()
-
+        playerMoveHandle()
         playerSkillHandle()
+        playerSlowHandle()
     end
     ----------
 
@@ -148,6 +163,9 @@ function M.create(params)
         onMoved = function(touches, event)
             local curPos = touches[1]:getLocation()
             _varDestPos = {x = curPos.x, y = curPos.y}
+            if #touches > 1 then
+                _cmpControlMapper:pressKey(ETouchType.MultiTouch)
+            end
         end,
         onEnded = function(touches, event)
             _varDestPos = false

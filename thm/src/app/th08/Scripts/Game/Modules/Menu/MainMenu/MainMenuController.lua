@@ -6,7 +6,7 @@ function M:_initViewClass()
 end
 
 function M:_onInit()
-    self:show()
+
 end
 
 

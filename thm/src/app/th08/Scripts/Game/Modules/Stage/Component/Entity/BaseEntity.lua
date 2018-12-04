@@ -2,12 +2,11 @@ module(..., package.seeall)
 
 local M = class("BaseEntity",cc.Node)
 function M:ctor()
-    self._entityData = false
-
+    self._entityData = false	--实体数据
     
 end
 
---????
+
 function M:getEntityData() 
     return self._entityData 
 end
@@ -15,6 +14,8 @@ end
 function M:setEntityData(value)
 
 end
+
+
 ------------------------------------------------------------------
 
 --?????????

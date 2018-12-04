@@ -82,6 +82,15 @@ function ScheduledTask:time()
     return self._varCurTime/(1000/self._varInterval)
 end
 
+function ScheduledTask:jumpTo(time)
+    self._varCurTime = getFixTime(self,time)
+end
+
+function ScheduledTask:jumpBy(offsetTime)
+    self._varCurTime = self._varCurTime + getFixTime(self,offsetTime)
+end
+
+
 function ScheduledTask:pause()
     self._varIsPause = true
 end

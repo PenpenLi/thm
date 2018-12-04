@@ -1,24 +1,21 @@
 module(..., package.seeall)
 local M = class("TestController", Controller)
-function M:ctor()
-    self._module = false
-    self.super.ctor(self)
+
+function M:_initViewClass()
+    return "Scripts.Game.Modules.Test.TestView"
 end
+
 function M:_onInit()
     THSTG.CCDispatcher:addEventListenerWithFixedPriority(THSTG.EVENT.newKeyboardListener({onPressed = function(keyCode, event) self:__keyBoadrControl(keyCode, event) end}), 1)
 end
 
 function M:__keyBoadrControl(keyCode, event)
     if keyCode == cc.KeyCode.KEY_F1 then
-        if not self._module then
-            self._module = require("Scripts.Game.Modules.Test.TestView"):create() 
-            self._module:showWithScene()
-        else
-            --切换回原场景--TODO:
-            self._module = false
-            local scene = require("Scripts.Game.Modules.GUI.GUIModule"):create()
-            scene:showWithScene()  
-        end
+        ModuleManager.enterTestScene()
+    elseif keyCode == cc.KeyCode.KEY_F2 then
+        ModuleManager.enterMenuScene()
+    elseif keyCode == cc.KeyCode.KEY_F3 then
+        ModuleManager.enterStageScene()
     end
 end
 

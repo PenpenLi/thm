@@ -40,17 +40,22 @@ end
 
 
 ----
---TODO:
---交换场景,当前场景入栈
--- function swapScene(scene)
 
--- end
+--替换场景,释放当前场景
+function replaceScene(myScene, transition, time, more)
+	return display.runScene(myScene, transition, time, more)
+end
 
--- --替换场景,释放当前场景
--- function replaceScene(scene)
--- 	return cc.Director:getInstance():replaceScene(scene)
--- end
+function pushScene(myScene, transition, time, more)
+	if transition then
+		myScene = display.wrapScene(myScene, transition, time, more)
+	end
+	return cc.Director:getInstance():pushScene(myScene)
+end
 
+function popScene()
+	return cc.Director:getInstance():popScene()
+end
 
 function loadPlistFrames(params)
 	params = params or {}

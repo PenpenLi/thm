@@ -67,7 +67,7 @@ function open(moduleType,params)
 end
 
 function close(moduleType)
-	local ctrl = ControllerManager.getCtrl(moduleType)
+	local ctrl = GameController.getCtrl(moduleType)
 	if not ctrl or not ctrl:isShow() then
 		return
 	end
@@ -127,23 +127,4 @@ function isOpenedAny()
 		end
 	end
 	return false
-end
-
----------
-function enterMenuScene()
-	closeAll()
-	open(ModuleType.MAIN_UI, {isResident = true})
-	open(ModuleType.MENU, {isResident = true})
-end
-
-function enterStageScene()
-	closeAll()
-	open(ModuleType.MAIN_UI, {isResident = true})
-	open(ModuleType.STAGE, {isResident = true})
-end
-
-function enterTestScene()
-	closeAll()
-	open(ModuleType.MAIN_UI, {isResident = true})
-	open(ModuleType.TEST, {isResident = true})
 end

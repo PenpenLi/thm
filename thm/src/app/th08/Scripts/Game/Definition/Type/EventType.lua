@@ -1,5 +1,13 @@
 module("EventType", package.seeall)
 
+-----公共事件--------------------------
+PUBLIC_MODULE_OPENED = UIDUtil.getEventUID()--有模块打开了
+PUBLIC_MODULE_CLOSED = UIDUtil.getEventUID()--有模块关闭了
+PUBLIC_MODULE_OPENING = UIDUtil.getEventUID()--有模块打开即将打开
+
+PUBLIC_OPEN_MODULE = UIDUtil.getEventUID()--打开模块
+PUBLIC_CLOSE_MODULE = UIDUtil.getEventUID()--关闭模块
+
 --开始菜单项
 STARTITEM_SELECTDIFF_SELECT = UIDUtil.getEventUID()
 STARTITEM_SELECTDIFF_CANCEL = UIDUtil.getEventUID()
@@ -14,3 +22,4 @@ LOADING_BUSY = UIDUtil.getEventUID()
 
 --舞台模块
 STAGE_ENTER = UIDUtil.getEventUID()
+STAGE_EXIT = UIDUtil.getEventUID()

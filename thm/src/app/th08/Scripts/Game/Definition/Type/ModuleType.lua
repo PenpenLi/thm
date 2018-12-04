@@ -2,6 +2,8 @@ module("ModuleType")
 
 TEST = "test"
 
+MAIN_UI = "main_ui"
+
 MENU = "menu"
 
 ROLE = "role"
