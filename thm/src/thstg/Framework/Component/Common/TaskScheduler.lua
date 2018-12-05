@@ -10,8 +10,8 @@ module("COMMON", package.seeall)
     }
 ]]
 
-local ScheduledTask = class("ScheduledTask")
-function ScheduledTask:ctor()
+local TaskScheduler = class("TaskScheduler")
+function TaskScheduler:ctor()
     self._pollClock = COMMON.newTickClock()
 
     self._varTaskTable = {}  --任务表
@@ -40,7 +40,7 @@ local function pushTaskQueue(self,taskInfo)
     table.insert(self._varTaskQueue[fixTime], taskInfo)
 end
 
-function ScheduledTask:push(time,callback,tag)
+function TaskScheduler:push(time,callback,tag)
     local taskInfo = nil
     if type(time) == "table" then
         if type(time.callback) == "function" and type(time.time) == "number" and time.time >=0 then
@@ -74,36 +74,36 @@ function ScheduledTask:push(time,callback,tag)
   
 end
 
-function ScheduledTask:tickTime()
+function TaskScheduler:tickTime()
    return self._varCurTime
 end
 
-function ScheduledTask:time()
+function TaskScheduler:time()
     return self._varCurTime/(1000/self._varInterval)
 end
 
-function ScheduledTask:jumpTo(time)
+function TaskScheduler:jumpTo(time)
     self._varCurTime = getFixTime(self,time)
 end
 
-function ScheduledTask:jumpBy(offsetTime)
+function TaskScheduler:jumpBy(offsetTime)
     self._varCurTime = self._varCurTime + getFixTime(self,offsetTime)
 end
 
 
-function ScheduledTask:pause()
+function TaskScheduler:pause()
     self._varIsPause = true
 end
 
-function ScheduledTask:isPause()
+function TaskScheduler:isPause()
     return self._varIsPause
 end
 
-function ScheduledTask:resume()
+function TaskScheduler:resume()
     self._varIsPause = false
 end
 
-function ScheduledTask:reset(startTime)
+function TaskScheduler:reset(startTime)
     startTime = startTime or 0
     self._varCurTime = startTime
     self._varTaskQueue = {}
@@ -113,7 +113,7 @@ function ScheduledTask:reset(startTime)
 
 end
 
-function ScheduledTask:removeByTag(tag,isRelease)
+function TaskScheduler:removeByTag(tag,isRelease)
     if tag == nil then return end
     for k,v in pairs(self._varTaskTable) do
         if v.tag == tag then
@@ -132,7 +132,7 @@ function ScheduledTask:removeByTag(tag,isRelease)
   
 end
 
-function ScheduledTask:removeById(id,isRelease)
+function TaskScheduler:removeById(id,isRelease)
     if type(id) ~= "number" then return end
     local info = self._varTaskTable[id]
     if info then
@@ -151,7 +151,7 @@ function ScheduledTask:removeById(id,isRelease)
    
 end
 
-function ScheduledTask:removeByTime(time,isRelease)
+function TaskScheduler:removeByTime(time,isRelease)
     if type(time) ~= "number" then return end
     for k,v in pairs(self._varTaskTable) do
         if v.time == time then
@@ -166,7 +166,7 @@ function ScheduledTask:removeByTime(time,isRelease)
 
 end
 
-function ScheduledTask:clear()
+function TaskScheduler:clear()
     self._pollClock:reset()
     self._varCurTime = 0
     self._varTaskTable = {}  --任务表
@@ -174,7 +174,7 @@ function ScheduledTask:clear()
 end
 
 --
-function ScheduledTask:setTasks(tasks)
+function TaskScheduler:setTasks(tasks)
     tasks = tasks or {}
     self:clear()
     for _,v in ipairs(tasks) do
@@ -182,11 +182,11 @@ function ScheduledTask:setTasks(tasks)
     end
 end
 
-function ScheduledTask:getTasks()
+function TaskScheduler:getTasks()
     return self._varTaskQueue
 end
 
-function ScheduledTask:getTasksByTag(tag)
+function TaskScheduler:getTasksByTag(tag)
     if tag == nil then return end
 
     local tasks = {}
@@ -199,24 +199,24 @@ function ScheduledTask:getTasksByTag(tag)
     return tasks
 end
 
-function ScheduledTask:getInterval()
+function TaskScheduler:getInterval()
     return self._varInterval
 end
 
-function ScheduledTask:setInterval(interval)
+function TaskScheduler:setInterval(interval)
     self._varInterval = interval
 end
 
-function ScheduledTask:getUserData()
+function TaskScheduler:getUserData()
     return self._varUserData
 end
 
-function ScheduledTask:setUserData(data)
+function TaskScheduler:setUserData(data)
     self._varUserData = data
 end
 
 --轮询函数
-function ScheduledTask:poll()
+function TaskScheduler:poll()
     if self._pollClock:getElpased() >= self._varInterval then
         if not self:isPause() then
             local funsTb = self._varTaskQueue[self._varCurTime]
@@ -226,7 +226,8 @@ function ScheduledTask:poll()
                         if not next(funsTb) then break end
                         local i = next(funsTb)
                     
-                        local ret = funsTb[i].callback(self,funsTb[i])
+                        local data = self:getUserData()
+                        local ret = funsTb[i].callback(self,funsTb[i],data)
                         table.remove(funsTb, i) --循环状态不能对数组操作
   
                         if self:isPause() then --如果在某个回调里暂停了时间
@@ -249,6 +250,13 @@ function ScheduledTask:poll()
 end
 
 --
-function newScheduledTask(params)
-    return ScheduledTask:create()
+function newTaskScheduler(params)
+    return TaskScheduler:create()
+end
+
+function newScheduleTask(time,callback)
+    return {
+        time = time,
+        callback = callback,
+    }
 end

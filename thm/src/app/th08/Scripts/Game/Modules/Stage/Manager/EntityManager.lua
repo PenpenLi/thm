@@ -1,0 +1,2 @@
+module("EntityManager", package.seeall)
+

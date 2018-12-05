@@ -19,7 +19,7 @@ function M.create(params)
 
     local _cmpControlMapper = THSTG.COMMON.newControlMapper()
     local _cmpPlayer = Player:create()
-    local _scheduledTask = THSTG.COMMON.newScheduledTask()
+    local _scheduledTask = THSTG.COMMON.newTaskScheduler()
     -------View-------
     local node = THSTG.UI.newNode()
     node:addChild(_cmpPlayer)

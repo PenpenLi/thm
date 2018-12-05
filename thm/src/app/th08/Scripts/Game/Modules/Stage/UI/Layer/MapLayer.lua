@@ -9,6 +9,10 @@ function M.create(params)
     local node = THSTG.UI.newNode()
 
   
+    local function init()
+        
+    end
+    init()
     -------Controller-------
     node:onNodeEvent("enter", function ()
         
