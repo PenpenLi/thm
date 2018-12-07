@@ -9,7 +9,7 @@ local Player = class("Player",cc.Node)
 function Player:ctor()
     self._controlMapper = false
 
-    self._entity = StageDef.PlayerEntity:create()
+    self._entity = StageDefine.PlayerEntity:create()
 
     self:setAnchorPoint(cc.p(0.5,0.5))
     self:setContentSize(cc.size(40,40))
@@ -116,7 +116,7 @@ end
 ---------------------------------------
 function M.create(params)
     -------Model-------
-    local _cmpControlMapper = THSTG.COMMON.newControlMapper()
+    local _cmpControlMapper = THSTG.UTIL.newControlMapper()
     local _cmpPlayer= Player:create()
 
     local _varKeyboardListener = nil

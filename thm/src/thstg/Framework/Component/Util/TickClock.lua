@@ -1,4 +1,4 @@
-module("COMMON", package.seeall)
+module("UTIL", package.seeall)
 local Socket = require "socket"
 local TickClock = class("TickClock")
 

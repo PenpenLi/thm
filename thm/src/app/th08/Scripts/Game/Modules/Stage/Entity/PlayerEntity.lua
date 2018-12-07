@@ -1,7 +1,7 @@
 --玩家实体
 module(..., package.seeall)
 
-local M = class("PlayerEntity", StageDef.LivedEntity)
+local M = class("PlayerEntity", StageDefine.LivedEntity)
 
 function M:ctor()
     self._state = false

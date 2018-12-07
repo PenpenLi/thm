@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("EnemyEntity", StageDef.LivedEntity)
+local M = class("EnemyEntity", StageDefine.LivedEntity)
 function M:ctor()
 
     

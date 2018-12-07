@@ -12,7 +12,7 @@ function M.create(params)
     local _varMoveStep = {x = 0,y = 0}
 
     local _varDestPos = false
-    local _cmpControlMapper = THSTG.COMMON.newControlMapper()
+    local _cmpControlMapper = THSTG.UTIL.newControlMapper()
   
     -------View-------
     local node = THSTG.UI.newNode()
@@ -29,7 +29,7 @@ function M.create(params)
     function _uiPlayer:init()
         self.__bullets = {} --缓存池
         self.__isStateWipe = false
-        self.__tickClock = THSTG.COMMON.newTickClock()
+        self.__tickClock = THSTG.UTIL.newTickClock()
         self.__isWipeEffectNode =  THSTG.UI.newNode({
             x = self:getContentSize().width/2,
             y = self:getContentSize().height/2,

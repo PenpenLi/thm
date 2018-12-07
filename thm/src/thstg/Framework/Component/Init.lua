@@ -14,5 +14,5 @@ require "thstg.Framework.Component.UI.Init"
 --NetWork组件
 require "thstg.Framework.Component.Network.Init"
 
---公共组件
-require "thstg.Framework.Component.Common.Init"
+--工具组件
+require "thstg.Framework.Component.Util.Init"

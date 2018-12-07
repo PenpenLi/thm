@@ -2,11 +2,11 @@
 --实体基类
 module(..., package.seeall)
 
-local M = class("LivedEntityData", StageDef.EntityData)
+local M = class("LivedEntityData", StageDefine.EntityData)
 
 function M:ctor()
-    self._speed = StageDef.Speed.new()          --速度
-    self._rigidBody = StageDef.Rigidbody.new()  --碰撞矩形
+    self._speed = StageDefine.Speed.new()          --速度
+    self._rigidBody = StageDefine.Rigidbody.new()  --碰撞矩形
 end
 
 return M

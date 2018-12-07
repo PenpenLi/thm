@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local M = class("Stage_01",StageDef.BaseStage)
+local M = class("Stage_01",StageDefine.BaseStage)
 
 ----
 function M:_onMap(node)

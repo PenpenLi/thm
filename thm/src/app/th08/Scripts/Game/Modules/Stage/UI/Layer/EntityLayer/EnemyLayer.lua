@@ -3,7 +3,7 @@ module(..., package.seeall)
 local M = {}
 function M.create(params)
     -------Model-------
-    -- local _cmpTaskScheduler = THSTG.COMMON.newTaskScheduler()  --任务管理器
+    -- local _cmpTaskScheduler = THSTG.UTIL.newTaskScheduler()  --任务管理器
 
     
    

@@ -22,7 +22,7 @@ function M:ctor()
     --
     self.__bullets = {} --缓存池
     self.__isStateWipe = false
-    self.__tickClock = THSTG.COMMON.newTickClock()
+    self.__tickClock = THSTG.UTIL.newTickClock()
     self.__isWipeEffectNode =  THSTG.UI.newNode({
         x = self:getContentSize().width/2,
         y = self:getContentSize().height/2,

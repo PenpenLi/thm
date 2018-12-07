@@ -1,5 +1,5 @@
 module(..., package.seeall)
 
 function new()
-    return THSTG.COMMON.newScheduledTask()
+    return THSTG.UTIL.newScheduledTask()
 end

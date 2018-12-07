@@ -9,7 +9,7 @@ function M.create(params)
     local _uiScoreLayer = require("Scripts.Game.Modules.Stage.UI.Layer.ScoreLayer").create()  --分数层
     local _uiStatusLayer = require("Scripts.Game.Modules.Stage.UI.Layer.StatusLayer").create() --状态层-血条,对话框,符卡技能
     --
-    local _cmpTaskScheduler = THSTG.COMMON.newTaskScheduler()  --任务管理器
+    local _cmpTaskScheduler = THSTG.UTIL.newTaskScheduler()  --任务管理器
 
 
 

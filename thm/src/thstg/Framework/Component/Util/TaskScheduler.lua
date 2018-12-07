@@ -1,4 +1,4 @@
-module("COMMON", package.seeall)
+module("UTIL", package.seeall)
 
 --[[
     任务表例子
@@ -12,7 +12,7 @@ module("COMMON", package.seeall)
 
 local TaskScheduler = class("TaskScheduler")
 function TaskScheduler:ctor()
-    self._pollClock = COMMON.newTickClock()
+    self._pollClock = UTIL.newTickClock()
 
     self._varTaskTable = {}  --任务表
     self._varTaskQueue = {}  --执行表
@@ -82,13 +82,14 @@ function TaskScheduler:time()
     return self._varCurTime/(1000/self._varInterval)
 end
 
-function TaskScheduler:jumpTo(time)
-    self._varCurTime = getFixTime(self,time)
-end
+--FIXME:如果跳过时间,因为之前的任务已经被移除,因此可能造成不在执行,往前跳的话又会因为没移除而出错
+-- function TaskScheduler:jumpTo(time)
+--     self._varCurTime = getFixTime(self,time)
+-- end
 
-function TaskScheduler:jumpBy(offsetTime)
-    self._varCurTime = self._varCurTime + getFixTime(self,offsetTime)
-end
+-- function TaskScheduler:jumpBy(offsetTime)
+--     self._varCurTime = self._varCurTime + getFixTime(self,offsetTime)
+-- end
 
 
 function TaskScheduler:pause()

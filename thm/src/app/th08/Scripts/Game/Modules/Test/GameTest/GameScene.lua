@@ -17,9 +17,9 @@ function M.create(params)
     local _varMoveStep = {x = 0,y = 0}
     local _varDestPos = false
 
-    local _cmpControlMapper = THSTG.COMMON.newControlMapper()
+    local _cmpControlMapper = THSTG.UTIL.newControlMapper()
     local _cmpPlayer = Player:create()
-    local _scheduledTask = THSTG.COMMON.newTaskScheduler()
+    local _scheduledTask = THSTG.UTIL.newTaskScheduler()
     -------View-------
     local node = THSTG.UI.newNode()
     node:addChild(_cmpPlayer)

@@ -1,7 +1,7 @@
 --玩家实体
 module(..., package.seeall)
 
-local M = class("LivedEntity", StageDef.BaseEntity)
+local M = class("LivedEntity", StageDefine.BaseEntity)
 function M:ctor()
 
     local function frameUpdateHandler(dt)

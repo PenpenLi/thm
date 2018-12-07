@@ -1,4 +1,4 @@
-module("COMMON", package.seeall)
+module("UTIL", package.seeall)
 
 local ControlMapper = class("ControlMapper")
 function ControlMapper:ctor()

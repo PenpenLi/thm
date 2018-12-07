@@ -1,2 +1,2 @@
-module("EntityManager", package.seeall)
+module(..., package.seeall)
 

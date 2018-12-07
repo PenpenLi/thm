@@ -1,4 +1,4 @@
-module("StageDef", package.seeall)
+module("StageDefine", package.seeall)
 
 --
 Speed = require("Scripts.Game.Modules.Stage.Entity.Base.Speed")
@@ -17,9 +17,9 @@ PlayerEntity = require("Scripts.Game.Modules.Stage.Entity.PlayerEntity")
 
 ----
 
-require("Scripts.Game.Modules.Stage.Manager.EntityManager")
+EntityManager = require("Scripts.Game.Modules.Stage.Manager.EntityManager")
 
 ----
 
-require("Scripts.Game.Modules.Stage.Util.ScenarioUtil")
-require("Scripts.Game.Modules.Stage.Util.EntityUtil")
+ScenarioUtil = require("Scripts.Game.Modules.Stage.Util.ScenarioUtil")
+EntityUtil = require("Scripts.Game.Modules.Stage.Util.EntityUtil")

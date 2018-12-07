@@ -287,7 +287,7 @@ end
 
 ----
 --安全取得key内容
-function getSafeValue(default,table,...)
+function safeGetValue(default,table,...)
 	local params = {...}
 	if table then
 		if type(table) == "table" then
@@ -302,6 +302,28 @@ function getSafeValue(default,table,...)
 		end
 	end
 	return default
+end
+--安全移除,解决在循环中移除造成的错位问题
+function safeRemoveItem(list, item, removeAll)
+	local rmCount = 0
+	local defaultFunc = function (v)
+		return v == item
+	end
+
+	if type(item) == "function" then
+		defaultFunc = item
+	end
+
+	for i = 1, #list do
+		if defaultFunc(list[i - rmCount]) then
+			table.remove(list, i - rmCount)
+			if removeAll then
+				rmCount = rmCount + 1
+			else
+				break
+			end
+		end
+	end
 end
 
 --pairs顺序遍历 table(按key从小到大遍历) 

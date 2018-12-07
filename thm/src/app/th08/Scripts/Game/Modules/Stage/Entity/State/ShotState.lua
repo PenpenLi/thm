@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("ShotState",StageDef.BaseState)
+local M = class("ShotState",StageDefine.BaseState)
 
 
 

@@ -53,7 +53,7 @@ return {
                     width = 40,
                     anchorPoint = THSTG.UI.POINT_LEFT_CENTER,
                 })
-                critter:setPositionX(StageDef.ScenarioUtil.calculateBoundX(critter,i,10,false))
+                critter:setPositionX(StageDefine.ScenarioUtil.calculateBoundX(critter,i,10,false))
                 node:addChild(critter)
                 debugUI(critter)
 
@@ -113,7 +113,7 @@ return {
                     width = 40,
                     anchorPoint = THSTG.UI.POINT_RIGHT_TOP,
                 })
-                critter:setPositionY(StageDef.ScenarioUtil.calculateBoundY(critter,i,10,true))
+                critter:setPositionY(StageDefine.ScenarioUtil.calculateBoundY(critter,i,10,true))
                 node:addChild(critter)
                 debugUI(critter)
 

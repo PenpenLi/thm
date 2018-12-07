@@ -1,1 +1,1 @@
-module("EntityUtil", package.seeall)
+module(..., package.seeall)

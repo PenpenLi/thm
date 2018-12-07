@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("BulletEntity", StageDef.BaseEntity)
+local M = class("BulletEntity", StageDefine.BaseEntity)
 
 
 return M
