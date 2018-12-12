@@ -57,6 +57,10 @@ function popScene()
 	return cc.Director:getInstance():popScene()
 end
 
+function getRunningScene()
+	return cc.Director:getInstance():getRunningScene()
+end
+
 function loadPlistFrames(params)
 	params = params or {}
 

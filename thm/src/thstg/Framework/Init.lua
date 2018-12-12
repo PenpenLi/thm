@@ -18,6 +18,9 @@
 
  --架构模式
  require "thstg.Framework.Package.Init"
+
+ --管理器
+ require "thstg.Framework.Managers.Init"
  
  --辅助库
  require "thstg.Framework.Util.StringUtil"

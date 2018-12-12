@@ -6,8 +6,12 @@ function Game:ctor()
 end
 
 function Game:run()
+    
     if self:_onInit() then
+
+        FlowManager.run()
         self:_onRun()
+
     end
 end
 
@@ -36,19 +40,12 @@ end
 
 function Game:_onInit()
     --初始化游戏
+        
     return true
 end
 
-function Game:_onScene()
-    return display.newScene()
-end
-
 function Game:_onRun()
-    --创建场景
-    local mainScene,transition = self:_onScene()
-
-    --运行
-    display.runScene(mainScene)
+    
 end
 
 return Game

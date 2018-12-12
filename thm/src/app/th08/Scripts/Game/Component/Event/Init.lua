@@ -1,1 +1,0 @@
-require "Scripts.Game.Component.Event.Public.PublicComponent"

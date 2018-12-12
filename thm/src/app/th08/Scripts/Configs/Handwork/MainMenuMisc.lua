@@ -7,7 +7,7 @@ return {
             desc = Language.getString(100111), 
             offsetPos = cc.p(0,0),
             moveBy = cc.p(20,0) ,
-            file = "Scripts.Game.Modules.Selection.Layer.SelectionLayer",
+            file = "Scripts.Context.Game.Modules.Selection.Layer.SelectionLayer",
             onClick = function ()
                 
             end,

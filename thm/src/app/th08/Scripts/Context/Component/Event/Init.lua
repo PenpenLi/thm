@@ -1,0 +1,1 @@
+require "Scripts.Context.Component.Event.Public.PublicComponent"
