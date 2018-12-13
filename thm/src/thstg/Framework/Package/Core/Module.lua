@@ -95,16 +95,18 @@ function M:open(...)
 	self:_onOpen(...)
 	self.__isOpend__ = true
 	--打开所有子模块
+	local args = {...}
 	self:visit(self,function(v,i)
-		v:open()
+		v:open(unpack(args))
 	end)
 
 end
 
 function M:close(...)
 	--关闭所有子模块
+	local args = {...}
 	self:visit(self,function(v,i)
-		v:close()
+		v:close(unpack(args))
 	end)
 	self:hide()
 	self:_onClose(...)
@@ -129,6 +131,7 @@ function M:addTo(parent)
 	parent:addChild(self)
 end
 function M:addChild(module)
+	assert(not tolua.cast(module, "Module"), "[Module] the addChild function param value must be a THSTG Module object!!")
 	assert(not module.__parent__, "[Module] child already added. It can't be added again!")
 	self.__children__ = self.__children__ or {}
 	table.insert(self.__children__, module)

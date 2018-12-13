@@ -46,26 +46,26 @@ module("SceneManager", package.seeall)
 --     return top()
 -- end
 
--- function replaceScene(scene, transition, time, more)
---     display.runScene(scene, transition, time, more)
+-- function replace(scene, transition, time, more)
+--     display.run(scene, transition, time, more)
 -- end
 
--- function pushScene(scene, transition, time, more)
+-- function push(scene, transition, time, more)
 --     local curScene = getCurScene()
 --     if curScene == scene then return end
 --     _stackTop = _stackTop + 1
 --     _sceneStack[_stackTop] = curScene
 --     curScene:retain()
 
---     replaceScene(scene, transition, time, more)
+--     replace(scene, transition, time, more)
 -- end
 
--- function popScene(transition, time, more)
+-- function pop(transition, time, more)
 --     if isEmpty() then return end
 --     local scene = pop()
 --     scene:release()
 
---     replaceScene(scene, transition, time, more)
+--     replace(scene, transition, time, more)
 -- end
 
 -- function popToButtom(transition, time, more)
@@ -81,7 +81,7 @@ module("SceneManager", package.seeall)
 --     scene:release()
     
 
---     replaceScene(scene, transition, time, more)
+--     replace(scene, transition, time, more)
 -- end
 
 
@@ -96,39 +96,39 @@ module("SceneManager", package.seeall)
 local _sceneInfo = {}
 local _scenes = {}
 
-local function __getScene(sceneType)
+local function __get(sceneType)
     local scene = _scenes[sceneType]
-    assert(scene, string.format( "[Scene] Can not find the Scene[\"%s\"]!",sceneType))
+    assert(scene, string.format( "[SceneManager] Can not find the Scene[\"%s\"]!",sceneType))
     return scene
 end
 
-function getCurScene()
+function getRunning()
     return THSTG.SCENE.getRunningScene()
 end
 
-function replaceScene(sceneType, transition, time, more)
-    local scene = __getScene(sceneType)
+function replace(sceneType, transition, time, more)
+    local scene = __get(sceneType)
     return THSTG.SCENE.replaceScene(scene, transition, time, more)
 end
 
-function pushScene(sceneType, transition, time, more)
-    local scene = __getScene(sceneType)
+function push(sceneType, transition, time, more)
+    local scene = __get(sceneType)
     return THSTG.SCENE.pushScene(scene, transition, time, more)
 end
 
-function popScene()
+function pop()
     return THSTG.SCENE.popScene()
 end
 
-function runScene(sceneType)
-    return replaceScene(sceneType)
+function run(sceneType)
+    return replace(sceneType)
 end
 -----
 function register(sceneType, classPath)
 	table.insert(_sceneInfo, {sceneType = sceneType,classPath = classPath} )
 end
 
-function getScene(sceneType)
+function get(sceneType)
 	return _scenes[sceneType]
 end
 

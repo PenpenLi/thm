@@ -2,18 +2,8 @@
 module(..., package.seeall)
 
 local M = class("LivedEntity", StageDefine.BaseEntity)
-function M:ctor()
-
-    local function frameUpdateHandler(dt)
-		self:_onUpdate(dt)
-	end
-	self:scheduleUpdateWithPriorityLua(frameUpdateHandler, 0)
-end
-
-------
-
-function M:_onUpdate(dt)
-    
+function M:_onInit()
+    self.super._onInit(self)
 end
 
 

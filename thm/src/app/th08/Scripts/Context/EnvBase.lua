@@ -1,7 +1,4 @@
 
---包装模块
-require "Scripts.Context.Package.Init"
-
 --辅助库初始化
 require "Scripts.Context.Utils.Init"
 

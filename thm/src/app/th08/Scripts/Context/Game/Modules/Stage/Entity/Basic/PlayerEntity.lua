@@ -2,23 +2,14 @@
 module(..., package.seeall)
 
 local M = class("PlayerEntity", StageDefine.LivedEntity)
+function M:_onInit()
+    self.super._onInit(self)
 
-function M:ctor()
-    self._state = false
 
+    self._life = 3 --残机数
+    
 end
 ------
 
-function M:__inputHandle(input)
-    -- local newState = self._state:input(self,input)
-    -- if newState then
-    --     self._state = newState
-    --     newState:enter(self)
-    -- end
-end
-
-function M:_onUpdate(dt)
-    -- self:__inputHandle()
-end
 
 return M

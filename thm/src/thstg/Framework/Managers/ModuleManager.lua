@@ -26,9 +26,18 @@ function init()
 	end
 end
 
+
+
 function get(moduleType)
 	return _modules[moduleType]
 end
+
+local function __get(moduleType)
+    local module = _modules[moduleType]
+    assert(module, string.format( "[ModuleManager] Can not find the Module[\"%s\"]!",moduleType))
+    return module
+end
+
 -------------
 --[[
 params = {
@@ -40,7 +49,7 @@ params = {
 
 function open(moduleType,params)
 	params = params or {}
-	local module = get(moduleType)
+	local module = __get(moduleType)
 	if not module then 
 		return
 	end
@@ -79,7 +88,7 @@ function open(moduleType,params)
 end
 
 function close(moduleType)
-	local module = get(moduleType)
+	local module = __get(moduleType)
 	if not module or not module:isOpen() then
 		return
 	end
