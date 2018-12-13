@@ -1,5 +1,5 @@
 
-require("Scripts.Context.Game.Modules.Stage.StageDefine")
+-- require("Scripts.Context.Game.Modules.Stage.StageDefine")
 
 
 
@@ -9,4 +9,4 @@ require("Scripts.Context.Game.Modules.Stage.StageDefine")
 -- THSTG.ModuleManager.register(ModuleType.LOADING, "Scripts.Context.Game.Modules.Loading.LoadingController")
 THSTG.ModuleManager.register(ModuleType.MENU, "Scripts.Context.Game.Modules.Menu.MenuModule")
 -- THSTG.ModuleManager.register(ModuleType.SELECTION, "Scripts.Context.Game.Modules.Selection.SelectionController")
-THSTG.ModuleManager.register(ModuleType.STAGE, "Scripts.Context.Game.Modules.Stage.StageModule")
+-- THSTG.ModuleManager.register(ModuleType.STAGE, "Scripts.Context.Game.Modules.Stage.StageModule")

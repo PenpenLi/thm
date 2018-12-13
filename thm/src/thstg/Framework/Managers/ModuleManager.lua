@@ -8,9 +8,9 @@ module("ModuleManager", package.seeall)
 local _modulesClass = {}
 local _modules = {}
 
--- 正在显示的常驻模块
+-- 正在打开的常驻模块
 local _residentModules = {}
--- 正在显示的普通模块
+-- 正在打开的普通模块
 local _openedModules = {}
 
 -----------------------------------
@@ -38,62 +38,62 @@ params = {
 }
 ]]
 
-function show(moduleType,params)
+function open(moduleType,params)
 	params = params or {}
 	local module = get(moduleType)
 	if not module then 
 		return
 	end
-	if module:isShow() and params.key == nil then
+	if module:isOpend() and params.key == nil then
 		return
 	end
 
 
 	local function residentShow()
 		_residentModules[moduleType] = true
-		module:show(params)
-		
+		module:open(params)
 	end
 
 	local function noResidentShow()
 		if params.closeOthers then
-			hideAll(1)
+			closeAll(1)
 		elseif params.key ~= nil then
 			module:close()
 		end
 		
 		_openedModules[moduleType] = true
-		module:show(params)
-		
+		module:open(params)
 	end
+
 
 	if params.closeOthers == nil then 
 		params.closeOthers = true 
 	end
 
+
 	if params.isResident then
 		residentShow()
 	else
 		noResidentShow()
-	end	
+	end
 end
 
-function hide(moduleType)
+function close(moduleType)
 	local module = get(moduleType)
-	if not module or not module:isShow() then
+	if not module or not module:isOpen() then
 		return
 	end
 
 	if _openedModules[moduleType] then
 
-		module:hide()
+		module:close()
 		_openedModules[moduleType] = nil
 		
 		
 	end
 
 	if _residentModules[moduleType] then
-		module:hide()
+		module:close()
 		_residentModules[moduleType] = nil
 		
 	end
@@ -105,22 +105,22 @@ nil 都关闭
 1 - 只关闭普通模块
 2 - 只关闭常驻模块
 ]]
-function hideAll(allType)
+function closeAll(allType)
 	if allType == nil or allType == 1 then
 		for k, v in pairs(_openedModules) do
-			hide(k)
+			close(k)
 		end
 	end
 
 	if allType == nil or allType == 2 then
 		for k, v in pairs(_residentModules) do
-			hide(k)
+			close(k)
 		end
 	end
 end
 
 -- 检测某模块是否处于打开状态
-function isShow(moduleType)
+function isOpened(moduleType)
 	if _openedModules[moduleType] then
 		return true
 	end
@@ -132,7 +132,7 @@ function isShow(moduleType)
 end
 
 -- 是否有一个以上的普通模块被打开了
-function isShowAny()
+function isOpenedAny()
 	for k, v in pairs(_openedModules) do
 		if v then
 			return true

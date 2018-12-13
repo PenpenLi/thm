@@ -93,7 +93,7 @@ module("SceneManager", package.seeall)
 -- end
 
 ---------------------
-local _sceneClass = {}
+local _sceneInfo = {}
 local _scenes = {}
 
 local function __getScene(sceneType)
@@ -125,7 +125,7 @@ function runScene(sceneType)
 end
 -----
 function register(sceneType, classPath)
-	table.insert(_sceneClass, {sceneType = sceneType,classPath = classPath} )
+	table.insert(_sceneInfo, {sceneType = sceneType,classPath = classPath} )
 end
 
 function getScene(sceneType)
@@ -133,12 +133,16 @@ function getScene(sceneType)
 end
 
 function init()
-    for _,v in pairs(_sceneClass) do
-		local Class = require(v.classPath)
-		_scenes[v.sceneType] = Class.new()
+    local firstScene = display.newScene()
+    for i = #_sceneInfo,1,-1 do
+        local classPath = _sceneInfo[i].classPath
+        local sceneType = _sceneInfo[i].sceneType
+		local Class = require(classPath)
+        _scenes[sceneType] = Class.new()
+        firstScene = _scenes[sceneType]
     end 
 
-    -- runScene(display.newScene())    --默认场景
+    display.runScene(firstScene)    --第一个场景或默认场景
 end
 
 function clear()

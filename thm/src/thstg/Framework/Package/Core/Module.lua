@@ -1,29 +1,39 @@
 local M = class("Module")
 
 function M:ctor()
-    --显示时被添加到的父级对象
-	self.__parent__ = false
-	--真实的cc显示对象
-    self.__realView__ = false
-
 	--子模块
 	self.__children__ = false
-    
+	self.__parent__ = false
+
+	--真实的cc显示对象
+    self.__realView__ = false
+	--模块是否被打开
+	self.__isOpend__ = false
+	--模块名
+	self.__moduleName__ = self.class.__cname 
+
 	self:_onInit()
 end
+------
 
 --显示
 function M:show(...)
 	if not self:isShow() then
 		self.__realView__ = self:_onView(...)
 		
-		assert(self:isViewExist(), "[View] the _onView function must return a CCNode object!")
+		assert(self:isViewExist(), "[Module] the _onView function must return a CCNode object!")
 		self.__realView__:onNodeEvent("cleanup", handler(self, self._onViewDestroy))
 
-		assert(self.__parent__, "[View] Wanna show this, you must run setLayer with a CCNode object for this view!")
-		self.__parent__:addChild(self.__realView__)
+		assert(self.__realView__:getParent(), "[Module] Wanna show this, you must run addTo with a CCNode object for this view!")
+	end
+end
 
-		self:_onShow()
+function M:tryShow(...)
+	if not self:isShow() then
+		self.__realView__ = self:_onView(...)
+		if self:isViewExist() then
+			assert(self.__realView__:getParent(), "[Module] Wanna show this, you must run addTo with a CCNode object for this view!")
+		end
 	end
 end
 
@@ -32,8 +42,6 @@ function M:hide()
 	if self:isShow() then
 		self.__realView__:removeFromParent()
 		self.__realView__ = false
-
-		self:_onHide()
 	end
 end
 
@@ -45,31 +53,11 @@ function M:isShow()
 	return false
 end
 
---设置父级对象
-function M:getViewParent() return self.__parent__ end
-function M:setViewParent(value)
-	assert(tolua.cast(value, "cc.Node"), "[View] the setViewParent function param value must be a CCNode object!")
-	self.__parent__ = value
-end
-
 --获取cc显示对象，可能为空
-function M:getRealView(...)
+function M:getView(...)
 	return self.__realView__
 end
 
-
-function M:dispose()
-	if self.__children__ then
-		for _,v in paris(self.__children__) do
-			v:dispose()
-		end
-	end
-
-	if self:isShow() then
-		self.__realView__:removeFromParent()
-		self.__realView__ = false
-	end
-end
 
 --判断realView是否真实存在
 function M:isViewExist()
@@ -80,13 +68,100 @@ function M:isViewExist()
 end
 
 -----
---子模块
-function M:addChild(module,moduleName)
-	if not moduleName then
-		moduleName = module.class.__cname
+
+--遍历所有子类
+function M:visit(self,func)
+	if self.__children__ then
+		for i = #self.__children__,1,-1 do
+			func(self.__children__[i],i)
+		end
 	end
+end
+
+function M:dispose()
+	self:visit(function(v)
+		v:dispose()
+	end)
+
+	if self:isShow() then
+		self.__realView__:removeFromParent()
+		self.__realView__ = false
+	end
+end
+
+function M:open(...)
+	--模块打开,可能伴随窗口打开,但不一定有窗口
+	self:tryShow(...)
+	self:_onOpen(...)
+	self.__isOpend__ = true
+	--打开所有子模块
+	self:visit(self,function(v,i)
+		v:open()
+	end)
+
+end
+
+function M:close(...)
+	--关闭所有子模块
+	self:visit(self,function(v,i)
+		v:close()
+	end)
+	self:hide()
+	self:_onClose(...)
+	self.__isOpend__ = false
+end
+
+function M:isOpend()
+	if self:isViewExist() then
+		return self:isShow()
+	else 
+		return self.__isOpend__
+	end
+end
+
+function M:getName() return self.__moduleName__ end
+function M:setName(name)
+	self.__moduleName__ = name
+end
+
+--
+function M:addTo(parent)
+	parent:addChild(self)
+end
+function M:addChild(module)
+	assert(not module.__parent__, "[Module] child already added. It can't be added again!")
 	self.__children__ = self.__children__ or {}
-	self.__children__[moduleName] = module
+	table.insert(self.__children__, module)
+	module.__parent__ = self
+end
+
+function M:removeFromParent()
+	if self.__parent__ then
+		self.__parent__:visit(function (v,i)
+			if v == self then
+				table.remove( self.__parent__.__children__, v )
+			end
+		end)
+	end
+end
+
+function M:getParent()
+	return self.__parent__
+end
+
+function M:getChildren()
+	return self.__children__
+end
+
+function M:getChildrenByName(name)
+	local list = {}
+	self:visit(function (v,i)
+		if v:getName() == name then
+			table.insert( list, v )
+		end
+	end)
+
+	return list
 end
 
 
@@ -95,7 +170,7 @@ end
 
 --待子类重写，需要return一个cc显示对象
 function M:_onView(...)
-	error("[View] Wanna show me the _onView function must be overrided!")
+	
 	return false
 end
 
@@ -107,12 +182,13 @@ end
 function M:_onInit()
 
 end
---
-function M:_onShow()
 
+function M:_onOpen(...)
+	
 end
-function M:_onHide()
 
+function M:_onClose(...)
+	
 end
 
 return M 

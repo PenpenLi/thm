@@ -19,9 +19,9 @@ end
 
 function M:_onRun()
     --启动场景
-    THSTG.SceneManager.runScene(SceneType.STAGE)
+    THSTG.SceneManager.runScene(SceneType.MENU)
 
-    -- THSTG.ModuleManager.show(ModuleType.MENU)
+    THSTG.ModuleManager.open(ModuleType.MENU)
 end
 
 return M

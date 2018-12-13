@@ -2,9 +2,10 @@ module(..., package.seeall)
 
 local M = class("StageModule", THSTG.CORE.Module)
 
-function M:_initView()
+function M:_onView()
+    self:setViewParent(THSTG.SceneManager.getScene(SceneType.STAGE))
     local layer = require("Scripts.Context.Game.Modules.Stage.View.StageGameUI").create()
-    layer:addTo(THSTG.SceneManager.getScene(SceneType.STAGE))
+    return layer
 end
 
 function M:_onInit()
