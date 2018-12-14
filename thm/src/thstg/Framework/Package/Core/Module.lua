@@ -82,11 +82,13 @@ function M:dispose()
 	self:visit(function(v)
 		v:dispose()
 	end)
-
+	
 	if self:isShow() then
 		self.__realView__:removeFromParent()
 		self.__realView__ = false
 	end
+	
+	self:_onDispose()
 end
 
 function M:open(...)
@@ -192,6 +194,10 @@ end
 
 function M:_onClose(...)
 	
+end
+
+function M_onDispose()
+
 end
 
 return M 

@@ -5,6 +5,11 @@ function newScene()
 	return cc.Scene:create()
 end
 
+--精灵
+--CCSprite组件
+function newSprite(params)
+	return UI.newSprite(params)
+end
 
 --创建精灵帧
 function newSpriteFrame(params)

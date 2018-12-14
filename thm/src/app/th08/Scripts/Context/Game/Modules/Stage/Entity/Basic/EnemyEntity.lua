@@ -1,8 +1,9 @@
 module(..., package.seeall)
 
 local M = class("EnemyEntity", StageDefine.LivedEntity)
-function M:_onInit()
-    self.super._onInit(self)
-end
 
+function M:ctor()
+    M.super.ctor(self)
+    
+end
 return M

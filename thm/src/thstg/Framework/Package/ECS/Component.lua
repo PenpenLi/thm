@@ -2,7 +2,7 @@ local M = class("Component")
 
 function M:ctor()
     --用于标识组件类别
-    self.__componentName__ = _onName() or self.class.__cname
+    self.__componentName__ = self:_onName() or self.class.__cname
 
     self:_onInit()
 end
@@ -15,6 +15,14 @@ end
 --[[以下函数必须重载]]
 --用于初始化数据
 function M:_onInit()
+
+end
+--被添加时的回调
+function M:_onAdded(entity)
+
+end
+--被移除时的回调
+function M:_onRemoved(entity)
 
 end
 
