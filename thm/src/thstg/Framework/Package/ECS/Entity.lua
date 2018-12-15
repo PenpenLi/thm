@@ -4,7 +4,8 @@ function M:ctor()
     _entityId = _entityId + 1
 
     self.__id__ = _entityId
-    self.__components__ = false
+	self.__components__ = false
+	
     ----
 
 	local function onEnter()
@@ -77,7 +78,9 @@ end
 function M:update(dTime)
 	if self.__components__ then
 		for k,v in pairs(self.__components__) do
-			v:_onUpdate(dTime,self)
+			if v:isEnabled() then
+				v:_onUpdate(dTime,self)
+			end
 		end
 	end
 

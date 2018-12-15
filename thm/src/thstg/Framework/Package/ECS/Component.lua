@@ -3,14 +3,20 @@ local M = class("Component")
 function M:ctor()
     --用于标识组件类别
     self.__componentName__ = self:_onName() or self.class.__cname
-
+    self.__isEnabled__ = true
+    
     self:_onInit()
 end
 
 function M:getName()
     return self.__componentName__
 end
-
+function M:isEnabled()
+	return self.__isEnabled__
+end
+function M:setEnabled(val)
+	self.__isEnabled__ = val
+end
 --
 --[[以下函数必须重载]]
 --用于初始化数据

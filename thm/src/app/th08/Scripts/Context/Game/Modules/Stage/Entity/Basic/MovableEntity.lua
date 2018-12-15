@@ -7,7 +7,7 @@ function M:ctor()
     
 
     self:addComponent(StageDefine.AnimationComponent.new())
-
+    self:addComponent(StageDefine.RigidbodyComponent.new())
 end
 
 return M

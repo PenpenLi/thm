@@ -19,10 +19,12 @@ LivedEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.LivedEnti
 EnemyEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.EnemyEntity")
 PlayerEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.PlayerEntity")
 
+Bullet = require("Scripts.Context.Game.Modules.Stage.Entity.Bullet")
 Reimu = require("Scripts.Context.Game.Modules.Stage.Entity.Reimu")
 Yukari = require("Scripts.Context.Game.Modules.Stage.Entity.Yukari")  
+LilyWhite = require("Scripts.Context.Game.Modules.Stage.Entity.LilyWhite")  
 ----
-TestSystem = require("Scripts.Context.Game.Modules.Stage.System.TestSystem")  
+CollisionSystem = require("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")  
 
 
 
