@@ -12,4 +12,5 @@ function M:_onRemoved(entity)
     self.sprite:removeFromParent()
 end
 
+
 return M

@@ -6,7 +6,6 @@ Speed = require("Scripts.Context.Game.Modules.Stage.Component.Data.Speed")
 --
 AnimationComponent = require("Scripts.Context.Game.Modules.Stage.Component.AnimationComponent")
 PositionComponent = require("Scripts.Context.Game.Modules.Stage.Component.PositionComponent")
-MoveComponent = require("Scripts.Context.Game.Modules.Stage.Component.MoveComponent")
 FlagComponent = require("Scripts.Context.Game.Modules.Stage.Component.FlagComponent")
 LifeComponent = require("Scripts.Context.Game.Modules.Stage.Component.LifeComponent")
 InputComponent = require("Scripts.Context.Game.Modules.Stage.Component.InputComponent")
@@ -23,5 +22,11 @@ PlayerEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.PlayerEn
 Reimu = require("Scripts.Context.Game.Modules.Stage.Entity.Reimu")
 Yukari = require("Scripts.Context.Game.Modules.Stage.Entity.Yukari")  
 ----
-
 TestSystem = require("Scripts.Context.Game.Modules.Stage.System.TestSystem")  
+
+
+
+
+
+---
+ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  

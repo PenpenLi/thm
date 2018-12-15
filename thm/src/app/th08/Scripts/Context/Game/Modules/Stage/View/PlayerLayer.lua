@@ -15,16 +15,16 @@ function M.create(params)
     -------Controller-------
   
     local function updateFrame()
-        StageDefine.TestSystem.move(_eYukari)
+        -- StageDefine.TestSystem.move(_eYukari)
     end
  
 
     node:onNodeEvent("enter", function ()
-        node:scheduleUpdateWithPriorityLua(updateFrame,0)
+        -- node:scheduleUpdateWithPriorityLua(updateFrame,0)
     end)
 
     node:onNodeEvent("exit", function ()
-        node:unscheduleUpdate()
+        -- node:unscheduleUpdate()
     end)
     
     return node

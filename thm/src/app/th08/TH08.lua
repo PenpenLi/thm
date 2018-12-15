@@ -18,10 +18,8 @@ function M:_onInit()
 end
 
 function M:_onRun()
-    --启动场景
-    THSTG.SceneManager.run(SceneType.STAGE)
 
-    THSTG.ModuleManager.open(ModuleType.STAGE)
+
 end
 
 return M

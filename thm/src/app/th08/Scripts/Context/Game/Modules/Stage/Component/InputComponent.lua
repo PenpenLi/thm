@@ -5,13 +5,13 @@ local M = class("InputComponent",THSTG.ECS.Component)
 
 function M:_onInit()
     self.keyMapper = THSTG.UTIL.newControlMapper()
-    self.touchListener = nil
-    self.keyboardListener = nil
+    self._touchListener = nil
+    self._keyboardListener = nil
 end
 
 function M:_onAdded(entity)
 
-    self.keyboardListener = EventPublic.newKeyboardExListener({
+    self._keyboardListener = EventPublic.newKeyboardExListener({
         onPressed = function (keyCode, event)
             self.keyMapper:pressKey(keyCode)
         end,
@@ -21,7 +21,7 @@ function M:_onAdded(entity)
         end,
     })
 
-    self.touchListener = EventPublic.newTouchAllAtOnceExListener({
+    self._touchListener = EventPublic.newTouchAllAtOnceExListener({
         onBegan = function(touches, event)
             self.keyMapper:pressKey(ETouchType.OnceClick)
             return true
@@ -48,13 +48,13 @@ function M:_onAdded(entity)
     })
 
 
-    THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(self.keyboardListener, entity)
-    THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(self.touchListener, entity)
+    THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(self._keyboardListener, entity)
+    THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(self._touchListener, entity)
 end
 
 function M:_onRemoved(entity)
-    THSTG.CCDispatcher:removeEventListener(self.keyboardListener)
-    THSTG.CCDispatcher:removeEventListener(self.touchListener)
+    THSTG.CCDispatcher:removeEventListener(self._keyboardListener)
+    THSTG.CCDispatcher:removeEventListener(self._touchListener)
 end
 
 return M

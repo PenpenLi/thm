@@ -5,7 +5,7 @@ local M = class("Yukari",StageDefine.PlayerEntity)
 
 function M:ctor()
     M.super.ctor(self)
-
+    debugUI(self)
    
 end
 
@@ -27,8 +27,12 @@ function M:__move()
         if keyMapper:isKeyDown(EGameKeyType.MoveDown) then
             moveStep.y = -Definition.Public.PLAYER_MOVE_STEP
         end
-        local oldX,oldY = self:getPosition()
-        self:setPosition(cc.p(oldX+moveStep.x,oldY+moveStep.y))
+        -- local oldX,oldY = self:getPosition()
+        -- self:setPosition(cc.p(oldX+moveStep.x,oldY+moveStep.y))
+
+        local posComp = self:getComponent("PositionComponent")
+        posComp.x = posComp.x + moveStep.x
+        posComp.y = posComp.y + moveStep.y
     end
 end
 
@@ -79,7 +83,7 @@ function M:_onEnter()
 
     animationComp.sprite:setAnchorPoint(0.5,0.5)
     animationComp.sprite:setContentSize(cc.size(rigidbodyComp.body.width,rigidbodyComp.body.height))
-    debugUI(animationComp.sprite)
+    
 end
 
 function M:_onExit()

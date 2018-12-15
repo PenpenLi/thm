@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("BulletEntity", StageDefine.BaseEntity)
+local M = class("BulletEntity", StageDefine.MovableEntity)
 function M:ctor()
     M.super.ctor(self)
     

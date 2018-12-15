@@ -8,6 +8,19 @@ function M:ctor()
 
     
     self:addChild(self.mainLayer)
+
+
+
+    --
+    self:onNodeEvent("enter", function ()
+        THSTG.ModuleManager.open(ModuleType.TEST)
+    end)
+
+    self:onNodeEvent("exit", function ()
+        THSTG.ModuleManager.close(ModuleType.TEST)
+    end)
 end
+
+
 
 return M

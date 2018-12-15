@@ -16,6 +16,14 @@ function M:ctor()
     self:addChild(self.entityLayer)
     self:addChild(self.mainLayer)
     self:addChild(self.windowLayer)
+    --
+    self:onNodeEvent("enter", function ()
+        THSTG.ModuleManager.open(ModuleType.STAGE)
+    end)
+
+    self:onNodeEvent("exit", function ()
+        THSTG.ModuleManager.close(ModuleType.STAGE)
+    end)
 end
 
 

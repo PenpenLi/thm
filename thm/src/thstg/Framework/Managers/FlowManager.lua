@@ -8,8 +8,10 @@ local s_needClear = false
 
 --开始运行
 function run()
+	
 	SceneManager.init()
 	ModuleManager.init()
+	
 end
 
 --关闭游戏
@@ -29,7 +31,8 @@ function clear()
 
 	-- Dispatcher.clear()
 
-	SceneManager.clear()
 	ModuleManager.closeAll()
+	SceneManager.clear()
+
 end
 

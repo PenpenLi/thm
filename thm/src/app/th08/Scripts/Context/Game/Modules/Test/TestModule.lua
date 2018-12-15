@@ -1,15 +1,10 @@
 module(..., package.seeall)
 
-local M = class("TestModule", View)
+local M = class("TestModule", THSTG.CORE.Module)
 
-local testUI = nil
-
-function M:_onInit()
-    self:setLayer(LayerManager.guiLayer)
-end
-
-function M:_initRealView(params)
+function M:_onView()
     local layer = cc.Layer:create()
+    layer:addTo(THSTG.SceneManager.get(SceneType.MAIN))
 
     local TestTb = {
         require("Scripts.Context.Game.Modules.Test.UITest.UITest0"),         --测试面板
@@ -77,5 +72,21 @@ function M:_initRealView(params)
 
     return layer
 end
+
+function M:_onInit()
+    THSTG.CCDispatcher:addEventListenerWithFixedPriority(THSTG.EVENT.newKeyboardListener({onPressed = function(keyCode, event) self:__keyBoadrControl(keyCode, event) end}), 1)
+end
+
+function M:__keyBoadrControl(keyCode, event)
+    if keyCode == cc.KeyCode.KEY_F1 then
+        THSTG.SceneManager.replace(SceneType.MAIN)
+    elseif keyCode == cc.KeyCode.KEY_F2 then
+        THSTG.SceneManager.replace(SceneType.MENU)
+    elseif keyCode == cc.KeyCode.KEY_F3 then
+        THSTG.SceneManager.replace(SceneType.STAGE)
+    end
+end
+
+
 
 return M

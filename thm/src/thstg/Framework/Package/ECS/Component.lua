@@ -26,6 +26,11 @@ function M:_onRemoved(entity)
 
 end
 
+--逻辑更新
+function M:_onUpdate(delay,entity)
+    
+end
+
 function M:_onName()   
     -- error("[Component] The _onName function must be overrided!")
     return false

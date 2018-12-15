@@ -89,7 +89,7 @@ end
 
 function close(moduleType)
 	local module = __get(moduleType)
-	if not module or not module:isOpen() then
+	if not module or not module:isOpend() then
 		return
 	end
 

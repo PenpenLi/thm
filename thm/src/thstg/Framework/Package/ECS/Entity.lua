@@ -6,10 +6,13 @@ function M:ctor()
     self.__id__ = _entityId
     self.__components__ = false
     ----
-	local function onUpdate(dTime)
-		self:update(dTime)
-	end
+
 	local function onEnter()
+		local function onUpdate(dTime)
+			self:update(dTime)
+		end
+
+		self:scheduleUpdateWithPriorityLua(onUpdate,0)
 		self:_onEnter()
 	end
 	local function onExit()
@@ -20,14 +23,14 @@ function M:ctor()
 		self:clear()
 		self:_onDestroy()
 	end
-
-	self:scheduleUpdateWithPriorityLua(onUpdate,0)
+	
+	
     self:onNodeEvent("enter", onEnter)
 	self:onNodeEvent("exit", onExit)
 	self:onNodeEvent("cleanup", onCleanup)
-    ---
-
-    self:_onInit()	--这里最后调用的是子类的
+	---
+	
+	-- self:_onInit()
 end
 --
 function M:addComponent(component)
@@ -72,6 +75,12 @@ function M:removeAllComponents()
 end
 
 function M:update(dTime)
+	if self.__components__ then
+		for k,v in pairs(self.__components__) do
+			v:_onUpdate(dTime,self)
+		end
+	end
+
 	self:_onUpdate(dTime)
 end
 
@@ -91,9 +100,7 @@ end
 
 --进入场景回调
 function M:_onEnter()
-	if self._entityData then
-		
-	end
+
 end
 
 --退出场景回调
