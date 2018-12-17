@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("Bullet",StageDefine.BulletEntity)
+local M = class("BatmanPrefab",StageDefine.EnemyEntity)
 
 function M:ctor()
     M.super.ctor(self)

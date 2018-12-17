@@ -137,18 +137,20 @@ end
         _private.shakeFreq = 50
         _private.shakeInteral = 100
         _private.shakeSpeed = 180
+        _private.shakeSafeDistance = 170
     
         _private.onDoubleClick = params.onDoubleClick or function(touches, event) end
         _private.onShaked = params.onShaked or function(touches, event) end
         _private.onLongClick = params.onLongClick or function(touches, event) end
     
         ---
+        local _startMovePos = nil
         local _lastClickTime = 0
         local _lastMoveState = {pos = cc.p(0,0),time = 0,shift = cc.p(0,0)}
     
         ---
         local function onBegan(touches, event)
-        
+            _startMovePos = touches[1]:getLocation()
             local curClickTime = TimeUtil.getHighPrecisionTime()
             local isDouble = curClickTime - _lastClickTime <= _private.doubleInteral
             if isDouble then
@@ -176,7 +178,11 @@ end
                     if _lastMoveState.speedCheck then
                         local dTime = curTime - _lastMoveState.speedCheck.startTime 
                         if dTime <= _private.shakeInteral then
-                            _private.onShaked()
+                            --还得判断一下起点和终点的距离是否超过范围距离
+                            local distance = cc.pGetLength(cc.pSub(curPos,_startMovePos))
+                            if distance <= _private.shakeSafeDistance then
+                                _private.onShaked()
+                            end
                             _lastMoveState.speedCheck = nil
                         end
                     else

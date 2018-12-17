@@ -10,3 +10,13 @@ function getRes(texType,resName)
 	local t = getDict(texType)
     return t[resName]
 end
+
+-- function getSize(texType,resName)
+-- 	local t = getDict(texType)
+--     return t[resName]
+-- end
+
+function getLength(texType,resName)
+	local t = getDict(texType)
+    return t[resName].length
+end

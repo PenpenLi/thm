@@ -6,3 +6,4 @@ require "thstg.Framework.Common.Cdl"
 
 require "thstg.Framework.Common.Queue"
 require "thstg.Framework.Common.Stack"
+require "thstg.Framework.Common.List"

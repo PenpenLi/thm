@@ -56,8 +56,9 @@ function newTouchAllAtOnceExListener(params)
     _private.doubleInteral = 400
     _private.longInteral = 1000
     _private.shakeFreq = 50
-    _private.shakeInteral = 100
+    _private.shakeInteral = 300
     _private.shakeSpeed = 180
+    _private.shakeSafeDistance = 200
 
     _private.onDoubleClick = params.onDoubleClick or function(touches, event) end
     _private.onShaked = params.onShaked or function(touches, event) end
@@ -69,7 +70,6 @@ function newTouchAllAtOnceExListener(params)
 
     ---
     local function onBegan(touches, event)
-    
         local curClickTime = THSTG.TimeUtil.getHighPrecisionTime()
         local isDouble = curClickTime - _lastClickTime <= _private.doubleInteral
         if isDouble then
@@ -92,17 +92,22 @@ function newTouchAllAtOnceExListener(params)
             local curShift = cc.pSub(curPos,_lastMoveState.pos)
             local angle = cc.pGetAngle(curShift,_lastMoveState.shift)
             local speed = cc.pGetLength(curShift) / dTime * 100
-            --FIXME:平移加速时会被认为抖动..而且最大速度被限死也会有问题
+            --平移加速时会被认为抖动..而且最大速度被限死也会有问题
             if speed >= _private.shakeSpeed then
                 if _lastMoveState.speedCheck then
                     local dTime = curTime - _lastMoveState.speedCheck.startTime 
                     if dTime <= _private.shakeInteral then
-                        _private.onShaked()
+                         --还得判断一下起点和终点的距离是否超过范围距离
+                         local distance = cc.pGetLength(cc.pSub(curPos,_lastMoveState.speedCheck.startPos))
+                         if distance <= _private.shakeSafeDistance then
+                             _private.onShaked()
+                         end
                         _lastMoveState.speedCheck = nil
                     end
                 else
                     _lastMoveState.speedCheck = {}
                     _lastMoveState.speedCheck.startTime = curTime
+                    _lastMoveState.speedCheck.startPos = curPos
                 end
             else
                 _lastMoveState.speedCheck = nil

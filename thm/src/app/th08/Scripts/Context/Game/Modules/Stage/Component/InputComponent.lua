@@ -5,8 +5,10 @@ local M = class("InputComponent",THSTG.ECS.Component)
 
 function M:_onInit()
     self.keyMapper = THSTG.UTIL.newControlMapper()
+    self.touchPos = nil
     self._touchListener = nil
     self._keyboardListener = nil
+
 end
 
 function M:_onAdded(entity)
@@ -24,12 +26,15 @@ function M:_onAdded(entity)
     self._touchListener = EventPublic.newTouchAllAtOnceExListener({
         onBegan = function(touches, event)
             self.keyMapper:pressKey(ETouchType.OnceClick)
+            self.touchPos = touches[1]:getLocation()
+
             return true
         end,
         onMoved = function(touches, event)
             if #touches > 1 then
                 self.keyMapper:pressKey(ETouchType.MultiTouch)
             end
+            self.touchPos = touches[1]:getLocation()
         end,
         onEnded = function(touches, event)
             self.keyMapper:releaseKey(ETouchType.OnceClick)
@@ -38,6 +43,7 @@ function M:_onAdded(entity)
             if #touches > 1 then
                 self.keyMapper:releaseKey(ETouchType.MultiTouch)
             end
+            self.touchPos = nil
         end,
         onDoubleClick = function(touches, event)
             self.keyMapper:pressKey(ETouchType.DoubleClick)
@@ -56,5 +62,6 @@ function M:_onRemoved(entity)
     THSTG.CCDispatcher:removeEventListener(self._keyboardListener)
     THSTG.CCDispatcher:removeEventListener(self._touchListener)
 end
+
 
 return M

@@ -1,11 +1,11 @@
 local M = class("Component")
 
-function M:ctor()
+function M:ctor(...)
     --用于标识组件类别
     self.__componentName__ = self:_onName() or self.class.__cname
     self.__isEnabled__ = true
     
-    self:_onInit()
+    self:_onInit(...)
 end
 
 function M:getName()
@@ -20,7 +20,7 @@ end
 --
 --[[以下函数必须重载]]
 --用于初始化数据
-function M:_onInit()
+function M:_onInit(...)
 
 end
 --被添加时的回调
@@ -34,6 +34,11 @@ end
 
 --逻辑更新
 function M:_onUpdate(delay,entity)
+    
+end
+
+--逻辑更新完成
+function M:_onFinished(delay,entity)
     
 end
 

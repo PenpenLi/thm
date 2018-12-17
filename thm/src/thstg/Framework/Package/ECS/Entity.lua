@@ -5,7 +5,7 @@ function M:ctor()
 
     self.__id__ = _entityId
 	self.__components__ = false
-	
+	self.__systems__ = ECS.SystemComponent.new(self)
     ----
 
 	local function onEnter()
@@ -30,10 +30,12 @@ function M:ctor()
 	self:onNodeEvent("exit", onExit)
 	self:onNodeEvent("cleanup", onCleanup)
 	---
-	
+
+	self:addComponent(self.__systems__)
 	-- self:_onInit()
 end
 --
+--[[component模块]]
 function M:addComponent(component)
 	
 	assert(not tolua.cast(component, "ECS.Component"), "[Entity] the addChild function param value must be a THSTG ECS.Component object!!")
@@ -75,6 +77,18 @@ function M:removeAllComponents()
 	end
 end
 
+--[[system模块]]
+function M:addSystem(system)
+	return self.__systems__:addSystem(system)
+end
+
+function M:removeSystem(system)
+	return self.__systems__:removeSystem(system)
+end
+
+
+
+---
 function M:update(dTime)
 	if self.__components__ then
 		for k,v in pairs(self.__components__) do
@@ -83,8 +97,15 @@ function M:update(dTime)
 			end
 		end
 	end
-
 	self:_onUpdate(dTime)
+	if self.__components__ then
+		for k,v in pairs(self.__components__) do
+			if v:isEnabled() then
+				v:_onFinished(dTime,self)
+			end
+		end
+	end
+	self:_onFinished(dTime)
 end
 
 function M:clear()
@@ -98,7 +119,7 @@ end
 
 ---
 --[[以下由子类重载]]
-function M:_onInit()
+function M:_onInit(...)
 end
 
 --进入场景回调
@@ -119,6 +140,11 @@ end
 --每帧回调
 function M:_onUpdate(dTime)
 
+end
+
+--逻辑更新完成
+function M:_onFinished(dTime)
+    
 end
 
 return M

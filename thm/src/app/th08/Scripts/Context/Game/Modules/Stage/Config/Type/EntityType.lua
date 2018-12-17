@@ -1,1 +1,0 @@
-module("EntityType", package.seeall)

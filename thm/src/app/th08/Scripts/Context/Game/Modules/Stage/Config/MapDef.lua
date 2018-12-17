@@ -1,1 +1,0 @@
-module("MapDef", package.seeall)

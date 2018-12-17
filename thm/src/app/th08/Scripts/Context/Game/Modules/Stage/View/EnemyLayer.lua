@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local SCENARIO_FILE_PATH_PATTERN = "Scripts.Context.Game.Modules.Stage.Scenario.Stage_%02d"
+local SCENARIO_FILE_PATH_PATTERN = "Scripts.Context.Game.Modules.Stage.Config.Scenario.Stage_%02d"
 local M = {}
 function M.create(params)
     -------Model-------

@@ -1,12 +1,12 @@
 module(..., package.seeall)
+local M = class("CollisionSystem",THSTG.ECS.System)
+function M:_onAdded()
+    local rigidbodyComp = self:getComponent("RigidbodyComponent")
 
---自己与所有实体做碰撞检测
-function isCollision(player,entity)
-    local RigidBodyPlayer = player:getComponent("RigidbodyComponent")
-    local RigidBodyEntity = entity:getComponent("RigidbodyComponent")
-
-    if RigidBodyPlayer and RigidBodyEntity then
-        
-
-    end
+    local animationComp = self:getComponent("AnimationComponent")
+    animationComp.sprite:setAnchorPoint(0.5,0.5)
+    animationComp.sprite:setContentSize(cc.size(rigidbodyComp.body.width,rigidbodyComp.body.height))
 end
+
+
+return M

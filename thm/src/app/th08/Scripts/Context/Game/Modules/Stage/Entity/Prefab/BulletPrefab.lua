@@ -1,22 +1,16 @@
 module(..., package.seeall)
 
-local M = class("LilyWhite",StageDefine.EnemyEntity)
+local M = class("BulletPrefab",StageDefine.BulletEntity)
 
 function M:ctor()
     M.super.ctor(self)
     debugUI(self)
    
 end
-----------
-function M:shot()
-    local bullet = StageDefine.Bullet.new()
-    bullet:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
-
-end
-
 
 ----------
 function M:_onEnter()
+
     
 end
 

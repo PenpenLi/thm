@@ -112,16 +112,16 @@ local function moveHandle(self)
     local input = self._cControlMapper
     local moveStep = cc.p(0,0)
     if input:isKeyDown(EGameKeyType.MoveLeft) then
-        moveStep.x = -Definition.Public.PLAYER_MOVE_STEP
+        moveStep.x = -Definition.Public.PLAYER_KEY_MOVE_STEP
     end
     if input:isKeyDown(EGameKeyType.MoveRight) then
-        moveStep.x = Definition.Public.PLAYER_MOVE_STEP
+        moveStep.x = Definition.Public.PLAYER_KEY_MOVE_STEP
     end
     if input:isKeyDown(EGameKeyType.MoveUp) then
-        moveStep.y = Definition.Public.PLAYER_MOVE_STEP
+        moveStep.y = Definition.Public.PLAYER_KEY_MOVE_STEP
     end
     if input:isKeyDown(EGameKeyType.MoveDown) then
-        moveStep.y = -Definition.Public.PLAYER_MOVE_STEP
+        moveStep.y = -Definition.Public.PLAYER_KEY_MOVE_STEP
     end
     local oldX,oldY = self:getPosition()
     self:setPosition(cc.p(oldX+moveStep.x,oldY+moveStep.y))

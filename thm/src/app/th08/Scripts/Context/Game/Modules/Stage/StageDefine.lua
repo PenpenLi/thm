@@ -19,16 +19,18 @@ LivedEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.LivedEnti
 EnemyEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.EnemyEntity")
 PlayerEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.PlayerEntity")
 
-Bullet = require("Scripts.Context.Game.Modules.Stage.Entity.Bullet")
-Reimu = require("Scripts.Context.Game.Modules.Stage.Entity.Reimu")
-Yukari = require("Scripts.Context.Game.Modules.Stage.Entity.Yukari")  
-LilyWhite = require("Scripts.Context.Game.Modules.Stage.Entity.LilyWhite")  
+BulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.BulletPrefab")
+PlayerPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.PlayerPrefab")
+
+
+Yukari = require("Scripts.Context.Game.Modules.Stage.Entity.Yukari")
 ----
 CollisionSystem = require("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")  
+PlayerControlSystem = require("Scripts.Context.Game.Modules.Stage.System.PlayerControlSystem")  
+PlayerAnimationSystem = require("Scripts.Context.Game.Modules.Stage.System.PlayerAnimationSystem")  
 
-
-
-
-
+---
+RoleType = require("Scripts.Context.Game.Modules.Stage.Config.Type.RoleType")  
+ActionType = require("Scripts.Context.Game.Modules.Stage.Config.Type.ActionType")  
 ---
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  
