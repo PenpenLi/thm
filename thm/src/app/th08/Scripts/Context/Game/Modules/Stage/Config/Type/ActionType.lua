@@ -1,11 +1,13 @@
 module(...)
 
-STAND = "stand"
+PLAYER_STAND = "player_stand"
 
-MOVE_LEFT = "move_left"
+PLAYER_MOVE_LEFT = "player_move_left"
 
-MOVE_RIGHT = "move_right"
+PLAYER_MOVE_RIGHT = "player_move_right"
 
-MOVE_UP = "move_up"
+PLAYER_MOVE_UP = "player_move_up"
 
-MOVE_DOWN = "move_down"
+PLAYER_MOVE_DOWN = "player_move_down"
+
+---

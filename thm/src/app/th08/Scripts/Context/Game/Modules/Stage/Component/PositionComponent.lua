@@ -6,6 +6,10 @@ function M:_onInit()
 end
 
 function M:_onUpdate(delay,entity)
+
+end
+
+function M:_onLateUpdate(delay,entity)
     entity:setPositionX(self.x)
     entity:setPositionY(self.y)
 end

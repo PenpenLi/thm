@@ -1,15 +1,19 @@
 module("StageDefine", package.seeall)
 
+
+---
+RoleType = require("Scripts.Context.Game.Modules.Stage.Config.Type.RoleType")  
+ActionType = require("Scripts.Context.Game.Modules.Stage.Config.Type.ActionType")  
+
 ----
 Speed = require("Scripts.Context.Game.Modules.Stage.Component.Data.Speed")
 
 --
 AnimationComponent = require("Scripts.Context.Game.Modules.Stage.Component.AnimationComponent")
 PositionComponent = require("Scripts.Context.Game.Modules.Stage.Component.PositionComponent")
-FlagComponent = require("Scripts.Context.Game.Modules.Stage.Component.FlagComponent")
-LifeComponent = require("Scripts.Context.Game.Modules.Stage.Component.LifeComponent")
 InputComponent = require("Scripts.Context.Game.Modules.Stage.Component.InputComponent")
 RigidbodyComponent = require("Scripts.Context.Game.Modules.Stage.Component.RigidbodyComponent")
+AudioComponent = require("Scripts.Context.Game.Modules.Stage.Component.AudioComponent")
 ----
 
 ----
@@ -23,14 +27,17 @@ BulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.BulletP
 PlayerPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.PlayerPrefab")
 
 
+Bullet = require("Scripts.Context.Game.Modules.Stage.Entity.Bullet")
+LilyWhite = require("Scripts.Context.Game.Modules.Stage.Entity.LilyWhite")
 Yukari = require("Scripts.Context.Game.Modules.Stage.Entity.Yukari")
+Sakuya = require("Scripts.Context.Game.Modules.Stage.Entity.Sakuya")
 ----
-CollisionSystem = require("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")  
-PlayerControlSystem = require("Scripts.Context.Game.Modules.Stage.System.PlayerControlSystem")  
-PlayerAnimationSystem = require("Scripts.Context.Game.Modules.Stage.System.PlayerAnimationSystem")  
+-- CollisionSystem = require("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")  
+-- PlayerControlSystem = require("Scripts.Context.Game.Modules.Stage.System.PlayerControlSystem")  
+-- PlayerAnimationSystem = require("Scripts.Context.Game.Modules.Stage.System.PlayerAnimationSystem")  
 
----
-RoleType = require("Scripts.Context.Game.Modules.Stage.Config.Type.RoleType")  
-ActionType = require("Scripts.Context.Game.Modules.Stage.Config.Type.ActionType")  
+--
+
+PlayerMove = require("Scripts.Context.Game.Modules.Stage.Script.PlayerMove")  
 ---
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  

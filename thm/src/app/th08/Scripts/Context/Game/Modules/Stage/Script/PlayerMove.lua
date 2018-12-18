@@ -1,14 +1,18 @@
 local EGameKeyType = Definition.Public.EGameKeyType
 local ETouchType = Definition.Public.ETouchType
+local ANIMATE_PATH = "Scripts.Context.Game.Modules.Stage.Config.Animation.%s"
+local M = class("PlayerMove",THSTG.ECS.Script)
 
-local M = class("PlayerControlSystem",THSTG.ECS.System)
-
+function M:_onInit()
+    --消息
+end
 -------------
 --[[控制模块]]
 
-function M:__onKeyMove(keyMapper)
+function M:__onKeyMove(inputComp,posComp)
     --细分状态:移动的各个状态是互斥的
     local moveStep = cc.p(0,0)
+    local keyMapper = inputComp.keyMapper
     if keyMapper:isKeyDown(EGameKeyType.MoveLeft) then
         moveStep.x = -Definition.Public.PLAYER_KEY_MOVE_STEP
     end
@@ -22,48 +26,57 @@ function M:__onKeyMove(keyMapper)
         moveStep.y = -Definition.Public.PLAYER_KEY_MOVE_STEP
     end
 
-    local posComp = self:getComponent("PositionComponent")
-    posComp.x = posComp.x + moveStep.x
-    posComp.y = posComp.y + moveStep.y
-  
+    return moveStep
+
 end
 
-function M:__onTouchMove(touchPos)
-    local destPos = touchPos
-
+function M:__onTouchMove(inputComp,posComp)
+    local destPos = inputComp.touchPos
     if destPos then
-        local posComp = self:getComponent("PositionComponent")
+        local moveStep = cc.p(0,0)
         local curPos = cc.p(posComp.x,posComp.y)
-
         local destPos = cc.p(destPos.x,destPos.y)
         local shift = cc.pSub(destPos, curPos) 
         local length = cc.pGetLength(shift)
         if length <= Definition.Public.PLAYER_TOUCH_MOVE_STEP then
-            posComp.x = destPos.x
-            posComp.y = destPos.y
+            moveStep.x = destPos.x - posComp.x
+            moveStep.y = destPos.y - posComp.y
         else
             local angle = cc.pGetAngle(cc.p(1,0),shift)
-            local offesetX = Definition.Public.PLAYER_TOUCH_MOVE_STEP * math.cos(angle)
-            local offesetY = Definition.Public.PLAYER_TOUCH_MOVE_STEP * math.sin(angle)
-            posComp.x = (posComp.x + offesetX)
-            posComp.y = (posComp.y + offesetY)
+            moveStep.x = Definition.Public.PLAYER_TOUCH_MOVE_STEP * math.cos(angle)
+            moveStep.y = Definition.Public.PLAYER_TOUCH_MOVE_STEP * math.sin(angle)
         end
+        return moveStep
     end
+
+    return false
 end
 
-function M:__onShot(keyMapper)
+function M:__onMove(inputComp)
+    --移动这里是互斥的
+    local posComp = self:getComponent("PositionComponent")
+    local offset = self:__onTouchMove(inputComp,posComp) or self:__onKeyMove(inputComp,posComp) or cc.p(0,0)
+
+    posComp.x = posComp.x + offset.x
+    posComp.y = posComp.y + offset.y
+
+    if offset.x < 0 then self.curAnimation = StageDefine.ActionType.PLAYER_MOVE_LEFT
+    elseif offset.x > 0 then self.curAnimation = StageDefine.ActionType.PLAYER_MOVE_RIGHT
+    else
+        self.curAnimation = StageDefine.ActionType.PLAYER_STAND
+    end
+
+
+end
+
+function M:__onKill(inputComp)
+    local keyMapper = inputComp.keyMapper
     if keyMapper:isKeyDown(EGameKeyType.Attack) then
         
     end
-end
-
-function M:__onSkill(keyMapper)
     if keyMapper:isKeyDown(EGameKeyType.Skill) then
        
     end
-end
-
-function M:__onSlow(keyMapper)
     if keyMapper:isKeyDown(EGameKeyType.Skill) then
        
     end
@@ -104,22 +117,60 @@ function M:__onInputHandle()
     local inputComp = self:getComponent("InputComponent")
     local keyMapper = inputComp.keyMapper
     local touchPos = inputComp.touchPos
-    self:__onKeyMove(keyMapper)
-    self:__onTouchMove(touchPos)
-    self:__onShot(keyMapper)
-    self:__onSkill(keyMapper)
-    self:__onSlow(keyMapper)
+    self:__onMove(inputComp)
+    self:__onKill(inputComp)
+end
+--------------
+--[[动画模块]]
+function M:__onAnimationInit(params)
+    self.roleType = nil                 --人物类型
+    self.curAnimation = nil             --当前动作
+    self._lastAnimation = nil           --动作
+
+    self._animationDict = false
+end
+
+function M:__playAnime(action)
+    if action == self._lastAnimation then return end
+    local animationComp = self:getComponent("AnimationComponent")
+    local sprite = animationComp.sprite
+
+    local function getAnime(action)
+        if not self._animationDict then
+            local path = string.format(ANIMATE_PATH,self.roleType)
+            self._animationDict = require(path)
+        end
+        return self._animationDict[action]
+    end
+
+    --查找配置
+    local actionFunc = getAnime(action)
+    actionFunc(sprite,self._lastAnimation)
+
+    self._lastAnimation = action
+end
+
+function M:__onAnimationHandle()
+    if self.curAnimation then
+        self:__playAnime(self.curAnimation)
+    end
 end
 
 ------
-function M:_onAdded()
+function M:_onStart(params)
 
-    self:__onInputInit()
+    self:__onInputInit(params)
+    self:__onAnimationInit(params)
 end
 
 
 function M:_onUpdate()
     self:__onInputHandle()
+    
+end
+
+function M:_onLateUpdate()
+    self:__onAnimationHandle()
 end
 
 

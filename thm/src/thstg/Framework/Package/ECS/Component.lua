@@ -1,8 +1,10 @@
 local M = class("Component")
-
+local _componentId = 0
 function M:ctor(...)
     --用于标识组件类别
-    self.__componentName__ = self:_onName() or self.class.__cname
+    _componentId = _componentId + 1
+    self.__id__ = _componentId
+    self.__componentName__ = self:_onName( self.class.__cname or "" ,self.__id__)
     self.__isEnabled__ = true
     
     self:_onInit(...)
@@ -10,6 +12,9 @@ end
 
 function M:getName()
     return self.__componentName__
+end
+function M:getID()
+    return self.__id__
 end
 function M:isEnabled()
 	return self.__isEnabled__
@@ -38,13 +43,13 @@ function M:_onUpdate(delay,entity)
 end
 
 --逻辑更新完成
-function M:_onFinished(delay,entity)
+function M:_onLateUpdate(delay,entity)
     
 end
 
-function M:_onName()   
-    -- error("[Component] The _onName function must be overrided!")
-    return false
+function M:_onName(className,id)
+    --能够决定是否可以多次被添加
+    return className
 end
 
 

@@ -9,17 +9,6 @@ function M:ctor()
 end
 
 ----------
-function M:_onEnter()
 
-    
-end
-
-function M:_onExit()
-   
-end
-
-function M:_onUpdate()
-
-end
 
 return M

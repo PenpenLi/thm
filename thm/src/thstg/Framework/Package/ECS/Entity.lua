@@ -1,11 +1,12 @@
 local M = class("Entity",cc.Node)
+
 local _entityId = 10000
 function M:ctor()
     _entityId = _entityId + 1
 
     self.__id__ = _entityId
 	self.__components__ = false
-	self.__systems__ = ECS.SystemComponent.new(self)
+
     ----
 
 	local function onEnter()
@@ -31,31 +32,38 @@ function M:ctor()
 	self:onNodeEvent("cleanup", onCleanup)
 	---
 
-	self:addComponent(self.__systems__)
 	-- self:_onInit()
 end
 --
 --[[component模块]]
-function M:addComponent(component)
-	
+local function _addComponent(self,component,params)
 	assert(not tolua.cast(component, "ECS.Component"), "[Entity] the addChild function param value must be a THSTG ECS.Component object!!")
 	self.__components__ = self.__components__ or {}
 
+	--有些组件可以被多次添加,有些不行
 	local componentName = component:getName()
+	assert(componentName, "[Entity] The component must have a unique name!")
 	assert(not self.__components__[componentName], "[Entity] component already added. It can't be added again!")
 	self.__components__[componentName] = component
 
-	component:_onAdded(self)
+	component:_onAdded(self,params)
 end
---移除组件
-function M:removeComponent(name)
+local function _remveComponent(self,name,params)
 	if self.__components__ then
 		local component = self.__components__[name]
 		if component then
-			component:_onRemoved(self)
+			component:_onRemoved(self,params)
 			self.__components__[name] = nil
 		end
 	end
+end
+
+function M:addComponent(component,params)
+	_addComponent(self,component,params)
+end
+--移除组件
+function M:removeComponent(name,params)
+	_remveComponent(self,name,params)
 end
 --获取组件
 function M:getComponent(name)
@@ -77,16 +85,18 @@ function M:removeAllComponents()
 	end
 end
 
---[[system模块]]
-function M:addSystem(system)
-	return self.__systems__:addSystem(system)
+--[[脚本模块]]
+function M:addScript(scprit,params)
+	_addComponent(self,scprit,params)
 end
 
-function M:removeSystem(system)
-	return self.__systems__:removeSystem(system)
+-- function M:removeScript(scprit,params)
+-- 	_remveComponent(self,scprit,params)
+-- end
+
+function M:getScript(name)
+	return self:getComponent("Script" .. "_" .. name)
 end
-
-
 
 ---
 function M:update(dTime)
@@ -98,14 +108,15 @@ function M:update(dTime)
 		end
 	end
 	self:_onUpdate(dTime)
+
 	if self.__components__ then
 		for k,v in pairs(self.__components__) do
 			if v:isEnabled() then
-				v:_onFinished(dTime,self)
+				v:_onLateUpdate(dTime,self)
 			end
 		end
 	end
-	self:_onFinished(dTime)
+	self:_onLateUpdate(dTime)
 end
 
 function M:clear()
@@ -143,7 +154,7 @@ function M:_onUpdate(dTime)
 end
 
 --逻辑更新完成
-function M:_onFinished(dTime)
+function M:_onLateUpdate(dTime)
     
 end
 

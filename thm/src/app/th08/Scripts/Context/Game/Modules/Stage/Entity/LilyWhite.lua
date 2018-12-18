@@ -1,10 +1,10 @@
 module(..., package.seeall)
 
-local M = class("LilyWhite",StageDefine.EnemyEntity)
+local M = class("LilyWhite",StageDefine.BatmanPrefab)
 
 function M:ctor()
     M.super.ctor(self)
-    debugUI(self)
+ 
    
 end
 ----------

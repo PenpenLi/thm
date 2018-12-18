@@ -1,10 +1,11 @@
 module("AnimationCache", package.seeall)
 
 local _dict = {}
-function getRes(type,name)
+function getRes(type,name,time)
     local ret =_dict[type] and _dict[type][name]
     if not ret then
-        ret = ScenePublic.newAnimation(type,name)
+        time = time or Definition.Public.ANIMATION_INTERVAL
+        ret = ScenePublic.newAnimation(type,name,time)
         if ret then
             _dict[type] = _dict[type] or {}
             _dict[type][name] = ret
@@ -15,8 +16,8 @@ function getRes(type,name)
     
 end
 
-function getSheetRes(name)
-    return getRes(TexType.SHEET,name)
+function getSheetRes(name,time)
+    return getRes(TexType.SHEET,name,time)
 end
 
 function clear()

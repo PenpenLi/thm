@@ -150,6 +150,8 @@ function newLabel(params)
 			if style.outline > 0 then
 				local outlineColor = style.outlineColor or finalParams.style.outlineColor
 				self:enableOutline(cc.c4b(outlineColor.r, outlineColor.g, outlineColor.b, outlineColor.a), style.outline)
+			else
+				self:enableOutline(cc.c4b(0, 0, 0, 0), -1)
 			end
 		end
 		if style.color then
