@@ -4,12 +4,12 @@ local M = {}
 function M.create(params)
     -------Model-------
     -- local _eReimu = StageDefine.Reimu.new()
-    local _eSakuya = StageDefine.Sakuya.new()
+    local _ePlayer = StageDefine.Player.new(StageDefine.RoleType.REIMU)
    
     -------View-------
     local node = THSTG.UI.newNode()
     -- node:addChild(_eReimu)
-    node:addChild(_eSakuya)
+    node:addChild(_ePlayer)
     
 
     -------Controller-------

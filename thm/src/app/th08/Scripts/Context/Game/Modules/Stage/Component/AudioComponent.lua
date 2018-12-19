@@ -5,7 +5,7 @@ function M:ctor(tag)
     M.super.ctor(self)
 end
 function M:_onName(className,id)
-    return className .. "_" .. (self.__tag or id)
+    return className , (self.__tag or id)
 end
 
 function M:_onInit()

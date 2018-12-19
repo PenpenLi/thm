@@ -1,16 +1,20 @@
 local EGameKeyType = Definition.Public.EGameKeyType
 local ETouchType = Definition.Public.ETouchType
 local ANIMATE_PATH = "Scripts.Context.Game.Modules.Stage.Config.Animation.%s"
-local M = class("PlayerMove",THSTG.ECS.Script)
+local M = class("PlayerController",THSTG.ECS.Script)
 
 function M:_onInit()
-    --消息
+    self.roleType = nil                             --人物类型
+    self.bulletEntity = false                       --子弹的实体
+    self.shotInterval = 0.05                        --发射子弹的时间间隔
+    self.life = 3                                   --残机数
+
+    self._nextShotTime = 0
 end
 -------------
 --[[控制模块]]
 
 function M:__onKeyMove(inputComp,posComp)
-    --细分状态:移动的各个状态是互斥的
     local moveStep = cc.p(0,0)
     local keyMapper = inputComp.keyMapper
     if keyMapper:isKeyDown(EGameKeyType.MoveLeft) then
@@ -60,10 +64,10 @@ function M:__onMove(inputComp)
     posComp.x = posComp.x + offset.x
     posComp.y = posComp.y + offset.y
 
-    if offset.x < 0 then self.curAnimation = StageDefine.ActionType.PLAYER_MOVE_LEFT
-    elseif offset.x > 0 then self.curAnimation = StageDefine.ActionType.PLAYER_MOVE_RIGHT
+    if offset.x < 0 then self._curAnimation = StageDefine.ActionType.PLAYER_MOVE_LEFT
+    elseif offset.x > 0 then self._curAnimation = StageDefine.ActionType.PLAYER_MOVE_RIGHT
     else
-        self.curAnimation = StageDefine.ActionType.PLAYER_STAND
+        self._curAnimation = StageDefine.ActionType.PLAYER_STAND
     end
 
 
@@ -72,13 +76,25 @@ end
 function M:__onKill(inputComp)
     local keyMapper = inputComp.keyMapper
     if keyMapper:isKeyDown(EGameKeyType.Attack) then
-        
+        --根据不同的人物,等级,发射的子弹可能不同
+        if THSTG.TimeUtil.time() >= self._nextShotTime then
+            local bullet = self.bulletEntity.new()
+            local myPosComp = self:getComponent("PositionComponent")
+            local bulletPosComp = bullet:getComponent("PositionComponent")
+            bulletPosComp.x = myPosComp.x + 10
+            bulletPosComp.y = myPosComp.y
+         
+            bullet:setAnchorPoint(cc.p(0.5,0.5))
+            bullet:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
+
+            self._nextShotTime = THSTG.TimeUtil.time() + self.shotInterval
+        end
     end
     if keyMapper:isKeyDown(EGameKeyType.Skill) then
-       
+       --这里又要实时变化模式-
     end
-    if keyMapper:isKeyDown(EGameKeyType.Skill) then
-       
+    if keyMapper:isKeyDown(EGameKeyType.Slow) then
+       --这里又要实时变化子弹模式-
     end
 end
 
@@ -123,8 +139,8 @@ end
 --------------
 --[[动画模块]]
 function M:__onAnimationInit(params)
-    self.roleType = nil                 --人物类型
-    self.curAnimation = nil             --当前动作
+    
+    self._curAnimation = nil            --当前动作
     self._lastAnimation = nil           --动作
 
     self._animationDict = false
@@ -151,13 +167,13 @@ function M:__playAnime(action)
 end
 
 function M:__onAnimationHandle()
-    if self.curAnimation then
-        self:__playAnime(self.curAnimation)
+    if self._curAnimation then
+        self:__playAnime(self._curAnimation)
     end
 end
 
 ------
-function M:_onStart(params)
+function M:_onAdded(params)
 
     self:__onInputInit(params)
     self:__onAnimationInit(params)

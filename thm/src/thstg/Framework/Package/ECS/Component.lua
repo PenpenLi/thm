@@ -1,10 +1,9 @@
 local M = class("Component")
-local _componentId = 0
+
 function M:ctor(...)
     --用于标识组件类别
-    _componentId = _componentId + 1
-    self.__id__ = _componentId
-    self.__componentName__ = self:_onName( self.class.__cname or "" ,self.__id__)
+    self.__id__ = ECS.ECSUtil.getComponentId()
+    self.__componentName__ = ECS.ECSUtil.trans2Name(self:_onName( self.class.__cname or "UnknowComponent" , self.__id__ ))
     self.__isEnabled__ = true
     
     self:_onInit(...)
@@ -21,6 +20,12 @@ function M:isEnabled()
 end
 function M:setEnabled(val)
 	self.__isEnabled__ = val
+end
+function M:_added(entity,param)
+    self:_onAdded(entity)
+end
+function M:_removed(entity,param)
+    self:_onRemoved(entity)
 end
 --
 --[[以下函数必须重载]]
@@ -44,6 +49,10 @@ end
 
 --逻辑更新完成
 function M:_onLateUpdate(delay,entity)
+    
+end
+--被销毁时回调
+function M:_onDestroy()
     
 end
 

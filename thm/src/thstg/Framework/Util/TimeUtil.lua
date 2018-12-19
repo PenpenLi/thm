@@ -1,9 +1,17 @@
 module("TimeUtil", package.seeall)
 
 -- 获取高精度时间
-function getHighPrecisionTime()
+local function getHighPrecisionTime()
 	local socket = require "socket"
 	return socket.gettime() * 1000
+end
+
+function time()
+	return getHighPrecisionTime() / 1000
+end
+
+function msTime()
+	return getHighPrecisionTime()
 end
 
 -- 获取与服务器时间差值：秒

@@ -144,14 +144,12 @@ end
         _private.onLongClick = params.onLongClick or function(touches, event) end
     
         ---
-        local _startMovePos = nil
         local _lastClickTime = 0
         local _lastMoveState = {pos = cc.p(0,0),time = 0,shift = cc.p(0,0)}
     
         ---
         local function onBegan(touches, event)
-            _startMovePos = touches[1]:getLocation()
-            local curClickTime = TimeUtil.getHighPrecisionTime()
+            local curClickTime = TimeUtil.msTime()
             local isDouble = curClickTime - _lastClickTime <= _private.doubleInteral
             if isDouble then
                 _private.onDoubleClick(touches, event)
@@ -166,7 +164,7 @@ end
         end
         local function onMoved(touches, event)
             local curPos = touches[1]:getLocation()
-            local curTime = TimeUtil.getHighPrecisionTime()
+            local curTime = TimeUtil.msTime()
             
             local dTime = curTime - _lastMoveState.time
             if dTime > _private.shakeFreq then --取样频度
@@ -179,7 +177,7 @@ end
                         local dTime = curTime - _lastMoveState.speedCheck.startTime 
                         if dTime <= _private.shakeInteral then
                             --还得判断一下起点和终点的距离是否超过范围距离
-                            local distance = cc.pGetLength(cc.pSub(curPos,_startMovePos))
+                            local distance = cc.pGetLength(cc.pSub(curPos,_lastMoveState.speedCheck.startPos))
                             if distance <= _private.shakeSafeDistance then
                                 _private.onShaked()
                             end
@@ -188,6 +186,7 @@ end
                     else
                         _lastMoveState.speedCheck = {}
                         _lastMoveState.speedCheck.startTime = curTime
+                        _lastMoveState.speedCheck.startPos = curPos
                     end
                 else
                     _lastMoveState.speedCheck = nil
@@ -206,7 +205,7 @@ end
         end
         local function onEnded(touches, event)
     
-            local curClickTime = TimeUtil.getHighPrecisionTime()
+            local curClickTime = TimeUtil.msTime()
             local isLongClick = curClickTime - _lastClickTime >= _private.longInteral
             if isLongClick then
                 _private.onLongClick()

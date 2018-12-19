@@ -70,7 +70,7 @@ function newTouchAllAtOnceExListener(params)
 
     ---
     local function onBegan(touches, event)
-        local curClickTime = THSTG.TimeUtil.getHighPrecisionTime()
+        local curClickTime = THSTG.TimeUtil.msTime()
         local isDouble = curClickTime - _lastClickTime <= _private.doubleInteral
         if isDouble then
             _private.onDoubleClick(touches, event)
@@ -85,7 +85,7 @@ function newTouchAllAtOnceExListener(params)
     end
     local function onMoved(touches, event)
         local curPos = touches[1]:getLocation()
-        local curTime = THSTG.TimeUtil.getHighPrecisionTime()
+        local curTime = THSTG.TimeUtil.msTime()
         
         local dTime = curTime - _lastMoveState.time
         if dTime > _private.shakeFreq then --取样频度
@@ -126,7 +126,7 @@ function newTouchAllAtOnceExListener(params)
     end
     local function onEnded(touches, event)
 
-        local curClickTime = THSTG.TimeUtil.getHighPrecisionTime()
+        local curClickTime = THSTG.TimeUtil.msTime()
         local isLongClick = curClickTime - _lastClickTime >= _private.longInteral
         if isLongClick then
             _private.onLongClick()

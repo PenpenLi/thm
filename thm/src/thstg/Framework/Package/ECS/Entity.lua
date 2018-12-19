@@ -1,19 +1,16 @@
 local M = class("Entity",cc.Node)
+local EFlagType = {Destroy = 1}
 
-local _entityId = 10000
 function M:ctor()
-    _entityId = _entityId + 1
-
-    self.__id__ = _entityId
+    self.__id__ = ECS.ECSUtil.getEntityId()
 	self.__components__ = false
-
+	self.__flags__ = false
     ----
 
 	local function onEnter()
 		local function onUpdate(dTime)
 			self:update(dTime)
 		end
-
 		self:scheduleUpdateWithPriorityLua(onUpdate,0)
 		self:_onEnter()
 	end
@@ -22,8 +19,8 @@ function M:ctor()
         self:unscheduleUpdate()
 	end
 	local function onCleanup()
+		self:_onCleanup()
 		self:clear()
-		self:_onDestroy()
 	end
 	
 	
@@ -46,13 +43,13 @@ local function _addComponent(self,component,params)
 	assert(not self.__components__[componentName], "[Entity] component already added. It can't be added again!")
 	self.__components__[componentName] = component
 
-	component:_onAdded(self,params)
+	component:_added(self,params)
 end
 local function _remveComponent(self,name,params)
 	if self.__components__ then
 		local component = self.__components__[name]
 		if component then
-			component:_onRemoved(self,params)
+			component:_removed(self,params)
 			self.__components__[name] = nil
 		end
 	end
@@ -66,15 +63,16 @@ function M:removeComponent(name,params)
 	_remveComponent(self,name,params)
 end
 --获取组件
-function M:getComponent(name)
+function M:getComponent(...)
 	if self.__components__ then
+		local name = ECS.ECSUtil.trans2Name(...)
 		return self.__components__[name]
 	end
 	return nil
 end
 
-function M:isHaveComponent(name)
-    return self:getComponent(name) and true or false
+function M:isHaveComponent(...)
+    return self:getComponent(...) and true or false
 end
 
 function M:removeAllComponents()
@@ -95,7 +93,7 @@ end
 -- end
 
 function M:getScript(name)
-	return self:getComponent("Script" .. "_" .. name)
+	return self:getComponent(ECS.Script.__cname,name)
 end
 
 ---
@@ -117,10 +115,15 @@ function M:update(dTime)
 		end
 	end
 	self:_onLateUpdate(dTime)
+	self:__onUpdateFinish()
 end
 
 function M:clear()
 	self:removeAllComponents()
+end
+
+function M:destroy()
+	self:__setFlag(EFlagType.Destroy,true)
 end
 --
 
@@ -131,11 +134,12 @@ end
 ---
 --[[以下由子类重载]]
 function M:_onInit(...)
+
 end
 
 --进入场景回调
 function M:_onEnter()
-
+	
 end
 
 --退出场景回调
@@ -148,6 +152,9 @@ function M:_onDestroy()
 	
 end
 
+function M:_onCleanup()
+
+end
 --每帧回调
 function M:_onUpdate(dTime)
 
@@ -156,6 +163,40 @@ end
 --逻辑更新完成
 function M:_onLateUpdate(dTime)
     
+end
+
+
+-----
+function M:__setFlag(flag,state)
+	self.__flags__ = self.__flags__ or {}
+	self.__flags__[flag] = true
+end
+
+function M:__isFlag(flag)
+	if self.__flags__ then
+		return self.__flags__[flag]
+	end
+	return false
+end
+function M:__flagHandle()
+	if self:__isFlag(EFlagType.Destroy) then
+		self:__setFlag(EFlagType.Destroy,nil)
+		if self.__components__ then
+			for k,v in pairs(self.__components__) do
+				if v:isEnabled() then
+					v:_onDestroy()
+				end
+			end
+		end
+
+		self:_onDestroy()
+		self:removeFromParent()
+
+	end
+end
+function M:__onUpdateFinish()
+	self:__flagHandle()
+
 end
 
 return M
