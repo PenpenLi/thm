@@ -1,5 +1,5 @@
 --脚本组件是一个特殊的组件
-local M = class("Script",ECS.Component)
+local M = class("ScriptComponent",ECS.Component)
 function M:ctor(...)
     M.super.ctor(self)
     self.__entity = nil
@@ -7,14 +7,16 @@ function M:ctor(...)
 
     --
     --让脚本在帧开始前执行一次初始化
-    local handle = nil
-    local scheduler = cc.Director:getInstance():getScheduler()
-    local onNextFrame = function()
-        self:start()
-        scheduler:unscheduleScriptEntry(handle)
-        handle = nil
-    end
-    handle = scheduler:scheduleScriptFunc(onNextFrame, 0, false)
+    --以下不严谨,因为对象可能已经销毁了才执行
+    -- local handle = nil
+    -- local scheduler = cc.Director:getInstance():getScheduler()
+    -- local onNextFrame = function()
+    --     -- self:start()
+    --     print(15,"1",self:getID())
+    --     scheduler:unscheduleScriptEntry(handle)
+    --     handle = nil
+    -- end
+    -- handle = scheduler:scheduleScriptFunc(onNextFrame, 0, false)
     
     --
     self:_onInit(...)
@@ -30,13 +32,8 @@ function M:__getEntity()
     return self.__entity
 end
 
-function M:getEntity(name)
-    if not name then
-       return self:__getEntity()
-    else
-        --TODO:全局范围搜索
-        return nil
-    end
+function M:getEntity()
+    return self:__getEntity()
 end
 
 --移除组件
@@ -58,7 +55,7 @@ end
 
 ----
 --以下不能被重写
-function M:_onName(className,id)
+function M:_onClass(className,id)
     return M.__cname,className
 end
 
@@ -72,13 +69,17 @@ function M:_removed(entity,param)
 
 end
 
-function M:_onRemoved(entity,param)
+function M:_onEnter()
+    self:start()
+end
+--
+function M:_onExit()
     self:_onEnd()
 end
-
+---------------
 --如果不支持定时器只能手动执行了
 function M:start(param)
-    self:_onStart()
+    self:_onStart(param)
 end
 
 ---
@@ -99,10 +100,6 @@ function M:_onStart()
 
 end
 
-function M:_onEnd()
-    
-end
-
 --[[以下需要被重载]]
 function M:_onUpdate(delay)
    
@@ -113,7 +110,10 @@ function M:_onLateUpdate(delay)
 end
 
 function M:_onDestroy()
-    
+
 end
 
+function M:_onEnd()
+    
+end
 return M

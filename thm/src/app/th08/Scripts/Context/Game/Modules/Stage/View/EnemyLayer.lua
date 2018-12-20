@@ -15,18 +15,14 @@ function M.create(params)
 
   
     -------Controller-------
-    local function onInit()
-        local function loadFileByid(id)
-            local filePath = string.format(SCENARIO_FILE_PATH_PATTERN,id)
-            return require(filePath)
-        end
-        
+    local function onInit()        
         _cTaskScheduler:setUserData({
             mapLayer = THSTG.SceneManager.get(SceneType.STAGE).entityLayer,
             danmakuLayer = THSTG.SceneManager.get(SceneType.STAGE).entityLayer,
             enemyLayer = THSTG.SceneManager.get(SceneType.STAGE).entityLayer,
         })
-        _cTaskScheduler:setTasks(loadFileByid(1))
+        local stageID = Cache.stageCache.getStageId()
+        _cTaskScheduler:setTasks(StageDefine.ConfigReader.getScenario(stageID))
 
     end
     onInit()

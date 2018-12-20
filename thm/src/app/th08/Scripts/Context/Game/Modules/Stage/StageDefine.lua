@@ -44,4 +44,6 @@ PlayerController = require("Scripts.Context.Game.Modules.Stage.System.PlayerCont
 BatmanController = require("Scripts.Context.Game.Modules.Stage.System.BatmanController")
 DestoryByBorder = require("Scripts.Context.Game.Modules.Stage.System.DestoryByBorder")
 ---
+ConfigReader = require("Scripts.Context.Game.Modules.Stage.Config.ConfigReader")  
+---
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  

@@ -4,6 +4,7 @@ function M:_onInit()
     self.sprite = THSTG.SCENE.newSprite()
 
 end
+---
 
 ---
 function M:_onAdded(entity)

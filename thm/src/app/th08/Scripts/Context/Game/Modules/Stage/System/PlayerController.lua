@@ -8,8 +8,18 @@ function M:_onInit()
     self.bulletEntity = false                       --子弹的实体
     self.shotInterval = 0.05                        --发射子弹的时间间隔
     self.life = 3                                   --残机数
+    self.initPos = cc.p(120,32)                     --玩家初始位置
 
     self._nextShotTime = 0
+end
+-------------
+function M:__onInitMyself()
+    local myPosComp = self:getComponent("PositionComponent")
+    myPosComp.x = self.initPos.x
+    myPosComp.y = self.initPos.y
+
+    self.roleType = Cache.roleCache.getType()
+    self.bulletEntity = StageDefine.PlayerBullet    --TODO:根据roleType变换
 end
 -------------
 --[[控制模块]]
@@ -19,14 +29,12 @@ function M:__onKeyMove(inputComp,posComp)
     local keyMapper = inputComp.keyMapper
     if keyMapper:isKeyDown(EGameKeyType.MoveLeft) then
         moveStep.x = -Definition.Public.PLAYER_KEY_MOVE_STEP
-    end
-    if keyMapper:isKeyDown(EGameKeyType.MoveRight) then
+    elseif keyMapper:isKeyDown(EGameKeyType.MoveRight) then
         moveStep.x = Definition.Public.PLAYER_KEY_MOVE_STEP
     end
     if keyMapper:isKeyDown(EGameKeyType.MoveUp) then
         moveStep.y = Definition.Public.PLAYER_KEY_MOVE_STEP
-    end
-    if keyMapper:isKeyDown(EGameKeyType.MoveDown) then
+    elseif keyMapper:isKeyDown(EGameKeyType.MoveDown) then
         moveStep.y = -Definition.Public.PLAYER_KEY_MOVE_STEP
     end
 
@@ -81,9 +89,8 @@ function M:__onKill(inputComp)
             local bullet = self.bulletEntity.new()
             local myPosComp = self:getComponent("PositionComponent")
             local bulletPosComp = bullet:getComponent("PositionComponent")
-            bulletPosComp.x = myPosComp.x + 10
-            bulletPosComp.y = myPosComp.y
-         
+            bulletPosComp.x = myPosComp.x + 0
+            bulletPosComp.y = myPosComp.y - 25  --FIXME:贴图尾巴太长了
             bullet:setAnchorPoint(cc.p(0.5,0.5))
             bullet:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
 
@@ -151,16 +158,8 @@ function M:__playAnime(action)
     local animationComp = self:getComponent("AnimationComponent")
     local sprite = animationComp.sprite
 
-    local function getAnime(action)
-        if not self._animationDict then
-            local path = string.format(ANIMATE_PATH,self.roleType)
-            self._animationDict = require(path)
-        end
-        return self._animationDict[action]
-    end
-
     --查找配置
-    local actionFunc = getAnime(action)
+    local actionFunc = StageDefine.ConfigReader.getAnime(self.roleType,action)
     actionFunc(sprite,self._lastAnimation)
 
     self._lastAnimation = action
@@ -174,15 +173,16 @@ end
 
 ------
 function M:_onAdded(params)
-
     self:__onInputInit(params)
     self:__onAnimationInit(params)
 end
 
+function M:_onStart()
+    self:__onInitMyself()
+end
 
 function M:_onUpdate()
     self:__onInputHandle()
-    
 end
 
 function M:_onLateUpdate()

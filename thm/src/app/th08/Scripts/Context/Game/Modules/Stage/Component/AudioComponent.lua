@@ -1,11 +1,10 @@
 local M = class("AudioComponent",THSTG.ECS.Component)
-function M:ctor(tag)
-    self.__tag = tag
-
+function M:ctor()
     M.super.ctor(self)
+
 end
-function M:_onName(className,id)
-    return className , (self.__tag or id)
+function M:_onClass(className,id)
+    return className , id
 end
 
 function M:_onInit()

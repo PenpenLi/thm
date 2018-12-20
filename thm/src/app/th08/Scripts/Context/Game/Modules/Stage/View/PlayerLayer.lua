@@ -4,7 +4,7 @@ local M = {}
 function M.create(params)
     -------Model-------
     -- local _eReimu = StageDefine.Reimu.new()
-    local _ePlayer = StageDefine.Player.new(StageDefine.RoleType.REIMU)
+    local _ePlayer = StageDefine.Player.new()
    
     -------View-------
     local node = THSTG.UI.newNode()

@@ -7,8 +7,8 @@ function M:ctor()
    
     self.bulletController.belong = "PLAYER"
     self.bulletController.speed.y = 20
-    self.bulletController.rotation = -90        --玩家子弹需要90度旋转
-
+    self.bulletController.rotation = -90        --这个仅由贴图决定
+    
 end
 
 
