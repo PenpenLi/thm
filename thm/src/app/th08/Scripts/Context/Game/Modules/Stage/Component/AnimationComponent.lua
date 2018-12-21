@@ -5,7 +5,17 @@ function M:_onInit()
 
 end
 ---
+function play(action)
+    
+end
 
+function playForever(action)
+
+end
+
+function playOnce(action)
+
+end
 ---
 function M:_onAdded(entity)
     self.sprite = self.sprite or THSTG.SCENE.newSprite()

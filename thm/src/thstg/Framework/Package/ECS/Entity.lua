@@ -1,44 +1,16 @@
+local ECSUtil = require "thstg.Framework.Package.ECS.ECSUtil"
 local M = class("Entity",cc.Node)
-local _entityCache = {}
-local function _addEntity(entity)
-	_entityCache[entity] = entity
-end
-local function _removeEntity(entity)
-	_entityCache[entity] = nil
-end
-local function _visitEntity(func)
-	for _,v in pairs(_entityCache) do
-		if tolua.isnull(v) then 
-			_entityCache[v] = nil
-		else
-			local ret = func(v)
-			if ret then return ret end
-		end
-	end
-end
-function M.find(id)
-	return _visitEntity(function(entity)
-		if entity:getID() == id then
-			return entity
-		end
-	end)
-end
-function M.findEntitysWithTag(tag)
-	local list = {}
-	_visitEntity(function(entity)
-		if entity:getTag() == tag then
-			table.insert( list, entity )
-		end
-	end)
-	return list
-end
-function M.findWithTag(tag)
-	return M.findEntitysWithTag(tag)[1]
-end
+
+function M.find(id) return ECSManager.findEntityById(id) end
+function M.findEntitysWithTag(tag) return ECSManager.findEntitysWithTag(tag) end
+function M.findWithTag(tag) return ECSManager.findEntityWithTag(tag) end
+function M.getAll() return ECSManager.getAllEntities() end
+function M.getAllEx(entity) return ECSManager.getAllEntities(entity) end
+
 local EFlagType = {Destroy = 1}
 -----
 function M:ctor()
-    self.__id__ = ECS.ECSUtil.getEntityId()
+    self.__id__ = ECSUtil.getEntityId()
 	self.__components__ = false
 	self.__flags__ = false
     ----
@@ -49,10 +21,10 @@ function M:ctor()
 		end
 		self:scheduleUpdateWithPriorityLua(onUpdate,0)
 		self:_enter()
-		_addEntity(self)
+		ECSManager.addEntity(self)
 	end
 	local function onExit()
-		_removeEntity(self)
+		ECSManager.removeEntity(self)
 		self:_exit()
         self:unscheduleUpdate()
 	end
@@ -85,7 +57,7 @@ local function _addComponent(self,component,params)
 end
 local function _remveComponent(self,...)
 	if self.__components__ then
-		local name = ECS.ECSUtil.trans2Name(...)
+		local name = ECSUtil.trans2Name(...)
 		local component = self.__components__[name]
 		if component then
 			component:_removed(self)
@@ -106,25 +78,34 @@ end
 --移除组件列表
 function M:removeComponents(...)
 	if self.__components__ then
-		local name = ECS.ECSUtil.trans2Name(...)
+		local name = ECSUtil.trans2Name(...)
 		for k,v in pairs(self.__components__) do
 			local className = v:getClass()
-			if ECS.ECSUtil.find2Class(className,...) then
-				local argName = ECS.ECSUtil.trans2Args(className)
+			if ECSUtil.find2Class(className,...) then
+				local argName = ECSUtil.trans2Args(className)
 				self:removeComponent(unpack(argName))
 			end
 		end
 	end
 end
-
+--
+function M:getAllComponents()
+	local ret = {}
+	if self.__components__ then
+		for _,v in pairs() do
+			table.insert( ret, v )
+		end
+	end
+	return ret
+end
 --获取组件列表
 function M:getComponents(...)
 	local ret = {}
 	if self.__components__ then
-		local name = ECS.ECSUtil.trans2Name(...)
+		local name = ECSUtil.trans2Name(...)
 		for k,v in pairs(self.__components__) do
 			local className = v:getClass()
-			if ECS.ECSUtil.find2Class(className,...) then
+			if ECSUtil.find2Class(className,...) then
 				table.insert( ret, v )
 			end
 		end
@@ -135,7 +116,7 @@ end
 --获取组件
 function M:getComponent(...)
 	if self.__components__ then
-		local name = ECS.ECSUtil.trans2Name(...)
+		local name = ECSUtil.trans2Name(...)
 		return self.__components__[name]
 	end
 	return nil

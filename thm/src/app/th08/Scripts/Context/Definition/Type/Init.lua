@@ -7,3 +7,4 @@ require "Scripts.Context.Definition.Type.UIType"
 require "Scripts.Context.Definition.Type.TexType"
 
 require "Scripts.Context.Definition.Type.MenuType"
+require "Scripts.Context.Definition.Type.RoleType"

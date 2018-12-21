@@ -1,15 +1,16 @@
+local ECSUtil = require "thstg.Framework.Package.ECS.ECSUtil"
 local M = class("Component")
 
 function M:ctor(...)
     --用于标识组件类别
-    self.__id__ = ECS.ECSUtil.getComponentId()
+    self.__id__ = ECSUtil.getComponentId()
     self.__isEnabled__ = true
     
     self:_onInit(...)
 end
 
 function M:getClass()
-    return ECS.ECSUtil.trans2Name(self:_onClass( self.class.__cname or "UnknowComponent" , self.__id__ ))
+    return ECSUtil.trans2Name(self:_onClass( self.class.__cname or "UnknowComponent" , self.__id__ ))
 end
 function M:getID()
     return self.__id__

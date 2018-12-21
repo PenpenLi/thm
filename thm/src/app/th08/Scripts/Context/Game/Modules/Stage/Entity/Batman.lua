@@ -1,11 +1,12 @@
 module(..., package.seeall)
 
 local M = class("Batman",StageDefine.BatmanPrefab)
-function M:ctor(roleType)
+function M:ctor()
     M.super.ctor(self)
     --初始化变量
-    self.playerController.roleType = roleType
-    self.playerController.bulletEntity = StageDefine.EnemyBullet
+    -- self.batmanController.bulletEntity = StageDefine.EnemyBullet
+
+    debugUI(self)
 end
 
 

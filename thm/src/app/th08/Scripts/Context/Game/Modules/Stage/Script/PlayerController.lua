@@ -1,6 +1,6 @@
 local EGameKeyType = Definition.Public.EGameKeyType
 local ETouchType = Definition.Public.ETouchType
-local ANIMATE_PATH = "Scripts.Context.Game.Modules.Stage.Config.Animation.%s"
+
 local M = class("PlayerController",THSTG.ECS.Script)
 
 function M:_onInit()

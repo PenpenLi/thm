@@ -8,10 +8,11 @@ local s_needClear = false
 
 --开始运行
 function run()
-	
+
 	SceneManager.init()
 	ModuleManager.init()
-	
+	ECSManager.init()
+	MVCManager.init()
 end
 
 --关闭游戏
@@ -30,7 +31,8 @@ function clear()
 	cc.Director:getInstance():getActionManager():removeAllActions()
 
 	-- Dispatcher.clear()
-
+	ECSManager.clear()
+	MVCManager.clear()
 	ModuleManager.closeAll()
 	SceneManager.clear()
 

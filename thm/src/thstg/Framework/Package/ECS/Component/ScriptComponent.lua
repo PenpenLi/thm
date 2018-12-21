@@ -4,20 +4,6 @@ function M:ctor(...)
     M.super.ctor(self)
     self.__entity = nil
     
-
-    --
-    --让脚本在帧开始前执行一次初始化
-    --以下不严谨,因为对象可能已经销毁了才执行
-    -- local handle = nil
-    -- local scheduler = cc.Director:getInstance():getScheduler()
-    -- local onNextFrame = function()
-    --     -- self:start()
-    --     print(15,"1",self:getID())
-    --     scheduler:unscheduleScriptEntry(handle)
-    --     handle = nil
-    -- end
-    -- handle = scheduler:scheduleScriptFunc(onNextFrame, 0, false)
-    
     --
     self:_onInit(...)
 end

@@ -8,6 +8,7 @@ function M:ctor()
 
     self:addComponent(StageDefine.AnimationComponent.new())
     self:addComponent(StageDefine.RigidbodyComponent.new())
+    self:addComponent(StageDefine.CollisionComponent.new())
 end
 
 return M
