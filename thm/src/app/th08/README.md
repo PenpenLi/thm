@@ -14,12 +14,20 @@ TODO LIST:
 6:任务系统,如果有循环的怎么办,时间回溯?,还是多搞几个一样的?
 
 2018-12-24
-1:PositionComponent与runAction()产生冲突,两者只能取一
+1:(待议)PositionComponent与runAction()产生冲突,两者只能取一,出于ccNode已经包含必要的组件,所以Entity不可能只有数据,(这里只能说ECS.Entity耦合了cc.Node,导致耦合度过高,目前来看没有很好的解决方法)
 2:Batman与Layer与Scene与ScheduleTask的关系
 3:AnimationComponent的动画与CollisionComponent的矩形不一定需要一致,因为动画可能尺寸很长,但实际碰撞不需要符合尺寸
 4:组件这块事实上应该是可以带方法的,不然会很麻烦
 5:网格碰撞没弄好,不应该设置在组件上
 6:System应该负责一组组件的记录和遍历,比如CollisionComponent只有数据或方法,不做其他用途,如网格碰撞的检测
 7:对5,6这个网格碰撞的存在异议,实现方法有待研究
-8:对单例组件的实现
+8:对单例组件的实现(如输入组件)
 9:组件可以获得其他组件,也可以设置
+10:Component是可以取到Entity的,Component应该包含getEntity()方法
+11:(待议)组件顺序,脚本顺序,以及组件分类(有些组件只能有一个,有些是多个,如脚本组件,声音组件)    --这个可以用Map + List的组合,因为getComponent只取第一个,因此效率O(1),需要特殊处理的是脚本组件的查找(理论上无此函数,但为了子类能够访问父类脚本而设置),添加时遍历一次组件表以确认是否添加过(依据????)
+12:子弹分类-光玉:(小玉,大玉), 激光又可以根据不同类型细分
+
+2018-12-25
+1:ECS,再次重构,Component只有数据没有方法,(尽量少或没有方法,尽量或没有关联其他组件),Entity需要分成CCEntity和Entity
+构造时加入自管理,调用Destroy()时释放,(去掉实体回调)
+2:TimeLine就是TaskScheduler
