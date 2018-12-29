@@ -20,8 +20,8 @@ function M:_onStart()
 end
 
 function M:_moveHandle()
-    local posComp = self:getComponent("PositionComponent")
-    posComp.y = posComp.y + self.speed.y
+    local posComp = self:getComponent("TransformComponent")
+    posComp:setPositionY(posComp:getPositionY() + self.speed.y)
 end
 
 ---

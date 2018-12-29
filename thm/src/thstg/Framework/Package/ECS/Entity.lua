@@ -7,11 +7,12 @@ function M.findWithTag(tag) return ECSManager.findEntityWithTag(tag) end
 function M.getAll() return ECSManager.getAllEntities() end
 function M.getAllEx(entity) return ECSManager.getAllEntities(entity) end
 
-local EFlagType = {Destroy = 1}
+local ECompType = {Control = 1,Script = 2}	--组件类型
+local EFlagType = {DestroyMySelf = 1}		--Flag类型
 -----
 function M:ctor()
     self.__id__ = ECSUtil.getEntityId()
-	self.__components__ = false
+	self.__components__ = {}
 	self.__flags__ = false
     ----
 
@@ -46,23 +47,20 @@ end
 local function _addComponent(self,component,params)
 	assert(not tolua.cast(component, "ECS.Component"), "[Entity] the addChild function param value must be a THSTG ECS.Component object!!")
 
-	self.__components__ = self.__components__ or {}
 	-- 有些组件可以被多次添加,有些不行
 	local componentName = component:getClass()
 	assert(componentName, "[Entity] The component must have a unique name!")
 	assert(not self.__components__[componentName], "[Entity] component already added. It can't be added again!")
 	self.__components__[componentName] = component
-
+		
 	component:_added(self,params)
 end
 local function _remveComponent(self,...)
-	if self.__components__ then
-		local name = ECSUtil.trans2Name(...)
-		local component = self.__components__[name]
-		if component then
-			component:_removed(self)
-			self.__components__[name] = nil
-		end
+	local name = ECSUtil.trans2Name(...)
+	local component = self.__components__[name]
+	if component then
+		component:_removed(self)
+		self.__components__[name] = nil
 	end
 end
 
@@ -77,49 +75,40 @@ end
 
 --移除组件列表
 function M:removeComponents(...)
-	if self.__components__ then
-		local name = ECSUtil.trans2Name(...)
-		for k,v in pairs(self.__components__) do
-			local className = v:getClass()
-			if ECSUtil.find2Class(className,...) then
-				local argName = ECSUtil.trans2Args(className)
-				self:removeComponent(unpack(argName))
-			end
+	local name = ECSUtil.trans2Name(...)
+	for k,v in pairs(self.__components__) do
+		local className = v:getClass()
+		if ECSUtil.find2Class(className,...) then
+			local argName = ECSUtil.trans2Args(className)
+			self:removeComponent(unpack(argName))
 		end
 	end
 end
 --
 function M:getAllComponents()
 	local ret = {}
-	if self.__components__ then
-		for _,v in pairs() do
-			table.insert( ret, v )
-		end
+	for _,v in pairs() do
+		table.insert( ret, v )
 	end
 	return ret
 end
 --获取组件列表
 function M:getComponents(...)
 	local ret = {}
-	if self.__components__ then
-		local name = ECSUtil.trans2Name(...)
-		for k,v in pairs(self.__components__) do
-			local className = v:getClass()
-			if ECSUtil.find2Class(className,...) then
-				table.insert( ret, v )
-			end
+	local name = ECSUtil.trans2Name(...)
+	for k,v in pairs(self.__components__) do
+		local className = v:getClass()
+		if ECSUtil.find2Class(className,...) then
+			table.insert( ret, v )
 		end
 	end
+	
 	return ret
 end
 
 --获取组件
 function M:getComponent(...)
-	if self.__components__ then
-		local name = ECSUtil.trans2Name(...)
-		return self.__components__[name]
-	end
-	return nil
+	return self:getComponents(...)[1]
 end
 
 function M:isHaveComponent(...)
@@ -127,10 +116,8 @@ function M:isHaveComponent(...)
 end
 
 function M:removeAllComponents()
-	if self.__components__ then
-		for name,_ in pairs(self.__components__) do
-			self:removeComponent(name)
-		end
+	for name,_ in pairs(self.__components__) do
+		self:removeComponent(name)
 	end
 end
 
@@ -149,22 +136,23 @@ end
 
 ---
 function M:update(dTime)
-	if self.__components__ then
-		for k,v in pairs(self.__components__) do
-			if v:isEnabled() then
-				v:_onUpdate(dTime,self)
-			end
+	--先control,然后才是Script
+	
+	for k,v in pairs(self.__components__) do
+		if v:isEnabled() then
+			v:_onUpdate(dTime,self)
 		end
 	end
+	
 	self:_onUpdate(dTime)
 
-	if self.__components__ then
-		for k,v in pairs(self.__components__) do
-			if v:isEnabled() then
-				v:_onLateUpdate(dTime,self)
-			end
+	
+	for k,v in pairs(self.__components__) do
+		if v:isEnabled() then
+			v:_onLateUpdate(dTime,self)
 		end
 	end
+	
 	self:_onLateUpdate(dTime)
 	self:__onUpdateFinish()
 end
@@ -174,7 +162,7 @@ function M:clear()
 end
 
 function M:destroy()
-	self:__setFlag(EFlagType.Destroy,true)
+	self:__setFlag(EFlagType.DestroyMySelf,true)
 end
 
 function M:getID()
@@ -182,7 +170,9 @@ function M:getID()
 end
 
 ---
---[[以下由子类重载]]
+--[[
+    以下函数不建议重载,违反了设计模式的思想
+]]
 function M:_onInit(...)
 
 end
@@ -217,20 +207,17 @@ end
 
 ---
 function M:_enter()
-	if self.__components__ then
-		for k,v in pairs(self.__components__) do
-			v:_onEnter()
-		end
+	for k,v in pairs(self.__components__) do
+		v:_onEnter()
 	end
 	self:_onEnter()
 end
 function M:_exit()
 	self:clear()
-	if self.__components__ then
-		for k,v in pairs(self.__components__) do
-			v:_onExit()
-		end
+	for k,v in pairs(self.__components__) do
+		v:_onExit()
 	end
+	
 	self:_onExit()
 end
 -----
@@ -246,14 +233,14 @@ function M:__isFlag(flag)
 	return false
 end
 function M:__flagHandle()
-	if self:__isFlag(EFlagType.Destroy) then
-		self:__setFlag(EFlagType.Destroy,nil)
+	if self:__isFlag(EFlagType.DestroyMySelf) then
+		self:__setFlag(EFlagType.DestroyMySelf,nil)
 
-		if self.__components__ then
-			for k,v in pairs(self.__components__) do
-				v:_onDestroy()
-			end
+		
+		for k,v in pairs(self.__components__) do
+			v:_onDestroy()
 		end
+		
 		
 		self:_onDestroy()
 		self:removeFromParent()

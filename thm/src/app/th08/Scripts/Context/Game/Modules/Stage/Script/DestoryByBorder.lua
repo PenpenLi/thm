@@ -6,10 +6,10 @@ function M:_onInit()
 end
 ---
 function M:_onLateUpdate()
-    local posComp = self:getComponent("PositionComponent")
-    local posPoint = cc.p(posComp.x,posComp.y)
+    local posComp = self:getComponent("TransformComponent")
+    local posPoint = cc.p(posComp:getPositionX(),posComp:getPositionY())
     if not cc.rectContainsPoint(self.boarder, posPoint) then
-        self:destroy()
+        self:getEntity():destroy()
     end
 end
 

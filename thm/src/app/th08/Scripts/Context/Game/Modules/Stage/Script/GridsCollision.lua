@@ -1,4 +1,4 @@
-local M = class("CollisionComponent",THSTG.ECS.Component)
+local M = class("GridsCollisionController",THSTG.ECS.Script)
 --[[
     网格碰撞思路:
     当物体发生移动,应该实时改变物体所在的区域,以便能快速找到
@@ -31,10 +31,6 @@ local function removeGridObj(entity,gridId)
 end
 -----
 function M:_onInit()
-    self.rect = cc.rect(0,0,20,20)
-    self.anchorPoint = cc.p(0.5,0.5)
-    self.isTrigger = false
-
     self._gridId = 1
 end
 ----
@@ -55,12 +51,16 @@ function M:_onRemoved(entity)
 end
 
 function M:_onUpdate(delay,entity)
-    self.rect.x = entity:getPositionX() - self.anchorPoint.x * self.rect.width
-    self.rect.y = entity:getPositionY() + self.anchorPoint.y * self.rect.height
+
 end
 
 function M:_onLateUpdate(delay,entity)
-    self._gridId = updateGridId(entity,self._gridId,self.rect)
+    local colliderComp = self:getComponent("ColliderComponent")
+    if colliderComp then
+        local rect = colliderComp:getRect()
+
+        self._gridId = updateGridId(entity,self._gridId,rect)
+    end
 end
 
 

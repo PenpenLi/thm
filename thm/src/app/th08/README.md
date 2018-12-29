@@ -30,4 +30,10 @@ TODO LIST:
 2018-12-25
 1:ECS,再次重构,Component只有数据没有方法,(尽量少或没有方法,尽量或没有关联其他组件),Entity需要分成CCEntity和Entity
 构造时加入自管理,调用Destroy()时释放,(去掉实体回调)
-2:TimeLine就是TaskScheduler
+2:---
+3:脚本与脚本之间传递消息
+4:Entity添加,搜索算法有问题
+6:用CCNode的注册的回调,所创建的对象无法超过10000个,需要重新写基类
+7:TimeLine技术,能够被暂停,但时间依然流逝
+8:System监视Component,通过观察者模式通知System,这个组件被移除
+9:Component与System处理不太好,无法获得大类,无法知道组件消亡..

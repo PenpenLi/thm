@@ -2,19 +2,21 @@ local M = class("AnimationComponent",THSTG.ECS.Component)
 
 function M:_onInit()
     self.sprite = THSTG.SCENE.newSprite()
-
+    self.state = false
 end
 ---
 function play(action)
-    
+    self.sprite:runAction(action)
 end
 
-function playForever(action)
-
+function playForever(animation,params)
+    local action = cc.RepeatForever:create(cc.Animate:create(animation))
+    self:play(action)
 end
 
-function playOnce(action)
-
+function playOnce(animation,params)
+    local action = cc.Animate:create(animation)
+    self:play(action)
 end
 ---
 function M:_onAdded(entity)

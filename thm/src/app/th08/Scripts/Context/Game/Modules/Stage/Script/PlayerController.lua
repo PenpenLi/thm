@@ -14,9 +14,9 @@ function M:_onInit()
 end
 -------------
 function M:__onInitMyself()
-    local myPosComp = self:getComponent("PositionComponent")
-    myPosComp.x = self.initPos.x
-    myPosComp.y = self.initPos.y
+    local myPosComp = self:getComponent("TransformComponent")
+    myPosComp:setPositionX(self.initPos.x)
+    myPosComp:setPositionY(self.initPos.y)
 
     self.roleType = Cache.roleCache.getType()
     self.bulletEntity = StageDefine.PlayerBullet    --TODO:根据roleType变换
@@ -46,13 +46,13 @@ function M:__onTouchMove(inputComp,posComp)
     local destPos = inputComp.touchPos
     if destPos then
         local moveStep = cc.p(0,0)
-        local curPos = cc.p(posComp.x,posComp.y)
+        local curPos = cc.p(posComp:getPositionX(),posComp:getPositionY())
         local destPos = cc.p(destPos.x,destPos.y)
         local shift = cc.pSub(destPos, curPos) 
         local length = cc.pGetLength(shift)
         if length <= Definition.Public.PLAYER_TOUCH_MOVE_STEP then
-            moveStep.x = destPos.x - posComp.x
-            moveStep.y = destPos.y - posComp.y
+            moveStep.x = destPos.x - posComp:getPositionX()
+            moveStep.y = destPos.y - posComp:getPositionY()
         else
             local angle = cc.pGetAngle(cc.p(1,0),shift)
             moveStep.x = Definition.Public.PLAYER_TOUCH_MOVE_STEP * math.cos(angle)
@@ -66,11 +66,11 @@ end
 
 function M:__onMove(inputComp)
     --移动这里是互斥的
-    local posComp = self:getComponent("PositionComponent")
+    local posComp = self:getComponent("TransformComponent")
     local offset = self:__onTouchMove(inputComp,posComp) or self:__onKeyMove(inputComp,posComp) or cc.p(0,0)
 
-    posComp.x = posComp.x + offset.x
-    posComp.y = posComp.y + offset.y
+    posComp:setPositionX(posComp:getPositionX() + offset.x)
+    posComp:setPositionY(posComp:getPositionY() + offset.y)
 
     if offset.x < 0 then self._curAnimation = StageDefine.ActionType.PLAYER_MOVE_LEFT
     elseif offset.x > 0 then self._curAnimation = StageDefine.ActionType.PLAYER_MOVE_RIGHT
@@ -87,10 +87,10 @@ function M:__onKill(inputComp)
         --根据不同的人物,等级,发射的子弹可能不同
         if THSTG.TimeUtil.time() >= self._nextShotTime then
             local bullet = self.bulletEntity.new()
-            local myPosComp = self:getComponent("PositionComponent")
-            local bulletPosComp = bullet:getComponent("PositionComponent")
-            bulletPosComp.x = myPosComp.x + 0
-            bulletPosComp.y = myPosComp.y - 25  --FIXME:贴图尾巴太长了
+            local myPosComp = self:getComponent("TransformComponent")
+            local bulletPosComp = bullet:getComponent("TransformComponent")
+            bulletPosComp:setPositionX(myPosComp:getPositionX() + 0)
+            bulletPosComp:setPositionY(myPosComp:getPositionY() - 25)  --FIXME:贴图尾巴太长了
             bullet:setAnchorPoint(cc.p(0.5,0.5))
             bullet:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
 

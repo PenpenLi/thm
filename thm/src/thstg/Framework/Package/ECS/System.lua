@@ -12,8 +12,17 @@ function M:ctor(...)
     self:_onInit(...)
 end
 
+function M:getClass()
+    return self:_onClass( self.class.__cname )
+end
+
 function M:update(delay)
     self:_onUpdate(delay)
+    self:_onLateUpdate(delay)
+end
+
+function M:clear()
+    self:_onClear()
 end
 
 --取得所有实体
@@ -54,4 +63,15 @@ function M:_onUpdate(delay)
     --通过对Entity获取到相应的Component
 end
 
+function M:_onLateUpdate(delay)
+    --通过对Entity获取到相应的Component
+end
+
+function M:_onClear()
+
+end
+
+function M:_onClass(className)
+    return className
+end
 return M

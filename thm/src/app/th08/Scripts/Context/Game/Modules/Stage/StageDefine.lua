@@ -5,16 +5,16 @@ module("StageDefine", package.seeall)
 -- RoleType = require("Scripts.Context.Game.Modules.Stage.Config.Type.RoleType")  
 ActionType = require("Scripts.Context.Game.Modules.Stage.Config.Type.ActionType")  
 
-----
-Speed = require("Scripts.Context.Game.Modules.Stage.Component.Data.Speed")
-
 --
 AnimationComponent = require("Scripts.Context.Game.Modules.Stage.Component.AnimationComponent")
-PositionComponent = require("Scripts.Context.Game.Modules.Stage.Component.PositionComponent")
+TransformComponent = require("Scripts.Context.Game.Modules.Stage.Component.TransformComponent")
+ActionComponent = require("Scripts.Context.Game.Modules.Stage.Component.ActionComponent")
 InputComponent = require("Scripts.Context.Game.Modules.Stage.Component.InputComponent")
 RigidbodyComponent = require("Scripts.Context.Game.Modules.Stage.Component.RigidbodyComponent")
 AudioComponent = require("Scripts.Context.Game.Modules.Stage.Component.AudioComponent")
-CollisionComponent = require("Scripts.Context.Game.Modules.Stage.Component.CollisionComponent")
+-- ColliderComponent = require("Scripts.Context.Game.Modules.Stage.Component.ColliderComponent.ColliderComponent")
+BoxColliderComponent = require("Scripts.Context.Game.Modules.Stage.Component.Collider.BoxColliderComponent")
+CircleColliderComponent = require("Scripts.Context.Game.Modules.Stage.Component.Collider.CircleColliderComponent")
 ----
 
 ----

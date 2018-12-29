@@ -4,6 +4,7 @@ local M = class("Component")
 function M:ctor(...)
     --用于标识组件类别
     self.__id__ = ECSUtil.getComponentId()
+    self.__entity = nil
     self.__isEnabled__ = true
     
     self:_onInit(...)
@@ -21,14 +22,39 @@ end
 function M:setEnabled(val)
 	self.__isEnabled__ = val
 end
-function M:_added(entity,param)
-    self:_onAdded(entity)
+
+function M:getEntity()
+    assert(self.__entity, "[System] You must have a parent entity")
+    return self.__entity
 end
-function M:_removed(entity)
-    self:_onRemoved(entity)
+
+--移除组件
+function M:removeComponent(...)
+	return self:getEntity():removeComponent(...)
 end
+--获取组件
+function M:getComponent(...)
+	return self:getEntity():getComponent(...)
+end
+--是否存在组件
+function M:isHaveComponent(...)
+    return self:getEntity():getComponent(...) and true or false
+end
+
 --
---[[以下函数必须重载]]
+--[[
+    以下函数由子类重载
+]]
+
+function M:_onClass(className,id)
+    --能够决定是否可以多次被添加
+    return className
+end
+
+--[[
+    以下函数不建议重载,违反了设计模式的思想
+]]
+
 --用于初始化数据
 function M:_onInit(...)
 
@@ -64,12 +90,15 @@ function M:_onDestroy()
     
 end
 
-function M:_onClass(className,id)
-    --能够决定是否可以多次被添加
-    return className
+------------
+function M:_added(entity,param)
+    assert(not self.__entity, "[System] System already added. It can't be added again!")
+    self.__entity = entity
+    self:_onAdded(entity)
 end
-
-
-
+function M:_removed(entity)
+    self:_onRemoved(entity)
+    self.__entity = nil
+end
 
 return M

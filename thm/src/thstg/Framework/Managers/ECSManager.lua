@@ -61,10 +61,17 @@ end
 
 -----
 --[[系统管理]]
-function addSystem(system) 
-    _systemCache[system] = system
+function addSystem(system)
+    local className = system:getClass()
+    _systemCache[className] = system
 end
-function removeSystem(system) 
+
+function getSystem(name)
+    return _systemCache[name]
+end
+
+function removeSystem(system)
+    local className = system:getClass()
     _systemCache[system] = nil
 end
 
@@ -79,6 +86,7 @@ function visitSystem(func)
 	end
 end
 
+
 ----
 
 function update(delay)
@@ -86,6 +94,7 @@ function update(delay)
         v:update(delay)
     end)
 end
+
 
 function init()
     --创建System
@@ -103,7 +112,17 @@ function clear()
     local scheduler = cc.Director:getInstance():getScheduler()
     scheduler:unschedule(_handle)
 
+    visitEntity(function(v)
+        v:clear()
+    end)
+
+    visitSystem(function(v)
+        v:clear()
+    end)
+
+
     _handle = nil
     _entityCache = {}
     _systemCache = {}
+
 end

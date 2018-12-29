@@ -5,10 +5,10 @@ local M = class("MovableEntity", StageDefine.BaseEntity)
 function M:ctor()
     M.super.ctor(self)
     
-
     self:addComponent(StageDefine.AnimationComponent.new())
     self:addComponent(StageDefine.RigidbodyComponent.new())
-    self:addComponent(StageDefine.CollisionComponent.new())
+    self:addComponent(StageDefine.BoxColliderComponent.new())
+
 end
 
 return M
