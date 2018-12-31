@@ -30,6 +30,11 @@ function M:getCenterPos()
     return cc.p(x + self.offset.x, y + self.offset.y)
 end
 
+-----
+function M:_onClass(className,id)
+    return M.super._cname,className,id
+end
+
 function M:_onCollide(collder)
     local otherType = collder._type
     if otherType == ColliderComponent.EColliderType.Rect then

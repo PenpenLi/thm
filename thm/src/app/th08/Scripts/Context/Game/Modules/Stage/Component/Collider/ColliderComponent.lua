@@ -17,7 +17,7 @@ end
 ------
 -- 可能有多个碰撞体组成一个整体
 function M:_onClass(className,id)
-    return className,id
+    return className
 end
 
 function M:_onAdded(entity)

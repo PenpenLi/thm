@@ -44,6 +44,10 @@ function M:_onStart()
 
 end
 
+function M:_onEnd()
+    
+end
+
 --[[以下需要被重载]]
 function M:_onUpdate(delay)
    
@@ -53,11 +57,5 @@ function M:_onLateUpdate(delay)
     
 end
 
-function M:_onDestroy()
 
-end
-
-function M:_onEnd()
-    
-end
 return M

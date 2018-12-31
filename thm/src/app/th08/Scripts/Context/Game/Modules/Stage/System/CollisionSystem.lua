@@ -10,7 +10,7 @@ local M = class("CollisionSystem",THSTG.ECS.System)
 local _GRID_SIZE_ = cc.size(50,50)
 local _GRID_NUM_ = cc.p(13,13)
 local _gridComps = {}
-local _compsIDs = {}
+local _gridIDs = {}
 local function getGridId(rect)
     local x = math.floor(rect.x / _GRID_SIZE_.width) + 1
     local y = math.floor(rect.y / _GRID_SIZE_.height)
@@ -18,32 +18,31 @@ local function getGridId(rect)
     return (y * _GRID_NUM_.y + x)
 end
 
-local function updateGridId(comp,rect)
-    local gridId = _compsIDs[comp] or -1
+local function updateGrids(comp,rect)
+    local gridId = _gridIDs[comp] or -1
+
     _gridComps[gridId] = _gridComps[gridId] or {}
     _gridComps[gridId][comp] = nil
     gridId = getGridId(rect)
     _gridComps[gridId] = _gridComps[gridId] or {}
     _gridComps[gridId][comp] = comp
     
-    _compsIDs[comp] = gridId
+    _gridIDs[comp] = gridId
 end
 
---TODO:没有办法移除掉消亡的对象....
-local function removeGridComp(comp)
-    local gridId = _compsIDs[comp]
+local function removeGridObjs(comp)
+    local gridId = _gridIDs[comp]
     if gridId then
         _gridComps[gridId][comp] = nil
     end
 end
 
 -----
-function M:getGridId(v)
-    return _compsIDs[v]
+function M:getGridCompId(comp)
+    return _gridIDs[comp]
 end
 
-function M:getGridObjs(id)
-    id = id or self:getGridId()
+function M:getGridComps(id)
     return _gridComps[id]
 end
 -----
@@ -52,11 +51,20 @@ function M:_onInit()
 end
 
 function M:_onUpdate(delay)
-    --TODO:没有办法获得ColliderComponent,只能获得子类
     local collComps = self:getComponents("ColliderComponent")
     for _,v in pairs(collComps) do
         local rect = v:getRect()
-        updateGridId(v,rect)
+        updateGrids(v,rect)
+    end
+end
+
+function M:_onEvent(e,params)
+    if e == THSTG.ECSManager.EEventType.DestroyEntity then
+        local entity = params
+        local collComps = entity:getComponents("ColliderComponent")
+        for k,v in pairs(collComps) do
+            removeGridObjs(v)
+        end
     end
 end
 

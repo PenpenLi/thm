@@ -52,4 +52,4 @@ ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")
 
 ------
 --轮询的系统注册
--- THSTG.ECS.System.register("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")
+THSTG.ECS.System.register("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")

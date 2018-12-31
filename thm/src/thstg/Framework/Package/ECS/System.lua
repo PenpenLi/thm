@@ -67,6 +67,10 @@ function M:_onLateUpdate(delay)
     --通过对Entity获取到相应的Component
 end
 
+function M:_onEvent(event,params)
+
+end
+
 function M:_onClear()
 
 end

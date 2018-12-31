@@ -2,45 +2,20 @@ local ECSUtil = require "thstg.Framework.Package.ECS.ECSUtil"
 local M = class("Entity",cc.Node)
 
 function M.find(id) return ECSManager.findEntityById(id) end
-function M.findEntitysWithTag(tag) return ECSManager.findEntitysWithTag(tag) end
+function M.findEntitiesWithTag(tag) return ECSManager.findEntitiesWithTag(tag) end
 function M.findWithTag(tag) return ECSManager.findEntityWithTag(tag) end
 function M.getAll() return ECSManager.getAllEntities() end
 function M.getAllEx(entity) return ECSManager.getAllEntities(entity) end
 
 local ECompType = {Control = 1,Script = 2}	--组件类型
-local EFlagType = {DestroyMySelf = 1}		--Flag类型
 -----
 function M:ctor()
     self.__id__ = ECSUtil.getEntityId()
 	self.__components__ = {}
 	self.__flags__ = false
+	self.__isCCNode__ = false
     ----
-
-	local function onEnter()
-		local function onUpdate(dTime)
-			self:update(dTime)
-		end
-		self:scheduleUpdateWithPriorityLua(onUpdate,0)
-		self:_enter()
-		ECSManager.addEntity(self)
-	end
-	local function onExit()
-		ECSManager.removeEntity(self)
-		self:_exit()
-        self:unscheduleUpdate()
-	end
-	local function onCleanup()
-		self:_onCleanup()
-		self:clear()
-	end
-	
-	
-    self:onNodeEvent("enter", onEnter)
-	self:onNodeEvent("exit", onExit)
-	self:onNodeEvent("cleanup", onCleanup)
-	---
-
-	-- self:_onInit()
+	ECSManager.addEntity(self)
 end
 --
 --[[component模块]]
@@ -87,7 +62,7 @@ end
 --
 function M:getAllComponents()
 	local ret = {}
-	for _,v in pairs() do
+	for _,v in pairs(self.__components__) do
 		table.insert( ret, v )
 	end
 	return ret
@@ -133,7 +108,6 @@ end
 function M:getScript(name)
 	return self:getComponent(ECS.Script.__cname,name)
 end
-
 ---
 function M:update(dTime)
 	--先control,然后才是Script
@@ -154,7 +128,7 @@ function M:update(dTime)
 	end
 	
 	self:_onLateUpdate(dTime)
-	self:__onUpdateFinish()
+
 end
 
 function M:clear()
@@ -162,11 +136,15 @@ function M:clear()
 end
 
 function M:destroy()
-	self:__setFlag(EFlagType.DestroyMySelf,true)
+	ECSManager.destroyEntity(self)
 end
 
 function M:getID()
     return self.__id__
+end
+
+function M:isCCNode()
+	return self.__isCCNode__
 end
 
 ---
@@ -184,11 +162,6 @@ end
 
 --退出场景回调
 function M:_onExit()
-	
-end
-
---销毁回调
-function M:_onDestroy()
 	
 end
 
@@ -217,39 +190,8 @@ function M:_exit()
 	for k,v in pairs(self.__components__) do
 		v:_onExit()
 	end
-	
 	self:_onExit()
 end
------
-function M:__setFlag(flag,state)
-	self.__flags__ = self.__flags__ or {}
-	self.__flags__[flag] = true
-end
-
-function M:__isFlag(flag)
-	if self.__flags__ then
-		return self.__flags__[flag]
-	end
-	return false
-end
-function M:__flagHandle()
-	if self:__isFlag(EFlagType.DestroyMySelf) then
-		self:__setFlag(EFlagType.DestroyMySelf,nil)
-
-		
-		for k,v in pairs(self.__components__) do
-			v:_onDestroy()
-		end
-		
-		
-		self:_onDestroy()
-		self:removeFromParent()
-
-	end
-end
-function M:__onUpdateFinish()
-	self:__flagHandle()
-
-end
+-------
 
 return M

@@ -5,7 +5,6 @@ function M:_onInit()
     self.size = cc.size(20,20)
 
     self._type = ColliderComponent.EColliderType.Rect
-    print(15,self:getClass())
 end
 
 function M:getRect()
@@ -23,6 +22,11 @@ function M:_onCollide(collder)
         return cc.rectIntersectsRect(self:getRect(),collder:getOutSideRect())
     end
     return false
+end
+
+-----
+function M:_onClass(className,id)
+    return M.super.__cname,className,id
 end
 
 return M

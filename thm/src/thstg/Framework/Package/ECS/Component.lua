@@ -24,7 +24,7 @@ function M:setEnabled(val)
 end
 
 function M:getEntity()
-    assert(self.__entity, "[System] You must have a parent entity")
+    assert(self.__entity, "[Component] You must have a parent entity")
     return self.__entity
 end
 
@@ -83,10 +83,6 @@ end
 
 --逻辑更新完成
 function M:_onLateUpdate(delay,entity)
-    
-end
---被销毁时回调
-function M:_onDestroy()
     
 end
 
