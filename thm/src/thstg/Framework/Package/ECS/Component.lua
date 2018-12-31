@@ -32,6 +32,10 @@ end
 function M:removeComponent(...)
 	return self:getEntity():removeComponent(...)
 end
+--获取组件数组
+function M:getComponents(...)
+	return self:getEntity():getComponents(...)
+end
 --获取组件
 function M:getComponent(...)
 	return self:getEntity():getComponent(...)

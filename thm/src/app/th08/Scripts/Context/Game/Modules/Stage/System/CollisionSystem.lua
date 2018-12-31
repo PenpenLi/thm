@@ -43,7 +43,7 @@ function M:getGridCompId(comp)
 end
 
 function M:getGridComps(id)
-    return _gridComps[id]
+    return _gridComps[id] or {}
 end
 -----
 function M:_onInit()

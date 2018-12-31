@@ -5,16 +5,23 @@ function M:_onInit()
 end
 
 function M:_onLateUpdate()
-    -- local entities = THSTG.ECS.Entity.getAllEx(self:getEntity())
-    -- local myCollComp = self:getComponent("ColliderComponent")
-    -- for _,v in pairs(entities) do
-    --     local entityCollComp = v:getComponent("ColliderComponent")
-    --     if entityCollComp then
-    --         if cc.rectIntersectsRect(myCollComp.rect,entityCollComp.rect) then
-    --             --TODO:碰撞
-    --         end
-    --     end
-    -- end
+    local system = THSTG.ECSManager.getSystem("CollisionSystem")
+    if system then
+        local myColliders = self:getComponents("ColliderComponent")
+        for _,v in pairs(myColliders) do
+            local compId = system:getGridCompId(v)
+            local otherComps = system:getGridComps(compId) --取得碰撞组件
+            for _,vv in pairs(otherComps) do
+                if v ~= vv then
+                    if vv:getEntity():getName() ~= "PLAYER_BULLET" then --不与自己的子弹碰撞
+                        if vv:collide(v) then
+                            print(15,"collide")
+                        end
+                    end
+                end
+            end
+        end
+    end
 end
 
 return M

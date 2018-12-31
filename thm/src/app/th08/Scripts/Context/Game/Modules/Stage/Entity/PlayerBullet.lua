@@ -4,8 +4,8 @@ local M = class("PlayerBullet",StageDefine.BulletPrefab)
 
 function M:ctor()
     M.super.ctor(self)
-   
-    self.bulletController.belong = "PLAYER"
+    self:setName("PLAYER_BULLET")
+
     self.bulletController.speed.y = 20
     self.bulletController.rotation = -90        --这个仅由贴图决定
     
