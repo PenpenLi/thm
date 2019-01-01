@@ -4,6 +4,7 @@ local M = class("Player",StageDefine.PlayerPrefab)
 function M:ctor()
     M.super.ctor(self)
     --初始化变量
+    self:setName("PLAYER")
 
 end
 

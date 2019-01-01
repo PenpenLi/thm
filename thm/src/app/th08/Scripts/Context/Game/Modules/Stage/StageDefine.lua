@@ -12,7 +12,6 @@ ActionComponent = require("Scripts.Context.Game.Modules.Stage.Component.ActionCo
 InputComponent = require("Scripts.Context.Game.Modules.Stage.Component.InputComponent")
 RigidbodyComponent = require("Scripts.Context.Game.Modules.Stage.Component.RigidbodyComponent")
 AudioComponent = require("Scripts.Context.Game.Modules.Stage.Component.AudioComponent")
--- ColliderComponent = require("Scripts.Context.Game.Modules.Stage.Component.ColliderComponent.ColliderComponent")
 BoxColliderComponent = require("Scripts.Context.Game.Modules.Stage.Component.Collider.BoxColliderComponent")
 CircleColliderComponent = require("Scripts.Context.Game.Modules.Stage.Component.Collider.CircleColliderComponent")
 ----
@@ -42,8 +41,8 @@ Batman = require("Scripts.Context.Game.Modules.Stage.Entity.Batman")
 BulletController = require("Scripts.Context.Game.Modules.Stage.Script.BulletController")
 PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.PlayerController")
 BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.BatmanController")
-DestoryByBorder = require("Scripts.Context.Game.Modules.Stage.Script.DestoryByBorder")
-PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.PlayerCollision")
+DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.DestroyByBorder")
+DestroyByBullet = require("Scripts.Context.Game.Modules.Stage.Script.DestroyByBullet")
 ---
 ConfigReader = require("Scripts.Context.Game.Modules.Stage.Config.ConfigReader")  
 ---

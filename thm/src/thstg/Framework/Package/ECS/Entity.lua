@@ -178,6 +178,10 @@ function M:_onLateUpdate(dTime)
     
 end
 
+--消息
+function M:_onEvent(event,params)
+
+end
 ---
 function M:_enter()
 	for k,v in pairs(self.__components__) do

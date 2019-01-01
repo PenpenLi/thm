@@ -1,9 +1,10 @@
-local M = class("PlayerCollision",THSTG.ECS.Script)
+local M = class("DestroyByBullet",THSTG.ECS.Script)
 
 function M:_onInit()
-
+    
+    
 end
-
+---
 function M:_onLateUpdate()
     local system = THSTG.ECSManager.getSystem("CollisionSystem")
     if system then
@@ -13,9 +14,10 @@ function M:_onLateUpdate()
             local otherComps = system:getGridComps(compId) --取得碰撞组件
             for _,vv in pairs(otherComps) do
                 if v ~= vv then
-                    if vv:getEntity():getName() ~= "PLAYER_BULLET" then --不与自己的子弹碰撞
+                    if vv:getEntity():getName() == "PLAYER_BULLET" then --只与玩家子弹碰撞
                         if vv:collide(v) then
-                            print(15,"collide")
+                            self:getEntity():destroy()
+                            vv:getEntity():destroy()
                         end
                     end
                 end

@@ -5,16 +5,16 @@ function M:_onInit()
     self.state = false
 end
 ---
-function play(action)
+function M:play(action)
     self.sprite:runAction(action)
 end
 
-function playForever(animation,params)
+function M:playForever(animation,params)
     local action = cc.RepeatForever:create(cc.Animate:create(animation))
     self:play(action)
 end
 
-function playOnce(animation,params)
+function M:playOnce(animation,params)
     local action = cc.Animate:create(animation)
     self:play(action)
 end

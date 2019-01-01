@@ -8,10 +8,13 @@ function M:ctor()
     self.batmanController = StageDefine.BatmanController.new()
     self:addScript(self.batmanController)
 
-    self.destoryByBorder = StageDefine.DestoryByBorder.new()
-    self:addScript(self.destoryByBorder)
+    self.destroyByBorder = StageDefine.DestroyByBorder.new()
+    self:addScript(self.destroyByBorder)
    
-    debugUI(self)
+    -- self.destroyByBullet = StageDefine.DestroyByBullet.new()
+    -- self:addScript(self.destroyByBullet)
+
+    -- debugUI(self)
 end
 
 ----------

@@ -6,7 +6,7 @@ function M:ctor()
     --初始化变量
     -- self.batmanController.bulletEntity = StageDefine.EnemyBullet
 
-    debugUI(self)
+    -- debugUI(self)
 end
 
 

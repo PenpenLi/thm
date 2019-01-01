@@ -8,11 +8,7 @@ function M:ctor(...)
     self.playerController = StageDefine.PlayerController.new()
     self:addScript(self.playerController)
     
-    self.playerCollision = StageDefine.PlayerCollision.new()
-    self:addScript(self.playerCollision)
-
     ---
-
 end
 
 

@@ -28,7 +28,7 @@ local _eventQueue = {
 }
 ---
 --[[事件管理]]
-local function dispathcEvent(cacheType,event,params)
+function dispathcEvent(cacheType,event,params)
     local info = {
         event = event,
         params = params,
@@ -48,6 +48,7 @@ end
 function destroyEntity(entity)
     dirtyEntity(entity,EEntityFlag.Destroy)
     dispathcEvent(EEventCacheType.System,EEventType.DestroyEntity,entity)
+    dispathcEvent(EEventCacheType.Entity,EEventType.DestroyEntity,entity)
 end
 
 function addEntity(entity)
@@ -116,8 +117,8 @@ local function _handleEntities(delay)
     end
     local function _handleEntitiesEvent()
         for _,v in ipairs(_eventQueue[EEventCacheType.Entity]) do
-            ECSManager.visitSystem(function(system)
-                system:_onEvent(v.event,v.params)
+            visitEntity(function(entity)
+                entity:_onEvent(v.event,v.params)
             end)
         end
         _eventQueue[EEventCacheType.Entity] = {}
@@ -187,7 +188,7 @@ local function _handleSystems(delay)
     end
     local function _handleSystemsEvent()
         for _,v in ipairs(_eventQueue[EEventCacheType.System]) do
-            ECSManager.visitSystem(function(system)
+            visitSystem(function(system)
                 system:_onEvent(v.event,v.params)
             end)
         end
