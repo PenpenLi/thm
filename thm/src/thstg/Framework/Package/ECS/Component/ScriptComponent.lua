@@ -7,6 +7,10 @@ function M:ctor(...)
     self:_onInit(...)
 end
 
+--如果不支持定时器只能手动执行了
+function M:start(param)
+    self:_onStart(param)
+end
 ----
 --以下不能被重写
 function M:_onClass(className,id)
@@ -19,11 +23,6 @@ end
 --
 function M:_onExit()
     self:_onEnd()
-end
----------------
---如果不支持定时器只能手动执行了
-function M:start(param)
-    self:_onStart(param)
 end
 
 ---

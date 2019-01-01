@@ -11,7 +11,7 @@ function M:ctor()
 		self:scheduleUpdateWithPriorityLua(M.onUpdate,0)
 		self:_enter()
 	end
-    local function onExit()
+	local function onExit()
 		self:_exit()
 		self:unscheduleUpdate()
 	end

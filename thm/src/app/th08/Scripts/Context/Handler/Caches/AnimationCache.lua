@@ -19,6 +19,7 @@ end
 function getSheetRes(name,time)
     return getRes(TexType.SHEET,name,time)
 end
+----
 
 function clear()
     _dict = {}

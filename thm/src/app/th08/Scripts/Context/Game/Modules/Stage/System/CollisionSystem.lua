@@ -7,8 +7,8 @@ local M = class("CollisionSystem",THSTG.ECS.System)
 ]]
 -----
 --通过坐标获取网格ID
-local _GRID_SIZE_ = cc.size(50,50)
-local _GRID_NUM_ = cc.p(13,13)
+local _GRID_SIZE_ = cc.size(100,100)--FIXME:格子大小,决定碰撞检测的精度
+local _GRID_NUM_ = cc.p(10,10)
 local _gridComps = {}
 local _gridIDs = {}
 local function getGridId(rect)

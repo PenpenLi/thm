@@ -184,17 +184,18 @@ function M:_onEvent(event,params)
 end
 ---
 function M:_enter()
+	self:_onEnter()
 	for k,v in pairs(self.__components__) do
 		v:_onEnter()
 	end
-	self:_onEnter()
 end
 function M:_exit()
-	self:clear()
 	for k,v in pairs(self.__components__) do
 		v:_onExit()
 	end
 	self:_onExit()
+
+	self:clear()
 end
 -------
 

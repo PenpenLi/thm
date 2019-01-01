@@ -88,6 +88,12 @@ return {
         },
 
 
+        --[[]]
+        enemt_breaked = {
+            source = "Assets/Texture/Sheet/etama2.png",
+            length = 1,
+            rect = {x = 12*16,y = 11*16,width = 64,height = 64},
+        },
     },
     plist = {
         
