@@ -8,7 +8,7 @@ function M:ctor()
 		function M.onUpdate(dTime)
 			self:update(dTime)
 		end
-		self:scheduleUpdateWithPriorityLua(M.onUpdate,0)
+		self:scheduleUpdateWithPriorityLua(M.onUpdate,-1)
 		self:_enter()
 	end
 	local function onExit()

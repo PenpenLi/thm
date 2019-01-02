@@ -44,7 +44,14 @@ end
 function M:isHaveComponent(...)
     return self:getEntity():getComponent(...) and true or false
 end
-
+--
+function M:getSystem(...)
+	return self:getEntity():getSystem(...)
+end
+--
+function M:killEntity()
+    self:getEntity():destroy()
+end
 --
 --[[
     以下函数由子类重载

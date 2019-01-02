@@ -16,6 +16,9 @@ function play(params)
     sprite:addTo(params.layer)
     local action = params.onAction(sprite)
     if params.isLoop == true then
+        table.insert(action, cc.CallFunc:create(function()
+            node:removeFromParent()
+        end))
         action = cc.Sequence:create(action)
     elseif params.isLoop == false then
         action = cc.RepeatForever:create(cc.Sequence:create(action))

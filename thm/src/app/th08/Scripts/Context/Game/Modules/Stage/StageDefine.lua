@@ -43,6 +43,7 @@ PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.PlayerCont
 BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.BatmanController")
 DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.DestroyByBorder")
 DestroyByBullet = require("Scripts.Context.Game.Modules.Stage.Script.DestroyByBullet")
+HealthController = require("Scripts.Context.Game.Modules.Stage.Script.HealthController")
 ---
 ConfigReader = require("Scripts.Context.Game.Modules.Stage.Config.ConfigReader")  
 ---

@@ -11,6 +11,14 @@ end
 function M:start(param)
     self:_onStart(param)
 end
+
+function M:removeScript(scprit)
+	return self:getEntity():removeScript(scprit)
+end
+
+function M:getScript(name)
+	return self:getEntity():getScript(name)
+end
 ----
 --以下不能被重写
 function M:_onClass(className,id)

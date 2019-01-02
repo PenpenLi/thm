@@ -15,39 +15,27 @@ function M:_onStart()
     sprite:runAction(cc.RepeatForever:create(
         cc.Animate:create(AnimationCache.getSheetRes("reimu_bullet_01_normal"))
     ))
- 
-    
+  
 end
 
+function M:_onCollide(collider)
+    local script = collider:getScript("HealthController")--被击中物
+    script:hurt(3)--TODO:伤害值由计算得出
+
+    self:getEntity():destroy()  --子弹消失
+end
+
+-----
 function M:_moveHandle()
     local posComp = self:getComponent("TransformComponent")
     posComp:setPositionY(posComp:getPositionY() + self.speed.y)
 end
 
 function M:_collideHandle()
-    local system = THSTG.ECSManager.getSystem("CollisionSystem")
+    local system = self:getSystem("CollisionSystem")
     if system then
-        local myColliders = self:getComponents("ColliderComponent")
-        for _,v in pairs(myColliders) do
-            local compId = system:getGridCompId(v)
-            local otherComps = system:getGridComps(compId) --取得碰撞组件
-            for _,vv in pairs(otherComps) do
-                while true do
-                    if v ~= vv then
-                        if vv:getEntity():getName() == "PLAYER_BULLET" then break       --不与玩家子弹碰撞
-                        elseif vv:getEntity():getName() == "PLAYER" then break          --不与玩家碰撞
-                        end          
-
-                        if v:collide(vv) then
-                            vv:getEntity():destroy()
-                            v:getEntity():destroy()
-                        end
-                    end
-                    break
-                end
-                
-            end
-        end
+        local isCollide,collider = system:isCollided(self:getEntity(),{"PLAYER_BULLET","PLAYER"})
+        if isCollide then self:_onCollide(collider) end
     end
 end
 ---

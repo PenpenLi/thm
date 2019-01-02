@@ -108,6 +108,11 @@ end
 function M:getScript(name)
 	return self:getComponent(ECS.Script.__cname,name)
 end
+
+--[[系统模块]]
+function M:getSystem(name)
+	return ECSManager.getSystem(name)
+end
 ---
 function M:update(dTime)
 	--先control,然后才是Script
