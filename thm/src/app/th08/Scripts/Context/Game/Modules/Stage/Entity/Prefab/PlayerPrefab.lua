@@ -8,6 +8,8 @@ function M:ctor(...)
     self.playerController = StageDefine.PlayerController.new()
     self:addScript(self.playerController)
     
+    self.healthController = StageDefine.PlayerHealth.new()
+    self:addScript(self.healthController)
     ---
 end
 

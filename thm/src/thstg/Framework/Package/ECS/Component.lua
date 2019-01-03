@@ -11,8 +11,30 @@ function M:ctor(...)
 end
 
 function M:getClass()
-    return ECSUtil.trans2Name(self:_onClass( self.class.__cname or "UnknowComponent" , self.__id__ ))
+    local function reverseTable(tab)
+        local tmp = {}
+        for i = 1, #tab do
+            local key = #tab
+            tmp[i] = table.remove(tab)
+        end
+        return tmp
+    end
+
+    local classList = {}
+    local this = self
+    while this do
+        if not this.super then break end    --不包括最顶层,没有意义
+        local keys = {this:_onClass( this.__cname or "UnknowComponent" , this.__id__ )}
+        for i = #keys,1,-1 do
+            table.insert( classList, keys[i])
+        end
+        this = this.super
+        
+    end
+    classList = reverseTable(classList)
+    return ECSUtil.trans2Name(unpack(classList))
 end
+
 function M:getID()
     return self.__id__
 end

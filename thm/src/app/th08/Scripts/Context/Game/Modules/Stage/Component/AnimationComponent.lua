@@ -18,6 +18,10 @@ function M:playOnce(animation,params)
     local action = cc.Animate:create(animation)
     self:play(action)
 end
+
+function M:stop()
+    self.sprite:stopAllActions()
+end
 ---
 function M:_onAdded(entity)
     self.sprite = self.sprite or THSTG.SCENE.newSprite()

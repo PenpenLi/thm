@@ -7,6 +7,10 @@ end
 function M:runAction(action)
     self:getEntity():runAction(action)
 end
+
+function M:stopAllActions()
+    self.sprite:stopAllActions()
+end
 ----
 function M:_onAdded(entity)
     local transComp = entity:getComponent("TransformComponent")

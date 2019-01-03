@@ -1,9 +1,6 @@
 module("StageDefine", package.seeall)
 
-
----
--- RoleType = require("Scripts.Context.Game.Modules.Stage.Config.Type.RoleType")  
-ActionType = require("Scripts.Context.Game.Modules.Stage.Config.Type.ActionType")  
+require("Scripts.Context.Game.Modules.Stage.Config.Init")
 
 --
 AnimationComponent = require("Scripts.Context.Game.Modules.Stage.Component.AnimationComponent")
@@ -43,11 +40,12 @@ PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.PlayerCont
 BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.BatmanController")
 DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.DestroyByBorder")
 DestroyByBullet = require("Scripts.Context.Game.Modules.Stage.Script.DestroyByBullet")
-HealthController = require("Scripts.Context.Game.Modules.Stage.Script.HealthController")
----
-ConfigReader = require("Scripts.Context.Game.Modules.Stage.Config.ConfigReader")  
+BatmanHealth = require("Scripts.Context.Game.Modules.Stage.Script.Health.BatmanHealth")
+PlayerHealth = require("Scripts.Context.Game.Modules.Stage.Script.Health.PlayerHealth")
+BulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Health.BulletHealth")
 ---
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  
+PublicUtil = require("Scripts.Context.Game.Modules.Stage.Util.PublicUtil")  
 
 
 ------

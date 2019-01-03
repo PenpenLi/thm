@@ -73,7 +73,7 @@ function M:getComponents(...)
 	local name = ECSUtil.trans2Name(...)
 	for k,v in pairs(self.__components__) do
 		local className = v:getClass()
-		if ECSUtil.find2Class(className,...) then
+		if ECSUtil.find2ClassWithChild(className,...) then
 			table.insert( ret, v )
 		end
 	end

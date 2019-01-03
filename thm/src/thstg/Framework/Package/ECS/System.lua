@@ -13,7 +13,7 @@ function M:ctor(...)
 end
 
 function M:getClass()
-    return self:_onClass( self.class.__cname )
+    return self:_onClass( self.__cname )
 end
 
 function M:update(delay)

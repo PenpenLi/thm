@@ -1,31 +1,31 @@
 module(..., package.seeall)
 
-local ANIMATION_PATH_PATTERN = "Scripts.Context.Game.Modules.Stage.Config.Animation.%s"
+local ACTION_PATH_PATTERN = "Scripts.Context.Game.Modules.Stage.Config.Action.%s"
+local EFFECT_PATH_PATTERN = "Scripts.Context.Game.Modules.Stage.Config.Effect.%s"
 local SCENARIO_PATH_PATTERN = "Scripts.Context.Game.Modules.Stage.Config.Scenario.Stage_%02d"
+local MAP_PATH_PATTERN = "Scripts.Context.Game.Modules.Stage.Config.Map.Map_%02d"
 
-local _animationDict = false
+local function getDictByFile(path,file)
+    local pathFile = string.format(path,file)
+    return require(pathFile)
+end
 
-function getAnime(roleType,actionType)
-    local function getDict(roleType)
-        if not _animationDict then
-            local path = string.format(ANIMATION_PATH_PATTERN,roleType)
-            _animationDict = _animationDict or {}
-            _animationDict[roleType] = require(path)
-        end
-        return _animationDict[roleType]
-    end
-    local tb = getDict(roleType)
+function getAction(roleType,actionType)
+    local tb = getDictByFile(ACTION_PATH_PATTERN,roleType)
     return tb[actionType]
 end
 
+function getEffect(effectType,name)
+    local tb = getDictByFile(EFFECT_PATH_PATTERN,effectType)
+    return tb[name]
+end
+
 function getScenario(id)
-    local function loadFileByid(id)
-        local filePath = string.format(SCENARIO_PATH_PATTERN,id)
-        return require(filePath)
-    end
-    return loadFileByid(id)
+    local tb = getDictByFile(SCENARIO_PATH_PATTERN,id)
+    return tb
 end
 
 function getMap(id)
-    
+    local tb = getDictByFile(MAP_PATH_PATTERN,id)
+    return tb
 end

@@ -15,6 +15,7 @@ function M:getRect()
 end
 
 function M:_onCollide(collder)
+    
     local otherType = collder._type
     if otherType == ColliderComponent.EColliderType.Rect then
         return cc.rectIntersectsRect(self:getRect(),collder:getRect())
@@ -26,7 +27,7 @@ end
 
 -----
 function M:_onClass(className,id)
-    return M.super.__cname,className,id
+    return className,id
 end
 
 return M

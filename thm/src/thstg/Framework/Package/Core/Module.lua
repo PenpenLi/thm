@@ -10,7 +10,7 @@ function M:ctor()
 	--模块是否被打开
 	self.__isOpend__ = false
 	--模块名
-	self.__moduleName__ = self.class.__cname 
+	self.__moduleName__ = self.__cname 
 
 	self:_onInit()
 end

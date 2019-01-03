@@ -104,16 +104,19 @@ function M:isCollidedByGrids(entity,filter,idsFunc)
             for _,vv in pairs(otherComps) do
                 while true do
                     if v ~= vv then
-                        if type(filter) == "function" then
-                            if filter(vv:getEntity()) then  break  end
-                        elseif type(filter) == "table" then
+                        if type(filter) == "table" then
                             local isBreak = false
                             for _,str in ipairs(filter) do  if vv:getEntity():getName() == str then isBreak = true  break end end
                             if isBreak then break end
+                        elseif type(filter) == "function" then
+                            if filter(vv:getEntity()) then  break  end
                         end
 
                         if v:collide(vv) then
-                            return true,vv:getEntity()
+                            --返回碰撞结果和信息
+                            return true,{
+                                collider = vv:getEntity()
+                            }
                         end
                     end
                     break

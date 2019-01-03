@@ -11,7 +11,7 @@ function M:ctor()
     self.destroyByBorder = StageDefine.DestroyByBorder.new()
     self:addScript(self.destroyByBorder)
    
-    self.helthController = StageDefine.HealthController.new()
+    self.helthController = StageDefine.BatmanHealth.new()
     self:addScript(self.helthController)
 
     -- debugUI(self)

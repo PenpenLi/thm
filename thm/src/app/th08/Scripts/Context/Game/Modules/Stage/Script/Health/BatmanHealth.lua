@@ -1,0 +1,28 @@
+local HealthController = require("Scripts.Context.Game.Modules.Stage.Script.Health.HealthController")
+local M = class("BatmanHealth",HealthController)
+
+function M:_onInit()
+   M.super._onInit(self)
+
+end
+--
+----
+function M:_onHurt()
+    --闪烁特效
+    local animationComp = self:getComponent("AnimationComponent")
+    animationComp:play(cc.Blink:create(0.1, 5))
+
+end
+
+function M:_onDead()
+    --这里代表击中,而不是对象消亡
+    StageDefine.PublicUtil.playEffect({
+        refNode = self:getEntity(),
+        name = "die_magic_01",
+    })
+    --TODO:还需要播放一个粒子效果
+    self:killEntity()
+
+end
+
+return M

@@ -1,7 +1,7 @@
 module(..., package.seeall)
 
 function getType()
-    return RoleType.REIMU
+    return StageDefine.RoleType.REIMU
 end
 
 function getLevel()

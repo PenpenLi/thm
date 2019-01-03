@@ -32,7 +32,7 @@ end
 
 -----
 function M:_onClass(className,id)
-    return M.super._cname,className,id
+    return className,id
 end
 
 function M:_onCollide(collder)

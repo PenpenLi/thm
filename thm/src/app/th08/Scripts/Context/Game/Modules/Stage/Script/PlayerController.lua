@@ -159,7 +159,7 @@ function M:__playAnime(action)
     local sprite = animationComp.sprite
 
     --查找配置
-    local actionFunc = StageDefine.ConfigReader.getAnime(self.roleType,action)
+    local actionFunc = StageDefine.ConfigReader.getAction(self.roleType,action)
     actionFunc(sprite,self._lastAnimation)
 
     self._lastAnimation = action
@@ -177,7 +177,10 @@ function M:__onCollisionHandle()
     local system = self:getSystem("CollisionSystem")
     if system then
         if system:isCollided(self:getEntity(),{"PLAYER_BULLET"}) then
-            print(15,"collide") 
+            local script = self:getScript("HealthController")--被击中物
+            script:hurt(100)--TODO:伤害值由计算得出
+            
+
         end
     end
 end

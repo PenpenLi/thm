@@ -22,7 +22,7 @@ end
 ----
 --以下不能被重写
 function M:_onClass(className,id)
-    return M.__cname,className
+    return className
 end
 
 function M:_onEnter()
