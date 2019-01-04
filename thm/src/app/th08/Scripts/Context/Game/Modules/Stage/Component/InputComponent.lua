@@ -8,6 +8,7 @@ function M:_onInit()
     self.keyCache = {}
     self.touchPos = nil
     self.touchState = nil
+    
     self._touchListener = nil
     self._keyboardListener = nil
 end

@@ -10,7 +10,7 @@ function M:_onInit()
 end
 
 --力和施力位置
-function M:apply(power,pos)
+function M:addForce(power,pos)
     
 end
 ----

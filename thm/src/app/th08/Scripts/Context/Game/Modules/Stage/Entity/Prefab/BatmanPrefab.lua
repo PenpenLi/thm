@@ -14,6 +14,9 @@ function M:ctor()
     self.helthController = StageDefine.BatmanHealth.new()
     self:addScript(self.helthController)
 
+    self.animationController = StageDefine.BatmanAnimation.new()
+    self:addScript(self.animationController)
+
     -- debugUI(self)
 end
 

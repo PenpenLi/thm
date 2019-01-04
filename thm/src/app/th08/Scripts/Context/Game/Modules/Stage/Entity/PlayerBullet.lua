@@ -7,7 +7,7 @@ function M:ctor()
     self:setName("PLAYER_BULLET")
 
     self.bulletController.speed.y = 20
-    self.bulletController.rotation = -90        --这个仅由贴图决定
+    self.animationController.rotation = -90        --这个仅由贴图决定
     
 end
 

@@ -13,6 +13,12 @@ function M:ctor()
 
     self.helthController = StageDefine.BulletHealth.new()
     self:addScript(self.helthController)
+
+    self.collisionController = StageDefine.BulletCollision.new()
+    self:addScript(self.collisionController)
+
+    self.animationController = StageDefine.BulletAnimation.new()
+    self:addScript(self.animationController)
     --
     
     -- debugUI(self)

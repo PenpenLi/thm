@@ -6,7 +6,7 @@ function M:ctor()
     M.super.ctor(self)
     
     self:addComponent(StageDefine.AnimationComponent.new())
-    self:addComponent(StageDefine.RigidbodyComponent.new())
+    -- self:addComponent(StageDefine.RigidbodyComponent.new())
     self:addComponent(StageDefine.BoxColliderComponent.new())
 
 end

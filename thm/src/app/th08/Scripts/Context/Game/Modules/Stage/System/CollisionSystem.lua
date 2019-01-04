@@ -1,5 +1,16 @@
 module(..., package.seeall)
 local M = class("CollisionSystem",THSTG.ECS.System)
+M.EDirectionType = {
+    None = 1,
+    Left = 2,
+    Right = 3,
+    Up = 4,
+    Down = 5,
+    LeftTop = 6,
+    RightTop = 7,
+    LeftBottom = 8,
+    RightBottom = 9,
+}
 --[[
     网格碰撞思路:
     当物体发生移动,应该实时改变物体所在的区域,以便能快速找到
@@ -49,49 +60,83 @@ end
 function M:getGridComps(id)
     return _gridComps[id] or {}
 end
+--
+function M:getCollisionGridIds(id,directions)
+    local list = {}
+    for i,v in ipairs(directions) do
+        if v == M.EDirectionType.None then
+            table.insert( list, id)
+        elseif v == M.EDirectionType.Left then
+            table.insert( list, id - 1)
+        elseif v == M.EDirectionType.Right then
+            table.insert( list, id + 1)
+        elseif v == M.EDirectionType.Up then
+            table.insert( list, id + _GRID_NUM_.y)
+        elseif v == M.EDirectionType.Down then
+            table.insert( list, id - _GRID_NUM_.y)
+        elseif v == M.EDirectionType.LeftTop then
+            table.insert( list, id + _GRID_NUM_.y - 1)
+        elseif v == M.EDirectionType.RightTop then
+            table.insert( list, id + _GRID_NUM_.y + 1)
+        elseif v == M.EDirectionType.LeftBottom then
+            table.insert( list, id - _GRID_NUM_.y - 1)
+        elseif v == M.EDirectionType.RightBottom then
+            table.insert( list, id - _GRID_NUM_.y + 1)
+        end
+    end
+    return list
+end
+--自己
+function M:getRoundMyGridIds(id)
+    return getCollisionGridIds(id,{
+        M.EDirectionType.None,
+
+    })
+end
 --周围4个
 function M:getRound4GridIds(id)
-    return {
-        id, 
-        id - 1, 
-        id + 1, 
-        id + _GRID_NUM_.y, 
-        id - _GRID_NUM_.y
-    }
+    return getCollisionGridIds(id,{
+        M.EDirectionType.None,
+        M.EDirectionType.Left,
+        M.EDirectionType.Right,
+        M.EDirectionType.Up,
+        M.EDirectionType.Down,
+    })
 end
 --周围8个
 function M:getRound8GridIds(id)
-    return {
-        id,
-        id - 1, 
-        id + 1, 
-        id + _GRID_NUM_.y - 1 , 
-        id + _GRID_NUM_.y, 
-        id + _GRID_NUM_.y + 1,
-        id - _GRID_NUM_.y - 1 , 
-        id - _GRID_NUM_.y,
-        id - _GRID_NUM_.y + 1,
-    }
+    return getCollisionGridIds(id,{
+        M.EDirectionType.None,
+        M.EDirectionType.Left,
+        M.EDirectionType.Right,
+        M.EDirectionType.Up,
+        M.EDirectionType.Down,
+
+        M.EDirectionType.LeftTop,
+        M.EDirectionType.RightTop,
+        M.EDirectionType.LeftBottom,
+        M.EDirectionType.RightBottom,
+    })
 end
 --左上
 function M:getLeftTopGridIds(id)
-    return {
-        id,
-        id - 1, 
-        id + _GRID_NUM_.y - 1 , 
-        id + _GRID_NUM_.y, 
-        id + _GRID_NUM_.y + 1,
-    }
+    return getCollisionGridIds(id,{
+        M.EDirectionType.None,
+        M.EDirectionType.Left,
+        M.EDirectionType.LeftTop,
+        M.EDirectionType.Up,
+        M.EDirectionType.RightTop,
+    })
 end
 --右下
 function M:getRightBottomGridIds(id)
-    return {
-        id,
-        id + 1, 
-        id - _GRID_NUM_.y - 1 , 
-        id - _GRID_NUM_.y,
-        id - _GRID_NUM_.y + 1,
-    }
+    return getCollisionGridIds(id,{
+        M.EDirectionType.None,
+        M.EDirectionType.Right,
+        M.EDirectionType.Down,
+        M.EDirectionType.LeftBottom,
+        M.EDirectionType.RightBottom,
+    })
 end
 
 function M:isCollidedByGrids(entity,filter,idsFunc)
@@ -99,7 +144,7 @@ function M:isCollidedByGrids(entity,filter,idsFunc)
     for _,v in pairs(myColliders) do
         local curId = self:getGridCompId(v)  --判断属于同一格的实体
         local ids = idsFunc and idsFunc(curId) or {curId}
-        for _,compId in ipairs(ids) do  --应该判断4个方向的格子
+        for _,compId in ipairs(ids) do  --应该判断n个方向的格子
             local otherComps = self:getGridComps(compId) --取得碰撞组件
             for _,vv in pairs(otherComps) do
                 while true do
@@ -115,7 +160,8 @@ function M:isCollidedByGrids(entity,filter,idsFunc)
                         if v:collide(vv) then
                             --返回碰撞结果和信息
                             return true,{
-                                collider = vv:getEntity()
+                                collider = vv:getEntity(),
+                                component = vv,
                             }
                         end
                     end

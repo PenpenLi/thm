@@ -10,6 +10,10 @@ function M:ctor(...)
     
     self.healthController = StageDefine.PlayerHealth.new()
     self:addScript(self.healthController)
+
+    self.collisionController = StageDefine.PlayerCollision.new()
+    self:addScript(self.collisionController)
+
     ---
 end
 

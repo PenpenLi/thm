@@ -1,5 +1,5 @@
-local HealthController = require("Scripts.Context.Game.Modules.Stage.Script.Health.HealthController")
-local M = class("BulletHealth",HealthController)
+
+local M = class("BulletHealth",StageDefine.HealthController)
 
 function M:_onInit()
    M.super._onInit(self)

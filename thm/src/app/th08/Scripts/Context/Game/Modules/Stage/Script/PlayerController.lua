@@ -171,20 +171,6 @@ function M:__onAnimationHandle()
     end
 end
 
-----
---[[碰撞检测]]
-function M:__onCollisionHandle()
-    local system = self:getSystem("CollisionSystem")
-    if system then
-        if system:isCollided(self:getEntity(),{"PLAYER_BULLET"}) then
-            local script = self:getScript("HealthController")--被击中物
-            script:hurt(100)--TODO:伤害值由计算得出
-            
-
-        end
-    end
-end
-
 ------
 function M:_onAdded(params)
     self:__onInputInit(params)
@@ -201,7 +187,6 @@ end
 
 function M:_onLateUpdate()
     self:__onAnimationHandle()
-    self:__onCollisionHandle()
 end
 
 function M:_onEnd()

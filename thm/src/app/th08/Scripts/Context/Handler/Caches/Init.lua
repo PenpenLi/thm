@@ -1,3 +1,4 @@
 require "Scripts.Context.Handler.Caches.Cache"
 require "Scripts.Context.Handler.Caches.AnimationCache"
 require "Scripts.Context.Handler.Caches.EffectCache"
+require "Scripts.Context.Handler.Caches.ObjectCache"

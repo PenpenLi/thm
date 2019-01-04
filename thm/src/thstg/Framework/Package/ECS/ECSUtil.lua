@@ -49,19 +49,23 @@ end
 function find2ClassWithChild(name,...)
     local argsA = trans2Args(name)
     local argsB = {...}
-    local isMatch = true
     local length = #argsB
-    if #argsB <= 2 and argsA[#argsA] == argsB[#argsB] then
-        return true
+    if length <= 2 then 
+        for i = #argsA,1,-1 do
+            if argsA[i] == argsB[#argsB] then
+                return true
+            end
+        end
     else
         for i = 1,length do
             if argsA[i] ~= argsB[i] then
                 return false
             end
         end
+        return true
     end
 
-    return isMatch
+    return false
 end
 
 function match2Class(name,...)
