@@ -210,9 +210,9 @@ function M.create(params)
     registerKey("TouchWipe",EGameKeyType.Wipe)
     registerKey(cc.KeyCode.KEY_J,EGameKeyType.Wipe)
 
-    registerKey(cc.KeyCode.KEY_C,EGameKeyType.Skill)
-    registerKey("TouchSkill",EGameKeyType.Skill)
-    registerKey(cc.KeyCode.KEY_K,EGameKeyType.Skill)
+    registerKey(cc.KeyCode.KEY_C,EGameKeyType.Bomb)
+    registerKey("TouchSkill",EGameKeyType.Bomb)
+    registerKey(cc.KeyCode.KEY_K,EGameKeyType.Bomb)
     ---
     local function playerKeyMoveHandle()
         if isKeyDown(EGameKeyType.MoveLeft) then
@@ -267,12 +267,12 @@ function M.create(params)
     end
 
     local function playerSkillHandle()
-        if isKeyDown(EGameKeyType.Skill) then
+        if isKeyDown(EGameKeyType.Bomb) then
             print(15,"SpellCard")
 
 
             _uiPlayer:skill()
-            resetKey(EGameKeyType.Skill)
+            resetKey(EGameKeyType.Bomb)
         end
     end
 

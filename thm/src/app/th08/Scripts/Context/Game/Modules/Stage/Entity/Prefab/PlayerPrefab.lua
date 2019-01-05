@@ -14,7 +14,15 @@ function M:ctor(...)
     self.collisionController = StageDefine.PlayerCollision.new()
     self:addScript(self.collisionController)
 
-    ---
+    self.inputController = StageDefine.PlayerInput.new()
+    self:addScript(self.inputController)
+    
+    self.animationController = StageDefine.PlayerAnimation.new()
+    self:addScript(self.animationController)
+
+    self.constraintByBorder = StageDefine.ConstraintByBorder.new()
+    self:addScript(self.constraintByBorder)
+
 end
 
 

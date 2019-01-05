@@ -2,7 +2,6 @@ local M = class("AnimationComponent",THSTG.ECS.Component)
 
 function M:_onInit()
     self.sprite = THSTG.SCENE.newSprite()
-    self.state = false
 end
 ---
 function M:play(action)

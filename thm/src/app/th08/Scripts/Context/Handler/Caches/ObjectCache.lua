@@ -2,8 +2,25 @@ module("ObjectCache", package.seeall)
 
 local objsCache = {}            --所有对象缓存的信息
 local categoryCache = {}
+---
+local function getTotalObjs(class)
+    local num = 0
+    for _,v in pairs(objsCache) do
+        if v.class == class then
+            num = num + 1
+        end
+    end
+    return num
+end
 
+local function getAvailableObjs(class)
+    if not categoryCache[class] then return 0 end
+
+    local queue = categoryCache[class]
+    return (queue.tail - queue.front)
+end
 ----
+--自动扩充
 function create(class,param)
     if type(class) == "table" then
         local queue = nil
@@ -61,6 +78,18 @@ function release(obj,isDelete)
 
     end
 end
+---
+--填充池
+function fill(class,num,param)
+    local totalNum = getTotalObjs(class)
+    if totalNum >= num then return end
+
+    for i = 1,num-totalNum do
+        local obj = create(class,param)
+        release(obj)
+    end
+end
+--
 
 --
 function clear()
@@ -72,4 +101,5 @@ function clear()
     objsCache = {}
     categoryCache = {}
 end
+
 

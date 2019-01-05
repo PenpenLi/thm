@@ -93,7 +93,7 @@ function Player:_onInput(input)
     end
 
     local function skillHandle()
-        if input:isKeyDown(EGameKeyType.Skill) then
+        if input:isKeyDown(EGameKeyType.Bomb) then
             self:setAnimation("skill")
         end
     end
@@ -187,9 +187,9 @@ function M.create(params)
         _cmpControlMapper:registerKey(ETouchType.Shake,EGameKeyType.Wipe)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_J,EGameKeyType.Wipe)
     
-        _cmpControlMapper:registerKey(cc.KeyCode.KEY_C,EGameKeyType.Skill)
-        _cmpControlMapper:registerKey(ETouchType.DoubleClick,EGameKeyType.Skill)
-        _cmpControlMapper:registerKey(cc.KeyCode.KEY_K,EGameKeyType.Skill)
+        _cmpControlMapper:registerKey(cc.KeyCode.KEY_C,EGameKeyType.Bomb)
+        _cmpControlMapper:registerKey(ETouchType.DoubleClick,EGameKeyType.Bomb)
+        _cmpControlMapper:registerKey(cc.KeyCode.KEY_K,EGameKeyType.Bomb)
 
         _cmpControlMapper:registerKey(ETouchType.MultiTouch,EGameKeyType.Slow)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_SHIFT,EGameKeyType.Slow)

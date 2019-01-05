@@ -6,9 +6,9 @@ function M:ctor()
     M.super.ctor(self)
     self:setName("PLAYER_BULLET")
 
-    self.bulletController.speed.y = 20
+    self.bulletMove.speed.y = 20
     self.animationController.rotation = -90        --这个仅由贴图决定
-    
+
 end
 
 

@@ -14,6 +14,7 @@ function M:ctor()
 	self.__components__ = {}
 	self.__flags__ = false
 	self.__isCCNode__ = false
+	self.__isActive__ = true
     ----
 	ECSManager.addEntity(self)
 end
@@ -115,6 +116,7 @@ function M:getSystem(name)
 end
 ---
 function M:update(dTime)
+	if not self:isActive() then return end
 	--先control,然后才是Script
 	
 	for k,v in pairs(self.__components__) do
@@ -125,7 +127,6 @@ function M:update(dTime)
 	
 	self:_onUpdate(dTime)
 
-	
 	for k,v in pairs(self.__components__) do
 		if v:isEnabled() then
 			v:_onLateUpdate(dTime,self)
@@ -152,6 +153,12 @@ function M:isCCNode()
 	return self.__isCCNode__
 end
 
+function M:setActive(isActive)
+	self.__isActive__ = isActive
+end
+function M:isActive()
+	return self.__isActive__ 
+end
 ---
 --[[
     以下函数不建议重载,违反了设计模式的思想
@@ -182,6 +189,7 @@ end
 function M:_onLateUpdate(dTime)
     
 end
+--
 
 --消息
 function M:_onEvent(event,params)

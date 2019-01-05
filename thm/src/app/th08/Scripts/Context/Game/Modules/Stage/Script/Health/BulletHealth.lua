@@ -14,6 +14,7 @@ function M:_onHurt()
 end
 
 function M:_onDead()
+    --TODO:这个动画应该保存下来,以被复用是使用,太过频繁会掉帧
     local animationComp = self:getComponent("AnimationComponent")
     animationComp:play(cc.Sequence:create({
         --自己旋转,缩小,消失

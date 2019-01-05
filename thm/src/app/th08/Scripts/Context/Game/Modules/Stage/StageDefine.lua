@@ -41,6 +41,7 @@ BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.BatmanCont
 --公共脚本
 DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBorder")
 DestroyByBullet = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBullet")
+ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
 
 --生命控制
 HealthController = require("Scripts.Context.Game.Modules.Stage.Script.Health.HealthController")
@@ -54,11 +55,19 @@ PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.Collision.P
 BatmanCollision = require("Scripts.Context.Game.Modules.Stage.Script.Collision.BatmanCollision")
 BulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Collision.BulletCollision")
 
+InputController = require("Scripts.Context.Game.Modules.Stage.Script.Input.InputController")
+PlayerInput = require("Scripts.Context.Game.Modules.Stage.Script.Input.PlayerInput")
+
 --动画控制
 AnimationController = require("Scripts.Context.Game.Modules.Stage.Script.Animation.AnimationController")
 BatmanAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Animation.BatmanAnimation")
 BulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Animation.BulletAnimation")
 PlayerAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Animation.PlayerAnimation")
+
+--移动控制
+MoveController = require("Scripts.Context.Game.Modules.Stage.Script.Move.MoveController")
+BulletMove = require("Scripts.Context.Game.Modules.Stage.Script.Move.BulletMove")
+
 ---[[工具]]-----
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  
 PublicUtil = require("Scripts.Context.Game.Modules.Stage.Util.PublicUtil")  

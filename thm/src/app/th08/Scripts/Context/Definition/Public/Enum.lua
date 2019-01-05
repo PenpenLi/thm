@@ -8,7 +8,7 @@ EGameKeyType = {
 
     Attack = 5,
     Wipe = 6,
-    Skill = 7,
+    Bomb = 7,
     Slow = 8,
 }
 

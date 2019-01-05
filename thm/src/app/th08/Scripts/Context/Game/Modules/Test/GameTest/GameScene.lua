@@ -46,9 +46,9 @@ function M.create(params)
         _cmpControlMapper:registerKey(ETouchType.Shake,EGameKeyType.Wipe)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_J,EGameKeyType.Wipe)
     
-        _cmpControlMapper:registerKey(cc.KeyCode.KEY_C,EGameKeyType.Skill)
-        _cmpControlMapper:registerKey(ETouchType.DoubleClick,EGameKeyType.Skill)
-        _cmpControlMapper:registerKey(cc.KeyCode.KEY_K,EGameKeyType.Skill)
+        _cmpControlMapper:registerKey(cc.KeyCode.KEY_C,EGameKeyType.Bomb)
+        _cmpControlMapper:registerKey(ETouchType.DoubleClick,EGameKeyType.Bomb)
+        _cmpControlMapper:registerKey(cc.KeyCode.KEY_K,EGameKeyType.Bomb)
 
         _cmpControlMapper:registerKey(ETouchType.MultiTouch,EGameKeyType.Slow)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_SHIFT,EGameKeyType.Slow)
@@ -102,10 +102,10 @@ function M.create(params)
     end
 
     local function playerSkillHandle()
-        if _cmpControlMapper:isKeyDown(EGameKeyType.Skill) then
+        if _cmpControlMapper:isKeyDown(EGameKeyType.Bomb) then
 
             _cmpPlayer:skill()
-            _cmpControlMapper:resetKey(EGameKeyType.Skill)
+            _cmpControlMapper:resetKey(EGameKeyType.Bomb)
         end
     end
 

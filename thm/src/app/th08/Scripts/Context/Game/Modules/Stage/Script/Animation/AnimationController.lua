@@ -5,17 +5,38 @@ function M:_onInit()
     self._lastAnimation = nil           --动作
     self._animationDict = false
 
+    self._roleType = nil
 end
 --
-function M:play()
-    
+function M:play(roleType,actionType)
+    self._curAnimation = actionType
+    self._roleType = roleType
 end
 
 --
 function M:_onLateUpdate()
-
+    self:__onAnimationHandle()
 end
 
+----
+function M:__onAnimationHandle()
+    if self._curAnimation then
+        self:__playAnime()
+    end
+end
+
+--
+function M:__playAnime()
+    if self._curAnimation == self._lastAnimation then return end
+
+    local animationComp = self:getComponent("AnimationComponent")
+    local sprite = animationComp.sprite
+
+    local actionFunc = StageDefine.ConfigReader.getAction(self._roleType,self._curAnimation)
+    actionFunc(sprite,self._lastAnimation)
+
+    self._lastAnimation = self._curAnimation
+end
 ----
 
 return M

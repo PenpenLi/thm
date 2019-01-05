@@ -1,46 +1,71 @@
 
-local EGameKeyType = Definition.Public.EGameKeyType
+
 local ETouchType = Definition.Public.ETouchType
 local M = class("InputComponent",THSTG.ECS.Component)
 
 function M:_onInit()
     self.keyMapper = THSTG.UTIL.newControlMapper()
-    self.keyCache = {}
+    self.touchState = ""
     self.touchPos = nil
-    self.touchState = nil
-    
+
     self._touchListener = nil
     self._keyboardListener = nil
 end
+---
 
+function M:isKeyDown(type)
+    return self.keyMapper:isKeyDown(type)
+end
+
+function M:resetKey(type)
+    return self.keyMapper:resetKey(type)
+end
+
+function M:getTouchState()
+    return self.touchState
+end
+
+function M:getTouchPos()
+    return self.touchPos
+end
+--
+function M:_setTouchs(touchs)
+    if touchs then 
+        touchs:retain()
+        self.touchs = touchs
+    else
+        if self.touchs then
+            self.touchs:release()
+            self.touchs = nil
+        end
+    end
+end
 ---
 function M:_onAdded(entity)
 
     self._keyboardListener = THSTG.EVENT.newKeyboardExListener({
         onPressed = function (keyCode, event)
             self.keyMapper:pressKey(keyCode)
-            self.keyCache[keyCode] = true
         end,
 
         onReleased = function(keyCode, event)
             self.keyMapper:releaseKey(keyCode)
-            self.keyCache[keyCode] = false
         end,
     })
 
     self._touchListener = THSTG.EVENT.newTouchAllAtOnceExListener({
         onBegan = function(touches, event)
             self.keyMapper:pressKey(ETouchType.OnceClick)
-            self.touchPos = touches[1]:getLocation()
             self.touchState = "onBegan"
+            self.touchPos = touches[1]:getLocation()
             return true
         end,
         onMoved = function(touches, event)
             if #touches > 1 then
                 self.keyMapper:pressKey(ETouchType.MultiTouch)
             end
-            self.touchPos = touches[1]:getLocation()
             self.touchState = "onMoved"
+            self.touchPos = touches[1]:getLocation()
         end,
         onEnded = function(touches, event)
             self.keyMapper:releaseKey(ETouchType.OnceClick)
@@ -49,8 +74,8 @@ function M:_onAdded(entity)
             if #touches > 1 then
                 self.keyMapper:releaseKey(ETouchType.MultiTouch)
             end
-            self.touchPos = nil
             self.touchState = "onEnded"
+            self.touchPos = touches[1]:getLocation()
         end,
         onDoubleClick = function(touches, event)
             self.keyMapper:pressKey(ETouchType.DoubleClick)
@@ -72,7 +97,8 @@ end
 
 function M:_onLateUpdate()
     if self.touchState ~= "onMoved" then
-        self.touchState = nil
+        self.touchState = ""
+        self.touchPos = nil
     end
 end
 

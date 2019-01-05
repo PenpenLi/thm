@@ -19,9 +19,10 @@ function M:ctor()
 
     self.animationController = StageDefine.BulletAnimation.new()
     self:addScript(self.animationController)
-    --
-    
-    -- debugUI(self)
+
+    self.bulletMove = StageDefine.BulletMove.new()
+    self:addScript(self.bulletMove)
+ 
 end
 
 ----------

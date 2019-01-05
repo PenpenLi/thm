@@ -3,8 +3,6 @@ local M = class("ScriptComponent",ECS.Component)
 function M:ctor(...)
     M.super.ctor(self)
     
-    --
-    self:_onInit(...)
 end
 
 --如果不支持定时器只能手动执行了
