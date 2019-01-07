@@ -7,12 +7,13 @@ function M:_onFilter()
 end
 
 function M:_onCollision(collider,collision)
-    local colliderHealthScript = collider:getScript("HealthController")--被击中物
-    colliderHealthScript:hurt(3)--TODO:伤害值由计算得出
-    
     local myHealthScript = self:getScript("HealthController")         --被击中物
-    myHealthScript:hurt(9999)--TODO:伤害值由计算得出
-
+    if not myHealthScript:isDead() then
+        local colliderHealthScript = collider:getScript("HealthController")--被击中物
+        colliderHealthScript:hurt(100)--TODO:伤害值由计算得出
+        myHealthScript:hurt(9999)--TODO:伤害值由计算得出
+    end
+    
     local moveScript = self:getScript("MoveController")
     moveScript:stop()
 end

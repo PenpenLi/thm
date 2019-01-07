@@ -8,3 +8,5 @@ require "Scripts.Context.Definition.Type.TexType"
 
 require "Scripts.Context.Definition.Type.MenuType"
 require "Scripts.Context.Definition.Type.RoleType"
+require "Scripts.Context.Definition.Type.EffectType"
+require "Scripts.Context.Definition.Type.ParticleType"

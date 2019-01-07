@@ -28,7 +28,7 @@ local _eventQueue = {
 }
 ---
 --[[事件管理]]
-function dispathcEvent(cacheType,event,params)
+function dispatchEvent(cacheType,event,params)
     local info = {
         event = event,
         params = params,
@@ -37,7 +37,7 @@ function dispathcEvent(cacheType,event,params)
 end
 
 --[[实体管理]]
-function dirtyEntity(entity,flag)
+local function dirtyEntity(entity,flag)
     local id = entity:getID()
     _dirtyEntities[id] = _dirtyEntities[id] or {}
     _dirtyEntities[id].entity = entity
@@ -47,8 +47,8 @@ end
 
 function destroyEntity(entity)
     dirtyEntity(entity,EEntityFlag.Destroy)
-    dispathcEvent(EEventCacheType.System,EEventType.DestroyEntity,entity)
-    dispathcEvent(EEventCacheType.Entity,EEventType.DestroyEntity,entity)
+    dispatchEvent(EEventCacheType.System,EEventType.DestroyEntity,entity)
+    dispatchEvent(EEventCacheType.Entity,EEventType.DestroyEntity,entity)
 end
 
 function addEntity(entity)
@@ -134,7 +134,7 @@ local function _handleEntities(delay)
     local function _handleEntitiesEvent()
         for _,v in ipairs(_eventQueue[EEventCacheType.Entity]) do
             visitEntity(function(entity)
-                entity:_onEvent(v.event,v.params)
+                entity:_event(v.event,v.params)
             end)
         end
         _eventQueue[EEventCacheType.Entity] = {}

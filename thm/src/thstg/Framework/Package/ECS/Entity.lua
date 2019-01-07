@@ -159,6 +159,10 @@ end
 function M:isActive()
 	return self.__isActive__ 
 end
+--发送事件
+function M:dispatch(e,params)
+	ECSManager.dispatchEvent(e,params)
+end
 ---
 --[[
     以下函数不建议重载,违反了设计模式的思想
@@ -196,6 +200,13 @@ function M:_onEvent(event,params)
 
 end
 ---
+function M:_event(event,params)
+	self:_onEvent()
+	for k,v in pairs(self.__components__) do
+		v:_onEvent()
+	end
+end
+
 function M:_enter()
 	self:_onEnter()
 	for k,v in pairs(self.__components__) do

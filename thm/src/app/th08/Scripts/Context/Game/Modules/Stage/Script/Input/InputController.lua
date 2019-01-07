@@ -3,6 +3,7 @@ local M = class("InputController",THSTG.ECS.Script)
 function M:_onInit()
     M.super._onInit(self)
 
+    self.keyMapper = THSTG.UTIL.newControlMapper()
 end
 --
 function M:_onStart()

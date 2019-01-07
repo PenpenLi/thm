@@ -1,7 +1,7 @@
 module("ScenePublic", package.seeall)
 
 function newAnimation(texType,resName,time)
-    local info = AnimationConfig.getRes(texType,resName)
+    local info = ResManager.getAnimationRes(texType,resName)
     if texType == TexType.SHEET then
         local animation = THSTG.SCENE.newAnimation({
             frames = THSTG.SCENE.newFramesBySheet({
@@ -13,6 +13,8 @@ function newAnimation(texType,resName,time)
         })
         return animation
     elseif texType == TexType.PLIST then
+        -- TODO:需要加载Plist
+        THSTG.SCENE.loadPlistFile(info.source)
         local animation = THSTG.SCENE.newAnimation({
             frames = THSTG.SCENE.newFramesByPattern({
                 pattern = info.pattern,

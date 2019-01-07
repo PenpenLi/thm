@@ -6,7 +6,7 @@ local M = class("PlayerController",THSTG.ECS.Script)
 function M:_onInit()
     self.roleType = nil                             --人物类型
     self.bulletEntity = false                       --子弹的实体
-    self.shotInterval = 0.05                        --发射子弹的时间间隔
+    self.shotInterval = 0.10                        --发射子弹的时间间隔
     self.initPos = cc.p(120,32)                     --玩家初始位置
 
 end

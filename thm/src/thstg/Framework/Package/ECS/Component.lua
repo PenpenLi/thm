@@ -108,6 +108,10 @@ end
 function M:_onExit()
 
 end
+--消息
+function M:_onEvent(e,params)
+
+end
 
 --逻辑更新
 function M:_onUpdate(delay,entity)

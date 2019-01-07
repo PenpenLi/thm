@@ -34,7 +34,8 @@ function M.create(params)
         local lastPosX,lastPosY = 0,panel:getContentSize().height
         local curMaxHeight = 0
         local innerHeight = panel:getContentSize().height
-        local dict = AnimationConfig.getDict(type) or {}
+        local dict = ResManager.getAnimationDict(type) or {}
+        
         for k,v in pairs(dict) do
             local animation = ScenePublic.newAnimation(type,k)
             local sprite = THSTG.UI.newSprite({

@@ -1,6 +1,32 @@
 ﻿module("ResManager", package.seeall)
 local Resources = require "Scripts.Configs.Handwork.Resources"
 
+
+-- 多层资源获取
+-- @param	...		[string]	资源类型
+-- @return	资源路径
+function getResMul(...)
+	
+	local path = nil
+	local params = {...}
+	local pathStr = ""
+	for i = 1, #params do
+		path = path and path[params[i]] or Resources[params[i]]
+		if not path then
+			if __DEBUG_RESOURCES__ then
+				error(string.format("ResManager.getRes ERROR: can't found: %s",pathStr))
+			end
+			break
+		else
+			if __DEBUG_RESOURCES__ then
+				pathStr = pathStr .. "." ..  params[i]
+			end
+		end
+	end
+	
+	return path
+end
+
 --[[
 获取资源
 @param	resType		[string]资源类型	(对应ResTypes中的项)
@@ -28,7 +54,7 @@ function getRes(resType, resName)
 end
 
 --------------------------
--- 多层资源获取
+-- 子层资源获取
 -- @param	resType		[string]	资源类型
 -- @param	subType		[string]	子级资源类型
 -- @param	resName		[string]	资源名
@@ -46,38 +72,6 @@ function getResSub(resType, subType, resName)
 	end
 
 	return path
-end
-
--- 多层资源获取
--- @param	...		[string]	资源类型
--- @return	资源路径
-function getResMul(...)
-	
-	local path = nil
-	local params = {...}
-	local pathStr = ""
-	for i = 1, #params do
-		path = path and path[params[i]] or Resources[params[i]]
-		if not path then
-			if __DEBUG_RESOURCES__ then
-				error(string.format("ResManager.getRes ERROR: can't found: %s",pathStr))
-			end
-			break
-		else
-			pathStr = pathStr .. "." ..  params[i]
-		end
-	end
-	
-	return path
-end
-
-function getResTable(resType, subType)
-	local res = Resources[resType]
-	if subType and res then
-		res = res[subType]
-	end
-
-	return res or {}
 end
 
 ------------
@@ -100,4 +94,42 @@ end
 
 
 --------------------------
+--[[
+获取纹理资源
+@param	texType		[string]纹理类型	(对应texType中的项)
+@param	resName		[string]资源名
+@return 资源表
+--]]
+function getTexDict(texType)
+	return getResMul(ResType.TEXTURE, texType)
+end
 
+function getTexRes(texType,resName)
+	return getResSub(ResType.TEXTURE, texType, resName)
+end
+
+-------
+--[[
+获取动画资源
+@param	texType		[string]纹理类型	(对应texType中的项)
+@param	resName		[string]资源名
+@return 资源表
+--]]
+function getAnimationDict(texType)
+	return getResMul(ResType.ANIMATION, texType)
+end
+
+function getAnimationRes(texType,resName)
+	return getResSub(ResType.ANIMATION, texType, resName)
+end
+
+--[[
+获取粒子资源
+@param	ParticleType		[string]纹理类型	(对应ParticleType中的项)
+@param	resName		[string]资源名
+@return 资源表
+--]]
+
+function getParticleRes(particleType,...)
+	return getResMul(ResType.PARTICLE, particleType,...)
+end
