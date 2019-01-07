@@ -40,7 +40,6 @@ BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.BatmanCont
 
 --公共脚本
 DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBorder")
-DestroyByBullet = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBullet")
 ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
 
 --生命控制
