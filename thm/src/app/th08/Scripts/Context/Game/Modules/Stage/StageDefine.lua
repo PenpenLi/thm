@@ -2,6 +2,7 @@ module("StageDefine", package.seeall)
 require("Scripts.Context.Game.Modules.Stage.Config.Init")
 
 ---[[组件]]----
+SpriteComponent = require("Scripts.Context.Game.Modules.Stage.Component.SpriteComponent")
 AnimationComponent = require("Scripts.Context.Game.Modules.Stage.Component.AnimationComponent")
 TransformComponent = require("Scripts.Context.Game.Modules.Stage.Component.TransformComponent")
 ActionComponent = require("Scripts.Context.Game.Modules.Stage.Component.ActionComponent")

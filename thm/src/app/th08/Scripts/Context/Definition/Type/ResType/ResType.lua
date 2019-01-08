@@ -10,7 +10,11 @@ ANIMATION = "animation"
 
 PARTICLE = "particle"
 
+EFFECT = "effect"
+
 MODEL = "model"
+
+SHADER = "shader"
 
 UI = "ui"
 ---

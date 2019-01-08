@@ -145,7 +145,8 @@ return {
 
     particle = {
         public = {
-
+            ccp_gk_default_01 = "Assets/SFX/Particle/ccp_gk_default_01.plist",
+            ccp_gk_heart_01 = "Assets/SFX/Particle/ccp_gk_heart_01.plist",
         },
     },
 

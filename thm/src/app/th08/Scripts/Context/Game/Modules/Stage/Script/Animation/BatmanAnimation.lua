@@ -14,7 +14,7 @@ function M:_onStart()
 end
 ---
 function M:_onLateUpdate()
-
+    --主要根据移动方式判断动画
 end
 
 ----

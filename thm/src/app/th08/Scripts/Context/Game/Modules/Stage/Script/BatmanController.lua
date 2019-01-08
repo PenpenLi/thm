@@ -8,4 +8,9 @@ function M:_onUpdate()
 
 end
 
+
+function M:_onLateUpdate()
+
+end
+
 return M

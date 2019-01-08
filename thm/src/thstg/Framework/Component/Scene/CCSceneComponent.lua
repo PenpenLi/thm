@@ -43,7 +43,6 @@ function newAnimation(params)
 end
 
 
-
 ----
 
 --替换场景,释放当前场景

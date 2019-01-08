@@ -28,9 +28,9 @@ end
 --
 function M:__playAnime()
     if self._curAnimation == self._lastAnimation then return end
-
-    local animationComp = self:getComponent("AnimationComponent")
-    local sprite = animationComp.sprite
+    --TODO:存在逻辑层面的不符
+    local spriteComp = self:getComponent("SpriteComponent")
+    local sprite = spriteComp:getSprite()
 
     local actionFunc = StageDefine.ConfigReader.getAction(self._roleType,self._curAnimation)
     actionFunc(sprite,self._lastAnimation)

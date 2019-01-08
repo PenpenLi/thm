@@ -8,54 +8,121 @@ function M.create(params)
     --------View--------
     local node = THSTG.UI.newNode()
 
-    local bg = UIPublic.newSheetSprite({
-        x = display.cx,
-        y = display.cy,
-        anchorPoint = THSTG.UI.POINT_CENTER,
-        sheet = "stg01_bg"
-    })
-    node:addChild(bg)
-    
-    local cloud01 = UIPublic.newSheetSprite({
-        x = display.cx-50,
-        y = 0,
-        anchorPoint = THSTG.UI.POINT_CENTER,
-        sheet = "stg01_cloud_01"
-    })
-    cloud01:setPositionY(-cloud01:getContentSize().height)
-    node:addChild(cloud01)
+    local function createLayer(params)
+		-- local layer = THSTG.UI.newLayerColor(params)
+        local layer = THSTG.UI.newLayer(params)
+        local scrollView = UI.newScrollView({
+            x = 0,
+            y = 0,
+            width = layer:getContentSize().width,
+            height = layer:getContentSize().height,
+            innerWidth = layer:getContentSize().width,
+            innerHeight = layer:getContentSize().height,
+            direction = ccui.ScrollViewDir.vertical,
+        })
+        layer:addChild(scrollView)
 
-    local cloud02 = UIPublic.newSheetSprite({
-        x = display.cx+50,
-        y = 0,
-        anchorPoint = THSTG.UI.POINT_CENTER,
-        sheet = "stg01_cloud_02"
-    })
-    cloud02:setPositionY(-cloud02:getContentSize().height)
-    node:addChild(cloud02)
+        local panel = THSTG.UI.newNode({
+            x = 0,
+            y = 0,
+            width = layer:getContentSize().width,
+            height = layer:getContentSize().height,
+        })
+        scrollView:addChild(panel)
 
-    local function initAction()
-        local function makeAction(node,time)
-            local array = {
-                cc.CallFunc:create(function ()
-                    node:setScale(1.0)
-                    node:setPositionY(-node:getContentSize().height)
-                end),
-                cc.Spawn:create({
-                    cc.MoveTo:create(time, cc.p(node:getPositionX(), display.cy)),
-                    cc.ScaleTo:create(time, 0),
-                }),
-            }
-            return cc.RepeatForever:create(cc.Sequence:create(array))
+        local type = params.type
+        local lastPosX,lastPosY = 0,panel:getContentSize().height
+        local curMaxHeight = 0
+        local innerHeight = panel:getContentSize().height
+        local dict = TmplManager.getSFXDict(type) or {}
+        
+        for k,v in pairs(dict) do
+            for _,vv in pairs(v) do
+                local actions = vv()
+                local sprite = THSTG.UI.newSprite({
+                    x = lastPosX,
+                    y = lastPosY,
+                    anchorPoint = THSTG.UI.POINT_LEFT_TOP
+                })
+
+                sprite:runAction(cc.RepeatForever:create(cc.Sequence:create(actions)))
+                panel:addChild(sprite)
+                local spriteSize = sprite:getContentSize()--animation:getFrames()[1]:getSpriteFrame():getOriginalSize()
+
+                local clickNode = THSTG.UI.newWidget({
+                    x = spriteSize.width/2,
+                    y = spriteSize.height/2,
+                    width = spriteSize.width,
+                    height = spriteSize.height,
+                    anchorPoint = THSTG.UI.POINT_CENTER,
+                    onClick = function()
+                        dump(0,v.rect,k)
+                    end,
+                })
+                sprite:addChild(clickNode)
+
+
+                lastPosX = lastPosX + spriteSize.width
+            
+                if lastPosX >= panel:getContentSize().width then
+                    lastPosX = 0
+                    lastPosY = lastPosY - curMaxHeight
+                    if lastPosY <= 0 then
+                        innerHeight = innerHeight + curMaxHeight
+                    end
+                    
+                    curMaxHeight = 0
+                end
+                curMaxHeight = math.max(curMaxHeight,spriteSize.height)
+            end
         end
-        cloud01:runAction(makeAction(cloud01,8.0))
-        cloud02:runAction(makeAction(cloud02,10.0))
-    end
 
-    local function init()
-        initAction()
-    end
-    init()
+        scrollView:setInnerContainerSize(cc.size(scrollView:getContentSize().width,innerHeight))
+        panel:setPositionY(innerHeight - panel:getContentSize().height)
+
+
+		return layer
+	end
+    local layerStack = THSTG.UI.newLayerStack{
+		layers = {
+            {data = "Layer1", creator = createLayer, creatorParams = {type = SFXType.EFFECT,color = THSTG.UI.COLOR_RED, width = display.width, height = display.height - 50}},
+			{data = "Layer2", creator = createLayer, creatorParams = {type = SFXType.PARTICLE,color = THSTG.UI.COLOR_GREEN, width = display.width, height = display.height - 50}},
+			{data = "Layer3", creator = createLayer, creatorParams = {type = SFXType.FLOW,color = THSTG.UI.COLOR_BLUE, width = display.width, height = display.height - 50}},
+        }
+	}
+    node:addChild(layerStack)
+
+    local tabBar = THSTG.UI.newTabBar({
+        dataProvider = {
+            "EFFECT",
+            "PARTICLE",
+            "FLOW",
+        },
+        style = {
+            normal = {
+                skin = {
+                    src = ResManager.getUIRes(UIType.BUTTON,"btn_base_yellow")
+                } 
+            },
+            pressed = {
+                skin = {
+                    src = ResManager.getUIRes(UIType.BUTTON,"btn_base_yellow")
+                }
+            },
+            disabled = {
+                skin = {
+                    src = ResManager.getUIRes(UIType.BUTTON,"btn_base_yellow")
+                } 
+            },
+        },
+        x = 10, y = display.height,
+        anchorPoint = THSTG.UI.POINT_LEFT_TOP,
+        onChange = function(sender, curIndex, prevIndex)
+            layerStack:setSelectedIndex(curIndex)
+        end,
+    })
+    node:addChild(tabBar)
+
     --------Controller--------
   
     node:onNodeEvent("enter", function ()

@@ -8,15 +8,15 @@ function M:_onView()
 
     local TestTb = {
         require("Scripts.Context.Game.Modules.Test.UITest.UITest0"),         --测试面板
-        require("Scripts.Context.Game.Modules.Test.UITest.UITest1"),         --动画测试
-        require("Scripts.Context.Game.Modules.Test.UITest.UITest2"),         --所有动画测试
-        require("Scripts.Context.Game.Modules.Test.UITest.UITest3"),         --背景测试
+        require("Scripts.Context.Game.Modules.Test.UITest.UITest1"),         --纹理测试
+        require("Scripts.Context.Game.Modules.Test.UITest.UITest2"),         --动画测试
+        require("Scripts.Context.Game.Modules.Test.UITest.UITest3"),         --特效测试
         require("Scripts.Context.Game.Modules.Test.UITest.UITest4"),         --控制测试
         require("Scripts.Context.Game.Modules.Test.UITest.UITest5"),         --对话框测试
         require("Scripts.Context.Game.Modules.Test.UITest.UITest6"),         --时间表测试
         require("Scripts.Context.Game.Modules.Test.UITest.UITest7"),         --特效测试
         require("Scripts.Context.Game.Modules.Test.UITest.UITest8"),         --图片效果测试
-
+        require("Scripts.Context.Game.Modules.Test.UITest.UITest9"),         --背景测试
 
         require("Scripts.Context.Game.Modules.Test.GameTest.GameScene"),         --图片效果测试
 
@@ -67,7 +67,7 @@ function M:_onView()
     THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, layer)
 
     -- changeTest(#TestTb)
-    changeTest(9 + 1)
+    changeTest(1 + 1)
 
 
     return layer

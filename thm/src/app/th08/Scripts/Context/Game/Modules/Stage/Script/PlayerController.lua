@@ -17,7 +17,6 @@ function M:move(x,y)
     local posComp = self:getComponent("TransformComponent")
     local offset = cc.p(x,y)
 
-    --TODO:边界检测
     posComp:setPositionX(posComp:getPositionX() + offset.x)
     posComp:setPositionY(posComp:getPositionY() + offset.y)
     

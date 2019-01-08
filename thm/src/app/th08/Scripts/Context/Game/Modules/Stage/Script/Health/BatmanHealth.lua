@@ -18,7 +18,7 @@ function M:_onDead()
     --这里代表击中,而不是对象消亡
     StageDefine.PublicUtil.playEffect({
         refNode = self:getEntity(),
-        name = "die_magic_01",
+        name = "ccle_die_magic_01",
     })
     --TODO:还需要播放一个粒子效果
     self:killEntity()

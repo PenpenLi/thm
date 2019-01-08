@@ -13,7 +13,7 @@ function newAnimation(texType,resName,time)
         })
         return animation
     elseif texType == TexType.PLIST then
-        -- TODO:需要加载Plist
+
         THSTG.SCENE.loadPlistFile(info.source)
         local animation = THSTG.SCENE.newAnimation({
             frames = THSTG.SCENE.newFramesByPattern({

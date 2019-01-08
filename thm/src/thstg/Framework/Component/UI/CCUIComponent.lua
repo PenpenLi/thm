@@ -524,3 +524,24 @@ function newTouchLayer(params)
 	return layer
 end
 
+
+-- 新建粒子
+-- @param	x			[number]		x
+-- @param	y			[number]		y
+-- @param	src			[string]		特效文件
+-- @param	isLoop		[boolean]		是否循环
+-- @param	posType		[enum]			位置类型
+
+function newParticle(params)
+	params = params or {}
+	params.isLoop = params.isLoop or false
+	params.posType = params.posType or cc.POSITION_TYPE_RELATIVE
+	local system = cc.ParticleSystemQuad:create(params.src)
+	system:setPosition(params.x or 0, params.y or 0)
+	if params.anchorPoint then
+		system:setAnchorPoint(params.anchorPoint)
+	end
+	system:setAutoRemoveOnFinish(not params.isLoop)
+	system:setPositionType(params.posType)
+	return system
+end

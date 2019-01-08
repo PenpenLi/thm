@@ -4,9 +4,9 @@ function playEffect(params)
     
     if not params.onAction then
         params.isLoop = params.isLoop or false
-        params.type = params.type or ParticleType.PUBLIC
+        params.type = params.type or EffectType.PUBLIC
         local onAction = function(node)
-            return TmplManager.getParticle(params.type,params.name)()
+            return TmplManager.getEffect(params.type,params.name)()
         end
         params.onAction = onAction
     end
