@@ -6,27 +6,17 @@ SOUND = "sound"
 
 TEXTURE = "texture"
 
+SFX = "sfx"
+
 ANIMATION = "animation"
-
-PARTICLE = "particle"
-
-EFFECT = "effect"
-
-MODEL = "model"
 
 SHADER = "shader"
 
+MODEL = "model"
+
 UI = "ui"
----
+
 PUBLIC = "public"
 
-MAINUI = "main_ui"
-
-MENU = "menu"
-
-ROLE = "role"
-
-LOADING = "loading"
-
-SELECTION = "selection"
-
+---
+MODULE = "module"

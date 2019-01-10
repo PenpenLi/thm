@@ -1,9 +1,9 @@
 module("ScenePublic", package.seeall)
 
-function newAnimation(texType,resName,time)
-    local info = ResManager.getAnimationRes(texType,resName)
+function newAnimation(texType,fileName,resName,time)
+    local info = SheetConfig.getSequence(fileName,resName)
     if texType == TexType.SHEET then
-        local animation = THSTG.SCENE.newAnimation({
+        local animation = THSTG.UI.newSequenceAnimation({
             frames = THSTG.SCENE.newFramesBySheet({
                 source = info.source,
                 length = info.length,
@@ -13,9 +13,9 @@ function newAnimation(texType,resName,time)
         })
         return animation
     elseif texType == TexType.PLIST then
-
+        local info = PlistConfig.getSequence(fileName,resName)
         THSTG.SCENE.loadPlistFile(info.source)
-        local animation = THSTG.SCENE.newAnimation({
+        local animation = THSTG.UI.newSequenceAnimation({
             frames = THSTG.SCENE.newFramesByPattern({
                 pattern = info.pattern,
                 begin = info.begin,
@@ -25,7 +25,8 @@ function newAnimation(texType,resName,time)
         })
         return animation
     elseif texType == TexType.IMAGE then
-        local animation = THSTG.SCENE.newAnimation({
+        --TODO:
+        local animation = THSTG.UI.newSequenceAnimation({
             frames = THSTG.SCENE.newFramesByFiles({
                 array = info.array,
                 begin = info.begin,
@@ -38,14 +39,14 @@ function newAnimation(texType,resName,time)
 
 end
 
-function newAnimationBySheet(resName,time)
-    return newAnimation(TexType.SHEET,resName,time)
+function newAnimationBySheet(fileName,resName,time)
+    return newAnimation(TexType.SHEET,fileName,resName,time)
 end
 
-function newAnimationByPlist(resName)
-    return newAnimation(TexType.PLIST,resName,time)
+function newAnimationByPlist(fileName,resName,time)
+    return newAnimation(TexType.PLIST,fileName,resName,time)
 end
 
-function newAnimationByFiles(resName)
-    return newAnimation(TexType.IMAGE,resName,time)
+function newAnimationByFiles(fileName,resName,time)
+    return newAnimation(TexType.IMAGE,fileName,resName,time)
 end

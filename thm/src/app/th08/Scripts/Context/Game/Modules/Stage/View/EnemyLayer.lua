@@ -22,7 +22,7 @@ function M.create(params)
             enemyLayer = THSTG.SceneManager.get(SceneType.STAGE).entityLayer,
         })
         local stageID = Cache.stageCache.getStageId()
-        _cTaskScheduler:setTasks(StageDefine.ConfigReader.getScenario(stageID))
+        _cTaskScheduler:setTasks(ScriptManager.getScenario(stageID))
 
     end
     onInit()

@@ -87,7 +87,7 @@ function checkFileMD5(fullFilePath, md5)
 	if not isFileExist(fullFilePath) then
 		return false
 	else
-		local fileMD5 = FRFileMD5(fullFilePath)
+		local fileMD5 = MD5.file(fullFilePath)
 		if fileMD5 ~= "" and fileMD5 == md5 then
 			return true
 		else

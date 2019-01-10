@@ -1,42 +1,31 @@
 local M = class("AnimationController",THSTG.ECS.Script)
 
 function M:_onInit()
-    self._curAnimation = nil            --当前动作
-    self._lastAnimation = nil           --动作
-    self._animationDict = false
+    M.super._onInit(self)
 
-    self._roleType = nil
+    self.fsm = THSTG.UTIL.newStateMachine() --状态机
+    self.sprite = nil
 end
 --
-function M:play(roleType,actionType)
-    self._curAnimation = actionType
-    self._roleType = roleType
+function M:play(actionType)
+    if self.fsm:getState() == actionType then return end
+    
+    self.fsm:doEvent(actionType)
 end
 
+
+------------------
+function M:_onStart()
+    self.sprite = self:getComponent("SpriteComponent"):getSprite()
+
+    local cfg = self:_onSetup()
+    self.fsm:setupState(cfg)
+end
+------------------
+--[[以下由子类重载]]
+function M:_onSetup()
+
+end
 --
-function M:_onLateUpdate()
-    self:__onAnimationHandle()
-end
-
-----
-function M:__onAnimationHandle()
-    if self._curAnimation then
-        self:__playAnime()
-    end
-end
-
---
-function M:__playAnime()
-    if self._curAnimation == self._lastAnimation then return end
-    --TODO:存在逻辑层面的不符
-    local spriteComp = self:getComponent("SpriteComponent")
-    local sprite = spriteComp:getSprite()
-
-    local actionFunc = StageDefine.ConfigReader.getAction(self._roleType,self._curAnimation)
-    actionFunc(sprite,self._lastAnimation)
-
-    self._lastAnimation = self._curAnimation
-end
-----
 
 return M

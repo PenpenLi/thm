@@ -10,7 +10,7 @@ module("UTIL", package.seeall)
     }
 ]]
 
-local TaskScheduler = class("TaskScheduler")
+TaskScheduler = class("TaskScheduler")
 function TaskScheduler:ctor()
     self._pollClock = UTIL.newTickClock()
 

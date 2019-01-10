@@ -1,6 +1,6 @@
 module("UTIL", package.seeall)
 
-local ControlMapper = class("ControlMapper")
+ControlMapper = class("ControlMapper")
 function ControlMapper:ctor()
     self:clear()
 end

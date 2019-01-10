@@ -10,7 +10,7 @@ function M:ctor()
     
     self.__playerActionStatus = EPlayerActionStatus.Normal
     self.__mainSprite = THSTG.UI.newSprite()
-    self.__mainSprite:playAnimationForever(AnimationCache.getSheetRes("reimu_stand_normal"))
+    self.__mainSprite:playAnimationForever(AnimationCache.getResBySheet("reimu_stand_normal"))
     self.__mainSprite:setAnchorPoint(THSTG.UI.POINT_CENTER)
     self.__mainSprite:setContentSize(cc.size(self:getContentSize().width,self:getContentSize().height))
     self.__mainSprite:setPosition(cc.p(self:getContentSize().width/2,self:getContentSize().height/2))
@@ -93,10 +93,10 @@ function M:move(x,y)
         sprite:setFlippedX(false)
         sprite:stopAllActions()
         sprite:runAction(cc.Sequence:create({
-            cc.Animate:create(AnimationCache.getSheetRes("reimu_move_left_start")),
+            cc.Animate:create(AnimationCache.getResBySheet("reimu_move_left_start")),
             cc.CallFunc:create(function() 
                 -- sprite:stopAllActions()
-                sprite:runAction(cc.RepeatForever:create(cc.Animate:create(AnimationCache.getSheetRes("reimu_move_left_sustain"))))
+                sprite:runAction(cc.RepeatForever:create(cc.Animate:create(AnimationCache.getResBySheet("reimu_move_left_sustain"))))
             end)
         }))
         self.__playerActionStatus = EPlayerActionStatus.MoveLeft
@@ -105,10 +105,10 @@ function M:move(x,y)
         sprite:setFlippedX(true)
         sprite:stopAllActions()
         sprite:runAction(cc.Sequence:create({
-            cc.Animate:create(AnimationCache.getSheetRes("reimu_move_left_start")),
+            cc.Animate:create(AnimationCache.getResBySheet("reimu_move_left_start")),
             cc.CallFunc:create(function() 
                 -- sprite:stopAllActions()
-                sprite:runAction(cc.RepeatForever:create(cc.Animate:create(AnimationCache.getSheetRes("reimu_move_left_sustain"))))
+                sprite:runAction(cc.RepeatForever:create(cc.Animate:create(AnimationCache.getResBySheet("reimu_move_left_sustain"))))
             end)
         }))
         self.__playerActionStatus = EPlayerActionStatus.MoveRight
@@ -116,13 +116,13 @@ function M:move(x,y)
         if  self.__playerActionStatus == EPlayerActionStatus.Normal then return end
         local actions = {}
         if self.__playerActionStatus == EPlayerActionStatus.MoveLeft or self.__playerActionStatus == EPlayerActionStatus.MoveRight then
-            table.insert( actions,cc.Animate:create(AnimationCache.getSheetRes("reimu_move_left")):reverse())--
+            table.insert( actions,cc.Animate:create(AnimationCache.getResBySheet("reimu_move_left")):reverse())--
             table.insert( actions,cc.CallFunc:create(function() 
                 sprite:setFlippedX(not sprite:isFlippedX())
             end))
         end
         table.insert( actions,cc.CallFunc:create(function() 
-            sprite:playAnimationForever(AnimationCache.getSheetRes("reimu_stand_normal"))
+            sprite:playAnimationForever(AnimationCache.getResBySheet("reimu_stand_normal"))
         end))
 
         sprite:stopAllActions()

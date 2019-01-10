@@ -49,7 +49,7 @@ TODO LIST:
 2:[]对象缓存池,Entity的Destroy()会把所有脚本移除,然后使用时出错,但是不执行Destroy()又会因为addTo()出错,应该增加一种方法remove(),不移除脚本,同时又能removeFromParent()
 3:[√]PlayerController过于臃肿,不利于扩展
 4:[]旋转矩形的碰撞检测
-5:[]输入组件对Touch处理不好
+5:[√]输入组件对Touch处理不好
 
 2019-01-08
 1:[]由于没有控制_onRemoved()的顺序,因此会造成引用对象不存在的情况

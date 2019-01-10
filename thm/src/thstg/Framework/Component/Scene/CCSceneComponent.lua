@@ -29,20 +29,6 @@ function newFrames(params)
 	return display.newFrames(params.pattern, params.begin, params.length, params.isReversed)
 end
 
--- 新建动画
--- @param	tiem			[number]	所需时间
--- @param	frames			[table]		帧动画精灵
-function newAnimation(params)
-	params = params or {}
-
-	local frames = params.frames or {}
-	local time = params.time or (1/(#frames or 1))
-	local animation,_ = display.newAnimation(frames,time)
-
-	return animation
-end
-
-
 ----
 
 --替换场景,释放当前场景

@@ -12,7 +12,8 @@ function M.create(params)
         x = display.cx,
         y = display.cy,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        sheet = "stg01_bg"
+        source = {"stg1bg","stg01_bg"},
+
     })
     node:addChild(bg)
     
@@ -20,7 +21,7 @@ function M.create(params)
         x = display.cx-50,
         y = 0,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        sheet = "stg01_cloud_01"
+        source = {"stg1bg","stg01_cloud_01"},
     })
     cloud01:setPositionY(-cloud01:getContentSize().height)
     node:addChild(cloud01)
@@ -29,7 +30,7 @@ function M.create(params)
         x = display.cx+50,
         y = 0,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        sheet = "stg01_cloud_02"
+        source = {"stg1bg","stg01_cloud_02"},
     })
     cloud02:setPositionY(-cloud02:getContentSize().height)
     node:addChild(cloud02)

@@ -88,8 +88,20 @@ end
 @param	resName		[string]资源名
 @return 资源路径
 --]]
-function getUIRes(uiType, resName)
-	return getResSub(ResType.UI, uiType, resName)
+function getModuleRes(moduleType, ...)
+	return getResMul(ResType.MODULE, moduleType, ...)
+end
+
+
+--------------------------
+--[[
+获取组件资源
+@param	uiType		[string]组件类型	(对应UIType中的项)
+@param	resName		[string]资源名
+@return 资源路径
+--]]
+function getUIRes(uiType, ...)
+	return getResMul(ResType.UI, uiType, ...)
 end
 
 
@@ -104,8 +116,8 @@ function getTexDict(texType)
 	return getResMul(ResType.TEXTURE, texType)
 end
 
-function getTexRes(texType,resName)
-	return getResSub(ResType.TEXTURE, texType, resName)
+function getTexRes(texType, ...)
+	return getResMul(ResType.TEXTURE, texType ,...)
 end
 
 -------
@@ -115,12 +127,12 @@ end
 @param	resName		[string]资源名
 @return 资源表
 --]]
-function getAnimationDict(texType)
-	return getResMul(ResType.ANIMATION, texType)
+function getAnimationDict(texType, ...)
+	return getResMul(ResType.ANIMATION, texType, ... )
 end
 
-function getAnimationRes(texType,resName)
-	return getResSub(ResType.ANIMATION, texType, resName)
+function getAnimationRes(texType, ...)
+	return getResMul(ResType.ANIMATION, texType, ...)
 end
 
 --[[
@@ -130,6 +142,6 @@ end
 @return 资源表
 --]]
 
-function getParticleRes(particleType,...)
-	return getResMul(ResType.PARTICLE, particleType,...)
+function getParticleRes(particleType, ...)
+	return getResMul(ResType.SFX, SFXType.PARTICLE, particleType, ...)
 end

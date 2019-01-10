@@ -532,7 +532,7 @@ end
 -- @param	isLoop		[boolean]		是否循环
 -- @param	posType		[enum]			位置类型
 
-function newParticle(params)
+function newParticleSystem(params)
 	params = params or {}
 	params.isLoop = params.isLoop or false
 	params.posType = params.posType or cc.POSITION_TYPE_RELATIVE
@@ -544,4 +544,69 @@ function newParticle(params)
 	system:setAutoRemoveOnFinish(not params.isLoop)
 	system:setPositionType(params.posType)
 	return system
+end
+
+-- 新建骨骼动画
+-- @param	x			[number]		x
+-- @param	y			[number]		y
+-- @param	jsonSrc		[string]		骨骼数据文件
+-- @param	atlasSrc	[string]		资源集文件
+-- @param	src			[string]		文件路径
+-- @param	default		[string]		默认动作
+function newSkeletonAnimation(params)
+	params = params or {}
+
+	if params.src then
+		local dir = params.src
+		local fileName = FileUtil.stripPath(params.src)
+		
+		if fileName then 
+			dir = string.sub(dir,1,string.find(dir,fileName) - 2)
+			fileName = FileUtil.stripExtension(fileName)
+			
+		else 
+			fileName = string.sub(params.src,string.match(params.src, ".*()/")+1)
+		end
+		params.jsonSrc = string.format("%s/%s.json",dir, fileName)
+		params.atlasSrc = string.format("%s/%s.atlas",dir, fileName)
+		
+	end
+	local node = sp.SkeletonAnimation:create(params.jsonSrc,params.atlasSrc)
+	if params.anchorPoint then
+		node:setAnchorPoint(params.anchorPoint)
+	end
+	node:setPosition(cc.p(params.x or display.cx,params.y or display.cy))
+	if params.default then
+		node:setAnimation(0, params.default, true)
+	end
+	
+	local oldSetAnimation = node.setAnimation
+	function node:setAnimation(trackIndex,name,isLoop)
+		-- self:setToSetupPose()
+		local trackEntry = oldSetAnimation(self,trackIndex,name,isLoop)
+		-- if (trackEntry) then
+		-- 	self:
+		-- end
+	end
+
+	return node
+end
+
+-- 新建序列帧动画
+-- @param	x			[number]		x
+-- @param	y			[number]		y
+-- @param	frames		[string]		帧数据
+-- @param	default		[string]		默认动作
+function newSequenceAnimation(params)
+	params = params or {}
+
+	local frames = params.frames or {}
+	local time = params.time or (1/12)
+	local node,_ = display.newAnimation(frames,time)
+
+	function node:setAnimation(frames)
+		slef:playAnimationForever(frames)
+	end
+
+	return node
 end

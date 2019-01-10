@@ -15,7 +15,7 @@ function M.create(params)
         x = 470,
         y = 40,
         anchorPoint= THSTG.UI.POINT_CENTER,
-        source = ResManager.getRes(ResType.LOADING,"loading_icon_1")
+        source = ResManager.getModuleRes(ModuleType.LOADING,"loading_icon_1")
     })
     node:addChild(_uiIcon1)
 
@@ -23,7 +23,7 @@ function M.create(params)
         x = 500,
         y = 45,
         anchorPoint= THSTG.UI.POINT_CENTER,
-        source = ResManager.getRes(ResType.LOADING,"loading_word_cn")
+        source = ResManager.getModuleRes(ModuleType.LOADING,"loading_word_cn")
     })
     node:addChild(_uiWordCn)
 
@@ -31,7 +31,7 @@ function M.create(params)
         x = 560,
         y = 25,
         anchorPoint= THSTG.UI.POINT_CENTER,
-        source = ResManager.getRes(ResType.LOADING,"loading_word_en")
+        source = ResManager.getModuleRes(ModuleType.LOADING,"loading_word_en")
     })
     node:addChild(_uiWordEn)
 

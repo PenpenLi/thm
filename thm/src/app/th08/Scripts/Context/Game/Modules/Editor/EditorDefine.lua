@@ -1,0 +1,2 @@
+module("EditorDefine", package.seeall)
+

@@ -43,28 +43,28 @@ function newRotateIcon(params)
 end
 
 function newSheetImage(params)
-    local sheet = params.sheet 
+    local source = params.source
     local image = THSTG.UI.newImage(params)
 
-    function image:setSheetInfo(sheetKey)
-        local info = ResManager.getAnimationRes(TexType.SHEET,sheetKey)
+    function image:setSheetInfo(fileName,name)
+        local info = SheetConfig.getFrame(fileName,name)
         image:setSource(info.source)
         image:setTextureRect(info.rect)
         local size = cc.size(params.width or info.rect.width,params.height or info.rect.height)
         image:setContentSize(size)
     end
 
-    image:setSheetInfo(sheet)
+    image:setSheetInfo(source[1],source[2])
 
     return image
 end
 
 function newSheetSprite(params)
-    local sheet = params.sheet 
+    local source = params.source
     local sprite = THSTG.UI.newSprite(params)
 
-    function sprite:setSheetInfo(sheetKey)
-        local info = ResManager.getTexRes(TexType.SHEET,sheetKey)
+    function sprite:setSheetInfo(fileName,name)
+        local info = SheetConfig.getFrame(fileName,name)
         sprite:setSource(info.source)
         sprite:setTextureRect(info.rect)
         local size = cc.size(params.width or info.rect.width,params.height or info.rect.height)
@@ -72,7 +72,7 @@ function newSheetSprite(params)
     end
     
 
-    sprite:setSheetInfo(sheet)
+    sprite:setSheetInfo(source[1],source[2])
 
     return sprite
 end

@@ -4,7 +4,7 @@ local ETouchType = Definition.Public.ETouchType
 local M = class("PlayerController",THSTG.ECS.Script)
 
 function M:_onInit()
-    self.roleType = nil                             --人物类型
+    
     self.bulletEntity = false                       --子弹的实体
     self.shotInterval = 0.10                        --发射子弹的时间间隔
     self.initPos = cc.p(120,32)                     --玩家初始位置
@@ -22,9 +22,9 @@ function M:move(x,y)
     
     ---动画模块
     local animationScript = self:getScript("PlayerAnimation")
-    if offset.x < 0 then animationScript:play(StageDefine.ActionType.PLAYER_MOVE_LEFT)
-    elseif offset.x > 0 then animationScript:play(StageDefine.ActionType.PLAYER_MOVE_RIGHT)
-    else animationScript:play(StageDefine.ActionType.PLAYER_STAND) 
+    if offset.x < 0 then animationScript:play("MoveLeft")
+    elseif offset.x > 0 then animationScript:play("MoveRight")
+    else animationScript:play("Idle") 
     end
 end
 
@@ -96,7 +96,6 @@ function M:__onInitMyself()
     myPosComp:setPositionX(self.initPos.x)
     myPosComp:setPositionY(self.initPos.y)
 
-    self.roleType = Cache.roleCache.getType()
     self.bulletEntity = StageDefine.PlayerBullet    --TODO:根据roleType变换
 end
 

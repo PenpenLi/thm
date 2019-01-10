@@ -2,7 +2,9 @@ module("ModuleType")
 
 TEST = "test"
 
-MAIN_UI = "main_ui"
+EDITOR = "editor"
+
+MAINUI = "main_ui" 
 
 MENU = "menu"
 
@@ -13,3 +15,8 @@ LOADING = "loading"
 SELECTION = "selection"
 
 STAGE = "stage"
+
+
+
+
+

@@ -1,5 +1,4 @@
 module("StageDefine", package.seeall)
-require("Scripts.Context.Game.Modules.Stage.Config.Init")
 
 ---[[组件]]----
 SpriteComponent = require("Scripts.Context.Game.Modules.Stage.Component.SpriteComponent")
@@ -70,8 +69,6 @@ BulletMove = require("Scripts.Context.Game.Modules.Stage.Script.Move.BulletMove"
 
 ---[[工具]]-----
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  
-PublicUtil = require("Scripts.Context.Game.Modules.Stage.Util.PublicUtil")  
-
 
 ------
 --[[轮询的系统注册]]---

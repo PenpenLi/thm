@@ -1,13 +1,13 @@
 local M = class("BatmanAnimation",StageDefine.AnimationController)
 
 function M:_onInit()
-
+    M.super._onInit(self)
 end
 ---
 function M:_onStart()
     local animationComp = self:getComponent("AnimationComponent")
     animationComp:play(cc.RepeatForever:create(
-        cc.Animate:create(AnimationCache.getSheetRes("enemy_01_a_normal"))
+        cc.Animate:create(AnimationCache.getResBySheet("enemy","enemy_01_a_normal"))
     ))
  
     
