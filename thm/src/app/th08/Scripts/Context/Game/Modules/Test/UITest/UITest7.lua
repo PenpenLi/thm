@@ -9,15 +9,26 @@ function M.create(params)
 
 
     
-    local skeletonNode = THSTG.UI.newSkeletonAnimation({
+    -- local skeletonNode = THSTG.UI.newSkeletonAnimation({
+    --     x = display.cx,
+    --     y = display.cy,
+    --     src = ResManager.getResMul(ResType.ANIMATION,AnimationType.SKELETON,"spine_dragonborn_logo"),
+    --     default = "newAnimation",
+    -- })
+    -- skeletonNode:setScale(0.4)
+    -- node:addChild(skeletonNode)
+
+    GlobalUtil.playEffect({
         x = display.cx,
         y = display.cy,
-        src = ResManager.getResMul(ResType.ANIMATION,AnimationType.SKELETON,"spine_player_dragon"),
-        default = "stand",
+        src = ResManager.getResMul(ResType.ANIMATION,AnimationType.SKELETON,"spine_dragonborn_logo"),
+        default = "newAnimation",
+        isLoop = false,
+        scale = 0.4,
+        father = node,
     })
    
-    skeletonNode:setScale(0.4)
-    node:addChild(skeletonNode)
+    
 
     local p1 = THSTG.UI.newParticleSystem({
         x = display.width/2,

@@ -16,7 +16,7 @@ end
 
 function M:_onDead()
     --这里代表击中,而不是对象消亡
-    GlobalUtil.playEffect({
+    GlobalUtil.playSFXEffect({
         refNode = self:getEntity(),
         name = "ccle_die_magic_01",
     })

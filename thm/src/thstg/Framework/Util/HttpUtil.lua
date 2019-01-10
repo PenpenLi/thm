@@ -107,7 +107,7 @@ function private.getFormatedURLData(params, key, signWord)
 		table.sort(tmpT)
 		local paramsStr = table.concat(tmpT, "&")
 		local md5str = paramsStr..key
-		local sign = string.format("&%s=%s", signWord, string.lower(FRMD5(md5str, string.len(md5str))))
+		local sign = string.format("&%s=%s", signWord, string.lower(THSTG.MD5.string(md5str)))
 		return paramsStr..sign
 	else
 		return ""
