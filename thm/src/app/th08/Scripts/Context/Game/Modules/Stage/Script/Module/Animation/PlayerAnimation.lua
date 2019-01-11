@@ -27,10 +27,10 @@ function M:_onMoveLeft(event)
     self.sprite:setFlippedX(false)
     self.sprite:stopAllActions()
     self.sprite:runAction(cc.Sequence:create({
-        cc.Animate:create(AnimationCache.getResBySheet(Cache.roleCache.getCurAnimSheetByName("move_left_start"))),
+        cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetByName("move_left_start"))),
         cc.CallFunc:create(function() 
             self.sprite:runAction(cc.RepeatForever:create(
-                cc.Animate:create(AnimationCache.getResBySheet(Cache.roleCache.getCurAnimSheetByName("move_left_sustain")))
+                cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetByName("move_left_sustain")))
             ))
         end)
     }))
@@ -40,10 +40,10 @@ function M:_onMoveRight(event)
     self.sprite:setFlippedX(true)
     self.sprite:stopAllActions()
     self.sprite:runAction(cc.Sequence:create({
-        cc.Animate:create(AnimationCache.getResBySheet(Cache.roleCache.getCurAnimSheetByName("move_left_start"))),
+        cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetByName("move_left_start"))),
         cc.CallFunc:create(function() 
             self.sprite:runAction(cc.RepeatForever:create(
-                cc.Animate:create(AnimationCache.getResBySheet(Cache.roleCache.getCurAnimSheetByName("move_left_sustain")))
+                cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetByName("move_left_sustain")))
             ))
         end)
     }))
@@ -53,13 +53,13 @@ end
 function M:_onIdle(event)
     local actions = {}
     if event.from == "MoveRight" or event.from == "MoveLeft" then
-        table.insert( actions,cc.Animate:create(AnimationCache.getResBySheet(Cache.roleCache.getCurAnimSheetByName("move_left"))):reverse())
+        table.insert( actions,cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetByName("move_left"))):reverse())
         table.insert( actions,cc.CallFunc:create(function() 
             self.sprite:setFlippedX(not self.sprite:isFlippedX())
         end))
     end
     table.insert( actions,cc.CallFunc:create(function() 
-        self.sprite:playAnimationForever(AnimationCache.getResBySheet(Cache.roleCache.getCurAnimSheetByName("stand_normal")))
+        self.sprite:playAnimationForever(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetByName("stand_normal")))
     end))
     self.sprite:stopAllActions()
     self.sprite:runAction(cc.Sequence:create(actions))

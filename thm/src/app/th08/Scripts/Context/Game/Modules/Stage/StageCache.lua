@@ -16,6 +16,13 @@ end
 function getMapId()
     return getStageId()
 end
+
+----
+function getCurRoleAnimSheetByName(name)
+    return StageConfig.getRoleAnimSheetByName(Cache.roleCache.getType(),name)
+end
+
+
 ----
 function clear()
     

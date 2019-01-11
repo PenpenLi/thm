@@ -18,7 +18,7 @@ function M.create(params)
     -- skeletonNode:setScale(0.4)
     -- node:addChild(skeletonNode)
 
-    GlobalUtil.playEffect({
+    local sp0 = GlobalUtil.playEffect({
         x = display.cx,
         y = display.cy,
         src = ResManager.getResMul(ResType.ANIMATION,AnimationType.SKELETON,"spine_dragonborn_logo"),

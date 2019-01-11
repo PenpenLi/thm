@@ -3,7 +3,7 @@ module(..., package.seeall)
 local M = {}
 function M.create(params)
     -------Model-------
-    local _scheduledTask = THSTG.UTIL.newScheduledTask()
+    local _scheduledTask = THSTG.UTIL.newTaskScheduler()
    
     -------View-------
     local node = THSTG.UI.newNode()

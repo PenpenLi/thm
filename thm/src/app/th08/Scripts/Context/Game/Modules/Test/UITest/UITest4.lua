@@ -292,7 +292,7 @@ function M.create(params)
 
 
     ---------
-    _varKeyboardListener = EventPublic.newKeyboardExListener({
+    _varKeyboardListener = THSTG.EVENT.newKeyboardExListener({
         onPressed = function (keyCode, event)
             pressKey(keyCode)
         end,
@@ -305,7 +305,7 @@ function M.create(params)
     })
 
 
-    _varTouchAllListener = EventPublic.newTouchAllAtOnceExListener({
+    _varTouchAllListener = THSTG.EVENT.newTouchAllAtOnceExListener({
         onBegan = function(touches, event)
             --有触屏就有攻击
             local curPos = touches[1]:getLocation()

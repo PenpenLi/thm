@@ -30,6 +30,13 @@ return {
 
     },
 
+    shader = {
+        default_vs = "Assets/Shader/default.vs",
+        default_fs = "Assets/Shader/default.fs",
+        grey_vs = "Assets/Shader/grey.vs",
+        grey_fs = "Assets/Shader/grey.fs"
+    },
+
     ui = {
        button = {
             btn_base_yellow = "Assets/UI/Button/btn_base_yellow.png" ,

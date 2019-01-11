@@ -1,9 +1,10 @@
 module("ScenePublic", package.seeall)
 
 function newAnimation(texType,fileName,resName,time)
-    local info = SheetConfig.getSequence(fileName,resName)
+
     if texType == TexType.SHEET then
-        local animation = THSTG.UI.newSequenceAnimation({
+        local info = SheetConfig.getSequence(fileName,resName)
+        local animation = THSTG.SCENE.newAnimation({
             frames = THSTG.SCENE.newFramesBySheet({
                 source = info.source,
                 length = info.length,
@@ -15,7 +16,7 @@ function newAnimation(texType,fileName,resName,time)
     elseif texType == TexType.PLIST then
         local info = PlistConfig.getSequence(fileName,resName)
         THSTG.SCENE.loadPlistFile(info.source)
-        local animation = THSTG.UI.newSequenceAnimation({
+        local animation = THSTG.SCENE.newAnimation({
             frames = THSTG.SCENE.newFramesByPattern({
                 pattern = info.pattern,
                 begin = info.begin,
@@ -25,8 +26,8 @@ function newAnimation(texType,fileName,resName,time)
         })
         return animation
     elseif texType == TexType.IMAGE then
-        --TODO:
-        local animation = THSTG.UI.newSequenceAnimation({
+        local info = ImageConfig.getSequence(fileName,resName)
+        local animation = THSTG.SCENE.newAnimation({
             frames = THSTG.SCENE.newFramesByFiles({
                 array = info.array,
                 begin = info.begin,

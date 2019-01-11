@@ -551,8 +551,11 @@ end
 -- @param	y			[number]		y
 -- @param	jsonSrc		[string]		骨骼数据文件
 -- @param	atlasSrc	[string]		资源集文件
--- @param	src			[string]		文件路径
+-- @param	src			[string]		文件路径(上面的简写,只需要json文件路径即可)
 -- @param	default		[string]		默认动作
+-- @param 	onStart		[function]		动画开始回调
+-- @param 	onComplete		[function]	动画完成一次回调
+-- @param 	onEnd		[function]		动画结束回调
 function newSkeletonAnimation(params)
 	params = params or {}
 
@@ -579,14 +582,27 @@ function newSkeletonAnimation(params)
 	if params.default then
 		node:setAnimation(0, params.default, true)
 	end
+
+	if type(params.onStart) == "function" then node:registerSpineEventHandler(handler(node,params.onStart), sp.EventType.ANIMATION_START) end
+	if type(params.onComplete) == "function" then node:registerSpineEventHandler(handler(node,params.onComplete), sp.EventType.ANIMATION_COMPLETE) end
+	if type(params.onEnd) == "function" then node:registerSpineEventHandler(handler(node,params.onEnd), sp.EventType.ANIMATION_END) end
+
+	---
 	
-	local oldSetAnimation = node.setAnimation
-	function node:setAnimation(trackIndex,name,isLoop)
-		-- self:setToSetupPose()
-		local trackEntry = oldSetAnimation(self,trackIndex,name,isLoop)
-		-- if (trackEntry) then
-		-- 	self:
-		-- end
+	local _isSet = false
+	function node:playAnimation(trackIndex,name,isLoop)
+		if not _isSet then
+			-- self:setToSetupPose()
+			local trackEntry = self:setAnimation(trackIndex,name,isLoop)
+			-- if (trackEntry) then
+			-- 	self:
+			-- end
+
+			_isSet = true
+		else
+			self:clearTracks()
+			self:addAnimation(trackIndex,name,isLoop)
+		end
 	end
 
 	return node
@@ -595,18 +611,68 @@ end
 -- 新建序列帧动画
 -- @param	x			[number]		x
 -- @param	y			[number]		y
--- @param	frames		[string]		帧数据
--- @param	default		[string]		默认动作
+-- @param	animation	[userdata]		动画
+-- @param 	onStart		[function]		动画开始回调
+-- @param 	onComplete		[function]	动画完成回调
+-- @param 	onEnd		[function]		动画结束回调
+
 function newSequenceAnimation(params)
 	params = params or {}
+	---
+	local privateData = {}
+	privateData.onStart = params.onStart
+	privateData.onComplete = params.onComplete
+	privateData.onEnd = params.onEnd
 
-	local frames = params.frames or {}
-	local time = params.time or (1/12)
-	local node,_ = display.newAnimation(frames,time)
+	privateData.isLoop = params.isLoop or false
+	privateData.isReversed = params.isReversed or false
+	privateData.animation = params.animation
 
-	function node:setAnimation(frames)
-		slef:playAnimationForever(frames)
+	local node = newSprite(params)
+
+	----
+
+	function node:playAnimation(animation,isLoop,isReversed)
+		if not animation then return end
+
+		local actions = {}
+		local animateAction = false
+		
+		local animate = (isReversed and {cc.Animate:create(animation):reverse()} or {cc.Animate:create(animation)})[1]
+		
+		if type(privateData.onComplete) == "function" then
+			animateAction = cc.Sequence:create({
+				animate,
+				cc.CallFunc:create(handler(node,privateData.onComplete))
+			})
+		else
+			animateAction = animate
+		end
+
+		if type(privateData.onStart) == "function" then table.insert(actions,cc.CallFunc:create(handler(node,privateData.onStart))) end
+		if isLoop then 
+			table.insert(actions,cc.CallFunc:create(function()
+				self:runAction(cc.RepeatForever:create(animateAction))
+			end))
+		else 
+			table.insert(actions,animateAction) 
+		end
+		if type(privateData.onEnd) == "function" then table.insert(actions,cc.CallFunc:create(handler(node,privateData.onEnd))) end
+		
+		local action = cc.Sequence:create(actions)
+		self:runAction(action)
+
+		return actions
+	end
+
+	function node:stopAnimation()
+		self:stopAllActions()
+	end
+	---
+	if privateData.animation then
+		node:playAnimation(privateData.animation,privateData.isLoop,params.isReversed)
 	end
 
 	return node
 end
+

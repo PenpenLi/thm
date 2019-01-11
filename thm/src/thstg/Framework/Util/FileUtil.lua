@@ -37,9 +37,9 @@ end
 	@param   [string] fileName  指定文件路径（可写路径下的相对路径）
 	@return  [string]           文件全部内容的字符串返回
 --]]
-function readWritableFileStrData(fileName)
-	return FREngineUtil:getInstance():readWritableFileStrData(fileName)
-end
+-- function readWritableFileStrData(fileName)
+-- 	return FREngineUtil:getInstance():readWritableFileStrData(fileName)
+-- end
 
 --[[
 	把内容写入指定文件, 原来文件内容将被覆盖
@@ -47,9 +47,10 @@ end
 	@param  [string] contentStr 写入内容
 	@return [boolean]           是否写入成功
 --]]
-function writeWritableFileStrData(fileName, contentStr)
-	return FREngineUtil:getInstance():writeWritableFileStrData(fileName, contentStr)
-end
+-- function writeWritableFileStrData(fileName, contentStr)
+-- 	return FREngineUtil:getInstance():writeWritableFileStrData(fileName, contentStr)
+-- end
+
 
 --[[
 	把内容追加到指定文件末尾, 原来文件内容将会保留
@@ -57,9 +58,39 @@ end
 	@param  [string] contentStr 写入内容
 	@return [boolean]           是否写入成功
 --]]
-function insertWritableFileStrData(fileName, contentStr)
-	return FREngineUtil:getInstance():insertWritableFileStrData(fileName, contentStr)
+-- function insertWritableFileStrData(fileName, contentStr)
+-- 	return FREngineUtil:getInstance():insertWritableFileStrData(fileName, contentStr)
+-- end
+
+
+--[[读取文件]]
+function readFile(fileName)
+    local fileName = fileUtils:fullPathForFilename(fileName)
+    local file = assert(io.open(fileName, "r"), "The specified file could not be found")
+    local data = file:read("*all")
+    file:close()
+    return data 
 end
+
+
+--读取指定文件: lines是读取到的内容
+function readFileLine(filename)
+    local BUFFSIZE = 84012
+    local filename = fileUtils:fullPathForFilename(filename)
+    local file = assert(io.open(filename, "r"), "The specified file could not be found")
+    local lines, rest = file:read(BUFFSIZE, "*line")
+    file:close()
+    return lines, rest
+end
+
+--文件的写入
+function writeFile(filename, string)
+   local filename = fileUtils:fullPathForFilename(filename)
+   local file = assert(io.open(filename, "w"))
+   file:write(string)
+   file:close()
+end
+
 
 --[[
 	删除文件

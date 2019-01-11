@@ -1,6 +1,4 @@
-module("RoleType")
-
-LILYWHITE = "LilyWhite"
+module("RoleType", package.seeall)
 
 REIMU = "Reimu"
 

@@ -17,9 +17,6 @@ function getPower()
 end
 
 ----
-function getCurAnimSheetByName(name)
-    return RoleConfig.getAnimSheetByName(getType(),name)
-end
 
 
 ----

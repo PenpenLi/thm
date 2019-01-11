@@ -96,7 +96,8 @@ function M:__onInitMyself()
     myPosComp:setPositionX(self.initPos.x)
     myPosComp:setPositionY(self.initPos.y)
 
-    self.bulletEntity = StageDefine.PlayerBullet    --TODO:根据roleType变换
+    --TODO:根据roleType变换
+    self.bulletEntity = StageDefine.PlayerBullet    
 end
 
 return M

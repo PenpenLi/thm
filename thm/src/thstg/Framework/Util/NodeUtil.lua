@@ -300,3 +300,79 @@ function onMove(widget, params)
 	widget:setSwallowTouches(swallowTouches)
 	widget:addTouchEventListener(onTouch)
 end
+
+
+local DEFAULT_VERTEX_SHADER = 
+[[
+	attribute vec4 a_position;
+	attribute vec2 a_texCoord;
+	attribute vec4 a_color;
+	
+	#ifdef GL_ES
+	varying lowp vec4 v_fragmentColor;
+	varying mediump vec2 v_texCoord;
+	#else
+	varying vec4 v_fragmentColor;
+	varying vec2 v_texCoord;
+	#endif
+	
+	void main()
+	{
+		gl_Position = CC_PMatrix * a_position;
+		v_fragmentColor = a_color;
+		v_texCoord = a_texCoord;
+	}
+]]
+local DEFAULT_FRAGMENT_SHADER = 
+[[
+	#ifdef GL_ES
+	precision lowp float;
+	#endif
+	
+	uniform vec4 u_color;
+	varying vec2 v_texCoord;
+	
+	void main()
+	{
+		gl_FragColor = texture2D(CC_Texture0, v_texCoord);
+	}
+	
+]]
+
+function applyShader(node,params)
+    params = params or {}
+    if node then
+        local shaderKey = params.shaderKey
+        
+        local glProgramCache = cc.GLProgramCache:getInstance()
+        local glProgram = false
+        if shaderKey then glProgram = glProgramCache:getGLProgram(shaderKey) end
+    
+        if not glProgram then
+            local vertShaderStr = DEFAULT_VERTEX_SHADER
+            local fragShaderStr = DEFAULT_FRAGMENT_SHADER
+			if params.vsSrc then vertShaderStr = FileUtil.readFile(params.vsSrc)
+			elseif params.vsStr then vertShaderStr = params.vsStr end
+
+			if params.fsSrc then fragShaderStr = FileUtil.readFile(params.fsSrc)
+			elseif params.fsStr then  fragShaderStr = params.fsStr end
+			
+			glProgram = cc.GLProgram:createWithByteArrays(vertShaderStr, fragShaderStr)
+			if shaderKey then
+				glProgramCache:addGLProgram(glProgram, shaderKey)
+			end
+        end
+
+        if glProgram then
+            local glProgramState = cc.GLProgramState:getOrCreateWithGLProgram(glProgram)
+
+            if type(params.onState) == "function" then
+                params.onState(node,glProgramState,glProgram)
+            end
+
+            node:setGLProgramState(glProgramState)
+            return glProgram
+        end
+    end
+    return nil
+end

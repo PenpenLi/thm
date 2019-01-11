@@ -8,16 +8,29 @@ function M.create(params)
     --------View--------
     local node = THSTG.UI.newNode()
 
-    local bg = UIPublic.newSheetSprite({
+    local bg = UIPublic.newUVSheetFrameSprite({
+        x = display.cx,
+        y = display.cy,
+        width = display.width-100,
+        height = display.height,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        source = {"stg1bg","stg01_bg"},
+        vRange = cc.p(0,0.5),
+        speed = cc.p(0,0.4),
+    })
+    bg:setRotation3D(cc.vec3(120,0,0))
+    node:addChild(bg)
+
+    local an = UIPublic.newSheetAnimationSprite({
         x = display.cx,
         y = display.cy,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        source = {"stg1bg","stg01_bg"},
-
+        source = {"player00","reimu_stand_normal"},
+        isLoop = true,
     })
-    node:addChild(bg)
+    node:addChild(an)
     
-    local cloud01 = UIPublic.newSheetSprite({
+    local cloud01 = UIPublic.newSheetFrameSprite({
         x = display.cx-50,
         y = 0,
         anchorPoint = THSTG.UI.POINT_CENTER,
@@ -26,7 +39,7 @@ function M.create(params)
     cloud01:setPositionY(-cloud01:getContentSize().height)
     node:addChild(cloud01)
 
-    local cloud02 = UIPublic.newSheetSprite({
+    local cloud02 = UIPublic.newSheetFrameSprite({
         x = display.cx+50,
         y = 0,
         anchorPoint = THSTG.UI.POINT_CENTER,

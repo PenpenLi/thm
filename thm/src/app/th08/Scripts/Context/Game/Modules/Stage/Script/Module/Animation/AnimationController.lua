@@ -8,7 +8,8 @@ function M:_onInit()
 end
 --
 function M:play(actionType)
-    if self.fsm:getState() == actionType then return end
+
+    if self.fsm:cannotDoEvent(actionType) then return end
     
     self.fsm:doEvent(actionType)
 end

@@ -8,6 +8,7 @@ function M.create(params)
     -------View-------
     local node = THSTG.UI.newNode()
 
+    -- THSTG.NodeUtil.applyShader(img)
     --弹入对话框
     --弹出对话框-回调
     --换边说话-明暗处理

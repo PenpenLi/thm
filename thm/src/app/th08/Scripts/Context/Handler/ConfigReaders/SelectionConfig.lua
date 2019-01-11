@@ -4,7 +4,7 @@ local _Dict = false
 
 local function getDict()
     if not _Dict then
-        _Dict = require("Scripts.Configs.Handwork.SelectionMisc")
+        _Dict = require("Scripts.Configs.Handwork.Module.SelectionMisc")
     end
     return _Dict
 end
