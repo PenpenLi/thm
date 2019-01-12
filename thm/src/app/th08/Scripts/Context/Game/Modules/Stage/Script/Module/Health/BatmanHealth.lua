@@ -18,7 +18,7 @@ function M:_onDead()
     --这里代表击中,而不是对象消亡
     GlobalUtil.playSEXEffect({
         refNode = self:getEntity(),
-        name = "ccle_die_magic_01",
+        source = {EffectType.PUBLIC,"ccle_die_magic_01"},
     })
     --TODO:还需要播放一个粒子效果
     self:killEntity()

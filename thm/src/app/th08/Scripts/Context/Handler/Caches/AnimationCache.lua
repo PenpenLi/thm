@@ -1,32 +1,39 @@
 module("AnimationCache", package.seeall)
 
-local _dict = {}
-function getRes(type,fileName,name,time)
-    local ret =_dict[type] and _dict[type][name]
-    if not ret then
-        time = time or Definition.Public.ANIMATION_INTERVAL
-        ret = ScenePublic.newAnimation(type,fileName,name,time)
-        if ret then
-            _dict[type] = _dict[type] or {}
-            _dict[type][fileName] = _dict[type][fileName] or {}
-            _dict[type][fileName][name] = ret
-            ret:retain()
-        end
+local function getNameKey(...)
+    local keys = {...}
+    local keyName = ""
+    for _,v in ipairs(keys) do
+        keyName = keyName .. v .. "#"
     end
-    return ret
-    
+    keyName = THSTG.MD5.string(keyName)
+
+    return keyName
 end
 
-function getResBySheet(fileName,name,time)
-    return getRes(TexType.SHEET,fileName,name,time)
+function getRes(type,fileName,name)
+    local nameKey = getNameKey(type,fileName,name)
+    local animation = display.getAnimationCache(nameKey)
+    if not animation then
+        local ret = ScenePublic.newAnimation({
+            texType = type,
+            fileName = fileName,
+            resName = name,
+        })
+        if not ret then return nil
+        else
+            display.setAnimationCache(nameKey,ret)
+        end
+        return ret
+    end
+    return animation
+end
+
+function getResBySheet(fileName,name)
+    return getRes(TexType.SHEET,fileName,name)
 end
 ----
 
 function clear()
-    _dict = {}
-    for _,v in pairs(_dict) do
-        for _,vv in pairs(v) do
-            vv:release()
-        end
-    end
+   
 end

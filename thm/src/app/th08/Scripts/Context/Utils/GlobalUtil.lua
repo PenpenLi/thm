@@ -15,7 +15,7 @@ function playEffect(params)
 
     local node = THSTG.UI.newSkeletonAnimation(params)
 
-    node:playAnimation(0,params.default,params.isLoop)
+    node:playAnimation(0,params.animation,params.isLoop)
 
     if params.father then
         params.father:addChild(node)
@@ -32,14 +32,13 @@ function playEffect(params)
 end
 
 function playSEXEffect(params)
-    if not params.onAction then
-        params.isLoop = params.isLoop or false
+    params = params or {}
+    if params.source then
+        params.type = params.source[1]
+        params.name = params.source[2]
+    else
         params.type = params.type or EffectType.PUBLIC
-        local onAction = function(node)
-            return SEXManager.getSEXEffect(params.type,params.name)()
-        end
-        params.onAction = onAction
     end
-
-    return SpriteCache.create(params)
+    
+    return SEXManager.playEffect(params)
 end

@@ -41,7 +41,7 @@ function create(class,param)
                 object = obj
             }
 
-            if tolua.cast(obj,"cc.Node") then
+            if tolua.iskindof(obj,"cc.Node") then
                 obj:retain()
             end
 
@@ -66,7 +66,7 @@ function release(obj,isDelete)
         local queue = categoryCache[class]
 
         if isDelete then
-            if tolua.cast(obj,"cc.Node") then
+            if tolua.iskindof(obj,"cc.Node") then
                 obj:release()
             end
             objsCache[obj] = nil
@@ -94,7 +94,7 @@ end
 --
 function clear()
     for _,v in paris(objsCache) do
-        if tolua.cast(v.object,"cc.Node") then
+        if tolua.iskindof(v.object,"cc.Node") then
             v.object:release()
         end
     end

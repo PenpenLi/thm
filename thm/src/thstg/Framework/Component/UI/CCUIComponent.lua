@@ -552,7 +552,7 @@ end
 -- @param	jsonSrc		[string]		骨骼数据文件
 -- @param	atlasSrc	[string]		资源集文件
 -- @param	src			[string]		文件路径(上面的简写,只需要json文件路径即可)
--- @param	default		[string]		默认动作
+-- @param	amination	[string]		默认动作
 -- @param 	onStart		[function]		动画开始回调
 -- @param 	onComplete		[function]	动画完成一次回调
 -- @param 	onEnd		[function]		动画结束回调
@@ -579,8 +579,8 @@ function newSkeletonAnimation(params)
 		node:setAnchorPoint(params.anchorPoint)
 	end
 	node:setPosition(cc.p(params.x or display.cx,params.y or display.cy))
-	if params.default then
-		node:setAnimation(0, params.default, true)
+	if params.amination then
+		node:setAnimation(0, params.amination, true)
 	end
 
 	if type(params.onStart) == "function" then node:registerSpineEventHandler(handler(node,params.onStart), sp.EventType.ANIMATION_START) end
@@ -676,3 +676,44 @@ function newSequenceAnimation(params)
 	return node
 end
 
+--
+-- 新建骨骼动画
+-- @param	x			[number]		x
+-- @param	y			[number]		y
+-- @param	src			[string]		文件路径
+-- @param	animation		[string]		默认动作
+--TODO:
+function newArmatureAnimation(params)
+	params  = params or {}
+	---
+	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(params.src)
+    local node = ccs.Armature:create(params.animation)
+	if params.anchorPoint then
+		node:setAnchorPoint(params.anchorPoint)
+	end
+	node:setPosition(cc.p(params.x or display.cx,params.y or display.cy))
+
+
+	---
+	-- function node:playAnimation(name)
+	-- 	self:getAnimation():play(name)
+	-- end
+
+	-- function node:playWithIndex(index)
+	-- 	self:getAnimation():playWithIndex(index)
+	-- end
+
+	-- function node:stop()
+	-- 	self:getAnimation():stop()
+	-- end
+
+	-- function node:pause()
+	-- 	self:getAnimation():pause()
+	-- end
+
+	-- function node:resume()
+	-- 	self:getAnimation():resume()
+	-- end
+
+	return node
+end

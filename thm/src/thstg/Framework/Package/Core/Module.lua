@@ -133,7 +133,7 @@ function M:addTo(parent)
 	parent:addChild(self)
 end
 function M:addChild(module)
-	assert(not tolua.cast(module, "Module"), "[Module] the addChild function param value must be a THSTG Module object!!")
+	assert(not tolua.iskindof(module, "Module"), "[Module] the addChild function param value must be a THSTG Module object!!")
 	assert(not module.__parent__, "[Module] child already added. It can't be added again!")
 	self.__children__ = self.__children__ or {}
 	table.insert(self.__children__, module)

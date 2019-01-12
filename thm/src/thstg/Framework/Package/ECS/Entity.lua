@@ -13,7 +13,6 @@ function M:ctor()
     self.__id__ = ECSUtil.getEntityId()
 	self.__components__ = {}
 	self.__flags__ = false
-	self.__isCCNode__ = false
 	self.__isActive__ = true
     ----
 	ECSManager.addEntity(self)
@@ -21,7 +20,7 @@ end
 --
 --[[component模块]]
 local function _addComponent(self,component,params)
-	assert(not tolua.cast(component, "ECS.Component"), "[Entity] the addChild function param value must be a THSTG ECS.Component object!!")
+	assert(not tolua.iskindof(component, "ECS.Component"), "[Entity] the addChild function param value must be a THSTG ECS.Component object!!")
 
 	-- 有些组件可以被多次添加,有些不行
 	local componentName = component:getClass()
@@ -150,7 +149,7 @@ function M:getID()
 end
 
 function M:isCCNode()
-	return self.__isCCNode__
+	return tolua.iskindof(self,"cc.Node")
 end
 
 function M:setActive(isActive)

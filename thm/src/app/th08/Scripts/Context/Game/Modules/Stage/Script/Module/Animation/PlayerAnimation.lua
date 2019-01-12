@@ -4,14 +4,14 @@ function M:_onInit()
     M.super._onInit(self)
 end
 
-function M:_onSetup()
+function M:_onState()
     return {
         initial = "Idle",
         events  = {
             {name = "MoveLeft",  from = {"Idle","MoveRight"},  to = "MoveLeft"},
             {name = "MoveRight",  from = {"Idle","MoveLeft"},  to = "MoveRight"},
 
-            {name = "Idle", from = "*",  to = "Idle"},
+            {name = "Idle", from = {"MoveRight","MoveLeft"},  to = "Idle"},
         },
         callbacks = {
             onMoveLeft = handler(self,self._onMoveLeft),
@@ -53,7 +53,9 @@ end
 function M:_onIdle(event)
     local actions = {}
     if event.from == "MoveRight" or event.from == "MoveLeft" then
-        table.insert( actions,cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetByName("move_left"))):reverse())
+        local animation = AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetByName("move_left"))
+        animation:setDelayPerUnit(1/26)
+        table.insert( actions,cc.Animate:create(animation):reverse())
         table.insert( actions,cc.CallFunc:create(function() 
             self.sprite:setFlippedX(not self.sprite:isFlippedX())
         end))

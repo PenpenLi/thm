@@ -22,7 +22,7 @@ function M.create(params)
         x = display.cx,
         y = display.cy,
         src = ResManager.getResMul(ResType.ANIMATION,AnimationType.SKELETON,"spine_dragonborn_logo"),
-        default = "newAnimation",
+        animation = "newAnimation",
         isLoop = false,
         scale = 0.4,
         father = node,
