@@ -1,5 +1,5 @@
 return {
-    source = "Assets/Module/Stage/Effect/etama2.png",
+    source = "Assets/Module/Stage/Bullet/etama2.png",
     desc = "",
     frame = {
 

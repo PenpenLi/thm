@@ -1,16 +1,16 @@
 local M = class("HealthController",THSTG.ECS.Script)
 
 function M:_onInit()
-    self.life = 10
+    self.blood = 100
 
     self._isDead = false
     self._isHurt = false
 end
 --
 function M:hurt(damage)
-    self.life = self.life - damage
+    self.blood = self.blood - damage 
     self._isHurt = (damage > 0)
-    self._isDead = (self.life <= 0)
+    self._isDead = (self.blood <= 0)
 end
 
 function M:isDead()
@@ -19,6 +19,15 @@ end
 
 function M:isHurt()
     return self._isHurt
+end
+
+function M:setBlood(val,isRefresh)
+    self.blood = val
+    if isRefresh then self:hurt(0) end
+end
+
+function M:getBlood()
+    return self.blood
 end
 
 --

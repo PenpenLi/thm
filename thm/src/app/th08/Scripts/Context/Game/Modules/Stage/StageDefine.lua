@@ -20,6 +20,7 @@ EnemyEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.EnemyEnti
 BulletEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.BulletEntity")
 PlayerEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.PlayerEntity")
 
+BossPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.BossPrefab")
 BatmanPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.BatmanPrefab")
 BulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.BulletPrefab")
 PlayerPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.PlayerPrefab")
@@ -27,6 +28,7 @@ PlayerPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.PlayerP
 EnemyBullet = require("Scripts.Context.Game.Modules.Stage.Entity.EnemyBullet")
 PlayerBullet = require("Scripts.Context.Game.Modules.Stage.Entity.PlayerBullet")
 Player = require("Scripts.Context.Game.Modules.Stage.Entity.Player")
+Boss = require("Scripts.Context.Game.Modules.Stage.Entity.Boss")
 Batman = require("Scripts.Context.Game.Modules.Stage.Entity.Batman")
 StageGame = require("Scripts.Context.Game.Modules.Stage.Entity.StageGame")
 
@@ -46,13 +48,13 @@ ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.C
 --生命控制
 HealthController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.HealthController")
 BatmanHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.BatmanHealth")
+BossHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.BossHealth")
 PlayerHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.PlayerHealth")
 BulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.BulletHealth")
 
 --碰撞控制
 CollisionController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.CollisionController")
 PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.PlayerCollision")
-BatmanCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.BatmanCollision")
 BulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.BulletCollision")
 
 InputController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Input.InputController")
