@@ -7,7 +7,7 @@ function M.findWithTag(tag) return ECSManager.findEntityWithTag(tag) end
 function M.getAll() return ECSManager.getAllEntities() end
 function M.getAllEx(entity) return ECSManager.getAllEntities(entity) end
 
-local ECompType = {Control = 1,Script = 2}	--组件类型
+-- local ECompType = {Control = 1,Script = 2}	--组件类型
 -----
 function M:ctor()
     self.__id__ = ECSUtil.getEntityId()
@@ -70,10 +70,8 @@ end
 --获取组件列表
 function M:getComponents(...)
 	local ret = {}
-	local name = ECSUtil.trans2Name(...)
 	for k,v in pairs(self.__components__) do
-		local className = v:getClass()
-		if ECSUtil.find2ClassWithChild(className,...) then
+		if ECSUtil.find2ClassWithChild(k,...) then
 			table.insert( ret, v )
 		end
 	end
@@ -83,7 +81,9 @@ end
 
 --获取组件
 function M:getComponent(...)
-	return self:getComponents(...)[1]
+	local name = ECSUtil.trans2Name(...)
+	local comp = self.__components__[name]
+	return comp or self:getComponents(...)[1]
 end
 
 function M:isHaveComponent(...)
@@ -101,12 +101,12 @@ function M:addScript(scprit,params)
 	_addComponent(self,scprit,params)
 end
 
-function M:removeScript(scprit,params)
-	_remveComponent(self,scprit,params)
+function M:removeScript(...)
+	_remveComponent(self,...)
 end
 
-function M:getScript(name)
-	return self:getComponent(ECS.Script.__cname,name)
+function M:getScript(...)
+	return self:getComponent(ECS.Script.__cname,...)
 end
 
 --[[系统模块]]

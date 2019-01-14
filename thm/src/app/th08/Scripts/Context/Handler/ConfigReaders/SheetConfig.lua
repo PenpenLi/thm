@@ -1,5 +1,5 @@
 module("SheetConfig", package.seeall)
-
+local SHEET_PATH_FILES = "Scripts.Configs.Handwork.Sheet.All"
 local SHEET_PATH_PATTERN = "Scripts.Configs.Handwork.Sheet.%s"
 local EType = {
     Frame = 1,
@@ -48,6 +48,25 @@ function getFrame(filename,keyName)
     return nil
 end
 
+local _frameDict = false
+function getFrameDict(filename)
+    if not _frameDict then
+        _frameDict = {}
+        local files = {}
+        if filename then files = {filename} else files = require(SHEET_PATH_FILES) end
+        for _,v in pairs(files) do
+            local tb = getDict(v)
+            if tb and tb.frame then
+                _frameDict[v] = _frameDict[v] or {}
+                for keyName,_ in pairs(tb.frame) do 
+                    _frameDict[v][keyName] = getFrame(v,keyName)
+                end
+            end
+        end
+    end
+    return _frameDict
+end
+
 function getSequence(filename,keyName)
     if _animDict[filename] and _animDict[filename][EType.Sequence] and _animDict[filename][EType.Sequence][keyName] then
         return _animDict[filename][EType.Sequence][keyName]
@@ -67,5 +86,24 @@ function getSequence(filename,keyName)
         end
     end
     return nil
+end
+
+local _sequenceDict = false
+function getSequenceDict(filename)
+    if not _sequenceDict then
+        _sequenceDict = {}
+        local files = {}
+        if filename then files = {filename} else  files = require(SHEET_PATH_FILES) end
+        for _,v in ipairs(files) do
+            local tb = getDict(v)
+            if tb and tb.sequence then
+                _sequenceDict[v] = _sequenceDict[v] or {}
+                for keyName,_ in pairs(tb.sequence) do 
+                    _sequenceDict[v][keyName] = getSequence(v,keyName)
+                end
+            end
+        end
+    end
+    return _sequenceDict
 end
 

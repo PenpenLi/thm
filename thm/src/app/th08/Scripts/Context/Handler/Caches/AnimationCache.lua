@@ -18,7 +18,7 @@ function getRes(type,fileName,name)
         local ret = ScenePublic.newAnimation({
             texType = type,
             fileName = fileName,
-            resName = name,
+            keyName = name,
         })
         if not ret then return nil
         else

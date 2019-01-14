@@ -31,7 +31,7 @@ function getRoleGameArgs(roleType)
     return tb.gameArgs
 end
 
-function getRoleAnimSheetByName(roleType,name)
+function getRoleAnimSheetArgs(roleType,name)
     local tb = getRole(roleType)
     local args = tb.animation[name]
     if args then

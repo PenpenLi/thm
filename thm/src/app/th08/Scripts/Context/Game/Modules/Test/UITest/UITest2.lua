@@ -34,45 +34,52 @@ function M.create(params)
         local lastPosX,lastPosY = 0,panel:getContentSize().height
         local curMaxHeight = 0
         local innerHeight = panel:getContentSize().height
-        local dict = ResManager.getAnimationDict(type) or {}
-        
-        for k,v in pairs(dict) do
-            local animation = ScenePublic.newAnimation(type,k)
-            local sprite = THSTG.UI.newSprite({
-                x = lastPosX,
-                y = lastPosY,
-                anchorPoint = THSTG.UI.POINT_LEFT_TOP
-            })
+        local dict = {}
+        if type == TexType.SHEET then dict = SheetConfig.getSequenceDict() end
 
-            sprite:playAnimationForever(animation)
-            panel:addChild(sprite)
-            local spriteSize = animation:getFrames()[1]:getSpriteFrame():getOriginalSize()
+        for fileName,v in pairs(dict) do
+            for keyName,vv in pairs(v) do
+                local animation = ScenePublic.newAnimation({
+                    texType = type, 
+                    fileName = fileName,
+                    keyName = keyName
+                })
+                local sprite = THSTG.UI.newSprite({
+                    x = lastPosX,
+                    y = lastPosY,
+                    anchorPoint = THSTG.UI.POINT_LEFT_TOP
+                })
 
-            local clickNode = THSTG.UI.newWidget({
-                x = spriteSize.width/2,
-                y = spriteSize.height/2,
-                width = spriteSize.width,
-                height = spriteSize.height,
-                anchorPoint = THSTG.UI.POINT_CENTER,
-                onClick = function()
-                    dump(0,v.rect,k)
-                end,
-            })
-            sprite:addChild(clickNode)
+                sprite:playAnimationForever(animation)
+                panel:addChild(sprite)
+                local spriteSize = animation:getFrames()[1]:getSpriteFrame():getOriginalSize()
+
+                local clickNode = THSTG.UI.newWidget({
+                    x = spriteSize.width/2,
+                    y = spriteSize.height/2,
+                    width = spriteSize.width,
+                    height = spriteSize.height,
+                    anchorPoint = THSTG.UI.POINT_CENTER,
+                    onClick = function()
+                        dump(0,vv.rect,keyName)
+                    end,
+                })
+                sprite:addChild(clickNode)
 
 
-            lastPosX = lastPosX + spriteSize.width
-         
-            if lastPosX >= panel:getContentSize().width then
-                lastPosX = 0
-                lastPosY = lastPosY - curMaxHeight
-                if lastPosY <= 0 then
-                    innerHeight = innerHeight + curMaxHeight
+                lastPosX = lastPosX + spriteSize.width
+            
+                if lastPosX >= panel:getContentSize().width then
+                    lastPosX = 0
+                    lastPosY = lastPosY - curMaxHeight
+                    if lastPosY <= 0 then
+                        innerHeight = innerHeight + curMaxHeight
+                    end
+                    
+                    curMaxHeight = 0
                 end
-                
-                curMaxHeight = 0
+                curMaxHeight = math.max(curMaxHeight,spriteSize.height)
             end
-            curMaxHeight = math.max(curMaxHeight,spriteSize.height)
         end
 
         scrollView:setInnerContainerSize(cc.size(scrollView:getContentSize().width,innerHeight))

@@ -30,6 +30,9 @@ function M:getBlood()
     return self.blood
 end
 
+function M:die()
+    self:setBlood(0)
+end
 --
 function M:_onLateUpdate()
     if self._isHurt then self:_onHurt() end

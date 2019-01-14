@@ -34,45 +34,48 @@ function M.create(params)
         local lastPosX,lastPosY = 0,panel:getContentSize().height
         local curMaxHeight = 0
         local innerHeight = panel:getContentSize().height
-        local dict = ResManager.getTexDict(type) or {}
+        local dict = {}
+        if type == TexType.SHEET then dict = SheetConfig.getFrameDict() end
         
-        for k,v in pairs(dict) do
-            local info = ResManager.getTexRes(type,k)
-            local sprite = THSTG.UI.newSprite({
-                x = lastPosX,
-                y = lastPosY,
-                anchorPoint = THSTG.UI.POINT_LEFT_TOP
-            })
-            sprite:setSource(info.source)
-            sprite:setTextureRect(info.rect)
-            panel:addChild(sprite)
-            local spriteSize = sprite:getContentSize()
+        for fileName,v in pairs(dict) do
+            for keyName,vv in pairs(v) do
+                local info = vv
+                local sprite = THSTG.UI.newSprite({
+                    x = lastPosX,
+                    y = lastPosY,
+                    anchorPoint = THSTG.UI.POINT_LEFT_TOP
+                })
+                sprite:setSource(info.source)
+                sprite:setTextureRect(info.rect)
+                panel:addChild(sprite)
+                local spriteSize = sprite:getContentSize()
 
-            local clickNode = THSTG.UI.newWidget({
-                x = spriteSize.width/2,
-                y = spriteSize.height/2,
-                width = spriteSize.width,
-                height = spriteSize.height,
-                anchorPoint = THSTG.UI.POINT_CENTER,
-                onClick = function()
-                    dump(0,v.rect,k)
-                end,
-            })
-            sprite:addChild(clickNode)
+                local clickNode = THSTG.UI.newWidget({
+                    x = spriteSize.width/2,
+                    y = spriteSize.height/2,
+                    width = spriteSize.width,
+                    height = spriteSize.height,
+                    anchorPoint = THSTG.UI.POINT_CENTER,
+                    onClick = function()
+                        dump(0,v.rect,k)
+                    end,
+                })
+                sprite:addChild(clickNode)
 
 
-            lastPosX = lastPosX + spriteSize.width
-         
-            if lastPosX >= panel:getContentSize().width then
-                lastPosX = 0
-                lastPosY = lastPosY - curMaxHeight
-                if lastPosY <= 0 then
-                    innerHeight = innerHeight + curMaxHeight
+                lastPosX = lastPosX + spriteSize.width
+            
+                if lastPosX >= panel:getContentSize().width then
+                    lastPosX = 0
+                    lastPosY = lastPosY - curMaxHeight
+                    if lastPosY <= 0 then
+                        innerHeight = innerHeight + curMaxHeight
+                    end
+                    
+                    curMaxHeight = 0
                 end
-                
-                curMaxHeight = 0
+                curMaxHeight = math.max(curMaxHeight,spriteSize.height)
             end
-            curMaxHeight = math.max(curMaxHeight,spriteSize.height)
         end
 
         scrollView:setInnerContainerSize(cc.size(scrollView:getContentSize().width,innerHeight))

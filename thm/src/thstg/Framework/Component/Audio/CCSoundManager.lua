@@ -1,8 +1,8 @@
 --音乐管理器
-module("SoundManager", package.seeall)
+module("AUDIO", package.seeall)
 
 local AudioEngine = ccexp.AudioEngine
-local fileUtils = cc.FileUtils:getInstance()
+local FileUtils = cc.FileUtils:getInstance()
 -- local textureManager = TextureManager:getInstance()
 
 INVALID_AUDIO_ID = -1
@@ -30,38 +30,16 @@ local _playingSounds = {}
 local removeEventListener = function() end
 
 
-local _dict = nil
-
-local function getDict()
-	if not _dict then
-		_dict = require "Scripts.Configs.Handwork.Sounds"
-	end
-	return _dict
-end
-function hasVoice(musicKey)
-	return getDict()[musicKey]
-end
-local function getFilePath(soundKey)
-	local t = getDict()[soundKey]
-	if t then
-		return fileUtils:isFileExist(t.src), t.src
-	end
-
-	return false, false
-end
-
-
-
 --------------------------------音乐----------------------------------
 
 --播放音乐 循环播放 参数id为地图id--切换地图ID时会回收上次地图的所有音效和音乐资源--
-function playMusic(musicKey, loadCall)
+function playMusic(filePath, loadCall)
 	if __IN_AUDITING__ then
 		return INVALID_AUDIO_ID
 	end
 
 	removeEventListener()
-	local exist, filePath = getFilePath(musicKey)
+	local exist, filePath = FileUtils:isFileExist(filePath),filePath
 	if not exist then
 		-- if __ENGINE_VERSION__ >= 50 and filePath then
 		-- 	if textureManager:isFileExistGame(filePath) then
@@ -78,7 +56,7 @@ function playMusic(musicKey, loadCall)
 		-- 		end
 		-- 	end
 		-- end
-		print("Error! The key " .. musicKey .. " is not exist!")
+		print("Error! The key [" .. filePath .. "] is not exist!")
 		return INVALID_AUDIO_ID
 	end
 	
@@ -229,14 +207,14 @@ end
 --------------------------------音效----------------------------------
 
 --播放音效--ResKey资源配置的key-返回音效ID
-function playSound(soundKey, isLoop,endCallback)
+function playSound(filePath, isLoop, endCallback)
 	isLoop = isLoop or false
-	local exist, filePath = getFilePath(soundKey)
+	local exist, filePath = filePath
 	if not exist then
 		-- if filePath then
 		-- 	textureManager:toDownloadRes(filePath)
 		-- end
-		print("Error! The key " .. soundKey .. " is not exist!")
+		print("Error! The key " .. filePath .. " is not exist!")
 		return INVALID_AUDIO_ID
 	end
 
@@ -250,7 +228,7 @@ function playSound(soundKey, isLoop,endCallback)
 		local function onPlayEnd(id, path)
 			_playingSounds[id] = nil
 			if type(endCallback) == "function" then
-				endCallback(soundKey,id)
+				endCallback(filePath,id)
 			end 
 		end
 		AudioEngine:setFinishCallback(soundId, onPlayEnd)

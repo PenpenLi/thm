@@ -40,7 +40,7 @@ function ControlMapper:unregisterAllKeys()
 end
 
 function ControlMapper:isKeyDown(keyType)
-    return self._varCountChache[keyType] and self._varCountChache[keyType] > 0
+    return self._varCountChache[keyType] and (self._varCountChache[keyType] > 0) or false 
 end
 
 function ControlMapper:getDownCount(keyType)

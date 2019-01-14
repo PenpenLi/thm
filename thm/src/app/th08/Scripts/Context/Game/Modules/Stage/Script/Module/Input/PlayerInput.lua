@@ -6,7 +6,7 @@ function M:_onInit()
     M.super._onInit(self)
 
 
-
+    self.inputCache = {}
 end
 
 --
@@ -59,22 +59,23 @@ function M:__onMove(inputComp)
         elseif inputComp:isKeyDown(EGameKeyType.MoveDown) then
             moveStep.y = -Definition.Public.PLAYER_KEY_MOVE_STEP
         end
-    
+
         return moveStep
-    
     end
     
     local function touchMove(inputComp,posComp)
-        local destPos = inputComp:getTouchPos()
-        if destPos then
+        local touchPos = inputComp:getTouchPos()
+        -- if (touchPos or self.destPos) then
+        if (touchPos) then
+            if touchPos then self.destPos = cc.p(touchPos.x,touchPos.y) end
             local moveStep = cc.p(0,0)
             local curPos = cc.p(posComp:getPositionX(),posComp:getPositionY())
-            local destPos = cc.p(destPos.x,destPos.y)
-            local shift = cc.pSub(destPos, curPos) 
+            local shift = cc.pSub(self.destPos, curPos) 
             local length = cc.pGetLength(shift)
             if length <= Definition.Public.PLAYER_TOUCH_MOVE_STEP then
-                moveStep.x = destPos.x - posComp:getPositionX()
-                moveStep.y = destPos.y - posComp:getPositionY()
+                moveStep.x = self.destPos.x - posComp:getPositionX()
+                moveStep.y = self.destPos.y - posComp:getPositionY()
+                self.destPos = nil
             else
                 local angle = cc.pGetAngle(cc.p(1,0),shift)
                 moveStep.x = Definition.Public.PLAYER_TOUCH_MOVE_STEP * math.cos(angle)
@@ -90,40 +91,46 @@ function M:__onMove(inputComp)
     --移动这里是互斥的
     local posComp = self:getComponent("TransformComponent")
     local offset = touchMove(inputComp,posComp) or keyMove(inputComp,posComp) or cc.p(0,0)
-
-    local playControllerScript = self:getScript("PlayerController")
-    playControllerScript:move(offset.x,offset.y)
+    local playerControllerScript = self:getScript("PlayerController")
+    playerControllerScript:move(offset.x,offset.y)
 end
 
 function M:__onShot(inputComp)
     if inputComp:isKeyDown(EGameKeyType.Attack) then
-        local playControllerScript = self:getScript("PlayerController")
-        playControllerScript:shot()
+        local playerControllerScript = self:getScript("PlayerController")
+        playerControllerScript:shot()
     end
    
 end
 
 function M:__onBomb(inputComp)
     if inputComp:isKeyDown(EGameKeyType.Bomb) then
-        
-        local playControllerScript = self:getScript("PlayerController")
-        playControllerScript:bomb()
+        local playerControllerScript = self:getScript("PlayerController")
+        playerControllerScript:bomb()
         inputComp:resetKey(EGameKeyType.Bomb)
     end
 end
 
 function M:__onWipe(inputComp)
-    local playControllerScript = self:getScript("PlayerController")
-    playControllerScript:wipe(inputComp:isKeyDown(EGameKeyType.Wipe))
+    local playerControllerScript = self:getScript("PlayerController")
+    local state = inputComp:isKeyDown(EGameKeyType.Wipe)
+    if self.inputCache[EGameKeyType.Wipe] ~= nil then
+        if self.inputCache[EGameKeyType.Wipe] ~= state then
+            playerControllerScript:wipe(state)
+        end
+    end
+    self.inputCache[EGameKeyType.Wipe] = state
 end
 
 function M:__onSlow(inputComp)
-    if inputComp:isKeyDown(EGameKeyType.Slow) then
-
-       local playControllerScript = self:getScript("PlayerController")
-       playControllerScript:slow()
-       inputComp:resetKey(EGameKeyType.Slow)
+    local playerControllerScript = self:getScript("PlayerController")
+    local state = inputComp:isKeyDown(EGameKeyType.Slow)
+    if self.inputCache[EGameKeyType.Slow] ~= nil then
+        if self.inputCache[EGameKeyType.Slow] ~= state then
+            playerControllerScript:slow(state)
+        end
     end
+    self.inputCache[EGameKeyType.Slow] = state
 end
 
 

@@ -32,18 +32,13 @@ Boss = require("Scripts.Context.Game.Modules.Stage.Entity.Boss")
 Batman = require("Scripts.Context.Game.Modules.Stage.Entity.Batman")
 StageGame = require("Scripts.Context.Game.Modules.Stage.Entity.StageGame")
 
--- LilyWhite = require("Scripts.Context.Game.Modules.Stage.Entity.LilyWhite")
--- Yukari = require("Scripts.Context.Game.Modules.Stage.Entity.Yukari")
--- Sakuya = require("Scripts.Context.Game.Modules.Stage.Entity.Sakuya")
-
 ---[[脚本]]----
-BulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.BulletController")
-PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.Module.PlayerController")
-BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.Module.BatmanController")
-
---公共脚本
-DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBorder")
-ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
+BaseController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BaseController")
+BulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BulletController")
+PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.PlayerController")
+BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BatmanController")
+BossController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BossController")
+StageGameController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.StageGameController")
 
 --生命控制
 HealthController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.HealthController")
@@ -57,6 +52,7 @@ CollisionController = require("Scripts.Context.Game.Modules.Stage.Script.Module.
 PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.PlayerCollision")
 BulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.BulletCollision")
 
+--输入控制
 InputController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Input.InputController")
 PlayerInput = require("Scripts.Context.Game.Modules.Stage.Script.Module.Input.PlayerInput")
 
@@ -70,8 +66,15 @@ PlayerAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Anim
 MoveController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Move.MoveController")
 BulletMove = require("Scripts.Context.Game.Modules.Stage.Script.Module.Move.BulletMove")
 
+--公共脚本
+DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBorder")
+ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
+
 ---[[工具]]-----
+AnimationUtil = require("Scripts.Context.Game.Modules.Stage.Util.AnimationUtil")  
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  
+
+
 
 ------
 --[[轮询的系统注册]]---

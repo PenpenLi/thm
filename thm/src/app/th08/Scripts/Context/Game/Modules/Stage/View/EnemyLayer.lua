@@ -16,11 +16,6 @@ function M.create(params)
   
     -------Controller-------
     local function onInit()        
-        _cTaskScheduler:setUserData({
-            mapLayer = THSTG.SceneManager.get(SceneType.STAGE).entityLayer,
-            danmakuLayer = THSTG.SceneManager.get(SceneType.STAGE).entityLayer,
-            enemyLayer = THSTG.SceneManager.get(SceneType.STAGE).entityLayer,
-        })
         local stageID = Cache.stageCache.getStageId()
         _cTaskScheduler:setTasks(StageConfig.getScenario(stageID))
 

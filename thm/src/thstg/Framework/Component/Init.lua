@@ -14,5 +14,8 @@ require "thstg.Framework.Component.UI.Init"
 --NetWork组件
 require "thstg.Framework.Component.Network.Init"
 
+--Audio组件
+require "thstg.Framework.Component.Audio.Init"
+
 --工具组件
 require "thstg.Framework.Component.Util.Init"

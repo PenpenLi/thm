@@ -3,7 +3,7 @@ module(..., package.seeall)
 local M = {}
 function M.create(params)
     -------Model-------
-
+    local _eMapBuilder = nil
 
     
    

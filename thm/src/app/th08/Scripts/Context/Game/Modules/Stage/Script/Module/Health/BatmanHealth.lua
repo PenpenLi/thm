@@ -15,14 +15,13 @@ function M:_onHurt()
 end
 
 function M:_onDead()
-    --这里代表击中,而不是对象消亡
-    GlobalUtil.playSEXEffect({
-        refNode = self:getEntity(),
-        source = {EffectType.PUBLIC,"ccle_die_magic_01"},
-    })
-    --TODO:还需要播放一个粒子效果
-    self:killEntity()
-
+         --这里代表击中,而不是对象消亡
+         GlobalUtil.playSEXEffect({
+            refNode = self:getEntity(),
+            source = {EffectType.PUBLIC,"ccle_die_magic_01"},
+        })
+        --TODO:还需要播放一个粒子效果
+        self:killEntity()
 end
 
 return M

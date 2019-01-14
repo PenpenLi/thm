@@ -22,7 +22,9 @@ function M:_onStart()
     self.sprite = self:getComponent("SpriteComponent"):getSprite()
 
     local cfg = self:_onState()
-    self.fsm:setupState(cfg)
+    if cfg and next(cfg) then
+        self.fsm:setupState(cfg)
+    end
 end
 ------------------
 --[[以下由子类重载]]
