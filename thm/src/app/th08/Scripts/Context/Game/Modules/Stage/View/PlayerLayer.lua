@@ -5,11 +5,11 @@ function M.create(params)
     -------Model-------
     local _ePlayer = StageDefine.Player.new()
 
+
     -------View-------
     local node = THSTG.UI.newNode()
     node:addChild(_ePlayer)
     
-
     -------Controller-------
   
 

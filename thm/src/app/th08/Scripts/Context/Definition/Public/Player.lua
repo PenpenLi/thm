@@ -2,3 +2,5 @@ module("Definition.Public", package.seeall)
 
 PLAYER_KEY_MOVE_STEP = 3
 PLAYER_TOUCH_MOVE_STEP = 3
+PLAYER_DEATH_SAVE_TIME = 0.13
+PLAYER_INVINCIBLE_TIME = 4

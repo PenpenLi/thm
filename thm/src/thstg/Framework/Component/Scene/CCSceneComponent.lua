@@ -122,7 +122,7 @@ function loadTexture(source)
 		texRect = cc.rect(0,0,textureSize.width,textureSize.height)
 
 	else
-		error("createFrame() - invalid parameters", 0)
+		error("loadTexture() - invalid parameters", 0)
 	end
 
 	return texture,texRect
@@ -145,7 +145,7 @@ function removeTexture(scource)
 	elseif scource == nil then
 		cc.SpriteFrameCache:getInstance():removeUnusedSpriteFrames()
 	else
-		error("createFrame() - invalid parameters", 0)
+		error("removeTexture() - invalid parameters", 0)
 	end
 
 end

@@ -1,10 +1,9 @@
 module(..., package.seeall)
 
-local M = class("BaseEntity",THSTG.ECS.CCEntity)
+local M = class("BaseEntity",StageDefine.EmptyEntity)
 function M:ctor()
     M.super.ctor(self)
     
-    self:addComponent(StageDefine.TransformComponent.new())
     self:addComponent(StageDefine.ActionComponent.new())
 end
 

@@ -4,6 +4,8 @@ local M = class("Entity",cc.Node)
 function M.find(id) return ECSManager.findEntityById(id) end
 function M.findEntitiesWithTag(tag) return ECSManager.findEntitiesWithTag(tag) end
 function M.findWithTag(tag) return ECSManager.findEntityWithTag(tag) end
+function M.findEntitiesWithName(name) return ECSManager.findEntitiesWithName(name) end
+function M.findWithName(name) return ECSManager.findEntityWithName(name) end
 function M.getAll() return ECSManager.getAllEntities() end
 function M.getAllEx(entity) return ECSManager.getAllEntities(entity) end
 

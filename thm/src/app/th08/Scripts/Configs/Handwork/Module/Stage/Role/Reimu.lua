@@ -1,6 +1,6 @@
 return {
     name = "博丽的巫女",
-    desc1 = "十万巫女",
+    nickName = "十万巫女",
     ability = "看见钱财服侍程度的能力",
     gameArgs = {
         moveSpeed = cc.p(2,2),

@@ -1,6 +1,6 @@
 return {
     name = "十六夜咲夜",
-    desc1 = "Ko No Dio da!",
+    nickName = "Ko No Dio da!",
     ability = "暂停时间程度的能力",
     gameArgs = {
         moveSpeed = cc.p(2,2),
@@ -13,7 +13,7 @@ return {
         move_left = {"player00","reimu_move_left"},
         stand_normal = {"player00","reimu_stand_normal"},
     },
-    spellcard = {
+    spellcards = {
 
     },
 }

@@ -2,6 +2,8 @@ local M = class("BossController",StageDefine.BaseController)
 
 function M:_onInit()
     M.super._onInit(self)
+
+    self.bossType = BossType.WRIGGLE_NIGHTBUG
 end
 
 

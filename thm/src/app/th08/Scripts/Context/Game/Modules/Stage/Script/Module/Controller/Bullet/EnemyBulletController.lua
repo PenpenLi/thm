@@ -1,17 +1,18 @@
-local M = class("BulletController",StageDefine.BaseController)
+local M = class("PlayerBulletController",StageDefine.BulletController)
 
 function M:_onInit()
     M.super._onInit(self)
-    self.belong = 0
-    self.type = false
 
+    self.rotation = 0
+    self.speed = cc.p(0,-10)
 
 end
 ---
 
 ---
 function M:_onStart()
-    
+    M.super._onStart(self)
+
 end
 
 ---

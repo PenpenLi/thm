@@ -11,15 +11,11 @@ function M:_onLateUpdate()
     end
 end
 ---
-
+--屏蔽Tag
 function M:_onFilter()
 
 end
-
-function M:_onDirection()
-    
-end
-
+--碰撞回调
 function M:_onCollision(collider,collision)
 
 end

@@ -7,7 +7,7 @@ function M:ctor()
     
     self:addComponent(StageDefine.SpriteComponent.new())
     self:addComponent(StageDefine.AnimationComponent.new())
-    -- self:addComponent(StageDefine.RigidbodyComponent.new())
+    self:addComponent(StageDefine.RigidbodyComponent.new())
     self:addComponent(StageDefine.BoxColliderComponent.new())
 
 end

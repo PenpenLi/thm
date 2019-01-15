@@ -18,7 +18,7 @@ M.EDirectionType = {
 ]]
 -----
 --通过坐标获取网格ID
-local _GRID_SIZE_ = cc.size(100,100)--FIXME:格子大小,决定碰撞检测的精度
+local _GRID_SIZE_ = cc.size(100,100)--XXX:格子大小,决定碰撞检测的精度
 local _GRID_NUM_ = cc.p(10,10)
 local _gridComps = {}
 local _gridIDs = {}

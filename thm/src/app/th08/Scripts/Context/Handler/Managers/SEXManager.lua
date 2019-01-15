@@ -2,6 +2,7 @@ module("SEXManager", package.seeall)
 
 
 local EFFECT_PATH_PATTERN = "Scripts.Configs.Handwork.SEX.Effect.Effect"
+local PARTICLE_PATH_PATTERN = "Scripts.Configs.Handwork.SEX.Particle.Particle"
 
 local function getDictByFile(path,file)
     local pathFile = string.format(path,file)
@@ -70,4 +71,27 @@ function playEffect(params)
     end
 
     return createNode(params)
+end
+
+-----
+function getParticleDict() return getDictByFile(PARTICLE_PATH_PATTERN) end
+function getParticle(particleType,name) return getParticleDict()[particleType][name] end
+function playParticle(params)
+    local node = THSTG.UI.newParticleSystem(params)
+
+    if params.type and params.name then
+        local info = getParticle(params.type,params.name)()
+        local tex,rect = nil,nil
+        if info.texSrc then
+            tex,rect = THSTG.SCEE.loadTexture(info.texSrc)
+        elseif info.tex then
+            tex = info.tex
+        end
+        if info.texRect then
+            rect = info.texRect
+        end
+        node:setTextureWithRect(tex,rect)
+    end
+    
+    return node
 end

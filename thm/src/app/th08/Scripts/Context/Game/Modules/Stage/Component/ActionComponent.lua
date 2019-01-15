@@ -8,6 +8,16 @@ function M:runAction(action)
     self:getEntity():runAction(action)
 end
 
+function M:runSeqAct(actions)
+    local action = cc.Sequence:create(actions)
+    self:runAction(action)
+end
+
+function M:runForeAct(action)
+    local action = cc.RepeatForever:create(action)
+    self:runAction(action)
+end
+
 function M:stopAllActions()
     self.sprite:stopAllActions()
 end

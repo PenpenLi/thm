@@ -22,7 +22,8 @@ return {
         particle = {
             ccp_gk_default_01 = "Assets/SFX/Particle/ccp_gk_default_01.plist",
             ccp_gk_heart_01 = "Assets/SFX/Particle/ccp_gk_heart_01.plist",
-            
+            ccp_st_boss_down = "Assets/SFX/Particle/ccp_st_boss_down.plist" ,
+
         },
     },
     
@@ -38,11 +39,13 @@ return {
     },
 
     ui = {
-       button = {
+        button = {
             btn_base_yellow = "Assets/UI/Button/btn_base_yellow.png" ,
-       }
-
-
+        },
+        progressBar = {
+            prog_radial_bg = "Assets/UI/ProgressBar/prog_radial_bg.png" ,
+            prog_radial_hp = "Assets/UI/ProgressBar/prog_radial_hp.png" ,
+        }
     },
 
     public = {

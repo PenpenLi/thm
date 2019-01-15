@@ -148,7 +148,7 @@ function newControlButton(params)
 			privateData.isInside = isTouchMoveInside
 		elseif event.name == "ended" then
 			extendEvent.position = controlButton:getTouchEndPosition()
-			--TODO:ccui.Widget:hitTest has wrong number of arguments: 1, was expecting 3 
+			--FIXME:ccui.Widget:hitTest has wrong number of arguments: 1, was expecting 3 
 			local isTouchMoveInside = controlButton:hitTest(extendEvent.position,nil,nil)
 			if isTouchMoveInside then
 				extendEvent.name = TOUCH_UP_INSIDE

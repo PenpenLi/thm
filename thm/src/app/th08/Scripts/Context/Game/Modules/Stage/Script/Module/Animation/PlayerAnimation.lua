@@ -2,6 +2,7 @@ local M = class("PlayerAnimation",StageDefine.AnimationController)
 
 function M:_onInit()
     M.super._onInit(self)
+    self.roleType = nil
 end
 
 function M:_onState()
@@ -20,30 +21,48 @@ function M:_onState()
         },
     }
 end
-
+function M:getRoleType()
+    return self.roleType
+end
 ----
+function M:_onStart()
+    M.super._onStart(self)
+  
+    local playerControScript = self:getScript("PlayerController")
+    self.roleType = playerControScript.roleType
+end
+----
+function M:_onMove(dx,dy)
+    if dx < 0 then 
+        self:play("MoveLeft")
+    elseif dx > 0 then 
+        self:play("MoveRight")
+    else 
+        self:play("Idle") 
+    end
+end
 
 function M:_onMoveLeft(event)
-    self.sprite:setFlippedX(false)
-    self.sprite:stopAllActions()
-    self.sprite:runAction(cc.Sequence:create({
-        cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetArgs("move_left_start"))),
+    self:getSprite():setFlippedX(false)
+    self:getSprite():stopAllActions()
+    self:getSprite():runAction(cc.Sequence:create({
+        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left_start"))),
         cc.CallFunc:create(function() 
-            self.sprite:runAction(cc.RepeatForever:create(
-                cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetArgs("move_left_sustain")))
+            self:getSprite():runAction(cc.RepeatForever:create(
+                cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left_sustain")))
             ))
         end)
     }))
 end
 
 function M:_onMoveRight(event)
-    self.sprite:setFlippedX(true)
-    self.sprite:stopAllActions()
-    self.sprite:runAction(cc.Sequence:create({
-        cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetArgs("move_left_start"))),
+    self:getSprite():setFlippedX(true)
+    self:getSprite():stopAllActions()
+    self:getSprite():runAction(cc.Sequence:create({
+        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left_start"))),
         cc.CallFunc:create(function() 
-            self.sprite:runAction(cc.RepeatForever:create(
-                cc.Animate:create(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetArgs("move_left_sustain")))
+            self:getSprite():runAction(cc.RepeatForever:create(
+                cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left_sustain")))
             ))
         end)
     }))
@@ -53,18 +72,18 @@ end
 function M:_onIdle(event)
     local actions = {}
     if event.from == "MoveRight" or event.from == "MoveLeft" then
-        local animation = AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetArgs("move_left"))
+        local animation = AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left"))
         animation:setDelayPerUnit(1/26)
         table.insert( actions,cc.Animate:create(animation):reverse())
         table.insert( actions,cc.CallFunc:create(function() 
-            self.sprite:setFlippedX(not self.sprite:isFlippedX())
+            self:getSprite():setFlippedX(not self:getSprite():isFlippedX())
         end))
     end
     table.insert( actions,cc.CallFunc:create(function() 
-        self.sprite:playAnimationForever(AnimationCache.getResBySheet(Cache.stageCache.getCurRoleAnimSheetArgs("stand_normal")))
+        self:getSprite():playAnimationForever(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"stand_normal")))
     end))
-    self.sprite:stopAllActions()
-    self.sprite:runAction(cc.Sequence:create(actions))
+    self:getSprite():stopAllActions()
+    self:getSprite():runAction(cc.Sequence:create(actions))
 end
 
 ----

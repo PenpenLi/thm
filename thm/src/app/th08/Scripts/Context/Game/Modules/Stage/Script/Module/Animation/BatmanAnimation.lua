@@ -2,16 +2,22 @@ local M = class("BatmanAnimation",StageDefine.AnimationController)
 
 function M:_onInit()
     M.super._onInit(self)
+
+    self.batmanType = nil
 end
+--
+function M:getBatmanType()
+    return self.batmanType
+end
+
 ---
 function M:_onStart()
-    local animationComp = self:getComponent("AnimationComponent")
-    animationComp:play(cc.RepeatForever:create(
-        cc.Animate:create(AnimationCache.getResBySheet("enemy","enemy_01_a_normal"))
-    ))
- 
-    
+    M.super._onStart(self)
+  
+    local batmanControScript = self:getScript("BatmanController")
+    self.batmanType = batmanControScript.batmanType
 end
+
 ---
 function M:_onState()
     return {
@@ -30,8 +36,15 @@ function M:_onState()
     }
 end
 ---
-function M:_onLateUpdate()
+function M:_onMove(dx,dy)
     --主要根据移动方式判断动画
+    if dx > 0 then
+        self:play("MoveLeft")
+    elseif dx < 0 then
+        self:play("MoveRight")
+    else
+        self:play("Idle")
+    end
 end
 
 ----
@@ -44,7 +57,20 @@ function M:_onMoveRight(event)
 end
 
 function M:_onIdle(event)
-   
+    local actions = {}
+    if event.from == "MoveRight" or event.from == "MoveLeft" then
+        -- local animation = AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getBatmanType(),"move_left"))
+        -- animation:setDelayPerUnit(1/26)
+        -- table.insert( actions,cc.Animate:create(animation):reverse())
+        -- table.insert( actions,cc.CallFunc:create(function() 
+        --     self:getSprite():setFlippedX(not self:getSprite():isFlippedX())
+        -- end))
+    end
+    table.insert( actions,cc.CallFunc:create(function() 
+        self:getSprite():playAnimationForever(AnimationCache.getResBySheet(StageConfig.getBatmanAnimSheetArgs(self:getBatmanType(),"stand_normal")))
+    end))
+    self:getSprite():stopAllActions()
+    self:getSprite():runAction(cc.Sequence:create(actions))
 end
 
 --

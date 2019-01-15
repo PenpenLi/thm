@@ -14,6 +14,7 @@ function M:_onHurt()
 end
 
 function M:_onDead()
+    --TODO:用于检测决死
     print(15,"玩家死亡")
 end
 

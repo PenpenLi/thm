@@ -34,8 +34,8 @@ function M.create(params)
         x = display.width/2,
         y = display.height/2,
         anchorPoint = cc.p(0.5,0.5),
-        isLoop = true,
-        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_heart_01"),
+        isLoop = false,
+        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_st_boss_down"),
     })
     node:addChild(p1)
     -------Controller-------

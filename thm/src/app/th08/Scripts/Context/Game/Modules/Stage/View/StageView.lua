@@ -14,9 +14,8 @@ function M.create(params)
     local node = THSTG.UI.newNode()
     node:addChild(_eStageGame)
 
-    _viewPlayerLayer:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
     _viewEnemyLayer:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
-
+    _viewPlayerLayer:addTo(THSTG.SceneManager.get(SceneType.STAGE).mainLayer)
 
     -------Controller-------
     local function onInit()        

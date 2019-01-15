@@ -31,6 +31,22 @@ function playEffect(params)
     return node
 end
 
+function playParticle(params)
+
+    local node = THSTG.UI.newParticleSystem(params)
+
+    if params.father then
+        params.father:addChild(node)
+    elseif params.refNode then
+        node:setPositionX(params.refNode:getPositionX())
+        node:setPositionY(params.refNode:getPositionY())
+        node:setAnchorPoint(cc.p(0.5,0.5))
+        params.refNode:getParent():addChild(node)
+    end
+
+    return node
+end
+
 function playSEXEffect(params)
     params = params or {}
     if params.source then
@@ -41,4 +57,17 @@ function playSEXEffect(params)
     end
     
     return SEXManager.playEffect(params)
+end
+
+
+function playSEXParticle(params)
+    params = params or {}
+    if params.source then
+        params.type = params.source[1]
+        params.name = params.source[2]
+    else
+        params.type = params.type or EffectType.PUBLIC
+    end
+    
+    return SEXManager.playParticle(params)
 end

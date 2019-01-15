@@ -13,7 +13,7 @@ return {
 
         ccle_lightspot_01 = function (param)
             return {
-                cc.Animate:create(AnimationCache.getResBySheet("etama2","light_spot_01")),
+                cc.Animate:create(AnimationCache.getResBySheet("etama2","light_spot")),
                 cc.Spawn:create({
                     cc.FadeOut:create(2),
                 })

@@ -528,19 +528,27 @@ end
 -- 新建粒子
 -- @param	x			[number]		x
 -- @param	y			[number]		y
+-- @param	anchorPoint [cc.p]			锚点
 -- @param	src			[string]		特效文件
 -- @param	isLoop		[boolean]		是否循环
+-- @param	duration	[number]		持续时间
 -- @param	posType		[enum]			位置类型
 
 function newParticleSystem(params)
 	params = params or {}
 	params.isLoop = params.isLoop or false
+	params.duration = params.isLoop and (-1) or (params.duration)
 	params.posType = params.posType or cc.POSITION_TYPE_RELATIVE
 	local system = cc.ParticleSystemQuad:create(params.src)
 	system:setPosition(params.x or 0, params.y or 0)
 	if params.anchorPoint then
 		system:setAnchorPoint(params.anchorPoint)
 	end
+
+	if params.duration then
+		system:setDuration(params.duration)
+	end
+
 	system:setAutoRemoveOnFinish(not params.isLoop)
 	system:setPositionType(params.posType)
 	return system
@@ -676,44 +684,3 @@ function newSequenceAnimation(params)
 	return node
 end
 
---
--- 新建骨骼动画
--- @param	x			[number]		x
--- @param	y			[number]		y
--- @param	src			[string]		文件路径
--- @param	animation		[string]		默认动作
---TODO:
-function newArmatureAnimation(params)
-	params  = params or {}
-	---
-	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(params.src)
-    local node = ccs.Armature:create(params.animation)
-	if params.anchorPoint then
-		node:setAnchorPoint(params.anchorPoint)
-	end
-	node:setPosition(cc.p(params.x or display.cx,params.y or display.cy))
-
-
-	---
-	-- function node:playAnimation(name)
-	-- 	self:getAnimation():play(name)
-	-- end
-
-	-- function node:playWithIndex(index)
-	-- 	self:getAnimation():playWithIndex(index)
-	-- end
-
-	-- function node:stop()
-	-- 	self:getAnimation():stop()
-	-- end
-
-	-- function node:pause()
-	-- 	self:getAnimation():pause()
-	-- end
-
-	-- function node:resume()
-	-- 	self:getAnimation():resume()
-	-- end
-
-	return node
-end

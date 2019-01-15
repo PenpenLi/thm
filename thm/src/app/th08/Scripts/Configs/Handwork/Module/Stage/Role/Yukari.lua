@@ -1,6 +1,6 @@
 return {
     name = "紫妹",
-    desc1 = "紫dmsakdnaslkdn",
+    nickName = "紫dmsakdnaslkdn",
     ability = "隙间讨论其年龄程度的能力",
     gameArgs = {
         moveSpeed = cc.p(2,2),
@@ -13,7 +13,7 @@ return {
         move_left = {"player00","yukari_move_left"},
         stand_normal = {"player00","yukari_stand_normal"},
     },
-    spellcard = {
+    spellcards = {
 
     },
 }

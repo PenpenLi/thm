@@ -4,9 +4,6 @@ local M = class("BulletPrefab",StageDefine.BulletEntity)
 
 function M:ctor()
     M.super.ctor(self)
-    
-    self.bulletController = StageDefine.BulletController.new()
-    self:addScript(self.bulletController)
 
     self.destroyByBorder = StageDefine.DestroyByBorder.new()
     self:addScript(self.destroyByBorder)
@@ -19,9 +16,6 @@ function M:ctor()
 
     self.animationController = StageDefine.BulletAnimation.new()
     self:addScript(self.animationController)
-
-    self.bulletMove = StageDefine.BulletMove.new()
-    self:addScript(self.bulletMove)
  
 end
 

@@ -1,13 +1,13 @@
 local M = class("AnimationComponent",THSTG.ECS.Component)
 
 function M:_onInit()
-    self.spriteComp = nil
+    self._spriteComp = nil
     --
 
 end
 ---
 function M:play(action)
-    self.spriteComp:getSprite():runAction(action)
+    self._spriteComp:getSprite():runAction(action)
 end
 
 function M:playForever(animation,params)
@@ -21,15 +21,13 @@ function M:playOnce(animation,params)
 end
 
 function M:stop()
-    self.spriteComp:getSprite():stopAllActions()
+    self._spriteComp:getSprite():stopAllActions()
 end
 ---
 function M:_onAdded(entity)
-    local spriteComp = entity:getComponent("SpriteComponent")
-    assert(spriteComp, string.format("[%s] You must have a SpriteComponent ",M.__cname))
-    self.spriteComp = spriteComp
+    self._spriteComp = entity:getComponent("SpriteComponent")
+    assert(self._spriteComp, string.format("[%s] You must have a SpriteComponent ",M.__cname))
 
- 
 end
 
 function M:_onRemoved(entity)

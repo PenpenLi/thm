@@ -5,6 +5,8 @@ function M:_onInit()
 
     self.fsm = THSTG.UTIL.newStateMachine() --状态机
     self.sprite = nil
+
+    self._prevPos = cc.p(0,0)
 end
 --
 function M:play(actionType)
@@ -12,9 +14,20 @@ function M:play(actionType)
 
     self.fsm:doEvent(actionType)
 end
+function M:getSprite()
+    return self.sprite
+end
 ----
 function M:_onLateUpdate()
-    --根据实体状态判断需要执行的动画
+    local posComp = self:getComponent("TransformComponent")
+    local posPoint = cc.p(posComp:getPositionX(),posComp:getPositionY())
+    
+    self:_onAction({
+        dx = posPoint.x - self._prevPos.x,
+        dy = posPoint.y - self._prevPos.y,
+    })
+
+    self._prevPos = cc.p(posComp:getPositionX(),posComp:getPositionY())
 end
 
 ------------------
@@ -25,11 +38,22 @@ function M:_onStart()
     if cfg and next(cfg) then
         self.fsm:setupState(cfg)
     end
+
+    local posComp = self:getComponent("TransformComponent")
+    self._prevPos = cc.p(posComp:getPositionX(),posComp:getPositionY())
 end
 ------------------
 --[[以下由子类重载]]
 function M:_onState()
 
+end
+--cc.Move无法主动调用,这里由自身进行判断
+function M:_onMove(dx,dy)
+
+end
+
+function M:_onAction(params)
+    self:_onMove(params.dx,params.dy)
 end
 --
 

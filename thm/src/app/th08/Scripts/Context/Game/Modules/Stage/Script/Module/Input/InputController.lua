@@ -19,10 +19,12 @@ end
 
 ----
 --[[有子类重写]]
+--按键注册
 function M:_onRegister(keyMapper)
     
 end
 
+--输入处理
 function M:_onHandle(inputComp)
 
 end

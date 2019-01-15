@@ -1,11 +1,13 @@
 module(..., package.seeall)
 
-local M = class("EnemyBullet",StageDefine.BatmanPrefab)
+local M = class("EnemyBullet",StageDefine.BulletPrefab)
 
 function M:ctor()
     M.super.ctor(self)
-   
-    self.bulletMove.speed.y = -10
+    
+    self.bulletController = StageDefine.EnemyBulletController.new()
+    self:addScript(self.bulletController)
+
 
 end
 
