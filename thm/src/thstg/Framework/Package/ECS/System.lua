@@ -33,9 +33,11 @@ function M:getAllComponents()
     local ret = {}
     local entitys = self:getAllEntities()
     for _,v in pairs(entitys) do
-        local comps = v:getAllComponents()
-        for _,vv in pairs(comps) do
-            table.insert( ret, vv )
+        if v:isActive() then
+            local comps = v:getAllComponents()
+            for _,vv in pairs(comps) do
+                table.insert( ret, vv )
+            end
         end
     end
     return ret

@@ -2,7 +2,7 @@ local ColliderComponent = require("Scripts.Context.Game.Modules.Stage.Component.
 local M = class("BoxColliderComponent",ColliderComponent)
 function M:_onInit()
     M.super._onInit(self)
-    self.size = cc.size(20,20)
+    self.size = cc.size(16,16)  --最小碰撞矩形
 
     self._type = ColliderComponent.EColliderType.Rect
 end
@@ -14,6 +14,22 @@ function M:getRect()
     return cc.rect(x + self.offset.x, y + self.offset.y, self.size.width, self.size.height)
 end
 
+
+-----
+function M:_onClass(className,id)
+    return className,id
+end
+
+function M:_onAdded(entity)
+    local spriteComp = entity:getComponent("SpriteComponent")
+    if spriteComp then
+        local size = spriteComp:getSprite():getContentSize()
+        self.size.width = math.max(self.size.width,size.width)
+        self.size.height = math.max(self.size.height,size.height)
+    end
+end
+
+----
 function M:_onCollide(collder)
     
     local otherType = collder._type
@@ -23,11 +39,6 @@ function M:_onCollide(collder)
         return cc.rectIntersectsRect(self:getRect(),collder:getOutSideRect())
     end
     return false
-end
-
------
-function M:_onClass(className,id)
-    return className,id
 end
 
 return M

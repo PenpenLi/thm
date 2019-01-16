@@ -3,7 +3,7 @@ local M = class("CircleColliderComponent",ColliderComponent)
 
 function M:_onInit()
     M.super._onInit(self)
-    self.radius = 10
+    self.radius = 8
 
     self._type = ColliderComponent.EColliderType.Circle
 end
@@ -35,6 +35,16 @@ function M:_onClass(className,id)
     return className,id
 end
 
+function M:_onAdded(entity)
+    local spriteComp = entity:getComponent("SpriteComponent")
+    if spriteComp then
+        local spriteSize = spriteComp:getSprite():getContentSize()
+        local radius = math.sqrt((spriteSize.width/2) * (spriteSize.width/2) + (spriteSize.height/2)*(spriteSize.height/2))
+        self.radius = math.max(self.radius,radius)
+    end
+end
+
+---
 function M:_onCollide(collder)
     local otherType = collder._type
     if otherType == ColliderComponent.EColliderType.Rect then

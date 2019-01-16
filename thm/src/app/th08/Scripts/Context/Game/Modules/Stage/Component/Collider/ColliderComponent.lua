@@ -15,24 +15,6 @@ function M:collide(collder)
 end
 
 ------
-function M:_onAdded(entity)
-    
-end
 
-function M:_onRemoved(entity)
-    
-end
-
-function M:_onUpdate(delay,entity)
-    
-end
-
-function M:_onLateUpdate(delay,entity)
-
-end
-
-function M:_onCollide(collder)
-    
-end
 
 return M

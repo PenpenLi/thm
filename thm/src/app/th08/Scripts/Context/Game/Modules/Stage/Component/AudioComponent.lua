@@ -3,9 +3,7 @@ function M:ctor()
     M.super.ctor(self)
 
 end
-function M:_onClass(className,id)
-    return className , id
-end
+
 
 function M:_onInit()
     self.isLoop = false
@@ -21,4 +19,9 @@ function M:play()
 
 end
 
+---
+
+function M:_onClass(className,id)
+    return className , id
+end
 return M

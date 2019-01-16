@@ -34,8 +34,6 @@ return {
     shader = {
         default_vs = "Assets/Shader/default.vs",
         default_fs = "Assets/Shader/default.fs",
-        grey_vs = "Assets/Shader/grey.vs",
-        grey_fs = "Assets/Shader/grey.fs"
     },
 
     ui = {

@@ -7,7 +7,11 @@ function M:ctor()
     
     self:addComponent(StageDefine.SpriteComponent.new())
     self:addComponent(StageDefine.AnimationComponent.new())
-    self:addComponent(StageDefine.RigidbodyComponent.new())
+    
+    local rigidbodyComponent = StageDefine.RigidbodyComponent.new()
+    rigidbodyComponent.gravityScale = 0
+    self:addComponent(rigidbodyComponent)
+
     self:addComponent(StageDefine.BoxColliderComponent.new())
 
 end

@@ -7,22 +7,27 @@ function M:_onInit()
     self.mass = 1
     self.speed = cc.p(0,0)
     self.gravityScale = 1.0
+    self.retForce = cc.p(0,0)  --合力
 
     self._transComp = nil
-    self._force = cc.p(0,0)
-    self._acceSpeed = cc.p(0,0)
+
 end
 
 --力和施力位置
 function M:addForce(power,pos)
-    --TODO:pos,非中心力产生力作用不同
-    self._force = power
-    self._acceSpeed.x = power.x / self.mass
-    self._acceSpeed.y = power.y / self.mass
+    --XXX:pos,非中心力产生力作用不同,要区分质点与非质点
+    -- pos = pos or cc.p(0.5,0.5)--中心
+    self.retForce.x = self.retForce.x + power.x
+    self.retForce.y = self.retForce.y + power.y
 end
 -----
 function M:setSpeed(x,y)
     self.speed = cc.p(x,y)
+end
+
+function M:setMass(val)
+    val = val or self.mass
+    self.mass = math.max(1,val)
 end
 -----
 function M:_onAdded(entity)
@@ -31,22 +36,7 @@ function M:_onAdded(entity)
 end
 
 function M:_onRemoved(entity)
-
-end
-
-function M:_onUpdate()
-    --加速度叠加
-    self.speed.x = self.speed.x + self._acceSpeed.x
-    self.speed.y = self.speed.y + self._acceSpeed.y
-
-    --计算位移
-    self._transComp:setPositionX(self._transComp:getPositionX() + self.speed.x)
-    self._transComp:setPositionY(self._transComp:getPositionY() + self.speed.y)
-end
-
-function M:_onLateUpdate()
-    -- 非持续力,每帧清空
-    self._force = cc.p(0,0)
+    
 end
 
 

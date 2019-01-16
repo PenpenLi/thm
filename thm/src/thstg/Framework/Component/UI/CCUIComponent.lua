@@ -528,6 +528,8 @@ end
 -- 新建粒子
 -- @param	x			[number]		x
 -- @param	y			[number]		y
+-- @param   width		[number]		宽
+-- @param   height		[number]		高
 -- @param	anchorPoint [cc.p]			锚点
 -- @param	src			[string]		特效文件
 -- @param	isLoop		[boolean]		是否循环
@@ -549,6 +551,10 @@ function newParticleSystem(params)
 		system:setDuration(params.duration)
 	end
 
+	if params.width and params.height then
+		system:setContentSize(cc.size(params.width, params.height))
+	end
+
 	system:setAutoRemoveOnFinish(not params.isLoop)
 	system:setPositionType(params.posType)
 	return system
@@ -557,6 +563,8 @@ end
 -- 新建骨骼动画
 -- @param	x			[number]		x
 -- @param	y			[number]		y
+-- @param   width		[number]		宽
+-- @param   height		[number]		高
 -- @param	jsonSrc		[string]		骨骼数据文件
 -- @param	atlasSrc	[string]		资源集文件
 -- @param	src			[string]		文件路径(上面的简写,只需要json文件路径即可)
@@ -590,6 +598,9 @@ function newSkeletonAnimation(params)
 	if params.amination then
 		node:setAnimation(0, params.amination, true)
 	end
+	if params.width and params.height then
+		node:setContentSize(cc.size(params.width, params.height))
+	end
 
 	if type(params.onStart) == "function" then node:registerSpineEventHandler(handler(node,params.onStart), sp.EventType.ANIMATION_START) end
 	if type(params.onComplete) == "function" then node:registerSpineEventHandler(handler(node,params.onComplete), sp.EventType.ANIMATION_COMPLETE) end
@@ -619,6 +630,8 @@ end
 -- 新建序列帧动画
 -- @param	x			[number]		x
 -- @param	y			[number]		y
+-- @param   width		[number]		宽
+-- @param   height		[number]		高
 -- @param	animation	[userdata]		动画
 -- @param 	onStart		[function]		动画开始回调
 -- @param 	onComplete		[function]	动画完成回调
@@ -684,3 +697,49 @@ function newSequenceAnimation(params)
 	return node
 end
 
+-- 新建视频播放
+-- @param	x			[number]		x
+-- @param	y			[number]		y
+-- @param   width		[number]		宽
+-- @param   height		[number]		高
+-- @param	isFullScene	[boolean]		是否全屏
+-- @param	src			[string]		文件路径
+-- @param	isLoop		[boolean]		是否循环
+
+-- @param 	onComplete	[function]		播放完成回调
+
+function newVideoPlayer(params)
+	params = params or {}
+	---
+	local node = ccexp.VideoPlayer:create() --创建
+	if params.src then
+		node:setFileName(src)    --资源文件位置
+	end
+
+	if params.anchorPoint then
+		node:setAnchorPoint(params.anchorPoint)
+	end
+	node:setPosition(cc.p(params.x or display.cx,params.y or display.cy))
+
+	if params.isFullScene then
+		node:setFullScreenEnabled(params.isFullScene)
+	else
+		if params.width and params.height then
+			node:setContentSize(cc.size(params.width, params.height))
+		end
+	end
+	if params.isLoop then 
+		params.onComplete = function(sender)
+			sender:play()
+		end
+	end
+	if type(params.onComplete) == "function" then
+		node:addEventListener(function(sener, eventType)
+			if eventType == ccexp.VideoPlayerEvent.COMPLETED then
+				params.onComplete(sener)
+			end
+		end)
+	end	
+	
+	return node
+end

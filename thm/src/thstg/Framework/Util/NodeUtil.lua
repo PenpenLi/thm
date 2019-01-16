@@ -301,7 +301,7 @@ function onMove(widget, params)
 	widget:addTouchEventListener(onTouch)
 end
 
-
+local DEFAULT_SHADER_KEY = "THSTG_DEFAULT_SHADER"
 local DEFAULT_VERTEX_SHADER = 
 [[
 	attribute vec4 a_position;
@@ -342,13 +342,21 @@ local DEFAULT_FRAGMENT_SHADER =
 function applyShader(node,params)
     params = params or {}
     if node then
-        local shaderKey = params.shaderKey
+		local shaderKey = params.shaderKey
+		if not shaderKey then
+			if not (params.vsSrc or params.vsStr or params.fsSrc or params.fsStr) then
+				shaderKey = DEFAULT_SHADER_KEY
+			end
+		end
         
         local glProgramCache = cc.GLProgramCache:getInstance()
         local glProgram = false
         if shaderKey then glProgram = glProgramCache:getGLProgram(shaderKey) end
     
-        if not glProgram then
+		if not glProgram then
+			if not (params.vsSrc or params.vsStr or params.fsSrc or params.fsStr) then
+				shaderKey = DEFAULT_SHADER_KEY
+			end
             local vertShaderStr = DEFAULT_VERTEX_SHADER
             local fragShaderStr = DEFAULT_FRAGMENT_SHADER
 			if params.vsSrc then vertShaderStr = FileUtil.readFile(params.vsSrc)

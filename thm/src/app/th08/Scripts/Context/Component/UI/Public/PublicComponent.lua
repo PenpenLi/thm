@@ -1,47 +1,5 @@
 module("UIPublic", package.seeall)
 
-function newRotateIcon(params)
-    params = params or {}
-    params.x = params.x or 0
-    params.y = params.y or 0
-    params.anchorPoint = params.anchorPoint or THSTG.UI.POINT_CENTER
-    params.time = params.time or -1
-    params.speed = params.speed or false
-    params.source = params.source or ResManager.getRes(ResType.LOADING,"loading_icon_1")
-    -----
-    local node = THSTG.UI.newNode({
-        x = params.x,
-        y = params.y,
-        anchorPoint = params.anchorPoint,
-    })
-    local icon = THSTG.UI.newImage({
-        x = node:getContentSize().width/2,
-        y = node:getContentSize().height/2,
-        anchorPoint = THSTG.UI.POINT_CENTER,
-        source = params.source
-    })
-    node:addChild(icon)
-
-    function node.updateLayer()
-        if params.time <0 then
-            icon:runAction(cc.RepeatForever:create(
-                cc.RotateBy:create(1,params.speed)
-            ))
-        else
-            icon:runAction(cc.RotateBy:create(params.time,params.time*params.speed))
-        end
-    end
-
-    node:onNodeEvent("enter", function ()
-        node.updateLayer()
-    end)
-
-    node:onNodeEvent("exit", function ()
-        
-    end)
-    return node
-end
-
 function newSheetFrameImage(params)
     local source = params.source
     local image = THSTG.UI.newImage(params)
@@ -63,15 +21,17 @@ function newSheetFrameSprite(params)
     local finalParams = clone(params)
     local source = params.source
    
-    finalParams.width = nil
-    finalParams.height = nil
-    local sprite = THSTG.UI.newSprite(finalParams)
+    local paramsWidth = params.width
+    local paramsHeight = params.height
+    params.width = nil
+    params.height = nil
+    local sprite = THSTG.UI.newSprite(params)
 
     function sprite:setSheetInfo(fileName,name)
         local info = SheetConfig.getFrame(fileName,name)
         sprite:setSource(info.source)
         sprite:setTextureRect(info.rect)
-        local size = cc.size(params.width or info.rect.width,params.height or info.rect.height)
+        local size = cc.size(paramsWidth or info.rect.width,paramsHeight or info.rect.height)
         sprite:setContentSize(size)
     end
     
@@ -104,56 +64,171 @@ end
 
 ----------------
 -----------------
-local function createUVSpriteByType(type,params)
+function newSprite(params)
     params = params or {}
+    --
+    local paramsWidth = params.width
+    local paramsHeight = params.height
+    if type(params.source) == "string" then params.src = params.src or params.source end
+    local sprite = THSTG.UI.newSprite(params)
 
-    params.uRange = params.uRange or cc.p(0,1)
-    params.vRange = params.vRange or cc.p(0,1)
-    params.speed = params.speed or cc.p(1,1)
-
-    local sprite = nil
-    if type == 0 then
-        sprite = THSTG.UI.newSprite(params)
-    elseif type == 1 then
-        sprite = newSheetFrameSprite(params)
+    function sprite:setSheetInfo(fileName,name)
+        local info = SheetConfig.getFrame(fileName,name)
+        sprite:setSource(info.source)
+        sprite:setTextureRect(info.rect)
+        
+        sprite:setContentSize(cc.size(info.rect.width,info.rect.height))
     end
 
-    local vsStr,fsStr = ShaderConfig.getShader("Uv_Sprite_Shader")
-    THSTG.NodeUtil.applyShader(sprite,{
-        shaderKey = "Uv_Sprite_Shader",
-        vsStr = vsStr,
-        fsStr = fsStr,
-        onState = function (node,state)
-            state:setUniformVec2("uRange",cc.vec3(params.uRange.x,params.uRange.y,0))
-            state:setUniformVec2("vRange",cc.vec3(params.vRange.x,params.vRange.y,0))
-            local count = cc.p(0,0)
-            node:runAction(cc.RepeatForever:create(cc.Sequence:create({
-                cc.DelayTime:create(0.01),
-                cc.CallFunc:create(function ()
-                    count.x = count.x + params.speed.x/1000
-                    count.y = count.y + params.speed.y/1000
-                    state:setUniformVec2("texOffset",cc.vec3(count.x,count.y,0))
-                end)
-            })))
-        end,
-    })
+    if type(params.source) == "table" then
+        if params.source[1] == TexType.SHEET then
+            sprite:setSheetInfo(params.source[2],params.source[3])
+            --根据宽高变形
+            local size = sprite:getContentSize()
+            sprite:setScale(1)
+            if params.width then sprite:setScaleX(params.width / size.width) end
+            if params.height then sprite:setScaleY(params.height / size.height) end
+        end
+    end
+    
+    return sprite
+end
+
+function newShaderSprite(params)
+    local sprite = newSprite(params)
+    ---
+    function sprite:setShaderEnabled(val)
+        if val then
+            if not params.shaderKey then return end
+            local vsStr,fsStr = ShaderConfig.getShader(params.shaderKey)
+            THSTG.NodeUtil.applyShader(sprite,{
+                shaderKey = params.shaderKey,
+                vsStr = vsStr,
+                fsStr = fsStr,
+                onState = params.onState,
+            })
+        else
+            THSTG.NodeUtil.applyShader(sprite)
+        end
+    end
     --
+    if params.shaderKey then
+        sprite:setShaderEnabled(true)
+    end
+
+    return sprite
+end
+
+local function newUVShaderSprite(params)
+    local sprite = newShaderSprite(params)
+    --
+    local oldSetShaderEnabled = sprite.setShaderEnabled
+    function sprite:setShaderEnabled(val)
+        oldSetShaderEnabled(self,val)
+        if not val then self:stopAllActions() end
+    end
+    return sprite
+end
+
+function newUVRollSprite(params)
+    params = params or {}
+    params.args = params.args or {}
+    params.args.uRange = params.args.uRange or cc.p(0,1)
+    params.args.vRange = params.args.vRange or cc.p(0,1)
+    params.args.speedX = params.args.speedX or 0
+    params.args.speedY = params.args.speedY or 0
+
+    params.shaderKey = "Uv_Rolling_Sprite_Shader"
+    params.onState = function (node,state)
+        state:setUniformVec2("_uRange",cc.vec3(params.args.uRange.x,params.args.uRange.y,0))
+        state:setUniformVec2("_vRange",cc.vec3(params.args.vRange.x,params.args.vRange.y,0))
+        local count = cc.p(0,0)
+        node:runAction(cc.RepeatForever:create(cc.Sequence:create({
+            cc.DelayTime:create(0.01),
+            cc.CallFunc:create(function ()
+                count.x = count.x + params.args.speedX/1000
+                count.y = count.y + params.args.speedY/1000
+                state:setUniformVec2("_texOffset",cc.vec3(count.x,count.y,0))
+            end)
+        })))
+    end
+    local sprite = newUVShaderSprite(params)
+    --
+
     function sprite:setSpeed(val)
-        params.speed = val
+        params.args.speed = val
     end
     function sprite:getSpeed(val)
-        return params.speed
+        return params.args.speed
     end
 
     return sprite
 end
 
-function newUVSprite(params)
-    local sprite = createUVSpriteByType(0,params)
-    return sprite
+function newUVWaveSprite(params)
+    params = params or {}
+    params.args = params.args or {}
+    params.args.speed = params.args.speed or 1.0
+    params.args.scale = params.args.scale or 3.0
+    params.args.identity = params.args.identity or 80.0
+
+    --
+    params.shaderKey = "Uv_Wave_Sprite_Shader"
+    params.onState = function(node,state)
+        state:setUniformFloat("_speed",params.args.speed)
+        state:setUniformFloat("_scale",params.args.scale)
+        state:setUniformFloat("_identity",params.args.identity)
+        local time = 0 
+        node:runAction(cc.RepeatForever:create(cc.Sequence:create({
+            cc.DelayTime:create(0.01),
+            cc.CallFunc:create(function ()
+                time = time + 0.1
+                state:setUniformFloat("_time",time)
+            end)
+        })))
+    end
+    
+    local node = newUVShaderSprite(params)
+    return node
 end
 
-function newUVSheetFrameSprite(params)
-    local sprite = createUVSpriteByType(1,params)
-    return sprite
+function newUVRippleSprite(params)
+    params = params or {}
+    params.args = params.args or {}
+    params.args.speed = params.args.speed or 1.0
+    params.args.ripple = params.args.ripple or 60.0
+    params.args.swing = params.args.swing or 1.0
+
+    
+    --
+    params.shaderKey = "Uv_Ripple_Sprite_Shader"
+    params.onState = function(node,state)
+        state:setUniformFloat("_speed",params.args.speed)
+        state:setUniformFloat("_ripple",params.args.ripple)
+        state:setUniformFloat("_swing",params.args.swing)
+        local time = 0 
+        node:runAction(cc.RepeatForever:create(cc.Sequence:create({
+            cc.DelayTime:create(0.01),
+            cc.CallFunc:create(function ()
+                time = time + 0.1
+                state:setUniformFloat("_time",time)
+            end)
+        })))
+    end
+    
+    local node = newUVShaderSprite(params)
+    return node
+end
+
+function newGreySprite(params)
+    params.shaderKey = "Grey_Sprite_Shader"
+    --
+    local node = newUVShaderSprite(params)
+    
+    function node:setDiscolored(val)
+       self:setShaderEnabled(val)
+    end
+
+    node:setDiscolored(true)
+    return node
 end

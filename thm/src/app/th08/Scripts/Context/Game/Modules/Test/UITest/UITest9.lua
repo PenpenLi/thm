@@ -8,18 +8,54 @@ function M.create(params)
     --------View--------
     local node = THSTG.UI.newNode()
 
-    local bg = UIPublic.newUVSheetFrameSprite({
+    local bg = UIPublic.newUVRollSprite({
         x = display.cx,
         y = display.cy,
         width = display.width-100,
         height = display.height,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        source = {"stg1bg","stg01_bg"},
-        vRange = cc.p(0,0.5),
-        speed = cc.p(0,0.4),
+        source = {TexType.SHEET,"stg1bg","stg01_bg"},
+        args = {
+            vRange = cc.p(0,0.5),
+            speedY = 0.4,
+        },
     })
     bg:setRotation3D(cc.vec3(120,0,0))
     node:addChild(bg)
+
+    -- local bg = UIPublic.newUVWaveSprite({
+    --     x = display.cx,
+    --     y = display.cy,
+    --     -- width = display.width-100,
+    --     -- height = display.height,
+    --     anchorPoint = THSTG.UI.POINT_CENTER,
+    --     source = "HelloWorld.png",
+    --     args = {
+    --         speed = 1.0,
+    --         scale = 3.0,
+    --         identity = 80.0,
+    --     }
+    -- })
+    -- node:addChild(bg)
+
+    local bg = UIPublic.newUVRippleSprite({
+            x = display.cx,
+            y = display.cy,
+            width = display.width-100,
+            height = display.height,
+            anchorPoint = THSTG.UI.POINT_CENTER,
+            source = "HelloWorld.png",
+            args= {
+                speed = 1.0,
+                ripple = 120.0,
+                swing = 1.0,
+            }
+           
+        })
+
+    node:addChild(bg)
+    
+    
 
     local an = UIPublic.newSheetAnimationSprite({
         x = display.cx,
