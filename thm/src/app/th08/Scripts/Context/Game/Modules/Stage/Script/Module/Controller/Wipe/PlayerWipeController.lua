@@ -1,4 +1,4 @@
-local M = class("EnemyBulletController",StageDefine.BulletController)
+local M = class("PlayerWipeController",StageDefine.BulletController)
 
 function M:_onInit()
     M.super._onInit(self)

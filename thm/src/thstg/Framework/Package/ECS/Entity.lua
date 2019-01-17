@@ -32,6 +32,7 @@ local function _addComponent(self,component,params)
 		
 	component:_added(self,params)
 end
+
 local function _remveComponent(self,...)
 	local name = ECSUtil.trans2Name(...)
 	local component = self.__components__[name]
@@ -86,6 +87,30 @@ function M:getComponent(...)
 	local name = ECSUtil.trans2Name(...)
 	local comp = self.__components__[name]
 	return comp or self:getComponents(...)[1]
+end
+
+function M:getComponentsWithName(type,name)
+	local list = {}
+	local comp = {}
+
+	if name and type(name) == "string" then
+		comps = self:getComponents(type)
+	else
+		name = type
+		comps = self.__components__
+	end
+	for k,v in pairs(comps) do
+		if v:getName() then
+			if v:getName() == name then
+				table.insert( list, v)
+			end
+		end
+	end
+	return list
+end
+
+function M:getComponentWithName(...)
+	return self:getComponentsWithName(...)[1]
 end
 
 function M:isHaveComponent(...)
@@ -156,13 +181,14 @@ end
 
 function M:setActive(isActive)
 	self.__isActive__ = isActive
+	self:_active(isActive)
 end
 function M:isActive()
 	return self.__isActive__ 
 end
 --发送事件
 function M:dispatch(e,params)
-	ECSManager.dispatchEvent(e,params)
+	ECSManager.dispatchEvent(ECSManager.EEventCacheType.Entity,e,params)
 end
 ---
 --[[
@@ -195,6 +221,9 @@ function M:_onLateUpdate(dTime)
     
 end
 --
+function M:_onActive(val)
+
+end
 
 --消息
 function M:_onEvent(event,params)
@@ -221,6 +250,12 @@ function M:_exit()
 	self:_onExit()
 
 	self:clear()
+end
+function M:_active(isActive)
+	self:_onActive()
+	for k,v in pairs(self.__components__) do
+		v:_onActive(isActive)
+	end
 end
 -------
 

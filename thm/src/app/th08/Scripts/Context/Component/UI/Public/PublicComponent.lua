@@ -67,6 +67,7 @@ end
 function newSprite(params)
     params = params or {}
     --
+
     local paramsWidth = params.width
     local paramsHeight = params.height
     if type(params.source) == "string" then params.src = params.src or params.source end
@@ -89,6 +90,12 @@ function newSprite(params)
             if params.width then sprite:setScaleX(params.width / size.width) end
             if params.height then sprite:setScaleY(params.height / size.height) end
         end
+    end
+
+    if params.isTile then
+        sprite:setScale(1)
+        sprite:getTexture():setTexParameters(gl.LINEAR,gl.LINEAR,gl.REPEAT,gl.REPEAT)
+        sprite:setTextureRect(cc.rect(0, 0, paramsWidth or 0, paramsHeight or 0))
     end
     
     return sprite
@@ -132,34 +139,35 @@ end
 
 function newUVRollSprite(params)
     params = params or {}
-    params.args = params.args or {}
-    params.args.uRange = params.args.uRange or cc.p(0,1)
-    params.args.vRange = params.args.vRange or cc.p(0,1)
-    params.args.speedX = params.args.speedX or 0
-    params.args.speedY = params.args.speedY or 0
+    params.uniforms = params.uniforms or {}
+    params.uniforms.uRange = params.uniforms.uRange or cc.p(0,1)
+    params.uniforms.vRange = params.uniforms.vRange or cc.p(0,1)
+    params.uniforms.speedX = params.uniforms.speedX or 0
+    params.uniforms.speedY = params.uniforms.speedY or 0
 
     params.shaderKey = "Uv_Rolling_Sprite_Shader"
     params.onState = function (node,state)
-        state:setUniformVec2("_uRange",cc.vec3(params.args.uRange.x,params.args.uRange.y,0))
-        state:setUniformVec2("_vRange",cc.vec3(params.args.vRange.x,params.args.vRange.y,0))
+        state:setUniformVec2("_uRange",cc.vec3(params.uniforms.uRange.x,params.uniforms.uRange.y,0))
+        state:setUniformVec2("_vRange",cc.vec3(params.uniforms.vRange.x,params.uniforms.vRange.y,0))
         local count = cc.p(0,0)
         node:runAction(cc.RepeatForever:create(cc.Sequence:create({
             cc.DelayTime:create(0.01),
             cc.CallFunc:create(function ()
-                count.x = count.x + params.args.speedX/1000
-                count.y = count.y + params.args.speedY/1000
+                count.x = count.x + params.uniforms.speedX/1000
+                count.y = count.y + params.uniforms.speedY/1000
                 state:setUniformVec2("_texOffset",cc.vec3(count.x,count.y,0))
             end)
         })))
     end
     local sprite = newUVShaderSprite(params)
+    
     --
 
     function sprite:setSpeed(val)
-        params.args.speed = val
+        params.uniforms.speed = val
     end
     function sprite:getSpeed(val)
-        return params.args.speed
+        return params.uniforms.speed
     end
 
     return sprite
@@ -167,17 +175,17 @@ end
 
 function newUVWaveSprite(params)
     params = params or {}
-    params.args = params.args or {}
-    params.args.speed = params.args.speed or 1.0
-    params.args.scale = params.args.scale or 3.0
-    params.args.identity = params.args.identity or 80.0
+    params.uniforms = params.uniforms or {}
+    params.uniforms.speed = params.uniforms.speed or 1.0
+    params.uniforms.scale = params.uniforms.scale or 3.0
+    params.uniforms.identity = params.uniforms.identity or 80.0
 
     --
     params.shaderKey = "Uv_Wave_Sprite_Shader"
     params.onState = function(node,state)
-        state:setUniformFloat("_speed",params.args.speed)
-        state:setUniformFloat("_scale",params.args.scale)
-        state:setUniformFloat("_identity",params.args.identity)
+        state:setUniformFloat("_speed",params.uniforms.speed)
+        state:setUniformFloat("_scale",params.uniforms.scale)
+        state:setUniformFloat("_identity",params.uniforms.identity)
         local time = 0 
         node:runAction(cc.RepeatForever:create(cc.Sequence:create({
             cc.DelayTime:create(0.01),
@@ -194,18 +202,18 @@ end
 
 function newUVRippleSprite(params)
     params = params or {}
-    params.args = params.args or {}
-    params.args.speed = params.args.speed or 1.0
-    params.args.ripple = params.args.ripple or 60.0
-    params.args.swing = params.args.swing or 1.0
+    params.uniforms = params.uniforms or {}
+    params.uniforms.speed = params.uniforms.speed or 1.0
+    params.uniforms.ripple = params.uniforms.ripple or 60.0
+    params.uniforms.swing = params.uniforms.swing or 1.0
 
     
     --
     params.shaderKey = "Uv_Ripple_Sprite_Shader"
     params.onState = function(node,state)
-        state:setUniformFloat("_speed",params.args.speed)
-        state:setUniformFloat("_ripple",params.args.ripple)
-        state:setUniformFloat("_swing",params.args.swing)
+        state:setUniformFloat("_speed",params.uniforms.speed)
+        state:setUniformFloat("_ripple",params.uniforms.ripple)
+        state:setUniformFloat("_swing",params.uniforms.swing)
         local time = 0 
         node:runAction(cc.RepeatForever:create(cc.Sequence:create({
             cc.DelayTime:create(0.01),

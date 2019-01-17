@@ -75,8 +75,9 @@ function release(obj,isDelete)
             queue.tail = queue.tail + 1
             queue.data[queue.tail] = obj
         end
-
+        return true
     end
+    return false
 end
 ---
 --填充池

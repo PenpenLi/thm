@@ -1,26 +1,38 @@
-return {
-    --第一个场景
-    [1] = {
-        openScene = function ()
+module(..., package.seeall)
 
-        end,
-        onScene = function ()
+local M = {}
+function M.create(params)
+    -------Model-------
 
-        end,
-        endScene = function ()
+   
+    -------View-------
+    local node = THSTG.UI.newNode()
 
-        end,
-    },
-    --第二个场景
-    [2] = {
-        openScene = function ()
+    local mainBg = UIPublic.newUVRollSprite({
+        x = display.cx,
+        y = display.cy,
+        width = display.width,
+        height = display.height,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        src = ResManager.getResSub(ResType.TEXTURE,TexType.IMAGE,"stg1bg"),
+        isTile = true,
+        args = {
+            speedY = 1,
+        },
+    })
 
-        end,
-        onScene = function ()
+    -- node:addChild(mainBg)
+  
+    -------Controller-------
+    node:onNodeEvent("enter", function ()
+        
+    end)
 
-        end,
-        endScene = function ()
+    node:onNodeEvent("exit", function ()
+        
+    end)
+    
+    return node
+end
 
-        end,
-    },
-}
+return M

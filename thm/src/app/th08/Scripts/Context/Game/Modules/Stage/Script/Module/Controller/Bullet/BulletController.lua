@@ -25,12 +25,6 @@ function M:_onStart()
 end
 
 ---
-function M:_onUpdate(delay)
 
-end
-
-function M:_onLateUpdate()
-
-end
 
 return M

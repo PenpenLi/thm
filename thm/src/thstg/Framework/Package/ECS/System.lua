@@ -21,6 +21,11 @@ function M:update(delay)
     self:_onLateUpdate(delay)
 end
 
+--发送事件
+function M:dispatch(e,params)
+	ECSManager.dispatchEvent(ECSManager.EEventCacheType.System,e,params)
+end
+
 function M:clear()
     self:_onClear()
 end

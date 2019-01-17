@@ -12,7 +12,7 @@ module("UTIL", package.seeall)
 
 TaskScheduler = class("TaskScheduler")
 function TaskScheduler:ctor()
-    self._pollClock = UTIL.newTickClock()
+    self._pollClock = newTickClock()
 
     self._varTaskTable = {}  --任务表
     self._varTaskQueue = {}  --执行表

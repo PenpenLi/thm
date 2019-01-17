@@ -6,6 +6,10 @@ function M:_onInit()
 
 end
 ---
+function M:getSprite()
+    return self._spriteComp:getSprite()
+end
+
 function M:play(action)
     self._spriteComp:getSprite():runAction(action)
 end

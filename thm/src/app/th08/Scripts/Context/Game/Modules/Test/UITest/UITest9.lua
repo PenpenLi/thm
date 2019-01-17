@@ -15,7 +15,7 @@ function M.create(params)
         height = display.height,
         anchorPoint = THSTG.UI.POINT_CENTER,
         source = {TexType.SHEET,"stg1bg","stg01_bg"},
-        args = {
+        uniforms = {
             vRange = cc.p(0,0.5),
             speedY = 0.4,
         },
@@ -23,20 +23,20 @@ function M.create(params)
     bg:setRotation3D(cc.vec3(120,0,0))
     node:addChild(bg)
 
-    -- local bg = UIPublic.newUVWaveSprite({
-    --     x = display.cx,
-    --     y = display.cy,
-    --     -- width = display.width-100,
-    --     -- height = display.height,
-    --     anchorPoint = THSTG.UI.POINT_CENTER,
-    --     source = "HelloWorld.png",
-    --     args = {
-    --         speed = 1.0,
-    --         scale = 3.0,
-    --         identity = 80.0,
-    --     }
-    -- })
-    -- node:addChild(bg)
+    local bg = UIPublic.newUVWaveSprite({
+        x = display.cx,
+        y = display.cy,
+        -- width = display.width-100,
+        -- height = display.height,
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        source = "HelloWorld.png",
+        uniforms = {
+            speed = 1.0,
+            scale = 3.0,
+            identity = 80.0,
+        }
+    })
+    node:addChild(bg)
 
     local bg = UIPublic.newUVRippleSprite({
             x = display.cx,
@@ -54,7 +54,6 @@ function M.create(params)
         })
 
     node:addChild(bg)
-    
     
 
     local an = UIPublic.newSheetAnimationSprite({

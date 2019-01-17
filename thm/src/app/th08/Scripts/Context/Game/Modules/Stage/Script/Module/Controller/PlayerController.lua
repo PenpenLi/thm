@@ -11,6 +11,7 @@ function M:_onInit()
 
     self.__isStateWipe = false                         --擦弹模式
     self.__isStateSlow = false                         --低速模式
+
 end
 
 
@@ -34,14 +35,13 @@ function M:shot()
     --TODO:子弹应该复用
     --根据不同的人物,等级,发射的子弹可能不同
     if THSTG.TimeUtil.time() >= (self._nextShotTime or 0) then
-        local bullet = StageDefine.PlayerBullet.new()                   --TODO:受Slow,人物的影响,可能会变,主要以role决定
-        local myPosComp = self:getComponent("TransformComponent")
-        local bulletPosComp = bullet:getComponent("TransformComponent")
-        bulletPosComp:setPositionX(myPosComp:getPositionX() + 0)
-        bulletPosComp:setPositionY(myPosComp:getPositionY() - 25)  --贴图尾巴太长了
-        bullet:setAnchorPoint(cc.p(0.5,0.5))
-        bullet:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)--TODO:一般是添加到一个空的实体上,但是应该怎么获取那个实体??
-
+        --TODO:受Slow,人物的影响,可能会变,主要以role决定
+        -- local bullet = ObjectCache.create(StageDefine.PlayerBullet) --TODO:中途消失的bug,好像还有溢出风险
+        local bullet = StageDefine.PlayerBullet.new()
+        local bulletControlScript = bullet:getScript("PlayerBulletController")
+        bulletControlScript:reset(self:getEntity())
+        bullet:setActive(true)
+        
         self._nextShotTime = THSTG.TimeUtil.time() + self.shotInterval
     end
 end

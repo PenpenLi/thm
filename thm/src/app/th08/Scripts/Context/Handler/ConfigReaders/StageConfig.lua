@@ -4,7 +4,8 @@ local BOSS_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Boss.%s"
 local BATMAN_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Batman.%s"
 local SCENARIO_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Scenario.Stage_%02d"
 local MAP_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Map.Map_%02d"
-
+local BULLET_PLAYER_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Bullet.PlayerBullet"
+local BULLET_ENEMY_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Bullet.EnemyBullet"
 local function getDictByFile(path,file)
     local pathFile = string.format(path,file)
     return require(pathFile)
@@ -30,6 +31,14 @@ end
 
 function getBatman(batmanType)
     return getDictByFile(BATMAN_PATH_PATTERN,batmanType)
+end
+
+function getPlayerBullet(keyName)
+    return getDictByFile(BULLET_PLAYER_PATH_PATTERN)
+end
+
+function getEnemyBullet(keyName)
+    return getDictByFile(BULLET_ENEMY_PATH_PATTERN)
 end
 
 ----

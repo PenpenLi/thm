@@ -1,5 +1,5 @@
 
-local M = class("BulletHealth",StageDefine.HealthController)
+local M = class("PlayerBulletHealth",StageDefine.HealthController)
 
 function M:_onInit()
    M.super._onInit(self)
@@ -25,7 +25,7 @@ function M:_onDead()
             cc.FadeOut:create(1)
         }),
         cc.CallFunc:create(function()
-            self:killEntity()
+            if ObjectCache.release(self:getEntity()) then self:getEntity():setActive(false) else self:killEntity() end
         end)
     }))
 end

@@ -52,7 +52,7 @@ function find2ClassWithChild(name,...)
     local length = #argsB
     if length <= 2 then 
         for i = #argsA,1,-1 do
-            if argsA[i] == argsB[#argsB] then
+            if argsA[i] == argsB[length] then
                 return true
             end
         end

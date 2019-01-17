@@ -1,6 +1,7 @@
 module("UTIL", package.seeall)
 local Socket = require "socket"
-local TickClock = class("TickClock")
+
+TickClock = class("TickClock")
 
 local function getHighPrecisionTime()
 	return Socket.gettime() * 1000

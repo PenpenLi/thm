@@ -18,6 +18,7 @@ function M:_onView()
         require("Scripts.Context.Game.Modules.Test.UITest.UITest8"),         --图片效果测试
         require("Scripts.Context.Game.Modules.Test.UITest.UITest9"),         --背景测试
 
+        require("Scripts.Context.Game.Modules.Test.UITest.UITest10"),         --CC特效测试
         require("Scripts.Context.Game.Modules.Test.GameTest.GameScene"),         --图片效果测试
 
     }

@@ -36,24 +36,35 @@ Batman = require("Scripts.Context.Game.Modules.Stage.Entity.Batman")
 StageGame = require("Scripts.Context.Game.Modules.Stage.Entity.StageGame")
 
 ---[[脚本]]----
+--主控制器
 BaseController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BaseController")
-BulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.BulletController")
-PlayerBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.PlayerBulletController")
-EnemyBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.EnemyBulletController")
 PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.PlayerController")
 BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BatmanController")
 BossController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BossController")
-StageGameController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.StageGameController")
+---舞台控制器
+StageGameController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Stage.StageGameController")
+---子弹控制器
+BulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.BulletController")
+PlayerBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.PlayerBulletController")
+EnemyBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.EnemyBulletController")
 
-HealthBarController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.GUI.HealthBarController")
+--GUI系统
+HealthBarController = require("Scripts.Context.Game.Modules.Stage.Script.Module.GUI.HealthBarController")
+
+--符卡系统
+BaseSpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.BaseSpellController")
+PlayerSpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.PlayerSpellController")
+EnemySpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.EnemySpellController")
+BossSpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.BossSpellController")
 
 --生命控制
 HealthController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.HealthController")
 BatmanHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.BatmanHealth")
 BossHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.BossHealth")
 PlayerHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.PlayerHealth")
-BulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.BulletHealth")
-
+BulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.Bullet.BulletHealth")
+PlayerBulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.Bullet.PlayerBulletHealth")
+EnemyBulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.Bullet.EnemyBulletHealth")
 --碰撞控制
 CollisionController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.CollisionController")
 PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.PlayerCollision")

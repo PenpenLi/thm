@@ -1,5 +1,5 @@
 --音乐管理器
-module("AUDIO", package.seeall)
+module(..., package.seeall)
 
 local AudioEngine = ccexp.AudioEngine
 local FileUtils = cc.FileUtils:getInstance()
@@ -282,9 +282,16 @@ function resumeSounds()
 	end
 end
 
+--取得指定音效音量--
+function getSoundVolume(soundId)
+	if _playingSounds[soundId] then
+		return AudioEngine:getVolume(soundId)
+	end
+end
+
 --设置音效音量--对当前正在播放的无效--value[0, 100]
-function getSoundVolume() return _soundVolume end
-function setSoundVolume(value)
+function getSoundsVolume() return _soundVolume end
+function setSoundsVolume(value)
 	if type(value) ~= "number" then return end
 
 	if value < 0 then
@@ -304,7 +311,12 @@ function setSoundVolume(value)
 		end
 	end
 end
-
+--设置指定音效音量--
+function setSoundVolume(soundId,volume)
+	if _playingSounds[soundId] then
+		AudioEngine:setVolume(soundId,volume)
+	end
+end
 
 -----------------------------新增API----------------------------
 

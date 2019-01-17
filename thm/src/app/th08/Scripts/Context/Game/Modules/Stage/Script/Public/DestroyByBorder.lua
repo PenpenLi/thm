@@ -9,7 +9,7 @@ function M:_onLateUpdate()
     local posComp = self:getComponent("TransformComponent")
     local posPoint = cc.p(posComp:getPositionX(),posComp:getPositionY())
     if not cc.rectContainsPoint(self.boarder, posPoint) then
-        self:getEntity():destroy()
+        if ObjectCache.release(self:getEntity()) then self:getEntity():setActive(false) else self:killEntity() end
     end
 end
 

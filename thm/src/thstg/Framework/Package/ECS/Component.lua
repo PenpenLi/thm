@@ -4,35 +4,24 @@ local M = class("Component")
 function M:ctor(...)
     --用于标识组件类别
     self.__id__ = ECSUtil.getComponentId()
-    self.__entity = nil
+    self.__compName__ = nil
+    self.__entity__ = nil
     self.__isEnabled__ = true
-    
+    self.__className__ = self:_getClass(...)
+
     self:_onInit(...)
 end
 
 function M:getClass()
-    local function reverseTable(tab)
-        local tmp = {}
-        for i = 1, #tab do
-            local key = #tab
-            tmp[i] = table.remove(tab)
-        end
-        return tmp
-    end
+    return self.__className__
+end
 
-    local classList = {}
-    local this = self
-    while this do
-        if not this.super then break end    --不包括最顶层,没有意义
-        local keys = {this:_onClass( this.__cname or "UnknowComponent" , this.__id__ )}
-        for i = #keys,1,-1 do
-            table.insert( classList, keys[i])
-        end
-        this = this.super
-        
-    end
-    classList = reverseTable(classList)
-    return ECSUtil.trans2Name(unpack(classList))
+function M:getName()
+    return self.__compName__ 
+end
+
+function M:setName(name)
+    self.__compName__ = name
 end
 
 function M:getID()
@@ -46,8 +35,8 @@ function M:setEnabled(val)
 end
 
 function M:getEntity()
-    assert(self.__entity, "[Component] You must have a parent entity")
-    return self.__entity
+    assert(self.__entity__, "[Component] You must have a parent entity")
+    return self.__entity__
 end
 
 --移除组件
@@ -79,7 +68,7 @@ end
     以下函数由子类重载
 ]]
 
-function M:_onClass(className,id)
+function M:_onClass(className, id, ctorArgs)
     --能够决定是否可以多次被添加
     return className
 end
@@ -123,15 +112,42 @@ function M:_onLateUpdate(delay,entity)
     
 end
 
+function M:_onActive(val)
+	
+end
 ------------
 function M:_added(entity,param)
-    assert(not self.__entity, "[System] System already added. It can't be added again!")
-    self.__entity = entity
+    assert(not self.__entity__, "[System] System already added. It can't be added again!")
+    self.__entity__ = entity
     self:_onAdded(entity)
 end
 function M:_removed(entity)
     self:_onRemoved(entity)
-    self.__entity = nil
+    self.__entity__ = nil
+end
+function M:_getClass(...)
+    local function reverseTable(tab)
+        local tmp = {}
+        for i = 1, #tab do
+            local key = #tab
+            tmp[i] = table.remove(tab)
+        end
+        return tmp
+    end
+
+    local classList = {}
+    local this = self
+    while this do
+        if not this.super then break end    --不包括最顶层,没有意义
+        local keys = {this:_onClass( this.__cname or "UnknowComponent" , this.__id__ , {...})}
+        for i = #keys,1,-1 do
+            table.insert( classList, keys[i])
+        end
+        this = this.super
+        
+    end
+    classList = reverseTable(classList)
+    return ECSUtil.trans2Name(unpack(classList))
 end
 
 return M

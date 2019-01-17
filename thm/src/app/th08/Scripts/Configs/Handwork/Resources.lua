@@ -10,6 +10,9 @@ return {
         plist = {
             select_diff = "Assets/Texture/Plist/select_diff.plist" ,
         },
+        image = {
+            stg1bg = "Assets/Texture/stg1bg.jpg" ,
+        }
     },
     animation = {
         skeleton = {
@@ -43,6 +46,8 @@ return {
         progressBar = {
             prog_radial_bg = "Assets/UI/ProgressBar/prog_radial_bg.png" ,
             prog_radial_hp = "Assets/UI/ProgressBar/prog_radial_hp.png" ,
+            prog_radial_boss_hp = "Assets/UI/ProgressBar/prog_radial_boss_hp.png" ,
+            prog_radial_boss_spell = "Assets/UI/ProgressBar/prog_radial_boss_spell.png" ,
         }
     },
 

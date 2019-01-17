@@ -4,6 +4,7 @@ module("ECSManager", package.seeall)
 --实体flag
 EEntityFlag = {
     Init = 1,
+    Active = 2,
     Destroy = 99,
 }
 
@@ -12,6 +13,7 @@ EEventType = {
 }
 
 local EEventCacheType = {
+    All = 0,
     Entity = 1,
     System = 2
 }
@@ -33,7 +35,15 @@ function dispatchEvent(cacheType,event,params)
         event = event,
         params = params,
     }
-    table.insert(_eventQueue[cacheType], info )
+    if cacheType == EEventCacheType.All then
+        for _,v in pairs(EEventCacheType) do
+            if v ~= EEventCacheType.All then
+                table.insert(_eventQueue[v], info )
+            end
+        end
+    else
+        table.insert(_eventQueue[cacheType], info )
+    end
 end
 
 --[[实体管理]]
@@ -47,8 +57,7 @@ end
 
 function destroyEntity(entity)
     dirtyEntity(entity,EEntityFlag.Destroy)
-    dispatchEvent(EEventCacheType.System,EEventType.DestroyEntity,entity)
-    dispatchEvent(EEventCacheType.Entity,EEventType.DestroyEntity,entity)
+    dispatchEvent(EEventCacheType.All,EEventType.DestroyEntity,entity)
 end
 
 function addEntity(entity)

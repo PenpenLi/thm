@@ -33,13 +33,13 @@ end
 ---
 function M:_onMove(dx,dy)
     --主要根据移动方式判断动画
-    if dx > 0 then
-        self:play("MoveLeft")
-    elseif dx < 0 then
-        self:play("MoveRight")
-    else
-        self:play("Idle")
-    end
+    -- if dx > 0 then
+    --     -- self:play("MoveLeft")
+    -- elseif dx < 0 then
+    --     -- self:play("MoveRight")
+    -- else
+    --     self:play("Idle")
+    -- end
 end
 
 ----
