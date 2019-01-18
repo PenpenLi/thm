@@ -107,7 +107,7 @@ function closeAllViews(allType)
 end
 
 -- 检测某模块是否处于打开状态
-function isOpenedView(moduleType)
+function isViewOpened(moduleType)
 	if _openedModules[moduleType] then
 		return true
 	end

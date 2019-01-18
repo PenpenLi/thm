@@ -38,7 +38,6 @@ StageGame = require("Scripts.Context.Game.Modules.Stage.Entity.StageGame")
 ---[[脚本]]----
 --主控制器
 BaseController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BaseController")
-PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.PlayerController")
 BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BatmanController")
 BossController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BossController")
 ---舞台控制器
@@ -47,6 +46,11 @@ StageGameController = require("Scripts.Context.Game.Modules.Stage.Script.Module.
 BulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.BulletController")
 PlayerBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.PlayerBulletController")
 EnemyBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.EnemyBulletController")
+---自机控制
+PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Player.PlayerController")
+---道具控制
+PropController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Prop.PropController")
+
 
 --GUI系统
 HealthBarController = require("Scripts.Context.Game.Modules.Stage.Script.Module.GUI.HealthBarController")
@@ -68,7 +72,11 @@ EnemyBulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.He
 --碰撞控制
 CollisionController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.CollisionController")
 PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.PlayerCollision")
-BulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.BulletCollision")
+---子弹的碰撞控制
+BulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.BulletCollision")
+PlayerBulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.PlayerBulletCollision")
+
+
 
 --输入控制
 InputController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Input.InputController")

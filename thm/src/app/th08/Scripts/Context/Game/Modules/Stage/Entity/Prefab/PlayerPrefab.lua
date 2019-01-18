@@ -5,9 +5,6 @@ local M = class("PlayerPrefab",StageDefine.PlayerEntity)
 function M:ctor(...)
     M.super.ctor(self)
 
-    self.playerController = StageDefine.PlayerController.new()
-    self:addScript(self.playerController)
-    
     self.healthController = StageDefine.PlayerHealth.new()
     self:addScript(self.healthController)
 
@@ -22,6 +19,9 @@ function M:ctor(...)
 
     self.constraintByBorder = StageDefine.ConstraintByBorder.new()
     self:addScript(self.constraintByBorder)
+
+    self.playerController = StageDefine.PlayerController.new()
+    self:addScript(self.playerController)
 
 end
 

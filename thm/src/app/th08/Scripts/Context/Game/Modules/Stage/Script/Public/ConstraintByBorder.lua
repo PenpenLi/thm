@@ -2,7 +2,7 @@ local M = class("ConstraintByBorder",THSTG.ECS.Script)
 
 function M:_onInit()
     self.border = cc.rect(0,0,display.width,display.height)
-    self.size = cc.size(16,16)      --TODO:由纹理决定
+    self.size = cc.size(32,48)      --TODO:由纹理决定
 
     self._transComp = nil
     self._prevPos = cc.p(0,0)
@@ -12,8 +12,8 @@ function M:_onStart()
     local spriteComp = self:getComponent("SpriteComponent")
     if spriteComp then
         local size = spriteComp:getSprite():getContentSize()
-        self.size.width = math.max(16,size.width)
-        self.size.height = math.max(16,size.height)
+        self.size.width = math.max(self.size.width,size.width)
+        self.size.height = math.max(self.size.height,size.height)
     end
 
     local transComp = self:getComponent("TransformComponent")

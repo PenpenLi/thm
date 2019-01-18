@@ -53,26 +53,52 @@ end
 
 ----
 function M:_onSkill()
-    
+    self:getSprite():setFlippedX(false)
+    self:getSprite():stopAllActions()
+    self:getSprite():runAction(cc.Sequence:create({
+        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"skill"))),
+        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"skill_susbin"))),
+        cc.DelayTime:create(1),
+        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"skill"))):reverse(),
+    }))
+
 end
 
 function M:_onMoveLeft(event)
-    
+    self:getSprite():setFlippedX(false)
+    self:getSprite():stopAllActions()
+    self:getSprite():runAction(cc.Sequence:create({
+        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"move_right_start"))),
+        cc.CallFunc:create(function() 
+            self:getSprite():runAction(cc.RepeatForever:create(
+                cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"move_right_sustain")))
+            ))
+        end)
+    }))
 end
 
 function M:_onMoveRight(event)
-   
+    self:getSprite():setFlippedX(true )
+    self:getSprite():stopAllActions()
+    self:getSprite():runAction(cc.Sequence:create({
+        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"move_right_start"))),
+        cc.CallFunc:create(function() 
+            self:getSprite():runAction(cc.RepeatForever:create(
+                cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"move_right_sustain")))
+            ))
+        end)
+    }))
 end
 
 function M:_onIdle(event)
     local actions = {}
     if event.from == "MoveRight" or event.from == "MoveLeft" then
-        -- local animation = AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"move_left"))
-        -- animation:setDelayPerUnit(1/26)
-        -- table.insert( actions,cc.Animate:create(animation):reverse())
-        -- table.insert( actions,cc.CallFunc:create(function() 
-        --     self:getSprite():setFlippedX(not self:getSprite():isFlippedX())
-        -- end))
+        local animation = AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"move_right"))
+        animation:setDelayPerUnit(1/26)
+        table.insert( actions,cc.Animate:create(animation):reverse())
+        table.insert( actions,cc.CallFunc:create(function() 
+            -- self:getSprite():setFlippedX(not self:getSprite():isFlippedX())
+        end))
     end
     table.insert( actions,cc.CallFunc:create(function() 
         self:getSprite():playAnimationForever(AnimationCache.getResBySheet(StageConfig.getBossAnimSheetArgs(self:getBossType(),"stand_normal")))

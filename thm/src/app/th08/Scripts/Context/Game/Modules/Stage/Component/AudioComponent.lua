@@ -61,4 +61,5 @@ end
 function M:_onClass(className,id)
     return className, id
 end
+
 return M

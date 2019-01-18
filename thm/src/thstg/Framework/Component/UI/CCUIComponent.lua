@@ -290,6 +290,39 @@ function newLayerColor(params)
 	return node
 end
 
+
+--背景屏蔽
+function newMaskLayer(params)
+	params = params or {}
+	local finalParams = clone({
+		x = 0,
+		y = 0,
+		alpha = 0.5,
+	})
+	TableUtil.mergeA2B(params, finalParams)
+
+	local layer = cc.LayerColor:create(params.color or cc.c4b(0, 0, 0, finalParams.alpha * 255), display.width, display.height)
+	layer:setPosition(finalParams.x, finalParams.y)
+
+	local function onTouchBegan(pTouch, event)
+		return true
+	end
+	local function onTouchEnded(pTouch, event)
+		if params and params.onClick then
+			params.onClick(layer)
+		end
+	end
+	local listener = cc.EventListenerTouchOneByOne:create()
+	listener:setSwallowTouches(true)
+	listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
+	listener:registerScriptHandler(onTouchEnded, cc.Handler.EVENT_TOUCH_ENDED)
+	local dispatcher = layer:getEventDispatcher()
+	dispatcher:addEventListenerWithSceneGraphPriority(listener, layer)
+
+	return layer
+end
+
+
 --CCWidget组件
 --param x           	#number     x坐标
 --param y           	#number     y坐标

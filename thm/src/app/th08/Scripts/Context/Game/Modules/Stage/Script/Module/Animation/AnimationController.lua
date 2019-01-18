@@ -4,7 +4,7 @@ function M:_onInit()
     M.super._onInit(self)
 
     self.fsm = THSTG.UTIL.newStateMachine() --状态机
-    self.sprite = nil
+    self.animaComp = nil
 
     self._prevPos = cc.p(0,0)
 end
@@ -15,7 +15,7 @@ function M:play(actionType)
     self.fsm:doEvent(actionType)
 end
 function M:getSprite()
-    return self.sprite
+    return self.animaComp:getSprite()
 end
 ----
 function M:_onLateUpdate()
@@ -32,7 +32,7 @@ end
 
 ------------------
 function M:_onStart()
-    self.sprite = self:getComponent("SpriteComponent"):getSprite()
+    self.animaComp = self:getComponent("AnimationComponent")
 
     local cfg = self:_onState()
     if cfg and next(cfg) then

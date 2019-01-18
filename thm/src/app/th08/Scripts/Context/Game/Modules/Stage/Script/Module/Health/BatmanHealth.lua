@@ -29,6 +29,9 @@ function M:_onDead()
     })
     --TODO:还需要播放一个粒子效果
     self:killEntity()
+
+
+    --TODO:爆道具
 end
 
 return M

@@ -8,7 +8,9 @@ function M:_onInit()
 
 end
 ---
-
+function M:reset(refEntity)
+    M.super.reset(self,refEntity)
+end
 ---
 function M:_onStart()
     M.super._onStart(self)

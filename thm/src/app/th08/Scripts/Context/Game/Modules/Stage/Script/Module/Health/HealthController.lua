@@ -4,12 +4,18 @@ function M:_onInit()
     self.blood = 100    --TODO:特异性
 
     self._isDead = false
-    self._isHurt = false
+    self.isInvincible = false
 end
 --
-function M:hurt(damage)
-    self._isHurt = (damage > 0)
-    self:setBlood(self:getBlood()- damage)
+function M:hit(damage)
+    if self.isInvincible then return end
+
+    if (damage > 0) then self:_onHurt(damage)
+    elseif (damage == 0) then self:_onMiss(damage)
+    elseif (damage < 0) then self:_onCure(damage)
+    end
+
+    self:setBlood(self:getBlood() - damage)
 end
 
 function M:die()
@@ -20,8 +26,12 @@ function M:isDead()
     return self._isDead
 end
 
-function M:isHurt()
-    return self._isHurt
+function M:isInvincible()
+    return self.isInvincible
+end
+
+function M:setInvincible(val)
+    self.isInvincible = val
 end
 
 function M:setBlood(val)
@@ -29,28 +39,30 @@ function M:setBlood(val)
     self.blood = val
 
     self._isDead = (self.blood <= 0)
+
+    --
+    if self._isDead then self:_onDead() end
 end
 
 function M:getBlood()
     return self.blood
 end
 
-
---
-function M:_onLateUpdate()
-    if self._isHurt then self:_onHurt() end
-    if self._isDead then self:_onDead() end
-
-    if self._isHurt then self._isHurt = false end
-end
-
 ----
 --[[由子类重写]]
 --受伤回调
-function M:_onHurt()
-
+function M:_onHurt(damage)
 
 end
+
+function M:_onMiss(damage)
+    self:_onHurt(damage)
+end
+
+function M:_onCure(damage)
+    self:_onHurt(damage)
+end
+
 --死亡回调
 function M:_onDead()
 

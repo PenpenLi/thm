@@ -37,11 +37,11 @@ function M:_onInit(...)
     
 end
 
-function M:_onAdded(param)
+function M:_onAdded(entity,param)
     
 end
 
-function M:_onRemoved(param)
+function M:_onRemoved(entity)
     
 end
 --执行start()时回调

@@ -108,10 +108,7 @@ return {
             sl_text = "Assets/Module/Selection/SelectRole/sl_text.png" ,
     
         },
-    
-        main_ui = {
-                
-        },
+
     
         loading = {
             loading_icon_1 = "Assets/Module/GUI/PublicUI/Loading/loading_icon_1.png" ,

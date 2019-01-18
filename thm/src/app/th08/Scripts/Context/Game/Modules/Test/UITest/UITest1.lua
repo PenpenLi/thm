@@ -57,7 +57,7 @@ function M.create(params)
                     height = spriteSize.height,
                     anchorPoint = THSTG.UI.POINT_CENTER,
                     onClick = function()
-                        dump(0,v.rect,k)
+                        dump(0,vv.rect,keyName)
                     end,
                 })
                 sprite:addChild(clickNode)

@@ -8,9 +8,6 @@ function M:ctor()
     self.destroyByBorder = StageDefine.DestroyByBorder.new()
     self:addScript(self.destroyByBorder)
 
-    self.collisionController = StageDefine.BulletCollision.new()
-    self:addScript(self.collisionController)
-
     self.animationController = StageDefine.BulletAnimation.new()
     self:addScript(self.animationController)
  

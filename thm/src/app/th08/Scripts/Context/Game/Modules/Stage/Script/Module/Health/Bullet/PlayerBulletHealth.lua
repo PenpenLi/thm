@@ -1,5 +1,5 @@
 
-local M = class("PlayerBulletHealth",StageDefine.HealthController)
+local M = class("PlayerBulletHealth",StageDefine.BulletHealth)
 
 function M:_onInit()
    M.super._onInit(self)
@@ -19,7 +19,7 @@ function M:_onDead()
     animationComp:play(cc.Sequence:create({
         --自己旋转,缩小,消失
         cc.Spawn:create({
-            --XXX:旋转不是绕中心点???
+            --旋转不是绕中心点
             cc.RotateBy:create(1,280),
             cc.ScaleBy:create(1,0.6),
             cc.FadeOut:create(1)
@@ -29,5 +29,6 @@ function M:_onDead()
         end)
     }))
 end
+
 
 return M

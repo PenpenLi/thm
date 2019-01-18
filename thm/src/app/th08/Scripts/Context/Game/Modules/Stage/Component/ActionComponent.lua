@@ -19,7 +19,7 @@ function M:runForeAct(action)
 end
 
 function M:stopAllActions()
-    self.sprite:stopAllActions()
+    self:getEntity():stopAllActions()
 end
 ----
 function M:_onAdded(entity)
@@ -29,6 +29,12 @@ end
 
 function M:_onRemoved(entity)
     
+end
+
+function M:_onActive(val)
+    if val == false then
+        self:stopAllActions()
+    end
 end
 
 

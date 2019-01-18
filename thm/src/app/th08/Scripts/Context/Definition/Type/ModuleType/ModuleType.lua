@@ -4,8 +4,6 @@ TEST = "test"
 
 EDITOR = "editor"
 
-MAINUI = "main_ui" 
-
 MENU = "menu"
 
 ROLE = "role"

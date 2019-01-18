@@ -79,21 +79,56 @@ function release(obj,isDelete)
     end
     return false
 end
+
+function pick(class,num,initFunc,params)
+    local list = {}
+    initFunc = initFunc or function(...) end
+    for i = 1,num do
+        local obj = create(class,params)
+        initFunc(obj,i)
+        table.insert( list, obj)
+    end
+    return obj
+end
+
+function throw(objs,isDelete,delFunc)
+    delFunc = delFunc or function(...) end
+    for k,v in pairs(objs) do
+        local ret = release(v,isDelete)
+        delFunc(v,k,ret)
+    end
+end
+
+function releaseAll(class,isDelete)
+    local queue = categoryCache[class]
+    if queue then
+        for _,v in pairs(queue) do 
+            release(v,isDelete)
+        end
+    end
+end
 ---
---填充池
+--填满池
 function fill(class,num,param)
     local totalNum = getTotalObjs(class)
     if totalNum >= num then return end
-
     for i = 1,num-totalNum do
+        local obj = create(class,param)
+        release(obj)
+        table.insert( list, obj ) 
+    end
+
+end
+--
+function expand(class,num,param)
+    for i = 1,num do
         local obj = create(class,param)
         release(obj)
     end
 end
 --
 
---
-function clear()
+function clearAll()
     for _,v in paris(objsCache) do
         if tolua.iskindof(v.object,"cc.Node") then
             v.object:release()
@@ -101,6 +136,20 @@ function clear()
     end
     objsCache = {}
     categoryCache = {}
+end
+
+
+function clear(class)
+    if class then
+        for _,v in paris(objsCache) do
+            if info.class == class then
+                release(v.obj)
+            end
+        end
+        categoryCache[class] = nil
+    else
+        clearAll()
+    end
 end
 
 

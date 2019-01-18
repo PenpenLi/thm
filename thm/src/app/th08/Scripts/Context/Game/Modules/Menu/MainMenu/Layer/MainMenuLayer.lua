@@ -83,7 +83,7 @@ function M.create(params)
         x = display.cx,
         y = display.cy,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        src = ResManager.getResSub(ResType.MENU,MenuType.MAIN_MENU, "main_bg") --TODO:
+        src = ResManager.getModuleRes(ModuleType.MENU, "main_menu" , "main_bg") --TODO:
 
     })
     node:addChild(mainBg)
@@ -143,12 +143,10 @@ function M.create(params)
             if data.onClick then
                 data.onClick(sender)
             end
-            if data.file and  data.file ~= "" then
-                --TODO:需要一个全局Layer,进行 入栈出栈操作的那种,这个layer 进别的层时先 入栈
-                local file = require(data.file)
-                local scene = file.create()
-                cc.Director:getInstance():replaceScene(scene)
-                
+           
+            if index == 1 then
+
+                THSTG.SceneManager.replace(SceneType.STAGE)
             end
         end
     end

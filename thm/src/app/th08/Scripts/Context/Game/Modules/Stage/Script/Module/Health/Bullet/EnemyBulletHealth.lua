@@ -1,5 +1,5 @@
 
-local M = class("EnemyBulletHealth",StageDefine.HealthController)
+local M = class("EnemyBulletHealth",StageDefine.BulletHealth)
 
 function M:_onInit()
    M.super._onInit(self)

@@ -3,6 +3,8 @@ return {
     desc1 = "",
     ability = "",
     animation = {
-        stand_normal = {"enemy","enemy_01_a_normal"}
+        stand_normal = {"enemy","enemy_01_a_normal"},
+        -- move_left = {"enemy","enemy_01_a_normal"},
+        -- move_left_sustain = {"enemy","enemy_01_a_normal"},
     },
 }

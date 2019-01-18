@@ -2,10 +2,11 @@ module("StageConfig", package.seeall)
 local ROLE_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Role.%s"
 local BOSS_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Boss.%s"
 local BATMAN_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Batman.%s"
-local SCENARIO_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Scenario.Stage_%02d"
-local MAP_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Map.Map_%02d"
+local SCENARIO_PATH_PATTERN = "Scripts.Configs.Template.Module.Stage.Scenario.Stage_%02d"
+local MAP_PATH_PATTERN = "Scripts.Configs.Template.Module.Stage.Map.Map_%02d"
 local BULLET_PLAYER_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Bullet.PlayerBullet"
 local BULLET_ENEMY_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Bullet.EnemyBullet"
+local PROP_ENEMY_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Prop.Prop"
 local function getDictByFile(path,file)
     local pathFile = string.format(path,file)
     return require(pathFile)
@@ -33,12 +34,16 @@ function getBatman(batmanType)
     return getDictByFile(BATMAN_PATH_PATTERN,batmanType)
 end
 
-function getPlayerBullet(keyName)
+function getPlayerBullet()
     return getDictByFile(BULLET_PLAYER_PATH_PATTERN)
 end
 
-function getEnemyBullet(keyName)
+function getEnemyBullet()
     return getDictByFile(BULLET_ENEMY_PATH_PATTERN)
+end
+
+function getProp(propType)
+    return getDictByFile(BULLET_ENEMY_PATH_PATTERN)[propType]
 end
 
 ----
@@ -85,6 +90,21 @@ end
 function getBatmanAnimSheetArgs(batmanType,name)
     local tb = getBatman(batmanType)
     local args = tb.animation[name]
+    if args then
+        return unpack(args)
+    end
+    return {}
+end
+
+---
+function getPropGameArgs(propType)
+    local tb = getProp(propType)
+    return tb.gameArgs
+end
+
+function getPropFrameSheetArgs(propType)
+    local tb = getProp(propType)
+    local args = tb.frame
     if args then
         return unpack(args)
     end

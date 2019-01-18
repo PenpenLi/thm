@@ -5,7 +5,7 @@ return {
     gameArgs = {
         moveSpeed = cc.p(2,2),
         colliderSize = cc.size(20,20),
-        mapSize = cc.size(20,20),
+        mapSize = cc.size(32,48),
     },
     animation = {
         move_left_start = {"player00","yukari_move_left_start"},

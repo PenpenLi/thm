@@ -23,3 +23,6 @@ LOADING_BUSY = UIDUtil.getEventUID()
 --舞台模块
 STAGE_ENTER = UIDUtil.getEventUID()
 STAGE_EXIT = UIDUtil.getEventUID()
+
+STAGE_SPELLCARD_EFFECT_WND = UIDUtil.getEventUID()
+STAGE_MAP_INFO_UPDATE = UIDUtil.getEventUID()

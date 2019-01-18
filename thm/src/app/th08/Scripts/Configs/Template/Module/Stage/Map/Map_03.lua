@@ -16,12 +16,12 @@ function M.create(params)
         anchorPoint = THSTG.UI.POINT_CENTER,
         src = ResManager.getResSub(ResType.TEXTURE,TexType.IMAGE,"stg1bg"),
         isTile = true,
-        args = {
-            speedY = 1,
+        uniforms = {
+            speedY = -1,
         },
     })
 
-    -- node:addChild(mainBg)
+    node:addChild(mainBg)
   
     -------Controller-------
     node:onNodeEvent("enter", function ()

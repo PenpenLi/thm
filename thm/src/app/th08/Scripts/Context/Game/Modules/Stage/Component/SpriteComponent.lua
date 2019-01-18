@@ -20,6 +20,8 @@ function M:_onRemoved(entity)
     self._sprite = nil
 end
 
-
+function M:_onActive(val)
+    self:getSprite():setVisible(val)
+end
 
 return M

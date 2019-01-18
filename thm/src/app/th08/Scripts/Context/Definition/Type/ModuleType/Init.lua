@@ -2,9 +2,10 @@
 require "Scripts.Context.Definition.Type.ModuleType.ModuleType"
 
 --模块子类型
-require "Scripts.Context.Definition.Type.ModuleType.SceneType"
 require "Scripts.Context.Definition.Type.ModuleType.MenuType"
-require "Scripts.Context.Definition.Type.ModuleType.RoleType"
-require "Scripts.Context.Definition.Type.ModuleType.BulletType"
-require "Scripts.Context.Definition.Type.ModuleType.BossType"
-require "Scripts.Context.Definition.Type.ModuleType.BatmanType"
+
+require "Scripts.Context.Definition.Type.ModuleType.Stage.RoleType"
+require "Scripts.Context.Definition.Type.ModuleType.Stage.BulletType"
+require "Scripts.Context.Definition.Type.ModuleType.Stage.BossType"
+require "Scripts.Context.Definition.Type.ModuleType.Stage.BatmanType"
+require "Scripts.Context.Definition.Type.ModuleType.Stage.PropType"

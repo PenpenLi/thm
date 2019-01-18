@@ -35,6 +35,8 @@ function M:_onDead()
    })
 
    self:killEntity()
+
+   --TODO:爆道具
 end
 
 function M:_onBlood(oldVal,newVal)

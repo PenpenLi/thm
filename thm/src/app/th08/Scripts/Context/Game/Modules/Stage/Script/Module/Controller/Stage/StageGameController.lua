@@ -8,13 +8,10 @@ function M:_onInit()
     self._ePlayer = StageDefine.Player.new()
 
 
-    ---
-    self._ePlayer:addTo(THSTG.SceneManager.get(SceneType.STAGE).playerLayer)
-
 end
 
 function M:updateStage()
-    --TODO:根据关卡改变
+    --FIXME:根据关卡改变
     local stageID = Cache.stageCache.getStageId()
     self._cTaskScheduler:setTasks(StageConfig.getScenario(stageID))
 

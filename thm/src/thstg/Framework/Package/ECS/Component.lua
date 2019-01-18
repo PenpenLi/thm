@@ -82,7 +82,7 @@ function M:_onInit(...)
 
 end
 --被添加时的回调
-function M:_onAdded(entity)
+function M:_onAdded(entity,param)
 
 end
 --被移除时的回调
@@ -119,7 +119,7 @@ end
 function M:_added(entity,param)
     assert(not self.__entity__, "[System] System already added. It can't be added again!")
     self.__entity__ = entity
-    self:_onAdded(entity)
+    self:_onAdded(entity,param)
 end
 function M:_removed(entity)
     self:_onRemoved(entity)
