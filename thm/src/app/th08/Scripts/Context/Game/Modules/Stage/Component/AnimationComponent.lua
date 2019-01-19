@@ -24,7 +24,7 @@ function M:playOnce(animation,params)
     self:play(action)
 end
 
-function M:stop()
+function M:stopAll()
     self._spriteComp:getSprite():stopAllActions()
 end
 ---

@@ -5,9 +5,6 @@ local M = class("BatmanPrefab",StageDefine.EnemyEntity)
 function M:ctor()
     M.super.ctor(self)
 
-    self.batmanController = StageDefine.BatmanController.new()
-    self:addScript(self.batmanController)
-
     self.destroyByBorder = StageDefine.DestroyByBorder.new()
     self:addScript(self.destroyByBorder)
    
@@ -16,6 +13,10 @@ function M:ctor()
 
     self.animationController = StageDefine.BatmanAnimation.new()
     self:addScript(self.animationController)
+
+
+    self.batmanController = StageDefine.BatmanController.new()
+    self:addScript(self.batmanController)
 
     -- debugUI(self)
 end

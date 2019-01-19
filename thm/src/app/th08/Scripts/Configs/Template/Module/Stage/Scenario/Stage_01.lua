@@ -1,5 +1,4 @@
--- local layer = THSTG.ModuleManager.get(ModuleType.STAGE)
-local layer = THSTG.SceneManager.get(SceneType.STAGE).entityLayer
+
 return {
     {
         time = 1,
@@ -13,7 +12,7 @@ return {
                 local posComp = batman:getComponent("TransformComponent")
                 posComp:setPositionX(posX)
                 posComp:setPositionY(posY)
-                layer:addChild(batman)
+                
 
                 local actions = {}
                 table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(2*display.height))))  
@@ -39,7 +38,7 @@ return {
                local posComp = batman:getComponent("TransformComponent")
                posComp:setPositionX(posX)
                posComp:setPositionY(posY)
-               layer:addChild(batman)
+               
 
                local actions = {}
                table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(2*display.height))))  
@@ -67,7 +66,7 @@ return {
                local posComp = batman:getComponent("TransformComponent")
                posComp:setPositionX(posX)
                posComp:setPositionY(posY)
-               layer:addChild(batman)
+               
 
                local actions = {}
                table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(2*display.height))))  
@@ -95,7 +94,7 @@ return {
                local posComp = batman:getComponent("TransformComponent")
                posComp:setPositionX(posX)
                posComp:setPositionY(posY)
-               layer:addChild(batman)
+               
 
                local actions = {}
                table.insert(actions, cc.MoveBy:create(8.0,cc.p(2*display.width,0)))  
@@ -113,7 +112,7 @@ return {
                 local posComp = batman:getComponent("TransformComponent")
                 posComp:setPositionX(posX)
                 posComp:setPositionY(posY)
-                layer:addChild(batman)
+                
 
                 local actions = {}
                 table.insert(actions, cc.MoveBy:create(8.0,cc.p(-2*display.width,0)))  
@@ -128,11 +127,25 @@ return {
         end,
     },
     {
-        time = 4,
+        time = 1,
         callback = function (scheduler,task,params)
+            ObjectCache.pick(StageDefine.Batman,4,function(batman,i)
+                
 
-            
-            
+                local trans = batman:getComponent("TransformComponent")
+                trans:setPositionX(0)
+                trans:setPositionY(display.height)
+                
+
+                local actionComp = batman:getComponent("ActionComponent")
+                actionComp:runAction(cc.Sequence:create({
+                    cc.EaseQuadraticActionOut:create(cc.MoveTo:create(6.0,cc.p(200,display.width*0.40))),
+                    cc.EaseSineIn:create(cc.MoveTo:create(6.0,cc.p(0,display.width*1.5))),
+
+
+
+                }))
+            end)
         end,  
     },
     {

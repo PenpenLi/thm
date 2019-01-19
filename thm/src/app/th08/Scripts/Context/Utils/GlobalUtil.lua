@@ -3,13 +3,23 @@ module("GlobalUtil", package.seeall)
 function playEffect(params)
     params = params or {}
     params.isLoop = params.isLoop or false
+    params.isRemoveLate = params.isRemoveLate or (not params.isLoop)
+
     params.default = params.default or "stand"
-    if not params.isLoop and not params.onComplete then
+
+    if params.isRemoveLate then
+        local oldOnComplete = params.onComplete
         params.onComplete = function (sender)
             sender:runAction(cc.Sequence:create({
                 cc.DelayTime:create(0.01),
-                cc.RemoveSelf:create(),
+                cc.CallFunc:create(function ()
+                    sender:removeFromParent()
+                    if type(oldOnComplete) == "function" then 
+                        oldOnComplete(sender)
+                    end
+                end),
             }))
+
         end
     end
 

@@ -23,7 +23,7 @@ function M:_spellEffectWnd(e,params)
             if not self._bossSpellEffectWnd then
                 local file = require("Scripts.Context.Game.Modules.Stage.View.Effect.BossSpellCardEffectLayer")
                 self._bossSpellEffectWnd = file.create(params)
-                self._bossSpellEffectWnd:addTo(THSTG.SceneManager.get(SceneType.STAGE).preEffectLayer)
+                self._bossSpellEffectWnd:addTo(THSTG.SceneManager.get(SceneType.STAGE).backEffectLayer)
             end
         else
             if self._bossSpellEffectWnd then
@@ -36,7 +36,7 @@ function M:_spellEffectWnd(e,params)
             if not self._playerSpellEffectWnd then
                 local file = require("Scripts.Context.Game.Modules.Stage.View.Effect.PlayerSpellCardEffectLayer")
                 self._playerSpellEffectWnd = file.create(params)
-                self._playerSpellEffectWnd:addTo(THSTG.SceneManager.get(SceneType.STAGE).preEffectLayer)
+                self._playerSpellEffectWnd:addTo(THSTG.SceneManager.get(SceneType.STAGE).backEffectLayer)
             end
         else
             if self._playerSpellEffectWnd then

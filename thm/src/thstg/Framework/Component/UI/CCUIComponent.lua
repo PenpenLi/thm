@@ -657,6 +657,14 @@ function newSkeletonAnimation(params)
 		end
 	end
 
+	--移除操作必须延迟,包括移除其父节点也是如此
+	function node:removeFromParent()
+		self:runAction(cc.Sequence:create({
+			cc.DelayTime:create(0.01),
+			cc.RemoveSelf:create(),
+		}))
+	end
+
 	return node
 end
 

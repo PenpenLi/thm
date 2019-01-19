@@ -46,26 +46,52 @@ end
 
 --
 --使能够找到子类
+-- function find2ClassWithChild(name,...)
+--     local argsA = trans2Args(name)
+--     local argsB = {...}
+--     local length = #argsB
+--     if length <= 2 then 
+--         for i = #argsA,1,-1 do
+--             if argsA[i] == argsB[length] then
+--                 return true
+--             end
+--         end
+--     else
+--         for i = 1,length do
+--             if argsA[i] ~= argsB[i] then
+--                 return false
+--             end
+--         end
+--         return true
+--     end
+
+--     return false
+-- end
+
+--使能够找到子类
+--模式匹配,改进算法
 function find2ClassWithChild(name,...)
     local argsA = trans2Args(name)
     local argsB = {...}
-    local length = #argsB
-    if length <= 2 then 
-        for i = #argsA,1,-1 do
-            if argsA[i] == argsB[length] then
-                return true
-            end
-        end
-    else
-        for i = 1,length do
-            if argsA[i] ~= argsB[i] then
-                return false
-            end
-        end
-        return true
-    end
 
-    return false
+    local lengthA,lengthB = #argsA,#argsB
+    local i,j = lengthA,lengthB
+    --[[
+        脚本的匹配加了标志,会出错,如
+        ScriptComponent BaseController PlayerController 
+        ScriptComponent PlayerController
+        然而组件是没有头标识的,改为不加头标识,和组件一致,(因为加不加都没什么用,这块没做优化)
+    ]]
+    while (i>0 and j>0) do
+        if argsA[i] == argsB[j] then
+            i = i - 1
+            j = j - 1
+        else
+            i = i + (lengthB - j) - 1
+            j = lengthB
+        end
+    end
+    return (j ~= lengthB)
 end
 
 function match2Class(name,...)

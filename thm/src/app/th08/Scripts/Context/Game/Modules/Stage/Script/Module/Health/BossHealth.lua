@@ -16,15 +16,17 @@ function M:_onStart()
 end
 
 function M:_onHurt()
-   local animationComp = self:getComponent("AnimationComponent")
-   animationComp:play(cc.Sequence:create({
-      cc.Blink:create(0.1, 6),
-      cc.CallFunc:create(function ()
-         local spriteComp = self:getComponent("SpriteComponent")
-         spriteComp:getSprite():setOpacity(255)
-         spriteComp:getSprite():setVisible(true)
-      end)
-   }))
+   --TODO:受伤频闪引发的bug,前后2次调用的时间差小于行为执行的时间差
+   if self._isBlink ~= true then
+      self._isBlink = true
+      local animationComp = self:getComponent("AnimationComponent")
+      animationComp:play(cc.Sequence:create({
+         cc.Blink:create(0.1, 2),
+         cc.CallFunc:create(function ()
+            self._isBlink = false
+         end)
+      }))
+   end
 end
 
 function M:_onDead()

@@ -86,7 +86,7 @@ function pick(class,num,initFunc,params)
     for i = 1,num do
         local obj = create(class,params)
         initFunc(obj,i)
-        table.insert( list, obj)
+        table.insert(list, obj)
     end
     return obj
 end

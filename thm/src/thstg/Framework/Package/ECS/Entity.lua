@@ -133,7 +133,7 @@ function M:removeScript(...)
 end
 
 function M:getScript(...)
-	return self:getComponent(ECS.Script.__cname,...)
+	return self:getComponent(...)
 end
 
 --[[系统模块]]

@@ -4,7 +4,7 @@ return {
     ability = "",
     animation = {
         stand_normal = {"enemy","enemy_01_a_normal"},
-        -- move_left = {"enemy","enemy_01_a_normal"},
-        -- move_left_sustain = {"enemy","enemy_01_a_normal"},
+        move_right = {"enemy","enemy_01_a_right_fly"},
+        move_turn = {"enemy","enemy_01_a_fly_stand"},
     },
 }

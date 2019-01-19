@@ -8,6 +8,10 @@ end
 ----
 
 ----
+function M:_onAdded(entity)
+    entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
+end
+
 function M:_onUpdate()
 
 end
