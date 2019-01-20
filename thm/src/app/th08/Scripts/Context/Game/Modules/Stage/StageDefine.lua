@@ -89,6 +89,9 @@ BatmanAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Anim
 BulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.BulletAnimation")
 PlayerAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.PlayerAnimation")
 
+--剧本控制
+ScenarioController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Scenario.ScenarioController")
+
 --公共脚本
 DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBorder")
 ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")

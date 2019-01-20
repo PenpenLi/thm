@@ -3,7 +3,7 @@ module(..., package.seeall)
 local M = {}
 function M.create(params)
     -------Model-------
-
+    -- THSTG.AudioMgr.playMusic(SoundConfig.getFilePath(100121))
    
     -------View-------
     local node = THSTG.UI.newNode()

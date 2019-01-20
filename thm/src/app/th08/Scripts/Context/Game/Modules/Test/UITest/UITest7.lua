@@ -21,8 +21,8 @@ function M.create(params)
     local sp0 = GlobalUtil.playEffect({
         x = display.cx,
         y = display.cy,
-        src = ResManager.getResMul(ResType.ANIMATION,AnimationType.SKELETON,"spine_dragonborn_logo"),
-        animation = "newAnimation",
+        src = ResManager.getResMul(ResType.ANIMATION,AnimationType.SKELETON,"spine_boss_spellcard_attack"),
+        animation = "default",
         isLoop = false,
         scale = 0.4,
         father = node,
