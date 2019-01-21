@@ -38,7 +38,7 @@ end
 function M:_onAdded(entity)
     local spriteComp = entity:getComponent("SpriteComponent")
     if spriteComp then
-        local spriteSize = spriteComp:getSprite():getContentSize()
+        local spriteSize = spriteComp:getContentSize()
         local radius = math.sqrt((spriteSize.width/2) * (spriteSize.width/2) + (spriteSize.height/2)*(spriteSize.height/2))
         self.radius = math.max(self.radius,radius)
     end

@@ -1,4 +1,4 @@
-local M = class("PlayerBulletController",StageDefine.BulletController)
+local M = class("ReimuBulletController",StageDefine.PlayerBulletController)
 
 function M:_onInit()
     M.super._onInit(self)

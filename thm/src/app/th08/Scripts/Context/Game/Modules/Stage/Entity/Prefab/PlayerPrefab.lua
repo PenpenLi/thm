@@ -20,8 +20,14 @@ function M:ctor(...)
     self.constraintByBorder = StageDefine.ConstraintByBorder.new()
     self:addScript(self.constraintByBorder)
 
-    self.playerController = StageDefine.PlayerController.new()
-    self:addScript(self.playerController)
+    --初始化变量
+    self:setName("PLAYER")
+
+    --普通子弹的发射口
+    self.emitter = StageDefine.EmitterPrefab.new()
+    self.emitter:setName("EMITTER")
+    self:addChild(self.emitter)
+
 
 end
 

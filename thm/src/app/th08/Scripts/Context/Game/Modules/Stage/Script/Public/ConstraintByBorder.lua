@@ -11,7 +11,7 @@ end
 function M:_onStart()
     local spriteComp = self:getComponent("SpriteComponent")
     if spriteComp then
-        local size = spriteComp:getSprite():getContentSize()
+        local size = spriteComp:getContentSize()
         self.size.width = math.max(self.size.width,size.width)
         self.size.height = math.max(self.size.height,size.height)
     end

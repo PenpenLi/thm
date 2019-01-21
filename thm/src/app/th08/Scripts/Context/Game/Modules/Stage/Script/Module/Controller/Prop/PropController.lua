@@ -18,7 +18,7 @@ end
 function M:_onAdded(entity)
     M.super._onAdded(self,entity)
     
-    entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
+
     entity:setActive(false)
 end
 ---

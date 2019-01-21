@@ -5,14 +5,16 @@ local M = class("PlayerController",StageDefine.BaseController)
 
 function M:_onInit()
     M.super._onInit(self)
-    self.roleType = RoleType.REIMU                  --TODO:
+    self.roleType = false                  --TODO:
 
-    self.shotInterval = 0.10                        --发射子弹的时间间隔
     self.bombCount = 3                              --Bomb次数
     self.wipeRestTime = 5                           --wipe的剩余时间
 
-    ObjectCache.expand(StageDefine.PlayerBullet,6)        --最大5颗,与子弹速度有关
+    --TODO:以下具有特异性
+    self.mainEmitter = nil                           --主发射器实体
 
+    ---
+    ObjectCache.expand(StageDefine.PlayerBulletPrefab,6)        --最大5颗,与子弹速度有关
 end
 
 
@@ -34,17 +36,8 @@ function M:move(dx,dy)
 end
 
 function M:shot()
-    --TODO:子弹应该复用
-    --根据不同的人物,等级,发射的子弹可能不同
-    if THSTG.TimeUtil.time() >= (self._nextShotTime or 0) then
-        --TODO:受Slow,人物的影响,可能会变,主要以role决定
-        local bullet = ObjectCache.create(StageDefine.PlayerBullet)
-        local bulletControlScript = bullet:getScript("PlayerBulletController")
-        bulletControlScript:reset(self:getEntity())
-        bullet:setActive(true)
-
-        self._nextShotTime = THSTG.TimeUtil.time() + self.shotInterval
-    end
+    local emitterCtrl = self.mainEmitter:getScript("EmitterController")
+    emitterCtrl:shot()
 end
 
 function M:bomb()
@@ -80,12 +73,15 @@ end
 function M:slow(state)
     local function slowOpen()
         print(15,"slow开")
+       
     end
     local function slowClose()
         print(15,"slow关")
+       
     end
     --根据不同人物显示不同的低速模式
     if state then slowOpen() else slowClose() end
+    self:_onSlow(state)
     self.__isStateSlow = state
 end
 
@@ -140,6 +136,10 @@ function M:reset()
     }))
 
 end
+-----
+function M:_onSlow(val)
+
+end
 ------
 function M:_onState()
     return {
@@ -153,16 +153,15 @@ function M:_onState()
     }
 end
 ------
-------
-function M:_onAdded(entity)
-    M.super._onAdded(self,entity)
-
-    --由于这个语句会触发_onStart(),因此在实体类中需要调整脚本顺序
-    entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).playerLayer)  
-end
 
 function M:_onStart()
     M.super._onStart(self)
+
+    --取得主发射口
+    self.mainEmitter = self:getEntity():getChildByName("EMITTER")
+    --僚机发射口
+    self.wingman1 = self:getEntity():getChildByName("GYOKU1")
+    self.wingman2 = self:getEntity():getChildByName("GYOKU2")
 
     self:reset()
 end

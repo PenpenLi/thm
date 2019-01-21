@@ -1,8 +1,10 @@
+module(..., package.seeall)
 
-local M = class("HealthBarController",THSTG.ECS.Script)
+local M = class("HealthBar",StageDefine.BaseEntity)
 
-function M:_onInit()
-    M.super._onInit(self)
+function M:ctor(...)
+    M.super.ctor(self)
+    
     self.healthBar = THSTG.UI.newRadialProgressBar({
         x = 0,
         y = 0, --半径
@@ -20,23 +22,15 @@ function M:_onInit()
            }
         }
     })
+    self.healthBar:setName("HEALTH_BAR")
+    self.healthBar:setPosition(cc.p(self:getContentSize().width/2,self:getContentSize().height/2))
+    self:addChild(self.healthBar)
+    ----
+    self.healthCtrl = StageDefine.HealthBarController.new()
+    self:addScript(self.healthCtrl)
 
 end
 
-function M:refresh(val,maxVal)
-    self.healthBar:refresh(val,maxVal)
-end
-
-function M:_onAdded(params)
-    local entity = self:getEntity()
-
-    self.healthBar:setPosition(cc.p(entity:getContentSize().width/2,entity:getContentSize().height/2))
-    entity:addChild(self.healthBar)
-
-end
-
-function M:_onRemoved(params)
-    self.healthBar:removeFromParent()
-end
+----------
 
 return M

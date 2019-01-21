@@ -18,7 +18,8 @@ function M:ctor()
     self.batmanController = StageDefine.BatmanController.new()
     self:addScript(self.batmanController)
 
-    -- debugUI(self)
+    --
+    self:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
 end
 
 ----------

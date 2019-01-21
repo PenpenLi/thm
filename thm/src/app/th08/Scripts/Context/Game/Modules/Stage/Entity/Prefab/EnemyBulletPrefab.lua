@@ -12,6 +12,8 @@ function M:ctor()
     self:addScript(self.bulletController)
 
 
+    ----
+    self:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
 end
 
 

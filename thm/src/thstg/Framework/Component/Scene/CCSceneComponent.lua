@@ -150,3 +150,11 @@ function removeTexture(scource)
 
 end
 --
+function getCurFPS()
+	return cc.Director:getInstance():getSecondsPerFrame()
+end
+
+function getSettingFPS()
+	return cc.Director:getInstance():getAnimationInterval()
+end
+--

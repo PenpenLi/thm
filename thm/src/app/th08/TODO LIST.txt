@@ -76,6 +76,9 @@ TODO LIST:
 2019-01-20
 1:[]资源的加载,场景的加载必须有一个资源的预先载入管理器(并且有回调,有进度),不然会卡住
 
+2019-01-21
+1:[]PlayerController具有特异性,要么让键盘监听成为全局或者继承PlayerController,然后PlayerPrefab的Controller由子类添加(防止菱形继承)
+
 --遗留bug
 1:[]_onAdded()中不能使用addChild()/addTo(),会触发_onStart(),如要使用需要手动调整addScript()顺序
 2:[]_onRemoved()中没有设置析构顺序,因此不能调用其他脚本(可能已经被移除了),防止出错,如需使用需要添加判断

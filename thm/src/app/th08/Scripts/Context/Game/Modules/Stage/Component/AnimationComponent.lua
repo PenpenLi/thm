@@ -7,11 +7,11 @@ function M:_onInit()
 end
 ---
 function M:getSprite()
-    return self._spriteComp:getSprite()
+    return self._spriteComp:_getSprite()
 end
 
 function M:play(action)
-    self._spriteComp:getSprite():runAction(action)
+    self:getSprite():runAction(action)
 end
 
 function M:playForever(animation,params)
@@ -25,7 +25,7 @@ function M:playOnce(animation,params)
 end
 
 function M:stopAll()
-    self._spriteComp:getSprite():stopAllActions()
+    self:getSprite():stopAllActions()
 end
 ---
 function M:_onAdded(entity)

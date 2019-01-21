@@ -8,7 +8,7 @@ return {
             local posY = 0
             for i = 1,3 do
                 posY = display.height - (i-1) * 60
-                local batman = StageDefine.Batman.new()
+                local batman = StageDefine.BatmanPrefab.new()
                 local posComp = batman:getComponent("TransformComponent")
                 posComp:setPositionX(posX)
                 posComp:setPositionY(posY)
@@ -34,7 +34,7 @@ return {
            local posY = 0
            for i = 1,3 do
                posY = display.height - (i-1) * 60
-               local batman = StageDefine.Batman.new()
+               local batman = StageDefine.BatmanPrefab.new()
                local posComp = batman:getComponent("TransformComponent")
                posComp:setPositionX(posX)
                posComp:setPositionY(posY)
@@ -62,7 +62,7 @@ return {
            local posY = 0
            for i = 1,3 do
                posY = display.height - (i-1) * 60
-               local batman = StageDefine.Batman.new()
+               local batman = StageDefine.BatmanPrefab.new()
                local posComp = batman:getComponent("TransformComponent")
                posComp:setPositionX(posX)
                posComp:setPositionY(posY)
@@ -90,7 +90,7 @@ return {
            local posY = display.height - 100
            for i = 1,3 do
                posX = - (i-1) * 60
-               local batman = StageDefine.Batman.new()
+               local batman = StageDefine.BatmanPrefab.new()
                local posComp = batman:getComponent("TransformComponent")
                posComp:setPositionX(posX)
                posComp:setPositionY(posY)
@@ -108,7 +108,7 @@ return {
 
            for i = 1,3 do
                 posX = display.width + (i-1) * 60
-                local batman = StageDefine.Batman.new()
+                local batman = StageDefine.BatmanPrefab.new()
                 local posComp = batman:getComponent("TransformComponent")
                 posComp:setPositionX(posX)
                 posComp:setPositionY(posY)
@@ -129,7 +129,7 @@ return {
     {
         time = 1,
         callback = function (scheduler,task,params)
-            ObjectCache.pick(StageDefine.Batman,4,function(batman,i)
+            ObjectCache.pick(StageDefine.BatmanPrefab,4,function(batman,i)
                 
 
                 local trans = batman:getComponent("TransformComponent")

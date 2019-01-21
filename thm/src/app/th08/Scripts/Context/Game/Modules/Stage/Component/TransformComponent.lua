@@ -16,6 +16,13 @@ end
 function M:getPositionY()
     return self:getEntity():getPositionY()
 end
+function M:getPosition()
+    return cc.p(self:getEntity():getPosition())
+end
+function M:convertToWorldSpace(anchorPoint)
+    anchorPoint = anchorPoint or cc.p(0.5,0.5)
+    return self:getEntity():convertToWorldSpace(anchorPoint)
+end
 --
 function M:setRotation(val)
     self:getEntity():setRotation(val)

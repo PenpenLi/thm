@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("PlayerBullet",StageDefine.BulletPrefab)
+local M = class("PlayerBulletPrefab",StageDefine.BulletPrefab)
 
 function M:ctor()
     M.super.ctor(self)
@@ -11,9 +11,6 @@ function M:ctor()
 
     self.collisionController = StageDefine.PlayerBulletCollision.new()
     self:addScript(self.collisionController)
-
-    self.bulletController = StageDefine.PlayerBulletController.new()
-    self:addScript(self.bulletController)
 
 
 end

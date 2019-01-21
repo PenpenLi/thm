@@ -14,13 +14,7 @@ function M:getBulletType()
     return self.bulletType
 end
 
-function M:reset(refEntity)
-    --重置位置,根据贴图的大小产生一些偏移
-    local refTransComp = refEntity:getComponent("TransformComponent")
-    local myPosComp = self:getComponent("TransformComponent")
-    myPosComp:setPositionX(refTransComp:getPositionX() + self.posOffset.x)
-    myPosComp:setPositionY(refTransComp:getPositionY() + self.posOffset.y)
-
+function M:reset()
     local rigidbodyComp = self:getComponent("RigidbodyComponent")
     rigidbodyComp:setSpeed(self.speed.x,self.speed.y)
 
@@ -37,7 +31,7 @@ end
 function M:_onAdded(entity)
     M.super._onAdded(self,entity)
     
-    entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
+
     entity:setActive(false)
 end
 ---
@@ -45,8 +39,8 @@ function M:_onStart()
     M.super._onStart(self)
     --进行碰撞点与贴图的位置修正
     local spriteComp =  self:getComponent("SpriteComponent")
-    spriteComp:getSprite():setAnchorPoint(self.centerPoint)
-    spriteComp:getSprite():setRotation(self.rotation)
+    spriteComp:setAnchorPoint(self.centerPoint)
+    spriteComp:setRotation(self.rotation)
  
 end
 

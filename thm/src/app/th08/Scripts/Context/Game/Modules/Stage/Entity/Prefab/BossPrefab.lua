@@ -14,6 +14,11 @@ function M:ctor()
     self.animationController = StageDefine.BossAnimation.new()
     self:addScript(self.animationController)
     --
+    self.healthBar = StageDefine.HealthBar.new()
+    self.healthBar:setName("HealthBar")
+    self:addChild(self.healthBar)
+
+
 end
 
 ----------
