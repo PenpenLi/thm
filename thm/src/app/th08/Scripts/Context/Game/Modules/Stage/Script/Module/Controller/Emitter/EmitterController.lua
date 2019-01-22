@@ -2,6 +2,7 @@ local M = class("EmitterController",THSTG.ECS.Script)
 
 function M:_onInit()
     self.shotInterval = 0.10          --时间间隔
+    self.shotSpeed = cc.p(0,10)        --子弹的初始速度
     self.bulletPrefab = nil           --发射的预制体
     self.shotOffset = cc.p(0,0)       --子弹发射偏移
 
@@ -19,6 +20,9 @@ function M:shot()
         local myAbsPos = myTransComp:convertToWorldSpace()--由于图层的关系,需采用绝对坐标
         bulletTransComp:setPositionX(myAbsPos.x + self.shotOffset.x)
         bulletTransComp:setPositionY(myAbsPos.y + self.shotOffset.y)
+
+        local rigidbodyComp = bullet:getComponent("RigidbodyComponent")
+        rigidbodyComp:setSpeed(self.shotSpeed.x,self.shotSpeed.y)
 
         local bulletControlScript = bullet:getScript("BulletController")
         bulletControlScript:reset(self:getEntity())

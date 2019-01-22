@@ -4,15 +4,13 @@ local M = class("BossHealth",StageDefine.HealthController)
 function M:_onInit()
    M.super._onInit(self)
 
-   self.blood = 10000
-
-   self._healthBarController = nil
+   self._healthBar = nil
 end
 ----
-function M:_onStart()
-   M.super._onStart(self)
-   local entity = self:getEntity():getChildByName("HealthBar")
-   self._healthBarController = entity:getScript("HealthBarController")
+function M:_onAdded()
+   M.super._onAdded(self)
+
+   self._healthBar = self:getEntity():getChildByName("HEALTH_BAR")
 end
 
 function M:_onHurt()
@@ -42,7 +40,7 @@ function M:_onDead()
 end
 
 function M:_onBlood(oldVal,newVal)
-   self._healthBarController:refresh(newVal,10000)
+   self._healthBar:refresh(newVal,self:getMaxBlood())
 end
 
 return M

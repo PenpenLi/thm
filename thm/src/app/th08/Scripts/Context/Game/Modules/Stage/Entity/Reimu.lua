@@ -11,6 +11,7 @@ function M:ctor()
     local emitterController = self.emitter:getScript("EmitterController")
     emitterController.bulletPrefab = StageDefine.ReimuBulletPrefab
     emitterController.shotInterval = 0.10
+    emitterController.shotSpeed = cc.p(0,20)
 
     --添加两个僚机的实体
     self.gyoku1 = StageDefine.OnmyouGyoku.new()

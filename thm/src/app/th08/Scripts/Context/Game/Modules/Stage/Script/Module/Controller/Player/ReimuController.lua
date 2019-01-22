@@ -35,7 +35,11 @@ function M:_onStart()
 
     self._wingman1EmitterCtrl = self.wingman1:getChildByName("EMITTER"):getScript("EmitterController")
     self._wingman2EmitterCtrl = self.wingman2:getChildByName("EMITTER"):getScript("EmitterController")
-
+    ---
+    -- FIXME:修改炮口方向(这里是改物体方向还是发射初速度,有待商讨)
+    self._wingman1EmitterCtrl.shotSpeed = cc.p(-2,10)
+    self._wingman2EmitterCtrl.shotSpeed = cc.p(2,10)
+    ---
     self._wingman1ActionComp = self.wingman1:getComponent("ActionComponent")
     self._wingman2ActionComp = self.wingman2:getComponent("ActionComponent")
 
@@ -45,11 +49,17 @@ end
 
 function M:_onSlow(val)
     if val then
+        -- self._wingman1ActionComp:stopAllActions()
+        -- self._wingman2ActionComp:stopAllActions()
+
         self._wingman1ActionComp:runAction(cc.MoveBy:create(0.1,cc.p(7,10)))
         self._wingman2ActionComp:runAction(cc.MoveBy:create(0.1,cc.p(-7,10)))
     else
         self._wingman1ActionComp:runAction(cc.MoveBy:create(0.1,cc.p(-7,-10)))
         self._wingman2ActionComp:runAction(cc.MoveBy:create(0.1,cc.p(7,-10)))
+
+        -- self._wingman1ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(0.3,30,1,{delayTime = -3.14/2})))
+        -- self._wingman2ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(0.3,30,1,{delayTime = 3.14/2})))
     end
 end
 

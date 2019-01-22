@@ -8,8 +8,7 @@ function M:ctor()
     self.destroyByBorder = StageDefine.DestroyByBorder.new()
     self:addScript(self.destroyByBorder)
 
-    self.animationController = StageDefine.BulletAnimation.new()
-    self:addScript(self.animationController)
+
  
 end
 

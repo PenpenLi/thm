@@ -3,7 +3,7 @@ module("ACTION", package.seeall)
 local M = class("M")
 
 function M:ctor(speed,aR,bR,params)
-
+    params = params or {}
     bR = bR or aR
     ----
     self.speed = speed

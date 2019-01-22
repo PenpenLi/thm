@@ -44,6 +44,14 @@ return {
             }
         },
 
+        reimu_bullet_02_normal = {
+            desc = "",
+            grid = {    
+                length = 1,
+                rect = {x = 2*16,y = 11*16,width = 1*16,height = 1*16}
+            }
+        },
+
         --[[yukari]]
         yukari_stand_normal = {
             desc = "",

@@ -14,7 +14,8 @@ function M:ctor()
     self:addChild(self.emitter)
     local emitterController = self.emitter:getScript("EmitterController")
     emitterController.bulletPrefab = StageDefine.OnmyouGyokuBulletPrefab
-    emitterController.shotInterval = 0.08
+    emitterController.shotInterval = 0.4
+    emitterController.shotSpeed = cc.p(0,10)
 
     debugUI(self)
 end

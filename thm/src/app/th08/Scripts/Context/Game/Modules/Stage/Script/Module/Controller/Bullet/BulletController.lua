@@ -5,27 +5,31 @@ function M:_onInit()
     --FIXME:特异属性
     self.bulletType = false             --子弹类型
     self.rotation = 0                   --初始角度  
-    self.speed = cc.p(0,0)              --初始速度
     self.centerPoint = cc.p(0.5,0.5)    --中心点
-    self.posOffset = cc.p(0,0)          --初始位置的偏移 
+    self.lethality = 10                 --杀伤力               
 end
 ---
 function M:getBulletType()
     return self.bulletType
 end
 
-function M:reset()
-    local rigidbodyComp = self:getComponent("RigidbodyComponent")
-    rigidbodyComp:setSpeed(self.speed.x,self.speed.y)
+function M:getLethality()
+    return self.lethality
+end
 
+function M:setLethality(val)
+    self.lethality = val
+end
+
+function M:reset()
     local animationComp = self:getComponent("AnimationComponent")
     animationComp:getSprite():setRotation(self.rotation)
     animationComp:getSprite():setOpacity(255)
     animationComp:getSprite():setScale(1)
 
     --重置生命值
-    local myHealthComp = self:getScript("BulletHealth")
-    myHealthComp:setBlood(100)
+    local bulletHealthComp = self:getScript("BulletHealth")
+    bulletHealthComp:setBlood(100)
 end
 ---
 function M:_onAdded(entity)

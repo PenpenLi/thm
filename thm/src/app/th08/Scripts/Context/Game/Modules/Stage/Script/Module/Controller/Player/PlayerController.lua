@@ -14,7 +14,7 @@ function M:_onInit()
     self.mainEmitter = nil                           --主发射器实体
 
     ---
-    ObjectCache.expand(StageDefine.PlayerBulletPrefab,6)        --最大5颗,与子弹速度有关
+    -- ObjectCache.expand(StageDefine.PlayerBulletPrefab,6)        --最大5颗,与子弹速度有关
 end
 
 

@@ -20,6 +20,13 @@ function M:_onState()
     }
 end
 -----
+function M:_onStart()
+    M.super._onStart(self)
+
+    local healthCtrl = self:getScript("HealthController")
+    healthCtrl:reset(1000)
+end
+
 function M:_onUpdate()
 
 end
