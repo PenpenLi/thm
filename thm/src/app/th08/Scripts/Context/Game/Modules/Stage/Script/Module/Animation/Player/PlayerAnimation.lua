@@ -2,7 +2,6 @@ local M = class("PlayerAnimation",StageDefine.AnimationController)
 
 function M:_onInit()
     M.super._onInit(self)
-    self.roleType = nil
 end
 
 function M:_onState()

@@ -43,10 +43,12 @@ end
 function M:bomb()
     if self.bombCount <= 0 then return end
     print(15,"炸弹")
-    THSTG.Dispatcher.dispatchEvent(EventType.STAGE_SPELLCARD_EFFECT_WND,{isPlayer = true,isOpen = true})
+    
 
     self.bombCount = self.bombCount - 1
     --TODO:决死效果
+
+    THSTG.Dispatcher.dispatchEvent(EventType.STAGE_PLAYER_SPELLCARD_ATTACK,{roleType = self.roleType,isDeadSave = false})
 end
 
 function M:getBombCount()

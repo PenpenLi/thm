@@ -3,7 +3,6 @@ local M = class("BatmanAnimation",StageDefine.AnimationController)
 function M:_onInit()
     M.super._onInit(self)
 
-    self.batmanType = nil
 end
 --
 function M:getBatmanType()

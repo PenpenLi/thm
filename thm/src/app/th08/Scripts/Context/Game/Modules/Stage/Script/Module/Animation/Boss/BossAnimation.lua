@@ -1,9 +1,7 @@
-local M = class("BatmanAnimation",StageDefine.AnimationController)
+local M = class("BossAnimation",StageDefine.AnimationController)
 
 function M:_onInit()
     M.super._onInit(self)
-
-    self.bossType = nil
 end
 
 ---
@@ -11,13 +9,13 @@ function M:getBossType()
     return self.bossType
 end
 
----
 function M:_onStart()
     M.super._onStart(self)
-  
+
     local bossControScript = self:getScript("BossController")
     self.bossType = bossControScript.bossType
 end
+
 ---
 function M:_onState()
     return {
@@ -106,6 +104,5 @@ function M:_onIdle(event)
     self:getSprite():stopAllActions()
     self:getSprite():runAction(cc.Sequence:create(actions))
 end
-
 ---
 return M

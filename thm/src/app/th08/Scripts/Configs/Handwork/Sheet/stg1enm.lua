@@ -1,6 +1,9 @@
 return {
     source = "Assets/Module/Stage/Enemy/Boss/stg1enm.png",
-    desc = "莉格露·奈特巴格",
+    cnName= "莉格露·奈特巴格",
+    enName = "Wriggle Nightbug",
+    jpName = "リグル·ナイトバグ",
+    desc = "",
     frame = {
 
     },

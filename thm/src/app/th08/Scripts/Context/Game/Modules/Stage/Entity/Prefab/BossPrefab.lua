@@ -27,14 +27,9 @@ function M:ctor()
     self.healthBar:setPosition(cc.p(self:getContentSize().width/2,self:getContentSize().height/2))
     self:addChild(self.healthBar)
 
-    self.animationController = StageDefine.BossAnimation.new()
-    self:addScript(self.animationController)
-
     self.helthController = StageDefine.BossHealth.new()
     self:addScript(self.helthController)
 
-    self.bossController = StageDefine.BossController.new()
-    self:addScript(self.bossController)
 end
 
 ----------

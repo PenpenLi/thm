@@ -2,11 +2,11 @@ local M = class("BulletAnimation",StageDefine.AnimationController)
 
 function M:_onInit()
     M.super._onInit(self)
-    self.bulletType = nil
 end
 --
 function M:getBulletType()
-    return self.bulletType
+    local bulletControScript = self:getScript("BulletController")
+    return bulletControScript.bulletType
 end
 
 ---

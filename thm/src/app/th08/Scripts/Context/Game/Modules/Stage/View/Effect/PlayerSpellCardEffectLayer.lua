@@ -1,47 +1,34 @@
 module(..., package.seeall)
 
---[[
-    参数说明:
-
-]]
-
 local M = {}
 function M.create(params)
     params = params or {}
-
     -------Model-------
     local _uiEffect = nil
    
     -------View-------
     local node = THSTG.UI.newNode()
+    node:setVisible(false)
+
 
     local function initLayer()
-        --背景黑幕
-        local maskNode = THSTG.UI.newLayerColor({
-            color = {r=0,g=0,b=0},
-            opacity = 0.5,
-        })
-        node:addChild(maskNode)
-
-        --特效
-        _uiEffect = GlobalUtil.playEffect({
+          --特效
+          _uiEffect = THSTG.UI.newSkeletonAnimation({
             x = display.cx,
             y = display.cy,
-            src = ResManager.getResMul(ResType.ANIMATION,AnimationType.SKELETON,"spine_dragonborn_logo"),
-            isLoop = false,
-            scale = 0.4,
-            father = node,
+            src = ResManager.getResMul(ResType.ANIMATION,AnimationType.TWEEN,"spine_boss_spellcard_attack"),
             onComplete = function(sender)
-                THSTG.Dispatcher.dispatchEvent(EventType.STAGE_SPELLCARD_EFFECT_WND,{isPlayer = true,isOpen = false})
+                node:setVisible(false)
             end,
         })
+        _uiEffect:setScale(0.4)
+        node:addChild(_uiEffect)
     end
+    
 
     local function initData()
-        _uiEffect:playAnimation(0,"newAnimation")
         --生成一个动画并运行
-        --关闭特效窗口
-        -- 
+        
     end
 
     local function init()
@@ -50,12 +37,28 @@ function M.create(params)
     end
     init()
     -------Controller-------
-    node:onNodeEvent("enter", function ()
+    function node:show()
+
         
+        self:setVisible(true)
+    end
+
+    local function updateLayer(_,e,params)
+        if tolua.isnull(node) then
+            return 
+        end
+        
+
+        _uiEffect:setAnimation(0,"default",false)
+        node:show()
+    end
+
+    node:onNodeEvent("enter", function ()
+        THSTG.Dispatcher.addEventListener(EventType.STAGE_PLAYER_SPELLCARD_ATTACK, updateLayer)
     end)
 
     node:onNodeEvent("exit", function ()
-        
+        THSTG.Dispatcher.removeEventListener(EventType.STAGE_PLAYER_SPELLCARD_ATTACK, updateLayer)
     end)
     
     return node

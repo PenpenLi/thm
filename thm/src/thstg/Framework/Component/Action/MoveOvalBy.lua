@@ -11,7 +11,7 @@ function M:ctor(speed,aR,bR,params)
     self.bR = bR
     self.centerPos = params.centerPos or cc.p(0,0)
     self.isAnticlockwise = params.isAnticlockwise or false
-    self.delayTime = params.delayTime or 0
+    self.offset = params.offset or cc.p(0,0)
     self.zOrderRang = params.zOrderRang or cc.p(-99,99)
     self.isScale = params.isScale or false
 
@@ -25,12 +25,12 @@ function M:update(node,delay)
     local y = self:_getPositionYAtOval(self._totalTime)
     node:setPosition(cc.p(x+self.centerPos.x, y+self.centerPos.y))--由于我们画计算出的椭圆你做值是以原点为中心的，所以需要加上我们设定的中心点坐标
 
+    --TODO:y>0的缩放效果
     if self.isScale then
         local radio = (math.ceil(y) - y) * 0.1
         node:setScale(1+radio)
     end
 
-    --TODO:y>0的缩放效果
     if (y > 0 ) then
         node:setLocalZOrder(self.zOrderRang.y)
     else
@@ -43,9 +43,9 @@ end
 function M:_getPositionXAtOval(t)
     --参数方程
     if(self.isAnticlockwise == false) then
-        return self.aR * math.cos((6.2831852 * (1 - t)) + self.delayTime)
+        return self.aR * math.cos((6.2831852 * (1 - t)) + self.offset.x)
     else
-        return self.aR * math.cos((6.2831852 * t)+ self.delayTime)
+        return self.aR * math.cos((6.2831852 * t) + self.offset.x)
     end
 end
 
@@ -53,13 +53,11 @@ end
 function M:_getPositionYAtOval(t)
       --参数方程
     if(self.isAnticlockwise == false) then
-        return self.bR * math.sin(6.2831852 * (1 - t))
+        return self.bR * math.sin((6.2831852 * (1 - t)) + self.offset.y)
     else
-        return self.bR * math.sin(6.2831852 * t)
+        return self.bR * math.sin((6.2831852 * t) + self.offset.y)
     end
 end
-
-
 
 ---
 function newMoveOvalBy(...)

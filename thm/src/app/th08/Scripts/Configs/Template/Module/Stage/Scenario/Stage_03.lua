@@ -1,14 +1,12 @@
-local layer = THSTG.SceneManager.get(SceneType.STAGE).entityLayer
 local curBoss = nil
 return {
     {
         time = 0,
         callback  = function (sender,task,params)
-            curBoss = StageDefine.BossPrefab.new()
+            curBoss = StageDefine.WrigglePrefab.new()
             local posComp = curBoss:getComponent("TransformComponent")
             posComp:setPositionX(40)
             posComp:setPositionY(display.width + 100)
-            layer:addChild(curBoss)
 
         end
     },

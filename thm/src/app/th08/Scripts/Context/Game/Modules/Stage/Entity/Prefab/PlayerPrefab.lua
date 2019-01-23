@@ -14,8 +14,6 @@ function M:ctor(...)
     self.inputController = StageDefine.PlayerInput.new()
     self:addScript(self.inputController)
     
-    self.animationController = StageDefine.PlayerAnimation.new()
-    self:addScript(self.animationController)
 
     self.constraintByBorder = StageDefine.ConstraintByBorder.new()
     self:addScript(self.constraintByBorder)

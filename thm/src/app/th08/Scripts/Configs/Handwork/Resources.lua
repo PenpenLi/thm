@@ -16,10 +16,13 @@ return {
     },
     animation = {
         skeleton = {
-            spine_player_dragon = "Assets/Animation/Skeleton/Dragon/Dragon.json",
-            spine_dragonborn_logo = "Assets/Animation/Skeleton/DragonOpening/DragonOpening.json",
-            spine_boss_spellcard_attack = "Assets/Animation/Skeleton/SpellCardAttack/SpellCardAttack.json"
+             spine_player_dragon = "Assets/Animation/Skeleton/Dragon/Dragon.json",
         },
+        tween = {
+           
+            spine_dragonborn_logo = "Assets/Animation/Tween/DragonOpening/DragonOpening.json",
+            spine_boss_spellcard_attack = "Assets/Animation/Tween/SpellCardAttack/SpellCardAttack.json"
+        }
 
     },
     sfx = {
