@@ -1,49 +1,55 @@
 module("StageConfig", package.seeall)
-local ROLE_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Role.%s"
-local BOSS_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Boss.%s"
-local BATMAN_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Batman.%s"
 local SCENARIO_PATH_PATTERN = "Scripts.Configs.Template.Module.Stage.Scenario.Stage_%02d"
 local MAP_PATH_PATTERN = "Scripts.Configs.Template.Module.Stage.Map.Map_%02d"
-local BULLET_PLAYER_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Bullet.PlayerBullet"
-local BULLET_ENEMY_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Bullet.EnemyBullet"
-local PROP_ENEMY_PATH_PATTERN = "Scripts.Configs.Handwork.Module.Stage.Prop.Prop"
-local function getDictByFile(path,file)
+
+local ROLE_FILE = "Scripts.Configs.Handwork.Module.Stage.Role"
+local BOSS_FILE = "Scripts.Configs.Handwork.Module.Stage.Boss"
+local BATMAN_FILE = "Scripts.Configs.Handwork.Module.Stage.Batman"
+local BULLET_PLAYER_FILE = "Scripts.Configs.Handwork.Module.Stage.PlayerBullet"
+local BULLET_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.EnemyBullet"
+local PROP_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.Prop"
+local function getDictByFile(path)
+    local pathFile = string.format(path)
+    return require(pathFile)
+end
+
+local function getDictByPattern(path,file)
     local pathFile = string.format(path,file)
     return require(pathFile)
 end
 
 function getScenario(id)
-    local tb = getDictByFile(SCENARIO_PATH_PATTERN,id)
+    local tb = getDictByPattern(SCENARIO_PATH_PATTERN,id)
     return tb
 end
 
 function getMap(id)
-    local tb = getDictByFile(MAP_PATH_PATTERN,id)
+    local tb = getDictByPattern(MAP_PATH_PATTERN,id)
     return tb
 end
 
 function getRole(roleType)
-    return getDictByFile(ROLE_PATH_PATTERN,roleType)
+    return getDictByFile(ROLE_FILE)[roleType]
 end
 
 function getBoss(bossType)
-    return getDictByFile(BOSS_PATH_PATTERN,bossType)
+    return getDictByFile(BOSS_FILE)[bossType]
 end
 
 function getBatman(batmanType)
-    return getDictByFile(BATMAN_PATH_PATTERN,batmanType)
+    return getDictByFile(BATMAN_FILE)[batmanType]
 end
 
-function getPlayerBullet()
-    return getDictByFile(BULLET_PLAYER_PATH_PATTERN)
+function getPlayerBullet(bulletType)
+    return getDictByFile(BULLET_PLAYER_FILE)[bulletType]
 end
 
-function getEnemyBullet()
-    return getDictByFile(BULLET_ENEMY_PATH_PATTERN)
+function getEnemyBullet(bulletType)
+    return getDictByFile(BULLET_ENEMY_FILE)[bulletType]
 end
 
 function getProp(propType)
-    return getDictByFile(BULLET_ENEMY_PATH_PATTERN)[propType]
+    return getDictByFile(BULLET_ENEMY_FILE)[propType]
 end
 
 ----

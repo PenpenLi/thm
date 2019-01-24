@@ -13,7 +13,7 @@ function M:updateStage()
     local schedulerComp = self:getComponent("SchedulerComponent")
     schedulerComp:setTasks(StageConfig.getScenario(stageID))
 
-    local map = StageConfig.getMap(1).create()
+    local map = StageConfig.getMap(stageID).create()
     map:addTo(THSTG.SceneManager.get(SceneType.STAGE).backgroundLayer)
 end
 

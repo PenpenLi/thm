@@ -8,12 +8,17 @@ function M:_onInit()
     self.isTrigger = false
 
     self._type = nil
+    self._transComp = nil
 end
 ------
 function M:collide(collder)
     return self:_onCollide(collder)
 end
 
+function M:_onAdded(entity)
+    self._transComp = entity:getComponent("TransformComponent")
+    assert(self._transComp, string.format("[%s] You must have a TransformComponent ",M.__cname))
+end
 ------
 
 

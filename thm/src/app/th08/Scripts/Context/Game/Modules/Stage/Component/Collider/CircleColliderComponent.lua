@@ -9,25 +9,25 @@ function M:_onInit()
 end
 
 function M:getInSideRect()
-    local entity = self:getEntity()
-    local x = (entity:getPositionX() - self.anchorPoint.x * self.radius)
-    local y = (entity:getPositionY() + self.anchorPoint.y * self.radius)
-    return cc.rect(x + self.offset.x, y + self.offset.y, self.radius, self.radius)
+    local pos = cc.p(self._transComp:getPosition())
+    local x = (pos.x + (0.5-self.anchorPoint.x) * self.radius)+ self.offset.x
+    local y = (pos.y + (0.5-self.anchorPoint.y) * self.radius)+ self.offset.y
+    return cc.rect(x , y , self.radius, self.radius)
 end
 
 function M:getOutSideRect()
-    local entity = self:getEntity()
+    local pos = cc.p(self._transComp:getPosition())
     local side = math.sqrt( 2 * self.radius * self.radius )
-    local x = (entity:getPositionX() - self.anchorPoint.x * side)
-    local y = (entity:getPositionY() + self.anchorPoint.y * side)
-    return cc.rect(x + self.offset.x, y + self.offset.y, side, side)
+    local x = (pos.x + (0.5-self.anchorPoint.x) * side)+ self.offset.x
+    local y = (pos.y + (0.5-self.anchorPoint.y) * side)+ self.offset.y
+    return cc.rect(x , y , side, side)
 end
 
 function M:getCenterPos()
-    local entity = self:getEntity()
-    local x = (entity:getPositionX() - (0.5 - self.anchorPoint.x) * self.radius)
-    local y = (entity:getPositionY() + (0.5 - self.anchorPoint.y) * self.radius)
-    return cc.p(x + self.offset.x, y + self.offset.y)
+    local pos = cc.p(self._transComp:getPosition())
+    local x = (pos.x + (0.5 - self.anchorPoint.x) * self.radius)+ self.offset.x
+    local y = (pos.y + (0.5 - self.anchorPoint.y) * self.radius)+ self.offset.y
+    return cc.p(x , y )
 end
 
 -----
@@ -36,6 +36,8 @@ function M:_onClass(className,id)
 end
 
 function M:_onAdded(entity)
+    M.super._onAdded(self,entity)
+    
     local spriteComp = entity:getComponent("SpriteComponent")
     if spriteComp then
         local spriteSize = spriteComp:getContentSize()

@@ -3,15 +3,15 @@ local M = class("BoxColliderComponent",ColliderComponent)
 function M:_onInit()
     M.super._onInit(self)
     self.size = cc.size(16,16)  --最小碰撞矩形
-
+    
     self._type = ColliderComponent.EColliderType.Rect
 end
 
 function M:getRect()
-    local entity = self:getEntity()
-    local x = (entity:getPositionX() - self.anchorPoint.x * self.size.width)
-    local y = (entity:getPositionY() + self.anchorPoint.y * self.size.height)
-    return cc.rect(x + self.offset.x, y + self.offset.y, self.size.width, self.size.height)
+    local pos = cc.p(self._transComp:getPosition())
+    local x = (pos.x + (0.5-self.anchorPoint.x) * self.size.width) + self.offset.x
+    local y = (pos.y + (0.5-self.anchorPoint.y) * self.size.height) + self.offset.y
+    return cc.rect(x , y , self.size.width, self.size.height)
 end
 
 
@@ -21,11 +21,25 @@ function M:_onClass(className,id)
 end
 
 function M:_onAdded(entity)
+    M.super._onAdded(self,entity)
+
     local spriteComp = entity:getComponent("SpriteComponent")
     if spriteComp then
         local size = spriteComp:getContentSize()
         self.size.width = math.max(self.size.width,size.width)
         self.size.height = math.max(self.size.height,size.height)
+    end
+
+    if __DEBUG__ and __SHOW_COLLIDER_DEBUG__ then
+        local testRect = THSTG.UI.newNode({
+            x = ((0.5-self.anchorPoint.x) * self.size.width) + self.offset.x,
+            y = ((0.5-self.anchorPoint.y) * self.size.height) + self.offset.y,
+            width = self.size.width,
+            height = self.size.height,
+            anchorPoint = cc.p(0.5,0.5)
+        })
+        entity:addChild(testRect)
+        debugUI(testRect)
     end
 end
 

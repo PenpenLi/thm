@@ -21,7 +21,7 @@ function M.create(params)
         },
     })
 
-    node:addChild(mainBg)
+    -- node:addChild(mainBg)
   
     -------Controller-------
     node:onNodeEvent("enter", function ()
