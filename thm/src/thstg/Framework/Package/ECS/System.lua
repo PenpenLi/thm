@@ -1,4 +1,4 @@
-
+local ECSUtil = require "thstg.Framework.Package.ECS.ECSUtil"
 --针对某一类组件进行轮询
 local M = class("System")
 
@@ -7,9 +7,13 @@ function M.register(path)
 end
 ---
 function M:ctor(...)
-
+    self.__id__ = ECSUtil.getSystemId()
     
     self:_onInit(...)
+end
+
+function M:getID()
+    return self.__id__
 end
 
 function M:getClass()
@@ -79,6 +83,10 @@ function M:_onEvent(event,params)
 end
 
 function M:_onClear()
+
+end
+
+function M:_onEntityDestroy()
 
 end
 

@@ -6,6 +6,8 @@ function M:ctor()
     M.super.ctor(self)
 
     ----
+    self:setName("BOSS"
+)
     self.healthBar = THSTG.UI.newRadialProgressBar({
         x = 0,
         y = 0, --半径

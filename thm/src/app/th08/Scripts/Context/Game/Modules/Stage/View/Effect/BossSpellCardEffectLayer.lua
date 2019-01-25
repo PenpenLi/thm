@@ -13,7 +13,7 @@ function M.create(params)
 
     local function initLayer()
           --特效
-          _uiEffect = THSTG.UI.newSkeletonAnimation({
+          _uiEffect = THSTG.UI.newSpineAnimation({
             x = display.cx,
             y = display.cy,
             src = ResManager.getResMul(ResType.ANIMATION,AnimationType.TWEEN,"spine_boss_spellcard_attack"),

@@ -3,7 +3,7 @@ return {
         name = "莉莉白",
         nickName = "叫春精",
         ability = "传播春天程度的能力",
-        desc1 = "叫春精",
+        description = "叫春精",
 
     },
     ["WriggleNightbug"] = {
@@ -13,7 +13,7 @@ return {
         jpName = "リグル·ナイトバグ",
         nickName = "虫子",
         ability = "",
-        desc1 = "虫子而已",
+        description = "虫子而已",
         
         gameArgs = {
             health = 10000,  --血量
@@ -29,8 +29,10 @@ return {
             skill = {"stg1enm","wriggle_hand_up"},
             skill_susbin = {"stg1enm","wriggle_hand_up_susbin"},
         },
-        spellcards = {
-            [1] = "LilyWhite_01",
+        barrage = {
+            spellcards = {
+                [1] = "SC_01",
+            },
         },
         character ={
             [1] = "",

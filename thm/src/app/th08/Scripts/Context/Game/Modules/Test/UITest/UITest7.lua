@@ -9,7 +9,7 @@ function M.create(params)
 
 
     
-    -- local skeletonNode = THSTG.UI.newSkeletonAnimation({
+    -- local skeletonNode = THSTG.UI.newSpineAnimation({
     --     x = display.cx,
     --     y = display.cy,
     --     src = ResManager.getResMul(ResType.ANIMATION,AnimationType.TWEEN,"spine_dragonborn_logo"),

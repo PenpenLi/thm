@@ -8,7 +8,7 @@ __DEBUG__ = true
 __HIDE_TEST__ = false
 
 --是否显示碰撞矩形
-__SHOW_COLLIDER_DEBUG__ = true
+__SHOW_COLLIDER_DEBUG__ = false
 
 ------
 --每个人定义一个自己的类型，用于屏蔽其他人写的打印log，为0时打印所有

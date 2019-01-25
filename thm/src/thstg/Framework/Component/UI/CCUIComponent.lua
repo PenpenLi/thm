@@ -593,7 +593,7 @@ function newParticleSystem(params)
 	return system
 end
 
--- 新建骨骼动画
+-- 新建Spine动画
 -- @param	x			[number]		x
 -- @param	y			[number]		y
 -- @param   width		[number]		宽
@@ -605,7 +605,7 @@ end
 -- @param 	onStart		[function]		动画开始回调
 -- @param 	onComplete		[function]	动画完成一次回调
 -- @param 	onEnd		[function]		动画结束回调
-function newSkeletonAnimation(params)
+function newSpineAnimation(params)
 	params = params or {}
 
 	if params.src then
@@ -668,7 +668,7 @@ function newSkeletonAnimation(params)
 	return node
 end
 
--- 新建序列帧动画
+-- 新建精灵动画
 -- @param	x			[number]		x
 -- @param	y			[number]		y
 -- @param   width		[number]		宽
@@ -678,7 +678,7 @@ end
 -- @param 	onComplete		[function]	动画完成回调
 -- @param 	onEnd		[function]		动画结束回调
 
-function newSequenceAnimation(params)
+function newSpriteAnimation(params)
 	params = params or {}
 	---
 	local privateData = {}

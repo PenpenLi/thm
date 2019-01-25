@@ -23,7 +23,7 @@ function playEffect(params)
         end
     end
 
-    local node = THSTG.UI.newSkeletonAnimation(params)
+    local node = THSTG.UI.newSpineAnimation(params)
 
     node:playAnimation(0,params.animation,params.isLoop)
 

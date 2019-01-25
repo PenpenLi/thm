@@ -1,10 +1,11 @@
 local M = class("HealthController",THSTG.ECS.Script)
 
 function M:_onInit()
-    self.blood = 100
+    self.maxBlood = 100
+    self.blood = self.maxBlood 
     self.isInvincible = false
 
-    self._maxBlood = self.blood
+    
     self._isDead = false
 
 end
@@ -51,15 +52,15 @@ function M:getBlood()
 end
 
 function M:setMaxBlood(val)
-    self._maxBlood = val
+    self.maxBlood = val
 end
 
 function M:getMaxBlood()
-    return self._maxBlood
+    return self.maxBlood
 end
 
 function M:reset(val)
-    self:setMaxBlood(val or self._maxBlood)
+    self:setMaxBlood(val or self.maxBlood)
     self:setBlood(self:getMaxBlood())
 end
 

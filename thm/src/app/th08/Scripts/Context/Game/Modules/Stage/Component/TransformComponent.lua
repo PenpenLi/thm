@@ -37,7 +37,12 @@ end
 function M:getScale()
     return self:getEntity():getScale()
 end
-
+function M:setOpacity(val)
+    self:getEntity():setOpacity(val)
+end
+function M:getOpacity()
+    return self:getEntity():getOpacity()
+end
 ------
 function M:_onUpdate(delay,entity)
 

@@ -2,17 +2,24 @@ module("ECSManager", package.seeall)
 
 
 --实体flag
-EEntityFlag = {
+local EEntityFlag = {
     Init = 1,
     Active = 2,
     Destroy = 99,
 }
 
-EEventType = {
-    DestroyEntity = 1,
+local ESystemFlag = {
+   
 }
 
-local EEventCacheType = {
+EEventType = {
+    DestroyEntity = 1,
+    EntityActive = 2,
+    EntityReset = 3,
+}
+
+
+EEventCacheType = {
     All = 0,
     Entity = 1,
     System = 2
@@ -21,6 +28,7 @@ local EEventCacheType = {
 local _handle = nil
 local _entityCache = {}
 local _dirtyEntities = {}
+local _dirtySystems = {}
 local _systemClass = {}
 local _systemCache = {}
 
@@ -45,7 +53,9 @@ function dispatchEvent(cacheType,event,params)
         table.insert(_eventQueue[cacheType], info )
     end
 end
-
+function dispatchEventAll(event,params)
+    dispatchEvent(EEventCacheType.All,event,params)
+end
 --[[实体管理]]
 local function dirtyEntity(entity,flag)
     local id = entity:getID()
@@ -53,11 +63,6 @@ local function dirtyEntity(entity,flag)
     _dirtyEntities[id].entity = entity
     _dirtyEntities[id].flags = _dirtyEntities[id].flags or {}
     _dirtyEntities[id].flags[flag] = true
-end
-
-function destroyEntity(entity)
-    dirtyEntity(entity,EEntityFlag.Destroy)
-    dispatchEvent(EEventCacheType.All,EEventType.DestroyEntity,entity)
 end
 
 function addEntity(entity)
@@ -133,21 +138,6 @@ function findEntityWithName(name)
 end
 
 local function _handleEntities(delay)
-    local function _updateEntities()
-        visitEntity(function(v)
-            if not v:isCCNode() then
-                v:update(delay)
-            end
-        end)
-    end
-    local function _handleEntitiesEvent()
-        for _,v in ipairs(_eventQueue[EEventCacheType.Entity]) do
-            visitEntity(function(entity)
-                entity:_event(v.event,v.params)
-            end)
-        end
-        _eventQueue[EEventCacheType.Entity] = {}
-    end
     local function _rinseEntities()
         for _,v in pairs(_dirtyEntities) do
             if v.flags[EEntityFlag.Init] then
@@ -167,6 +157,22 @@ local function _handleEntities(delay)
         end
         _dirtyEntities = {}
     end
+    local function _updateEntities()
+        visitEntity(function(v)
+            if not v:isCCNode() then
+                v:update(delay)
+            end
+        end)
+    end
+    local function _handleEntitiesEvent()
+        for _,v in ipairs(_eventQueue[EEventCacheType.Entity]) do
+            visitEntity(function(entity)
+                entity:_event(v.event,v.params)
+            end)
+        end
+        _eventQueue[EEventCacheType.Entity] = {}
+    end
+    
     _rinseEntities()
     _handleEntitiesEvent()
     _updateEntities()
@@ -198,6 +204,14 @@ function registerSystem(path)
     table.insert( _systemClass, {classPath = path})
 end
 
+local function dirtySystem(system,flag)
+    local id = system:getID()
+    _dirtySystems[id] = _dirtySystems[id] or {}
+    _dirtySystems[id].system = system
+    _dirtySystems[id].flags = _dirtySystems[id].flags or {}
+    _dirtySystems[id].flags[flag] = true
+end
+
 function visitSystem(func)
     for _,v in pairs(_systemCache) do
         local ret = func(v)
@@ -206,6 +220,12 @@ function visitSystem(func)
 end
 
 local function _handleSystems(delay)
+    local function _rinseSystems()
+        for _,v in pairs(_dirtySystems) do
+           
+        end
+        _dirtySystems = {}
+    end
     local function _updateSystems()
         visitSystem(function(v)
             v:update(delay)
@@ -219,18 +239,25 @@ local function _handleSystems(delay)
         end
         _eventQueue[EEventCacheType.System] = {}
     end
-    local function _rinseSystems()
-       
-    end
+
+    _rinseSystems()
     _updateSystems()
     _handleSystemsEvent()
-    _rinseSystems()
 end
 local function _clearSystems()
     visitSystem(function(v)
         v:clear()
     end)
 end
+----
+function destroyEntity(entity)
+    dirtyEntity(entity,EEntityFlag.Destroy)
+
+    --通知所有对象被移除
+    dispatchEvent(EEventCacheType.All,EEventType.DestroyEntity,entity)
+end
+
+
 ----
 
 function update(delay)

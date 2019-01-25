@@ -2,7 +2,8 @@ local M = class("OnmyouGyokuBulletAnimation",StageDefine.PlayerBulletAnimation)
 
 function M:_onInit()
     M.super._onInit(self)
-
+    --
+    self.rotation = -90
 end
 --
 

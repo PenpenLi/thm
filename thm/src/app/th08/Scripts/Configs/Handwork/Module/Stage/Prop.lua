@@ -1,7 +1,7 @@
 return {
     ["Prop_P"] = {
         name = "P弹",
-        desc = "给予能量",
+        description = "给予能量",
         gameArgs = {
             colliderSize = cc.size(16,16),
             bodySize = cc.size(16,16),

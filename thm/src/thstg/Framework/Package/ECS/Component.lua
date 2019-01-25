@@ -115,6 +115,7 @@ end
 function M:_onActive(val)
 	
 end
+
 ------------
 function M:_added(entity,param)
     assert(not self.__entity__, "[System] System already added. It can't be added again!")

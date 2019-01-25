@@ -203,6 +203,13 @@ function M:_onEnter()
 	
 end
 
+function M:_onActive(val)
+
+end
+
+function M:_onReset()
+	
+end
 --退出场景回调
 function M:_onExit()
 	
@@ -221,9 +228,6 @@ function M:_onLateUpdate(dTime)
     
 end
 --
-function M:_onActive(val)
-
-end
 
 --消息
 function M:_onEvent(event,params)
@@ -231,20 +235,20 @@ function M:_onEvent(event,params)
 end
 ---
 function M:_event(event,params)
-	self:_onEvent()
-	for k,v in pairs(self.__components__) do
-		v:_onEvent()
+	self:_onEvent(event,params)
+	for _,v in pairs(self.__components__) do
+		v:_onEvent(event,params)
 	end
 end
 
 function M:_enter()
 	self:_onEnter()
-	for k,v in pairs(self.__components__) do
+	for _,v in pairs(self.__components__) do
 		v:_onEnter()
 	end
 end
 function M:_exit()
-	for k,v in pairs(self.__components__) do
+	for _,v in pairs(self.__components__) do
 		v:_onExit()
 	end
 	self:_onExit()
