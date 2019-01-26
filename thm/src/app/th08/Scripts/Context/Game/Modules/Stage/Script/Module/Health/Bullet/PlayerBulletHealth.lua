@@ -28,6 +28,7 @@ function M:_onDead()
             if ObjectCache.release(self:getEntity()) then self:getEntity():setActive(false) else self:killEntity() end
         end)
     }))
+    SoundManager.playEffect(200103)
 end
 
 

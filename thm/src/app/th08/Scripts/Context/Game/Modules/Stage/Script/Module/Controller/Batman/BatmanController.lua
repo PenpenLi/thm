@@ -6,6 +6,11 @@ function M:_onInit()
     self.batmanType = BatmanType.BATMAN_01
 end
 ----
+function M:_onStart()
+    M.super._onStart(self)
+    local healthCtrl = self:getScript("HealthController")
+    healthCtrl:reset(10)
+end
 
 function M:_onUpdate()
 

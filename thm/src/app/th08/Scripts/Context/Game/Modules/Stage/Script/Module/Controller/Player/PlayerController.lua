@@ -83,7 +83,6 @@ function M:slow(state)
     end
     --根据不同人物显示不同的低速模式
     if state then slowOpen() else slowClose() end
-    self:_onSlow(state)
     self.__isStateSlow = state
 end
 
@@ -139,9 +138,6 @@ function M:reset()
 
 end
 -----
-function M:_onSlow(val)
-
-end
 ------
 function M:_onState()
     return {

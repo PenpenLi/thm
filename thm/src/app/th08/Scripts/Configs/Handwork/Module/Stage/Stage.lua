@@ -1,4 +1,5 @@
 return {
+    --第一个Stage
     [1] = {
         --预加载资源清单
         preLoad = {
@@ -6,6 +7,9 @@ return {
             sound = {
 
             },
+            bulletPrefab = {
+                
+            }
         },
         boss = {
 

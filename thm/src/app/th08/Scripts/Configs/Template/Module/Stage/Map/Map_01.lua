@@ -3,10 +3,15 @@ module(..., package.seeall)
 local M = {}
 function M.create(params)
     -------Model-------
---    THSTG.AudioMgr.playMusic(SoundConfig.getFilePath(100101))
+
    
     -------View-------
     local node = THSTG.UI.newNode()
+
+    local music = THSTG.AUDIO.newMusic({
+        src = SoundConfig.getFilePath(100101),
+    })
+
 
     local mainBg = UIPublic.newUVRollSprite({
         x = display.cx,
@@ -20,12 +25,11 @@ function M.create(params)
             speedY = -1,
         },
     })
-
     -- node:addChild(mainBg)
   
     -------Controller-------
     node:onNodeEvent("enter", function ()
-        
+        music:play()
     end)
 
     node:onNodeEvent("exit", function ()

@@ -1,5 +1,5 @@
 return {
-    [101] = {
+    ["Batman_01"] = {
         name = "妖精01",
         description = "",
         ability = "",

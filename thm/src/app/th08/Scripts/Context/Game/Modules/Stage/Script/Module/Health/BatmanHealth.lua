@@ -13,9 +13,8 @@ function M:_onHurt()
     animationComp:play(cc.Sequence:create({
         cc.Blink:create(0.1, 6),
         cc.CallFunc:create(function ()
-            local spriteComp = self:getComponent("SpriteComponent")
-            spriteComp:getSprite():setOpacity(255)
-            spriteComp:getSprite():setVisible(true)
+            animationComp:getSprite():setOpacity(255)
+            animationComp:getSprite():setVisible(true)
         end)
     }))
 

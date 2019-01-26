@@ -30,6 +30,8 @@ function M:shot()
 
     self._wingman1EmitterCtrl:shot()
     self._wingman2EmitterCtrl:shot()
+
+    SoundManager.playEffect(200101)
 end
 
 function M:_onStart()
@@ -56,7 +58,8 @@ function M:_onStart()
     self._wingman2ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(WINGMAN_AROUND_SPEED,30,1,{offset = cc.p(0,0),centerPos = cc.p(0,WINGMAN_SLOW_OFF_POS.y)})))
 end
 
-function M:_onSlow(val)
+function M:slow(val)
+    M.super.slow(self,val)
     if val then
         self._wingman1ActionComp:stopAllActions()
         self._wingman2ActionComp:stopAllActions()

@@ -7,35 +7,29 @@ local FileUtils = cc.FileUtils:getInstance()
 --新建一个音效组件
 --@param    #volume        number             音量
 --@param    #src          string              文件路径
---@param    #isLoop       bollean             是否无限循环
+--@param    #isPreLoad    boolean              是否预加载
+--@param    #isLoop       boolean             是否无限循环
 
 local function commonInit(node,params)
-    node._privateData = {}
+    local _privateData = {}
     _privateData.id = INVALID_AUDIO_ID
     _privateData.src = params.src or ""
-    _privateData.isLoop = params.isLoop
+    _privateData.isLoop = params.isLoop or false
     _privateData.src = params.src
+    _privateData.isPreLoad = params.isPreLoad or true
     _privateData.isSilence = params.isSilence or false
     _privateData.volume = _privateData.isSilence and 0 or (params.volume or 50)
     _privateData.onEnd = params.onEnd
-    
-    ----
-    function node:play()
 
-        local isLoop = _privateData.isLoop or true
-        local volume = _privateData.volume
-        local isSilence = _privateData.isSilence
+    ----
+    function node:play(isLoop,volume)
+        isLoop = isLoop or _privateData.isLoop
+        volume = volume or _privateData.volume
 
         local exist, filePath = FileUtils:isFileExist(_privateData.src),_privateData.src
         if not exist then
             print("Error! The file [" .. filePath .. "] is not exist!")
             return false
-        end
-
-        if params.onLoad and "function" == type(params.onLoad) then
-            AudioEngine:preload(filePath, function(isloadSuccess)
-                params.onLoad(node,isloadSuccess)
-            end)
         end
     
         _privateData.id = AudioEngine:play2d(filePath, isLoop, volume / 100)
@@ -96,19 +90,30 @@ local function commonInit(node,params)
         end
     end
 
-    return node._privateData
+    function node:preLoad(callFunc)
+        if _privateData.src then
+            if type(callFunc) == "function" then
+                AudioEngine:preload(_privateData.src,callFunc)
+            else
+                AudioEngine:preload(_privateData.src)
+            end
+        end
+    end
+
+    if _privateData.isPreLoad then
+        node:preLoad()
+    end
+
+    return _privateData
 end
 
 
 --@param    #onEnd        function            结束回调
 function newSound(params)
+    params.isLoop = params.isLoop or false
+    ----
     local node = cc.Node:create()
     local _privateData = commonInit(node,params)
-
-    function node:play()
-        return self.super.play()
-    end
-
 
     return node
 end
@@ -116,15 +121,18 @@ end
 --@param    #onLoad        function             加载回调
 --@param    #onEnd        function            结束回调
 function newMusic(params)
+    params.isLoop = params.isLoop or true
+    ---
     local node = cc.Node:create()
     local _privateData = commonInit(node,params)
     ------
+    local oldPlay = node.play
     function node:play()
         if _privateData.id ~= INVALID_AUDIO_ID then 
             self:stop() 
             AudioEngine:uncache(_privateData.src)
         end
-        return self.super.play(self)
+        return oldPlay(self)
     end
 
     -------------------------
