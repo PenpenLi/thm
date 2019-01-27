@@ -29,7 +29,7 @@ function M.create(params)
   
     -------Controller-------
     node:onNodeEvent("enter", function ()
-        music:play()
+        -- music:play()
     end)
 
     node:onNodeEvent("exit", function ()

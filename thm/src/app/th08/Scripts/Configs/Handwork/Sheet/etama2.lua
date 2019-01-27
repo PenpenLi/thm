@@ -142,14 +142,56 @@ return {
                 rect = {x = 0*16,y = 5*16,width = 1*16,height = 1*16},
             },
         },
+
+
     },
     sequence = {    
-         --[[Public]]
-         enemt_breaked = {
+        --[[Public]]
+        enemt_breaked = {
             desc = "",
             grid = {
                 length = 1,
                 rect = {x = 12*16,y = 11*16,width = 64,height = 64},
+            },
+        },
+
+        enemt_halo = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 8*16,y = 7*16,width = 64,height = 64},
+            },
+        },
+
+        player_breaked = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 0*16,y = 11*16,width = 64,height = 64},
+            },
+        },
+
+        player_halo = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 12*16,y = 7*16,width = 64,height = 64},
+            },
+        },
+
+        player_spellcard_1 = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 0*16,y = 7*16,width = 64,height = 64},
+            },
+        },
+
+        player_spellcard_2 = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 4*16,y = 7*16,width = 64,height = 64},
             },
         },
 
