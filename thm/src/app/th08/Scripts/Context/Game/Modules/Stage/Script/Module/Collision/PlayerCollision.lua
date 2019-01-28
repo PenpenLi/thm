@@ -6,8 +6,11 @@ function M:_onFilter()
 end
 
 function M:_onCollision(collider,collision)
-    local script = self:getScript("HealthController")--被击中物
-    script:hit(100)--TODO:伤害值由计算得出
+    local myHealthScript = self:getScript("HealthController")         --子弹自身
+    if not myHealthScript:isDead() then
+        myHealthScript:die()   --TODO:被弹数+1
+        --TODO:剩余的死亡操作,如决死
+    end
 end
 
 return M

@@ -10,7 +10,7 @@ function M.create(params)
     local music = THSTG.AUDIO.newMusic({
         src = SoundConfig.getFilePath(100101),
     })
-    music:play()
+    
     local mainBg = UIPublic.newUVRollSprite({
         x = display.cx,
         y = display.cy,
@@ -24,11 +24,11 @@ function M.create(params)
         },
     })
 
-    node:addChild(mainBg)
+    -- node:addChild(mainBg)
   
     -------Controller-------
     node:onNodeEvent("enter", function ()
-        
+        music:play()
     end)
 
     node:onNodeEvent("exit", function ()

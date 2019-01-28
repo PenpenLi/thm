@@ -147,7 +147,7 @@ return {
     },
     sequence = {    
         --[[Public]]
-        enemt_breaked = {
+        enemy_breaked = {
             desc = "",
             grid = {
                 length = 1,
@@ -155,7 +155,7 @@ return {
             },
         },
 
-        enemt_halo = {
+        enemy_halo = {
             desc = "",
             grid = {
                 length = 1,

@@ -54,30 +54,7 @@ function playParticle(params)
         params.refNode:getParent():addChild(node)
     end
 
+    node:play()
+    
     return node
-end
-
-function playSEXEffect(params)
-    params = params or {}
-    if params.source then
-        params.type = params.source[1]
-        params.name = params.source[2]
-    else
-        params.type = params.type or EffectType.PUBLIC
-    end
-    
-    return SEXManager.playEffect(params)
-end
-
-
-function playSEXParticle(params)
-    params = params or {}
-    if params.source then
-        params.type = params.source[1]
-        params.name = params.source[2]
-    else
-        params.type = params.type or EffectType.PUBLIC
-    end
-    
-    return SEXManager.playParticle(params)
 end

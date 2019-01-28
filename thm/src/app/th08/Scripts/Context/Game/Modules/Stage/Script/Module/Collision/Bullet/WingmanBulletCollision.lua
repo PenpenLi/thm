@@ -1,5 +1,5 @@
 
-local M = class("PlayerBulletCollision",StageDefine.BulletCollision)
+local M = class("WingmanBulletCollision",StageDefine.BulletCollision)
 
 ---
 function M:_onFilter()

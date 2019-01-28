@@ -54,8 +54,8 @@ function M:_onStart()
     self._wingman1ActionComp = self.wingman1:getComponent("ActionComponent")
     self._wingman2ActionComp = self.wingman2:getComponent("ActionComponent")
 
-    self._wingman1ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(WINGMAN_AROUND_SPEED,30,1,{offset = cc.p(3.14,3.14),centerPos = cc.p(0,WINGMAN_SLOW_OFF_POS.y)})))
-    self._wingman2ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(WINGMAN_AROUND_SPEED,30,1,{offset = cc.p(0,0),centerPos = cc.p(0,WINGMAN_SLOW_OFF_POS.y)})))
+    self._wingman1ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(WINGMAN_AROUND_SPEED,30,3,{offset = cc.p(3.14,3.14),centerPos = cc.p(0,WINGMAN_SLOW_OFF_POS.y)})))
+    self._wingman2ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(WINGMAN_AROUND_SPEED,30,3,{offset = cc.p(0,0),centerPos = cc.p(0,WINGMAN_SLOW_OFF_POS.y)})))
 end
 
 function M:slow(val)
@@ -75,7 +75,7 @@ function M:slow(val)
             cc.DelayTime:create(1.0),
             cc.CallFunc:create(function()
                 self._wingman1EmitterCtrl.shotSpeed = cc.p(-EMITTER_INIT_SHOT_SPEED.x,EMITTER_INIT_SHOT_SPEED.y)
-                self._wingman1ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(WINGMAN_AROUND_SPEED,30,1,{offset = cc.p(3.14,3.14),centerPos = cc.p(0,WINGMAN_SLOW_OFF_POS.y)})))
+                self._wingman1ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(WINGMAN_AROUND_SPEED,30,3,{offset = cc.p(3.14,3.14),centerPos = cc.p(0,WINGMAN_SLOW_OFF_POS.y)})))
             end)
         }))
         self._wingman2ActionComp:runAction(cc.Sequence:create({
@@ -83,7 +83,7 @@ function M:slow(val)
             cc.DelayTime:create(1.0),
             cc.CallFunc:create(function()
                 self._wingman2EmitterCtrl.shotSpeed = cc.p(EMITTER_INIT_SHOT_SPEED.x,EMITTER_INIT_SHOT_SPEED.y)
-                self._wingman2ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(WINGMAN_AROUND_SPEED,30,1,{offset = cc.p(0,0),centerPos = cc.p(0,WINGMAN_SLOW_OFF_POS.y)})))
+                self._wingman2ActionComp:runAction(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(WINGMAN_AROUND_SPEED,30,3,{offset = cc.p(0,0),centerPos = cc.p(0,WINGMAN_SLOW_OFF_POS.y)})))
             end)
         }))
 

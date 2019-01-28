@@ -1,17 +1,19 @@
-local M = class("BaseSpellController",THSTG.ECS.Script)
+local M = class("BrushController",THSTG.ECS.Script)
 
 function M:_onInit()
     M.super._onInit(self)
+
 end
 
 -------
 -------
+
 function M:_onStart()
 
 end
 
 function M:_onUpdate()
-
+    --子弹擦过精灵框而没有撞到判定点算擦弹
 end
 
 

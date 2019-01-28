@@ -1,11 +1,21 @@
 return {
     public = {
         --敌人阵亡特效
-        ccle_die_magic_01 = function (param)
+        ccle_enemy_die_magic_01 = function (param)
             return {  
-                cc.Animate:create(AnimationCache.getResBySheet("etama2","enemt_breaked")),
+                cc.Animate:create(AnimationCache.getResBySheet("etama2","enemy_breaked")),
                 cc.Spawn:create({
                     cc.ScaleBy:create(0.5,2.5),
+                    cc.FadeOut:create(0.5),
+                })
+            }
+        end,
+
+        ccle_player_die_magic_01 = function (param)
+            return {  
+                cc.Animate:create(AnimationCache.getResBySheet("etama2","player_breaked")),
+                cc.Spawn:create({
+                    cc.ScaleBy:create(0.5,10.5),
                     cc.FadeOut:create(0.5),
                 })
             }

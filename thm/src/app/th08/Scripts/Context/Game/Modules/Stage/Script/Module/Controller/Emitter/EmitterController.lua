@@ -3,7 +3,7 @@ local M = class("EmitterController",THSTG.ECS.Script)
 function M:_onInit()
     self.shotInterval = 0.10          --时间间隔
     self.shotSpeed = cc.p(0,10)       --子弹的初始速度
-    self.bulletPrefab = nil           --发射的预制体
+    self.objectPrefab = nil           --发射的预制体
     self.shotOffset = cc.p(0,0)       --子弹发射偏移
     self.prefabNum = 10               --预制数量
 
@@ -12,9 +12,9 @@ end
 
 function M:shot()
     if THSTG.TimeUtil.time() >= (self._nextShotTime or 0) then
-        if not self.bulletPrefab then return end
+        if not self.objectPrefab then return end
 
-        local bullet = ObjectCache.create(self.bulletPrefab)
+        local bullet = ObjectCache.create(self.objectPrefab)
         local myTransComp = self:getComponent("TransformComponent")
         local bulletTransComp = bullet:getComponent("TransformComponent")
 
@@ -36,7 +36,7 @@ end
 
 function M:_onStart()
     M.super._onStart(self)
-    ObjectCache.expand(self.bulletPrefab,self.prefabNum)
+    ObjectCache.expand(self.objectPrefab,self.prefabNum)
 end
 
 return M

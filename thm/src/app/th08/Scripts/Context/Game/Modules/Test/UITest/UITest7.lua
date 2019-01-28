@@ -38,14 +38,35 @@ function M.create(params)
    
     
 
-    -- local p1 = THSTG.UI.newParticleSystem({
-    --     x = display.width/2,
-    --     y = display.height/2,
-    --     anchorPoint = cc.p(0.5,0.5),
-    --     isLoop = false,
-    --     src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_st_boss_down"),
-    -- })
-    -- node:addChild(p1)
+    local p1 = THSTG.UI.newParticleSystem({
+        x = display.width/2,
+        y = display.height/2,
+        anchorPoint = cc.p(0.5,0.5),
+        isLoop = true,
+        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_leaf"),
+    })
+    p1:play()
+    node:addChild(p1)
+
+    local p2 = THSTG.UI.newParticleSystem({
+        x = display.width/2,
+        y = display.height/2,
+        anchorPoint = cc.p(0.5,0.5),
+        isLoop = true,
+        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_protected"),
+    })
+    node:addChild(p2)
+
+    node:runAction(cc.Sequence:create({
+        cc.DelayTime:create(3.0),
+        cc.CallFunc:create(function()
+            p2:stop()
+        end),
+        cc.DelayTime:create(3.0),
+        cc.CallFunc:create(function()
+            p2:play()
+        end)
+    }))
     -------Controller-------
     node:onNodeEvent("enter", function ()
         

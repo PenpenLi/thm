@@ -5,23 +5,19 @@ local M = class("PlayerController",StageDefine.BaseController)
 
 function M:_onInit()
     M.super._onInit(self)
-    self.roleType = false                  --TODO:
+    self.roleType = false                  
 
-    self.bombCount = 3                              --Bomb次数
-    self.wipeRestTime = 5                           --wipe的剩余时间
-
-    --TODO:以下具有特异性
-    self.mainEmitter = nil                           --主发射器实体
-
-    ---
-    -- ObjectCache.expand(StageDefine.PlayerBulletPrefab,6)        --最大5颗,与子弹速度有关
+    self._shotCtrl = nil                           --主发射器实体
+    self._bombCtrl = nil                              --Spell(bomb)
+    self._wipeCtrl = nil                              --消弹
+    self._slowCtrl = nil                              --低速
 end
 
 
 ----------
 function M:move(dx,dy)
     if self.__isLockMove then return end --重设阶段不能移动
-    if self:isSlow() then
+    if self._slowCtrl:isSlow() then
         --低速模式速度减半
         dx = dx / 2 
         dy = dy / 2
@@ -36,62 +32,22 @@ function M:move(dx,dy)
 end
 
 function M:shot()
-    local emitterCtrl = self.mainEmitter:getScript("EmitterController")
-    emitterCtrl:shot()
+    self._shotCtrl:shot()
 end
 
 function M:bomb()
-    if self.bombCount <= 0 then return end
-    print(15,"炸弹")
-    
-
-    self.bombCount = self.bombCount - 1
-    --TODO:决死效果
-
-    THSTG.Dispatcher.dispatchEvent(EventType.STAGE_PLAYER_SPELLCARD_ATTACK,{roleType = self.roleType,isDeadSave = false})
-end
-
-function M:getBombCount()
-    return self.bombCount
-end
-
-function M:setBombCount(val)
-    self.bombCount = val
+    self._bombCtrl:bomb()
 end
 
 function M:wipe(state)
-    --擦弹模式开始定时器,超时自动关闭
-    local function wipeOpen()
-        print(15,"wipe开")
-    end
-    local function wipeClose()
-        print(15,"wipe关")
-    end
-    --
-    if state then wipeOpen() else wipeClose() end
-    self.__isStateWipe = state
+    self._wipeCtrl:wipe(state)
+
 end
 
 function M:slow(state)
-    local function slowOpen()
-        print(15,"slow开")
-       
-    end
-    local function slowClose()
-        print(15,"slow关")
-       
-    end
-    --根据不同人物显示不同的低速模式
-    if state then slowOpen() else slowClose() end
-    self.__isStateSlow = state
+    self._slowCtrl:slow(state)
 end
 
-function M:isWipe()
-    return self.__isStateWipe or false
-end
-function M:isSlow()
-    return self.__isStateSlow or false
-end
 
 function M:reset()
     --
@@ -155,13 +111,19 @@ end
 function M:_onStart()
     M.super._onStart(self)
 
+    --各部分
+    self._bombCtrl = self:getEntity():getScript("SpellController")                           
+    self._wipeCtrl = self:getEntity():getScript("WipeController")
+    self._slowCtrl = self:getEntity():getScript("SlowController")
     --取得主发射口
-    self.mainEmitter = self:getEntity():getChildByName("EMITTER")
+    self._shotCtrl = self:getEntity():getChildByName("EMITTER"):getScript("EmitterController")
+
     --僚机发射口
     self.wingman1 = self:getEntity():getChildByName("GYOKU1")
     self.wingman2 = self:getEntity():getChildByName("GYOKU2")
 
     self:reset()
+
 end
 
 function M:_onUpdate()

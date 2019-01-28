@@ -5,6 +5,7 @@ require "Scripts.Context.Handler.ConfigReaders.SheetConfig"
 require "Scripts.Context.Handler.ConfigReaders.PlistConfig"
 require "Scripts.Context.Handler.ConfigReaders.ShaderConfig"
 require "Scripts.Context.Handler.ConfigReaders.SoundConfig"
+require "Scripts.Context.Handler.ConfigReaders.SEXConfig"
 
 require "Scripts.Context.Handler.ConfigReaders.RoleConfig"
 require "Scripts.Context.Handler.ConfigReaders.StageConfig"

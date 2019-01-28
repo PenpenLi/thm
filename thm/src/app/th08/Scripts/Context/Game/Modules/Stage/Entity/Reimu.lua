@@ -12,7 +12,7 @@ function M:ctor()
 
     --Reimu子弹发射器
     local emitterController = self.emitter:getScript("EmitterController")
-    emitterController.bulletPrefab = StageDefine.ReimuBulletPrefab
+    emitterController.objectPrefab = StageDefine.ReimuBulletPrefab
     emitterController.shotInterval = 0.10
     emitterController.shotSpeed = cc.p(0,20)
 

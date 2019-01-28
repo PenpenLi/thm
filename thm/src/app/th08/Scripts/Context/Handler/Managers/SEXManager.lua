@@ -1,89 +1,97 @@
 module("SEXManager", package.seeall)
 
-
-local EFFECT_PATH_PATTERN = "Scripts.Configs.Handwork.SEX.Effect.Effect"
-local PARTICLE_PATH_PATTERN = "Scripts.Configs.Handwork.SEX.Particle.Particle"
-
-local function getDictByFile(path,file)
-    local pathFile = string.format(path,file)
-    return require(pathFile)
-end
-
-function createNode(params)
+function newSEXNode(params)
     params = params or {}
-
-    params.refNode = params.refNode
-    params.onAction = params.onAction or function () end
-    params.isLoop = params.isLoop
-
-    params.offset = params.offset or cc.p(0,0)
-
-    local layer = nil
-    local posX = params.x or 0
-    local posY = params.y or 0
-    local aPoint = params.anchorPoint or cc.p(0.5,0.5)
-
-    if params.father then
-        layer = params.father
-    elseif params.refNode then
-        layer = params.refNode:getParent()
-        posX = params.refNode:getPositionX()
-        posY = params.refNode:getPositionY()
-    end
-
-    local sprite = THSTG.SCENE.newSprite({
-        x = posX + params.offset.x,
-        y = posY + params.offset.y,
-        anchorPoint = aPoint,
+    params.onAction = params.onAction or function () return {} end
+    -----
+    local sprite = THSTG.UI.newSprite({
+        x = params.x or display.cx,
+        y = params.y or display.cy,
+        anchorPoint = params.anchorPoint or cc.p(0.5,0.5),
     })
 
-    if layer then
-        layer:addChild(sprite) 
+    ----
+    function sprite:play()
+        local actions = params.onAction(self)
+        local action = cc.Sequence:create(actions)
+        self:runAction(action)
+    end
+    
+    function sprite:playForever()
+        local actions = params.onAction(self)
+        local action = cc.RepeatForever:create(cc.Sequence:create(actions))
+        self:runAction(action)
     end
 
-    local action = params.onAction(sprite)
-    if params.isLoop == false then
-        local tmpAction = action
-        table.insert(tmpAction, cc.CallFunc:create(function()
-            sprite:removeFromParent()
-        end))
-        action = cc.Sequence:create(tmpAction)
-
-    elseif params.isLoop == true then
-        action = cc.RepeatForever:create(cc.Sequence:create(action))
+    function sprite:stop()
+        self:stopAllActions()
     end
-
-    sprite:runAction(action)
 
     return sprite
 end
 
-function getEffectDict() return getDictByFile(EFFECT_PATH_PATTERN) end
-function getEffect(effectType,name) return getEffectDict()[effectType][name] end
-function playEffect(params)
-    if not params.onAction then
-        params.isLoop = params.isLoop or false
+------------------------------
+------------------------------
 
-        local onAction = function(node)
-            return getEffect(params.type,params.name)()
+function playEffect(params)
+    params = params or {}
+    ----
+    if params.source then
+        params.isLoop = params.isLoop or false
+        
+        if params.isLoop == false then
+            params.onAction = function (node)
+                local actions = SEXConfig.getEffect(params.source[1],params.source[2])()
+                table.insert( actions, cc.RemoveSelf:create())
+                return actions
+            end
+        elseif params.isLoop == true then
+            params.onAction = function (node)
+                local actions = SEXConfig.getEffect(params.source[1],params.source[2])()
+                table.insert( actions, cc.CallFunc:create(function () 
+                    node:runAction(cc.RepeatForever:create(cc.Sequence:create(actions)))
+                end))
+                return actions
+            end
+            
         end
-        params.onAction = onAction
+        
     end
 
-    return createNode(params)
+    local node = newSEXNode(params)
+
+    ---
+    local layer = nil
+    if params.father then
+        layer = params.father
+    elseif params.refNode then
+        local posX = params.x or params.refNode:getPositionX()
+        local posY = params.y or params.refNode:getPositionY()
+        local aPoint = params.anchorPoint or cc.p(0.5,0.5)
+       
+        layer = params.refNode:getParent()
+        node:setAnchorPoint(aPoint)
+        node:setPosition(cc.p(posX,posY))
+    end
+    if layer then
+        layer:addChild(node) 
+    end
+    ---
+    node:play()
+
+    return node
 end
 
 -----
-function getParticleDict() return getDictByFile(PARTICLE_PATH_PATTERN) end
-function getParticle(particleType,name) return getParticleDict()[particleType][name] end
 function playParticle(params)
+    params = params or {}
     local node = THSTG.UI.newParticleSystem(params)
 
-    if params.type and params.name then
-        local info = getParticle(params.type,params.name)()
+    if params.source then
+        local info = SEXConfig.getParticle(params.source[1],params.source[2])()
         local tex,rect = nil,nil
         if info.texSrc then
-            tex,rect = THSTG.SCEE.loadTexture(info.texSrc)
+            tex,rect = THSTG.SCEEN.loadTexture(info.texSrc)
         elseif info.tex then
             tex = info.tex
         end

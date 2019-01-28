@@ -33,6 +33,7 @@ WingmanPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Wingma
 BulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.BulletPrefab")
 EnemyBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.EnemyBulletPrefab")
 PlayerBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.PlayerBulletPrefab")
+WingmanBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.WingmanBulletPrefab")
 ReimuBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.ReimuBulletPrefab")
 OnmyouGyokuBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.OnmyouGyokuBulletPrefab")
 
@@ -73,11 +74,7 @@ EmitterController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Co
 WingmanController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Wingman.WingmanController")
 OnmyouGyokuController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Wingman.OnmyouGyokuController")
 
---符卡系统
-BaseSpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.BaseSpellController")
-PlayerSpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.PlayerSpellController")
-EnemySpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.EnemySpellController")
-BossSpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.BossSpellController")
+
 
 --生命控制
 HealthController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.HealthController")
@@ -87,6 +84,8 @@ PlayerHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.
 BulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.Bullet.BulletHealth")
 PlayerBulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.Bullet.PlayerBulletHealth")
 EnemyBulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.Bullet.EnemyBulletHealth")
+WingmanBulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.Bullet.WingmanBulletHealth")
+
 --碰撞控制
 CollisionController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.CollisionController")
 PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.PlayerCollision")
@@ -94,8 +93,19 @@ PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Coll
 BulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.BulletCollision")
 PlayerBulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.PlayerBulletCollision")
 
-
-
+--消弹系统
+WipeController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Wipe.WipeController")
+--能量系统
+PowerController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Power.PowerController")
+--擦弹系统
+BrushController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Brush.BrushController")
+--低速(人妖)系统
+SlowController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Slow.SlowController")
+--符卡(bomb)系统
+SpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.SpellController")
+PlayerSpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.PlayerSpellController")
+EnemySpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.EnemySpellController")
+BossSpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.BossSpellController")
 --输入控制
 InputController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Input.InputController")
 PlayerInput = require("Scripts.Context.Game.Modules.Stage.Script.Module.Input.PlayerInput")
@@ -108,6 +118,9 @@ WriggleAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Ani
 
 PlayerAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Player.PlayerAnimation")
 ReimuAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Player.ReimuAnimation")
+
+WingmanAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Wingman.WingmanAnimation")
+OnmyouGyokuAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Wingman.OnmyouGyokuAnimation")
 
 BulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.BulletAnimation")
 EnemyBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.EnemyBulletAnimation")
@@ -130,3 +143,4 @@ ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")
 --[[轮询的系统注册]]---
 THSTG.ECS.System.register("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")
 THSTG.ECS.System.register("Scripts.Context.Game.Modules.Stage.System.PhysicsSystem")
+THSTG.ECS.System.register("Scripts.Context.Game.Modules.Stage.System.InputSystem")

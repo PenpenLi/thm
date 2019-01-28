@@ -3,9 +3,11 @@ local M = class("BatmanHealth",StageDefine.HealthController)
 
 function M:_onInit()
    M.super._onInit(self)
-
 end
---
+----
+function M:_onStart()
+    self.breakDownEffect = self:getEntity():getChildByName("breakDownEffect")
+end
 ----
 function M:_onHurt()
     --闪烁特效
@@ -22,11 +24,10 @@ end
 
 function M:_onDead()
     --这里代表击中,而不是对象消亡
-    GlobalUtil.playSEXEffect({
+    SEXManager.playEffect({
         refNode = self:getEntity(),
-        source = {EffectType.PUBLIC,"ccle_die_magic_01"},
+        source = {EffectType.PUBLIC,"ccle_enemy_die_magic_01"}
     })
-    --TODO:还需要播放一个粒子效果
     self:killEntity()
 
 

@@ -2,6 +2,15 @@ return {
     source = "Assets/Module/Stage/Enemy/Batman/enemy.png",
     desc = "敌人精灵集",
     frame = {
+        batman_halo = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 0*32,y = 4*32,width = 2*32,height = 2*32},
+            },
+            
+        },
+ 
 
     },
     sequence = {    
@@ -53,6 +62,39 @@ return {
             },
 
         },
+        onmyou_gyoku_r = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 0*32,y = 6*32,width = 1*32,height = 1*32},
+            },
+            
+        },
+        onmyou_gyoku_g = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 1*32,y = 6*32,width = 1*32,height = 1*32},
+            },
+            
+        },
 
+        onmyou_gyoku_b = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 2*32,y = 6*32,width = 1*32,height = 1*32},
+            },
+            
+        },
+
+        onmyou_gyoku_p = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 3*32,y = 6*32,width = 1*32,height = 1*32},
+            },
+            
+        },
     }
 }

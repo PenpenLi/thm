@@ -27,10 +27,11 @@ return {
     },
     sfx = {
         particle = {
-            ccp_gk_default_01 = "Assets/SFX/Particle/ccp_gk_default_01.plist",
-            ccp_gk_heart_01 = "Assets/SFX/Particle/ccp_gk_heart_01.plist",
+            ccp_gk_default_01 = "Assets/SFX/Particle/ccp_gk_default_01.plist" ,
+            ccp_gk_heart_01 = "Assets/SFX/Particle/ccp_gk_heart_01.plist" ,
             ccp_st_boss_down = "Assets/SFX/Particle/ccp_st_boss_down.plist" ,
-
+            ccp_gk_leaf = "Assets/SFX/Particle/ccp_gk_leaf.plist" ,
+            ccp_gk_protected = "Assets/SFX/Particle/ccp_gk_protected.plist" ,
         },
     },
     
