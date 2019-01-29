@@ -87,15 +87,16 @@ function newSprite(params)
             --根据宽高变形
             local size = sprite:getContentSize()
             sprite:setScale(1)
-            if params.width then sprite:setScaleX(params.width / size.width) end
-            if params.height then sprite:setScaleY(params.height / size.height) end
+            if paramsWidth then sprite:setScaleX(paramsWidth / size.width) end
+            if paramsHeight then sprite:setScaleY(paramsHeight / size.height) end
         end
     end
 
     if params.isTile then
         sprite:setScale(1)
+        local size = sprite:getContentSize()
         sprite:getTexture():setTexParameters(gl.LINEAR,gl.LINEAR,gl.REPEAT,gl.REPEAT)
-        sprite:setTextureRect(cc.rect(0, 0, paramsWidth or 0, paramsHeight or 0))
+        sprite:setTextureRect(cc.rect(0, 0, paramsWidth or size.width, paramsHeight or size.height))
     end
     
     return sprite
@@ -132,7 +133,6 @@ local function newUVShaderSprite(params)
     local oldSetShaderEnabled = sprite.setShaderEnabled
     function sprite:setShaderEnabled(val)
         oldSetShaderEnabled(self,val)
-        if not val then self:stopAllActions() end
     end
     return sprite
 end
@@ -142,32 +142,26 @@ function newUVRollSprite(params)
     params.uniforms = params.uniforms or {}
     params.uniforms.uRange = params.uniforms.uRange or cc.p(0,1)
     params.uniforms.vRange = params.uniforms.vRange or cc.p(0,1)
-    params.uniforms.speedX = params.uniforms.speedX or 0
-    params.uniforms.speedY = params.uniforms.speedY or 0
+    params.uniforms.speedX = params.uniforms.speedX or 1
+    params.uniforms.speedY = params.uniforms.speedY or 1
 
     params.shaderKey = "Uv_Rolling_Sprite_Shader"
     params.onState = function (node,state)
         state:setUniformVec2("_uRange",cc.vec3(params.uniforms.uRange.x,params.uniforms.uRange.y,0))
         state:setUniformVec2("_vRange",cc.vec3(params.uniforms.vRange.x,params.uniforms.vRange.y,0))
-        local count = cc.p(0,0)
-        node:runAction(cc.RepeatForever:create(cc.Sequence:create({
-            cc.DelayTime:create(0.01),
-            cc.CallFunc:create(function ()
-                count.x = count.x + params.uniforms.speedX/1000
-                count.y = count.y + params.uniforms.speedY/1000
-                state:setUniformVec2("_texOffset",cc.vec3(count.x,count.y,0))
-            end)
-        })))
+        state:setUniformFloat("_speedX",params.uniforms.speedX)
+        state:setUniformFloat("_speedY",params.uniforms.speedY)
     end
     local sprite = newUVShaderSprite(params)
     
     --
 
-    function sprite:setSpeed(val)
-        params.uniforms.speed = val
+    function sprite:setSpeed(x,y)
+        params.uniforms.speedX = x or params.uniforms.speedX
+        params.uniforms.speedY = y or params.uniforms.speedY
     end
     function sprite:getSpeed(val)
-        return params.uniforms.speed
+        return params.uniforms.speedX,params.uniforms.speedY
     end
 
     return sprite
@@ -186,14 +180,6 @@ function newUVWaveSprite(params)
         state:setUniformFloat("_speed",params.uniforms.speed)
         state:setUniformFloat("_scale",params.uniforms.scale)
         state:setUniformFloat("_identity",params.uniforms.identity)
-        local time = 0 
-        node:runAction(cc.RepeatForever:create(cc.Sequence:create({
-            cc.DelayTime:create(0.01),
-            cc.CallFunc:create(function ()
-                time = time + 0.1
-                state:setUniformFloat("_time",time)
-            end)
-        })))
     end
     
     local node = newUVShaderSprite(params)
@@ -214,14 +200,7 @@ function newUVRippleSprite(params)
         state:setUniformFloat("_speed",params.uniforms.speed)
         state:setUniformFloat("_ripple",params.uniforms.ripple)
         state:setUniformFloat("_swing",params.uniforms.swing)
-        local time = 0 
-        node:runAction(cc.RepeatForever:create(cc.Sequence:create({
-            cc.DelayTime:create(0.01),
-            cc.CallFunc:create(function ()
-                time = time + 0.1
-                state:setUniformFloat("_time",time)
-            end)
-        })))
+
     end
     
     local node = newUVShaderSprite(params)

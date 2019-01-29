@@ -86,10 +86,6 @@ function M:_onClear()
 
 end
 
-function M:_onEntityDestroy()
-
-end
-
 function M:_onClass(className)
     return className
 end

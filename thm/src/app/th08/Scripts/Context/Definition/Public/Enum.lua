@@ -13,11 +13,11 @@ EGameKeyType = {
 }
 
 ETouchType = {
-    OnceClick = 1,
-    DoubleClick = 2,
-    LongClick = 3,
-    Shake = 4,
-    MultiTouch = 5,
+    OnceClick = 301,
+    DoubleClick = 302,
+    LongClick = 303,
+    Shake = 304,
+    MultiTouch = 305,
 }
 
 EBusyType = {

@@ -17,7 +17,7 @@ function M:getPositionY()
     return self:getEntity():getPositionY()
 end
 function M:getPosition()
-    return cc.p(self:getEntity():getPosition())
+    return self:getEntity():getPosition()
 end
 function M:convertToWorldSpace(anchorPoint)
     anchorPoint = anchorPoint or cc.p(0.5,0.5)

@@ -8,6 +8,8 @@ function M:ctor()
     self.destroyByBorder = StageDefine.DestroyByBorder.new()
     self:addScript(self.destroyByBorder)
 
+    self.destroyByTime = StageDefine.DestroyByTime.new()
+    self:addScript(self.destroyByTime)
 
  
 end

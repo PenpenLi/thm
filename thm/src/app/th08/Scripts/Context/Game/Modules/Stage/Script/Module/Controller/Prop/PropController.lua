@@ -11,6 +11,11 @@ function M:getPropType()
     return self.propType
 end
 
+function M:effect(refEntity)
+    --被拾取
+    self:_onEffect()
+end
+
 function M:reset(refEntity)
 
 end
@@ -19,13 +24,15 @@ function M:_onAdded(entity)
     M.super._onAdded(self,entity)
     
 
-    entity:setActive(false)
 end
 ---
 function M:_onStart()
  
 end
 
+function M:_onEffect()
+    --TODO:效果效果
+end
 ---
 
 

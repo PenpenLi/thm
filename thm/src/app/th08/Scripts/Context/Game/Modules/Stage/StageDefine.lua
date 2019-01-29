@@ -89,9 +89,11 @@ WingmanBulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.
 --碰撞控制
 CollisionController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.CollisionController")
 PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.PlayerCollision")
+PorpCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.PorpCollision")
 ---子弹的碰撞控制
 BulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.BulletCollision")
 PlayerBulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.PlayerBulletCollision")
+WingmanBulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.WingmanBulletCollision")
 
 --消弹系统
 WipeController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Wipe.WipeController")
@@ -128,10 +130,15 @@ PlayerBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Modul
 ReimuBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.ReimuBulletAnimation")
 OnmyouGyokuBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.OnmyouGyokuBulletAnimation")
 
+PropAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Prop.PropAnimation")
+
 --公共脚本
 DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBorder")
 DestroyByTime = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByTime")
 ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
+
+--全局脚本
+EntityManager = require("Scripts.Context.Game.Modules.Stage.Script.EntityManager")
 
 ---[[工具]]-----
 AnimationUtil = require("Scripts.Context.Game.Modules.Stage.Util.AnimationUtil")  

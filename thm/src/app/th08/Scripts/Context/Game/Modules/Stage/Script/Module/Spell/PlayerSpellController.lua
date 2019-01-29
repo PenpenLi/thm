@@ -5,7 +5,7 @@ function M:_onInit()
     self.maxBombCount = 3                               --Bomb次数
     self.curBombCount = self.maxBombCount               --当前可用次数
 
-
+    self.healthCtrl = nil
 end
 -------
 function M:bomb()
@@ -13,9 +13,12 @@ function M:bomb()
     print(15,"炸弹")
 
     self.curBombCount = self.curBombCount - 1
-    --TODO:决死效果
-
-    THSTG.Dispatcher.dispatchEvent(EventType.STAGE_PLAYER_SPELLCARD_ATTACK,{roleType = self.roleType,isDeadSave = false})
+    local isDeadSave = self.healthCtrl:isInDeadSaveTime()
+    if isDeadSave then
+        self.curBombCount = math.min(0,self.curBombCount - 1)   --再次消耗一个
+        self.healthCtrl:deadSaveResurgence()-- 重新赋予生命
+    end
+    THSTG.Dispatcher.dispatchEvent(EventType.STAGE_PLAYER_SPELLCARD_ATTACK,{roleType = self.roleType,isDeadSave = isDeadSave})
 end
 
 function M:reset()
@@ -31,7 +34,7 @@ function M:setRestCount(val)
 end
 -------
 function M:_onStart()
-
+    self.healthCtrl = self:getScript("PlayerHealth")
 end
 
 function M:_onUpdate()

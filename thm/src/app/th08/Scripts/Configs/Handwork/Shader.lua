@@ -11,12 +11,14 @@ return {
             varying vec4 v_fragmentColor;                                           
             varying vec2 v_texCoord;       
                                                      
-            uniform vec2 _texOffset;                                                                                      
+            uniform float _speedX;
+            uniform float _speedY;                                                                                      
             uniform vec2 _uRange;                                                    
             uniform vec2 _vRange;                                                    
             void main()                                                             
-            {                                                                       
-                vec2 texcoord = _texOffset+v_texCoord;                               
+            {                               
+                vec2 texOffset = vec2(_speedX * CC_Time.x,_speedY*CC_Time.x);                       
+                vec2 texcoord = texOffset+v_texCoord;                               
                 texcoord.x = mod(texcoord.x - _uRange.x,_uRange.y-_uRange.x) + _uRange.x;   
                 texcoord.y = mod(texcoord.y - _vRange.x,_vRange.y-_vRange.x) + _vRange.x;   
                 gl_FragColor = v_fragmentColor * texture2D(CC_Texture0, texcoord);			
@@ -35,7 +37,6 @@ return {
             varying vec4 v_fragmentColor;                                           
             varying vec2 v_texCoord;       
                                                      
-            uniform float _time;     //8位
             uniform float _speed;    //1.0                                                                
             uniform float _scale;    //3.0
             uniform float _identity; //80.0                                                                                                  
@@ -43,7 +44,7 @@ return {
             {                                                                       
                 vec2 uv = v_texCoord;        
                 float r = sqrt(uv.x*uv.x + uv.y*uv.y);                   
-                float z = cos(_scale * r + _time * _speed)/_identity;
+                float z = cos(_scale * r + CC_Time.x * _speed)/_identity;
                 gl_FragColor = v_fragmentColor * texture2D(CC_Texture0, uv + vec2(z,z));			
             }
         ]]
@@ -61,7 +62,6 @@ return {
             varying vec4 v_fragmentColor;                                           
             varying vec2 v_texCoord;       
                                                      
-            uniform float _time;     //8位
             uniform float _speed;    //1.0                                                                
             uniform float _ripple;   //60.0
             uniform float _swing;    //1.0 
@@ -76,7 +76,7 @@ return {
                 //用sin函数计算出波形的偏移值factor
                 //dis在这里都是小于1的，所以我们需要乘以一个比较大的数，比如60，这样就有多个波峰波谷
                 //sin函数是（-1，1）的值域，我们希望偏移值很小，所以这里我们缩小100倍，据说乘法比较快,so...
-                float sinFactor = sin(dis * _ripple + _time * _speed) * _swing * 0.01;
+                float sinFactor = sin(dis * _ripple + CC_Time.x * _speed) * _swing * 0.01;
 
                 vec2 dv1 = normalize(dv);           //归一化
 

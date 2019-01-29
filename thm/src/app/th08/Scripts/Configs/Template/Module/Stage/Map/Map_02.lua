@@ -17,6 +17,7 @@ function M.create(params)
         src = ResManager.getResSub(ResType.TEXTURE,TexType.IMAGE,"stg1bg"),
         isTile = true,
         uniforms = {
+            speedX = 0,
             speedY = -1,
         },
     })

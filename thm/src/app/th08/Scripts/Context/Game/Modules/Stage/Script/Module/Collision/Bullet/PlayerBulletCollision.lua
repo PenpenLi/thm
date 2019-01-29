@@ -4,7 +4,18 @@ local M = class("PlayerBulletCollision",StageDefine.BulletCollision)
 ---
 function M:_onFilter()
     --TODO:特异性
-    return {"PLAYER_BULLET","WINGMAN_BULLET","PLAYER","WINGMAN","EMITTER","GYOKU1","GYOKU2"}
+    return {
+        ignore = {
+            ["PLAYER_BULLET"] = true,
+            ["WINGMAN_BULLET"] = true,
+            ["PLAYER"] = true,
+            ["WINGMAN"] = true,
+            ["EMITTER"] = true,
+            ["GYOKU1"] = true,
+            ["GYOKU2"] = true,
+            ["PROP"] = true,
+        }
+    }
 end
 
 function M:_onCollision(collider,collision)

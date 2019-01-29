@@ -18,7 +18,7 @@ M.EDirectionType = {
 ]]
 -----
 --通过坐标获取网格ID
-local _GRID_SIZE_ = cc.size(100,100)--XXX:格子大小,决定碰撞检测的精度
+local _GRID_SIZE_ = cc.size(160,120)--XXX:格子大小,决定碰撞检测的精度(格子越大,碰撞检测越精确,但是耗能越大,反之亦然)
 local _GRID_NUM_ = cc.p(10,10)
 local _gridComps = {}
 local _gridIDs = {}
@@ -151,7 +151,18 @@ function M:isCollidedByGrids(entity,filter,idsFunc)
                     if v ~= vv then
                         if type(filter) == "table" then
                             local isBreak = false
-                            for _,str in ipairs(filter) do  if vv:getEntity():getName() == str then isBreak = true  break end end
+                            local name = vv:getEntity():getName()
+                            if type(filter.ignore) == "table" then
+                                isBreak = false
+                                if name and filter.ignore[name] then 
+                                    isBreak = true
+                                end
+                            elseif type(filter.match) == "table" then
+                                isBreak = true
+                                if name and filter.match[name] then 
+                                    isBreak = false
+                                end
+                            end
                             if isBreak then break end
                         elseif type(filter) == "function" then
                             if filter(vv:getEntity()) then  break  end

@@ -53,7 +53,10 @@ function playParticle(params)
         node:setAnchorPoint(cc.p(0.5,0.5))
         params.refNode:getParent():addChild(node)
     end
-
+    if params.scale then
+        node:setScale(params.scale)
+    end
+    
     node:play()
     
     return node

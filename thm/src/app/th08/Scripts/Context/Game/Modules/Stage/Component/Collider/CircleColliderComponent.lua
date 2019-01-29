@@ -53,7 +53,7 @@ function M:_onCollide(collder)
         return cc.rectIntersectsRect(self:getInSideRect(),collder:getRect())
     elseif otherType == ColliderComponent.EColliderType.Circle then
         --圆心距小于等于半径和
-        local distance = cc.pGetDistance(cc.pSub(self:getCenterPos(), collder:getCenterPos()))
+        local distance = cc.pGetDistance(self:getCenterPos(), collder:getCenterPos())
         local radiusAdd = self.radius + collder.radius
         return(distance <= radiusAdd)
 

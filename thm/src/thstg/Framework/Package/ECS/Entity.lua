@@ -2,10 +2,10 @@ local ECSUtil = require "thstg.Framework.Package.ECS.ECSUtil"
 local M = class("Entity",cc.Node)
 
 function M.find(id) return ECSManager.findEntityById(id) end
-function M.findEntitiesWithTag(tag) return ECSManager.findEntitiesWithTag(tag) end
-function M.findWithTag(tag) return ECSManager.findEntityWithTag(tag) end
-function M.findEntitiesWithName(name) return ECSManager.findEntitiesWithName(name) end
-function M.findWithName(name) return ECSManager.findEntityWithName(name) end
+function M.findEntitiesByTag(tag) return ECSManager.findEntitiesByTag(tag) end
+function M.findByTag(tag) return ECSManager.findEntityWithTag(tag) end
+function M.findEntitiesByName(name) return ECSManager.findEntitiesByName(name) end
+function M.findByName(name) return ECSManager.findEntityWithName(name) end
 function M.getAll() return ECSManager.getAllEntities() end
 function M.getAllEx(entity) return ECSManager.getAllEntities(entity) end
 

@@ -8,12 +8,21 @@ function preloadMusic(filePath)
     CCSAudioEngine:preloadMusic(filePath)
 end
 
-function playMusic(filePath)
+function playMusic(filePath,isLood)
+    isLood = isLood or false
     if type(filePath) == "number" then
         filePath = SoundConfig.getFilePath(filePath)
     end
-    return CCSAudioEngine:playMusic(filePath)
+    
+    return CCSAudioEngine:playMusic(filePath,isLood)
 end
+
+function stopMusic(releaseData)
+    releaseData = releaseData or false
+    return CCSAudioEngine:stopMusic(releaseData)
+end
+
+
 
 function resumeMusic()
     CCSAudioEngine:resumeMusic()
@@ -43,7 +52,7 @@ function playEffect(filePath,loop,pitch,pan,gain)
     loop = loop or false
     pitch = pitch or 1.0
     pan = pan or 0
-    gain = gain or 0
+    gain = gain or 1.0
     --
     if type(filePath) == "number" then
         filePath = SoundConfig.getFilePath(filePath)

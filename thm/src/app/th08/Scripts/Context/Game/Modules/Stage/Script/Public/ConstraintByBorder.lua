@@ -2,7 +2,7 @@ local M = class("ConstraintByBorder",THSTG.ECS.Script)
 
 function M:_onInit()
     self.border = cc.rect(0,0,display.width,display.height)
-    self.size = cc.size(32,48)      --TODO:由纹理决定
+    self.size = cc.size(32,48)
 
     self._transComp = nil
     self._prevPos = cc.p(0,0)
@@ -41,7 +41,7 @@ function M:_onLateUpdate()
         transComp:setPositionY(self._prevPos.y)
     end
 
-    self._prevPos = cc.p(transComp:getPositionX(),transComp:getPositionY())
+    self._prevPos = cc.p(transComp:getPositionX(),transComp:getPositionY())--改为当前最新坐标
 end
 
 return M

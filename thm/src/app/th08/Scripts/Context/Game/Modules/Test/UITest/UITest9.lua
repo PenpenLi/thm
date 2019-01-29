@@ -17,6 +17,7 @@ function M.create(params)
         source = {TexType.SHEET,"stg1bg","stg01_bg"},
         uniforms = {
             vRange = cc.p(0,0.5),
+            speedX = 0.4,
             speedY = 0.4,
         },
     })

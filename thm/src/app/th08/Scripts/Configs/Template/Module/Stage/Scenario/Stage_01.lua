@@ -15,7 +15,7 @@ return {
                 
 
                 local actions = {}
-                table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(2*display.height))))  
+                table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(3*display.height))))  
                 table.insert(actions,cc.CallFunc:create(function ()
                     batman:destroy()
                     scheduler:resume()
@@ -41,7 +41,7 @@ return {
                
 
                local actions = {}
-               table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(2*display.height))))  
+               table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(3*display.height))))  
                table.insert(actions,cc.CallFunc:create(function ()
                    batman:destroy()
                    scheduler:resume()
@@ -69,7 +69,7 @@ return {
                
 
                local actions = {}
-               table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(2*display.height))))  
+               table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(3*display.height))))  
                table.insert(actions,cc.CallFunc:create(function ()
                    batman:destroy()
                    scheduler:resume()
@@ -97,7 +97,7 @@ return {
                
 
                local actions = {}
-               table.insert(actions, cc.MoveBy:create(8.0,cc.p(2*display.width,0)))  
+               table.insert(actions, cc.MoveBy:create(8.0,cc.p(3*display.width,0)))  
                table.insert(actions,cc.CallFunc:create(function ()
                    batman:destroy()
                    scheduler:resume()
@@ -115,7 +115,7 @@ return {
                 
 
                 local actions = {}
-                table.insert(actions, cc.MoveBy:create(8.0,cc.p(-2*display.width,0)))  
+                table.insert(actions, cc.MoveBy:create(8.0,cc.p(-3*display.width,0)))  
                 table.insert(actions,cc.CallFunc:create(function ()
                     batman:destroy()
                     scheduler:resume()
@@ -134,14 +134,31 @@ return {
 
                 local trans = batman:getComponent("TransformComponent")
                 trans:setPositionX(0)
-                trans:setPositionY(display.height)
+                trans:setPositionY(display.height - 32 * i)
                 
 
                 local actionComp = batman:getComponent("ActionComponent")
                 actionComp:runAction(cc.Sequence:create({
-                    cc.EaseQuadraticActionOut:create(cc.MoveTo:create(6.0,cc.p(200,display.width*0.40))),
-                    cc.EaseSineIn:create(cc.MoveTo:create(6.0,cc.p(0,display.width*1.5))),
+                    cc.EaseQuadraticActionOut:create(cc.MoveTo:create(6.0,cc.p(200,display.height*0.40))),
+                    cc.EaseSineIn:create(cc.MoveTo:create(6.0,cc.p(0- i *32,display.height*1.5+ i *32))),
+                    cc.CallFunc:create(function() ObjectCache.release(batman) end)
 
+
+                }))
+            end)
+
+            ObjectCache.pick(StageDefine.BatmanPrefab,4,function(batman,i)
+
+                local trans = batman:getComponent("TransformComponent")
+                trans:setPositionX(display.width + 1)
+                trans:setPositionY(display.height - 32 * i)
+                
+
+                local actionComp = batman:getComponent("ActionComponent")
+                actionComp:runAction(cc.Sequence:create({
+                    cc.EaseQuadraticActionOut:create(cc.MoveTo:create(6.0,cc.p(display.width-200,display.height*0.40))),
+                    cc.EaseSineIn:create(cc.MoveTo:create(6.0,cc.p(display.width+ i *32,display.height*1.5 + i *32))),
+                    cc.CallFunc:create(function() ObjectCache.release(batman) end)
 
 
                 }))

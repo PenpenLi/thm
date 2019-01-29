@@ -14,17 +14,18 @@ function M.create(params)
     local mainBg = UIPublic.newUVRollSprite({
         x = display.cx,
         y = display.cy,
-        width = display.width,
+        width = display.width-100,
         height = display.height,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        src = ResManager.getResSub(ResType.TEXTURE,TexType.IMAGE,"stg1bg"),
-        isTile = true,
+        source = {TexType.SHEET,"stg1bg","stg01_bg"},
         uniforms = {
-            speedY = -1,
+            speedX = 0.01,
+            speedY = -0.1,
+            vRange = cc.p(0,0.5),
         },
     })
-
-    -- node:addChild(mainBg)
+    mainBg:setRotation3D(cc.vec3(120,0,0))
+    node:addChild(mainBg)
   
     -------Controller-------
     node:onNodeEvent("enter", function ()

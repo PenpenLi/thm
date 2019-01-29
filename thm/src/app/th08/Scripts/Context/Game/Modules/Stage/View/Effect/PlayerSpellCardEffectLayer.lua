@@ -47,7 +47,8 @@ function M.create(params)
         if tolua.isnull(node) then
             return 
         end
-        
+        local isDeadSave = params.isDeadSave
+        if isDeadSave then return end   --决死复活没有特效
 
         _uiEffect:setAnimation(0,"default",false)
         node:show()

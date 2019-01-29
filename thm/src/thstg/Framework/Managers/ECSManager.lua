@@ -108,7 +108,7 @@ function findEntityById(id)
 end
 
 --以下仅适用于CCNode
-function findEntitiesWithTag(tag)
+function findEntitiesByTag(tag)
 	local list = {}
 	visitEntity(function(entity)
 		if entity:getTag() == tag then
@@ -119,11 +119,11 @@ function findEntitiesWithTag(tag)
 end
 
 function findEntityWithTag(tag)
-	return findEntitiesWithTag(tag)[1]
+	return findEntitiesByTag(tag)[1]
 end
 
 
-function findEntitiesWithName(name)
+function findEntitiesByName(name)
 	local list = {}
 	visitEntity(function(entity)
 		if entity:getName() == name then
@@ -134,7 +134,7 @@ function findEntitiesWithName(name)
 end
 
 function findEntityWithName(name)
-	return findEntitiesWithName(name)[1]
+	return findEntitiesByName(name)[1]
 end
 
 local function _handleEntities(delay)

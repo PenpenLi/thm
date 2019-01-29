@@ -32,6 +32,8 @@ return {
             ccp_st_boss_down = "Assets/SFX/Particle/ccp_st_boss_down.plist" ,
             ccp_gk_leaf = "Assets/SFX/Particle/ccp_gk_leaf.plist" ,
             ccp_gk_protected = "Assets/SFX/Particle/ccp_gk_protected.plist" ,
+            ccp_gk_littleRing  = "Assets/SFX/Particle/ccp_gk_littleRing.plist" ,
+            ccp_gk_star03  = "Assets/SFX/Particle/ccp_gk_star03.plist" ,
         },
     },
     

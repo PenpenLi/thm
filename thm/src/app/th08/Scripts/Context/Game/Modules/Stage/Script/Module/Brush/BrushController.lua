@@ -3,6 +3,7 @@ local M = class("BrushController",THSTG.ECS.Script)
 function M:_onInit()
     M.super._onInit(self)
 
+    self.brushSize = cc.size(32,32)
 end
 
 -------

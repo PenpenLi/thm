@@ -7,6 +7,9 @@ function M:ctor()
 
     self.destroyByBorder = StageDefine.DestroyByBorder.new()
     self:addScript(self.destroyByBorder)
+
+    self.destroyByTime = StageDefine.DestroyByTime.new()
+    self:addScript(self.destroyByTime)
    
     self.helthController = StageDefine.BatmanHealth.new()
     self:addScript(self.helthController)
@@ -19,6 +22,7 @@ function M:ctor()
     self:addScript(self.batmanController)
 
     --
+    self:setName("BATMAN")
     self:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
 end
 

@@ -7,7 +7,9 @@ function M:ctor()
 
     ----
     self:setName("BOSS")
-    
+
+    self.spellController = StageDefine.EnemySpellController.new()
+    self:addScript(self.spellController)
     
     self.helthController = StageDefine.BossHealth.new()
     self:addScript(self.helthController)
