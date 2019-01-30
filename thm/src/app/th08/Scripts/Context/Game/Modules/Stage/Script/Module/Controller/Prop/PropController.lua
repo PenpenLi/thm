@@ -14,6 +14,7 @@ end
 function M:effect(refEntity)
     --被拾取
     self:_onEffect()
+    --音效,效果,消失
 end
 
 function M:reset(refEntity)

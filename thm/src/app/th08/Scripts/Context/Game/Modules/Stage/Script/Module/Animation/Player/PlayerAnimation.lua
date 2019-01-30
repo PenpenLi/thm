@@ -27,8 +27,12 @@ end
 function M:_onStart()
     M.super._onStart(self)
   
-    local playerControScript = self:getScript("PlayerController")
-    self.roleType = playerControScript.roleType
+    --替换一下组件
+    self._transComp = self:getComponentInParent("TransformComponent")
+    self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
+    
+    local playerCtrl = self:getScriptInParten("PlayerController")
+    self.roleType = playerCtrl.roleType
 end
 ----
 function M:_onMove(dx,dy)

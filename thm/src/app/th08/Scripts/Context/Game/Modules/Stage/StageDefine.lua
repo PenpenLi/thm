@@ -74,8 +74,6 @@ EmitterController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Co
 WingmanController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Wingman.WingmanController")
 OnmyouGyokuController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Wingman.OnmyouGyokuController")
 
-
-
 --生命控制
 HealthController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.HealthController")
 BatmanHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.BatmanHealth")
@@ -97,12 +95,14 @@ WingmanBulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Modu
 
 --消弹系统
 WipeController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Wipe.WipeController")
+ReimuWipeController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Wipe.ReimuWipeController")
 --能量系统
 PowerController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Power.PowerController")
 --擦弹系统
 BrushController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Brush.BrushController")
 --低速(人妖)系统
 SlowController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Slow.SlowController")
+ReimuSlowController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Slow.ReimuSlowController")
 --符卡(bomb)系统
 SpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.SpellController")
 PlayerSpellController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Spell.PlayerSpellController")

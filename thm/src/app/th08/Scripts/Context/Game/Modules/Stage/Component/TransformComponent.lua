@@ -4,6 +4,9 @@ function M:_onInit()
 
 end
 ------
+function M:setPosition(x,y)
+    self:getEntity():setPosition(x,y)
+end
 function M:setPositionX(x)
     self:getEntity():setPositionX(x)
 end

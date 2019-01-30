@@ -26,6 +26,7 @@ end
 -------
 -------
 function M:wipe(state)
+    if state == self.__isStateWipe then return end
     if state then self:_wipeOpen() else self:_wipeClose() end
 end
 function M:isWipe()
@@ -33,21 +34,20 @@ function M:isWipe()
 end
 
 function M:_wipeOpen()
-    --XXX:受闪烁影响,无敌时间无法开启消弹
-    local myHealth = self:getScript("HealthController")
-    if not myHealth:isInvincible() then
+    -- local myHealth = self:getScript("HealthController")
+    -- if not myHealth:isInvincible() then
         print(15,"wipe开")
         --开始计时
         if self.wipeRestTime > 0 then
-            self.__effectNode:play()
+            self:_onWipeOpen()
             self.__isStateWipe = true
         end
-    end
+    -- end
 end
 
 function M:_wipeClose()
     print(15,"wipe关")
-    self.__effectNode:stop()
+    self:_onWipeClose()
     self.__isStateWipe = false
 end
 
@@ -63,14 +63,25 @@ function M:_wipeBreaked()
      })
     self:_wipeClose()
 end
-function M:_wipeInvalid()
+function M:_onWipeInvalid()
     --音效
 
     self:_wipeClose()
 end
-function M:_wipeTimeout()
+function M:_onWipeTimeout()
+    GlobalUtil.playParticle({
+        refNode = self:getEntity(),
+        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_star03"),
+        scale = 1.5
+     })
     --音效
     self:_wipeClose()
+end
+function M:_onWipeOpen()
+    self.__effectNode:play()
+end
+function M:_onWipeClose()
+    self.__effectNode:stop()
 end
 --
 function M:_onAdded(entity)
@@ -103,14 +114,14 @@ function M:_onUpdate(delay)
             if isCanWipe then
                 --TODO:查找范围内的敌弹并消除
             else
-                self:_wipeInvalid()
+                self:_onWipeInvalid()
             end
         end
 
         self.wipeRestTime = self.wipeRestTime - delay
         if self.wipeRestTime <= 0 then
             self.wipeRestTime = 0
-            self:_wipeTimeout()
+            self:_onWipeTimeout()
             print(15,"wipe能量耗尽")
         end
     else

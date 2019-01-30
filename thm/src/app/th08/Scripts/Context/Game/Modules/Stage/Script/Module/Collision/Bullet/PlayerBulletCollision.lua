@@ -8,6 +8,7 @@ function M:_onFilter()
         ignore = {
             ["PLAYER_BULLET"] = true,
             ["WINGMAN_BULLET"] = true,
+            ["ENEMY_BULLET"] = true,
             ["PLAYER"] = true,
             ["WINGMAN"] = true,
             ["EMITTER"] = true,

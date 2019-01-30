@@ -14,11 +14,59 @@ return {
             },
         },
 
-        bullet_big_jade_idle = {
+        bullet_big_jade_idle_1 = {
             desc = "",
             grid = {
-                length = 8,
-                rect = {x = 0*16,y = 7*16,width = 8*2*16,height = 1*2*16},
+                length = 1,
+                rect = {x = 0*32,y = 7*16,width = 1*32,height = 1*32},
+            },
+        },
+        bullet_big_jade_idle_2 = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 1*32,y = 7*16,width = 1*32,height = 1*32},
+            },
+        },
+        bullet_big_jade_idle_3 = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 2*32,y = 7*16,width = 1*32,height = 1*32},
+            },
+        },
+        bullet_big_jade_idle_4 = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 3*32,y = 7*16,width = 1*32,height = 1*32},
+            },
+        },
+        bullet_big_jade_idle_5 = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 4*32,y = 7*16,width = 1*32,height = 1*32},
+            },
+        },
+        bullet_big_jade_idle_6 = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 5*32,y = 7*16,width = 1*32,height = 1*32},
+            },
+        },bullet_big_jade_idle_7 = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 6*32,y = 7*16,width = 1*32,height = 1*32},
+            },
+        },
+        bullet_big_jade_idle_8 = {
+            desc = "",
+            grid = {
+                length = 1,
+                rect = {x = 7*32,y = 7*16,width = 1*32,height = 1*32},
             },
         },
     }

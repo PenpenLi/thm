@@ -6,6 +6,7 @@ function M:_onInit()
     self.fsm = THSTG.UTIL.newStateMachine() --状态机
     self.animaComp = nil
 
+    self._transComp = nil
     self._prevPos = cc.p(0,0)
 end
 --
@@ -19,15 +20,14 @@ function M:getSprite()
 end
 ----
 function M:_onLateUpdate()
-    local posComp = self:getComponent("TransformComponent")
-    local posPoint = cc.p(posComp:getPositionX(),posComp:getPositionY())
+    local posPoint = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
     
     self:_onAction({
         dx = posPoint.x - self._prevPos.x,
         dy = posPoint.y - self._prevPos.y,
     })
 
-    self._prevPos = cc.p(posComp:getPositionX(),posComp:getPositionY())
+    self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
 end
 
 ------------------
@@ -39,8 +39,8 @@ function M:_onStart()
         self.fsm:setupState(cfg)
     end
 
-    local posComp = self:getComponent("TransformComponent")
-    self._prevPos = cc.p(posComp:getPositionX(),posComp:getPositionY())
+    self._transComp = self:getComponent("TransformComponent")
+    self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
 end
 ------------------
 --[[以下由子类重载]]

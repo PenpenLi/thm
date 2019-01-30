@@ -51,15 +51,54 @@ end
 function M:getComponent(...)
 	return self:getEntity():getComponent(...)
 end
---是否存在组件
-function M:isHaveComponent(...)
-    return self:getEntity():getComponent(...) and true or false
-end
 --
 function M:getSystem(...)
 	return self:getEntity():getSystem(...)
 end
---
+---
+--[[扩展]]
+function M:getComponentsInChildren(...)
+	local ret = {}
+	local args = {...}
+	local function visit(node)
+		local comps = node:getComponents(unpack(args))
+		if comps and next(comps) then
+			for _,v in pairs(comps) do
+				table.insert( ret, v )
+			end
+		end
+		local children = node:getChildren()
+		if children and next(children) then
+			for _,v in pairs(children) do
+                if tolua.iskindof(v,"ECS.Entity") then
+                    if v:isActive() then
+                        visit(v)
+                    end
+				end
+			end
+		end
+	end
+	visit(self:getEntity())
+	return ret
+end
+
+function M:getComponentInParent(...)
+	local perent = self:getEntity():getParent()
+	while perent do
+		local comp = perent:getComponent(...)
+		if comp then
+			return comp
+		end
+		perent = perent:getParent()
+	end
+end
+function M:getScriptsInChildren(...)
+    return self:getComponentsInChildren(...)
+end
+function M:getScriptInParten(...)
+    return self:getComponentInParent(...)
+end
+---
 function M:killEntity()
     self:getEntity():destroy()
 end

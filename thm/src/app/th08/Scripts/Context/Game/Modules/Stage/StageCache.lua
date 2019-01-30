@@ -33,7 +33,7 @@ function setInStage(state)
 end
 
 function getStageId()
-    return 1
+    return 4
 end
 
 function getMapId()

@@ -3,15 +3,14 @@ local M = class("HealthController",THSTG.ECS.Script)
 function M:_onInit()
     self.maxBlood = 100
     self.blood = self.maxBlood 
-    self.invincible = false
-
     
+    self._isInvincible = false
     self._isDead = false
 
 end
 --
 function M:hit(damage)
-    if self.invincible then return end
+    if self._isInvincible then return end
 
     if (damage > 0) then self:_onHurt(damage)
     elseif (damage == 0) then self:_onMiss(damage)
@@ -30,11 +29,12 @@ function M:isDead()
 end
 
 function M:isInvincible()
-    return self.invincible
+    return self._isInvincible
 end
 
 function M:setInvincible(val)
-    self.invincible = val
+    self._isInvincible = val
+    self:_onInvincible(val)
 end
 
 function M:setBlood(val)
@@ -89,4 +89,6 @@ function M:_onBlood(old,val)
 
 end
 
+function M:_onInvincible(val)
+end
 return M

@@ -115,7 +115,6 @@ function fill(class,num,param)
     for i = 1,num-totalNum do
         local obj = create(class,param)
         release(obj)
-        table.insert( list, obj ) 
     end
 
 end

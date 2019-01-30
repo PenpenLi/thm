@@ -11,6 +11,8 @@ function M:_onInit()
     self._bombCtrl = nil                              --Spell(bomb)
     self._wipeCtrl = nil                              --消弹
     self._slowCtrl = nil                              --低速
+
+    self._spriteNode = nil
 end
 
 
@@ -25,8 +27,7 @@ function M:move(dx,dy)
     M.super.move(self,dx,dy)
     
     ---状态模块
-    if dx < 0 then self.fsm:doEvent("Move")
-    elseif dx > 0 then self.fsm:doEvent("Move")
+    if dx ~= 0 then self.fsm:doEvent("Move")
     else self.fsm:doEvent("Idle")
     end
 end
@@ -75,19 +76,8 @@ function M:reset()
             end)
         }),
         cc.Sequence:create({
-            cc.Spawn:create({
-                cc.CallFunc:create(function()
-                    myHealthComp:setInvincible(true)
-                end),
-                cc.Blink:create(3.0, 200),--FIXME:无敌时间
-            }),
-            
             cc.CallFunc:create(function()
-                --无敌时间已过
-                self:getEntity():setOpacity(255)
-                self:getEntity():setVisible(true)
-                myHealthComp:setInvincible(false)
-                
+                myHealthComp:invincible() 
             end)
         })
     }))
@@ -115,15 +105,19 @@ function M:_onStart()
     self._bombCtrl = self:getEntity():getScript("SpellController")                           
     self._wipeCtrl = self:getEntity():getScript("WipeController")
     self._slowCtrl = self:getEntity():getScript("SlowController")
-    --取得主发射口
+    
+    --取得主发射口脚本节点
     self._shotCtrl = self:getEntity():getChildByName("EMITTER"):getScript("EmitterController")
+    self._shotCtrl.objectPrefab = StageDefine.ReimuBulletPrefab
+    self._shotCtrl.shotInterval = 0.10
+    self._shotCtrl.shotSpeed = cc.p(0,20)
 
-    --僚机发射口
-    self.wingman1 = self:getEntity():getChildByName("GYOKU1")
-    self.wingman2 = self:getEntity():getChildByName("GYOKU2")
+    --取得动画节点
+    self._spriteNode = self:getEntity():getChildByName("SPRITE_NODE")
 
+    
+    ----
     self:reset()
-
 end
 
 function M:_onUpdate()

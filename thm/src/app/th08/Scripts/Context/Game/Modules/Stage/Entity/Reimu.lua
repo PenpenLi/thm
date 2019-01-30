@@ -5,16 +5,16 @@ function M:ctor()
     M.super.ctor(self)
 
     self.animationController = StageDefine.ReimuAnimation.new()
-    self:addScript(self.animationController)
+    self.spriteNode:addScript(self.animationController)
+
+    self.wipeController = StageDefine.ReimuWipeController.new()
+    self:addScript(self.wipeController)
+
+    self.slowController = StageDefine.ReimuSlowController.new()
+    self:addScript(self.slowController)
 
     self.playerController = StageDefine.ReimuController.new()
     self:addScript(self.playerController)
-
-    --Reimu子弹发射器
-    local emitterController = self.emitter:getScript("EmitterController")
-    emitterController.objectPrefab = StageDefine.ReimuBulletPrefab
-    emitterController.shotInterval = 0.10
-    emitterController.shotSpeed = cc.p(0,20)
 
     --添加两个僚机的实体
     self.gyoku1 = StageDefine.OnmyouGyoku.new()

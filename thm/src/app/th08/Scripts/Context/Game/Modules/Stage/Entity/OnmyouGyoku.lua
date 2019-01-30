@@ -13,12 +13,7 @@ function M:ctor()
 
     --普通子弹的发射口
     self.emitter = StageDefine.EmitterPrefab.new()
-    self.emitter:setName("EMITTER")
     self:addChild(self.emitter)
-    local emitterController = self.emitter:getScript("EmitterController")
-    emitterController.objectPrefab = StageDefine.OnmyouGyokuBulletPrefab
-    emitterController.shotInterval = 0.4
-    emitterController.shotSpeed = cc.p(0,10)
 
 end
 

@@ -1,7 +1,7 @@
 local M = class("DestroyByTime",THSTG.ECS.Script)
 
 function M:_onInit()
-    self.dwellTime = 30  --在非安全区最长可停留时间s    
+    self.dwellTime = 5  --在非安全区最长可停留时间s    
     self.safeArea = cc.rect(0,0,display.width,display.height)   --安全区
     
     self._totalTime = 0
