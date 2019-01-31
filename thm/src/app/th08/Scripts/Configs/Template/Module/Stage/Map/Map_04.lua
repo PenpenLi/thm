@@ -11,21 +11,21 @@ function M.create(params)
         src = SoundConfig.getFilePath(100101),
     })
     
-    local mainBg = UIPublic.newUVRollSprite({
+    local mainBg = UIPublic.newUVWaveSprite({
         x = display.cx,
-        y = display.cy,
-        width = display.width-100,
-        height = display.height,
+        y = display.cy + 100,
+        width = 2*display.width,
+        height = 2*display.height,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        source = {TexType.SHEET,"stg1bg","stg01_bg"},
+        src = "Assets/Module/Stage/Map/stg4_1_f.png",
+        isTile = true,
         uniforms = {
-            speedX = 0.01,
-            speedY = -0.1,
-            vRange = cc.p(0,0.5),
+            speed = 10,
+            identity = 50,
         },
     })
-    mainBg:setRotation3D(cc.vec3(120,0,0))
-    node:addChild(mainBg)
+    mainBg:setRotation3D(cc.vec3(-40,0,0))
+    -- node:addChild(mainBg)
   
     -------Controller-------
     node:onNodeEvent("enter", function ()

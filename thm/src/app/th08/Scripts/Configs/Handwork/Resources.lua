@@ -124,5 +124,8 @@ return {
             loading_word_cn = "Assets/Module/GUI/PublicUI/Loading/loading_word_cn.png" ,
             loading_word_en = "Assets/Module/GUI/PublicUI/Loading/loading_word_en.png" ,
         },
+        map = {
+            stg4_1_f = "Assets/Module/Stage/Map/stg4_1_f.png" ,
+        }
     },
 }

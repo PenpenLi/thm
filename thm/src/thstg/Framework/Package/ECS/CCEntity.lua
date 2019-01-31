@@ -7,7 +7,7 @@ function M:ctor()
 		function M.onUpdate(dTime)
 			self:update(dTime)
 		end
-		self:scheduleUpdateWithPriorityLua(M.onUpdate,-1)	--TODO:system的优先级要比实体更新高
+		self:scheduleUpdateWithPriorityLua(M.onUpdate,-1)	--FIXME:system的优先级要比实体更新高
 		self:_enter()
 	end
 	local function onExit()

@@ -55,10 +55,9 @@ end
 function M:removeComponents(...)
 	local name = ECSUtil.trans2Name(...)
 	for k,v in pairs(self.__components__) do
-		local className = v:getClass()
-		if ECSUtil.find2Class(className,...) then
-			local argName = ECSUtil.trans2Args(className)
-			self:removeComponent(unpack(argName))
+		local className,classArgs = v:getClass()
+		if ECSUtil.find2ClassWithChild(classArgs,...) then
+			self:removeComponent(unpack(classArgs))
 		end
 	end
 end
@@ -74,7 +73,8 @@ end
 function M:getComponents(...)
 	local ret = {}
 	for k,v in pairs(self.__components__) do
-		if ECSUtil.find2ClassWithChild(k,...) then
+		local _,classArgs = v:getClass()
+		if ECSUtil.find2ClassWithChild(classArgs,...) then
 			table.insert( ret, v )
 		end
 	end

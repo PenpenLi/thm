@@ -76,8 +76,8 @@ end
 
 --使能够找到子类
 --模式匹配,改进算法
-function find2ClassWithChild(name,...)
-    local argsA = trans2Args(name)
+function find2ClassWithChild(nameArgs,...)
+    local argsA = nameArgs
     local argsB = {...}
 
     local lengthA,lengthB = #argsA,#argsB

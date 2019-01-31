@@ -7,13 +7,13 @@ function M:ctor(...)
     self.__compName__ = nil
     self.__entity__ = nil
     self.__isEnabled__ = true
-    self.__className__ = self:_getClass(...)
+    self.__className__,self.__classArgs__ = self:_getClass(...)
 
     self:_onInit(...)
 end
 
 function M:getClass()
-    return self.__className__
+    return self.__className__,self.__classArgs__
 end
 
 function M:getName()
@@ -187,7 +187,7 @@ function M:_getClass(...)
         
     end
     classList = reverseTable(classList)
-    return ECSUtil.trans2Name(unpack(classList))
+    return ECSUtil.trans2Name(unpack(classList)),classList
 end
 
 return M
