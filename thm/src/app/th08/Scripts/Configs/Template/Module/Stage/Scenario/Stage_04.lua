@@ -1,4 +1,5 @@
-
+--预先生成310个bullet
+ObjectCache.expand(StageDefine.EnemyBulletPrefab,310)   --此处应该是最大的数(既缓冲池最大的缓存数)
 return {
     {
         time = 1,
@@ -6,7 +7,7 @@ return {
             --子弹测试,从中心绕圈发射弹幕
             local count = 0
             Scheduler.schedule(function()
-                local bullet = StageDefine.EnemyBulletPrefab.new()
+                local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
                 local rigidComp = bullet:getComponent("RigidbodyComponent")
                 local transComp = bullet:getComponent("TransformComponent")
                 transComp:setPosition(display.cx,display.cy)
@@ -14,6 +15,7 @@ return {
                 local initY = 3 * math.sin(2*count*3.14/180)
                 rigidComp:setSpeed(initX,initY)
                 bullet:setActive(true)
+                bullet:setLocalZOrder(count)
                 count = count + 1
             end, 0.08,5/0.08)
         end
@@ -24,12 +26,13 @@ return {
             --子弹测试,从中心绕圈发射弹幕
             Scheduler.schedule(function()
                 for i = 1,45 do
-                    local bullet = StageDefine.EnemyBulletPrefab.new()
+                    local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
                     local rigidComp = bullet:getComponent("RigidbodyComponent")
                     local transComp = bullet:getComponent("TransformComponent")
                     transComp:setPosition(display.cx,display.cy)
                     local initX = 1 * math.cos(8*i*3.14/180)
                     local initY = 1 * math.sin(8*i*3.14/180)
+                    bullet:setLocalZOrder(i)
                     bullet:setActive(true)
                     rigidComp:setSpeed(initX,initY)
                 end
@@ -43,7 +46,8 @@ return {
             math.randomseed(1001)  --伪随机数种子
             Scheduler.schedule(function()
                 for i = 1,360,8 do
-                    local bullet = StageDefine.EnemyBulletPrefab.new()
+                    local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
+                    
                     local rigidComp = bullet:getComponent("RigidbodyComponent")
                     local transComp = bullet:getComponent("TransformComponent")
                     local actionComp = bullet:getComponent("ActionComponent")
@@ -64,6 +68,7 @@ return {
                         end)
                     }))
                     rigidComp:setSpeed(0,0)
+                    bullet:setLocalZOrder(i)
                     bullet:setActive(true)
                     
                 end
@@ -79,7 +84,7 @@ return {
             local count = 1
             Scheduler.schedule(function()
                 for i = 225,315,5 do
-                    local bullet = StageDefine.EnemyBulletPrefab.new()
+                    local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
                     local rigidComp = bullet:getComponent("RigidbodyComponent")
                     local transComp = bullet:getComponent("TransformComponent")
                     local actionComp = bullet:getComponent("ActionComponent")
@@ -109,6 +114,7 @@ return {
                         end)
                     }))
                     rigidComp:setSpeed(0,0)
+                    bullet:setLocalZOrder(i)
                     bullet:setActive(true)
                     
                 end
@@ -124,7 +130,7 @@ return {
             --子弹测试,从中心绕圈发射弹幕
             local count = 0
             Scheduler.schedule(function()
-                local bullet = StageDefine.EnemyBulletPrefab.new()
+                local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
                 local rigidComp = bullet:getComponent("RigidbodyComponent")
                 local transComp = bullet:getComponent("TransformComponent")
                 transComp:setPosition(display.cx,display.cy)
@@ -136,7 +142,7 @@ return {
             end, 0.08,10/0.08)
 
             Scheduler.schedule(function()
-                local bullet = StageDefine.EnemyBulletPrefab.new()
+                local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
                 local rigidComp = bullet:getComponent("RigidbodyComponent")
                 local transComp = bullet:getComponent("TransformComponent")
                 transComp:setPosition(display.cx,display.cy)
@@ -144,6 +150,7 @@ return {
                 local initY = 3 * math.sin(2*count*3.14/180- 3.14)
                 rigidComp:setSpeed(initX,initY)
                 bullet:setActive(true)
+                bullet:setLocalZOrder(count)
                 count = count + 1
             end, 0.08,10/0.08)
         end
@@ -170,6 +177,7 @@ return {
                 end))
                 local actionComp = batman:getComponent("ActionComponent")
                 actionComp:runAction(cc.Sequence:create(actions))
+
             end
 
         end

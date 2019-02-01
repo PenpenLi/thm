@@ -2,6 +2,8 @@ module("ObjectCache", package.seeall)
 
 local objsCache = {}            --所有对象缓存的信息
 local categoryCache = {}
+local maxObject = {}
+
 ---
 local function getTotalObjs(class)
     local num = 0
@@ -19,9 +21,8 @@ local function getAvailableObjs(class)
     local queue = categoryCache[class]
     return (queue.tail - queue.front)
 end
-----
---自动扩充
-function create(class,param)
+
+local function getObjcetQueue(class)
     if type(class) == "table" then
         local queue = nil
         if not categoryCache[class] then
@@ -31,26 +32,40 @@ function create(class,param)
         else
             queue = categoryCache[class]
         end
+        return queue
+    end
+    return nil
+end
+
+local function addNewObject(queue,class,params)
+    if type(class) == "table" and type(queue) == "table" then
+        local obj = class.new(param)
+        objsCache[obj] = {
+            class = class,
+            object = obj
+        }
+
+        if tolua.iskindof(obj,"cc.Node") then
+            obj:retain()
+        end
+
+        --入队
+        queue.tail = queue.tail + 1
+        queue.data[queue.tail] = obj
+    end
+end
+
+----
+--自动扩充
+function create(class,param)
+    if type(class) == "table" then
+        --取得队列
+        local queue = getObjcetQueue(class)
         --没有可用的对象,现场做一个
         if queue.front == queue.tail then
-            
-            --
-            local obj = class.new(param)
-            objsCache[obj] = {
-                class = class,
-                object = obj
-            }
-
-            if tolua.iskindof(obj,"cc.Node") then
-                obj:retain()
-            end
-
-            --入队
-            queue.tail = queue.tail + 1
-            queue.data[queue.tail] = obj
-            
+            addNewObject(queue,class,params)
         end
-        
+
         --出队
         queue.front = queue.front + 1
         return queue.data[queue.front]
@@ -112,18 +127,19 @@ end
 function fill(class,num,param)
     local totalNum = getTotalObjs(class)
     if totalNum >= num then return end
+    local queue = getObjcetQueue(class)
     for i = 1,num-totalNum do
-        local obj = create(class,param)
-        release(obj)
+        addNewObject(queue,class,params)
     end
 
 end
 --
 function expand(class,num,param)
+    local queue = getObjcetQueue(class)
     for i = 1,num do
-        local obj = create(class,param)
-        release(obj)
+        addNewObject(queue,class,params)
     end
+    
 end
 --
 

@@ -4,6 +4,8 @@ local _bIsInStage = false
 local _bIsTeam = false
 local _eGroupType = false
 local _eRoleType = RoleType.REIMU
+local _eStageMode = StageModeType.BOSSRUSH
+
 function setGroupType(val)
     _eGroupType = val
 end
@@ -31,6 +33,17 @@ end
 function setInStage(state)
     _bIsInStage = state
 end
+function getStageMode()
+    return _eStageMode
+end
+
+function setStageMode(mode)
+    _eStageMode = mode
+end
+
+---
+
+
 
 function getStageId()
     return 4

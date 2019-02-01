@@ -2,6 +2,9 @@ module(..., package.seeall)
 
 local _bossEntity = nil
 local _playerEntity = nil
+local _enemyBullet = {}
+local _playerBuller = {}
+
 function setBossEntity(entity)
     _bossEntity = entity
 end
