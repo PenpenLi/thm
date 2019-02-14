@@ -11,13 +11,46 @@ function M.getAllEx(entity) return ECSManager.getAllEntities(entity) end
 
 -- local ECompType = {Control = 1,Script = 2}	--组件类型
 -----
+function M._purge()
+
+end
+-----
 function M:ctor()
     self.__id__ = ECSUtil.getEntityId()
 	self.__components__ = {}
-	self.__flags__ = false
+	self.__flags__ = {}
 	self.__isActive__ = true
+	----
+	--CCNode的回调
+	--从节点进入
+	local function onEnter()
+		function onUpdate(dTime)
+			self:update(dTime)
+		end
+
+		ECSManager.addEntity(self)
+		self:scheduleUpdateWithPriorityLua(onUpdate,-1)	--system的优先级要比实体更新高
+		self:_enter()
+	end
+
+	--从节点移除
+	local function onExit()
+		self:_exit()
+		self:unscheduleUpdate()
+		ECSManager.removeEntity(self)
+	end
+
+	--析构
+	local function onCleanup()
+		self:_cleanup()
+		ECSManager.broadcastEvent(ECSManager.EEventType.CleanupEntity,self)
+	end
+	
+    self:onNodeEvent("enter", onEnter)
+	self:onNodeEvent("exit", onExit)
+	self:onNodeEvent("cleanup", onCleanup)
     ----
-	ECSManager.addEntity(self)
+	
 end
 --
 --[[component模块]]
@@ -61,6 +94,7 @@ function M:removeComponents(...)
 		end
 	end
 end
+
 --
 function M:getAllComponents()
 	local ret = {}
@@ -69,6 +103,7 @@ function M:getAllComponents()
 	end
 	return ret
 end
+
 --获取组件列表
 function M:getComponents(...)
 	local ret = {}
@@ -175,10 +210,6 @@ function M:getID()
     return self.__id__
 end
 
-function M:isCCNode()
-	return tolua.iskindof(self,"cc.Node")
-end
-
 function M:setActive(isActive)
 	self.__isActive__ = isActive
 	self:_active(isActive)
@@ -186,6 +217,20 @@ end
 function M:isActive()
 	return self.__isActive__ 
 end
+
+function M:setupFlag(flag,state)
+	self.__flags__[flag] = state
+end
+
+function M:haveFlag(flag)
+	return self.__flags__[flag] and true or false
+end
+
+function M:clearFlags()
+	self.__flags__ = {}
+end
+
+
 --发送事件
 function M:dispatch(e,params)
 	ECSManager.dispatchEvent(ECSManager.EEventCacheType.Entity,e,params)
@@ -247,14 +292,20 @@ function M:_enter()
 		v:_onEnter()
 	end
 end
+
 function M:_exit()
 	for _,v in pairs(self.__components__) do
 		v:_onExit()
 	end
 	self:_onExit()
 
-	self:clear()
 end
+
+function M:_cleanup()
+	self:clear()
+	self:_onCleanup()
+end
+
 function M:_active(isActive)
 	self:_onActive()
 	for k,v in pairs(self.__components__) do

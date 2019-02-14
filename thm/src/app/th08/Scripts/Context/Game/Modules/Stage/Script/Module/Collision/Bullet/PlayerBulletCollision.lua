@@ -3,7 +3,7 @@ local M = class("PlayerBulletCollision",StageDefine.BulletCollision)
 
 ---
 function M:_onFilter()
-    --TODO:特异性
+    --特异性
     return {
         ignore = {
             ["PLAYER_BULLET"] = true,

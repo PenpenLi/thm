@@ -16,11 +16,10 @@ EEventType = {
     DestroyEntity = 1,
     EntityActive = 2,
     EntityReset = 3,
+    CleanupEntity = 4,
 }
 
-
 EEventCacheType = {
-    All = 0,
     Entity = 1,
     System = 2
 }
@@ -43,18 +42,13 @@ function dispatchEvent(cacheType,event,params)
         event = event,
         params = params,
     }
-    if cacheType == EEventCacheType.All then
-        for _,v in pairs(EEventCacheType) do
-            if v ~= EEventCacheType.All then
-                table.insert(_eventQueue[v], info )
-            end
-        end
-    else
-        table.insert(_eventQueue[cacheType], info )
-    end
+    table.insert(_eventQueue[cacheType], info )
 end
-function dispatchEventAll(event,params)
-    dispatchEvent(EEventCacheType.All,event,params)
+--全局广播巨TM低性能,能不用最好不用
+function broadcastEvent(event,params)
+    for _,cacheType in pairs(EEventCacheType) do
+        dispatchEvent(cacheType,event,params)
+    end
 end
 --[[实体管理]]
 local function dirtyEntity(entity,flag)
@@ -66,36 +60,47 @@ local function dirtyEntity(entity,flag)
 end
 
 function addEntity(entity)
-    _entityCache[entity] = entity
-    dirtyEntity(entity,EEntityFlag.Init)
+    local realEntity = _entityCache[entity]
+    if not realEntity then
+        _entityCache[entity] = entity
+        entity:retain()
+        dirtyEntity(entity,EEntityFlag.Init)
+    end
 end
 
-function removeEntity(entity,isDestroy)
-    if isDestroy then 
-        destroyEntity(entity) 
+function removeEntity(entity)
+    local realEntity = _entityCache[entity]
+    if realEntity then
+        realEntity:release()
+        _entityCache[entity] = nil
     end
-    _entityCache[entity] = nil
 end
 
 function visitEntity(func)
     for _,v in pairs(_entityCache) do
-		if tolua.isnull(v) then 
-			_entityCache[v] = nil
-		else
-			local ret = func(v)
-			if ret then return ret end
-		end
+        local ret = func(v)
+        if ret then return ret end
 	end
 end
 
+function isEntityDestroyed(entity)
+    return (entity and _entityCache[entity]) and true or false
+end
+
 function getAllEntities(exEntity)
-    --有点危险,因为可能有的实体因为场景释放而释放
     local ret = {}
-    visitEntity(function (v)
-        if exEntity ~= v then
-            table.insert( ret, v )
-        end
-    end)
+    
+    --法一:
+    ret = clone(_entityCache)
+    if ret[exEntity] then ret[exEntity] = nil end
+
+    --法二:
+    -- visitEntity(function (v)
+    --     if exEntity ~= v then
+    --         table.insert( ret, v )
+    --     end
+    -- end)
+
     return ret
 end
 
@@ -141,28 +146,16 @@ local function _handleEntities(delay)
     local function _rinseEntities()
         for _,v in pairs(_dirtyEntities) do
             if v.flags[EEntityFlag.Init] then
-                if not v.entity:isCCNode() then
-                    v.entity:_enter()
-                end
+               
             end
             if v.flags[EEntityFlag.Destroy] then
-                if not v.entity:isCCNode() then
-                    v.entity:_exit()
-                    v.entity:_onCleanup()
-                else
-                    v.entity:removeFromParent()
-                end
-                removeEntity(v.entity,false)
+                v.entity:removeFromParent()
             end
         end
         _dirtyEntities = {}
     end
     local function _updateEntities()
-        visitEntity(function(v)
-            if not v:isCCNode() then
-                v:update(delay)
-            end
-        end)
+        
     end
     local function _handleEntitiesEvent()
         for _,v in ipairs(_eventQueue[EEventCacheType.Entity]) do
@@ -176,6 +169,8 @@ local function _handleEntities(delay)
     _rinseEntities()
     _handleEntitiesEvent()
     _updateEntities()
+
+    ECS.Entity._purge()
 end
 
 local function _clearEntities()
@@ -243,6 +238,8 @@ local function _handleSystems(delay)
     _rinseSystems()
     _updateSystems()
     _handleSystemsEvent()
+
+    ECS.System._purge()
 end
 local function _clearSystems()
     visitSystem(function(v)
@@ -254,16 +251,19 @@ function destroyEntity(entity)
     dirtyEntity(entity,EEntityFlag.Destroy)
 
     --通知所有对象被移除
-    dispatchEvent(EEventCacheType.All,EEventType.DestroyEntity,entity)
+    broadcastEvent(EEventType.DestroyEntity,entity)
 end
 
 
 ----
 
 function update(delay)
+
+    ---
     _handleSystems(delay)
     _handleEntities(delay)
-    
+    ---
+
 end
 
 

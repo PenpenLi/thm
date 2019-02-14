@@ -2,13 +2,23 @@ local ECSUtil = require "thstg.Framework.Package.ECS.ECSUtil"
 --针对某一类组件进行轮询
 local M = class("System")
 
+---
+local _entitiesAllList = false
+local _entitiesAllComponents = false
+local _entitiesComponents = {}
 function M.register(path)
     ECSManager.registerSystem(path)
+end
+
+function M._purge()
+    _entitiesAllList = false
+    _entitiesAllComponents = false
+    _entitiesComponents = {}
 end
 ---
 function M:ctor(...)
     self.__id__ = ECSUtil.getSystemId()
-    
+
     self:_onInit(...)
 end
 
@@ -20,9 +30,15 @@ function M:getClass()
     return self:_onClass( self.__cname )
 end
 
+--应该使用脏队列
 function M:update(delay)
+    ---
+
     self:_onUpdate(delay)
     self:_onLateUpdate(delay)
+
+    ---
+
 end
 
 --发送事件
@@ -36,32 +52,45 @@ end
 
 --取得所有实体
 function M:getAllEntities()
-    return ECSManager.getAllEntities()
+    if not _entitiesAllList then
+        _entitiesAllList = ECSManager.getAllEntities()
+    end
+    return _entitiesAllList
 end
+
 function M:getAllComponents()
-    local ret = {}
-    local entitys = self:getAllEntities()
-    for _,v in pairs(entitys) do
-        if v:isActive() then
-            local comps = v:getAllComponents()
-            for _,vv in pairs(comps) do
-                table.insert( ret, vv )
+    if not _entitiesAllComponents then
+        local ret = {}
+        local entitys = self:getAllEntities()
+        for _,v in pairs(entitys) do
+            if v:isActive() then
+                local comps = v:getAllComponents()
+                for _,vv in pairs(comps) do
+                    table.insert( ret, vv )
+                end
             end
         end
+        _entitiesAllComponents = ret
     end
-    return ret
+    return _entitiesAllComponents
 end
+
 --取得所有某类组件
 function M:getComponents(name)
-    local ret = {}
-    local entitys = self:getAllEntities()
-    for _,v in pairs(entitys) do
-        local comp = v:getComponent(name)
-        if comp then
-            table.insert(ret, comp)
+    if not _entitiesComponents[name] then
+        local ret = {}
+        local entitys = self:getAllEntities()
+        for _,v in pairs(entitys) do
+            if v:isActive() then
+                local comp = v:getComponent(name)
+                if comp then
+                    table.insert(ret, comp)
+                end
+            end
         end
+        _entitiesComponents[name] = ret
     end
-    return ret
+    return _entitiesComponents[name]
 end
 ---
 --[[系统生命周期]]

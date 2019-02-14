@@ -61,8 +61,6 @@ function register(sceneType, classPath)
     _firstSceneType = _firstSceneType or sceneType
 end
 
-
-
 function init()
     local firstScene = _firstSceneType and get(_firstSceneType) or display.newScene()
     display.runScene(firstScene)    --第一个场景或默认场景

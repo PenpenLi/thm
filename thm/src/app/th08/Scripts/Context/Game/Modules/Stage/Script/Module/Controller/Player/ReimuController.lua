@@ -7,7 +7,6 @@ M.WINGMAN_AROUND_SPEED = 0.3
 
 function M:_onInit()
     M.super._onInit(self)
-    self.roleType = RoleType.REIMU
 
     --阴阳玉僚机
     self.wingman1 = nil

@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("EmptyEntity",THSTG.ECS.CCEntity)
+local M = class("EmptyEntity",THSTG.ECS.Entity)
 function M:ctor()
     M.super.ctor(self)
     

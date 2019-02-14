@@ -70,7 +70,7 @@ function M:getComponentsInChildren(...)
 		local children = node:getChildren()
 		if children and next(children) then
 			for _,v in pairs(children) do
-                if tolua.iskindof(v,"ECS.Entity") then
+                if tolua.iskindof(v,"cc.Node") then
                     if v:isActive() then
                         visit(v)
                     end

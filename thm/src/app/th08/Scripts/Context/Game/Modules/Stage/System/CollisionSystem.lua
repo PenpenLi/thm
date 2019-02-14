@@ -50,7 +50,7 @@ end
 
 -----
 function M:getGridCompId(comp)
-    --当cript时序>System导致没有更新到位置出错
+    --当Script时序>System导致没有更新到位置出错
     if _gridIDs[comp] == nil then
         self:_onUpdate(0)
     end

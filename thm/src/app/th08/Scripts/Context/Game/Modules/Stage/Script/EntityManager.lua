@@ -15,14 +15,33 @@ function getBossEntity()
     end
     return nil
 end
-function setPlayerEntity()
-    
+function setPlayerEntity(entity)
+    _playerEntity = entity
 end
+
 function getPlayerEntity()
     return _playerEntity
 end
 
 ------
-function newEntity(class)
+function createEntity(class)
+    
+end
+
+---
+function createBullet(type)
+    --读取配置,设置配置等
+end
+
+function createBullets(type,num)
+
+end
+
+---
+function createBatman(type)
+
+end
+
+function createBatmans(type,num)
     
 end

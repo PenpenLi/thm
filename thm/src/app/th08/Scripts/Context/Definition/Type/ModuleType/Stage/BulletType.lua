@@ -1,2 +1,3 @@
 module("BulletType")
 
+BIGJADE = "BigJade"
