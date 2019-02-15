@@ -12,6 +12,7 @@ function M:ctor()
 
     ----
     self:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
+    
 end
 
 

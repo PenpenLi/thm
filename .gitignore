@@ -51,3 +51,5 @@ luac.out
 frameworks
 runtime
 simulator
+LuaDebug.lua
+LuaDebugjit.lua

@@ -28,9 +28,11 @@ function M:ctor(...)
 
     --普通子弹的发射口
     self.emitter = StageDefine.EmitterPrefab.new()
+    local shotCtrl = self.emitter:getScript("EmitterController")
+    shotCtrl.shotInterval = 0.10
+    shotCtrl.shotSpeed = cc.p(0,20)
     self:addChild(self.emitter)
-
-
+    
 end
 
 

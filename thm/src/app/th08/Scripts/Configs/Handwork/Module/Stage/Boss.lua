@@ -1,11 +1,5 @@
 return {
-    ["LilyWhite"]= {
-        name = "莉莉白",
-        nickName = "叫春精",
-        ability = "传播春天程度的能力",
-        description = "叫春精",
 
-    },
     ["WriggleNightbug"] = {
         name = "莉格露·奈特巴格",
         cnName = "莉格露·奈特巴格",
@@ -37,6 +31,12 @@ return {
         character ={
             [1] = "",
         },
-    }
+    },
+    ["LilyWhite"]= {
+        name = "莉莉白",
+        nickName = "叫春精",
+        ability = "传播春天程度的能力",
+        description = "叫春精",
 
+    },
 }

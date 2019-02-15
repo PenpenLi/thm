@@ -1,5 +1,5 @@
 module(..., package.seeall)
-
+--TODO:
 local _bossEntity = nil
 local _playerEntity = nil
 local _enemyBullet = {}
@@ -31,6 +31,7 @@ end
 ---
 function createBullet(type)
     --读取配置,设置配置等
+    --设置setAcitve()
 end
 
 function createBullets(type,num)

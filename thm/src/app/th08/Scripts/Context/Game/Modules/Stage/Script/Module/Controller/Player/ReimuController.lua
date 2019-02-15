@@ -32,7 +32,6 @@ function M:shot()
         self._wingman2EmitterCtrl:shot()
     -- end
 
-    SoundManager.playEffect(200101)
 end
 
 function M:_initWingman()

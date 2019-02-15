@@ -34,6 +34,8 @@ end
 
 function M:shot()
     self._shotCtrl:shot()
+    
+    SoundManager.playEffect(200101)
 end
 
 function M:bomb()
@@ -108,9 +110,6 @@ function M:_onStart()
     
     --取得主发射口脚本节点
     self._shotCtrl = self:getEntity():getChildByName("EMITTER"):getScript("EmitterController")
-    self._shotCtrl.objectPrefab = StageDefine.ReimuBulletPrefab
-    self._shotCtrl.shotInterval = 0.10
-    self._shotCtrl.shotSpeed = cc.p(0,20)
 
     --取得动画节点
     self._spriteNode = self:getEntity():getChildByName("SPRITE_NODE")

@@ -4,7 +4,7 @@ local M = class("Reimu",StageDefine.PlayerPrefab)
 function M:ctor()
     M.super.ctor(self)
 
-    self.animationController = StageDefine.ReimuAnimation.new()
+    self.animationController = StageDefine.PlayerAnimation.new()
     self.spriteNode:addScript(self.animationController)
 
     self.wipeController = StageDefine.ReimuWipeController.new()
@@ -26,9 +26,12 @@ function M:ctor()
     self.gyoku2:setName("GYOKU2")
     self:addChild(self.gyoku2)
 
+    ----
+    local shotCtrl = self.emitter:getScript("EmitterController")
+    shotCtrl.objectPrefab = StageDefine.ReimuBulletPrefab
+
     ---
     self:addTo(THSTG.SceneManager.get(SceneType.STAGE).playerLayer)  
 end
-
 
 return M

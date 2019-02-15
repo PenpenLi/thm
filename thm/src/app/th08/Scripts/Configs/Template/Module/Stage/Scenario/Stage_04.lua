@@ -1,5 +1,5 @@
 --预先生成310个bullet
-ObjectCache.expand(StageDefine.EnemyBulletPrefab,310)   --此处应该是最大的数(既缓冲池最大的缓存数)
+ObjectCache.expand(StageDefine.BigJadePrefab,310)   --此处应该是最大的数(既缓冲池最大的缓存数)
 return {
     {
         time = 1,
@@ -7,7 +7,7 @@ return {
             --子弹测试,从中心绕圈发射弹幕
             local count = 0
             Scheduler.schedule(function()
-                local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
+                local bullet = ObjectCache.create(StageDefine.BigJadePrefab)
                 local rigidComp = bullet:getComponent("RigidbodyComponent")
                 local transComp = bullet:getComponent("TransformComponent")
                 transComp:setPosition(display.cx,display.cy)
@@ -26,7 +26,7 @@ return {
             --子弹测试,从中心绕圈发射弹幕
             Scheduler.schedule(function()
                 for i = 1,45 do
-                    local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
+                    local bullet = ObjectCache.create(StageDefine.BigJadePrefab)
                     local rigidComp = bullet:getComponent("RigidbodyComponent")
                     local transComp = bullet:getComponent("TransformComponent")
                     transComp:setPosition(display.cx,display.cy)
@@ -46,7 +46,7 @@ return {
             math.randomseed(1001)  --伪随机数种子
             Scheduler.schedule(function()
                 for i = 1,360,8 do
-                    local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
+                    local bullet = ObjectCache.create(StageDefine.BigJadePrefab)
                     
                     local rigidComp = bullet:getComponent("RigidbodyComponent")
                     local transComp = bullet:getComponent("TransformComponent")
@@ -84,7 +84,7 @@ return {
             local count = 1
             Scheduler.schedule(function()
                 for i = 225,315,5 do
-                    local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
+                    local bullet = ObjectCache.create(StageDefine.BigJadePrefab)
                     local rigidComp = bullet:getComponent("RigidbodyComponent")
                     local transComp = bullet:getComponent("TransformComponent")
                     local actionComp = bullet:getComponent("ActionComponent")
@@ -130,7 +130,7 @@ return {
             --子弹测试,从中心绕圈发射弹幕
             local count = 0
             Scheduler.schedule(function()
-                local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
+                local bullet = ObjectCache.create(StageDefine.BigJadePrefab)
                 local rigidComp = bullet:getComponent("RigidbodyComponent")
                 local transComp = bullet:getComponent("TransformComponent")
                 transComp:setPosition(display.cx,display.cy)
@@ -142,7 +142,7 @@ return {
             end, 0.08,10/0.08)
 
             Scheduler.schedule(function()
-                local bullet = ObjectCache.create(StageDefine.EnemyBulletPrefab)
+                local bullet = ObjectCache.create(StageDefine.BigJadePrefab)
                 local rigidComp = bullet:getComponent("RigidbodyComponent")
                 local transComp = bullet:getComponent("TransformComponent")
                 transComp:setPosition(display.cx,display.cy)
@@ -163,7 +163,7 @@ return {
             local posY = 0
             for i = 1,3 do
                 posY = display.height - (i-1) * 60
-                local batman = StageDefine.BatmanPrefab.new()
+                local batman = StageDefine.Fairy01Prefab.new()
                 local posComp = batman:getComponent("TransformComponent")
                 posComp:setPositionX(posX)
                 posComp:setPositionY(posY)
@@ -190,7 +190,7 @@ return {
            local posY = 0
            for i = 1,3 do
                posY = display.height - (i-1) * 60
-               local batman = StageDefine.BatmanPrefab.new()
+               local batman = StageDefine.Fairy01Prefab.new()
                local posComp = batman:getComponent("TransformComponent")
                posComp:setPositionX(posX)
                posComp:setPositionY(posY)
@@ -218,7 +218,7 @@ return {
            local posY = 0
            for i = 1,3 do
                posY = display.height - (i-1) * 60
-               local batman = StageDefine.BatmanPrefab.new()
+               local batman = StageDefine.Fairy01Prefab.new()
                local posComp = batman:getComponent("TransformComponent")
                posComp:setPositionX(posX)
                posComp:setPositionY(posY)
@@ -246,7 +246,7 @@ return {
            local posY = display.height - 100
            for i = 1,3 do
                posX = - (i-1) * 60
-               local batman = StageDefine.BatmanPrefab.new()
+               local batman = StageDefine.Fairy01Prefab.new()
                local posComp = batman:getComponent("TransformComponent")
                posComp:setPositionX(posX)
                posComp:setPositionY(posY)
@@ -264,7 +264,7 @@ return {
 
            for i = 1,3 do
                 posX = display.width + (i-1) * 60
-                local batman = StageDefine.BatmanPrefab.new()
+                local batman = StageDefine.Fairy01Prefab.new()
                 local posComp = batman:getComponent("TransformComponent")
                 posComp:setPositionX(posX)
                 posComp:setPositionY(posY)
@@ -285,7 +285,7 @@ return {
     {
         time = 1,
         callback = function (scheduler,task,params)
-            ObjectCache.pick(StageDefine.BatmanPrefab,4,function(batman,i)
+            ObjectCache.pick(StageDefine.Fairy01Prefab,4,function(batman,i)
                 
 
                 local trans = batman:getComponent("TransformComponent")
@@ -303,7 +303,7 @@ return {
                 }))
             end)
 
-            ObjectCache.pick(StageDefine.BatmanPrefab,4,function(batman,i)
+            ObjectCache.pick(StageDefine.Fairy01Prefab,4,function(batman,i)
 
                 local trans = batman:getComponent("TransformComponent")
                 trans:setPositionX(display.width + 1)

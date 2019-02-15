@@ -18,7 +18,7 @@ end
 function M:ctor()
     self.__id__ = ECSUtil.getEntityId()
 	self.__components__ = {}
-	self.__flags__ = {}
+	self.__flags__ = nil
 	self.__isActive__ = true
 	----
 	--CCNode的回调
@@ -219,11 +219,12 @@ function M:isActive()
 end
 
 function M:setupFlag(flag,state)
+	self.__flags__ = self.__flags__ or {}
 	self.__flags__[flag] = state
 end
 
 function M:haveFlag(flag)
-	return self.__flags__[flag] and true or false
+	return (self.__flags__ and self.__flags__[flag]) and true or false
 end
 
 function M:clearFlags()

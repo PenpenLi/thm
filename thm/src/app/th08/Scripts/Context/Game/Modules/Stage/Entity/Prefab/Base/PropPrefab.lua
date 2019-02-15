@@ -22,8 +22,7 @@ function M:ctor()
     self.animationController = StageDefine.PropAnimation.new()
     self:addScript(self.animationController)
 
-    --
-    self:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
+
 end
 
 ----------
