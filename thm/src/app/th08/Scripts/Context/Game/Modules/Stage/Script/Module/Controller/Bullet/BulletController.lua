@@ -3,7 +3,7 @@ local M = class("BulletController",StageDefine.BaseController)
 function M:_onInit()
     M.super._onInit(self)
 
-    self.bulletType = false             --子弹类型
+    self.bulletType = nil               --子弹类型
     self.lethality = 10                 --杀伤力               
 end
 ---
@@ -34,7 +34,7 @@ function M:_onAdded(entity)
     M.super._onAdded(self,entity)
     
 
-
+    entity:setActive(false)
 end
 ---
 function M:_onStart()

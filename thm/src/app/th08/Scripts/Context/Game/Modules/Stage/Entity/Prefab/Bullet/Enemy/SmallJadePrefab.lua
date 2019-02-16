@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("BigJadePrefab",StageDefine.EnemyBulletPrefab)
+local M = class("SmallJade",StageDefine.EnemyBulletPrefab)
 function M:ctor()
     M.super.ctor(self)
 
@@ -8,7 +8,7 @@ function M:ctor()
     self:addScript(self.animationController)
 
     self.bulletController = StageDefine.EnemyBulletController.new()
-    self.bulletController.bulletType = BulletType.BIGJADE
+    self.bulletController.bulletType = BulletType.SMALLJADE
     self:addScript(self.bulletController)
 
 
@@ -16,7 +16,5 @@ function M:ctor()
     self:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
    
 end
-
-
 
 return M
