@@ -1,6 +1,7 @@
 return {
-    ["BigJade"] = {
+    [301] = {
         name = "大玉",
+        desc = "BigJade",
         gameArgs = {
             collider = {
                 {
@@ -22,8 +23,9 @@ return {
             idle = {},
         },
     },
-    ["SmallJade"] = {
+    [302] = {
         name = "小玉",
+        desc = "SmallJade",
         gameArgs = {
             colliderSize = cc.size(20,20),
             bodySize = cc.size(20,20),

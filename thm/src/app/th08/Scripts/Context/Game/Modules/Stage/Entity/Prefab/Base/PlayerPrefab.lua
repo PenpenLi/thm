@@ -4,7 +4,17 @@ local M = class("PlayerPrefab",StageDefine.PlayerEntity)
 
 function M:ctor(...)
     M.super.ctor(self)
+    --初始化变量
+    self:setName("PLAYER")
 
+    --普通子弹的发射口
+    self.emitter = StageDefine.EmitterPrefab.new()
+    self.emitterMainCtrl = self.emitter:getScript("EmitterController")
+    self.emitterMainCtrl.shotInterval = 0.10
+    self.emitterMainCtrl.shotSpeed = cc.p(0,20)
+    self:addChild(self.emitter)
+
+    ---
     self.healthController = StageDefine.PlayerHealth.new()
     self:addScript(self.healthController)
 
@@ -22,17 +32,6 @@ function M:ctor(...)
     
     self.constraintByBorder = StageDefine.ConstraintByBorder.new()
     self:addScript(self.constraintByBorder)
-
-    --初始化变量
-    self:setName("PLAYER")
-
-    --普通子弹的发射口
-    self.emitter = StageDefine.EmitterPrefab.new()
-    local shotCtrl = self.emitter:getScript("EmitterController")
-    shotCtrl.shotInterval = 0.10
-    shotCtrl.shotSpeed = cc.p(0,20)
-    self:addChild(self.emitter)
-    
 end
 
 

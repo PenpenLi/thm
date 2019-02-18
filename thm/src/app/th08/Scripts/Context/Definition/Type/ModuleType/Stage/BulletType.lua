@@ -1,4 +1,4 @@
 module("BulletType")
 
-BIGJADE = "BigJade"
-SMALLJADE = "SmallJade"
+BIGJADE = 301
+SMALLJADE = 302

@@ -4,32 +4,13 @@ local M = class("BossHealth",StageDefine.HealthController)
 function M:_onInit()
    M.super._onInit(self)
 
-   --BOSS血条
-   self._healthBar = THSTG.UI.newRadialProgressBar({
-      x = 0,
-      y = 0, --半径
-      anchorPoint = THSTG.UI.POINT_CENTER,
-      isReverse = true,
-      minValue = 0,
-      maxValue = 50,
-      offset = 90,
-      style = {
-          --背景皮肤
-          bgSkin = false,
-          --进度条皮肤
-          progressSkin = {
-              src = ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_radial_boss_hp"),
-          }
-      }
-  })
-
+   self._healthBar = nil
 end
 ----
 function M:_onAdded()
    M.super._onAdded(self)
 
-   self._healthBar:setPosition(cc.p(self:getEntity():getContentSize().width/2,self:getEntity():getContentSize().height/2))
-   self:getEntity():addChild(self._healthBar)
+   self._healthBar = self:getEntity():getChildByName("HEALTH_BAR")
 end
 
 function M:_onHurt()
