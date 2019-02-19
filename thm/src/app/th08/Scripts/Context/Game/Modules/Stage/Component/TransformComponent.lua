@@ -19,12 +19,13 @@ end
 function M:getPositionY()
     return self:getEntity():getPositionY()
 end
+--默认是左下角坐标
 function M:getPosition()
     return self:getEntity():getPosition()
 end
-function M:convertToWorldSpace(anchorPoint)
-    anchorPoint = anchorPoint or cc.p(0.5,0.5)
-    return self:getEntity():convertToWorldSpace(anchorPoint)
+
+function M:getWorldPosition()
+    return self:getEntity():convertToWorldSpace(cc.p(0,0))
 end
 --
 function M:setRotation(val)

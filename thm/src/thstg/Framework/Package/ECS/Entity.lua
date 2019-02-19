@@ -206,6 +206,10 @@ function M:destroy()
 	ECSManager.destroyEntity(self)
 end
 
+function M:clone(entity)
+	return self:_onClone(entity or self)
+end
+
 function M:getID()
     return self.__id__
 end
@@ -264,6 +268,11 @@ end
 function M:_onCleanup()
 
 end
+
+function M:_onClone(entity)
+	return clone(entity)
+end
+
 --每帧回调
 function M:_onUpdate(dTime)
 

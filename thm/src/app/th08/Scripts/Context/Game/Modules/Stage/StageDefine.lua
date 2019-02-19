@@ -35,6 +35,8 @@ WingmanBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.
 BossPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Base.BossPrefab")
 PropPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Base.PropPrefab")
 
+HealthBarPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Base.UI.HealthBarPrefab")
+
 --发射口预制体
 EmitterPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.EmitterPrefab")
 

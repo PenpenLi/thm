@@ -11,6 +11,7 @@ function M:getRect()
     local pos = cc.p(self._transComp:getPosition())
     local x = (pos.x + (0.5-self.anchorPoint.x) * self.size.width) + self.offset.x
     local y = (pos.y + (0.5-self.anchorPoint.y) * self.size.height) + self.offset.y
+
     return cc.rect(x , y , self.size.width, self.size.height)
 end
 

@@ -10,7 +10,7 @@ end
 function M:_onAdded()
    M.super._onAdded(self)
 
-   self._healthBar = self:getEntity():getChildByName("HEALTH_BAR")
+   self._healthBar = self:getEntity():getChildByName("HEALTH_BAR").uiPrgBar
 end
 
 function M:_onHurt()

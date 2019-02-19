@@ -46,3 +46,12 @@ end
 function createBatmans(type,num)
     
 end
+-----
+
+function createProp(type)
+
+end
+
+function createProps(type,num)
+    
+end

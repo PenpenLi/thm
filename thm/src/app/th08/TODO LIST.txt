@@ -83,13 +83,19 @@ TODO LIST:
 1:[]需要一种方法获取全局对象信息,如Boss
 
 2019-01-30
-1:[]ECS模式下UI组件移植有点难
-2:[]因为UI组件不属于ECS范畴,因此entity:getChildren()/entity:getParent()可能会出错
-3:[]子弹发射系统,不同子弹,特殊子弹,子弹缓存,以及出现的位置,受到碰撞后的逻辑等
+1:[-]ECS模式下UI组件移植有点难
+2:[-]因为UI组件不属于ECS范畴,因此entity:getChildren()/entity:getParent()可能会出错:全部封装成Entity
+3:[√]子弹发射系统,不同子弹,特殊子弹,子弹缓存,以及出现的位置,受到碰撞后的逻辑等
 4:[√]getComponents与find2ClassWithChild效率过低,
-5:[]getAllEntities()效率过低,getNameKey()
-6:[]在onUpdate/onLateUpdate中遍历实体非常耗性能
-7:[]使用ObjectCache做对象缓存,可能存在渲染顺序的问题
+5:[√]getAllEntities()效率过低,getNameKey()
+6:[√]在onUpdate/onLateUpdate中遍历实体非常耗性能
+7:[√]使用ObjectCache做对象缓存,可能存在渲染顺序的问题:手动设置渲染循序
+
+2019-02-19
+(因为没有宽高因此获得的坐标是基于中点的)
+1:[]碰撞矩形有问题,实体坐标是左下角的,碰撞矩形的x,y也是左下角的,且要获取全局坐标进行碰撞
+2:[]边界碰撞也需要用全局坐标进行比较
+3:[]碰撞检测可以优化一半的实体
 
 --遗留bug
 1:[]_onAdded()中不能使用addChild()/addTo(),会触发_onStart(),如要使用需要手动调整addScript()顺序
