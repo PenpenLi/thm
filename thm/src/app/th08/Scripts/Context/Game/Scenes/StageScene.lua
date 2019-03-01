@@ -29,11 +29,11 @@ function M:ctor()
     self:addChild(self.windowLayer)
     --
     self:onNodeEvent("enter", function ()
-        THSTG.ModuleManager.open(ModuleType.STAGE)
+        THSTG.MVCManager.openModule(ModuleType.STAGE)
     end)
 
     self:onNodeEvent("exit", function ()
-        THSTG.ModuleManager.close(ModuleType.STAGE)
+        THSTG.MVCManager.closeModule(ModuleType.STAGE)
     end)
 end
 

@@ -1,9 +1,8 @@
 local M = class("TH08",THSTG.Game)
 
 function M:_onEnv()
-    --初始化环境
-    require "Scripts.Context.EnvBase"
-    require "Scripts.Context.EnvGame"
+    --初始脚本引擎
+    require "Scripts.Init"
 
     return true
 end

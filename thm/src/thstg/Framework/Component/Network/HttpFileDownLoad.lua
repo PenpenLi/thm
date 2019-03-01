@@ -174,6 +174,7 @@ function HttpFileDownLoad:split_str(str, delimiter)
     return resultStrsList
 end
 
+return HttpFileDownLoad
 ---------------------------------------代码结束了--------------------------------------------------
 
 -- 调用方法：

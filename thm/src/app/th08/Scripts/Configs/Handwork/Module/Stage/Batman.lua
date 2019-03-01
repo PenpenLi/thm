@@ -1,3 +1,4 @@
+local EBatmanType = Const.Stage.EBatmanType
 return {
     ["Batman_01"] = {
         name = "妖精01",

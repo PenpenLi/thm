@@ -1,8 +1,8 @@
 local BaseEntity = require("Scripts.Context.Game.Modules.Test.GameTest.Misc.BaseEntity")
 local M = class("Player",BaseEntity)
-local EGameKeyType = Definition.Public.EGameKeyType
-local ETouchType = Definition.Public.ETouchType
-local EPlayerActionStatus = Definition.Public.EPlayerActionStatus
+local EGameKeyType = Const.Public.EGameKeyType
+local ETouchExType = THSTG.CONST.PUBLIC.ETouchExType
+local EPlayerActionStatus = Const.Public.EPlayerActionStatus
 function M:ctor()
     self.__rigidBodyRect = cc.rect(0,0,20,20)
     self:setAnchorPoint(THSTG.UI.POINT_CENTER)

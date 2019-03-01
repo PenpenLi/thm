@@ -10,9 +10,8 @@ local s_needClear = false
 function run()
 
 	SceneManager.init()
-	ModuleManager.init()
-	ECSManager.init()
 	MVCManager.init()
+	ECSManager.init()
 end
 
 --关闭游戏
@@ -29,11 +28,10 @@ function clear()
 	-- 清理
 	Scheduler.unscheduleAll()
 	cc.Director:getInstance():getActionManager():removeAllActions()
-
-	-- Dispatcher.clear()
+	Dispatcher.clear()
+	
 	ECSManager.clear()
 	MVCManager.clear()
-	ModuleManager.closeAll()
 	SceneManager.clear()
 
 end

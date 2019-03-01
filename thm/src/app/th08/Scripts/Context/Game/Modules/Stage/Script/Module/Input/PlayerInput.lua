@@ -1,5 +1,5 @@
-local EGameKeyType = Definition.Public.EGameKeyType
-local ETouchType = Definition.Public.ETouchType
+local EGameKeyType = Const.Public.EGameKeyType
+local ETouchExType = THSTG.CONST.PUBLIC.ETouchExType
 local M = class("PlayerInput",StageDefine.InputController)
 
 function M:_onInit()
@@ -22,18 +22,18 @@ function M:_onRegister(keyMapper)
     keyMapper:registerKey(cc.KeyCode.KEY_RIGHT_ARROW,EGameKeyType.MoveRight)
 
     keyMapper:registerKey(cc.KeyCode.KEY_Z,EGameKeyType.Attack)
-    keyMapper:registerKey(ETouchType.OnceClick,EGameKeyType.Attack)
+    keyMapper:registerKey(ETouchExType.OnceClick,EGameKeyType.Attack)
     keyMapper:registerKey(cc.KeyCode.KEY_H,EGameKeyType.Attack)
 
     keyMapper:registerKey(cc.KeyCode.KEY_X,EGameKeyType.Wipe)
-    keyMapper:registerKey(ETouchType.Shake,EGameKeyType.Wipe)
+    keyMapper:registerKey(ETouchExType.Shake,EGameKeyType.Wipe)
     keyMapper:registerKey(cc.KeyCode.KEY_J,EGameKeyType.Wipe)
 
     keyMapper:registerKey(cc.KeyCode.KEY_C,EGameKeyType.Bomb)
-    keyMapper:registerKey(ETouchType.DoubleClick,EGameKeyType.Bomb)
+    keyMapper:registerKey(ETouchExType.DoubleClick,EGameKeyType.Bomb)
     keyMapper:registerKey(cc.KeyCode.KEY_K,EGameKeyType.Bomb)
 
-    keyMapper:registerKey(ETouchType.MultiTouch,EGameKeyType.Slow)
+    keyMapper:registerKey(ETouchExType.MultiTouch,EGameKeyType.Slow)
     keyMapper:registerKey(cc.KeyCode.KEY_SHIFT,EGameKeyType.Slow)
 end
 
@@ -50,14 +50,14 @@ function M:__onMove(inputComp)
     local function keyMove(inputComp,posComp)
         local moveStep = cc.p(0,0)
         if inputComp:isKeyDown(EGameKeyType.MoveLeft) then
-            moveStep.x = -Definition.Public.PLAYER_KEY_MOVE_STEP
+            moveStep.x = -Const.Stage.PLAYER_KEY_MOVE_STEP
         elseif inputComp:isKeyDown(EGameKeyType.MoveRight) then
-            moveStep.x = Definition.Public.PLAYER_KEY_MOVE_STEP
+            moveStep.x = Const.Stage.PLAYER_KEY_MOVE_STEP
         end
         if inputComp:isKeyDown(EGameKeyType.MoveUp) then
-            moveStep.y = Definition.Public.PLAYER_KEY_MOVE_STEP
+            moveStep.y = Const.Stage.PLAYER_KEY_MOVE_STEP
         elseif inputComp:isKeyDown(EGameKeyType.MoveDown) then
-            moveStep.y = -Definition.Public.PLAYER_KEY_MOVE_STEP
+            moveStep.y = -Const.Stage.PLAYER_KEY_MOVE_STEP
         end
 
         return moveStep
@@ -72,14 +72,14 @@ function M:__onMove(inputComp)
             local curPos = cc.p(posComp:getPositionX(),posComp:getPositionY())
             local shift = cc.pSub(self.destPos, curPos) 
             local length = cc.pGetLength(shift)
-            if length <= Definition.Public.PLAYER_TOUCH_MOVE_STEP then
+            if length <= Const.Stage.PLAYER_TOUCH_MOVE_STEP then
                 moveStep.x = self.destPos.x - posComp:getPositionX()
                 moveStep.y = self.destPos.y - posComp:getPositionY()
                 self.destPos = nil
             else
                 local angle = cc.pGetAngle(cc.p(1,0),shift)
-                moveStep.x = Definition.Public.PLAYER_TOUCH_MOVE_STEP * math.cos(angle)
-                moveStep.y = Definition.Public.PLAYER_TOUCH_MOVE_STEP * math.sin(angle)
+                moveStep.x = Const.Stage.PLAYER_TOUCH_MOVE_STEP * math.cos(angle)
+                moveStep.y = Const.Stage.PLAYER_TOUCH_MOVE_STEP * math.sin(angle)
             end
             return moveStep
         end

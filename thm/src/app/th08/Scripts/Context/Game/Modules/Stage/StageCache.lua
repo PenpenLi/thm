@@ -1,10 +1,12 @@
 module(..., package.seeall)
-
+local ERoleType = Const.Stage.ERoleType
+local EModeType = Const.Stage.EModeType
+--
 local _bIsInStage = false
 local _bIsTeam = false
 local _eGroupType = false
-local _eRoleType = RoleType.REIMU
-local _eStageMode = StageModeType.BOSSRUSH
+local _eRoleType = ERoleType.Reimu
+local _eStageMode = EModeType.BossRush
 
 function setGroupType(val)
     _eGroupType = val

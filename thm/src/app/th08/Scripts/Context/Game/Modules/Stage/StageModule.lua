@@ -1,27 +1,18 @@
 module(..., package.seeall)
 
-local M = class("StageModule", THSTG.CORE.Module)
-
-function M:_onView()
-    --游戏逻辑初始化
-    local _eStageGame = StageDefine.StageGame.new()
-    _eStageGame:addTo(THSTG.SceneManager.get(SceneType.STAGE))
-    
-    --游戏特效层
-    local bossSpellEffectWnd = require("Scripts.Context.Game.Modules.Stage.View.Effect.BossSpellCardEffectLayer").create()
-    bossSpellEffectWnd:addTo(THSTG.SceneManager.get(SceneType.STAGE).backEffectLayer)
-    local playerSpellEffectWnd = require("Scripts.Context.Game.Modules.Stage.View.Effect.PlayerSpellCardEffectLayer").create()
-    playerSpellEffectWnd:addTo(THSTG.SceneManager.get(SceneType.STAGE).backEffectLayer)
-
-    --游戏UI
-    local _mainUiLayer = require("Scripts.Context.Game.Modules.Stage.View.UI.StageMainLayer").create()
-    _mainUiLayer:addTo(THSTG.SceneManager.get(SceneType.STAGE).mainLayer)
-end
+local M = class("StageModule", THSTG.MVC.Module)
 
 function M:_onInit()
     
 end
 
+function M:_initViewClass()
+    return "Scripts.Context.Game.Modules.Stage.StageView"
+end
+
+function M:_initCtrlClass()
+    return "Scripts.Context.Game.Modules.Stage.StageController"
+end
 
 
 return M

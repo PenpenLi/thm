@@ -1,21 +1,20 @@
 module("StageDefine", package.seeall)
 
 ---[[组件]]----
-SpriteComponent = require("Scripts.Context.Game.Modules.Stage.Component.SpriteComponent")
-AnimationComponent = require("Scripts.Context.Game.Modules.Stage.Component.AnimationComponent")
-TransformComponent = require("Scripts.Context.Game.Modules.Stage.Component.TransformComponent")
-ActionComponent = require("Scripts.Context.Game.Modules.Stage.Component.ActionComponent")
-InputComponent = require("Scripts.Context.Game.Modules.Stage.Component.InputComponent")
-RigidbodyComponent = require("Scripts.Context.Game.Modules.Stage.Component.RigidbodyComponent")
-AudioComponent = require("Scripts.Context.Game.Modules.Stage.Component.AudioComponent")
-SchedulerComponent = require("Scripts.Context.Game.Modules.Stage.Component.SchedulerComponent")
-BoxColliderComponent = require("Scripts.Context.Game.Modules.Stage.Component.Collider.BoxColliderComponent")
-CircleColliderComponent = require("Scripts.Context.Game.Modules.Stage.Component.Collider.CircleColliderComponent")
+SpriteComponent = THSTG.ECS.SpriteComponent
+AnimationComponent = THSTG.ECS.AnimationComponent
+TransformComponent = THSTG.ECS.TransformComponent
+ActionComponent = THSTG.ECS.ActionComponent
+InputComponent = THSTG.ECS.InputComponent
+RigidbodyComponent = THSTG.ECS.RigidbodyComponent
+AudioComponent = THSTG.ECS.AudioComponent
+SchedulerComponent = THSTG.ECS.SchedulerComponent
+BoxColliderComponent = THSTG.ECS.BoxColliderComponent
+CircleColliderComponent = THSTG.ECS.CircleColliderComponent
 
 ----
 
 ---[[实体]]----
-EmptyEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.EmptyEntity")
 BaseEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.BaseEntity")
 MovableEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.MovableEntity")
 LivedEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.LivedEntity")

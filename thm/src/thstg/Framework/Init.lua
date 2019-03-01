@@ -12,25 +12,23 @@
 --第三方库加载
 require "thstg.Framework.Third.Init"
 
- --常规全局
+--辅助库
+require "thstg.Framework.Util.Init"
+
+--常规定义
+require "thstg.Framework.Definition.Init"
+
+--常规全局
 require "thstg.Framework.Common.Init"
  
- --组件
+--组件
 require "thstg.Framework.Component.Init"
 
- --架构模式
+--架构模式
 require "thstg.Framework.Package.Init"
 
- --管理器
+--管理器
 require "thstg.Framework.Managers.Init"
- 
- --辅助库
-require "thstg.Framework.Util.StringUtil"
-require "thstg.Framework.Util.FileUtil"
-require "thstg.Framework.Util.TableUtil"
-require "thstg.Framework.Util.TimeUtil"
--- require "thstg.Framework.Util.UIDUtil"
-require "thstg.Framework.Util.NodeUtil"
 
  --引擎驱动
 require "thstg.Framework.Game"

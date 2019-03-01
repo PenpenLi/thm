@@ -1,5 +1,6 @@
+local EEnemyBulletType = Const.Stage.EEnemyBulletType
 return {
-    [301] = {
+    [EEnemyBulletType.BigJade] = {
         name = "大玉",
         desc = "BigJade",
         gameArgs = {
@@ -23,7 +24,7 @@ return {
             idle = {},
         },
     },
-    [302] = {
+    [EEnemyBulletType.SmallJade] = {
         name = "小玉",
         desc = "SmallJade",
         gameArgs = {

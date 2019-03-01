@@ -1,5 +1,6 @@
+local ERoleType = Const.Stage.ERoleType
 return {
-    ["Reimu"] = {
+    [ERoleType.Reimu] = {
         name = "博丽的巫女",
         cnName = "博丽的巫女",
         enName = " ",
@@ -29,10 +30,5 @@ return {
         effectInfo = {},
 
     },
-    ["Sakuya"] = {
-        
-    },
-    ["Yukari"] = {
-        
-    }
+
 }

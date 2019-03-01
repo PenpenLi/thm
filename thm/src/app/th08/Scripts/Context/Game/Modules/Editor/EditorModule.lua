@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local M = class("EditorModule", THSTG.CORE.MODULE)
+local M = class("EditorModule", THSTG.MVC.Module)
 
 function M:_initRealView()
     self:setViewParent(LayerManager.guiLayer)

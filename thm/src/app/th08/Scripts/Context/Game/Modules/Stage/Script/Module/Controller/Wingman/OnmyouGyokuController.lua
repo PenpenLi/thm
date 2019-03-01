@@ -1,9 +1,10 @@
+local EWingmanType = Const.Stage.EWingmanType
 local M = class("OnmyouGyokuController",StageDefine.WingmanController)
 
 function M:_onInit()
     M.super._onInit(self)
 
-    self.wingmanType = WingmanType.ONMYOUGYOKU
+    self.wingmanType = EWingmanType.OnmyouGyoku
     --存储子弹
 end
 

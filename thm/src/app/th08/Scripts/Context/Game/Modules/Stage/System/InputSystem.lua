@@ -1,8 +1,8 @@
 module(..., package.seeall)
-local ETouchType = Definition.Public.ETouchType
+local ETouchExType = THSTG.CONST.PUBLIC.ETouchExType
 local M = class("InputSystem",THSTG.ECS.System)
 
---FIXME:ETouchType和SceneType都不能作为通用的
+--FIXME:ETouchExType和SceneType都不能作为通用的
 function M:_onInit()
     self.keyCache = {}
     self.touchState = ""
@@ -23,33 +23,33 @@ function M:_onInit()
 
     self._touchListener = THSTG.EVENT.newTouchAllAtOnceExListener({
         onBegan = function(touches, event)
-            self.keyCache[ETouchType.OnceClick] = true
+            self.keyCache[ETouchExType.OnceClick] = true
             self.touchState = "onBegan"
             self.touchPos = touches[1]:getLocation()
             return true
         end,
         onMoved = function(touches, event)
             if #touches > 1 then
-                self.keyCache[ETouchType.MultiTouch] = true
+                self.keyCache[ETouchExType.MultiTouch] = true
             end
             self.touchState = "onMoved"
             self.touchPos = touches[1]:getLocation()
         end,
         onEnded = function(touches, event)
-            self.keyCache[ETouchType.OnceClick] = false
-            self.keyCache[ETouchType.Shake] = false
-            self.keyCache[ETouchType.DoubleClick] = false
+            self.keyCache[ETouchExType.OnceClick] = false
+            self.keyCache[ETouchExType.Shake] = false
+            self.keyCache[ETouchExType.DoubleClick] = false
             if #touches > 1 then
-                self.keyCache[ETouchType.MultiTouch] = false
+                self.keyCache[ETouchExType.MultiTouch] = false
             end
             self.touchState = "onEnded"
             self.touchPos = touches[1]:getLocation()
         end,
         onDoubleClick = function(touches, event)
-            self.keyCache[ETouchType.DoubleClick] = true
+            self.keyCache[ETouchExType.DoubleClick] = true
         end,
         onShaked = function(touches, event)
-            self.keyCache[ETouchType.Shake] = true
+            self.keyCache[ETouchExType.Shake] = true
         end,
     })
 

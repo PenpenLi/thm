@@ -1,5 +1,5 @@
 
-
+local ERoleType = Const.Stage.ERoleType
 local M = class("ReimuController",StageDefine.PlayerController)
 M.WINGMAN_INIT_POS = cc.p(30,-8)
 M.EMITTER_INIT_SHOT_SPEED = cc.p(2,10)
@@ -7,6 +7,8 @@ M.WINGMAN_AROUND_SPEED = 0.3
 
 function M:_onInit()
     M.super._onInit(self)
+
+    self.roleType = ERoleType.Reimu
 
     --阴阳玉僚机
     self.wingman1 = nil

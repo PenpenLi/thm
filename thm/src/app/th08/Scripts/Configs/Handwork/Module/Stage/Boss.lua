@@ -1,6 +1,6 @@
+local EBossType = Const.Stage.EBossType
 return {
-
-    ["WriggleNightbug"] = {
+    [EBossType.WriggleNightbug] = {
         name = "莉格露·奈特巴格",
         cnName = "莉格露·奈特巴格",
         enName = "Wriggle Nightbug",
@@ -32,11 +32,5 @@ return {
             [1] = "",
         },
     },
-    ["LilyWhite"]= {
-        name = "莉莉白",
-        nickName = "叫春精",
-        ability = "传播春天程度的能力",
-        description = "叫春精",
 
-    },
 }

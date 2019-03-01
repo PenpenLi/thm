@@ -1,5 +1,5 @@
-local EGameKeyType = Definition.Public.EGameKeyType
-local ETouchType = Definition.Public.ETouchType
+local EGameKeyType = Const.Public.EGameKeyType
+local ETouchExType = Const.Public.ETouchExType
 
 local M = class("PlayerController",StageDefine.BaseController)
 

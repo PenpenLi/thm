@@ -1,6 +1,6 @@
 module(..., package.seeall)
-local EGameKeyType = Definition.Public.EGameKeyType
-local ETouchType = Definition.Public.ETouchType
+local EGameKeyType = Const.Public.EGameKeyType
+local ETouchExType = THSTG.CONST.PUBLIC.ETouchExType
 local Player = require("Scripts.Context.Game.Modules.Test.GameTest.Misc.Player")
 local Scenario = require("Scripts.Context.Game.Modules.Test.GameTest.Misc.Scenario")
 local M = {}
@@ -39,18 +39,18 @@ function M.create(params)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_RIGHT_ARROW,EGameKeyType.MoveRight)
     
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_Z,EGameKeyType.Attack)
-        _cmpControlMapper:registerKey(ETouchType.OnceClick,EGameKeyType.Attack)
+        _cmpControlMapper:registerKey(ETouchExType.OnceClick,EGameKeyType.Attack)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_H,EGameKeyType.Attack)
     
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_X,EGameKeyType.Wipe)
-        _cmpControlMapper:registerKey(ETouchType.Shake,EGameKeyType.Wipe)
+        _cmpControlMapper:registerKey(ETouchExType.Shake,EGameKeyType.Wipe)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_J,EGameKeyType.Wipe)
     
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_C,EGameKeyType.Bomb)
-        _cmpControlMapper:registerKey(ETouchType.DoubleClick,EGameKeyType.Bomb)
+        _cmpControlMapper:registerKey(ETouchExType.DoubleClick,EGameKeyType.Bomb)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_K,EGameKeyType.Bomb)
 
-        _cmpControlMapper:registerKey(ETouchType.MultiTouch,EGameKeyType.Slow)
+        _cmpControlMapper:registerKey(ETouchExType.MultiTouch,EGameKeyType.Slow)
         _cmpControlMapper:registerKey(cc.KeyCode.KEY_SHIFT,EGameKeyType.Slow)
     end
 
@@ -157,28 +157,28 @@ function M.create(params)
             --有触屏就有攻击
             local curPos = touches[1]:getLocation()
             _varDestPos = {x = curPos.x, y = curPos.y}
-            _cmpControlMapper:pressKey(ETouchType.OnceClick)
+            _cmpControlMapper:pressKey(ETouchExType.OnceClick)
             return true
         end,
         onMoved = function(touches, event)
             local curPos = touches[1]:getLocation()
             _varDestPos = {x = curPos.x, y = curPos.y}
             if #touches > 1 then
-                _cmpControlMapper:pressKey(ETouchType.MultiTouch)
+                _cmpControlMapper:pressKey(ETouchExType.MultiTouch)
             end
         end,
         onEnded = function(touches, event)
             _varDestPos = false
-            _cmpControlMapper:releaseKey(ETouchType.OnceClick)
-            _cmpControlMapper:releaseKey(ETouchType.Shake)
-            _cmpControlMapper:releaseKey(ETouchType.DoubleClick)
+            _cmpControlMapper:releaseKey(ETouchExType.OnceClick)
+            _cmpControlMapper:releaseKey(ETouchExType.Shake)
+            _cmpControlMapper:releaseKey(ETouchExType.DoubleClick)
         end,
         --
         onDoubleClick = function(touches, event)
-            _cmpControlMapper:pressKey(ETouchType.DoubleClick)
+            _cmpControlMapper:pressKey(ETouchExType.DoubleClick)
         end,
         onShaked = function(touches, event)
-            _cmpControlMapper:pressKey(ETouchType.Shake)
+            _cmpControlMapper:pressKey(ETouchExType.Shake)
         end,
 
     })

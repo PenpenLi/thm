@@ -1,7 +1,0 @@
-require "Scripts.Context.Definition.Type.ModuleType.Stage.RoleType"
-require "Scripts.Context.Definition.Type.ModuleType.Stage.BulletType"
-require "Scripts.Context.Definition.Type.ModuleType.Stage.BossType"
-require "Scripts.Context.Definition.Type.ModuleType.Stage.BatmanType"
-require "Scripts.Context.Definition.Type.ModuleType.Stage.PropType"
-require "Scripts.Context.Definition.Type.ModuleType.Stage.WingmanType"
-require "Scripts.Context.Definition.Type.ModuleType.Stage.StageModeType"

@@ -50,7 +50,7 @@ function M:ctor()
 	self:onNodeEvent("exit", onExit)
 	self:onNodeEvent("cleanup", onCleanup)
     ----
-	
+	self:addComponent(ECS.TransformComponent.new())
 end
 --
 --[[component模块]]

@@ -1,0 +1,1 @@
+InputSystem = require("thstg.Framework.Package.ECS.System.InputSystem")

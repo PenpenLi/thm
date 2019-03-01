@@ -1,90 +1,95 @@
 module("MVCManager", package.seeall)
 
-local _ctrls = {}
+--[[ 常驻模块
+主界面ui
+]]
+
+--注册的模块
+local _modulesClass = {}
+local _modules = {}
+
 -- 正在打开的常驻模块
 local _residentModules = {}
-
 -- 正在打开的普通模块
 local _openedModules = {}
 
---注册contrller
-function registerController(moduleType, classPath)
-	local Class = require(classPath)
-	_ctrls[moduleType] = Class.new()
+-----------------------------------
+
+function registerModule(moduleType, classPath)
+	table.insert(_modulesClass, {moduleType = moduleType,classPath = classPath} )
 end
 
-function getController(moduleType)
-	return _ctrls[moduleType]
+function getModule(moduleType)
+	return _modules[moduleType]
 end
--------
 
---[[ 打开模块
-moduleType 模块名
+-------------
+--[[
 params = {
 	isResident -- 是否常驻
 	closeOthers -- 是否关闭其他
 }
 ]]
-function openView(moduleType, params)
+function openModule(moduleType,params)
 	params = params or {}
-	local ctrl = getController(moduleType)
-	if not ctrl then 
+	local module = getModule(moduleType)
+	if not module then 
 		return
 	end
-	if ctrl:isShow() and params.key == nil then
+	if module:isOpend() and params.key == nil then
 		return
 	end
 
+
 	local function residentShow()
 		_residentModules[moduleType] = true
-		ctrl:show(params)
-		
+		module:open(params)
 	end
 
 	local function noResidentShow()
 		if params.closeOthers then
-			closeAll(1)
+			closeAllModules(1)
 		elseif params.key ~= nil then
-			ctrl:hide()
+			module:close()
 		end
-		_openedModules[moduleType] = true
-		ctrl:show(params)
 		
+		_openedModules[moduleType] = true
+		module:open(params)
 	end
+
 
 	if params.closeOthers == nil then 
 		params.closeOthers = true 
 	end
 
+
 	if params.isResident then
 		residentShow()
 	else
 		noResidentShow()
-	end	
-
+	end
 end
 
---关闭指定模块
-function closeView(moduleType)
-	local ctrl = getController(moduleType)
-	if not ctrl or not ctrl:isShow() then
+function closeModule(moduleType)
+	local module = getModule(moduleType)
+	if not module or not module:isOpend() then
 		return
 	end
 
 	if _openedModules[moduleType] then
 
-		ctrl:hide()
+		module:close()
 		_openedModules[moduleType] = nil
-
+		
+		
 	end
 
 	if _residentModules[moduleType] then
-		ctrl:hide()
+		module:close()
 		_residentModules[moduleType] = nil
 		
 	end
 end
-
 
 --[[ 关闭所有模块
 allType
@@ -92,22 +97,22 @@ nil 都关闭
 1 - 只关闭普通模块
 2 - 只关闭常驻模块
 ]]
-function closeAllViews(allType)
+function closeAllModules(allType)
 	if allType == nil or allType == 1 then
 		for k, v in pairs(_openedModules) do
-			close(k)
+			closeModule(k)
 		end
 	end
 
 	if allType == nil or allType == 2 then
 		for k, v in pairs(_residentModules) do
-			close(k)
+			closeModule(k)
 		end
 	end
 end
 
 -- 检测某模块是否处于打开状态
-function isViewOpened(moduleType)
+function isModuleOpened(moduleType)
 	if _openedModules[moduleType] then
 		return true
 	end
@@ -119,7 +124,7 @@ function isViewOpened(moduleType)
 end
 
 -- 是否有一个以上的普通模块被打开了
-function isOpenedAnyView()
+function isOpenedAnyModule()
 	for k, v in pairs(_openedModules) do
 		if v then
 			return true
@@ -128,36 +133,36 @@ function isOpenedAnyView()
 	return false
 end
 
-function printOpenedView()
-	dump(__PRINT_TYPE__, _openedModules, "打开了这些模块 _openedModules")
-	dump(__PRINT_TYPE__, _residentModules, "打开了这些模块 _residentModules")
-end
 
-function checkView( ... )
-	local flag = false
-	for k,v in pairs(_openedModules) do
-		local ctrl = getController(k)
-		local close = false
-		if ctrl and ctrl:isShow() then
-		else
-			close = true
-			flag = true
-		end
-		if close then
-			_openedModules[k] = nil
-		end 
-	end
-	return flag
-end
-
---------
+------
 function init()
-
-end
-function clear()
-	for k, v in pairs(_ctrls) do
-		v:hide()
-		v:dispose()
+	local function openModule(_,e,moduleType,params)
+		if moduleType then
+			openModule(moduleType,params)
+		end
 	end
-	_ctrls = {}
+
+	local function closeModule(_,e,moduleType,params)
+		if moduleType then
+			closeModule(pmoduleType,params)
+		end
+	end
+	Dispatcher.addEventListener(EVENTTYPE.MVC_OPEN_MODULE, openModule)
+    Dispatcher.addEventListener(EVENTTYPE.MVC_CLOSE_MODULE, closeModule)
+
+	---实例化所有模块
+	for _,v in pairs(_modulesClass) do
+		local Class = require(v.classPath)
+		local module = Class.new()
+		module:_registered()
+		_modules[v.moduleType] = module
+	end
+end
+
+function clear()
+	closeAllModules()
+	for k, v in pairs(_modules) do
+		v:close()
+	end
+	_modules = {}
 end

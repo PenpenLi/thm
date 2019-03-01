@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("TestModule", THSTG.CORE.Module)
+local M = class("TestModule", THSTG.MVC.Module)
 
 function M:_onView()
     local layer = cc.Layer:create()

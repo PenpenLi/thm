@@ -13,11 +13,11 @@ function M:ctor()
 
     --
     self:onNodeEvent("enter", function ()
-        THSTG.ModuleManager.open(ModuleType.TEST)
+        THSTG.MVCManager.openModule(ModuleType.TEST)
     end)
 
     self:onNodeEvent("exit", function ()
-        THSTG.ModuleManager.close(ModuleType.TEST)
+        THSTG.MVCManager.closeModule(ModuleType.TEST)
     end)
 end
 

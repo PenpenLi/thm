@@ -18,7 +18,7 @@ function M:shot()
         local myTransComp = self:getComponent("TransformComponent")
         local bulletTransComp = bullet:getComponent("TransformComponent")
 
-        local myAbsPos = myTransComp:convertToWorldSpace()--由于图层的关系,需采用绝对坐标
+        local myAbsPos = myTransComp:getWorldPosition()--由于图层的关系,需采用绝对坐标
         bulletTransComp:setPositionX(myAbsPos.x + self.shotOffset.x)
         bulletTransComp:setPositionY(myAbsPos.y + self.shotOffset.y)
 

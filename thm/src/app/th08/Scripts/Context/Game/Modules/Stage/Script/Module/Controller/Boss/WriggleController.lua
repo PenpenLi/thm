@@ -1,9 +1,10 @@
+local EBossType = Const.Stage.EBossType
 local M = class("WriggleController",StageDefine.BossController)
 
 function M:_onInit()
     M.super._onInit(self)
 
-    self.bossType = BossType.WRIGGLE_NIGHTBUG
+    self.bossType = EBossType.WriggleNightbug
 end
 
 
