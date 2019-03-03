@@ -8,7 +8,7 @@ function M:ctor()
     self:addScript(self.animationController)
 
     self.bulletController = StageDefine.EnemyBulletController.new()
-    self.bulletController.bulletType = BulletType.BIGJADE
+    self.bulletController.bulletType = Const.Stage.EEnemyBulletType.BigJade
     self:addScript(self.bulletController)
 
 

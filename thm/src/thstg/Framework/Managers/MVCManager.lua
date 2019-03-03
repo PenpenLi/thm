@@ -44,6 +44,7 @@ function openModule(moduleType,params)
 	local function residentShow()
 		_residentModules[moduleType] = true
 		module:open(params)
+		Dispatcher.dispatchEvent(EVENTTYPE.MVC_MODULE_OPENED, moduleType)
 	end
 
 	local function noResidentShow()
@@ -55,6 +56,7 @@ function openModule(moduleType,params)
 		
 		_openedModules[moduleType] = true
 		module:open(params)
+		Dispatcher.dispatchEvent(EVENTTYPE.MVC_MODULE_CLOSED, moduleType)
 	end
 
 
@@ -80,7 +82,6 @@ function closeModule(moduleType)
 
 		module:close()
 		_openedModules[moduleType] = nil
-		
 		
 	end
 

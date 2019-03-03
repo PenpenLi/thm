@@ -1,23 +1,5 @@
 module(..., package.seeall)
-
-local _componentId =    1000000
-local _entityId =       2000000
-local _systemId =       3000000
 local _COMPONENT_SEPARATE_CHAR_ = "@"
-function getEntityId()
-    _entityId = _entityId + 1
-    return _entityId
-end
-
-function getSystemId()
-    _systemId = _systemId + 1
-    return _systemId
-end
-
-function getComponentId()
-    _componentId = _componentId + 1
-    return _componentId
-end
 
 ----
 function trans2Name(...)

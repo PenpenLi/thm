@@ -17,7 +17,7 @@ function M._purge()
 end
 ---
 function M:ctor(...)
-    self.__id__ = ECSUtil.getSystemId()
+    self.__id__ = UIDUtil.getSystemUID()
 
     self:_onInit(...)
 end

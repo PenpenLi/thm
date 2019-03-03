@@ -3,7 +3,7 @@ local M = class("Component")
 
 function M:ctor(...)
     --用于标识组件类别
-    self.__id__ = ECSUtil.getComponentId()
+    self.__id__ = UIDUtil.getComponentUID()
     self.__compName__ = nil
     self.__entity__ = nil
     self.__isEnabled__ = true

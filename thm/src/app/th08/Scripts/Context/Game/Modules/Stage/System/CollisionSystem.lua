@@ -191,6 +191,7 @@ end
 -----
 function M:_onInit()
     --消息注册
+    THSTG.Dispatcher.addEventListener(THSTG.EVENTTYPE.ECS_ENTITY_REMOVED,handler(self,self._entityRemoveHandle))
 end
 
 function M:_onUpdate(delay)
@@ -201,13 +202,11 @@ function M:_onUpdate(delay)
     end
 end
 
-function M:_onEvent(e,params)
-    if e == THSTG.ECSManager.EEventType.DestroyEntity then
-        local entity = params
-        local collComps = entity:getComponents("ColliderComponent")
-        for k,v in pairs(collComps) do
-            removeGridObjs(v)
-        end
+----
+function M:_entityRemoveHandle(e,entity)
+    local collComps = entity:getComponents("ColliderComponent")
+    for k,v in pairs(collComps) do
+        removeGridObjs(v)
     end
 end
 

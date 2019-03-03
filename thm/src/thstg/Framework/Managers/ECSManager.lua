@@ -65,14 +65,17 @@ function addEntity(entity)
         _entityCache[entity] = entity
         entity:retain()
         dirtyEntity(entity,EEntityFlag.Init)
+        Dispatcher.dispatchEvent(EVENTTYPE.ECS_ENTITY_ADDED,entity)
     end
 end
 
 function removeEntity(entity)
     local realEntity = _entityCache[entity]
     if realEntity then
+        Dispatcher.dispatchEvent(EVENTTYPE.ECS_ENTITY_REMOVED,realEntity)
         realEntity:release()
         _entityCache[entity] = nil
+        
     end
 end
 
@@ -184,6 +187,7 @@ end
 function addSystem(system)
     local className = system:getClass()
     _systemCache[className] = system
+    Dispatcher.dispatchEvent(EVENTTYPE.ECS_SYSTEM_ADDED,system)
 end
 
 function getSystem(name)
@@ -192,6 +196,7 @@ end
 
 function removeSystem(system)
     local className = system:getClass()
+    Dispatcher.dispatchEvent(EVENTTYPE.ECS_SYSTEM_REMOVEd,_systemCache[system])
     _systemCache[system] = nil
 end
 
@@ -251,7 +256,7 @@ function destroyEntity(entity)
     dirtyEntity(entity,EEntityFlag.Destroy)
 
     --通知所有对象被移除
-    broadcastEvent(EEventType.DestroyEntity,entity)
+    Dispatcher.dispatchEvent(EVENTTYPE.ECS_ENTITY_DESTROY,entity)
 end
 
 

@@ -16,7 +16,7 @@ function M._purge()
 end
 -----
 function M:ctor()
-    self.__id__ = ECSUtil.getEntityId()
+    self.__id__ = UIDUtil.getEntityUID()
 	self.__components__ = {}
 	self.__flags__ = nil
 	self.__isActive__ = true
@@ -43,7 +43,6 @@ function M:ctor()
 	--析构
 	local function onCleanup()
 		self:_cleanup()
-		ECSManager.broadcastEvent(ECSManager.EEventType.CleanupEntity,self)
 	end
 	
     self:onNodeEvent("enter", onEnter)

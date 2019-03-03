@@ -4,7 +4,7 @@ local M = class("Module")
 function M:ctor()
 	--模块名
 	self.__moduleName__ = self.__cname 
-	self.__id__ = MVCUtil.getModuleUID()
+	self.__id__ = UIDUtil.getModuleUID()
 
 	--子模块
 	self.__children__ = false
