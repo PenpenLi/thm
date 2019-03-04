@@ -121,7 +121,7 @@ function M.create(params)
     node:addChild(_uiDescText)
     
     --用于检查是否能够移动
-    _timerCheckMove = THSTG.Scheduler.schedule(function ()
+    _timerCheckMove = Scheduler.schedule(function ()
         if not _varIsCanMove then
             _varLstTime = _varLstTime + 1
             if _varLstTime >= DELAY_TIME then
@@ -167,7 +167,7 @@ function M.create(params)
 
     function node.destoyTimer()
         if _timerCheckMove then
-            THSTG.Scheduler.unschedule(_timerCheckMove)
+            Scheduler.unschedule(_timerCheckMove)
             _timerCheckMove = nil
         end
     end

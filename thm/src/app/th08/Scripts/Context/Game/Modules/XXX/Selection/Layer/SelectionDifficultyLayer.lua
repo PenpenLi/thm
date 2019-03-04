@@ -111,7 +111,7 @@ function M.create(params)
         if selectedPos == lastPos then
             _varSelectedNode = selectedNode
             selectMoveAction()
-            THSTG.Dispatcher.dispatchEvent(EventType.STARTITEM_SELECTDIFF_SELECT,{node = selectedNode,pos = selectedPos})
+            Dispatcher.dispatchEvent(EventType.STARTITEM_SELECTDIFF_SELECT,{node = selectedNode,pos = selectedPos})
 
         else
             if selectedNode then selectedNode:setSelect(true) end
@@ -132,7 +132,7 @@ function M.create(params)
         onPressed = function (keyCode, event)
             if _varIsEnabled then
                 if keyCode == cc.KeyCode.KEY_ESCAPE then
-                    THSTG.Dispatcher.dispatchEvent(EventType.STARTITEM_SELECTDIFF_CANCEL)
+                    Dispatcher.dispatchEvent(EventType.STARTITEM_SELECTDIFF_CANCEL)
                 end
             end
         end,
@@ -151,12 +151,12 @@ function M.create(params)
 
     node:onNodeEvent("enter", function ()
         node.updateLayer()
-        THSTG.Dispatcher.addEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.updateData)
+        Dispatcher.addEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.updateData)
         THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(_varKeyboardListener, node)
     end)
 
     node:onNodeEvent("exit", function ()
-        THSTG.Dispatcher.removeEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.updateData)
+        Dispatcher.removeEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.updateData)
         THSTG.CCDispatcher:removeEventListener(_varKeyboardListener)
     end)
 

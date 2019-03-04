@@ -1,4 +1,4 @@
-module("AUDIO", package.seeall)
+
 local INVALID_AUDIO_ID = -1
 
 local AudioEngine = ccexp.AudioEngine

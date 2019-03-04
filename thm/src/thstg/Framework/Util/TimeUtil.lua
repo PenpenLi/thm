@@ -78,7 +78,7 @@ function newCountDown(seconds, callFun, isOffset)
 	if isOffset then
 		count = getOffsetTime(seconds)
 	end
-	local id = THSTG.Scheduler.schedule(function()
+	local id = Scheduler.schedule(function()
 		callFun(formatTime(count))
 		count = count - 1
 	end, 1)
@@ -88,7 +88,7 @@ end
 -- 倒计时析构
 function clearCountDown(id)
 	if timeHandleT[id] then
-		THSTG.Scheduler.unschedule(id)
+		Scheduler.unschedule(id)
 		timeHandleT[id] = nil
 	end
 end

@@ -1,4 +1,4 @@
-module("EVENTTYPE", package.seeall)
+module("EVENT_TYPE", package.seeall)
 
 --MVC模块
 MVC_MODULE_OPENED = UIDUtil.getEventUID()

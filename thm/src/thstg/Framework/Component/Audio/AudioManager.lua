@@ -1,5 +1,5 @@
 --音乐管理器
-module(..., package.seeall)
+module("AudioManager", package.seeall)
 
 local AudioEngine = ccexp.AudioEngine
 local FileUtils = cc.FileUtils:getInstance()

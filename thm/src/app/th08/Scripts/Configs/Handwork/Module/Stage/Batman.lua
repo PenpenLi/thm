@@ -1,6 +1,6 @@
 local EBatmanType = Const.Stage.EBatmanType
 return {
-    ["Batman_01"] = {
+    [EBatmanType.Fairy01] = {
         name = "妖精01",
         description = "",
         ability = "",

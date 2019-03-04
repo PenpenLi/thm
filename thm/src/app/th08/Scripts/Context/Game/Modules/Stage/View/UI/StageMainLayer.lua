@@ -34,11 +34,11 @@ function M.create(params)
     init()
     -------Controller-------
     node:onNodeEvent("enter", function ()
-        -- THSTG.Dispatcher.addEventListener(EventType.STAGE_SPELLCARD_EFFECT_WND, self._spellEffectWnd, self)
+        -- Dispatcher.addEventListener(EventType.STAGE_SPELLCARD_EFFECT_WND, self._spellEffectWnd, self)
     end)
 
     node:onNodeEvent("exit", function ()
-        -- THSTG.Dispatcher.removeEventListener(EventType.STAGE_SPELLCARD_EFFECT_WND, self._spellEffectWnd, self)
+        -- Dispatcher.removeEventListener(EventType.STAGE_SPELLCARD_EFFECT_WND, self._spellEffectWnd, self)
     end)
     
     return node

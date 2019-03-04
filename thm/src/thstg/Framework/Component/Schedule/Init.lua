@@ -1,1 +1,2 @@
-Scheduler = require "thstg.Framework.Component.Schedule.Scheduler"
+module("SCHEDULE", package.seeall)
+require "thstg.Framework.Component.Schedule.ScheduleManager"

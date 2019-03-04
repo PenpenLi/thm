@@ -191,7 +191,7 @@ end
 -----
 function M:_onInit()
     --消息注册
-    THSTG.Dispatcher.addEventListener(THSTG.EVENTTYPE.ECS_ENTITY_REMOVED,handler(self,self._entityRemoveHandle))
+    THSTG.Dispatcher.addEventListener(THSTG.EVENT_TYPE.ECS_ENTITY_REMOVED,handler(self,self._entityRemoveHandle))
 end
 
 function M:_onUpdate(delay)
@@ -203,7 +203,7 @@ function M:_onUpdate(delay)
 end
 
 ----
-function M:_entityRemoveHandle(e,entity)
+function M:_entityRemoveHandle(_,e,entity)
     local collComps = entity:getComponents("ColliderComponent")
     for k,v in pairs(collComps) do
         removeGridObjs(v)

@@ -55,7 +55,7 @@ function M.create(params)
             if not _varIsEnabled then return end
             if keyCode == cc.KeyCode.KEY_ESCAPE then
                 --返回上层的动画
-                THSTG.Dispatcher.dispatchEvent(EventType.STARTITEM_SELECTROLE_CANCEL)
+                Dispatcher.dispatchEvent(EventType.STARTITEM_SELECTROLE_CANCEL)
 
             end
            

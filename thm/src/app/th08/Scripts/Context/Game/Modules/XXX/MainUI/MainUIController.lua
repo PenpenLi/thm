@@ -6,8 +6,8 @@ function M:_initViewClass()
 end
 
 function M:_onInit()
-	THSTG.Dispatcher.addEventListener(EventType.PUBLIC_OPEN_MODULE, self.__openModuleHandler, self)
-	THSTG.Dispatcher.addEventListener(EventType.PUBLIC_CLOSE_MODULE, self.__closeModuleHandler, self)
+	Dispatcher.addEventListener(EventType.PUBLIC_OPEN_MODULE, self.__openModuleHandler, self)
+	Dispatcher.addEventListener(EventType.PUBLIC_CLOSE_MODULE, self.__closeModuleHandler, self)
 end
 
 function M:__openModuleHandler(e, moduleType, ...)

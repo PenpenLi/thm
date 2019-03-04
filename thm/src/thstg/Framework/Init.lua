@@ -24,6 +24,9 @@ require "thstg.Framework.Common.Init"
 --组件
 require "thstg.Framework.Component.Init"
 
+--单例服务
+require "thstg.Framework.Services.Init"
+
 --架构模式
 require "thstg.Framework.Package.Init"
 

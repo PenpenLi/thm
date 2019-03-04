@@ -154,14 +154,15 @@ DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.Dest
 DestroyByTime = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByTime")
 ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
 
---全局脚本
-EntityManager = require("Scripts.Context.Game.Modules.Stage.Script.EntityManager")
 
 ---[[工具]]-----
 AnimationUtil = require("Scripts.Context.Game.Modules.Stage.Util.AnimationUtil")  
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  
 
 
+------
+--全局脚本
+EntityManager = require("Scripts.Context.Game.Modules.Stage.EntityManager")  
 
 ------
 --[[轮询的系统注册]]---

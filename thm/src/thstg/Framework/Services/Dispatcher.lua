@@ -1,6 +1,6 @@
 local M = {}
 
-local _, _dispatcher = THSTG.DispatcherManager.getNewId()
+local _, _dispatcher = DispatcherManager.getNewId()
 
 function M.addEventListener(name, listener, listenerCaller, priority)
 	_dispatcher:addEventListener(name, listener, listenerCaller, priority)

@@ -8,7 +8,7 @@ function M:bomb()
     --TODO:触发立绘
     --TODO:触发特效
     --TODO:触发
-    THSTG.Dispatcher.dispatchEvent(EventType.STAGE_SPELLCARD_EFFECT_WND,{isBoss = true,isOpen = true})
+    Dispatcher.dispatchEvent(EventType.STAGE_SPELLCARD_EFFECT_WND,{isBoss = true,isOpen = true})
 end
 
 -------

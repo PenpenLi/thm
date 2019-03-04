@@ -45,8 +45,6 @@ end
 
 ---
 
-
-
 function getStageId()
     return 4
 end
@@ -54,6 +52,32 @@ end
 function getMapId()
     return getStageId()
 end
+
+----
+local _allEntities = {}
+local _bossEntity = nil
+local _playerEntity = nil
+local _enemyBullet = {}
+local _playerBuller = {}
+
+function setBossEntity(entity)
+    _bossEntity = entity
+end
+function getBossEntity()
+    local bossEntitys = THSTG.ECSManager.findEntitiesByName("BOSS")
+    if next(bossEntitys) then
+        return bossEntitys[1]
+    end
+    return nil
+end
+function setPlayerEntity(entity)
+    _playerEntity = entity
+end
+
+function getPlayerEntity()
+    return _playerEntity
+end
+
 
 
 

@@ -1,6 +1,6 @@
 local EventDispatcher = require "thstg.Framework.Component.Event.EventDispatcher"
 
-local M = {}
+module("DispatcherManager", package.seeall)
 
 --存放所有EventDispatcher实例
 local _dispatchers = {}
@@ -12,7 +12,7 @@ local _dispatcherUID = 0
 	1	[int]	EventDispatcher实例对应的唯一id，对应事件发布器
 	2	[table]	EventDispatcher实例
 ]]
-function M.getNewId()
+function getNewId()
 	_dispatcherUID = _dispatcherUID + 1
 	local d = EventDispatcher.new()
 	_dispatchers[_dispatcherUID] = d
@@ -24,7 +24,7 @@ end
 @param	id	[number]	对应EventDispatcher实例的id，若对应id无实例将报错
 @return 当参数id有值时，返回对应EventDispatcher实例
 ]]
-function M.getDispatcher(id)
+function getDispatcher(id)
 	if not _dispatchers[id] then
 		assert(false, "The Dispatcher id:" .. id .. " is nil, you can create a new instance without params!")
 		return nil
@@ -34,12 +34,12 @@ function M.getDispatcher(id)
 end
 
 --清除对应id的dispatcher
-function M.clearDispatcher(id)
+function clearDispatcher(id)
 	_dispatchers[id] = nil
 end
 
 --清除所有
-function M.clear()
+function clear()
 	for k, v in pairs(_dispatchers) do
 		v:clear()
 	end
@@ -57,8 +57,8 @@ end
 @listenerCaller	[Object]侦听函数调用者
 @priority		[int]权重，值越大越先被执行
 --]]
-function M.addEventListener(dispatcherId, name, listener, listenerCaller, priority)
-	local dispatcher = M.getDispatcher(dispatcherId)
+function addEventListener(dispatcherId, name, listener, listenerCaller, priority)
+	local dispatcher = getDispatcher(dispatcherId)
 	if dispatcher then
 		dispatcher:addEventListener(name, listener, listenerCaller, priority)
 	end
@@ -70,8 +70,8 @@ end
 @name			[string]事件名
 @listener		[function]侦听器
 --]]
-function M.removeEventListener(dispatcherId, name, listener)
-	local dispatcher = M.getDispatcher(dispatcherId)
+function removeEventListener(dispatcherId, name, listener)
+	local dispatcher = getDispatcher(dispatcherId)
 	if dispatcher then
 		dispatcher:removeEventListener(name, listener)
 	end
@@ -83,8 +83,8 @@ end
 @name			[string]事件名
 @...			其它参数
 --]]
-function M.dispatchEvent(dispatcherId, name, ...)
-	local dispatcher = M.getDispatcher(dispatcherId)
+function dispatchEvent(dispatcherId, name, ...)
+	local dispatcher = getDispatcher(dispatcherId)
 	if dispatcher then
 		dispatcher:dispatchEvent(name, ...)
 	end
@@ -95,8 +95,8 @@ end
 @dispatcherId	[number]对应Dispatcher的id
 @name			[string]事件名
 --]]
-function M.hasEventListener(dispatcherId, name)
-	local dispatcher = M.getDispatcher(dispatcherId)
+function hasEventListener(dispatcherId, name)
+	local dispatcher = getDispatcher(dispatcherId)
 	if dispatcher then
 		return dispatcher:hasEventListener(name)
 	end
@@ -105,8 +105,7 @@ end
 
 -------------------
 --实例个数，用于测试
-function M.getSize()
+function getSize()
 	return table.nums(_dispatchers)
 end
 
-return M

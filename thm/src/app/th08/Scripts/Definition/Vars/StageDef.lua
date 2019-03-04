@@ -14,8 +14,8 @@ EModeType = {
     BossRush = 2,
 }
 
-ELayerType = {
-
+EEntityLayerType = {
+    
 }
 
 EEntityType = {

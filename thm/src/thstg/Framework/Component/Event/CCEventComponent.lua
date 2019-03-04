@@ -1,4 +1,4 @@
-module("EVENT", package.seeall)
+-- module(..., package.seeall)
 
 function getEventDispatcher()
     return cc.Director:getInstance():getEventDispatcher()

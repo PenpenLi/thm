@@ -1,6 +1,4 @@
-module("ACTION", package.seeall)
-
-local M = class("M")
+local M = class("MoveOvalBy")
 
 function M:ctor(speed,aR,bR,params)
     params = params or {}
@@ -70,3 +68,5 @@ function newMoveOvalBy(...)
         end)
     })
 end
+
+return M

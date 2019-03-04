@@ -18,7 +18,7 @@ function M:bomb()
         self.curBombCount = math.min(0,self.curBombCount - 1)   --再次消耗一个
         self.healthCtrl:deadSaveResurgence()-- 重新赋予生命
     end
-    THSTG.Dispatcher.dispatchEvent(EventType.STAGE_PLAYER_SPELLCARD_ATTACK,{roleType = self.roleType,isDeadSave = isDeadSave})
+    Dispatcher.dispatchEvent(EventType.STAGE_PLAYER_SPELLCARD_ATTACK,{roleType = self.roleType,isDeadSave = isDeadSave})
 end
 
 function M:reset()

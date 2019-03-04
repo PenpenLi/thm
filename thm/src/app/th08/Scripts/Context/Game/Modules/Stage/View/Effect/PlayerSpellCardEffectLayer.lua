@@ -56,11 +56,11 @@ function M.create(params)
     end
 
     node:onNodeEvent("enter", function ()
-        THSTG.Dispatcher.addEventListener(EventType.STAGE_PLAYER_SPELLCARD_ATTACK, updateLayer)
+        Dispatcher.addEventListener(EventType.STAGE_PLAYER_SPELLCARD_ATTACK, updateLayer)
     end)
 
     node:onNodeEvent("exit", function ()
-        THSTG.Dispatcher.removeEventListener(EventType.STAGE_PLAYER_SPELLCARD_ATTACK, updateLayer)
+        Dispatcher.removeEventListener(EventType.STAGE_PLAYER_SPELLCARD_ATTACK, updateLayer)
     end)
     
     return node

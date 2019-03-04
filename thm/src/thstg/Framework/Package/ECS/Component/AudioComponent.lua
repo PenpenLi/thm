@@ -1,5 +1,5 @@
 local M = class("AudioComponent",ECS.Component)
-
+--TODO:AudioManager
 function M:ctor(...)
     M.super.ctor(self,...)
 
@@ -20,30 +20,30 @@ end
 ---
 function M:play()
     assert(self.source, string.format("[%s] The file path cannot be empty",M.__cname))
-    self._id = AudioMgr.playSound(self.source,self.isLoop)
+    self._id = AudioManager.playSound(self.source,self.isLoop)
 end
 
 function M:stop()
-    AudioMgr.stopSound(self._id)
+    AudioManager.stopSound(self._id)
     self._id = -1
 end
 
 function M:pause()
-    AudioMgr.pauseSound(self._id)
+    AudioManager.pauseSound(self._id)
 end
 
 function M:resume()
-    AudioMgr.resumeSound(self._id)
+    AudioManager.resumeSound(self._id)
 end
 
 function M:getVolume()
-    local val = AudioMgr.getSoundVolume(self._id)
+    local val = AudioManager.getSoundVolume(self._id)
     self.volume = val
 end
 
 function M:setVolume(val)
     self.volume = val
-    AudioMgr.setSoundVolume(self._id,val)
+    AudioManager.setSoundVolume(self._id,val)
 end
 
 function M:_onStart()

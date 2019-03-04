@@ -93,5 +93,3 @@ end
 function size()
 	return table.nums(stack)
 end
-
-return M

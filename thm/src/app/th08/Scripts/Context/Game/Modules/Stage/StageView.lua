@@ -2,10 +2,6 @@ module(..., package.seeall)
 
 local M = class("StageView", THSTG.MVC.View)
 
-function M:_onRealView()
-
-end
-
 function M:_onInit()
     --游戏逻辑初始化
     local _eStageGame = StageDefine.StageGame.new()

@@ -77,7 +77,7 @@ function M.create(params)
             }
             runTileAction(actions)
             --返回主菜单
-            -- THSTG.Dispatcher.dispatchEvent(EventType.GAME_REPLACE_SCENE,{type = SceneType.MAIN_SCENE})
+            -- Dispatcher.dispatchEvent(EventType.GAME_REPLACE_SCENE,{type = SceneType.MAIN_SCENE})
             
         end
     end
@@ -93,17 +93,17 @@ function M.create(params)
 
     node:onNodeEvent("enter", function ()
         node.updateLayer()
-        THSTG.Dispatcher.addEventListener(EventType.STARTITEM_SELECTDIFF_CANCEL,node.swapLayer)
-        THSTG.Dispatcher.addEventListener(EventType.STARTITEM_SELECTDIFF_SELECT,node.swapLayer)
-        THSTG.Dispatcher.addEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.swapLayer)
-        THSTG.Dispatcher.addEventListener(EventType.STARTITEM_SELECTROLE_SELECT,node.swapLayer)
+        Dispatcher.addEventListener(EventType.STARTITEM_SELECTDIFF_CANCEL,node.swapLayer)
+        Dispatcher.addEventListener(EventType.STARTITEM_SELECTDIFF_SELECT,node.swapLayer)
+        Dispatcher.addEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.swapLayer)
+        Dispatcher.addEventListener(EventType.STARTITEM_SELECTROLE_SELECT,node.swapLayer)
 	end)
 
     node:onNodeEvent("exit", function ()
-        THSTG.Dispatcher.removeEventListener(EventType.STARTITEM_SELECTDIFF_CANCEL,node.swapLayer)
-        THSTG.Dispatcher.removeEventListener(EventType.STARTITEM_SELECTDIFF_SELECT,node.swapLayer)
-        THSTG.Dispatcher.removeEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.swapLayer)
-        THSTG.Dispatcher.removeEventListener(EventType.STARTITEM_SELECTROLE_SELECT,node.swapLayer)
+        Dispatcher.removeEventListener(EventType.STARTITEM_SELECTDIFF_CANCEL,node.swapLayer)
+        Dispatcher.removeEventListener(EventType.STARTITEM_SELECTDIFF_SELECT,node.swapLayer)
+        Dispatcher.removeEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.swapLayer)
+        Dispatcher.removeEventListener(EventType.STARTITEM_SELECTROLE_SELECT,node.swapLayer)
     end)
 
 
