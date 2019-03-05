@@ -20,7 +20,6 @@ BOX_DEFAULT_PARAMS = {
 @param	height			[number]	高度
 @param	anchorPoint		[cc.p]		锚点(如UI.POINT_CENTER)
 @param	margin  		[number]	item之间的间隔
-@param	autoSize		[boolean]	自适应大小
 @param	linearGravity	[ccui.LinearGravity]	对齐方式，请参考ccui.LinearGravity枚举[top, centerVertical, bottom]
 ]]
 function newHBox(params)
@@ -36,10 +35,6 @@ function newHBox(params)
 	box:setAnchorPoint(finalParams.anchorPoint)
 	if finalParams.width > 0 and finalParams.height > 0 then
 		box:setContentSize(cc.size(finalParams.width, finalParams.height))
-	end
-
-	if finalParams.autoSize then
-		box:setAutoSize(true)
 	end
 
 	local addChild = box.addChild
@@ -84,7 +79,6 @@ end
 @param	height			[number]	高度
 @param	anchorPoint		[cc.p]		锚点(如UI.POINT_CENTER)
 @param	margin  		[number]	item之间的间隔
-@param	autoSize		[boolean]	自适应大小
 @param	linearGravity	[ccui.LinearGravity]	对齐方式，请参考ccui.LinearGravity枚举[left, centerHorizontal, right]
 ]]
 function newVBox(params)
@@ -99,10 +93,6 @@ function newVBox(params)
 	box:setAnchorPoint(finalParams.anchorPoint)
 	if finalParams.width > 0 and finalParams.height > 0 then
 		box:setContentSize(cc.size(finalParams.width, finalParams.height))
-	end
-
-	if finalParams.autoSize then
-		box:setAutoSize(true)
 	end
 
 	local addChild = box.addChild

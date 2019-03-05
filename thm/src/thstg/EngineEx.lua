@@ -23,7 +23,7 @@ end
 function EngineEx:run()
     local gamePath = self._configs.gameRoot .. "." ..self._configs.gameName
  
-    local Game = require(gamePath):create()
+    local Game = require(gamePath).new()
 
     --初始化环境
     if Game:createEnv(self._configs.gameRoot) then

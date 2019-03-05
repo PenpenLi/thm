@@ -196,7 +196,18 @@ function M:update(dTime)
 	self:_onLateUpdate(dTime)
 
 end
-
+----
+-- local oldAddChild = cc.Node.addChild
+-- local oldAddTo = cc.Node.addTo
+-- function M:addChild(obj,...)
+-- 	assert(tolua.iskindof(obj,"Entity"), "[Entity] You much add a entity object")
+-- 	oldAddChild(self,obj,...)
+-- end
+-- function M:addTo(obj,...)
+-- 	assert(tolua.iskindof(obj,"Entity"), "[Entity] You much add a entity object")
+-- 	oldAddTo(self,obj,...)
+-- end
+----
 function M:clear()
 	self:removeAllComponents()
 end

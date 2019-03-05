@@ -324,7 +324,16 @@ return {
     {
         time = 5,
         callback = function (scheduler,task,params)
+            -- local obj = StageDefine.EntityManager.createEnemyBullet(EEnemyBullet.BigJude,cc.p(0,0),cc.p(10,10))
 
+            -- StageDefine.EntityManager.createEnemyBullet(EEnemyBullet.BigJude,20,function(i,obj)
+            --     StageDefine.ScenarioUtil.runActionSeq(obj)
+            --     StageDefine.ScenarioUtil.playCycle(i,obj)
+
+
+
+            --     -- return cc.p(10,10),cc.p(20,20)
+            -- end)
 
             
         end,  

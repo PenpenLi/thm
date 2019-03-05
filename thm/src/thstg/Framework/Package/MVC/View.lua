@@ -49,6 +49,7 @@ function M:tryShow(...)
 	if not self:isShow() then
 		self.__realView__ = self:_onRealView(...)
 		if self:isRealViewExist() then
+			self.__realView__:onNodeEvent("cleanup", handler(self, self._onRealViewCleanup))
 			assert(self.__realView__:getParent(), "[Module] Wanna show this, you must run addTo with a CCNode object for this view!")
 			return false
 		end

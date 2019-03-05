@@ -155,6 +155,7 @@ function init()
 	for _,v in pairs(_modulesClass) do
 		local Class = require(v.classPath)
 		local module = Class.new()
+		assert(module, string.format("[MVCManager] Module creation failed!(%s)",v.classPath))
 		module:_registered()
 		_modules[v.moduleType] = module
 	end

@@ -2,6 +2,12 @@ module(..., package.seeall)
 
 local M = class("StageView", THSTG.MVC.View)
 
+function M:ctor()
+    M.super.ctor(self)
+    
+    
+end
+
 function M:_onInit()
     --游戏逻辑初始化
     local _eStageGame = StageDefine.StageGame.new()
@@ -16,6 +22,10 @@ function M:_onInit()
     --游戏UI
     local _mainUiLayer = require("Scripts.Context.Game.Modules.Stage.View.UI.StageMainLayer").create()
     _mainUiLayer:addTo(THSTG.SceneManager.get(SceneType.STAGE).mainLayer)
+
+    local _statusLayer = require("Scripts.Context.Game.Modules.Stage.View.UI.StageStatusLayer").create()
+    _mainUiLayer:addChild(_statusLayer)
+
 end
 
 --

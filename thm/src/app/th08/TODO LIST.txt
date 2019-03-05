@@ -106,7 +106,11 @@ TODO LIST:
 
 2019-03-01
 1:[]Prefab最好不要在Entity中指定Father
-2:[]重写MVC模式,改为 Module,View,Controller ,其中Module为主导
+2:[√]重写MVC模式,改为 Module,View,Controller ,其中Module为主导
+3:[]一张符卡包含多个弹幕组(单位),弹幕组单位是子弹,但是弹幕组可以跟着实体移动
+4:[]StageView的Layer层应该重新规划,这里的都是各个部件的Node,既不能没有RealView
+5:[]onUpdate与onLateUpdate()两者执行两次循环,然而onLateUpdate却没有什么明显存在的必要
+
 --遗留bug
 1:[]_onAdded()中不能使用addChild()/addTo(),会触发_onStart(),如要使用需要手动调整addScript()顺序
 2:[√]_onRemoved()中没有设置析构顺序,因此不能调用其他脚本(可能已经被移除了),防止出错,如需使用需要添加判断

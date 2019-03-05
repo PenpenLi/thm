@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local M = class("HealthBarPrefab",StageDefine.BaseEntity)
+local M = class("HealthBar",StageDefine.BaseEntity)
 
 function M:ctor()
     M.super.ctor(self)

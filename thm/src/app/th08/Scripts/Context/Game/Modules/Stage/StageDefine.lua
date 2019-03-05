@@ -34,8 +34,6 @@ WingmanBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.
 BossPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Base.BossPrefab")
 PropPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Base.PropPrefab")
 
-HealthBarPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Base.UI.HealthBarPrefab")
-
 --发射口预制体
 EmitterPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.EmitterPrefab")
 
@@ -54,6 +52,7 @@ WrigglePrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Boss.W
 OnmyouGyoku = require("Scripts.Context.Game.Modules.Stage.Entity.OnmyouGyoku")
 Reimu = require("Scripts.Context.Game.Modules.Stage.Entity.Reimu")
 Marisa = require("Scripts.Context.Game.Modules.Stage.Entity.Marisa")
+HealthBar = require("Scripts.Context.Game.Modules.Stage.Entity.HealthBar")
 StageGame = require("Scripts.Context.Game.Modules.Stage.Entity.StageGame")
 
 ---[[脚本]]----

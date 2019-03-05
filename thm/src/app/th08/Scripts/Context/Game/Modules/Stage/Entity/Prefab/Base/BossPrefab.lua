@@ -8,7 +8,7 @@ function M:ctor()
     ----
     self:setName("BOSS")
     --BOSS血条
-    self.healthBar = StageDefine.HealthBarPrefab.new()
+    self.healthBar = StageDefine.HealthBar.new()
     self.healthBar:setName("HEALTH_BAR")
     self:addChild(self.healthBar)
     
