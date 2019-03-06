@@ -17,11 +17,9 @@ function M:ctor()
     self:addScript(self.slowController)
 
     self.playerController = StageDefine.MarisaController.new()
-    self.playerController.roleType = RoleType.Marisa
+    self.playerController.roleType = Const.Stage.ERoleType.Marisa
     self:addScript(self.playerController)
 
-    ---
-    self:addTo(THSTG.SceneManager.get(SceneType.STAGE).playerLayer)  
 end
 
 

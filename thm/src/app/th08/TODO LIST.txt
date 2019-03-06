@@ -102,7 +102,7 @@ TODO LIST:
 7:[]应该使用一种新的特效系统,返回一个Node,且该Node应该是一种独立的内部系统或非独立内部系统作为一种资源使用,取代现在的SEX
 8:[]GetComponent应该添加一个无论是否Active都可获得对象的方法
 9:[]Entity层级与ctor()不应该存在关联
-10:[]定义,全局定义,局部定义有点混乱,需要统一一下
+10:[√]定义,全局定义,局部定义有点混乱,需要统一一下
 
 2019-03-01
 1:[]Prefab最好不要在Entity中指定Father
@@ -110,6 +110,11 @@ TODO LIST:
 3:[]一张符卡包含多个弹幕组(单位),弹幕组单位是子弹,但是弹幕组可以跟着实体移动
 4:[]StageView的Layer层应该重新规划,这里的都是各个部件的Node,既不能没有RealView
 5:[]onUpdate与onLateUpdate()两者执行两次循环,然而onLateUpdate却没有什么明显存在的必要
+6:[]cc.Node的add与ECS.Entity的add不应该存在逻辑关系,前者是渲染顺序,后者是逻辑顺序
+7:[-]ECS.Entity(除根节点外)不能直接add到cc.Node上,因为两者没有必然联系,(Prefab现在就是这样,不严谨)
+8:[]所有ECS.Entity都是平级的,必须addTo到cc.Node才行,因此必须自行处理层级关系(尽管如此,最好不要在ctor()中直接addTo)
+9:[]每张符卡都是有时间限制的
+10:[]物理系统直接用Cocos API,不要在造轮子了
 
 --遗留bug
 1:[]_onAdded()中不能使用addChild()/addTo(),会触发_onStart(),如要使用需要手动调整addScript()顺序

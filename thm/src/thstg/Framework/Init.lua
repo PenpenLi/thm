@@ -27,11 +27,11 @@ require "thstg.Framework.Component.Init"
 --单例服务
 require "thstg.Framework.Services.Init"
 
---架构模式
-require "thstg.Framework.Package.Init"
-
 --管理器
 require "thstg.Framework.Managers.Init"
+
+--架构模式
+require "thstg.Framework.Package.Init"
 
  --引擎驱动
 require "thstg.Framework.Game"

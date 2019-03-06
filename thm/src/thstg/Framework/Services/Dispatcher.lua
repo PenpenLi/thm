@@ -1,6 +1,6 @@
 local M = {}
 
-local _, _dispatcher = DispatcherManager.getNewId()
+local _, _dispatcher = EVENT.DispatcherManager.getNewId()
 
 function M.addEventListener(name, listener, listenerCaller, priority)
 	_dispatcher:addEventListener(name, listener, listenerCaller, priority)

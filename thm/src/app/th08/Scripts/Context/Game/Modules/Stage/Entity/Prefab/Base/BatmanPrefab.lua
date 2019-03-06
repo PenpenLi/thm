@@ -15,7 +15,8 @@ function M:ctor()
     self.helthController = StageDefine.BatmanHealth.new()
     self:addScript(self.helthController)
 
-
+    --
+    self.entityCtrl.entityType = Const.Stage.EEntityType.Batman
 end
 
 ----------

@@ -1,4 +1,4 @@
-local M = class("SchedulerComponent",ECS.Component)
+local M = class("SchedulerComponent",THSTG.ECS.Component)
 
 function M:_onInit()
     self._cTaskScheduler = UTIL.newTaskScheduler()  --任务管理器

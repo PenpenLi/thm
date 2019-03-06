@@ -32,6 +32,9 @@ function M:ctor(...)
     
     self.constraintByBorder = StageDefine.ConstraintByBorder.new()
     self:addScript(self.constraintByBorder)
+
+    --
+    self.entityCtrl.entityType = Const.Stage.EEntityType.Player
 end
 
 

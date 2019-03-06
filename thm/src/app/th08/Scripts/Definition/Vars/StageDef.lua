@@ -24,7 +24,8 @@ EEntityType = {
     Boss = 3,
     Batman = 4,
     PlayerBullet = 5,
-    EntityBullet = 6,
+    EnemyBullet = 6,
+    WingmanBullet = 7,
 }
 
 ERoleType = {
@@ -57,7 +58,6 @@ EPlaerBulletType = {
     JiAmulet = 1,               --咒符·集
     SanAmulet = 2,              --咒符·散
 }
-
 
 EEnemyBulletType = {
     SmallJade = 301,      --小玉

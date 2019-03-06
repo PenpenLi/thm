@@ -8,6 +8,10 @@ local BATMAN_FILE = "Scripts.Configs.Handwork.Module.Stage.Batman"
 local BULLET_PLAYER_FILE = "Scripts.Configs.Handwork.Module.Stage.PlayerBullet"
 local BULLET_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.EnemyBullet"
 local PROP_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.Prop"
+
+local ENTITY_MAP_FILE = "Scripts.Configs.Handwork.Module.Stage.EntityMap"
+
+
 local function getDictByFile(path)
     local pathFile = string.format(path)
     return require(pathFile)
@@ -115,4 +119,10 @@ function getPropFrameSheetArgs(propType)
         return unpack(args)
     end
     return {}
+end
+----------------
+----------------
+function getEntityClass(category,type)
+    local tb = getDictByFile(ENTITY_MAP_FILE)[category]
+    return tb[type]
 end

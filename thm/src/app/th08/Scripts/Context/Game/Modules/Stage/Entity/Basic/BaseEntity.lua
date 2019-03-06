@@ -5,6 +5,10 @@ function M:ctor()
     M.super.ctor(self)
     
     self:addComponent(StageDefine.ActionComponent.new())
+
+    self.entityCtrl = StageDefine.EntityController.new()
+    self:addScript(self.entityCtrl)
+
 end
 
 

@@ -30,6 +30,8 @@ function M:_onAdded(entity)
         self.size.width = math.max(self.size.width,size.width)
         self.size.height = math.max(self.size.height,size.height)
     end
+    --重新设置刚体形状
+    self._rigidComp._physicsBody = THSTG.PHYSICS.newBox({size = self.size})
 
     if __DEBUG__ and __SHOW_COLLIDER_DEBUG__ then
         local testRect = THSTG.UI.newNode({

@@ -4,4 +4,4 @@ Dispatcher = require "thstg.Framework.Services.Dispatcher"
 
 
 ----
-CCDispatcher = THSTG.EVENT.getEventDispatcher()
+CCDispatcher = EVENT.getEventDispatcher()

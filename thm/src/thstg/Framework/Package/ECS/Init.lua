@@ -6,3 +6,5 @@ System = require "thstg.Framework.Package.ECS.System"
 
 require "thstg.Framework.Package.ECS.Component.Init"
 require "thstg.Framework.Package.ECS.System.Init"
+
+-----

@@ -29,3 +29,19 @@ end
 function calMoveToBySpeed(node,destPos,speed)
     return calculateTimeByConstantSpeed(node,destPos,speed),destPos
 end
+
+------
+function calCirclePos(centerPos,radius,total,num)
+    centerPos = centerPos or cc.p(display.cx,display.cy)
+    num = num or total
+
+    --
+    local initPosX = display.cx
+    local initPosY = display.cy
+
+    local angle = num/total * 360 * (math.pi/180)
+    local initPosX = centerPos.x + radius * math.cos(angle)
+    local initPosY = centerPos.y + radius * math.sin(angle)
+
+    return cc.p(initPosX,initPosY)
+end

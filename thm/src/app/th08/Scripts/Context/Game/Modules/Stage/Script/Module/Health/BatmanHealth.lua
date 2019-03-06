@@ -28,7 +28,7 @@ function M:_onDead()
         refNode = self:getEntity(),
         source = {EffectType.PUBLIC,"ccle_enemy_die_magic_01"}
     })
-    self:killEntity()
+    self:getScript("EntityController"):destroy()
 
 
     --TODO:爆道具

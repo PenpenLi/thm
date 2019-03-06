@@ -12,6 +12,8 @@ function M:ctor()
     self.collisionController = StageDefine.PlayerBulletCollision.new()
     self:addScript(self.collisionController)
 
+    --
+    self.entityCtrl.entityType = Const.Stage.EEntityType.PlayerBullet
 
 end
 

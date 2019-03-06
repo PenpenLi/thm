@@ -4,6 +4,7 @@ module("SceneManager", package.seeall)
 local _firstSceneType = nil
 local _sceneMap = {}
 local _scenes = {}      --正在运行的场景
+local _curScene = nil
 
 local function __getClass(sceneType)
     return _sceneMap[sceneType]
@@ -37,18 +38,35 @@ function getRunning()
     return THSTG.SCENE.getRunningScene()
 end
 
+function getCurScene()
+    return _curScene
+end
+
 function replace(sceneType, transition, time, more)
-    local scene = get(sceneType)
-    return THSTG.SCENE.replaceScene(scene, transition, time, more)
+    _curScene = get(sceneType)
+    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_REPLACE, sceneType)
+    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_CHANGED, _curScene)
+    return THSTG.SCENE.replaceScene(_curScene, transition, time, more)
 end
 
 function push(sceneType, transition, time, more)
-    local scene =  get(sceneType)
-    return THSTG.SCENE.pushScene(scene, transition, time, more)
+    _curScene = get(sceneType)
+    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_PUSH, sceneType)
+    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_CHANGED, _curScene)
+    return THSTG.SCENE.pushScene(_curScene, transition, time, more)
 end
 
 function pop()
-    return THSTG.SCENE.popScene()
+    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_POP)
+    THSTG.SCENE.popScene()
+    _curScene = getRunning()
+    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_CHANGED, _curScene)
+end
+
+local function initRun(scene)
+    display.runScene(scene)    --第一个场景或默认场景
+    _curScene = scene
+    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_CHANGED, _curScene)
 end
 
 function run(sceneType)
@@ -63,7 +81,7 @@ end
 
 function init()
     local firstScene = _firstSceneType and get(_firstSceneType) or display.newScene()
-    display.runScene(firstScene)    --第一个场景或默认场景
+    initRun(firstScene)
 end
 
 function clear()

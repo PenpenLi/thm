@@ -19,7 +19,8 @@ function M:ctor()
     self:addScript(self.helthController)
     ---
 
-
+    --
+    self.entityCtrl.entityType = Const.Stage.EEntityType.Boss
 end
 
 ----------

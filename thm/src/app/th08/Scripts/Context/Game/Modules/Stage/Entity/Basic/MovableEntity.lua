@@ -9,7 +9,7 @@ function M:ctor()
     self:addComponent(StageDefine.AnimationComponent.new())
     
     local rigidbodyComponent = StageDefine.RigidbodyComponent.new()
-    rigidbodyComponent.gravityScale = 0
+    rigidbodyComponent:setGravityEnabled(false)
     self:addComponent(rigidbodyComponent)
 
     self:addComponent(StageDefine.BoxColliderComponent.new())

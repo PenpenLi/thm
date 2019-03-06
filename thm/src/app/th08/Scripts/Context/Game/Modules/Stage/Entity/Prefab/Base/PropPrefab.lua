@@ -22,7 +22,8 @@ function M:ctor()
     self.animationController = StageDefine.PropAnimation.new()
     self:addScript(self.animationController)
 
-
+    --
+    self.entityCtrl.entityType = Const.Stage.EEntityType.Prop
 end
 
 ----------

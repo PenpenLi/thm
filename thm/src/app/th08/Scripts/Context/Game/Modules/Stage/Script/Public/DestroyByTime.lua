@@ -19,7 +19,7 @@ function M:_onUpdate(delay)
         self._totalTime = self._totalTime + delay
         if self._totalTime >= self.dwellTime then
             self._totalTime = 0
-            if ObjectCache.release(self:getEntity()) then self:getEntity():setActive(false) else self:killEntity() end
+            self:getScript("EntityController"):destroy()
         end
     else
         self._totalTime = 0

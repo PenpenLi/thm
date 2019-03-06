@@ -9,6 +9,7 @@ function M:_onInit()
 
     self._type = nil
     self._transComp = nil
+    self._rigidComp = nil
 end
 ------
 function M:collide(collder)
@@ -16,6 +17,9 @@ function M:collide(collder)
 end
 
 function M:_onAdded(entity)
+    self._rigidComp = entity:getComponent("RigidbodyComponent")
+    assert(self._rigidComp, string.format("[%s] You must have a RigidbodyComponent ",M.__cname))
+    
     self._transComp = entity:getComponent("TransformComponent")
     assert(self._transComp, string.format("[%s] You must have a TransformComponent ",M.__cname))
 end

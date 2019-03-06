@@ -51,11 +51,14 @@ function M:_onInit()
             self.keyCache[ETouchExType.Shake] = true
         end,
     })
+    
+    Dispatcher.addEventListener(EVENT_TYPE.SCENEMGR_CHANGED, self._addListenerHandle,self)
+end
 
-    local node = SceneManager.getRunning()
+function M:_addListenerHandle(e,params)
+    local node = params
     CCDispatcher:addEventListenerWithSceneGraphPriority(self._keyboardListener, node)
     CCDispatcher:addEventListenerWithSceneGraphPriority(self._touchListener, node)
-
 end
 
 function M:isKeyDown(keyCode)

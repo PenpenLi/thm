@@ -1,5 +1,11 @@
 module("EVENT_TYPE", package.seeall)
 
+--SCENE_MANAGER
+SCENEMGR_REPLACE = UIDUtil.getEventUID()
+SCENEMGR_PUSH = UIDUtil.getEventUID()
+SCENEMGR_POP = UIDUtil.getEventUID()
+SCENEMGR_CHANGED = UIDUtil.getEventUID()
+
 --MVC模块
 MVC_MODULE_OPENED = UIDUtil.getEventUID()
 MVC_MODULE_CLOSED = UIDUtil.getEventUID()

@@ -41,7 +41,7 @@ function M:show(...)
 		assert(self:isRealViewExist(), "[Module] the _onRealView function must return a CCNode object!")
 		self.__realView__:onNodeEvent("cleanup", handler(self, self._onRealViewCleanup))
 
-		assert(self.__realView__:getParent(), "[Module] Wanna show this, you must run addTo with a CCNode object for this view!")
+		assert(self.__realView__:getParent(), "[Module] Wanna show this, you must run addTo with a CCNode object for this RealView!")
 	end
 end
 
@@ -50,7 +50,7 @@ function M:tryShow(...)
 		self.__realView__ = self:_onRealView(...)
 		if self:isRealViewExist() then
 			self.__realView__:onNodeEvent("cleanup", handler(self, self._onRealViewCleanup))
-			assert(self.__realView__:getParent(), "[Module] Wanna show this, you must run addTo with a CCNode object for this view!")
+			assert(self.__realView__:getParent(), "[Module] Wanna show this, you must run addTo with a CCNode object for this RealView!")
 			return false
 		end
 	end

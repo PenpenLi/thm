@@ -8,7 +8,7 @@ ActionComponent = THSTG.ECS.ActionComponent
 InputComponent = THSTG.ECS.InputComponent
 RigidbodyComponent = THSTG.ECS.RigidbodyComponent
 AudioComponent = THSTG.ECS.AudioComponent
-SchedulerComponent = THSTG.ECS.SchedulerComponent
+SchedulerComponent = require("Scripts.Context.Game.Modules.Stage.Component.SchedulerComponent")
 BoxColliderComponent = THSTG.ECS.BoxColliderComponent
 CircleColliderComponent = THSTG.ECS.CircleColliderComponent
 
@@ -41,9 +41,10 @@ EmitterPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Emitte
 Fairy01Prefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Batman.Fairy01Prefab")
 
 --Bullet预制体
+---自机子弹
 ReimuBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.Player.ReimuBulletPrefab")
 OnmyouGyokuBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.Player.OnmyouGyokuBulletPrefab")
-
+---敌机子弹
 BigJadePrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.Enemy.BigJadePrefab")
 
 --Boss预制体
@@ -149,6 +150,7 @@ OnmyouGyokuBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.
 PropAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Prop.PropAnimation")
 
 --公共脚本
+EntityController = require("Scripts.Context.Game.Modules.Stage.Script.Public.EntityController")
 DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBorder")
 DestroyByTime = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByTime")
 ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
@@ -157,14 +159,15 @@ ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.C
 ---[[工具]]-----
 AnimationUtil = require("Scripts.Context.Game.Modules.Stage.Util.AnimationUtil")  
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  
-
+EntityUtil = require("Scripts.Context.Game.Modules.Stage.Util.EntityUtil")  
 
 ------
 --全局脚本
 EntityManager = require("Scripts.Context.Game.Modules.Stage.EntityManager")  
 
+---
+
+
 ------
 --[[轮询的系统注册]]---
-THSTG.ECS.System.register("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")
-THSTG.ECS.System.register("Scripts.Context.Game.Modules.Stage.System.PhysicsSystem")
-THSTG.ECS.System.register("Scripts.Context.Game.Modules.Stage.System.InputSystem")
+THSTG.ECSManager.registerSystem("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")

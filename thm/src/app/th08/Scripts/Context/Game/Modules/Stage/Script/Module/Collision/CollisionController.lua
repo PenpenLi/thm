@@ -1,10 +1,16 @@
 local M = class("CollisionController",THSTG.ECS.Script)
+function M:_onInit()
+    self.collisionSys = nil
+end
+
+function M:_onStart()
+    self.collisionSys = self:getSystem("CollisionSystem")
+end
 
 function M:_onLateUpdate()
-    local system = self:getSystem("CollisionSystem")
-    if system then
+    if self.collisionSys then
         local filterStr = self:_onFilter()
-        local isCollision,collision = system:isCollidedByGrids(self:getEntity(),filterStr)
+        local isCollision,collision = self.collisionSys:isCollidedByGrids(self:getEntity(),filterStr)
         if isCollision then
             self:_onCollision(collision.collider,collision)
         end

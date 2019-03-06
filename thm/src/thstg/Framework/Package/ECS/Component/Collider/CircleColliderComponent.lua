@@ -44,6 +44,8 @@ function M:_onAdded(entity)
         local radius = math.sqrt((spriteSize.width/2) * (spriteSize.width/2) + (spriteSize.height/2)*(spriteSize.height/2))
         self.radius = math.max(self.radius,radius)
     end
+    --重新设置刚体形状
+    self._rigidComp._physicsBody = THSTG.PHYSICS.newCircle({radius = self.radius})
 end
 
 ---

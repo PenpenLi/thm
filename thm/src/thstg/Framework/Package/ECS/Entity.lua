@@ -214,6 +214,7 @@ end
 
 function M:destroy()
 	ECSManager.destroyEntity(self)
+	self:_onDestroy()
 end
 
 function M:clone(entity)
@@ -270,6 +271,11 @@ end
 function M:_onReset()
 	
 end
+
+function M:_onDestroy()
+	
+end
+
 --退出场景回调
 function M:_onExit()
 	

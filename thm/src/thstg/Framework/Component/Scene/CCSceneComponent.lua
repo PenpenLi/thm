@@ -1,8 +1,17 @@
 module("SCENE", package.seeall)
 
 --CCScene组件
-function newScene()
+function newScene(params)
 	return cc.Scene:create()
+end
+
+function newPhysicsScene(params)
+	return PHYSICS.newPhysicsScene(params)
+end
+
+--CCLayer组件
+function newLayer(params)
+	return UI.newLayer(params)
 end
 
 --精灵

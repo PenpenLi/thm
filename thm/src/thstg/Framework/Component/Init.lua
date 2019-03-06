@@ -20,5 +20,8 @@ require "thstg.Framework.Component.Audio.Init"
 --Action组件
 require "thstg.Framework.Component.Action.Init"
 
+--Physics组件
+require "thstg.Framework.Component.Physics.Init"
+
 --工具组件
 require "thstg.Framework.Component.Util.Init"

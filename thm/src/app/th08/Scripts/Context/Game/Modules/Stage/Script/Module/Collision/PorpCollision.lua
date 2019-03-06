@@ -5,6 +5,11 @@ function M:_onInit()
     M.super._onInit(self)
 
     self.mainCtrl = nil
+
+
+    --
+    --XXX:关掉
+    self:setEnabled(false)
 end
 
 function M:_onFilter()

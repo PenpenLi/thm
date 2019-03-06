@@ -1,16 +1,20 @@
 local M = class("MainScene",cc.Scene)
 
 function M:ctor()
-    --窗口层
-    self.mainLayer = cc.Layer:create()
+    --
+    self.background = cc.Layer:create()
+    --UI层
+    self.mainUILayer = cc.Layer:create()
+    --弹窗层
+    self.windowLayer = cc.Layer:create()
+    --最顶层
+    self.topLayer = cc.Layer:create()
 
 
-
-    
-    self:addChild(self.mainLayer)
-
-
-
+    self:addChild(self.background)
+    self:addChild(self.mainUILayer)
+    self:addChild(self.windowLayer)
+    self:addChild(self.topLayer)
     --
     self:onNodeEvent("enter", function ()
         THSTG.MVCManager.openModule(ModuleType.TEST)

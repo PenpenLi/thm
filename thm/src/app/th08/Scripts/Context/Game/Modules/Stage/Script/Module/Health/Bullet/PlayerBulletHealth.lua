@@ -25,7 +25,7 @@ function M:_onDead()
             cc.FadeOut:create(1)
         }),
         cc.CallFunc:create(function()
-            if ObjectCache.release(self:getEntity()) then self:getEntity():setActive(false) else self:killEntity() end
+            self:getScript("EntityController"):destroy()
         end)
     }))
     SoundManager.playEffect(200103)

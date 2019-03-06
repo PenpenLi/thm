@@ -11,8 +11,6 @@ function M:ctor()
     self.stageGameController = StageDefine.StageGameController.new()
     self:addScript(self.stageGameController)
 
-
-    --
 end
 
 
