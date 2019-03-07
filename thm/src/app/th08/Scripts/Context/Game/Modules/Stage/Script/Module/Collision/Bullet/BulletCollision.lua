@@ -2,6 +2,12 @@
 local M = class("BulletCollision",StageDefine.CollisionController)
 
 ---
+function M:_onInit()
+    M.super._onInit(self)
+
+    -- self:setEnabled(false)
+end
+
 function M:_onFilter()
     
 end

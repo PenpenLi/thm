@@ -1,7 +1,8 @@
+local STAGE_VIEW_SIZE = Const.Stage.STAGE_VIEW_SIZE
 local M = class("ConstraintByBorder",THSTG.ECS.Script)
 
 function M:_onInit()
-    self.border = cc.rect(0,0,display.width,display.height)
+    self.border = cc.rect(0,0,STAGE_VIEW_SIZE.width,STAGE_VIEW_SIZE.height)
     self.size = cc.size(32,48)
 
     self._transComp = nil

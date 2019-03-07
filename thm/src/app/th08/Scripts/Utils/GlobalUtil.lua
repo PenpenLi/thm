@@ -23,7 +23,7 @@ function playEffect(params)
         end
     end
 
-    local node = THSTG.UI.newSpineAnimation(params)
+    local node = THSTG.ANIMATION.newSpineAnimation(params)
 
     node:playAnimation(0,params.animation,params.isLoop)
 
@@ -43,7 +43,7 @@ end
 
 function playParticle(params)
 
-    local node = THSTG.UI.newParticleSystem(params)
+    local node = THSTG.PARTICLE.newParticleSystem(params)
 
     if params.father then
         params.father:addChild(node)

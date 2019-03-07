@@ -1,7 +1,8 @@
+local STAGE_VIEW_SIZE = Const.Stage.STAGE_VIEW_SIZE
 local M = class("DestroyByBorder",THSTG.ECS.Script)
 
 function M:_onInit()
-    self.border = cc.rect(-display.width,-display.height,3*display.width,3*display.height)
+    self.border = cc.rect(-STAGE_VIEW_SIZE.width,-STAGE_VIEW_SIZE.height,3*STAGE_VIEW_SIZE.width,3*STAGE_VIEW_SIZE.height)
     
     self._posComp = nil
 end

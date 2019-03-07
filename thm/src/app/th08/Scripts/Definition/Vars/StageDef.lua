@@ -1,5 +1,7 @@
 module("Stage", package.seeall)
 
+STAGE_VIEW_SIZE = cc.size(640,480)     --舞台的视图尺寸,不等于窗口大小
+
 MAX_BARRAGE_NUM = 32768         --最大弹幕数
 
 PLAYER_KEY_MOVE_STEP = 3        --玩家一步的像素步伐

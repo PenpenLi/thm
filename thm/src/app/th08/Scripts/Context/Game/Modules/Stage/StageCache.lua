@@ -46,7 +46,7 @@ end
 ---
 
 function getStageId()
-    return 5
+    return 4
 end
 
 function getMapId()

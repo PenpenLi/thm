@@ -1,4 +1,4 @@
-module("UI", package.seeall)
+-- module("Video", package.seeall)
 
 -- 新建视频播放
 -- @param	x			[number]		x

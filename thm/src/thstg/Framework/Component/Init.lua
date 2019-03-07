@@ -23,5 +23,14 @@ require "thstg.Framework.Component.Action.Init"
 --Physics组件
 require "thstg.Framework.Component.Physics.Init"
 
+--动画组件
+require "thstg.Framework.Component.Animation.Init"
+
+--特效组件
+require "thstg.Framework.Component.EffectSystem.Init"
+
+--视频组件
+require "thstg.Framework.Component.Video.Init"
+
 --工具组件
 require "thstg.Framework.Component.Util.Init"

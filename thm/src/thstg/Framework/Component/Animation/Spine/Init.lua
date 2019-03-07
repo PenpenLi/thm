@@ -1,0 +1,1 @@
+require "thstg.Framework.Component.Animation.Spine.SpineComponent"

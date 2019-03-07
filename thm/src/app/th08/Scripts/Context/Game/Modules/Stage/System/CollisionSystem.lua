@@ -1,4 +1,5 @@
 module(..., package.seeall)
+local STAGE_VIEW_SIZE = Const.Stage.STAGE_VIEW_SIZE
 local M = class("CollisionSystem",THSTG.ECS.System)
 M.EDirectionType = {
     None = 1,
@@ -18,8 +19,8 @@ M.EDirectionType = {
 ]]
 -----
 --通过坐标获取网格ID
-local _GRID_SIZE_ = cc.size(160,120)--XXX:格子大小,决定碰撞检测的精度(格子越大,碰撞检测越精确,但是耗能越大,反之亦然)
-local _GRID_NUM_ = cc.p(10,10)
+local _GRID_NUM_ = cc.p(8,6)
+local _GRID_SIZE_ = cc.size(STAGE_VIEW_SIZE.width/_GRID_NUM_.x,STAGE_VIEW_SIZE.height/_GRID_NUM_.y)--XXX:格子大小,决定碰撞检测的精度(格子越大,碰撞检测越精确,但是耗能越大,反之亦然)
 local _gridComps = {}
 local _gridIDs = {}
 local function getGridId(rect)

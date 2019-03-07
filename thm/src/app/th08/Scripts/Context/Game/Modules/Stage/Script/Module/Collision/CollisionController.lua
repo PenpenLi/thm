@@ -8,6 +8,7 @@ function M:_onStart()
 end
 
 function M:_onLateUpdate()
+    --越界判断更高效
     if self.collisionSys then
         local filterStr = self:_onFilter()
         local isCollision,collision = self.collisionSys:isCollidedByGrids(self:getEntity(),filterStr)

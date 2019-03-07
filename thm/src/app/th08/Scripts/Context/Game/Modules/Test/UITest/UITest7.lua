@@ -9,7 +9,7 @@ function M.create(params)
 
 
     
-    -- local skeletonNode = THSTG.UI.newSpineAnimation({
+    -- local skeletonNode = THSTG.ANIMATION.newSpineAnimation({
     --     x = display.cx,
     --     y = display.cy,
     --     src = ResManager.getResMul(ResType.ANIMATION,AnimationType.TWEEN,"spine_dragonborn_logo"),
@@ -38,7 +38,7 @@ function M.create(params)
    
     
 
-    local p1 = THSTG.UI.newParticleSystem({
+    local p1 = THSTG.PARTICLE.newParticleSystem({
         x = display.width/2,
         y = display.height/2,
         anchorPoint = cc.p(0.5,0.5),
@@ -48,7 +48,7 @@ function M.create(params)
     p1:play()
     node:addChild(p1)
 
-    local p2 = THSTG.UI.newParticleSystem({
+    local p2 = THSTG.PARTICLE.newParticleSystem({
         x = display.width/2,
         y = display.height/2,
         anchorPoint = cc.p(0.5,0.5),

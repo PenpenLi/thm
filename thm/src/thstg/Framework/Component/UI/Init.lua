@@ -46,9 +46,6 @@ require "thstg.Framework.Component.UI.Basic.TabBar"
 require "thstg.Framework.Component.UI.Basic.LayerStack"
 
 --[[扩展部件extends]]--
-require "thstg.Framework.Component.UI.Extends.Animation"
-require "thstg.Framework.Component.UI.Extends.Particle"
-require "thstg.Framework.Component.UI.Extends.Video"
 require "thstg.Framework.Component.UI.Extends.Streak"
 
 --[[自定义部件custom]]--

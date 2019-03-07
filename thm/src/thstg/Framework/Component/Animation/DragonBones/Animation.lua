@@ -1,4 +1,4 @@
-module("UI", package.seeall)
+
 NodeAni = require "thstg.Framework.Component.UI.Basic.DragonBones.NodeAni"
 --- 骨骼动画包装器
 -- 建议最多包括2级嵌套动画

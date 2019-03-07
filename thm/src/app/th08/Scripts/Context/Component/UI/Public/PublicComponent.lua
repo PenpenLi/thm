@@ -57,7 +57,7 @@ function newSheetAnimationSprite(params)
     })
     params.animation = animation
 
-    local sprite = THSTG.UI.newSpriteAnimation(params)
+    local sprite = THSTG.ANIMATION.newSpineAnimation(params)
 
     return sprite
 end

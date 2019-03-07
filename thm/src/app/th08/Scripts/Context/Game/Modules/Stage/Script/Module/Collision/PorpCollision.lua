@@ -8,8 +8,6 @@ function M:_onInit()
 
 
     --
-    --XXX:关掉
-    self:setEnabled(false)
 end
 
 function M:_onFilter()

@@ -1,4 +1,4 @@
-module("UI", package.seeall)
+-- module("PARTICLE", package.seeall)
 
 
 -- 新建粒子

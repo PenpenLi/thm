@@ -19,6 +19,7 @@ function M:destroy()
     if ObjectCache.release(self:getEntity()) then 
         self:getEntity():setActive(false) 
     else 
+        --TODO:对BATMAN不起作用??
         self:killEntity() 
     end
 end 
