@@ -10,10 +10,6 @@ function M:ctor()
     self.bulletController = StageDefine.ReimuBulletController.new()
     self:addScript(self.bulletController)
 
-    ----
-    self:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
 end
-
-
 
 return M

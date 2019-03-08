@@ -20,7 +20,7 @@ function M:_onUpdate(delay)
         self._totalTime = self._totalTime + delay
         if self._totalTime >= self.dwellTime then
             self._totalTime = 0
-            self:getScript("EntityController"):destroy()
+            self:killEntity()
         end
     else
         self._totalTime = 0

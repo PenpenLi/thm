@@ -58,12 +58,13 @@ function M:getAllEntities()
     return _entitiesAllList
 end
 
-function M:getAllComponents()
+function M:getAllComponents(isForces)
+    isForces = isForces or false
     if not _entitiesAllComponents then
         local ret = {}
         local entitys = self:getAllEntities()
         for _,v in pairs(entitys) do
-            if v:isActive() then
+            if isForces or (not isForces and v:isActive()) then
                 local comps = v:getAllComponents()
                 for _,vv in pairs(comps) do
                     table.insert( ret, vv )
@@ -76,12 +77,17 @@ function M:getAllComponents()
 end
 
 --取得所有某类组件
-function M:getComponents(name)
+function M:getComponents(isForces,...)
+    local params = {...}
+    if type(isForces) ~= "boolean" then 
+        table.insert(params, 1, isForces)
+    end
+    local name = ECSUtil.trans2Name(unpack(params))
     if not _entitiesComponents[name] then
         local ret = {}
         local entitys = self:getAllEntities()
         for _,v in pairs(entitys) do
-            if v:isActive() then
+            if isForces or (not isForces and v:isActive()) then
                 local comp = v:getComponent(name)
                 if comp then
                     table.insert(ret, comp)

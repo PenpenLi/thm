@@ -14,7 +14,7 @@ function M:_onAdded()
 end
 
 function M:_onHurt()
-   --TODO:受伤频闪引发的bug,前后2次调用的时间差小于行为执行的时间差
+
    local animationComp = self:getComponent("AnimationComponent")
    animationComp:play(cc.Sequence:create({
       cc.Blink:create(0.1, 2),
@@ -32,7 +32,7 @@ function M:_onDead()
       src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_st_boss_down"),
    })
 
-   self:getScript("EntityController"):destroy()
+   self:killEntity()
 
    --TODO:爆道具
 end

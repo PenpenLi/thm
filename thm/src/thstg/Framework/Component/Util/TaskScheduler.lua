@@ -252,7 +252,7 @@ end
 
 --
 function newTaskScheduler(params)
-    return TaskScheduler:create()
+    return TaskScheduler.new()
 end
 
 function newScheduleTask(time,callback)

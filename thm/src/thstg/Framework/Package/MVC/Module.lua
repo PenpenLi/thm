@@ -51,22 +51,23 @@ function M:visit(self,func)
 end
 
 function M:_tryShow(...)
-	if self:getView() then
-		self:getView():tryShow(...)
-	end
-
 	if self:getCtrl() then
 		self:getCtrl():open(...)
+	end
+
+	if self:getView() then
+		self:getView():tryShow(...)
 	end
 
 end
 
 function M:_tryHide(...)
-	if self:getView() then
-		self:getView():tryHide(...)
-	end
 	if self:getCtrl() then
 		self:getCtrl():close(...)
+	end
+	
+	if self:getView() then
+		self:getView():tryHide(...)
 	end
 end
 
@@ -186,17 +187,17 @@ end
 
 ----------------------------
 function M:_registered(...)
-	local viewClass = self:_initViewClass() ~= "" and require(self:_initViewClass()) or false
 	local ctrlClass = self:_initCtrlClass() ~= "" and require(self:_initCtrlClass()) or false
+	local viewClass = self:_initViewClass() ~= "" and require(self:_initViewClass()) or false
 	
-	if viewClass then 
-		self.__view__ = viewClass.new() 
-		self.__view__.__module__ = self	--在这里设置,以免被覆盖
-	end
-
 	if ctrlClass then 
 		self.__ctrl__ = ctrlClass.new() 
 		self.__ctrl__.__module__ = self	--在这里设置,以免被覆盖
+	end
+
+	if viewClass then 
+		self.__view__ = viewClass.new() 
+		self.__view__.__module__ = self	--在这里设置,以免被覆盖
 	end
 
 	self:_onRegistered(...)

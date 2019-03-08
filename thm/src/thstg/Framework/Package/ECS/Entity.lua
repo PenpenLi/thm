@@ -42,6 +42,7 @@ function M:ctor()
 
 	--析构
 	local function onCleanup()
+		Dispatcher.dispatchEvent(EVENT_TYPE.ECS_ENTITY_CLEANUP,self)
 		self:_cleanup()
 	end
 	
@@ -333,6 +334,7 @@ function M:_cleanup()
 end
 
 function M:_active(isActive)
+	self:setVisible(isActive)
 	self:_onActive()
 	for k,v in pairs(self.__components__) do
 		v:_onActive(isActive)

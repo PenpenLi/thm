@@ -92,7 +92,7 @@ end
 
 function newControlMapper(params)
     params = params or {}
-    local controlMapper = ControlMapper:create()
+    local controlMapper = ControlMapper.new()
     for k,v in pairs(params) do
         controlMapper:registerKey(k,v)
     end

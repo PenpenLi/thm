@@ -11,9 +11,6 @@ function M:ctor()
     self.bulletController.bulletType = Const.Stage.EEnemyBulletType.SmallJade
     self:addScript(self.bulletController)
 
-
-    ----
-    self:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
    
 end
 

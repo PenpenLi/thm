@@ -172,7 +172,7 @@ return {
                 local actions = {}
                 table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(3*display.height))))  
                 table.insert(actions,cc.CallFunc:create(function ()
-                    batman:getScript("EntityController"):destroy()
+                    batman:destroy()
                     scheduler:resume()
                 end))
                 local actionComp = batman:getComponent("ActionComponent")
@@ -199,7 +199,7 @@ return {
                local actions = {}
                table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(3*display.height))))  
                table.insert(actions,cc.CallFunc:create(function ()
-                   batman:getScript("EntityController"):destroy()
+                   batman:destroy()
                    scheduler:resume()
                end))
                local actionComp = batman:getComponent("ActionComponent")
@@ -227,7 +227,7 @@ return {
                local actions = {}
                table.insert(actions, cc.MoveBy:create(8.0,cc.p(0,-(3*display.height))))  
                table.insert(actions,cc.CallFunc:create(function ()
-                   batman:getScript("EntityController"):destroy()
+                   batman:destroy()
                    scheduler:resume()
                end))
                local actionComp = batman:getComponent("ActionComponent")
@@ -255,7 +255,7 @@ return {
                local actions = {}
                table.insert(actions, cc.MoveBy:create(8.0,cc.p(3*display.width,0)))  
                table.insert(actions,cc.CallFunc:create(function ()
-                   batman:getScript("EntityController"):destroy()
+                   batman:destroy()
                    scheduler:resume()
                end))
                local actionComp = batman:getComponent("ActionComponent")
@@ -273,7 +273,7 @@ return {
                 local actions = {}
                 table.insert(actions, cc.MoveBy:create(8.0,cc.p(-3*display.width,0)))  
                 table.insert(actions,cc.CallFunc:create(function ()
-                    batman:getScript("EntityController"):destroy()
+                    batman:destroy()
                     scheduler:resume()
                 end))
                 local actionComp = batman:getComponent("ActionComponent")

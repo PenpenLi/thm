@@ -21,7 +21,6 @@ function M:_onAdded(entity)
     assert(self._rigidComp, string.format("[%s] You must have a RigidbodyComponent ",M.__cname))
     
     self._transComp = entity:getComponent("TransformComponent")
-    assert(self._transComp, string.format("[%s] You must have a TransformComponent ",M.__cname))
 end
 ------
 

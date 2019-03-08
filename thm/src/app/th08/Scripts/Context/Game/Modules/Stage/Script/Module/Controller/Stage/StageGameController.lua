@@ -9,7 +9,6 @@ function M:_onInit()
 end
 
 function M:initStage()
-    --FIXME:根据关卡改变
     local stageID = Cache.stageCache.getStageId()
     local schedulerComp = self:getComponent("SchedulerComponent")
     schedulerComp:setTasks(StageConfig.getScenario(stageID))
@@ -19,10 +18,8 @@ function M:initStage()
 end
 
 function M:initPlayer()
-    --FIXME:根据ERoleType变动
-    self._ePlayer = StageDefine.Reimu.new()
-    self._ePlayer:addTo(THSTG.SceneManager.get(SceneType.STAGE).playerLayer)  
-
+    local roleType = Cache.stageCache.getRoleType()
+    self._ePlayer = EntityManager.createPlayer(roleType)
 end
 
 function M:_onStart()

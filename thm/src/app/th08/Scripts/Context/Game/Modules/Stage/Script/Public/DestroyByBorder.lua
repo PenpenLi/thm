@@ -14,7 +14,7 @@ end
 function M:_onLateUpdate()
     local posPoint = cc.p(self._posComp:getPositionX(),self._posComp:getPositionY())
     if not cc.rectContainsPoint(self.border, posPoint) then
-        self:getScript("EntityController"):destroy()
+        self:killEntity()
     end
 end
 

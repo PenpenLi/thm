@@ -23,6 +23,13 @@ function M:setRotation(val)
     return self:_getSprite():setRotation(val)
 end
 
+function M:setVisible(val)
+    return self:_getSprite():setVisible(val)
+end
+function M:isVisible()
+    return self:_getSprite():isVisible()
+end
+
 ---
 function M:_onAdded(entity)
     self._sprite = self._sprite or SCENE.newSprite()
@@ -33,10 +40,6 @@ end
 function M:_onRemoved(entity)
     self._sprite:removeFromParent()
     self._sprite = nil
-end
-
-function M:_onActive(val)
-    self:_getSprite():setVisible(val)
 end
 
 --

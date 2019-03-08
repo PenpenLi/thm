@@ -154,18 +154,12 @@ EntityController = require("Scripts.Context.Game.Modules.Stage.Script.Public.Ent
 DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBorder")
 DestroyByTime = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByTime")
 ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
-
+ManageByPool = require("Scripts.Context.Game.Modules.Stage.Script.Public.ManageByPool")
 
 ---[[工具]]-----
 AnimationUtil = require("Scripts.Context.Game.Modules.Stage.Util.AnimationUtil")  
 ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  
 EntityUtil = require("Scripts.Context.Game.Modules.Stage.Util.EntityUtil")  
-
-------
---全局脚本
-EntityManager = require("Scripts.Context.Game.Modules.Stage.EntityManager")  
-
----
 
 
 ------

@@ -13,7 +13,6 @@ function M:ctor()
     self:addScript(self.batmanController)
 
 
-    self:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
 end
 
 ----------

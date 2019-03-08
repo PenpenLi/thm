@@ -31,11 +31,6 @@ function M:_onRemoved(entity)
     
 end
 
-function M:_onActive(val)
-    if val == false then
-        self:stopAllActions()
-    end
-end
 
 
 

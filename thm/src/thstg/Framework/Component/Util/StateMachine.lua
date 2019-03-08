@@ -300,7 +300,7 @@ end
 
 ----------------
 function newStateMachine(cfg)
-    local stateMachine = StateMachine:create()
+    local stateMachine = StateMachine.new()
     if type(cfg) == "table" then
         stateMachine:setupState(cfg)
     end

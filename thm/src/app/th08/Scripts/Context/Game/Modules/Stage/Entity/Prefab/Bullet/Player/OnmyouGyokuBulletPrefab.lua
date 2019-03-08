@@ -10,11 +10,6 @@ function M:ctor()
     self.animationController = StageDefine.OnmyouGyokuBulletAnimation.new()
     self:addScript(self.animationController)
 
-    ----
-    self:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
-    
 end
-
-
 
 return M

@@ -10,7 +10,7 @@ local BULLET_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.EnemyBullet"
 local PROP_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.Prop"
 
 local ENTITY_MAP_FILE = "Scripts.Configs.Handwork.Module.Stage.EntityMap"
-
+local LAYER_MAP_FILE = "Scripts.Configs.Handwork.Module.Stage.LayerMap"
 
 local function getDictByFile(path)
     local pathFile = string.format(path)
@@ -125,4 +125,9 @@ end
 function getEntityClass(category,type)
     local tb = getDictByFile(ENTITY_MAP_FILE)[category]
     return tb[type]
+end
+
+function getEntityLayerType(category)
+    local tb = getDictByFile(LAYER_MAP_FILE)
+    return tb[category]
 end

@@ -17,6 +17,8 @@ EModeType = {
 }
 
 EEntityLayerType = {
+    Player = 1,
+    Barrage = 2,
     
 }
 

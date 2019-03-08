@@ -11,7 +11,6 @@ function M:ctor()
     self.bossController = StageDefine.WriggleController.new()
     self:addScript(self.bossController)
 
-    self:addTo(THSTG.SceneManager.get(SceneType.STAGE).entityLayer)
 end
 
 ----------

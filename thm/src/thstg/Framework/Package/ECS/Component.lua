@@ -39,6 +39,10 @@ function M:getEntity()
     return self.__entity__
 end
 
+function M:isAdded()
+    return self.__entity__ and true or false
+end
+
 --移除组件
 function M:removeComponent(...)
 	return self:getEntity():removeComponent(...)

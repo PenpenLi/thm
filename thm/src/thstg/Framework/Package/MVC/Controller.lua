@@ -17,11 +17,11 @@ function M:getView()
 end
 ---
 function M:open(...)
-	self:_onShow(...)
+	self:_onOpen(...)
 end
 
 function M:close(...)
-	self:_onHide(...)
+	self:_onClose(...)
 end
 
 ----
@@ -29,11 +29,11 @@ function M:_onInit()
 
 end
 
-function M:_onShow(...)
+function M:_onOpen(...)
 	
 end
 
-function M:_onHide(...)
+function M:_onClose(...)
 	
 end
 

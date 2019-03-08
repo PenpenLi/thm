@@ -1,5 +1,6 @@
 module(..., package.seeall)
-
+local EEntityType = Const.Stage.EEntityType
+local EEntityLayerType = Const.Stage.EEntityLayerType
 local M = class("StageController", THSTG.MVC.Controller)
 
 function M:_onInit()
@@ -7,22 +8,32 @@ function M:_onInit()
 end
 
 function M:_onOpen()
-    Dispatcher.addEventListener(EventType.STAGE_ADD_ENTITY, handler(self,self.addEntity))
-    Dispatcher.addEventListener(EventType.STAGE_REMOVE_ENTITY, handler(self,self.removentity))
+    Dispatcher.addEventListener(EventType.STAGE_ADD_ENTITY, self._addEntity, self)
+    Dispatcher.addEventListener(EventType.STAGE_REMOVE_ENTITY, self._removEntity, self)
 end
 
 function M:_onClose()
-    Dispatcher.removeEventListener(EventType.STAGE_ADD_ENTITY, handler(self,self.addEntity))
-    Dispatcher.removeEventListener(EventType.STAGE_REMOVE_ENTITY, handler(self,self.removentity))
+    Dispatcher.removeEventListener(EventType.STAGE_ADD_ENTITY, self._addEntity, self)
+    Dispatcher.removeEventListener(EventType.STAGE_REMOVE_ENTITY, self._removEntity, self)
 end
 
 ----
-function M:addEntity(e,params)
+function M:_addEntity(e,entity,layerType)
+    local entityType = entity:getScript("EntityController").entityType
+    layerType = layerType or StageConfig.getEntityLayerType(entityType)
 
+    if layerType then
+        if layerType == EEntityLayerType.Player then
+            entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).playerLayer)
+        elseif layerType == EEntityLayerType.Barrage then
+            entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
+        end
+        Cache.stageCache.addToEntityCache(entity)
+    end
 end
 
-function M:removentity(e,params)
-
+function M:_removEntity(e,entity)
+    Cache.stageCache.removeToEntityCache(entity)
 end
 
 return M

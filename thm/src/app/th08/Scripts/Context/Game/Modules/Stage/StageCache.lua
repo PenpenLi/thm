@@ -1,4 +1,5 @@
 module(..., package.seeall)
+local EEntityType = Const.Stage.EEntityType
 local ERoleType = Const.Stage.ERoleType
 local EModeType = Const.Stage.EModeType
 --
@@ -46,7 +47,7 @@ end
 ---
 
 function getStageId()
-    return 4
+    return 5
 end
 
 function getMapId()
@@ -55,33 +56,36 @@ end
 
 ----
 local _allEntities = {}
-local _bossEntity = nil
-local _playerEntity = nil
-local _enemyBullet = {}
-local _playerBuller = {}
+function addToEntityCache(entity)
+    local entityType = entity:getScript("EntityController").entityType
+    _allEntities = _allEntities or {}
+    _allEntities[entityType] = _allEntities[entityType] or {}
+    _allEntities[entityType][entity] = entity
+end
 
-function setBossEntity(entity)
-    _bossEntity = entity
+function removeToEntityCache(entity)
+    local entityType = entity:getScript("EntityController").entityType
+    _allEntities = _allEntities or {}
+    _allEntities[entityType] = _allEntities[entityType] or {}
+    _allEntities[entityType][entity] = nil
 end
+
+function getEntities(category)
+    local tb = _allEntities[category]
+    return tb
+ end
+
 function getBossEntity()
-    local bossEntitys = THSTG.ECSManager.findEntitiesByName("BOSS")
-    if next(bossEntitys) then
-        return bossEntitys[1]
-    end
-    return nil
-end
-function setPlayerEntity(entity)
-    _playerEntity = entity
+    local tb = getEntities(EEntityType.Boss)
+    return tb and tb[1]
 end
 
 function getPlayerEntity()
-    return _playerEntity
+    local tb = getEntities(EEntityType.Player)
+    return tb and tb[1]
 end
-
-
-
 
 ----
 function clear()
-    
+    _allEntities = {}
 end

@@ -14,7 +14,7 @@ function M:shot()
     if THSTG.TimeUtil.time() >= (self._nextShotTime or 0) then
         if not self.objectPrefab then return end
 
-        local bullet = ObjectCache.create(self.objectPrefab)
+        local bullet = EntityManager.createEntityObject(self.objectPrefab,true)
         local myTransComp = self:getComponent("TransformComponent")
         local bulletTransComp = bullet:getComponent("TransformComponent")
 
@@ -27,7 +27,6 @@ function M:shot()
 
         local bulletControlScript = bullet:getScript("BulletController")
         bulletControlScript:reset()
-        bullet:setActive(true)
 
         self._nextShotTime = THSTG.TimeUtil.time() + self.shotInterval
     end
@@ -36,7 +35,7 @@ end
 
 function M:_onStart()
     M.super._onStart(self)
-    ObjectCache.expand(self.objectPrefab,self.prefabNum)
+    EntityManager.expandEntityObject(self.objectPrefab,self.prefabNum)
 end
 
 return M

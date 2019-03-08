@@ -56,5 +56,5 @@ end
 
 ----
 function newTickClock(params)
-    return TickClock:create()
+    return TickClock.new()
 end

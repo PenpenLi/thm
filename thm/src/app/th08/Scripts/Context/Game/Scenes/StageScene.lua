@@ -1,9 +1,9 @@
 local M = class("StageScene",function ()
-    -- return THSTG.PHYSICS.newPhysicsScene({  --拥有物理引擎的场景
-    --     isHaveEdge = false,
-    --     drawMask = cc.PhysicsWorld.DEBUGDRAW_ALL,
-    -- })
-    return cc.Scene:create()
+    return THSTG.PHYSICS.newPhysicsScene({  --拥有物理引擎的场景
+        isHaveEdge = false,
+        drawMask = cc.PhysicsWorld.DEBUGDRAW_ALL,
+    })
+    -- return cc.Scene:create()
 end)
 
 function M:ctor()

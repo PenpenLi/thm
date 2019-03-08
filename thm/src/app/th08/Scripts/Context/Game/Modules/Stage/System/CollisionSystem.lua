@@ -149,6 +149,7 @@ function M:isCollidedByGrids(entity,filter,idsFunc)
             local otherComps = self:getGridComps(compId) --取得碰撞组件
             for _,vv in pairs(otherComps) do
                 while true do
+                    if not vv:getEntity():isActive() then break end
                     if v ~= vv then
                         if type(filter) == "table" then
                             local isBreak = false
@@ -192,7 +193,7 @@ end
 -----
 function M:_onInit()
     --消息注册
-    THSTG.Dispatcher.addEventListener(THSTG.EVENT_TYPE.ECS_ENTITY_REMOVED,handler(self,self._entityRemoveHandle))
+    THSTG.Dispatcher.addEventListener(THSTG.EVENT_TYPE.ECS_ENTITY_REMOVED, self._entityRemoveHandle, self)
 end
 
 function M:_onUpdate(delay)
@@ -204,7 +205,7 @@ function M:_onUpdate(delay)
 end
 
 ----
-function M:_entityRemoveHandle(_,e,entity)
+function M:_entityRemoveHandle(e,entity)
     local collComps = entity:getComponents("ColliderComponent")
     for k,v in pairs(collComps) do
         removeGridObjs(v)

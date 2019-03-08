@@ -1,6 +1,12 @@
 
 local M = class("WingmanBulletCollision",StageDefine.BulletCollision)
 
+function M:_onInit()
+    M.super._onInit(self)
+
+    -- self:setEnabled(false)
+end
+
 ---
 function M:_onFilter()
     --特异性
