@@ -5,7 +5,7 @@ function M:_onInit()
 end
 ------
 function M:setPosition(x,y)
-    if type(x) == "table" and not y then
+    if type(x) == "table" then
         return self:getEntity():setPosition(x)
     end
     return self:getEntity():setPosition(x,y)

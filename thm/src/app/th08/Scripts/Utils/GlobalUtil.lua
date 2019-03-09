@@ -43,7 +43,7 @@ end
 
 function playParticle(params)
 
-    local node = THSTG.PARTICLE.newParticleSystem(params)
+    local node = THSTG.EFFECT.newParticleSystem(params)
 
     if params.father then
         params.father:addChild(node)

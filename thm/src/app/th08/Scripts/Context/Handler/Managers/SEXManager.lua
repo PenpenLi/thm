@@ -85,7 +85,7 @@ end
 -----
 function playParticle(params)
     params = params or {}
-    local node = THSTG.PARTICLE.newParticleSystem(params)
+    local node = THSTG.EFFECT.newParticleSystem(params)
 
     if params.source then
         local info = SEXConfig.getParticle(params.source[1],params.source[2])()

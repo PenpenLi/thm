@@ -1,4 +1,4 @@
-local ColliderComponent = require("thstg.Framework.Package.ECS.Component.Collider.ColliderComponent")
+local ColliderComponent = require("thstg.Framework.Package.ECS.Component.Physics.Collider.ColliderComponent")
 local M = class("CircleColliderComponent",ColliderComponent)
 
 function M:_onInit()

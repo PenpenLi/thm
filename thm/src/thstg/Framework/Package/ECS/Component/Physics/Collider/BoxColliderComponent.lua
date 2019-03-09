@@ -1,4 +1,4 @@
-local ColliderComponent = require("thstg.Framework.Package.ECS.Component.Collider.ColliderComponent")
+local ColliderComponent = require("thstg.Framework.Package.ECS.Component.Physics.Collider.ColliderComponent")
 local M = class("BoxColliderComponent",ColliderComponent)
 function M:_onInit()
     M.super._onInit(self)

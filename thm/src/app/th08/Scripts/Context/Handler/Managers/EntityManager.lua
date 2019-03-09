@@ -31,6 +31,12 @@ local function initEntity(entity,params)
         local rigidComp = entity:getComponent("RigidbodyComponent")
         rigidComp:setSpeed(params.speed)
     end
+
+    if params.action then
+        local actionComp = entity:getComponent("ActionComponent")
+        actionComp:runAction(params.action)
+    end
+
     if params.isReusable then
         -- 防止二次添加
         -- 添加对象管理组件
@@ -41,6 +47,7 @@ local function initEntity(entity,params)
             entity:addScript(poolMgr)
         end
     end
+    
 
     Dispatcher.dispatchEvent(EventType.STAGE_ADD_ENTITY,entity,layerType)
 end
@@ -54,7 +61,7 @@ function createEntityObject(class,isReusable,layerType)
     return entity
 end
 
-function createEntity(category,type,isReusable,initPos,initSpeed)
+function createEntity(category,type,isReusable,initPos,initSpeed,initAction)
     local class = loadEntityClass(category,type)
     if not class then return end
 
@@ -62,6 +69,7 @@ function createEntity(category,type,isReusable,initPos,initSpeed)
     initEntity(entity,{
         pos = initPos,
         speed = initSpeed,
+        action = initAction,
         isReusable = isReusable,
     })
 
@@ -76,10 +84,11 @@ function createEntities(category,type,num,isReusable,initFunc)
         local entity = createObject(class,isReusable)
         entity:setLocalZOrder(i)
 
-        local initPos,initSpeed = initFunc(i,entity)
+        local initPos,initSpeed,initAction = initFunc(i,entity)
         initEntity(entity,{
             pos = initPos,
             speed = initSpeed,
+            action = initAction,
             isReusable = isReusable,
         })
     end

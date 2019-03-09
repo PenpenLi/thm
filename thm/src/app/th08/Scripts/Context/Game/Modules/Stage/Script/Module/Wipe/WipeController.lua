@@ -9,7 +9,7 @@ function M:_onInit()
     self.wipeRecoveryFactor = 0.5                   --wipe恢复系数
     self.bossProtectRadius = 60                      --Boss保护半径(这个范围消弹无效)
 
-    self.__effectNode = THSTG.PARTICLE.newParticleSystem({
+    self.__effectNode = THSTG.EFFECT.newParticleSystem({
         x = 0,
         y = 0,
         anchorPoint = cc.p(0.5,0.5),

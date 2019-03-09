@@ -26,7 +26,7 @@ function schedule(listener, interval, repeatCount, isPaused, cleanup)
 		end
 
 		if type(listener) == "function" then
-			listener(...)
+			listener(...,scheduledTimes)
 		end
 	end
 	schedulerId = scheduler:scheduleScriptFunc(onSchedule, interval, isPaused)
