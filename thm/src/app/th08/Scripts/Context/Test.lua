@@ -7,6 +7,9 @@ __DEBUG__ = true
 --测试状态用来隐藏测试按钮
 __HIDE_TEST__ = false
 
+--CC物理引擎的MASK
+__PHYSICS_DEBUG_MASK__ = nil --cc.PhysicsWorld.DEBUGDRAW_ALL
+
 --是否显示碰撞矩形
 __SHOW_COLLIDER_DEBUG__ = false
 

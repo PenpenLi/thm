@@ -1,7 +1,7 @@
 local M = class("StageScene",function ()
     return THSTG.PHYSICS.newPhysicsScene({  --拥有物理引擎的场景
         isHaveEdge = false,
-        drawMask = cc.PhysicsWorld.DEBUGDRAW_ALL,
+        drawMask = __PHYSICS_DEBUG_MASK__,
     })
     -- return cc.Scene:create()
 end)

@@ -20,6 +20,8 @@ end
 function M:initPlayer()
     local roleType = Cache.stageCache.getRoleType()
     self._ePlayer = EntityManager.createPlayer(roleType)
+
+    self._ePlayer:getScript("PlayerController"):reset()
 end
 
 function M:_onStart()

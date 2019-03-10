@@ -13,5 +13,6 @@ BoxColliderComponent = require("thstg.Framework.Package.ECS.Component.Physics.Co
 CircleColliderComponent = require("thstg.Framework.Package.ECS.Component.Physics.Collider.CircleColliderComponent")
 
 --CC的物理组件
-CCBoxRigidbodyComponent = require("thstg.Framework.Package.ECS.Component.CCPhysics.CCBoxRigidbodyComponent")
-CCCircleRigidbodyComponent = require("thstg.Framework.Package.ECS.Component.CCPhysics.CCCircleRigidbodyComponent")
+CCRigidbodyComponent = require("thstg.Framework.Package.ECS.Component.CCPhysics.CCRigidbodyComponent")
+CCBoxColliderComponent = require("thstg.Framework.Package.ECS.Component.CCPhysics.Collider.CCBoxColliderComponent")
+CCCircleColliderComponent = require("thstg.Framework.Package.ECS.Component.CCPhysics.Collider.CCCircleColliderComponent")

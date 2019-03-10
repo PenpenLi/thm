@@ -2,6 +2,7 @@ local ColliderComponent = require("thstg.Framework.Package.ECS.Component.Physics
 local M = class("BoxColliderComponent",ColliderComponent)
 function M:_onInit()
     M.super._onInit(self)
+    self.category = ""
     self.size = cc.size(16,16)  --最小碰撞矩形
     
     self._type = ColliderComponent.EColliderType.Rect

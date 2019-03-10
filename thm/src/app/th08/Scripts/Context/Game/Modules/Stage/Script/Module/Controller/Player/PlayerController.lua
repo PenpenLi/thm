@@ -114,9 +114,6 @@ function M:_onStart()
     --取得动画节点
     self._spriteNode = self:getEntity():getChildByName("SPRITE_NODE")
 
-    
-    ----
-    self:reset()
 end
 
 function M:_onUpdate()

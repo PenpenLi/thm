@@ -14,6 +14,17 @@ function M:ctor()
 
     self:addComponent(StageDefine.BoxColliderComponent.new())
 
+
+    ---XXX:TEST
+    -- local ccrigibbodyComp = THSTG.ECS.CCRigidbodyComponent.new()
+    -- ccrigibbodyComp:setGravityEnable(false)
+    -- self:addComponent(ccrigibbodyComp)
+    
+    -- local boxCollider = THSTG.ECS.CCBoxColliderComponent.new({
+    --     size = cc.size(16,16)
+    -- })
+    -- boxCollider:setSensor(true)
+    -- self:addComponent(boxCollider)
 end
 
 return M
