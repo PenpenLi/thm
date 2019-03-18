@@ -1,4 +1,3 @@
-module("UTIL", package.seeall)
 
 --[[
     任务表例子
@@ -10,9 +9,9 @@ module("UTIL", package.seeall)
     }
 ]]
 
-TaskScheduler = class("TaskScheduler")
-function TaskScheduler:ctor()
-    self._pollClock = newTickClock()
+local M = class("TaskScheduler")
+function M:ctor()
+    self._pollClock = UTIL.newTickClock()
 
     self._varTaskTable = {}  --任务表
     self._varTaskQueue = {}  --执行表
@@ -40,7 +39,7 @@ local function pushTaskQueue(self,taskInfo)
     table.insert(self._varTaskQueue[fixTime], taskInfo)
 end
 
-function TaskScheduler:push(time,callback,tag)
+function M:push(time,callback,tag)
     local taskInfo = nil
     if type(time) == "table" then
         if type(time.callback) == "function" and type(time.time) == "number" and time.time >=0 then
@@ -74,37 +73,37 @@ function TaskScheduler:push(time,callback,tag)
   
 end
 
-function TaskScheduler:tickTime()
+function M:tickTime()
    return self._varCurTime
 end
 
-function TaskScheduler:time()
+function M:time()
     return self._varCurTime/(1000/self._varInterval)
 end
 
 --FIXME:如果跳过时间,因为之前的任务已经被移除,因此可能造成不在执行,往前跳的话又会因为没移除而出错
--- function TaskScheduler:jumpTo(time)
+-- function M:jumpTo(time)
 --     self._varCurTime = getFixTime(self,time)
 -- end
 
--- function TaskScheduler:jumpBy(offsetTime)
+-- function M:jumpBy(offsetTime)
 --     self._varCurTime = self._varCurTime + getFixTime(self,offsetTime)
 -- end
 
 
-function TaskScheduler:pause()
+function M:pause()
     self._varIsPause = true
 end
 
-function TaskScheduler:isPause()
+function M:isPause()
     return self._varIsPause
 end
 
-function TaskScheduler:resume()
+function M:resume()
     self._varIsPause = false
 end
 
-function TaskScheduler:reset(startTime)
+function M:reset(startTime)
     startTime = startTime or 0
     self._varCurTime = startTime
     self._varTaskQueue = {}
@@ -114,7 +113,7 @@ function TaskScheduler:reset(startTime)
 
 end
 
-function TaskScheduler:removeByTag(tag,isRelease)
+function M:removeByTag(tag,isRelease)
     if tag == nil then return end
     for k,v in pairs(self._varTaskTable) do
         if v.tag == tag then
@@ -133,7 +132,7 @@ function TaskScheduler:removeByTag(tag,isRelease)
   
 end
 
-function TaskScheduler:removeById(id,isRelease)
+function M:removeById(id,isRelease)
     if type(id) ~= "number" then return end
     local info = self._varTaskTable[id]
     if info then
@@ -152,7 +151,7 @@ function TaskScheduler:removeById(id,isRelease)
    
 end
 
-function TaskScheduler:removeByTime(time,isRelease)
+function M:removeByTime(time,isRelease)
     if type(time) ~= "number" then return end
     for k,v in pairs(self._varTaskTable) do
         if v.time == time then
@@ -167,7 +166,7 @@ function TaskScheduler:removeByTime(time,isRelease)
 
 end
 
-function TaskScheduler:clear()
+function M:clear()
     self._pollClock:reset()
     self._varCurTime = 0
     self._varTaskTable = {}  --任务表
@@ -175,7 +174,7 @@ function TaskScheduler:clear()
 end
 
 --
-function TaskScheduler:setTasks(tasks)
+function M:setTasks(tasks)
     tasks = tasks or {}
     self:clear()
     for _,v in ipairs(tasks) do
@@ -183,11 +182,11 @@ function TaskScheduler:setTasks(tasks)
     end
 end
 
-function TaskScheduler:getTasks()
+function M:getTasks()
     return self._varTaskQueue
 end
 
-function TaskScheduler:getTasksByTag(tag)
+function M:getTasksByTag(tag)
     if tag == nil then return end
 
     local tasks = {}
@@ -200,24 +199,24 @@ function TaskScheduler:getTasksByTag(tag)
     return tasks
 end
 
-function TaskScheduler:getInterval()
+function M:getInterval()
     return self._varInterval
 end
 
-function TaskScheduler:setInterval(interval)
+function M:setInterval(interval)
     self._varInterval = interval
 end
 
-function TaskScheduler:getUserData()
+function M:getUserData()
     return self._varUserData
 end
 
-function TaskScheduler:setUserData(data)
+function M:setUserData(data)
     self._varUserData = data
 end
 
 --轮询函数
-function TaskScheduler:poll()
+function M:poll()
     if self._pollClock:getElpased() >= self._varInterval then
         if not self:isPause() then
             local funsTb = self._varTaskQueue[self._varCurTime]
@@ -250,14 +249,4 @@ function TaskScheduler:poll()
     end
 end
 
---
-function newTaskScheduler(params)
-    return TaskScheduler.new()
-end
-
-function newScheduleTask(time,callback)
-    return {
-        time = time,
-        callback = callback,
-    }
-end
+return M

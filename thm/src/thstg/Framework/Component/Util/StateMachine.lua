@@ -1,6 +1,6 @@
-module("UTIL", package.seeall)
 
-StateMachine = class("StateMachine")
+
+M = class("StateMachine")
 
 --[[--
 
@@ -12,34 +12,34 @@ JS Version: 2.2.0
 
 ]]
 
-StateMachine.VERSION = "2.2.0"
+M.VERSION = "2.2.0"
 
 -- the event transitioned successfully from one state to another
-StateMachine.SUCCEEDED = 1
+M.SUCCEEDED = 1
 -- the event was successfull but no state transition was necessary
-StateMachine.NOTRANSITION = 2
+M.NOTRANSITION = 2
 -- the event was cancelled by the caller in a beforeEvent callback
-StateMachine.CANCELLED = 3
+M.CANCELLED = 3
 -- the event is asynchronous and the caller is in control of when the transition occurs
-StateMachine.PENDING = 4
+M.PENDING = 4
 -- the event was failure
-StateMachine.FAILURE = 5
+M.FAILURE = 5
 
 -- caller tried to fire an event that was innapropriate in the current state
-StateMachine.INVALID_TRANSITION_ERROR = "INVALID_TRANSITION_ERROR"
+M.INVALID_TRANSITION_ERROR = "INVALID_TRANSITION_ERROR"
 -- caller tried to fire an event while an async transition was still pending
-StateMachine.PENDING_TRANSITION_ERROR = "PENDING_TRANSITION_ERROR"
+M.PENDING_TRANSITION_ERROR = "PENDING_TRANSITION_ERROR"
 -- caller provided callback function threw an exception
-StateMachine.INVALID_CALLBACK_ERROR = "INVALID_CALLBACK_ERROR"
+M.INVALID_CALLBACK_ERROR = "INVALID_CALLBACK_ERROR"
 
-StateMachine.WILDCARD = "*"
-StateMachine.ASYNC = "ASYNC"
+M.WILDCARD = "*"
+M.ASYNC = "ASYNC"
 
-function StateMachine:ctor()
+function M:ctor()
     
 end
 
-function StateMachine:setupState(cfg)
+function M:setupState(cfg)
     assert(type(cfg) == "table", "StateMachine:ctor() - invalid config")
 
     -- cfg.initial allow for a simple string,
@@ -73,15 +73,15 @@ function StateMachine:setupState(cfg)
     return self
 end
 
-function StateMachine:isReady()
+function M:isReady()
     return self.current_ ~= "None"
 end
 
-function StateMachine:getState()
+function M:getState()
     return self.current_
 end
 
-function StateMachine:isState(state)
+function M:isState(state)
     if type(state) == "table" then
         for _, s in ipairs(state) do
             if s == self.current_ then return true end
@@ -92,23 +92,23 @@ function StateMachine:isState(state)
     end
 end
 
-function StateMachine:canDoEvent(eventName)
+function M:canDoEvent(eventName)
     return not self.inTransition_
-        and (self.map_[eventName][self.current_] ~= nil or self.map_[eventName][StateMachine.WILDCARD] ~= nil)
+        and (self.map_[eventName][self.current_] ~= nil or self.map_[eventName][M.WILDCARD] ~= nil)
 end
 
-function StateMachine:cannotDoEvent(eventName)
+function M:cannotDoEvent(eventName)
     return not self:canDoEvent(eventName)
 end
 
-function StateMachine:isFinishedState()
+function M:isFinishedState()
     return self:isState(self.terminal_)
 end
 
-function StateMachine:doEventForce(name, ...)
+function M:doEventForce(name, ...)
     local from = self.current_
     local map = self.map_[name]
-    local to = (map[from] or map[StateMachine.WILDCARD]) or from
+    local to = (map[from] or map[M.WILDCARD]) or from
     local args = {...}
 
     local event = {
@@ -122,22 +122,22 @@ function StateMachine:doEventForce(name, ...)
     self:beforeEvent_(event)
     if from == to then
         self:afterEvent_(event)
-        return StateMachine.NOTRANSITION
+        return M.NOTRANSITION
     end
 
     self.current_ = to
     self:enterState_(event)
     self:changeState_(event)
     self:afterEvent_(event)
-    return StateMachine.SUCCEEDED
+    return M.SUCCEEDED
 end
 
-function StateMachine:doEvent(name, ...)
-    assert(self.map_[name] ~= nil, string.format("StateMachine:doEvent() - invalid event %s", tostring(name)))
+function M:doEvent(name, ...)
+    assert(self.map_[name] ~= nil, string.format("doEvent() - invalid event %s", tostring(name)))
 
     local from = self.current_
     local map = self.map_[name]
-    local to = (map[from] or map[StateMachine.WILDCARD]) or from
+    local to = (map[from] or map[M.WILDCARD]) or from
     local args = {...}
 
     local event = {
@@ -149,25 +149,25 @@ function StateMachine:doEvent(name, ...)
 
     if self.inTransition_ then
         self:onError_(event,
-                      StateMachine.PENDING_TRANSITION_ERROR,
+                      M.PENDING_TRANSITION_ERROR,
                       "event " .. name .. " inappropriate because previous transition did not complete")
-        return StateMachine.FAILURE
+        return M.FAILURE
     end
 
     if self:cannotDoEvent(name) then
         self:onError_(event,
-                      StateMachine.INVALID_TRANSITION_ERROR,
+                      M.INVALID_TRANSITION_ERROR,
                       "event " .. name .. " inappropriate in current state " .. self.current_)
-        return StateMachine.FAILURE
+        return M.FAILURE
     end
 
     if self:beforeEvent_(event) == false then
-        return StateMachine.CANCELLED
+        return M.CANCELLED
     end
 
     if from == to then
         self:afterEvent_(event)
-        return StateMachine.NOTRANSITION
+        return M.NOTRANSITION
     end
 
     event.transition = function()
@@ -176,7 +176,7 @@ function StateMachine:doEvent(name, ...)
         self:enterState_(event)
         self:changeState_(event)
         self:afterEvent_(event)
-        return StateMachine.SUCCEEDED
+        return M.SUCCEEDED
     end
 
     event.cancel = function()
@@ -191,12 +191,12 @@ function StateMachine:doEvent(name, ...)
         event.transition = nil
         event.cancel = nil
         self.inTransition_ = false
-        return StateMachine.CANCELLED
-    elseif string.upper(tostring(leave)) == StateMachine.ASYNC then
-        return StateMachine.PENDING
+        return M.CANCELLED
+    elseif string.upper(tostring(leave)) == M.ASYNC then
+        return M.PENDING
     else
         -- need to check in case user manually called transition()
-        -- but forgot to return StateMachine.ASYNC
+        -- but forgot to return M.ASYNC
         if event.transition then
             return event.transition()
         else
@@ -205,7 +205,7 @@ function StateMachine:doEvent(name, ...)
     end
 end
 
-function StateMachine:addEvent_(event)
+function M:addEvent_(event)
     local from = {}
     if type(event.from) == "table" then
         for _, name in ipairs(event.from) do
@@ -215,7 +215,7 @@ function StateMachine:addEvent_(event)
         from[event.from] = true
     else
         -- allow "wildcard" transition if "from" is not specified
-        from[StateMachine.WILDCARD] = true
+        from[M.WILDCARD] = true
     end
 
     self.map_[event.name] = self.map_[event.name] or {}
@@ -229,80 +229,73 @@ local function doCallback_(callback, event)
     if callback then return callback(event) end
 end
 
-function StateMachine:beforeAnyEvent_(event)
+function M:beforeAnyEvent_(event)
     return doCallback_(self.callbacks_["onBeforeEvent"], event)
 end
 
-function StateMachine:afterAnyEvent_(event)
+function M:afterAnyEvent_(event)
     return doCallback_(self.callbacks_["onAfterEvent"] or self.callbacks_["onEvent"], event)
 end
 
-function StateMachine:leaveAnyState_(event)
+function M:leaveAnyState_(event)
     return doCallback_(self.callbacks_["onLeaveState"], event)
 end
 
-function StateMachine:enterAnyState_(event)
+function M:enterAnyState_(event)
     return doCallback_(self.callbacks_["onEnterState"] or self.callbacks_["onState"], event)
 end
 
-function StateMachine:changeState_(event)
+function M:changeState_(event)
     return doCallback_(self.callbacks_["onChangeState"], event)
 end
 
-function StateMachine:beforeThisEvent_(event)
+function M:beforeThisEvent_(event)
     return doCallback_(self.callbacks_["onBefore" .. event.name], event)
 end
 
-function StateMachine:afterThisEvent_(event)
+function M:afterThisEvent_(event)
     return doCallback_(self.callbacks_["onAfter" .. event.name] or self.callbacks_["on" .. event.name], event)
 end
 
-function StateMachine:leaveThisState_(event)
+function M:leaveThisState_(event)
     return doCallback_(self.callbacks_["onLeave" .. event.from], event)
 end
 
-function StateMachine:enterThisState_(event)
+function M:enterThisState_(event)
     return doCallback_(self.callbacks_["onEnter" .. event.to] or self.callbacks_["on" .. event.to], event)
 end
 
-function StateMachine:beforeEvent_(event)
+function M:beforeEvent_(event)
     if self:beforeThisEvent_(event) == false or self:beforeAnyEvent_(event) == false then
         return false
     end
 end
 
-function StateMachine:afterEvent_(event)
+function M:afterEvent_(event)
     self:afterThisEvent_(event)
     self:afterAnyEvent_(event)
 end
 
-function StateMachine:leaveState_(event, transition)
+function M:leaveState_(event, transition)
     local specific = self:leaveThisState_(event, transition)
     local general = self:leaveAnyState_(event, transition)
     if specific == false or general == false then
         return false
-    elseif string.upper(tostring(specific)) == StateMachine.ASYNC
-        or string.upper(tostring(general)) == StateMachine.ASYNC then
-        return StateMachine.ASYNC
+    elseif string.upper(tostring(specific)) == M.ASYNC
+        or string.upper(tostring(general)) == M.ASYNC then
+        return M.ASYNC
     end
 end
 
-function StateMachine:enterState_(event)
+function M:enterState_(event)
     self:enterThisState_(event)
     self:enterAnyState_(event)
 end
 
-function StateMachine:onError_(event, error, message)
+function M:onError_(event, error, message)
     printf("ERROR: error %s, event %s, from %s to %s", tostring(error), event.name, event.from, event.to)
     print(string.format("[%s] %s", string.upper(tostring("ERR")), string.format(tostring(message))))
     print(debug.traceback("", 2))
 end
 
-----------------
-function newStateMachine(cfg)
-    local stateMachine = StateMachine.new()
-    if type(cfg) == "table" then
-        stateMachine:setupState(cfg)
-    end
-    return stateMachine
-end
+return M

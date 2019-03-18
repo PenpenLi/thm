@@ -1,13 +1,13 @@
-module("UTIL", package.seeall)
 
-ObjectPool = class("ObjectPool")
-function ObjectPool:ctor()
+
+local M = class("ObjectPool")
+function M:ctor()
     self._objsCache = {}            --所有对象缓存的信息
     self._categoryCache = {}
 end
 
 --自动扩充
-function ObjectPool:create(class,param)
+function M:create(class,param)
     if type(class) == "table" then
         --取得队列
         local queue = self:_getObjcetQueue(class)
@@ -24,7 +24,7 @@ function ObjectPool:create(class,param)
     return nil
 end
 
-function ObjectPool:release(obj,isDelete)
+function M:release(obj,isDelete)
     local info = self._objsCache[obj]
     if info then
         local class = info.class
@@ -45,7 +45,7 @@ function ObjectPool:release(obj,isDelete)
     return false
 end
 
-function ObjectPool:pick(class,num,initFunc,params)
+function M:pick(class,num,initFunc,params)
     local list = {}
     initFunc = initFunc or function(...) end
     for i = 1,num do
@@ -56,7 +56,7 @@ function ObjectPool:pick(class,num,initFunc,params)
     return obj
 end
 
-function ObjectPool:throw(objs,isDelete,delFunc)
+function M:throw(objs,isDelete,delFunc)
     delFunc = delFunc or function(...) end
     for k,v in pairs(objs) do
         local ret = self:release(v,isDelete)
@@ -64,7 +64,7 @@ function ObjectPool:throw(objs,isDelete,delFunc)
     end
 end
 
-function ObjectPool:releaseAll(class,isDelete)
+function M:releaseAll(class,isDelete)
     local queue = self._categoryCache[class]
     if queue then
         for _,v in pairs(queue) do 
@@ -74,7 +74,7 @@ function ObjectPool:releaseAll(class,isDelete)
 end
 ---
 --填满池
-function ObjectPool:fill(class,num,param)
+function M:fill(class,num,param)
     local totalNum = self:_getTotalObjs(class)
     if totalNum >= num then return end
     local queue = self:_getObjcetQueue(class)
@@ -84,7 +84,7 @@ function ObjectPool:fill(class,num,param)
 
 end
 --
-function ObjectPool:expand(class,num,param)
+function M:expand(class,num,param)
     local queue = self:_getObjcetQueue(class)
     for i = 1,num do
         self:_addNewObject(queue,class,params)
@@ -93,7 +93,7 @@ function ObjectPool:expand(class,num,param)
 end
 --
 
-function ObjectPool:clearAll()
+function M:clearAll()
     for _,v in paris(self._objsCache) do
         if tolua.iskindof(v.object,"cc.Node") then
             v.object:release()
@@ -104,7 +104,7 @@ function ObjectPool:clearAll()
 end
 
 
-function ObjectPool:clear(class)
+function M:clear(class)
     if class then
         for _,v in paris(self._objsCache) do
             if info.class == class then
@@ -118,7 +118,7 @@ function ObjectPool:clear(class)
 end
 
 ----
-function ObjectPool:_getTotalObjs(class)
+function M:_getTotalObjs(class)
     local num = 0
     for _,v in pairs(self._objsCache) do
         if v.class == class then
@@ -128,14 +128,14 @@ function ObjectPool:_getTotalObjs(class)
     return num
 end
 
-function ObjectPool:_getAvailableObjs(class)
+function M:_getAvailableObjs(class)
     if not self._categoryCache[class] then return 0 end
 
     local queue = self._categoryCache[class]
     return (queue.tail - queue.front)
 end
 
-function ObjectPool:_getObjcetQueue(class)
+function M:_getObjcetQueue(class)
     if type(class) == "table" then
         local queue = nil
         if not self._categoryCache[class] then
@@ -150,7 +150,7 @@ function ObjectPool:_getObjcetQueue(class)
     return nil
 end
 
-function ObjectPool:_addNewObject(queue,class,params)
+function M:_addNewObject(queue,class,params)
     if type(class) == "table" and type(queue) == "table" then
         local obj = class.new(param)
         self._objsCache[obj] = {
@@ -168,8 +168,4 @@ function ObjectPool:_addNewObject(queue,class,params)
     end
 end
 
-----------------
-function newObjectPool(cfg)
-    local instance = ObjectPool.new()
-    return instance
-end
+return M

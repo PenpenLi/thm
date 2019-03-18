@@ -1,12 +1,12 @@
-module("UTIL", package.seeall)
 
-FuncHookHandler = class("FuncHookHandler")
-function FuncHookHandler:ctor()
+
+local M = class("FuncHookHandler")
+function M:ctor()
     self._id = 1
     self._hookCache = {}
 end
 
-function FuncHookHandler:hook(instane,funcStr,newFunc)
+function M:hook(instane,funcStr,newFunc)
     local oldFunc = instane[funcStr]
     self._hookCache[self._id] = {
         instane = instane,
@@ -20,7 +20,7 @@ function FuncHookHandler:hook(instane,funcStr,newFunc)
     self._id = self._id + 1
 end
 
-function FuncHookHandler:unhook(id)
+function M:unhook(id)
     local info = self._hookCache[id]
     if info then
         info.instane[info.funcStr] = info.oldFunc
@@ -28,8 +28,4 @@ function FuncHookHandler:unhook(id)
     end
 end
 
-----------------
-function newFuncHookHandler(cfg)
-    local instance = FuncHookHandler.new()
-    return instance
-end
+return M

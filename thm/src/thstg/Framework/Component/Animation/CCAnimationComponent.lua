@@ -1,7 +1,7 @@
 -- module("ANIMATION", package.seeall)
 
 
--- 新建精灵动画
+-- 新建动画精灵
 -- @param	x			[number]		x
 -- @param	y			[number]		y
 -- @param   width		[number]		宽
@@ -11,7 +11,7 @@
 -- @param 	onComplete		[function]	动画完成回调
 -- @param 	onEnd		[function]		动画结束回调
 
-function newSpriteAnimation(params)
+function newAnimationSprite(params)
     params = params or {}
     ---
     local privateData = {}
