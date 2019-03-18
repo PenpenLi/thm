@@ -1,5 +1,5 @@
-local DBXAtlas = "thstg.Framework.Component.Animation.DBX.DBXAtlas"
-local DBXSkeleton = "thstg.Framework.Component.Animation.DBX.DBXSkeleton"
+local DBXAtlas = require "thstg.Framework.Component.Animation.DragonBonesX.DBXAtlas"
+local DBXSkeleton = require "thstg.Framework.Component.Animation.DragonBonesX.DBXSkeleton"
 local M = class("DBXAnimater")
 
 function M:ctor(texPath,skePath)
@@ -40,6 +40,21 @@ function M:createAnimate(name)
         return cc.Animate:create(animation)
     end
     return false
+end
+
+function M:createAnime(name)
+    local skeleton = self:getSkeleton()
+    local animate = createAnimate(name)
+    local times =  skeleton:getAnimationTimes()
+    if time > 0 then
+        local seq = {}
+        for i = 1,time do
+            table.insert( seq,animate )
+        end
+        return cc.Sequence:create(seq)
+    elseif time == 0 then
+        return cc.RepeatForever:create(animate)
+    end
 end
 ---
 

@@ -35,7 +35,8 @@ end
 function M:shot()
     self._shotCtrl:shot()
     
-    SoundManager.playEffect(200101)
+    --TODO:疯狂掉帧
+    -- SoundManager.playEffect(200101)
 end
 
 function M:bomb()

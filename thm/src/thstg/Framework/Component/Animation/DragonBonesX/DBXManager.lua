@@ -1,9 +1,9 @@
-local DBXAtlas = "thstg.Framework.Component.Animation.DBX.DBXAtlas"
-local DBXSkeleton = "thstg.Framework.Component.Animation.DBX.DBXSkeleton"
+local DBXAtlas = require "thstg.Framework.Component.Animation.DragonBonesX.DBXAtlas"
+local DBXSkeleton = require "thstg.Framework.Component.Animation.DragonBonesX.DBXSkeleton"
 
-module("DBXManager", package.seeall)
+module(..., package.seeall)
 local _atlasCahce = {}
-local _sketoneCahce = {}
+local _skeletonCahce = {}
 
 function loadDBXFile(texPath,skePath)
     if texPath ~= "" then
@@ -11,6 +11,7 @@ function loadDBXFile(texPath,skePath)
         if atlas then
             local name = atlas:getAtlasName()
             _atlasCahce[name] = atlas
+
         end
     end
 
@@ -18,7 +19,8 @@ function loadDBXFile(texPath,skePath)
         local sketloe = DBXSkeleton.new(skePath)
         if sketloe then
             local name = sketloe:getSkeletonName()
-            _sketoneCahce[name] = sketloe
+            _skeletonCahce[name] = sketloe
+
         end
     end
 end
@@ -27,12 +29,12 @@ function getAtlas(name)
     return _atlasCahce[name]
 end
 
-function getSketlone(name)
-    return _sketoneCahce[name]
+function getSkeleton(name)
+    return _skeletonCahce[name]
 end
 ---
 function createTexture(altasName,texName)
-    local atlas = self:getAtlas(altasName)
+    local atlas = getAtlas(altasName)
     if atlas then
         return atlas:createTexture(texName)
     end
@@ -40,7 +42,7 @@ function createTexture(altasName,texName)
 end
 
 function createFrame(altasName,texName)
-    local atlas = self:getAtlas(altasName)
+    local atlas = getAtlas(altasName)
     if atlas then
         return atlas:createFrame(texName)
     end
@@ -48,22 +50,22 @@ function createFrame(altasName,texName)
 end
 
 function createFrames(altasName,aniName)
-    local atlas = self:getAtlas(altasName)
+    local atlas = getAtlas(altasName)
     if atlas then
-       local sketlone = self:getSketlone(altasName)
-       if sketlone then
-            return sketlone:createFrames(atlas,aniName)
+       local skeleton = getSkeleton(altasName)
+       if skeleton then
+            return skeleton:createFrames(atlas,aniName)
        end
     end
     return nil
 end
 
 function createAnimation(altasName,aniName)
-    local atlas = self:getAtlas(altasName)
+    local atlas = getAtlas(altasName)
     if atlas then
-       local sketlone = self:getSketlone(altasName)
-       if sketlone then
-            return sketlone:createAnimation(atlas,aniName)
+       local skeleton = getSkeleton(altasName)
+       if skeleton then
+            return skeleton:createAnimation(atlas,aniName)
        end
     end
     return nil
@@ -77,7 +79,28 @@ function createAnimate(altasName,aniName)
     return nil
 end
 
+function createAnime(altasName,name)
+    local atlas = getAtlas(altasName)
+    if atlas then
+       local skeleton = getSkeleton(altasName)
+       if skeleton then
+            local animate = createAnimate(altasName,name)
+            local times =  skeleton:getAnimationTimes()
+            if times > 0 then
+                local seq = {}
+                for i = 1,times do
+                    table.insert( seq,animate )
+                end
+                return cc.Sequence:create(seq)
+            elseif times == 0 then
+                return cc.RepeatForever:create(animate)
+            end
+       end
+    end
+    return nil
+end
+
 function clear()
     _atlasCahce = {}
-    _sketoneCahce = {}
+    _skeletonCahce = {}
 end

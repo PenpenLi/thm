@@ -1,4 +1,4 @@
-local DBXUtil = "thstg.Framework.Component.Animation.DBX.DBXUtil"
+local DBXUtil = require "thstg.Framework.Component.Animation.DragonBonesX.DBXUtil"
 local M = class("DBXSkeleton")
 
 function M:ctor(path)
@@ -8,8 +8,9 @@ function M:ctor(path)
 end
 
 function M:load(path)
-    local jsonStr = DBXUtil.loadDBXFile(path)
+    local jsonStr = DBXUtil.loadJsonFile(path)
     self._oriInfo = DBXUtil.parseSkeletonMap(jsonStr)
+    
 end
 ----
 function M:getSkeletonName()
@@ -25,12 +26,20 @@ function M:getAnimationInfos(name)
     return nil
 end
 
-function M:getFrameRate(name)
+function M:getAnimationRate(name)
     local info = self:getAnimationInfos(name)
     if info then
         return info.frameRate
     end
     return false
+end
+
+function M:getAnimationTimes(name)
+    local info = self:getAnimationInfos(name)
+    if info then
+        return info.animation[1].playTimes
+    end
+    return 0
 end
 
 function M:getAABBSize(name)
@@ -72,7 +81,7 @@ end
 function M:createAnimation(atlas,name)
     local frames = self:createFrames(atlas,name)
     if frames then
-        local frameRate = self:getFrameRate(name) or 1/12
+        local frameRate = self:getAnimationRate(name) or 1/12
         local animation = display.newAnimation(frames,1/frameRate)
 
         return animation

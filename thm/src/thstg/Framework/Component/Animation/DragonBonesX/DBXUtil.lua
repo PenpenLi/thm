@@ -1,4 +1,4 @@
-module("DBXUtil", package.seeall)
+module(..., package.seeall)
 
 function getDirPath(fullPath)
     local fileName = FileUtil.stripPath(fullPath)
@@ -6,7 +6,7 @@ function getDirPath(fullPath)
     return dir
 end
 
-function loadDBXFile(path)
+function loadJsonFile(path)
     if path ~= "" then
         local filePath =  cc.FileUtils:getInstance():fullPathForFilename(path)
         local f = io.open( filePath, "r" )
@@ -18,18 +18,17 @@ function loadDBXFile(path)
     return false
 end
 
-function parseTextureMap(jsonStr)
+function parseAtlasMap(jsonStr)
     local oriTb = {}
     if nil ~= jsonStr and "" ~= jsonStr then
-        local texTb = json.decode(jsonStr)
-        if texTb then
-            local subTexture = texTb.SubTexture
+        local atlasTb = json.decode(jsonStr)
+        if atlasTb then
+            local subTexture = atlasTb.SubTexture
             local newSubTexture = {}
             for i,v in ipairs(subTexture) do
-                newSubTexture[v.name] = newSubTexture[v.name] or {}
-                newSubTexture = v
+                newSubTexture[v.name] = v
             end
-            oriTb = subTexture
+            oriTb = atlasTb
             oriTb.SubTexture = newSubTexture
 
             return oriTb

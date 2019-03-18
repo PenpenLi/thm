@@ -1,4 +1,4 @@
-local DBXUtil = "thstg.Framework.Component.Animation.DBX.DBXUtil"
+local DBXUtil = require "thstg.Framework.Component.Animation.DragonBonesX.DBXUtil"
 local M = class("DBXAtlas")
 
 function M:ctor(path)
@@ -9,8 +9,8 @@ function M:ctor(path)
 end
 
 function M:load(path)
-    local jsonStr = DBXUtil.loadDBXFile(path)
-    self._oriInfo = DBXUtil.parseTextureMap(jsonStr)
+    local jsonStr = DBXUtil.loadJsonFile(path)
+    self._oriInfo = DBXUtil.parseAtlasMap(jsonStr)
 
     if self._oriInfo then
         local textureName = self:getAtlasPath()
@@ -23,7 +23,7 @@ end
 
 function M:getAtlasName()
     if self._oriInfo then
-        return cc.size(self._oriInfo.player00)
+        return self._oriInfo.name
     end
     return ""
 end
@@ -39,7 +39,7 @@ end
 
 function M:getAtlasPath()
     if self._oriInfo then
-        return cc.size(self._oriInfo.imagePath)
+        return self._oriInfo.imagePath
     end
     return ""
 end
@@ -54,7 +54,7 @@ end
 function M:getFrameSize(name)
     local info = self:getFrameInfos(name)
     if info then
-        return cc.size(info.frameWidth,info.frameHeight)
+        return cc.size(info.width,info.height)
     end
     return cc.size(0,0)
 end
@@ -62,9 +62,16 @@ end
 function M:getFramePos(name)
     local info = self:getFrameInfos(name)
     if info then
-        return cc.size(info.x,info.y)
+        --TODO:当勾选"去除空白区域时的设置"
+        if info.frameWidth and info.frameHeight then
+            --被移除掉的留白尺寸
+            -- local noneSize = cc.size(info.frameWidth - info.width,info.frameHeight - info.height)
+            return cc.p(info.x, info.y)
+        else
+            return cc.p(info.x,info.y)
+        end
     end
-    return cc.size(0,0)
+    return cc.p(0,0)
 end
 
 ---
@@ -75,7 +82,9 @@ end
 function M:createFrame(name)
     local info = self:getFrameInfos(name)
     if info then
-        local rect = cc.rect(info.x,info.y,info.frameWidth,info.frameHeight)
+        local pos = self:getFramePos(name)
+        local size = self:getFrameSize(name)
+        local rect = cc.rect(pos.x, pos.y, size.width, size.height)
         local frame = display.newSpriteFrame(self._texture,rect)
         return frame
     end
@@ -86,6 +95,7 @@ function M:_loadTexture(path,textureName)
     local dirPath = DBXUtil.getDirPath(path)
     local srcPath = string.format("%s/%s",dirPath,textureName)
     self._texture = display.loadImage(srcPath)-- 加载纹理文件
+    assert(self._texture,string.format( "[DBXAtlas]:Texture file not find(%s)",srcPath))
 end
 
 

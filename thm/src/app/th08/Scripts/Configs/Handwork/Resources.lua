@@ -22,6 +22,10 @@ return {
            
             spine_dragonborn_logo = "Assets/Animation/Tween/DragonOpening/DragonOpening.json",
             spine_boss_spellcard_attack = "Assets/Animation/Tween/SpellCardAttack/SpellCardAttack.json"
+        },
+        sequence = {
+            player00_tex = "Assets/Animation/Sequence/player00_tex.json",
+            player00_ske = "Assets/Animation/Sequence/player00_ske.json",
         }
 
     },
