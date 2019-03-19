@@ -62,31 +62,39 @@ end
 function M:getFramePos(name)
     local info = self:getFrameInfos(name)
     if info then
-        --TODO:当勾选"去除空白区域时的设置"
-        if info.frameWidth and info.frameHeight then
-            --被移除掉的留白尺寸
-            -- local noneSize = cc.size(info.frameWidth - info.width,info.frameHeight - info.height)
-            return cc.p(info.x, info.y)
-        else
-            return cc.p(info.x,info.y)
-        end
+        return cc.p(info.x,info.y)
     end
     return cc.p(0,0)
 end
 
 ---
 function M:createTexture(name)
-   --TODO:
+    local frame = self:createFrame(name)
+    local sprite = cc.Sprite:createWithSpriteFrame(frame)
+    sprite:setAnchorPoint(cc.p(0.5,0.5))
+    sprite:setPosition(sprite:getContentSize().width/2,sprite:getContentSize().height/2)
+    sprite:setFlippedY(true)
+    
+    local render = cc.RenderTexture:create(sprite:getContentSize().width, sprite:getContentSize().height)
+	render:beginWithClear(0,0,0,0)
+    sprite:visit()
+    render:endToLua()
+    
+    return render:getSprite():getTexture()
 end
 
 function M:createFrame(name)
     local info = self:getFrameInfos(name)
     if info then
-        local pos = self:getFramePos(name)
-        local size = self:getFrameSize(name)
-        local rect = cc.rect(pos.x, pos.y, size.width, size.height)
-        local frame = display.newSpriteFrame(self._texture,rect)
-        return frame
+        local texRect = cc.rect(info.x, info.y, info.width, info.height)
+        --当勾选"去除空白区域时的设置"
+        if info.frameWidth and info.frameHeight then
+            local frame = display.newSpriteFrame(self._texture,texRect,false,cc.p(info.frameX,info.frameY),cc.size(info.frameWidth,info.frameHeight))
+            return frame
+        else
+            local frame = display.newSpriteFrame(self._texture,texRect)
+            return frame
+        end
     end
     return nil
 end

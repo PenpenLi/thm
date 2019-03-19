@@ -16,7 +16,7 @@ end
 
 function M:_onInit()
 
-    TestUtil.loadJsonTest("Assets/Animation/Sequence/Sheet/player00_tex.json")
+
 end
 
 function M:_onRealView()

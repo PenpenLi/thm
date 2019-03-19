@@ -305,7 +305,7 @@ function safeGetValue(default,table,...)
 			local value = table
 			for i,v in pairs(params) do
 				value = value[v]
-				if not value then
+				if value == nil then
 					return default
 				end
 			end
@@ -314,6 +314,58 @@ function safeGetValue(default,table,...)
 	end
 	return default
 end
+
+--安全设置值
+function safeSetValue(value,table,...)
+	local params = {...}
+	if table then
+		if type(table) == "table" then
+			local tb = table
+			if #params > 0 then
+				for i = 1,#params - 1 do
+					tb = tb[params[i]]
+					if tb == nil then
+						return false
+					end
+				end
+				
+				if tb[params[#params]] then
+					tb[params[#params]] = value
+					return true
+				else
+					return false
+				end
+			else
+				return false
+			end
+		end
+	end
+	return false
+end
+
+--强制设置值
+function forceSetValue(value,table,...)
+	local params = {...}
+	if table then
+		if type(table) == "table" then
+			local tb = table
+			if #params > 0 then
+				for i = 1,#params - 1 do
+					if tb[params[i]] == nil then
+						tb[params[i]] = {}
+					end
+					tb = tb[params[i]]
+				end
+				tb[params[#params]] = value
+				return true
+			else
+				return false
+			end
+		end
+	end
+	return false
+end
+
 --安全移除,解决在循环中移除造成的错位问题
 function safeRemoveItem(list, item, removeAll)
 	local rmCount = 0

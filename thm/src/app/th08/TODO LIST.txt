@@ -120,6 +120,7 @@ TODO LIST:
 1:[]直接使用DragonBones的动画系统,抛弃原生动画系统
 2:[]对动画系统,特效系统进行深度封装
 3:[]stopAction代替stopAllActions()
+4:[]抛弃SimpleAudioEngine改用AudioEngine,前者没有音效播放状态的检测机制导致循环播放
 
 --遗留bug
 1:[]_onAdded()中不能使用addChild()/addTo(),会触发_onStart(),如要使用需要手动调整addScript()顺序
