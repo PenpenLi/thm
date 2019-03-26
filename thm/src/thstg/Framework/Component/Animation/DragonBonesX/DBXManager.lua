@@ -5,7 +5,7 @@ module(..., package.seeall)
 local _atlasCahce = {}
 local _skeletonCahce = {}
 
-function preloadDBXFile(texPath,skePath)
+function loadDBXFile(texPath,skePath)
     if texPath ~= "" then
         local atlas = DBXAtlas.new(texPath)
         if atlas then

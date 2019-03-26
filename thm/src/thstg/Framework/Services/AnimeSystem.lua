@@ -1,6 +1,6 @@
 local DBXManager = ANIMATION.DBXManager
 
-function preloadDBXFile( ... ) return DBXManager.preloadDBXFile(...) end
+function preloadDBXFile( ... ) return DBXManager.loadDBXFile(...) end
 function createTexture(...) return DBXManager.createTexture(...) end
 function createFrame(...)return DBXManager.createFrame(...) end
 function createFrames(...)return DBXManager.createFrames(...) end

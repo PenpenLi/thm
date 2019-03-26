@@ -79,3 +79,5 @@ end
 function M:valueType()
     return self.valueType
 end
+
+return M

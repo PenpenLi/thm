@@ -1,0 +1,7 @@
+Queue = require "thstg.Framework.Common.Collections.Queue"
+Stack = require "thstg.Framework.Common.Collections.Stack"
+List = require "thstg.Framework.Common.Collections.List"
+Heap = require "thstg.Framework.Common.Collections.Heap"
+HeapHelper = require "thstg.Framework.Common.Collections.HeapHelper"
+Set = require "thstg.Framework.Common.Collections.Set"
+Dictionary = require "thstg.Framework.Common.Collections.Dictionary"
