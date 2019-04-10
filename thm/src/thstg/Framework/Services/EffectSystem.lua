@@ -1,5 +1,7 @@
 module(..., package.seeall)
 
+local _shadeCache = {}
+
 function loadShaderByFile(vertexPath,fragmentPath,shaderKey)
     
 end

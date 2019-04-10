@@ -1,4 +1,4 @@
-local EEnemyBulletType = Const.Stage.EEnemyBulletType
+local EEnemyBulletType = GameDef.Stage.EEnemyBulletType
 return {
     [EEnemyBulletType.BigJade] = {
         name = "大玉",

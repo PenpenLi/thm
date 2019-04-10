@@ -1,4 +1,4 @@
-local EPropType = Const.Stage.EPropType
+local EPropType = GameDef.Stage.EPropType
 return {
     [EPropType.Power] = {
         name = "P弹",

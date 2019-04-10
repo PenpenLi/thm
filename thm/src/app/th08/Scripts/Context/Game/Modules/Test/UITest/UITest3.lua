@@ -34,7 +34,7 @@ function M.create(params)
         local lastPosX,lastPosY = 0,panel:getContentSize().height
         local curMaxHeight = 0
         local innerHeight = panel:getContentSize().height
-        local dict = SEXConfig.getEffectDict(type) or {}
+        local dict = SEXFactory.getEffectDict(type) or {}
         
         for k,v in pairs(dict) do
             for _,vv in pairs(v) do

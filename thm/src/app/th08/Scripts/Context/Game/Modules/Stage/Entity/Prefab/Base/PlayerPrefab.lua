@@ -34,7 +34,7 @@ function M:ctor(...)
     self:addScript(self.constraintByBorder)
 
     --
-    self.entityCtrl.entityType = Const.Stage.EEntityType.Player
+    self.entityCtrl.entityType = GameDef.Stage.EEntityType.Player
 end
 
 

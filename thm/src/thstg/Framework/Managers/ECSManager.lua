@@ -60,21 +60,23 @@ local function dirtyEntity(entity,flag)
 end
 
 function addEntity(entity)
-    local realEntity = _entityCache[entity]
+    local id = entity:getID()
+    local realEntity = _entityCache[id]
     if not realEntity then
-        _entityCache[entity] = entity
+        _entityCache[id] = entity
         entity:retain()
         dirtyEntity(entity,EEntityFlag.Init)
-        Dispatcher.dispatchEvent(EVENT_TYPE.ECS_ENTITY_ADDED,entity)
+        Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_ADDED,entity)
     end
 end
 
 function removeEntity(entity)
-    local realEntity = _entityCache[entity]
+    local id = entity:getID()
+    local realEntity = _entityCache[id]
     if realEntity then
-        Dispatcher.dispatchEvent(EVENT_TYPE.ECS_ENTITY_REMOVED,realEntity)
+        Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_REMOVED,realEntity)
         realEntity:release()
-        _entityCache[entity] = nil
+        _entityCache[id] = nil
         
     end
 end
@@ -87,7 +89,8 @@ function visitEntity(func)
 end
 
 function isEntityDestroyed(entity)
-    return (entity and _entityCache[entity]) and true or false
+    local id = entity:getID()
+    return (entity and _entityCache[id]) and true or false
 end
 
 function getAllEntities(exEntity)
@@ -187,7 +190,7 @@ end
 function addSystem(system)
     local className = system:getClass()
     _systemCache[className] = system
-    Dispatcher.dispatchEvent(EVENT_TYPE.ECS_SYSTEM_ADDED,system)
+    Dispatcher.dispatchEvent(TYPES.EVENT.ECS_SYSTEM_ADDED,system)
 end
 
 function getSystem(name)
@@ -196,7 +199,7 @@ end
 
 function removeSystem(system)
     local className = system:getClass()
-    Dispatcher.dispatchEvent(EVENT_TYPE.ECS_SYSTEM_REMOVEd,_systemCache[system])
+    Dispatcher.dispatchEvent(TYPES.EVENT.ECS_SYSTEM_REMOVEd,_systemCache[system])
     _systemCache[system] = nil
 end
 
@@ -256,7 +259,7 @@ function destroyEntity(entity)
     dirtyEntity(entity,EEntityFlag.Destroy)
 
     --通知所有对象被移除
-    Dispatcher.dispatchEvent(EVENT_TYPE.ECS_ENTITY_DESTROY,entity)
+    Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_DESTROY,entity)
 end
 
 

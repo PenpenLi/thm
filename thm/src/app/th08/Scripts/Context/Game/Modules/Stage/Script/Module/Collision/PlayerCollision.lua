@@ -1,4 +1,4 @@
-local EEntityType = Const.Stage.EEntityType
+local EEntityType = GameDef.Stage.EEntityType
 local M = class("PlayerCollision",StageDefine.CollisionController)
 
 ---

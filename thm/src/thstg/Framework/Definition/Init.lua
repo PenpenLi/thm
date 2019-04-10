@@ -1,3 +1,2 @@
-
-require "thstg.Framework.Definition.Vars.Init"
-require "thstg.Framework.Definition.Type.Init"
+module("DEFINITION", package.seeall)
+TouchExType = require "thstg.Framework.Definition.TouchExType"

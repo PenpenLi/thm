@@ -26,7 +26,7 @@ function M:ctor()
     self:addScript(self.slowController)
 
     self.playerController = StageDefine.ReimuController.new()
-    self.playerController.roleType = Const.Stage.ERoleType.Reimu
+    self.playerController.roleType = GameDef.Stage.ERoleType.Reimu
     self:addScript(self.playerController)
 
 end

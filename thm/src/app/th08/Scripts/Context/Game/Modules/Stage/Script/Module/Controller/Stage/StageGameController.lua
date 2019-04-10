@@ -11,9 +11,9 @@ end
 function M:initStage()
     local stageID = Cache.stageCache.getStageId()
     local schedulerComp = self:getComponent("SchedulerComponent")
-    schedulerComp:setTasks(StageConfig.getScenario(stageID))
+    schedulerComp:setTasks(StageFactory.getScenario(stageID))
 
-    local map = StageConfig.getMap(stageID).create()
+    local map = StageFactory.getMap(stageID).create()
     map:addTo(THSTG.SceneManager.get(SceneType.STAGE).backgroundLayer)
 end
 

@@ -13,7 +13,7 @@ function M:ctor()
     self:addScript(self.collisionController)
 
     --
-    self.entityCtrl.entityType = Const.Stage.EEntityType.PlayerBullet
+    self.entityCtrl.entityType = GameDef.Stage.EEntityType.PlayerBullet
 
 end
 

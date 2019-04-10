@@ -1,5 +1,5 @@
 module(..., package.seeall)
-
+--TODO:过于简陋,需要重新弄,音效需要判断是否正在播放
 local CCSAudioEngine = cc.SimpleAudioEngine:getInstance()
 
 function preloadMusic(filePath)

@@ -11,3 +11,7 @@ function createAnime(...) return DBXManager.createAnime(...) end
 function playSpineAnimation(params)
 
 end
+
+function cleat( ... )
+
+end

@@ -42,7 +42,7 @@ function M:ctor()
 
 	--析构
 	local function onCleanup()
-		Dispatcher.dispatchEvent(EVENT_TYPE.ECS_ENTITY_CLEANUP,self)
+		Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_CLEANUP,self)
 		self:_cleanup()
 	end
 	

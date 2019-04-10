@@ -1,6 +1,6 @@
 module(..., package.seeall)
-local EGameKeyType = Const.Public.EGameKeyType
-local ETouchExType = THSTG.CONST.PUBLIC.ETouchExType
+local EGameKeyType = GameDef.Public.EGameKeyType
+local ETouchExType = THSTG.DEFINITION.TouchExType
 local Player = require("Scripts.Context.Game.Modules.Test.GameTest.Misc.Player")
 local Scenario = require("Scripts.Context.Game.Modules.Test.GameTest.Misc.Scenario")
 local M = {}

@@ -1,7 +1,7 @@
-module("SEXConfig", package.seeall)
+module("SEXFactory", package.seeall)
 
-local EFFECT_PATH_PATTERN = "Scripts.Configs.Handwork.SEX.Effect.Effect"
-local PARTICLE_PATH_PATTERN = "Scripts.Configs.Handwork.SEX.Particle.Particle"
+local EFFECT_PATH_PATTERN = "Scripts.Template.SEX.Effect.Effect"
+local PARTICLE_PATH_PATTERN = "Scripts.Template.SEX.Particle.Particle"
 
 local function getDictByFile(path,file)
     local pathFile = string.format(path,file)

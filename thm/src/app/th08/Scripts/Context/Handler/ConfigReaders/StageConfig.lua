@@ -1,6 +1,5 @@
 module("StageConfig", package.seeall)
-local SCENARIO_PATH_PATTERN = "Scripts.Configs.Template.Module.Stage.Scenario.Stage_%02d"
-local MAP_PATH_PATTERN = "Scripts.Configs.Template.Module.Stage.Map.Map_%02d"
+
 
 local ROLE_FILE = "Scripts.Configs.Handwork.Module.Stage.Role"
 local BOSS_FILE = "Scripts.Configs.Handwork.Module.Stage.Boss"
@@ -22,15 +21,6 @@ local function getDictByPattern(path,file)
     return require(pathFile)
 end
 
-function getScenario(id)
-    local tb = getDictByPattern(SCENARIO_PATH_PATTERN,id)
-    return tb
-end
-
-function getMap(id)
-    local tb = getDictByPattern(MAP_PATH_PATTERN,id)
-    return tb
-end
 
 function getRole(roleType)
     return getDictByFile(ROLE_FILE)[roleType]

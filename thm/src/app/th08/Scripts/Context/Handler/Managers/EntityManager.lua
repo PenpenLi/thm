@@ -1,5 +1,5 @@
-local EEntityType = Const.Stage.EEntityType
-local EEntityLayerType = Const.Stage.EEntityLayerType
+local EEntityType = GameDef.Stage.EEntityType
+local EEntityLayerType = GameDef.Stage.EEntityLayerType
 module("EntityManager", package.seeall)
 
 local objectPool = THSTG.UTIL.newObjectPool()

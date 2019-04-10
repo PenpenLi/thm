@@ -1,4 +1,4 @@
-local EPlaerBulletType = Const.Stage.EPlaerBulletType
+local EPlaerBulletType = GameDef.Stage.EPlaerBulletType
 return {
     [EPlaerBulletType.JiAmulet] = {
         name = "咒符·集",

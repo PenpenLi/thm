@@ -1,7 +1,7 @@
 module(..., package.seeall)
-local EEntityType = Const.Stage.EEntityType
-local ERoleType = Const.Stage.ERoleType
-local EModeType = Const.Stage.EModeType
+local EEntityType = GameDef.Stage.EEntityType
+local ERoleType = GameDef.Stage.ERoleType
+local EModeType = GameDef.Stage.EModeType
 --
 local _bIsInStage = false
 local _bIsTeam = false

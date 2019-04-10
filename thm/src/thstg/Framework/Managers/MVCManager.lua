@@ -44,7 +44,7 @@ function openModule(moduleType,params)
 	local function residentShow()
 		_residentModules[moduleType] = true
 		module:open(params)
-		Dispatcher.dispatchEvent(EVENT_TYPE.MVC_MODULE_OPENED, moduleType)
+		Dispatcher.dispatchEvent(TYPES.EVENT.MVC_MODULE_OPENED, moduleType)
 	end
 
 	local function noResidentShow()
@@ -56,7 +56,7 @@ function openModule(moduleType,params)
 		
 		_openedModules[moduleType] = true
 		module:open(params)
-		Dispatcher.dispatchEvent(EVENT_TYPE.MVC_MODULE_CLOSED, moduleType)
+		Dispatcher.dispatchEvent(TYPES.EVENT.MVC_MODULE_CLOSED, moduleType)
 	end
 
 
@@ -148,8 +148,8 @@ function init()
 			closeModule(pmoduleType,params)
 		end
 	end
-	Dispatcher.addEventListener(EVENT_TYPE.MVC_OPEN_MODULE, openModule)
-    Dispatcher.addEventListener(EVENT_TYPE.MVC_CLOSE_MODULE, closeModule)
+	Dispatcher.addEventListener(TYPES.EVENT.MVC_OPEN_MODULE, openModule)
+    Dispatcher.addEventListener(TYPES.EVENT.MVC_CLOSE_MODULE, closeModule)
 
 	---实例化所有模块
 	for _,v in pairs(_modulesClass) do

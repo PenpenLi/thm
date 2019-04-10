@@ -3,7 +3,7 @@ module("ScenePublic", package.seeall)
 function newAnimation(params)
     params = params or {}
     ----
-    local time = params.time or Const.Public.ANIMATION_INTERVAL or 1/info.length
+    local time = params.time or GameDef.Public.ANIMATION_INTERVAL or 1/info.length
     if params.texType == TexType.SHEET then
         local info = SheetConfig.getSequence(params.fileName,params.keyName)
         local animation = THSTG.SCENE.newAnimation({

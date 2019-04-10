@@ -1,5 +1,5 @@
 
-local ERoleType = Const.Stage.ERoleType
+local ERoleType = GameDef.Stage.ERoleType
 local M = class("MarisaController",StageDefine.PlayerController)
 
 

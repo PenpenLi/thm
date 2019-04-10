@@ -10,7 +10,7 @@ function M:ctor()
     self:addScript(self.helthController)
 
     --
-    self.entityCtrl.entityType = Const.Stage.EEntityType.EnemyBullet
+    self.entityCtrl.entityType = GameDef.Stage.EEntityType.EnemyBullet
 end
 
 return M

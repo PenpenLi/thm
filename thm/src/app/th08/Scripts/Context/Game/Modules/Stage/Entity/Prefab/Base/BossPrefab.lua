@@ -20,7 +20,7 @@ function M:ctor()
     ---
 
     --
-    self.entityCtrl.entityType = Const.Stage.EEntityType.Boss
+    self.entityCtrl.entityType = GameDef.Stage.EEntityType.Boss
 end
 
 ----------

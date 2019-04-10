@@ -1,6 +1,6 @@
 
 
-local EEntityType = Const.Stage.EEntityType
+local EEntityType = GameDef.Stage.EEntityType
 module(..., package.seeall)
 
 function isBullet(entity)

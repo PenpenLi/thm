@@ -44,29 +44,29 @@ end
 
 function replace(sceneType, transition, time, more)
     _curScene = get(sceneType)
-    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_REPLACE, sceneType)
-    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_CHANGED, _curScene)
+    Dispatcher.dispatchEvent(TYPES.EVENT.SCENEMGR_REPLACE, sceneType)
+    Dispatcher.dispatchEvent(TYPES.EVENT.SCENEMGR_CHANGED, _curScene)
     return THSTG.SCENE.replaceScene(_curScene, transition, time, more)
 end
 
 function push(sceneType, transition, time, more)
     _curScene = get(sceneType)
-    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_PUSH, sceneType)
-    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_CHANGED, _curScene)
+    Dispatcher.dispatchEvent(TYPES.EVENT.SCENEMGR_PUSH, sceneType)
+    Dispatcher.dispatchEvent(TYPES.EVENT.SCENEMGR_CHANGED, _curScene)
     return THSTG.SCENE.pushScene(_curScene, transition, time, more)
 end
 
 function pop()
-    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_POP)
+    Dispatcher.dispatchEvent(TYPES.EVENT.SCENEMGR_POP)
     THSTG.SCENE.popScene()
     _curScene = getRunning()
-    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_CHANGED, _curScene)
+    Dispatcher.dispatchEvent(TYPES.EVENT.SCENEMGR_CHANGED, _curScene)
 end
 
 local function initRun(scene)
     display.runScene(scene)    --第一个场景或默认场景
     _curScene = scene
-    Dispatcher.dispatchEvent(EVENT_TYPE.SCENEMGR_CHANGED, _curScene)
+    Dispatcher.dispatchEvent(TYPES.EVENT.SCENEMGR_CHANGED, _curScene)
 end
 
 function run(sceneType)

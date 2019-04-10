@@ -1,4 +1,4 @@
-local EBatmanType = Const.Stage.EBatmanType
+local EBatmanType = GameDef.Stage.EBatmanType
 return {
     [EBatmanType.Fairy01] = {
         name = "妖精01",

@@ -1,4 +1,4 @@
-local EBossType = Const.Stage.EBossType
+local EBossType = GameDef.Stage.EBossType
 return {
     [EBossType.WriggleNightbug] = {
         name = "莉格露·奈特巴格",

@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local STAGE_VIEW_SIZE = Const.Stage.STAGE_VIEW_SIZE
+local STAGE_VIEW_SIZE = GameDef.Stage.STAGE_VIEW_SIZE
 local M = class("CollisionSystem",THSTG.ECS.System)
 M.EDirectionType = {
     None = 1,
@@ -193,7 +193,7 @@ end
 -----
 function M:_onInit()
     --消息注册
-    THSTG.Dispatcher.addEventListener(THSTG.EVENT_TYPE.ECS_ENTITY_REMOVED, self._entityRemoveHandle, self)
+    THSTG.Dispatcher.addEventListener(THSTG.TYPES.EVENT.ECS_ENTITY_REMOVED, self._entityRemoveHandle, self)
 end
 
 function M:_onUpdate(delay)

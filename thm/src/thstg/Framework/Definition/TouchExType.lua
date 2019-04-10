@@ -1,5 +1,4 @@
-module("PUBLIC", package.seeall)
-ETouchExType = {
+return {
     OnceClick = 301,
     DoubleClick = 302,
     LongClick = 303,

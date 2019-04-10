@@ -1,4 +1,4 @@
-local ERoleType = Const.Stage.ERoleType
+local ERoleType = GameDef.Stage.ERoleType
 return {
     [ERoleType.Reimu] = {
         name = "博丽的巫女",

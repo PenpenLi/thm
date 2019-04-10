@@ -41,13 +41,13 @@ function playEffect(params)
         
         if params.isLoop == false then
             params.onAction = function (node)
-                local actions = SEXConfig.getEffect(params.source[1],params.source[2])()
+                local actions = SEXFactory.getEffect(params.source[1],params.source[2])()
                 table.insert( actions, cc.RemoveSelf:create())
                 return actions
             end
         elseif params.isLoop == true then
             params.onAction = function (node)
-                local actions = SEXConfig.getEffect(params.source[1],params.source[2])()
+                local actions = SEXFactory.getEffect(params.source[1],params.source[2])()
                 table.insert( actions, cc.CallFunc:create(function () 
                     node:runAction(cc.RepeatForever:create(cc.Sequence:create(actions)))
                 end))
@@ -88,7 +88,7 @@ function playParticle(params)
     local node = THSTG.EFFECT.newParticleSystem(params)
 
     if params.source then
-        local info = SEXConfig.getParticle(params.source[1],params.source[2])()
+        local info = SEXFactory.getParticle(params.source[1],params.source[2])()
         local tex,rect = nil,nil
         if info.texSrc then
             tex,rect = THSTG.SCEEN.loadTexture(info.texSrc)

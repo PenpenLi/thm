@@ -1,6 +1,6 @@
 module(..., package.seeall)
-local EEntityType = Const.Stage.EEntityType
-local EEntityLayerType = Const.Stage.EEntityLayerType
+local EEntityType = GameDef.Stage.EEntityType
+local EEntityLayerType = GameDef.Stage.EEntityLayerType
 local M = class("StageController", THSTG.MVC.Controller)
 
 function M:_onInit()

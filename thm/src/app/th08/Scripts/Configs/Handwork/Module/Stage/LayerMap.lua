@@ -1,6 +1,6 @@
 -- 实体与层级映射表
-local EEntityType = Const.Stage.EEntityType
-local EEntityLayerType = Const.Stage.EEntityLayerType
+local EEntityType = GameDef.Stage.EEntityType
+local EEntityLayerType = GameDef.Stage.EEntityLayerType
 
 return {
     [EEntityType.Player] = EEntityLayerType.Player,

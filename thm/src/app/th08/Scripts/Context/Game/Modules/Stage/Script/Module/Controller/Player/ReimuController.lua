@@ -1,5 +1,5 @@
 
-local ERoleType = Const.Stage.ERoleType
+local ERoleType = GameDef.Stage.ERoleType
 local M = class("ReimuController",StageDefine.PlayerController)
 M.WINGMAN_INIT_POS = cc.p(30,-8)
 M.EMITTER_INIT_SHOT_SPEED = cc.p(2,10)

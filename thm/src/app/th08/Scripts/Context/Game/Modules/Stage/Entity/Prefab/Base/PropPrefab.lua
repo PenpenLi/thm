@@ -23,7 +23,7 @@ function M:ctor()
     self:addScript(self.animationController)
 
     --
-    self.entityCtrl.entityType = Const.Stage.EEntityType.Prop
+    self.entityCtrl.entityType = GameDef.Stage.EEntityType.Prop
 end
 
 ----------

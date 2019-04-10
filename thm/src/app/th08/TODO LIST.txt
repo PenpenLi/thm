@@ -129,3 +129,4 @@ TODO LIST:
 --想要实现的
 1:[]应该设计一个动画与状态一体的动画系统,AnimationComponent
 2:[]新的特效系统,这个特效系统可以递归层.可以添加粒子层等,且资源是封闭的
+3:[]ECS框架是模仿unity的,理论上的ECS并不关心Entity,而是关心Component(即System有个函数用来找出拥有某几个Components的Entity)

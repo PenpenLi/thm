@@ -1,9 +1,9 @@
 -- 实体映射表
-local EEntityType = Const.Stage.EEntityType
-local EBatmanType = Const.Stage.EBatmanType
-local ERoleType = Const.Stage.ERoleType
-local EBossType = Const.Stage.EBossType
-local EEnemyBulletType = Const.Stage.EEnemyBulletType
+local EEntityType = GameDef.Stage.EEntityType
+local EBatmanType = GameDef.Stage.EBatmanType
+local ERoleType = GameDef.Stage.ERoleType
+local EBossType = GameDef.Stage.EBossType
+local EEnemyBulletType = GameDef.Stage.EEnemyBulletType
 
 return {
     [EEntityType.Player] = {

@@ -6,7 +6,7 @@ function M:ctor()
     M.super.ctor(self)
 
     --
-    self.entityCtrl.entityType = Const.Stage.EEntityType.Wingman
+    self.entityCtrl.entityType = GameDef.Stage.EEntityType.Wingman
 end
 
 ----------

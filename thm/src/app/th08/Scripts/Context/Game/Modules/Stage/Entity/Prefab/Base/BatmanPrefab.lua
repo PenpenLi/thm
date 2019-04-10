@@ -16,7 +16,7 @@ function M:ctor()
     self:addScript(self.helthController)
 
     --
-    self.entityCtrl.entityType = Const.Stage.EEntityType.Batman
+    self.entityCtrl.entityType = GameDef.Stage.EEntityType.Batman
 end
 
 ----------

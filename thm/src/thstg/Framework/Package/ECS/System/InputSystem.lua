@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local ETouchExType = CONST.PUBLIC.ETouchExType
+local ETouchExType = DEFINITION.TouchExType
 local M = class("InputSystem",ECS.System)
 
 function M:_onInit()
@@ -52,7 +52,7 @@ function M:_onInit()
         end,
     })
     
-    Dispatcher.addEventListener(EVENT_TYPE.SCENEMGR_CHANGED, self._addListenerHandle,self)
+    Dispatcher.addEventListener(TYPES.EVENT.SCENEMGR_CHANGED, self._addListenerHandle,self)
 end
 
 function M:_addListenerHandle(e,params)

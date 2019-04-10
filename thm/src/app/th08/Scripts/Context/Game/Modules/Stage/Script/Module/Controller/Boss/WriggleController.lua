@@ -1,4 +1,4 @@
-local EBossType = Const.Stage.EBossType
+local EBossType = GameDef.Stage.EBossType
 local M = class("WriggleController",StageDefine.BossController)
 
 function M:_onInit()

@@ -1,4 +1,4 @@
-module("EVENT_TYPE", package.seeall)
+module("EVENT", package.seeall)
 
 --SCENE_MANAGER
 SCENEMGR_REPLACE = UIDUtil.getEventUID()

@@ -1,4 +1,4 @@
-local STAGE_VIEW_SIZE = Const.Stage.STAGE_VIEW_SIZE
+local STAGE_VIEW_SIZE = GameDef.Stage.STAGE_VIEW_SIZE
 local M = class("ConstraintByBorder",THSTG.ECS.Script)
 
 function M:_onInit()

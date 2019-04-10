@@ -1,5 +1,5 @@
-local EGameKeyType = Const.Public.EGameKeyType
-local ETouchExType = THSTG.CONST.PUBLIC.ETouchExType
+local EGameKeyType = GameDef.Public.EGameKeyType
+local ETouchExType = THSTG.DEFINITION.TouchExType
 local M = class("PlayerInput",StageDefine.InputController)
 
 function M:_onInit()
@@ -50,14 +50,14 @@ function M:__onMove(inputComp)
     local function keyMove(inputComp,posComp)
         local moveStep = cc.p(0,0)
         if inputComp:isKeyDown(EGameKeyType.MoveLeft) then
-            moveStep.x = -Const.Stage.PLAYER_KEY_MOVE_STEP
+            moveStep.x = -GameDef.Stage.PLAYER_KEY_MOVE_STEP
         elseif inputComp:isKeyDown(EGameKeyType.MoveRight) then
-            moveStep.x = Const.Stage.PLAYER_KEY_MOVE_STEP
+            moveStep.x = GameDef.Stage.PLAYER_KEY_MOVE_STEP
         end
         if inputComp:isKeyDown(EGameKeyType.MoveUp) then
-            moveStep.y = Const.Stage.PLAYER_KEY_MOVE_STEP
+            moveStep.y = GameDef.Stage.PLAYER_KEY_MOVE_STEP
         elseif inputComp:isKeyDown(EGameKeyType.MoveDown) then
-            moveStep.y = -Const.Stage.PLAYER_KEY_MOVE_STEP
+            moveStep.y = -GameDef.Stage.PLAYER_KEY_MOVE_STEP
         end
 
         return moveStep
@@ -72,14 +72,14 @@ function M:__onMove(inputComp)
             local curPos = cc.p(posComp:getPositionX(),posComp:getPositionY())
             local shift = cc.pSub(self.destPos, curPos) 
             local length = cc.pGetLength(shift)
-            if length <= Const.Stage.PLAYER_TOUCH_MOVE_STEP then
+            if length <= GameDef.Stage.PLAYER_TOUCH_MOVE_STEP then
                 moveStep.x = self.destPos.x - posComp:getPositionX()
                 moveStep.y = self.destPos.y - posComp:getPositionY()
                 self.destPos = nil
             else
                 local angle = cc.pGetAngle(cc.p(1,0),shift)
-                moveStep.x = Const.Stage.PLAYER_TOUCH_MOVE_STEP * math.cos(angle)
-                moveStep.y = Const.Stage.PLAYER_TOUCH_MOVE_STEP * math.sin(angle)
+                moveStep.x = GameDef.Stage.PLAYER_TOUCH_MOVE_STEP * math.cos(angle)
+                moveStep.y = GameDef.Stage.PLAYER_TOUCH_MOVE_STEP * math.sin(angle)
             end
             return moveStep
         end

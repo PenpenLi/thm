@@ -1,4 +1,4 @@
-local EWingmanType = Const.Stage.EWingmanType
+local EWingmanType = GameDef.Stage.EWingmanType
 local M = class("OnmyouGyokuController",StageDefine.WingmanController)
 
 function M:_onInit()
