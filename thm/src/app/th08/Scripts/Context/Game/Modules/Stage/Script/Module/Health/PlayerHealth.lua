@@ -93,9 +93,9 @@ end
 
 function M:_onInvincible(val)
     if val then
-        self._spriteNodeActionComp:runAction(cc.Blink:create(3.0, 200))
+        self._spriteNodeActionComp:runOnce(cc.Blink:create(3.0, 200))
     else  
-        self._spriteNodeActionComp:stopAllActions()
+        self._spriteNodeActionComp:stop()
         self._spriteNode:setVisible(true)
     end
 end

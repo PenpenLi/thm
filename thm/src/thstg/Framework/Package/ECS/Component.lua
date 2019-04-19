@@ -165,9 +165,10 @@ function M:_added(entity,param)
     self.__entity__ = entity
     self:_onAdded(entity,param)
 end
-function M:_removed(entity)
-    self:_onRemoved(entity)
-    self.__entity__ = nil
+function M:_removed(entity,force)
+    if self:_onRemoved(entity) then
+        self.__entity__ = nil
+    end
 end
 function M:_getClass(...)
     local function reverseTable(tab)

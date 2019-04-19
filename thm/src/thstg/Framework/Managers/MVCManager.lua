@@ -16,7 +16,9 @@ local _openedModules = {}
 -----------------------------------
 
 function registerModule(moduleType, classPath)
-	table.insert(_modulesClass, {moduleType = moduleType,classPath = classPath} )
+	assert(moduleType, string.format("[MVCManager] ModuleType is not finded"))
+	assert(classPath, string.format("[MVCManager] ModuleClassPath is not finded"))
+	table.insert(_modulesClass, {moduleType = moduleType,classPath = classPath})
 end
 
 function getModule(moduleType)

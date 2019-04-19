@@ -104,7 +104,16 @@ function getUIRes(uiType, ...)
 	return getResMul(ResType.UI, uiType, ...)
 end
 
-
+--------------------------
+--[[
+获取组件资源
+@param	uiType		[string]组件类型	(对应UIType中的项)
+@param	resName		[string]资源名
+@return 资源路径
+--]]
+function getUIPublicRes(uiType, ...)
+	return getResMul(ResType.UIPUBLIC, uiType, ...)
+end
 --------------------------
 --[[
 获取纹理资源

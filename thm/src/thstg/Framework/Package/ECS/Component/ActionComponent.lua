@@ -1,26 +1,48 @@
 local M = class("ActionComponent",ECS.Component)
 
 function M:_onInit()
-   
-end
-----
-function M:runAction(action)
-    self:getEntity():runAction(action)
+    self._action = false
 end
 
-function M:runSeqAct(actions)
-    local action = cc.Sequence:create(actions)
-    self:runAction(action)
+function M:runOnce(action)
+    if action then
+        self:stop()
+        self:getEntity():runAction(action)
+        self._action = action 
+    end
 end
 
-function M:runForeAct(action)
-    local action = cc.RepeatForever:create(action)
-    self:runAction(action)
+function M:runSequence(actions)
+    if actions then
+        self:stop()
+        local action = cc.Sequence:create(actions)
+        self:getEntity():runAction(action)
+        self._action = action 
+    end
 end
 
-function M:stopAllActions()
+function M:runForever(actions)
+    if actions then
+        self:stop()
+        local action = cc.RepeatForever:create(actions)
+        self:getEntity():runAction(action)
+        self._action = action 
+    end
+end
+
+
+function M:stop()
     self:getEntity():stopAllActions()
+    self._action = false
+
+    -- if self._action then
+    --     if not tolua.isnull(self._action) then
+    --         self:getEntity():stopAction(self._action)
+    --         self._action = false
+    --     end
+    -- end
 end
+
 ----
 function M:_onAdded(entity)
     local transComp = entity:getComponent("TransformComponent")

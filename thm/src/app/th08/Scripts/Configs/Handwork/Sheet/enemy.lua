@@ -1,5 +1,5 @@
 return {
-    source = "Assets/Module/Stage/Enemy/Batman/enemy.png",
+    source = "Assets/UI/Stage/Enemy/Batman/enemy.png",
     desc = "敌人精灵集",
     frame = {
         batman_halo = {

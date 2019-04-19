@@ -17,7 +17,7 @@ function M.create(params)
         width = 2*display.width,
         height = 2*display.height,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        src = "Assets/Module/Stage/Map/stg4_1_f.png",
+        src = "Assets/UI/Stage/Map/stg4_1_f.png",
         isTile = true,
         uniforms = {
             speed = 10,

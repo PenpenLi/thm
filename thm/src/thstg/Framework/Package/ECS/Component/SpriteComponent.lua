@@ -23,6 +23,22 @@ function M:setRotation(val)
     return self:_getSprite():setRotation(val)
 end
 
+function M:setFlippedX(val)
+    return self:_getSprite():setFlippedX(val)
+end
+
+function M:isFlippedX()
+    return self:_getSprite():isFlippedX()
+end
+
+function M:setFlippedY(val)
+    return self:_getSprite():setFlippedY(val)
+end
+
+function M:isFlippedY()
+    return self:_getSprite():isFlippedY()
+end
+
 function M:setVisible(val)
     return self:_getSprite():setVisible(val)
 end

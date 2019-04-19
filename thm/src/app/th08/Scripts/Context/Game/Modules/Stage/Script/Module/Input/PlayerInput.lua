@@ -1,5 +1,5 @@
 local EGameKeyType = GameDef.Public.EGameKeyType
-local ETouchExType = THSTG.DEFINITION.TouchExType
+local ETouchExType = THSTG.DEFINITION.ETouchExType
 local M = class("PlayerInput",StageDefine.InputController)
 
 function M:_onInit()

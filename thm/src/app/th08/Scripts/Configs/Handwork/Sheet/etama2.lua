@@ -1,5 +1,5 @@
 return {
-    source = "Assets/Module/Stage/Bullet/etama2.png",
+    source = "Assets/UI/Stage/Bullet/etama2.png",
     desc = "",
     frame = {
         light_spot_01 = {

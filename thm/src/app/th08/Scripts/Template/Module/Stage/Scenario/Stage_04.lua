@@ -56,7 +56,7 @@ return {
                     local initPosX = display.cx + r * count * math.cos(angle)
                     local initPosY = display.cy + r * count * math.sin(angle)
                     transComp:setPosition(initPosX,initPosY)
-                    actionComp:runAction(cc.Sequence:create({
+                    actionComp:runOnce(cc.Sequence:create({
                         cc.DelayTime:create(2-count*0.2),
                         cc.CallFunc:create(function()
                             local speed = 1
@@ -93,11 +93,11 @@ return {
                     local initPosX = display.cx + r * count * math.cos(angle)
                     local initPosY = display.cy+display.cy/2 + r * count * math.sin(angle)
                     transComp:setPosition(initPosX,initPosY)
-                    actionComp:runAction(cc.Sequence:create({
+                    actionComp:runOnce(cc.Sequence:create({
                         cc.DelayTime:create(2-count*0.2),
                         cc.CallFunc:create(function()
                             local time = 0
-                            actionComp:runAction(cc.RepeatForever:create(cc.Sequence:create({
+                            actionComp:runOnce(cc.RepeatForever:create(cc.Sequence:create({
                                 cc.DelayTime:create(0.01),
                                 cc.CallFunc:create(function()
                                     --圆周运动,我写不出来...
@@ -176,7 +176,7 @@ return {
                     scheduler:resume()
                 end))
                 local actionComp = batman:getComponent("ActionComponent")
-                actionComp:runAction(cc.Sequence:create(actions))
+                actionComp:runOnce(cc.Sequence:create(actions))
 
             end
 
@@ -203,7 +203,7 @@ return {
                    scheduler:resume()
                end))
                local actionComp = batman:getComponent("ActionComponent")
-               actionComp:runAction(cc.Sequence:create(actions))
+               actionComp:runOnce(cc.Sequence:create(actions))
            end
 
 
@@ -231,7 +231,7 @@ return {
                    scheduler:resume()
                end))
                local actionComp = batman:getComponent("ActionComponent")
-               actionComp:runAction(cc.Sequence:create(actions))
+               actionComp:runOnce(cc.Sequence:create(actions))
            end
 
 
@@ -259,7 +259,7 @@ return {
                    scheduler:resume()
                end))
                local actionComp = batman:getComponent("ActionComponent")
-               actionComp:runAction(cc.Sequence:create(actions))
+               actionComp:runOnce(cc.Sequence:create(actions))
            end
 
            for i = 1,3 do
@@ -277,7 +277,7 @@ return {
                     scheduler:resume()
                 end))
                 local actionComp = batman:getComponent("ActionComponent")
-                actionComp:runAction(cc.Sequence:create(actions))
+                actionComp:runOnce(cc.Sequence:create(actions))
             end
 
         end,
@@ -294,7 +294,7 @@ return {
                 
 
                 local actionComp = batman:getComponent("ActionComponent")
-                actionComp:runAction(cc.Sequence:create({
+                actionComp:runOnce(cc.Sequence:create({
                     cc.EaseQuadraticActionOut:create(cc.MoveTo:create(6.0,cc.p(200,display.height*0.40))),
                     cc.EaseSineIn:create(cc.MoveTo:create(6.0,cc.p(0- i *32,display.height*1.5+ i *32))),
                     cc.CallFunc:create(function() ObjectCache.release(batman) end)
@@ -311,7 +311,7 @@ return {
                 
 
                 local actionComp = batman:getComponent("ActionComponent")
-                actionComp:runAction(cc.Sequence:create({
+                actionComp:runOnce(cc.Sequence:create({
                     cc.EaseQuadraticActionOut:create(cc.MoveTo:create(6.0,cc.p(display.width-200,display.height*0.40))),
                     cc.EaseSineIn:create(cc.MoveTo:create(6.0,cc.p(display.width+ i *32,display.height*1.5 + i *32))),
                     cc.CallFunc:create(function() ObjectCache.release(batman) end)

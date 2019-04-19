@@ -36,11 +36,11 @@ end
 
 
 function M:_onSlowOpen()
-    self._wingman1ActionComp:stopAllActions()
-    self._wingman2ActionComp:stopAllActions()
+    self._wingman1ActionComp:stop()
+    self._wingman2ActionComp:stop()
 
-    self._wingman1ActionComp:runAction(cc.MoveTo:create(0.1,cc.p(-M.WINGMAN_SLOW_POS.x,M.WINGMAN_SLOW_POS.y)))
-    self._wingman2ActionComp:runAction(cc.MoveTo:create(0.1,cc.p(M.WINGMAN_SLOW_POS.x,M.WINGMAN_SLOW_POS.y)))
+    self._wingman1ActionComp:runOnce(cc.MoveTo:create(0.1,cc.p(-M.WINGMAN_SLOW_POS.x,M.WINGMAN_SLOW_POS.y)))
+    self._wingman2ActionComp:runOnce(cc.MoveTo:create(0.1,cc.p(M.WINGMAN_SLOW_POS.x,M.WINGMAN_SLOW_POS.y)))
 
     self._wingman1EmitterCtrl.shotSpeed = cc.p(0,self.reimuCtrl.EMITTER_INIT_SHOT_SPEED.y)
     self._wingman2EmitterCtrl.shotSpeed = cc.p(0,self.reimuCtrl.EMITTER_INIT_SHOT_SPEED.y)

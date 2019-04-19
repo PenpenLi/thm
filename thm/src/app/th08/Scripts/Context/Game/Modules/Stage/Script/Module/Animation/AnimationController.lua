@@ -1,3 +1,6 @@
+--[[------------------
+主要调节动画的状态,相当于动画状态机
+]]----------------------
 local M = class("AnimationController",THSTG.ECS.Script)
 
 function M:_onInit()
@@ -5,6 +8,7 @@ function M:_onInit()
 
     self.fsm = THSTG.UTIL.newStateMachine() --状态机
     self.animaComp = nil
+    self.spriteComp = nil
 
     self._transComp = nil
     self._prevPos = cc.p(0,0)
@@ -15,8 +19,9 @@ function M:play(actionType)
 
     self.fsm:doEvent(actionType)
 end
+
 function M:getSprite()
-    return self.animaComp:getSprite()
+    return self.animaComp:_getSprite()
 end
 ----
 function M:_onLateUpdate()
@@ -33,6 +38,7 @@ end
 ------------------
 function M:_onStart()
     self.animaComp = self:getComponent("AnimationComponent")
+    self.spriteComp = self:getComponent("SpriteComponent")--self.spriteComp = self.animaComp:getSpriteComponent()
 
     local cfg = self:_onState()
     if cfg and next(cfg) then

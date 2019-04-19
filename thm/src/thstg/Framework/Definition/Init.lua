@@ -1,2 +1,2 @@
 module("DEFINITION", package.seeall)
-TouchExType = require "thstg.Framework.Definition.TouchExType"
+ETouchExType = require "thstg.Framework.Definition.ETouchExType"

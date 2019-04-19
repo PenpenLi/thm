@@ -31,7 +31,7 @@ function M.create(params)
     local tail = THSTG.UI.newMotionStreak({
         x = 0,
         y =0,
-        src = "Assets/Module/Loading/loading_icon_1.png"
+        src = "Assets/UI/Loading/loading_icon_1.png"
     })
     tail:runAction(cc.MoveTo:create(8.0,cc.p(600,600)))
     node:addChild(tail)

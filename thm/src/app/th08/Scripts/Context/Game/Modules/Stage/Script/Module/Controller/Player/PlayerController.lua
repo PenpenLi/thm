@@ -66,7 +66,7 @@ function M:reset()
     local myHealthComp = self:getScript("PlayerHealth")
 
     local actionComp = self:getComponent("ActionComponent")
-    actionComp:runAction(cc.Spawn:create({
+    actionComp:runOnce(cc.Spawn:create({
         cc.Sequence:create({
             cc.CallFunc:create(function()
                 constrainScript:setEnabled(false)

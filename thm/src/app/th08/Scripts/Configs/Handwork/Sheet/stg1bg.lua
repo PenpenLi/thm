@@ -1,5 +1,5 @@
 return {
-    source = "Assets/Module/Stage/Map/stg1bg.png",
+    source = "Assets/UI/Stage/Map/stg1bg.png",
     desc = "stg1背景",
     frame = {
         stg01_bg = {

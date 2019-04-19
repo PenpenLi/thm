@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local ETouchExType = DEFINITION.TouchExType
+local ETouchExType = DEFINITION.ETouchExType
 local M = class("InputSystem",ECS.System)
 
 function M:_onInit()

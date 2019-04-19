@@ -4,6 +4,6 @@ TTF = "ttf"
 
 FNT = "fnt"
 
-CHAR_MAP = "charMap"
+CHAR_MAP = "charmap"
 
 ATLAS = "atlas"

@@ -21,7 +21,7 @@ return {
                     scheduler:resume()
                 end))
                 local actionComp = batman:getComponent("ActionComponent")
-                actionComp:runAction(cc.Sequence:create(actions))
+                actionComp:runOnce(cc.Sequence:create(actions))
             end
 
         end
@@ -47,7 +47,7 @@ return {
                    scheduler:resume()
                end))
                local actionComp = batman:getComponent("ActionComponent")
-               actionComp:runAction(cc.Sequence:create(actions))
+               actionComp:runOnce(cc.Sequence:create(actions))
            end
 
 
@@ -75,7 +75,7 @@ return {
                    scheduler:resume()
                end))
                local actionComp = batman:getComponent("ActionComponent")
-               actionComp:runAction(cc.Sequence:create(actions))
+               actionComp:runOnce(cc.Sequence:create(actions))
            end
 
 
@@ -103,7 +103,7 @@ return {
                    scheduler:resume()
                end))
                local actionComp = batman:getComponent("ActionComponent")
-               actionComp:runAction(cc.Sequence:create(actions))
+               actionComp:runOnce(cc.Sequence:create(actions))
            end
 
            for i = 1,3 do
@@ -121,7 +121,7 @@ return {
                     scheduler:resume()
                 end))
                 local actionComp = batman:getComponent("ActionComponent")
-                actionComp:runAction(cc.Sequence:create(actions))
+                actionComp:runOnce(cc.Sequence:create(actions))
             end
 
         end,
@@ -138,7 +138,7 @@ return {
                 
 
                 local actionComp = batman:getComponent("ActionComponent")
-                actionComp:runAction(cc.Sequence:create({
+                actionComp:runOnce(cc.Sequence:create({
                     cc.EaseQuadraticActionOut:create(cc.MoveTo:create(6.0,cc.p(200,display.height*0.40))),
                     cc.EaseSineIn:create(cc.MoveTo:create(6.0,cc.p(0- i *32,display.height*1.5+ i *32))),
                     cc.CallFunc:create(function() ObjectCache.release(batman) end)
@@ -155,7 +155,7 @@ return {
                 
 
                 local actionComp = batman:getComponent("ActionComponent")
-                actionComp:runAction(cc.Sequence:create({
+                actionComp:runOnce(cc.Sequence:create({
                     cc.EaseQuadraticActionOut:create(cc.MoveTo:create(6.0,cc.p(display.width-200,display.height*0.40))),
                     cc.EaseSineIn:create(cc.MoveTo:create(6.0,cc.p(display.width+ i *32,display.height*1.5 + i *32))),
                     cc.CallFunc:create(function() ObjectCache.release(batman) end)

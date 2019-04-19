@@ -59,4 +59,9 @@ function M:_onLateUpdate(delay,entity)
 
 end
 
+function M:_onRemoved( ... )
+    print("[TransformComponent] The component can't be removed!")
+    return false
+end
+
 return M

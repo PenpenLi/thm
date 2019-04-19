@@ -1,5 +1,0 @@
-module("ParticleType")
-
-PUBLIC = "public"
-
----

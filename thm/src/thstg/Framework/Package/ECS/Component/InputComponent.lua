@@ -1,6 +1,6 @@
 
 
-local ETouchExType = DEFINITION.TouchExType
+local ETouchExType = DEFINITION.ETouchExType
 local M = class("InputComponent",ECS.Component)
 
 function M:_onInit()

@@ -1,5 +1,5 @@
 return {
-    source = "Assets/Module/Stage/Bullet/etama.png",
+    source = "Assets/UI/Stage/Bullet/etama.png",
     desc = "子弹精灵集",
     frame = {
 

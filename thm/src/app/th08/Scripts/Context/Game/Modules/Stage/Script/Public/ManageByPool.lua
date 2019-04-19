@@ -24,7 +24,7 @@ end
 
 function M:_onEnd()
     self:getEntity():setActive(false)
-    self._actionComp:stopAllActions()
+    self._actionComp:stop()
 end
 
 return M

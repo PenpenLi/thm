@@ -49,8 +49,7 @@ function M:ctor()
     self:onNodeEvent("enter", onEnter)
 	self:onNodeEvent("exit", onExit)
 	self:onNodeEvent("cleanup", onCleanup)
-    ----
-	self:addComponent(ECS.TransformComponent.new())
+
 end
 --
 --[[component模块]]
@@ -61,22 +60,25 @@ local function _addComponent(self,component,params)
 	local componentName = component:getClass()
 	assert(componentName, "[Entity] The component must have a unique name!")
 	assert(not self.__components__[componentName], "[Entity] component already added. It can't be added again!")
-	self.__components__[componentName] = component
-		
-	component:_added(self,params)
+	
+	if component:_added(self,params) ~= false then
+		self.__components__[componentName] = component
+		return component
+	end
 end
 
 local function _remveComponent(self,...)
 	local name = ECSUtil.trans2Name(...)
 	local component = self.__components__[name]
 	if component then
-		component:_removed(self)
-		self.__components__[name] = nil
+		if component:_removed(self) ~= false then
+			self.__components__[name] = nil
+		end
 	end
 end
 
 function M:addComponent(component,params)
-	_addComponent(self,component,params)
+	return _addComponent(self,component,params)
 end
 
 --移除组件

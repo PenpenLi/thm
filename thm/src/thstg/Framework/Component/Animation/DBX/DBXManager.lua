@@ -1,5 +1,5 @@
-local DBXAtlas = require "thstg.Framework.Component.Animation.DragonBonesX.DBXAtlas"
-local DBXSkeleton = require "thstg.Framework.Component.Animation.DragonBonesX.DBXSkeleton"
+local DBXAtlas = require "thstg.Framework.Component.Animation.DBX.DBXAtlas"
+local DBXSkeleton = require "thstg.Framework.Component.Animation.DBX.DBXSkeleton"
 
 module(..., package.seeall)
 local _atlasCahce = {}

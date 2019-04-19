@@ -30,7 +30,7 @@ function M:getClass()
     return self:_onClass( self.__cname )
 end
 
---应该使用脏队列
+--每帧更新
 function M:update(delay)
     ---
 
@@ -120,6 +120,8 @@ end
 function M:_onClear()
 
 end
+
+--
 
 function M:_onClass(className)
     return className

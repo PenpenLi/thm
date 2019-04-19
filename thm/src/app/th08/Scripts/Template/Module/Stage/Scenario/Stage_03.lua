@@ -19,7 +19,7 @@ return {
             }
 
             local actionComp = curBoss:getComponent("ActionComponent")
-            actionComp:runAction(cc.Sequence:create(actions))
+            actionComp:runOnce(cc.Sequence:create(actions))
         end
     },
 
@@ -38,7 +38,7 @@ return {
                 cc.DelayTime:create(2),
             }
             local actionComp = curBoss:getComponent("ActionComponent")
-            -- actionComp:runAction(cc.RepeatForever:create(cc.Sequence:create(actions)))
+            -- actionComp:runOnce(cc.RepeatForever:create(cc.Sequence:create(actions)))
         end
     },
 

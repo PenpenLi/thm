@@ -16,7 +16,4 @@ MODEL = "model"
 
 UI = "ui"
 
-PUBLIC = "public"
-
----
-MODULE = "module"
+UI = "uipublic"

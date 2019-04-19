@@ -1,5 +1,5 @@
 return {
-    source = "Assets/Module/Stage/Player/player01.png",
+    source = "Assets/UI/Stage/Player/player01.png",
     desc = "Marisa和Alice的精灵集信息",
     frame = {
 

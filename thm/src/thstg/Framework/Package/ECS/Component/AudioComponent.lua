@@ -5,7 +5,6 @@ function M:ctor(...)
 
 end
 
-
 function M:_onInit()
     self.isLoop = false
     self.volume = 100
@@ -18,6 +17,14 @@ end
 
 
 ---
+function M:preload(path,callback)
+    --TODO:
+    
+    if type(callback) == "function" then
+        callback()
+    end
+end
+
 function M:play()
     assert(self.source, string.format("[%s] The file path cannot be empty",M.__cname))
     self._id = AudioManager.playSound(self.source,self.isLoop)

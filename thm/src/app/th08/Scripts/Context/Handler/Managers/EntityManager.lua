@@ -34,7 +34,7 @@ local function initEntity(entity,params)
 
     if params.action then
         local actionComp = entity:getComponent("ActionComponent")
-        actionComp:runAction(params.action)
+        actionComp:runOnce(params.action)
     end
 
     if params.isReusable then

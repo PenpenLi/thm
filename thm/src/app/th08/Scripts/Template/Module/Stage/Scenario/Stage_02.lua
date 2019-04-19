@@ -52,7 +52,7 @@ return {
                     local initPosX = display.cx + r * count * math.cos(angle)
                     local initPosY = display.cy + r * count * math.sin(angle)
                     transComp:setPosition(initPosX,initPosY)
-                    actionComp:runAction(cc.Sequence:create({
+                    actionComp:runOnce(cc.Sequence:create({
                         cc.DelayTime:create(2-count*0.2),
                         cc.CallFunc:create(function()
                             local speed = 1
@@ -88,11 +88,11 @@ return {
                     local initPosX = display.cx + r * count * math.cos(angle)
                     local initPosY = display.cy+display.cy/2 + r * count * math.sin(angle)
                     transComp:setPosition(initPosX,initPosY)
-                    actionComp:runAction(cc.Sequence:create({
+                    actionComp:runOnce(cc.Sequence:create({
                         cc.DelayTime:create(2-count*0.2),
                         cc.CallFunc:create(function()
                             local time = 0
-                            actionComp:runAction(cc.RepeatForever:create(cc.Sequence:create({
+                            actionComp:runOnce(cc.RepeatForever:create(cc.Sequence:create({
                                 cc.DelayTime:create(0.01),
                                 cc.CallFunc:create(function()
                                     --圆周运动,我写不出来...

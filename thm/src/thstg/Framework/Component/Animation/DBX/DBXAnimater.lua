@@ -1,17 +1,26 @@
-local DBXAtlas = require "thstg.Framework.Component.Animation.DragonBonesX.DBXAtlas"
-local DBXSkeleton = require "thstg.Framework.Component.Animation.DragonBonesX.DBXSkeleton"
+local DBXAtlas = require "thstg.Framework.Component.Animation.DBX.DBXAtlas"
+local DBXSkeleton = require "thstg.Framework.Component.Animation.DBX.DBXSkeleton"
 local M = class("DBXAnimater")
 
 function M:ctor(texPath,skePath)
     self._atlas = false
     self._skeleton = false
-
-    self:load(path)
+    
+    self:load(texPath,skePath)
 end
 
 function M:load(texPath,skePath)
-    self:setAtlas(DBXAtlas.new(texPath))
-    self:setSkeleton(DBXSkeleton.new(skePath))
+    if texPath and texPath ~= "" then
+        local atlas = DBXAtlas.new()
+        atlas:load(texPath)
+        self:setAtlas(atlas)
+    end
+
+    if skePath and skePath ~= "" then
+        local skeleton = DBXSkeleton.new()
+        skeleton:load(skePath)
+        self:setSkeleton(skeleton)
+    end
 end
 ---
 function M:getAtlas()

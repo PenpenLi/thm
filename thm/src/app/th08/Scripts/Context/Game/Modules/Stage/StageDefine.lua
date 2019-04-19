@@ -1,6 +1,7 @@
 module("StageDefine", package.seeall)
 
 ---[[组件]]----
+TransformComponent = THSTG.ECS.TransformComponent
 SpriteComponent = THSTG.ECS.SpriteComponent
 AnimationComponent = THSTG.ECS.AnimationComponent
 TransformComponent = THSTG.ECS.TransformComponent

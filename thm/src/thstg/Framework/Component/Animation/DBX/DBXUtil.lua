@@ -7,7 +7,7 @@ function getDirPath(fullPath)
 end
 
 function loadJsonFile(path)
-    if path ~= "" then
+    if path and path ~= "" then
         local filePath =  cc.FileUtils:getInstance():fullPathForFilename(path)
         local f = io.open( filePath, "r" )
         local t = f:read( "*all" )

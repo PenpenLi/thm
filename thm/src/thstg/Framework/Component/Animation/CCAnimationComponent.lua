@@ -22,6 +22,7 @@ function newAnimationSprite(params)
     privateData.isLoop = params.isLoop or false
     privateData.isReversed = params.isReversed or false
     privateData.animation = params.animation
+    privateData.curAction = false
 
     local node = newSprite(params)
 
@@ -56,12 +57,16 @@ function newAnimationSprite(params)
         
         local action = cc.Sequence:create(actions)
         self:runAction(action)
+        
+        privateData.curAction = actions
 
         return actions
     end
 
     function node:stopAnimation()
-        self:stopAllActions()
+        if privateData.curAction then
+            self:stopAction(privateData.curAction)
+        end
     end
     ---
     if privateData.animation then

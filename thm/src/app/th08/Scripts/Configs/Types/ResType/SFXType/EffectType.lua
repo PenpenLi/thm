@@ -1,5 +1,0 @@
-module("EffectType")
-
-PUBLIC = "public"
-
----

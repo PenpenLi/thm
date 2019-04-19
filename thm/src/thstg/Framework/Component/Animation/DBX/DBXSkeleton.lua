@@ -1,4 +1,4 @@
-local DBXUtil = require "thstg.Framework.Component.Animation.DragonBonesX.DBXUtil"
+local DBXUtil = require "thstg.Framework.Component.Animation.DBX.DBXUtil"
 local M = class("DBXSkeleton")
 
 function M:ctor(path)
@@ -8,9 +8,15 @@ function M:ctor(path)
 end
 
 function M:load(path)
+    if not path or path == "" then return false end
+
     local jsonStr = DBXUtil.loadJsonFile(path)
     self._oriInfo = DBXUtil.parseSkeletonMap(jsonStr)
     
+    if self._oriInfo then
+        return true
+    end
+    return false
 end
 ----
 function M:getSkeletonName()

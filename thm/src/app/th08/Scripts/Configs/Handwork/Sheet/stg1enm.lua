@@ -1,5 +1,5 @@
 return {
-    source = "Assets/Module/Stage/Enemy/Boss/stg1enm.png",
+    source = "Assets/UI/Stage/Enemy/Boss/stg1enm.png",
     desc = "",
     frame = {
 

@@ -1,4 +1,4 @@
-local DBXUtil = require "thstg.Framework.Component.Animation.DragonBonesX.DBXUtil"
+local DBXUtil = require "thstg.Framework.Component.Animation.DBX.DBXUtil"
 local M = class("DBXAtlas")
 
 function M:ctor(path)
@@ -9,6 +9,8 @@ function M:ctor(path)
 end
 
 function M:load(path)
+    if not path or path == "" then return false end
+
     local jsonStr = DBXUtil.loadJsonFile(path)
     self._oriInfo = DBXUtil.parseAtlasMap(jsonStr)
 
@@ -17,8 +19,9 @@ function M:load(path)
         if textureName ~= "" then
             self:_loadTexture(path,textureName)
         end
+        return true
     end
-
+    return false
 end
 
 function M:getAtlasName()

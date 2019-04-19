@@ -33,6 +33,7 @@ function clear()
 	ECSManager.clear()
 	MVCManager.clear()
 	SceneManager.clear()
-
+	CacheManager.clear()
+	
 end
 

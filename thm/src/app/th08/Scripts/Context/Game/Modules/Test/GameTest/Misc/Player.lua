@@ -1,7 +1,7 @@
 local BaseEntity = require("Scripts.Context.Game.Modules.Test.GameTest.Misc.BaseEntity")
 local M = class("Player",BaseEntity)
 local EGameKeyType = GameDef.Public.EGameKeyType
-local ETouchExType = THSTG.DEFINITION.TouchExType
+local ETouchExType = THSTG.DEFINITION.ETouchExType
 local EPlayerActionStatus = GameDef.Public.EPlayerActionStatus
 function M:ctor()
     self.__rigidBodyRect = cc.rect(0,0,20,20)
