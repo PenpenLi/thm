@@ -27,19 +27,26 @@ function M.create(params)
     mainBg:setRotation3D(cc.vec3(-40,0,0))
     -- node:addChild(mainBg)
 
+    -- THSTG.SCENE.loadPlistFile(ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"loading"))
+    -- local sprite = THSTG.UI.newSprite({
+    --     x = display.cx,
+    --     y = display.cy ,
+    --     anchorPoint = THSTG.UI.POINT_CENTER,
+    --     src = "#loading_03"
+    -- })
+    -- node:addChild(sprite)
     
-    
-    THSTG.ANIMATION.DBXManager.loadDBXFile(
-        ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_tex"),
-        ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_ske")
-    )
-    local anime = THSTG.ANIMATION.DBXManager.createAnime("player00","reimu_idle")
-    local tex = THSTG.ANIMATION.DBXManager.createTexture("player00","reimu_idle_01")
+    -- THSTG.ANIMATION.DBXManager.loadDBXFile(
+    --     ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_tex"),
+    --     ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_ske")
+    -- )
+    -- local anime = THSTG.ANIMATION.DBXManager.createAnime("player00","reimu_idle")
+    -- local tex = THSTG.ANIMATION.DBXManager.createTexture("player00","reimu_idle_01")
 
-    local sprite = cc.Sprite:createWithTexture(tex)
-    sprite:setPosition(cc.p(display.cx,display.cy))
-    sprite:runAction(anime)
-    node:addChild(sprite)
+    -- local sprite = cc.Sprite:createWithTexture(tex)
+    -- sprite:setPosition(cc.p(display.cx,display.cy))
+    -- sprite:runAction(anime)
+    -- node:addChild(sprite)
     -------Controller-------
     node:onNodeEvent("enter", function ()
         -- music:play()

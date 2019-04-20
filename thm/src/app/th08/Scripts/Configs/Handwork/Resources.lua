@@ -25,15 +25,11 @@ return {
     {
         sheet = 
         {
-
-        },
-        plist = 
-        {
-            select_diff = "Assets/Texture/Plist/select_diff.plist" ,
+            loading = "Assets/Texture/Sheet/loading.plist" ,
         },
         image = 
         {
-            stg1bg = "Assets/Texture/stg1bg.jpg" ,
+            stg1bg = "Assets/Texture/Image/stg1bg.jpg" ,
         }
     },
 
