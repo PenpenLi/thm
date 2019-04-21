@@ -29,6 +29,8 @@ function M:shot()
         bulletControlScript:reset()
 
         self._nextShotTime = THSTG.TimeUtil.time() + self.shotInterval
+        
+        
     end
 end
 

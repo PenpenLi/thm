@@ -73,9 +73,6 @@ WriggleController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Co
 BulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.BulletController")
 EnemyBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.EnemyBulletController")
 PlayerBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.PlayerBulletController")
-ReimuBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.ReimuBulletController")
-MarisaBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.MarisaBulletController")
-OnmyouGyokuBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.OnmyouGyokuBulletController")
 
 ---自机控制
 PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Player.PlayerController")

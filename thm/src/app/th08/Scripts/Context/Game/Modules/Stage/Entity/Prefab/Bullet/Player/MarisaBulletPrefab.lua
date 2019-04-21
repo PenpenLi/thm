@@ -7,8 +7,6 @@ function M:ctor()
     self.animationController = StageDefine.MarisaBulletAnimation.new()
     self:addScript(self.animationController)
     
-    self.bulletController = StageDefine.MarisaBulletController.new()
-    self:addScript(self.bulletController)
 
 end
 

@@ -13,16 +13,7 @@ function M:_onAdded(entity)
 end
 
 function M:_onStart()
-    local emitterController = self:getEntity():getChildByName("EMITTER"):getScript("EmitterController")
-    emitterController.objectPrefab = StageDefine.OnmyouGyokuBulletPrefab
-    emitterController.shotInterval = 0.4
-    emitterController.shotSpeed = cc.p(0,10)
+
 end
-
-function M:_onUpdate()
-    --TODO:属于追踪弹,搜索自身8格子范围内的敌人锁定追踪
-end
-
-
 
 return M

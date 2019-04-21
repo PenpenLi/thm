@@ -25,7 +25,7 @@ function M:_onDead()
             cc.FadeOut:create(1)
         }),
         cc.CallFunc:create(function()
-            self:killEntity()
+            self:destroyEntity()
         end)
     }))
     SoundManager.playEffect(200103)

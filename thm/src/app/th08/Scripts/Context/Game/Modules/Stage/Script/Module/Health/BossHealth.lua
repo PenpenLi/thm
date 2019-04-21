@@ -32,7 +32,7 @@ function M:_onDead()
       src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_st_boss_down"),
    })
 
-   self:killEntity()
+   self:destroyEntity()
 
    --TODO:爆道具
 end

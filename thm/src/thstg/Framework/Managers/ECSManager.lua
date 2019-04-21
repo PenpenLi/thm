@@ -64,7 +64,6 @@ function addEntity(entity)
     local realEntity = _entityCache[id]
     if not realEntity then
         _entityCache[id] = entity
-        entity:retain()
         dirtyEntity(entity,EEntityFlag.Init)
         Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_ADDED,entity)
     end
@@ -75,7 +74,6 @@ function removeEntity(entity)
     local realEntity = _entityCache[id]
     if realEntity then
         Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_REMOVED,realEntity)
-        realEntity:release()
         _entityCache[id] = nil
         
     end

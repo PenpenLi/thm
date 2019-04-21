@@ -58,6 +58,11 @@ EPropType = {
     Bomb = 2,                       --B弹
 }
 
+EBulletCategory = {
+    Dot,
+    Laser,
+}
+
 EPlaerBulletType = {
     JiAmulet = 1,               --咒符·集
     SanAmulet = 2,              --咒符·散
@@ -68,3 +73,8 @@ EEnemyBulletType = {
     BigJade = 303,        --大玉,
 }
 
+ESpellCardCategory = {
+    Non,--非符
+    Time,--时符
+    Final,--终符
+}

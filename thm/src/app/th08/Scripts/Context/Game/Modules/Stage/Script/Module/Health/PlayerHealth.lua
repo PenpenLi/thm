@@ -85,9 +85,9 @@ end
 
 function M:_onRealDead()
     print(15,"玩家死亡")
-    SEXManager.playEffect({
+    SEXFactory.playEffect({
         refNode = self:getEntity(),
-        source = {EffectType.PUBLIC,"ccle_player_die_magic_01"},
+        source = {"ccle_player_die_magic_01"},
     })
 end
 

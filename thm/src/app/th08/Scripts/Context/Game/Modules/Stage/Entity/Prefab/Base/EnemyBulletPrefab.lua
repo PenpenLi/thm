@@ -9,6 +9,8 @@ function M:ctor()
     self.helthController = StageDefine.EnemyBulletHealth.new()
     self:addScript(self.helthController)
 
+    self.bulletController = StageDefine.EnemyBulletController.new()
+    self:addScript(self.bulletController)
     --
     self.entityCtrl.entityType = GameDef.Stage.EEntityType.EnemyBullet
 end

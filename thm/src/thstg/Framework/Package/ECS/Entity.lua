@@ -20,14 +20,17 @@ function M:ctor()
 	self.__components__ = {}
 	self.__flags__ = nil
 	self.__isActive__ = true
+
+	
 	----
 	--CCNode的回调
 	--从节点进入
+	--FIXME:addEntity与removeEntity本该放到构造和析构里的,当时析构调用除了问题
+	--由于析构有问题,因此_cleanup函数目前不能用
 	local function onEnter()
 		function onUpdate(dTime)
 			self:update(dTime)
 		end
-
 		ECSManager.addEntity(self)
 		self:scheduleUpdateWithPriorityLua(onUpdate,-1)	--system的优先级要比实体更新高
 		self:_enter()
@@ -43,7 +46,8 @@ function M:ctor()
 	--析构
 	local function onCleanup()
 		Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_CLEANUP,self)
-		self:_cleanup()
+		-- self:_cleanup()
+		
 	end
 	
     self:onNodeEvent("enter", onEnter)

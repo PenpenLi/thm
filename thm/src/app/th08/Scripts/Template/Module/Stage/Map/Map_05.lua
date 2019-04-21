@@ -27,15 +27,15 @@ function M.create(params)
     mainBg:setRotation3D(cc.vec3(-40,0,0))
     -- node:addChild(mainBg)
 
-    local sprite = cc.Sprite:create()
-    sprite:setPosition(cc.p(display.cx,display.cy))
-    THSTG.ANIMATION.DBXManager.loadDBXFile(
-        ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_tex"),
-        ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_ske")
-    )
-    local anime = THSTG.ANIMATION.DBXManager.createAnime("player00","reimu_idle")
-    sprite:runAction(cc.RepeatForever:create(anime))
-    node:addChild(sprite)
+    -- local sprite = cc.Sprite:create()
+    -- sprite:setPosition(cc.p(display.cx,display.cy))
+    -- THSTG.ANIMATION.DBXManager.loadDBXFile(
+    --     ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_tex"),
+    --     ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_ske")
+    -- )
+    -- local anime = THSTG.ANIMATION.DBXManager.createAnime("player00","reimu_idle")
+    -- sprite:runAction(cc.RepeatForever:create(anime))
+    -- node:addChild(sprite)
     -------Controller-------
     node:onNodeEvent("enter", function ()
         -- music:play()

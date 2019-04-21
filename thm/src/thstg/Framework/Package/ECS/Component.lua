@@ -103,7 +103,7 @@ function M:getScriptInParten(...)
     return self:getComponentInParent(...)
 end
 ---
-function M:killEntity()
+function M:destroyEntity()
     self:getEntity():destroy()
 end
 --

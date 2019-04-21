@@ -7,8 +7,7 @@ function M:ctor()
     self.animationController = StageDefine.ReimuBulletAnimation.new()
     self:addScript(self.animationController)
     
-    self.bulletController = StageDefine.ReimuBulletController.new()
-    self:addScript(self.bulletController)
+
 
 end
 

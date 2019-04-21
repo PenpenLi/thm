@@ -89,7 +89,7 @@ function M:_onIdle(event)
         end))
     end
     table.insert( actions,cc.CallFunc:create(function() 
-        self.animaComp:playCustom(cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"stand_normal"))))
+        self.animaComp:playCustom(cc.RepeatForever:create(cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"stand_normal")))))
     end))
     self.animaComp:stop()
     self.animaComp:playCustom(cc.Sequence:create(actions))

@@ -30,17 +30,11 @@ end
 
 function M:_onWipeOpen()
     M.super._onWipeOpen(self)
-    -- self._wingman1ActionComp:stop()
-    -- self._wingman2ActionComp:stop()
-
-    -- --高速自旋绕自己转
-    -- self._wingman1ActionComp:runOnce(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(4,60,60,{offset = cc.p(3.14,3.14),centerPos = cc.p(0,self.reimuCtrl.WINGMAN_INIT_POS.y)})))
-    -- self._wingman2ActionComp:runOnce(cc.RepeatForever:create(THSTG.ACTION.newMoveOvalBy(4,60,60,{offset = cc.p(0,0),centerPos = cc.p(0,self.reimuCtrl.WINGMAN_INIT_POS.y)})))
 end
 
 function M:_onWipeClose()
     M.super._onWipeClose(self)
-    -- self.reimuCtrl:wingmanReset()
+
 end
 
 return M

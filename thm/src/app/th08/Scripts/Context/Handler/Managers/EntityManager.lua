@@ -76,6 +76,10 @@ function createEntity(category,type,isReusable,initPos,initSpeed,initAction)
     return entity
 end
 
+function releaseEntity(entity)
+    objectPool:release(entity)
+end
+
 function createEntities(category,type,num,isReusable,initFunc)
     local class = loadEntityClass(category,type)
     if not class then return end
