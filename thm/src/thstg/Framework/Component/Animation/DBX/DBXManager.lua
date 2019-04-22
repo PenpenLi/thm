@@ -5,6 +5,8 @@ module(..., package.seeall)
 local _atlasCahce = {}
 local _skeletonCahce = {}
 
+local _animationCache = {}
+
 function loadDBXFile(texPath,skePath)
     if texPath ~= "" then
         local atlas = DBXAtlas.new(texPath)
@@ -61,12 +63,19 @@ function createFrames(altasName,aniName)
 end
 
 function createAnimation(altasName,aniName)
-    local atlas = getAtlas(altasName)
-    if atlas then
-       local skeleton = getSkeleton(altasName)
-       if skeleton then
-            return skeleton:createAnimation(atlas,aniName)
-       end
+    if _animationCache[altasName] and _animationCache[altasName][aniName] then
+        return _animationCache[altasName][aniName]
+    else
+        local atlas = getAtlas(altasName)
+        if atlas then
+            local skeleton = getSkeleton(altasName)
+            if skeleton then
+                local animation = skeleton:createAnimation(atlas,aniName)
+                _animationCache[altasName] = _animationCache[altasName] or {}
+                _animationCache[altasName][aniName] = animation
+                animation:retain()
+            end
+        end
     end
     return nil
 end
@@ -103,4 +112,11 @@ end
 function clear()
     _atlasCahce = {}
     _skeletonCahce = {}
+
+    for _,v in pairs(_animationCache) do
+        for _,vv in pairs(v) do
+            v:release()
+        end
+    end
+    _animationCache = {}
 end

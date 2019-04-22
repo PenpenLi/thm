@@ -99,7 +99,7 @@ end
 function M:getScriptsInChildren(...)
     return self:getComponentsInChildren(...)
 end
-function M:getScriptInParten(...)
+function M:getScriptInParent(...)
     return self:getComponentInParent(...)
 end
 ---

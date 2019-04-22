@@ -19,10 +19,16 @@ return {
 
         },
         animation = {
-            move_left_start = {"player00","reimu_move_left_start"},
-            move_left_sustain = {"player00","reimu_move_left_sustain"},
-            move_left = {"player00","reimu_move_left"},
-            stand_normal = {"player00","reimu_stand_normal"},
+            src = {
+                tex = ResManager.getResSub(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_tex"),
+                ske = ResManager.getResSub(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_ske"),
+            },
+            animations = {
+                move_left_start = {"player00","reimu_move_left_start"},
+                move_left_sustain = {"player00","reimu_move_left_sustain"},
+                move_left = {"player00","reimu_move_left"},
+                stand_normal = {"player00","reimu_stand_normal"},
+            },
         },
         character ={
             [1] = "",

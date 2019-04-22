@@ -1,6 +1,6 @@
 ﻿module("ResManager", package.seeall)
 local Resources = require "Scripts.Configs.Handwork.Resources"
-
+local PreLoadRes = require "Scripts.Configs.Handwork.PreLoadRes"
 
 -- 多层资源获取
 -- @param	...		[string]	资源类型
@@ -153,4 +153,25 @@ end
 
 function getParticleRes(particleType, ...)
 	return getResMul(ResType.SFX, SFXType.PARTICLE, particleType, ...)
+end
+
+------------------------------------------------------------------------
+--TODO:资源预加载
+local defCallback = function(...)
+
+end
+
+function preload(name,callback)
+	callback = callback or defCallback
+	if name ~= nil then
+		if type(PreLoadRes[name]) == "function" then
+			PreLoadRes[name](callback)
+		end
+	else
+		preload("preLoadGlobal",defCallback)
+	end
+end
+
+function clear( ... )
+	
 end

@@ -34,7 +34,7 @@ end
 
 
 function M:_onIdle(event)
-    self:getSprite():playAnimationForever(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"stand_normal")))
+    self:getSprite():playAnimationForever(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self:getRoleType(),"stand_normal")))
 end
 
 ----

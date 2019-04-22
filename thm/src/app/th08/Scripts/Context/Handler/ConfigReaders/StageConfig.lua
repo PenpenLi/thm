@@ -54,9 +54,18 @@ function getRoleGameArgs(roleType)
     return tb.gameArgs
 end
 
-function getRoleAnimSheetArgs(roleType,name)
+function getRoleAnimationDBXFile(roleType)
     local tb = getRole(roleType)
-    local args = tb.animation[name]
+    local args = tb.animation.src
+    if args then
+        return unpack(args)
+    end
+    return {}
+end
+
+function getRoleAnimationArgs(roleType,name)
+    local tb = getRole(roleType)
+    local args = tb.animation.animations[name]
     if args then
         return unpack(args)
     end

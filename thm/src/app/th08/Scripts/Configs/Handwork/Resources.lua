@@ -154,18 +154,18 @@ return {
         },
     },
 
-    uipublic = 
+    uibase = 
     {
         button =  
         {
-            btn_base_yellow = "Assets/UIPublic/Button/btn_base_yellow.png" ,
+            btn_base_yellow = "Assets/UIBase/Button/btn_base_yellow.png" ,
         },
         progressBar =  
         {
-            prog_radial_bg = "Assets/UIPublic/ProgressBar/prog_radial_bg.png" ,
-            prog_radial_hp = "Assets/UIPublic/ProgressBar/prog_radial_hp.png" ,
-            prog_radial_boss_hp = "Assets/UIPublic/ProgressBar/prog_radial_boss_hp.png" ,
-            prog_radial_boss_spell = "Assets/UIPublic/ProgressBar/prog_radial_boss_spell.png" ,
+            prog_radial_bg = "Assets/UIBase/ProgressBar/prog_radial_bg.png" ,
+            prog_radial_hp = "Assets/UIBase/ProgressBar/prog_radial_hp.png" ,
+            prog_radial_boss_hp = "Assets/UIBase/ProgressBar/prog_radial_boss_hp.png" ,
+            prog_radial_boss_spell = "Assets/UIBase/ProgressBar/prog_radial_boss_spell.png" ,
         }
     }
 

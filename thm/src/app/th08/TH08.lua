@@ -18,7 +18,7 @@ end
 
 function M:_onRun()
 
-
+    ResManager.preload()
 end
 
 return M

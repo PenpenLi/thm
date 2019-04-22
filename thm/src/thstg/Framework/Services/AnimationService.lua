@@ -1,3 +1,4 @@
+module(..., package.seeall)
 local DBXManager = ANIMATION.DBXManager
 
 function preloadDBXFile( ... ) return DBXManager.loadDBXFile(...) end

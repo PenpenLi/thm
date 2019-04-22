@@ -25,7 +25,7 @@ function M:ctor()
 	----
 	--CCNode的回调
 	--从节点进入
-	--FIXME:addEntity与removeEntity本该放到构造和析构里的,当时析构调用除了问题
+	--addEntity与removeEntity本该放到构造和析构里的,当时析构调用除了问题
 	--由于析构有问题,因此_cleanup函数目前不能用
 	local function onEnter()
 		function onUpdate(dTime)
@@ -45,9 +45,11 @@ function M:ctor()
 
 	--析构
 	local function onCleanup()
-		Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_CLEANUP,self)
-		-- self:_cleanup()
-		
+		--XXX:若父节点count>1,而子节点若父节点count<=1,会被干掉
+		if (self:getReferenceCount() <= 1) then
+			Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_CLEANUP,self)
+			self:_cleanup()
+		end
 	end
 	
     self:onNodeEvent("enter", onEnter)

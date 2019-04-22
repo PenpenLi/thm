@@ -16,4 +16,4 @@ MODEL = "model"
 
 UI = "ui"
 
-UI = "uipublic"
+UIBase = "uibase"

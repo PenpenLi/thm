@@ -3,11 +3,8 @@ local M = class("PlayerAnimation",StageDefine.AnimationController)
 function M:_onInit()
     M.super._onInit(self)
     
-    self.animater = THSTG.ANIMATION.newDBXAnimater({
-        tex = ResManager.getResSub(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_tex"),
-        ske = ResManager.getResSub(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_ske")
-    })
-    
+
+
 end
 
 function M:_onState()
@@ -26,9 +23,7 @@ function M:_onState()
         },
     }
 end
-function M:getRoleType()
-    return self.roleType
-end
+
 ----
 function M:_onStart()
     M.super._onStart(self)
@@ -37,8 +32,10 @@ function M:_onStart()
     self._transComp = self:getComponentInParent("TransformComponent")
     self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
     
-    local playerCtrl = self:getScriptInParten("PlayerController")
+    local playerCtrl = self:getScriptInParent("PlayerController")
     self.roleType = playerCtrl.roleType
+
+   
 end
 ----
 function M:_onMove(dx,dy)
@@ -55,10 +52,10 @@ function M:_onMoveLeft(event)
     self.spriteComp:setFlippedX(false)
     self.animaComp:stop()
     self.animaComp:playCustom(cc.Sequence:create({
-        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left_start"))),
+        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left_start"))),
         cc.CallFunc:create(function() 
             self.animaComp:playCustom(cc.RepeatForever:create(
-                cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left_sustain")))
+                cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left_sustain")))
             ))
         end)
     }))
@@ -68,10 +65,10 @@ function M:_onMoveRight(event)
     self.spriteComp:setFlippedX(true)
     self.animaComp:stop()
     self.animaComp:playCustom(cc.Sequence:create({
-        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left_start"))),
+        cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left_start"))),
         cc.CallFunc:create(function() 
             self.animaComp:playCustom(cc.RepeatForever:create(
-                cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left_sustain")))
+                cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left_sustain")))
             ))
         end)
     }))
@@ -81,7 +78,7 @@ end
 function M:_onIdle(event)
     local actions = {}
     if event.from == "MoveRight" or event.from == "MoveLeft" then
-        local animation = AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"move_left"))
+        local animation = AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left"))
         animation:setDelayPerUnit(1/26)
         table.insert( actions,cc.Animate:create(animation):reverse())
         table.insert( actions,cc.CallFunc:create(function() 
@@ -89,7 +86,7 @@ function M:_onIdle(event)
         end))
     end
     table.insert( actions,cc.CallFunc:create(function() 
-        self.animaComp:playCustom(cc.RepeatForever:create(cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimSheetArgs(self:getRoleType(),"stand_normal")))))
+        self.animaComp:playCustom(cc.RepeatForever:create(cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"stand_normal")))))
     end))
     self.animaComp:stop()
     self.animaComp:playCustom(cc.Sequence:create(actions))

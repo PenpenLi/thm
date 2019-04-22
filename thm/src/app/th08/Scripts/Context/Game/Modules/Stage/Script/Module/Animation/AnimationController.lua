@@ -6,7 +6,7 @@ local M = class("AnimationController",THSTG.ECS.Script)
 function M:_onInit()
     M.super._onInit(self)
 
-    self.fsm = THSTG.UTIL.newStateMachine() --状态机
+    self._fsm = THSTG.UTIL.newStateMachine() --状态机
     self.animaComp = nil
     self.spriteComp = nil
 
@@ -15,9 +15,9 @@ function M:_onInit()
 end
 --
 function M:play(actionType)
-    if self.fsm:cannotDoEvent(actionType) then return end
+    if self._fsm:cannotDoEvent(actionType) then return end
 
-    self.fsm:doEvent(actionType)
+    self._fsm:doEvent(actionType)
 end
 
 function M:getSprite()
@@ -38,11 +38,11 @@ end
 ------------------
 function M:_onStart()
     self.animaComp = self:getComponent("AnimationComponent")
-    self.spriteComp = self:getComponent("SpriteComponent")--self.spriteComp = self.animaComp:getSpriteComponent()
+    self.spriteComp = self:getComponent("SpriteComponent")
 
     local cfg = self:_onState()
     if cfg and next(cfg) then
-        self.fsm:setupState(cfg)
+        self._fsm:setupState(cfg)
     end
 
     self._transComp = self:getComponent("TransformComponent")
