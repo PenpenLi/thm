@@ -1,6 +1,6 @@
 module("UI", package.seeall)
 
--- IMAGE_DEFAULT_FILE = ResManager.getUIRes(UIType.IMAGE, "default")
+-- IMAGE_DEFAULT_FILE = ResManager.getResSub(ResType.UIBASE,UIBaseType.IMAGE, "default")
 
 --[[
 @param style {

@@ -21,12 +21,12 @@ PROGRESS_BAR_DEFAULT_PARAMS = {
 		labelAnchorPoint = UI.POINT_CENTER,
 		--背景皮肤
 		bgSkin = {
-			src = "",--ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_bar_bg2"),
+			src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.PROGRESS_BAR, "prog_bar_bg2"),
 			scale9Rect = {left = 5, right = 5, top = 5, bottom = 5}
 		},
 		--进度条皮肤
 		progressSkin = {
-			src = "",--ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_bar_item2"),
+			src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.PROGRESS_BAR, "prog_bar_item2"),
 			scale9Rect = {left = 5, right = 5, top = 5, bottom = 5}
 		}
 	}
@@ -49,13 +49,13 @@ PROGRESS_RADIAL_DEFAULT_PARAMS = {
 		--背景皮肤
 		bgSkin = {
 			src = "",
-			-- src = ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_radial_bg"),
+			-- src = ResManager.getResSub(ResType.UIBASE,UIBaseType.PROGRESS_BAR, "prog_radial_bg"),
 			
 		},
 		--进度条皮肤
 		progressSkin = {
 			src = "",
-			-- src = ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_radial_hp"),
+			-- src = ResManager.getResSub(ResType.UIBASE,UIBaseType.PROGRESS_BAR, "prog_radial_hp"),
 			
 		}
 	}

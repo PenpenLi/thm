@@ -2,17 +2,17 @@ module("UI", package.seeall)
 
 --滑动条默认背景皮肤
 SLIDER_BG_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.SLIDER, "slider_bg1"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.SLIDER, "slider_bg1"),
 	scale9Rect = {left = 10, right = 10, top = 5, bottom = 5}
 }
 --滑动条默认进度皮肤
 SLIDER_PROGRESS_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.SLIDER, "slider_sel1"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.SLIDER, "slider_sel1"),
 	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 --滑动条默认滑动点皮肤
 SLIDER_THUMB_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.SLIDER, "slider_btn1"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.SLIDER, "slider_btn1"),
 }
 
 --[[

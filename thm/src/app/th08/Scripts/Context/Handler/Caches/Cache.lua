@@ -1,20 +1,19 @@
-module("Cache", package.seeall)
+local M = {}
+local CacheManager = THSTG.CacheManager
 
--- testCache = require("Scripts.Context.Game.Modules.Test.TestCache")
-menuCache = require("Scripts.Context.Game.Modules.Menu.MenuCache")
--- settingCache = require("Scripts.Context.Game.Modules.Setting.SettingCache")
--- roleCache = require("Scripts.Context.Game.Modules.Role.RoleCache")
--- selectionCache = require("Scripts.Context.Game.Modules.Selection.SelectionCache")
--- loadingCache = require("Scripts.Context.Game.Modules.Loading.LoadingCache")
-stageCache = require("Scripts.Context.Game.Modules.Stage.StageCache")
----
-function clear()
-    -- testCache.clear()
-    -- settingCache.clear()
-    -- roleCache.clear()
-    -- selectionCache.clear()
-    -- loadingCache.clear()
-    -- loadingCache.clear()
-    menuCache.clear()
-    stageCache.clear()
+setmetatable(M, {
+	__index = function(_, k)
+		return CacheManager.getCache(k)
+	end
+})
+
+function M.register(name,classPath)
+    CacheManager.addCache(name,classPath)
 end
+-----------
+--由于有时序关系,在这里添加也行
+
+
+
+
+return M

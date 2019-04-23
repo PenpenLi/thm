@@ -93,12 +93,7 @@ return {
     
         menu = 
         {
-    
-            main_menu = 
-            {
-                main_bg = "",
-            },
-    
+            main_menu_main_bg = "",
         },
         
         selection = 

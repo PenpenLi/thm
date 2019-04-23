@@ -1,9 +1,9 @@
 
 Scheduler = require "thstg.Framework.Services.Scheduler"
 Dispatcher = require "thstg.Framework.Services.Dispatcher"
-AudioService = require "thstg.Framework.Services.AudioService"
-AnimationService = require "thstg.Framework.Services.AnimationService"
-EffectService = require "thstg.Framework.Services.EffectService"
+AudioEngine = require "thstg.Framework.Services.AudioEngine"
+AnimationSystem = require "thstg.Framework.Services.AnimationSystem"
+EffectSystem = require "thstg.Framework.Services.EffectSystem"
 
 ----
 CCDispatcher = EVENT.getEventDispatcher()

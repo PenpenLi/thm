@@ -2,12 +2,12 @@ module("UI", package.seeall)
 
 --滚动条皮肤
 HSCROLLBAR_SCROLL_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.SCROLLBAR, "h_progress_default"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.SCROLLBAR, "h_progress_default"),
 	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 --滚动条背景皮肤
 HSCROLLBAR_BG_SKIN = {
-	src = "",-- ResManager.getUIRes(UIType.SCROLLBAR, "h_bg_default"),
+	src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.SCROLLBAR, "h_bg_default"),
 	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 --滚动条点击按钮皮肤
@@ -15,7 +15,7 @@ HSCROLLBAR_CLICK_SKIN =
 	{
 		normal = {
 			skin = {
-				src = "",-- ResManager.getUIRes(UIType.SCROLLBAR, "v_bg_default"),
+				src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.SCROLLBAR, "v_bg_default"),
 				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		}--"h_click_default")}},
@@ -23,12 +23,12 @@ HSCROLLBAR_CLICK_SKIN =
 
 --滚动条皮肤
 VSCROLLBAR_SCROLL_SKIN = {
-	src = "",-- ResManager.getUIRes(UIType.SCROLLBAR, "v_progress_default"),
+	src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.SCROLLBAR, "v_progress_default"),
 	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 --滚动条背景皮肤
 VSCROLLBAR_BG_SKIN = {
-	src = "",-- ResManager.getUIRes(UIType.SCROLLBAR, "v_bg_default"),
+	src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.SCROLLBAR, "v_bg_default"),
 	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 --滚动条点击按钮皮肤
@@ -36,7 +36,7 @@ VSCROLLBAR_CLICK_SKIN =
 	{
 		normal = {
 			skin = {
-				src = "",-- ResManager.getUIRes(UIType.SCROLLBAR, "v_bg_default"),
+				src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.SCROLLBAR, "v_bg_default"),
 				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		}--v_click_default")}},

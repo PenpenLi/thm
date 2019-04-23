@@ -15,20 +15,20 @@ module("UIPublic", package.seeall)
 					normal = {
 						label = {}, 
 						skin = {
-							src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"), 
+							src = ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_sel"), 
 							scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 }, 
 }, 
 					pressed = {
 						label = {}, 
 						skin = {
-							src = ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"), 
+							src = ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_normal"), 
 							scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 }, 
 }
 }, 
 				lineSkin = {--分割线的样式，[可选]。
-					src = ResManager.getUIRes(UIType.WINDOW, "sep_line10"), 
+					src = ResManager.getResSub(ResType.UIBASE,UIBaseType.WINDOW, "sep_line10"), 
 					scale9Rect = {left = 5, right = 5, top = 5, bottom = 5}, 
 }, 
 				lineHeight  [number]   分割线高度，[可选]
@@ -98,7 +98,7 @@ function newWindowWithTabBar(params)
 		isBMFontLabel = false,
 		namePosX = false,
 		lineSkin = {--线的样式
-			src = ResManager.getUIRes(UIType.WINDOW, "sep_line10"),
+			src = ResManager.getResSub(ResType.UIBASE,UIBaseType.WINDOW, "sep_line10"),
 			scale9Rect = {left = 5, right = 5, top = 5, bottom = 5},
 		},
 		lineHeight = false,
@@ -474,7 +474,7 @@ function newBuyWindow(params)
 	win:addChild(inputTip)
 
 	local buyBtn = THSTG.UI.newButton({
-		src = ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
+		src = ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_big_yellow"),
 		x = buyBtnPos.x, y = buyBtnPos.y,
 		anchorPoint = THSTG.UI.POINT_LEFT_BOTTOM,
 		width = 135,
@@ -567,7 +567,7 @@ function newRedWindow(params)
 					additionalKerning = -6,
 				},
 				skin = {
-					src = ResManager.getUIRes(UIType.TAB_BAR, "tab_normal_6"),
+					src = ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_normal_6"),
 					scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 				},
 			},
@@ -577,13 +577,13 @@ function newRedWindow(params)
 					additionalKerning = -6,
 				},
 				skin = {
-					src = ResManager.getUIRes(UIType.TAB_BAR, "tab_selected_6"),
+					src = ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_selected_6"),
 					scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 				},
 			}
 		},
 		lineSkin = {
-			src = ResManager.getUIRes(UIType.WINDOW, "sep_line19"),
+			src = ResManager.getResSub(ResType.UIBASE,UIBaseType.WINDOW, "sep_line19"),
 			scale9Rect = {left = 5, right = 5, top = 5, bottom = 5},
 		},
 		lineWidth = 123,

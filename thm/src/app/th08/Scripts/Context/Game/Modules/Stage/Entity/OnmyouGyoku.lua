@@ -1,5 +1,5 @@
 module(..., package.seeall)
-
+local EWingmanType = GameDef.Stage.EWingmanType
 local M = class("OnmyouGyoku",StageDefine.WingmanPrefab)
 function M:ctor()
     M.super.ctor(self)
@@ -8,8 +8,8 @@ function M:ctor()
     self.animationController = StageDefine.OnmyouGyokuAnimation.new()
     self:addScript(self.animationController)
 
-    self.wingmanController = StageDefine.OnmyouGyokuController.new()
-    self:addScript(self.wingmanController)
+    --设置僚机类型
+    self.wingmanController.wingmanType = EWingmanType.OnmyouGyoku
 
     --普通子弹的发射口
     self.emitter = StageDefine.EmitterPrefab.new()

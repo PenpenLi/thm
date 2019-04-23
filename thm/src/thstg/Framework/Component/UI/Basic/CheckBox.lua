@@ -9,10 +9,10 @@ CHECK_BOX_DEFAULT_PARAMS = {
 	margin = 10,
 	style = {
 		skin = {
-			bgNormal = "",--ResManager.getUIRes(UIType.CHECK_BOX, "check_box_bg1"), --未选中状态底图
-			cross = "",--ResManager.getUIRes(UIType.CHECK_BOX, "check_box_sel1"), --选中状态覆盖图
-			bgDisabled = "",--ResManager.getUIRes(UIType.CHECK_BOX, "check_box_bg1"), --不可用状态底图
-			crossDisabled = "",--ResManager.getUIRes(UIType.CHECK_BOX, "check_box_dis1"), --选中不可用状态
+			bgNormal = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.CHECK_BOX, "check_box_bg1"), --未选中状态底图
+			cross = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.CHECK_BOX, "check_box_sel1"), --选中状态覆盖图
+			bgDisabled = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.CHECK_BOX, "check_box_bg1"), --不可用状态底图
+			crossDisabled = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.CHECK_BOX, "check_box_dis1"), --选中不可用状态
 		},
 		label = {
 			normal = UI.newTextStyle({color = UI.getColorHtml("#394847")}),
@@ -35,10 +35,10 @@ CheckBox组件
 @param	style			[table]			样式
 	{
 		skin = {
-			bgNormal = ResManager.getUIRes(UIType.CHECK_BOX, "bg_normal"), --未选中状态底图
-			bgDisabled = ResManager.getUIRes(UIType.CHECK_BOX, "bg_disabled"), --不可用状态底图
-			cross = ResManager.getUIRes(UIType.CHECK_BOX, "cross"), --选中状态覆盖图
-			crossDisabled = ResManager.getUIRes(UIType.CHECK_BOX, "cross_disabled"), --选中不可用状态
+			bgNormal = ResManager.getResSub(ResType.UIBASE,UIBaseType.CHECK_BOX, "bg_normal"), --未选中状态底图
+			bgDisabled = ResManager.getResSub(ResType.UIBASE,UIBaseType.CHECK_BOX, "bg_disabled"), --不可用状态底图
+			cross = ResManager.getResSub(ResType.UIBASE,UIBaseType.CHECK_BOX, "cross"), --选中状态覆盖图
+			crossDisabled = ResManager.getResSub(ResType.UIBASE,UIBaseType.CHECK_BOX, "cross_disabled"), --选中不可用状态
 }, 
 		label = {
 			normal = UI.newTextStyle(), 文本皮肤

@@ -93,10 +93,6 @@ function M.create(params)
     sprite:align(display.CENTER,display.cx,display.cy-60)
     sprite:addTo(layer)
 
-    local frames = createHFrames(ResManager.getAnimationRes(TexType.SHEET,"dragon_walk_down"),8)
-    local animation = display.newAnimation(frames,1/4)     --1s里面播放4帧
-    sprite:playAnimationForever(animation)
-
     local sprite = display.newSprite()
     sprite:align(display.CENTER,display.cx,display.cy+60)
     sprite:addTo(layer)

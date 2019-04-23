@@ -83,7 +83,7 @@ function M.create(params)
         x = display.cx,
         y = display.cy,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        src = ResManager.getModuleRes(ModuleType.MENU, "main_menu" , "main_bg") --TODO:
+        src = ResManager.getResSub(ResType.UI, ModuleType.MENU, "main_menu_main_bg")
 
     })
     node:addChild(mainBg)

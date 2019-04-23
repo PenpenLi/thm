@@ -12,6 +12,8 @@ function run()
 	SceneManager.init()
 	MVCManager.init()
 	ECSManager.init()
+
+	CacheManager.init()
 end
 
 --关闭游戏
@@ -33,7 +35,7 @@ function clear()
 	ECSManager.clear()
 	MVCManager.clear()
 	SceneManager.clear()
-	CacheManager.clear()
+	CacheManager.clearAll()
 	
 end
 

@@ -91,7 +91,7 @@ end
 @param	resName		[string]资源名
 @return 资源路径
 --]]
-function getUIRes(uiType, resName)
+function getUIBaseRes(uiType, resName)
 	return getResSub(ResType.UI, uiType, resName)
 end
 

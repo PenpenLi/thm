@@ -1,7 +1,17 @@
 ﻿module("ResManager", package.seeall)
 local Resources = require "Scripts.Configs.Handwork.Resources"
 local PreLoadRes = require "Scripts.Configs.Handwork.PreLoadRes"
+local function getNameKey(...)
+    local keys = {...}
+    local keyName = ""
+    for _,v in ipairs(keys) do
+        keyName = keyName .. v .. "#"
+    end
+    keyName = THSTG.MD5.string(keyName)
 
+    return keyName
+end
+--------------
 -- 多层资源获取
 -- @param	...		[string]	资源类型
 -- @return	资源路径
@@ -73,105 +83,42 @@ function getResSub(resType, subType, resName)
 
 	return path
 end
-
-------------
--- --获取空图片的资源路径
--- function getEmptyImg()
--- 	TextureManager:getInstance():getDefaultLoadingImage() -- 重置加载图
--- 	return getRes(ResType.PUBLIC, "empty")
--- end
-
---------------------------
---[[
-获取组件资源
-@param	uiType		[string]组件类型	(对应UIType中的项)
-@param	resName		[string]资源名
-@return 资源路径
---]]
-function getModuleRes(moduleType, ...)
-	return getResMul(ResType.MODULE, moduleType, ...)
+------------------------------------------------------------------------
+--带缓存的对象创建
+function createAnimation(altasName,aniName)
+	local nameKey = getNameKey(altasName,aniName)
+    local animation = display.getAnimationCache(nameKey)
+    if not animation then
+		local ret = THSTG.AnimationSystem.createAnimation(altasName,aniName)
+        if not ret then return nil
+        else
+            display.setAnimationCache(nameKey,ret)
+        end
+        return ret
+    end
+    return animation
 end
 
-
---------------------------
---[[
-获取组件资源
-@param	uiType		[string]组件类型	(对应UIType中的项)
-@param	resName		[string]资源名
-@return 资源路径
---]]
-function getUIRes(uiType, ...)
-	return getResMul(ResType.UI, uiType, ...)
+function cleanAnimationCache()
+	cc.SpriteFrameCache:getInstance():removeUnusedSpriteFrames()
 end
-
---------------------------
---[[
-获取组件资源
-@param	uiType		[string]组件类型	(对应UIType中的项)
-@param	resName		[string]资源名
-@return 资源路径
---]]
-function getUIPublicRes(uiType, ...)
-	return getResMul(ResType.UIPUBLIC, uiType, ...)
-end
---------------------------
---[[
-获取纹理资源
-@param	texType		[string]纹理类型	(对应texType中的项)
-@param	resName		[string]资源名
-@return 资源表
---]]
-function getTexDict(texType)
-	return getResMul(ResType.TEXTURE, texType)
-end
-
-function getTexRes(texType, ...)
-	return getResMul(ResType.TEXTURE, texType ,...)
-end
-
--------
---[[
-获取动画资源
-@param	texType		[string]纹理类型	(对应texType中的项)
-@param	resName		[string]资源名
-@return 资源表
---]]
-function getAnimationDict(texType, ...)
-	return getResMul(ResType.ANIMATION, texType, ... )
-end
-
-function getAnimationRes(texType, ...)
-	return getResMul(ResType.ANIMATION, texType, ...)
-end
-
---[[
-获取粒子资源
-@param	ParticleType		[string]纹理类型	(对应ParticleType中的项)
-@param	resName		[string]资源名
-@return 资源表
---]]
-
-function getParticleRes(particleType, ...)
-	return getResMul(ResType.SFX, SFXType.PARTICLE, particleType, ...)
-end
-
 ------------------------------------------------------------------------
 --TODO:资源预加载
-local defCallback = function(...)
-
-end
-
+local defCallback = function(...) end
 function preload(name,callback)
 	callback = callback or defCallback
 	if name ~= nil then
 		if type(PreLoadRes[name]) == "function" then
 			PreLoadRes[name](callback)
 		end
-	else
-		preload("preLoadGlobal",defCallback)
 	end
 end
 
-function clear( ... )
+function release( ... )
 	
+end
+
+-----------------------------------------------------------------------
+function init()
+	preload("_Global",defCallback)
 end

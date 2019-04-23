@@ -1,9 +1,9 @@
 module("UI", package.seeall)
 
 --页标点正常状态资源
-PAGE_VIEW_PAGE_POINT_NORMAL_SKIN_SRC = ""--ResManager.getUIRes(UIType.PAGE_VIEW, "page_point_normal")
+PAGE_VIEW_PAGE_POINT_NORMAL_SKIN_SRC = ""--ResManager.getResSub(ResType.UIBASE,UIBaseType.PAGE_VIEW, "page_point_normal")
 --页标点选中状态资源
-PAGE_VIEW_PAGE_POINT_SELECTED_SKIN_SRC = ""--ResManager.getUIRes(UIType.PAGE_VIEW, "page_point_selected")
+PAGE_VIEW_PAGE_POINT_SELECTED_SKIN_SRC = ""--ResManager.getResSub(ResType.UIBASE,UIBaseType.PAGE_VIEW, "page_point_selected")
 --默认宽度
 PAGE_VIEW_DEFAULT_WIDTH = 300
 --默认高度

@@ -11,42 +11,42 @@ TABBAR_DIRECTION_VR = 4
 
 --横向布局上方的标签栏皮肤样式
 TABBAR_DEFAULT_HT_NORMAL_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_normal"),
 	scale9Rect = {left = 8, right = 8, top = 2, bottom = 5}
 }
 TABBAR_DEFAULT_HT_SELECTED_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_sel"),
 	scale9Rect = {left = 8, right = 8, top = 2, bottom = 5}
 }
 TABBAR_DEFAULT_HT_DISABLED_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_normal"),
 	sscale9Rect = {left = 8, right = 8, top = 2, bottom = 5}
 }
 
 --横向布局下方的三个默认皮肤
 TABBAR_DEFAULT_HB_NORMAL_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_normal"),
 	scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 }
 TABBAR_DEFAULT_HB_SELECTED_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_sel"),
 	scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 }
 TABBAR_DEFAULT_HB_DISABLED_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_normal"),
 	scale9Rect = {left = 7, right = 7, top = 5, bottom = 5}
 }
 --纵向处于界面左方的三个默认皮肤
 TABBAR_DEFAULT_VL_NORMAL_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_normal"),
 	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 TABBAR_DEFAULT_VL_SELECTED_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_sel"),
 	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 TABBAR_DEFAULT_VL_DISABLED_SKIN = {
-	src = "",--ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal"),
+	src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_normal"),
 	scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 }
 
@@ -249,10 +249,10 @@ function newTabBar(params)
 			local backSrc, scale9Rect
 
 			if normal then
-				backSrc = params.tabBarStyle[index].normal.skin.src or style.normal.src or style.normal.skin.src or ResManager.getUIRes(UIType.TAB_BAR, "tab_base_normal")
+				backSrc = params.tabBarStyle[index].normal.skin.src or style.normal.src or style.normal.skin.src or ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_normal")
 				scale9Rect = style.normal.scale9Rect or style.normal.skin.scale9Rect or {left = 7, right = 7, top = 5, bottom = 5}
 			else
-				backSrc = params.tabBarStyle[index].pressed.skin.src or style.pressed.src or style.pressed.skin.src or ResManager.getUIRes(UIType.TAB_BAR, "tab_base_sel")
+				backSrc = params.tabBarStyle[index].pressed.skin.src or style.pressed.src or style.pressed.skin.src or ResManager.getResSub(ResType.UIBASE,UIBaseType.TAB_BAR, "tab_base_sel")
 				scale9Rect = style.pressed.scale9Rect or style.pressed.skin.scale9Rect or {left = 7, right = 7, top = 5, bottom = 5}
 			end
 

@@ -128,7 +128,7 @@ local function s_createSelecter(params)
 			anchorPoint = anchorPoint,
 		}
 
-		local bgImage = ResManager.getUIRes(UIType.DROP_DOWN, "drop_frame")
+		local bgImage = ResManager.getResSub(ResType.UIBASE,UIBaseType.DROP_DOWN, "drop_frame")
 		if params.style and params.style.bg then
 			bgImage = params.style.bg
 		end
@@ -346,7 +346,7 @@ local function s_createSelecter(params)
 		height = params.height,
 		anchorPoint = cc.p(0, 0.5),
 		style = {
-			src = params.style.bg or ResManager.getUIRes(UIType.DROP_DOWN, "drop_frame"),
+			src = params.style.bg or ResManager.getResSub(ResType.UIBASE,UIBaseType.DROP_DOWN, "drop_frame"),
 			scale9Rect = params.style.scale9Rect or {left = 5, right = 5, top = 5, bottom = 5}
 		},
 		onClick = dropOperate
@@ -388,7 +388,7 @@ local function s_createSelecter(params)
 	local img = UI.newSprite{
 		x = params.width - params.height * 0.5,
 		y = params.height * 0.5,
-		src = params.style.arrowBg or ResManager.getUIRes(UIType.DROP_DOWN, "drop_btn")
+		src = params.style.arrowBg or ResManager.getResSub(ResType.UIBASE,UIBaseType.DROP_DOWN, "drop_btn")
 	}
 	local scale = params.height / 34
 	img:setScale(scale)
@@ -397,7 +397,7 @@ local function s_createSelecter(params)
 	local arrow = UI.newSprite{
 		x = params.width - params.height * 0.5,
 		y = params.height * 0.5 - 2,
-		src = params.style.arrow or ResManager.getUIRes(UIType.DROP_DOWN, "drop_arrow")
+		src = params.style.arrow or ResManager.getResSub(ResType.UIBASE,UIBaseType.DROP_DOWN, "drop_arrow")
 	}
 	arrow:setScale(scale)
 	node:addChild(arrow)

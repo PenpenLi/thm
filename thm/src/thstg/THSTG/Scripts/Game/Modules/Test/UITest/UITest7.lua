@@ -144,10 +144,10 @@ function M.create(params)
             offset = 90,
             style = {
                 bgSkin = {
-                    src = ResManager.getUIRes(UIType.PROGRESSBAR,"prog_radial_bg")
+                    src = ResManager.getResSub(ResType.UIBASE,UIBaseType.PROGRESSBAR,"prog_radial_bg")
                 },
                 progressSkin = {
-                    src = ResManager.getUIRes(UIType.PROGRESSBAR,"prog_radial_hp")
+                    src = ResManager.getResSub(ResType.UIBASE,UIBaseType.PROGRESSBAR,"prog_radial_hp")
                 }
             }
 		})

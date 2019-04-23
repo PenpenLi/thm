@@ -3,7 +3,7 @@ module(..., package.seeall)
 local M = class("StageModule", THSTG.MVC.Module)
 
 function M:_onInit()
-    
+    Cache.register("stageCache","Scripts.Context.Game.Modules.Stage.StageCache")
 end
 
 function M:_initViewClass()

@@ -23,9 +23,9 @@ function M:_onStart()
 end
 
 function M:_onEnd()
-    EntityManager.releaseEntity(self:getEntity())  --放回池中
     self:getEntity():setActive(false)
     self._actionComp:stop()
+    EntityManager.releaseEntity(self:getEntity())  --放回池中
 end
 
 return M

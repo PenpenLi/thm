@@ -35,21 +35,21 @@ ACCORDION_DEFAULT_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline, isDr
 			normal = {
 				label = {size = UI.FONT_SIZE_NORMAL, color = UI.getColorHtml("#15233d")},
 				skin = {
-					src = "",--ResManager.getUIRes(UIType.WINDOW, imageNormalName),
+					src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.WINDOW, imageNormalName),
 					scale9Rect = {left = 20, right = 20, top = 20, bottom = 20},
 				}
 			},
 			selected = {
 				label = {size = UI.FONT_SIZE_NORMAL, color = UI.getColorHtml("#15233d")},
 				skin = {
-					src = "",--ResManager.getUIRes(UIType.WINDOW, imageSelectedName),
+					src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.WINDOW, imageSelectedName),
 					scale9Rect = {left = 20, right = 20, top = 20, bottom = 20}
 				}
 			},
 			disabled = {
 				label = {size = UI.FONT_SIZE_NORMAL, color = UI.COLOR_GRAY_C, outline = outline or 1},
 				skin = {
-					src = "",--ResManager.getUIRes(UIType.ACCORDION, "accord_disa1"),
+					src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.ACCORDION, "accord_disa1"),
 					scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 				}
 			}
@@ -113,7 +113,7 @@ ACCORDION_TEAM_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline)
 				x = w / 2,
 				y = h / 2,
 				style = {
-					src = "",--ResManager.getUIRes(UIType.ACCORDION, "accord_disa1"),
+					src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.ACCORDION, "accord_disa1"),
 					scale9Rect = {left = 10, right = 10, top = 10, bottom = 10},
 				}
 			})
@@ -131,7 +131,7 @@ ACCORDION_TEAM_HEAD_TEMPLATE = function(title, w, h, zoomScale, outline)
 			bg = UI.newImage({
 				x = w / 2, y = h / 2,
 				style = {
-					src = "",--ResManager.getUIRes(UIType.ACCORDION, "accord_sel1"),
+					src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.ACCORDION, "accord_sel1"),
 					scale9Rect = {left = 10, right = 10, top = 10, bottom = 10},
 				}
 			})

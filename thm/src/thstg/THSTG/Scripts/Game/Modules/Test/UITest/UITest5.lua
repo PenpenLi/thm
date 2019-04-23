@@ -26,21 +26,21 @@ local createTemplate = function(title, w, h, zoomScale, outline, isDrawArrow, im
 			normal = {
 				label = {size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.getColorHtml("#15233d")},
 				skin = {
-					src = imageNormalName,--ResManager.getUIRes(UIType.WINDOW, imageNormalName),
+					src = imageNormalName,--ResManager.getResSub(ResType.UIBASE,UIBaseType.WINDOW, imageNormalName),
 					scale9Rect = {left = 20, right = 20, top = 20, bottom = 20},
 				}
 			},
 			selected = {
 				label = {size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.getColorHtml("#15233d")},
 				skin = {
-					src = imageSelectedName,--ResManager.getUIRes(UIType.WINDOW, imageSelectedName),
+					src = imageSelectedName,--ResManager.getResSub(ResType.UIBASE,UIBaseType.WINDOW, imageSelectedName),
 					scale9Rect = {left = 20, right = 20, top = 20, bottom = 20}
 				}
 			},
 			disabled = {
 				label = {size = THSTG.UI.FONT_SIZE_NORMAL, color = THSTG.UI.COLOR_GRAY_C, outline = outline or 1},
 				skin = {
-					src = imageNormalName,--ResManager.getUIRes(UIType.ACCORDION, "accord_disa1"),
+					src = imageNormalName,--ResManager.getResSub(ResType.UIBASE,UIBaseType.ACCORDION, "accord_disa1"),
 					scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 				}
 			}

@@ -28,12 +28,12 @@ function M:_addEntity(e,entity,layerType)
         elseif layerType == EEntityLayerType.Barrage then
             entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
         end
-        Cache.stageCache.addToEntityCache(entity)
+        Cache.stageCache:addToEntityCache(entity)
     end
 end
 
 function M:_removEntity(e,entity)
-    Cache.stageCache.removeToEntityCache(entity)
+    Cache.stageCache:removeToEntityCache(entity)
 end
 
 return M

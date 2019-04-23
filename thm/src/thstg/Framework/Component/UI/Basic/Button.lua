@@ -19,7 +19,7 @@ BUTTON_DEFAULT_PARAMS = {
 				outlineColor = getColorHtml("#f0e6a9"),
 			}),
 			skin = {
-				src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+				src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_yellow"),
 				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		},
@@ -31,7 +31,7 @@ BUTTON_DEFAULT_PARAMS = {
 				outlineColor = getColorHtml("#f0e6a9"),
 			}),
 			skin = {
-				src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+				src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_yellow"),
 				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		},
@@ -59,7 +59,7 @@ yellowStyle = {
 			outlineColor = UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			src = "",--ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+			src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_yellow"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -71,7 +71,7 @@ yellowStyle = {
 			outlineColor = UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			src = "",--ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+			src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_yellow"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -98,7 +98,7 @@ blueStyle = {
 			outlineColor = UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_blue"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -110,7 +110,7 @@ blueStyle = {
 			outlineColor = UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_blue"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -122,7 +122,7 @@ blueStyle = {
 			outlineColor = UI.getColorHtml("#cdc8c8"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_base_blue"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_blue"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -137,7 +137,7 @@ bigYellowStyle = {
 			outlineColor = UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_big_yellow"),
 			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
@@ -149,7 +149,7 @@ bigYellowStyle = {
 			outlineColor = UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			src = "", -- ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
+			src = "", -- ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_big_yellow"),
 			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
@@ -176,7 +176,7 @@ bigBlueStyle = {
 			outlineColor = UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_big_blue"),
 			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
@@ -188,7 +188,7 @@ bigBlueStyle = {
 			outlineColor = UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_big_blue"),
 			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
@@ -215,7 +215,7 @@ biggestYellowStyle = {
 			outlineColor = UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_big_yellow"),
 			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
@@ -227,7 +227,7 @@ biggestYellowStyle = {
 			outlineColor = UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_yellow"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_big_yellow"),
 			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
@@ -254,7 +254,7 @@ biggestBlueStyle = {
 			outlineColor = UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_big_blue"),
 			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
@@ -266,7 +266,7 @@ biggestBlueStyle = {
 			outlineColor = UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_big_blue"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_big_blue"),
 			scale9Rect = {bottom = 30, left = 60, right = 60, top = 30},
 		}
 	},
@@ -294,7 +294,7 @@ yellowExStyle = {
 			outlineColor = UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_login_enter"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_login_enter"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -306,7 +306,7 @@ yellowExStyle = {
 			outlineColor = UI.getColorHtml("#f0e6a9"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_login_enter"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_login_enter"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -373,7 +373,7 @@ yellowFlowerStyle = {
 			outlineColor = UI.getColorHtml("#8b0922"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_yellow"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_flower_yellow"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -385,7 +385,7 @@ yellowFlowerStyle = {
 			outlineColor = UI.getColorHtml("#8b0922"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_yellow"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_flower_yellow"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -412,7 +412,7 @@ flowerStyle = {
 			outlineColor = UI.getColorHtml("#ffe1a9"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_flower"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -424,7 +424,7 @@ flowerStyle = {
 			outlineColor = UI.getColorHtml("#ffe1a9"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_flower"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -453,7 +453,7 @@ blueFlowerStyle = {
 		outlineColor = UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			src = "", -- ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
+			src = "", -- ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_flower_blue"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -465,7 +465,7 @@ blueFlowerStyle = {
 		outlineColor = UI.getColorHtml("#aac4d2"),
 		}),
 		skin = {
-			src = "", -- ResManager.getUIRes(UIType.BUTTON, "btn_flower_blue"),
+			src = "", -- ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_flower_blue"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -493,7 +493,7 @@ greenFlowerStyle = {
 			outlineColor = UI.getColorHtml("#8b0922"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_green"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_flower_green"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},
@@ -505,7 +505,7 @@ greenFlowerStyle = {
 			outlineColor = UI.getColorHtml("#8b0922"),
 		}),
 		skin = {
-			src = "", --ResManager.getUIRes(UIType.BUTTON, "btn_flower_green"),
+			src = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_flower_green"),
 			scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 		}
 	},

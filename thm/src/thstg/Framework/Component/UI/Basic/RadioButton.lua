@@ -8,10 +8,10 @@ RADIO_BUTTON_DEFAULT_PARAMS = {
 	enabled = true,
 	style = {
 		skin = {
-			bgNormal = "",-- ResManager.getUIRes(UIType.RADIO_BUTTON, "bg_normal"), --未选中状态底图
-			bgDisabled ="",-- ResManager.getUIRes(UIType.RADIO_BUTTON, "bg_disabled"), --不可用状态底图
-			cross = "",--ResManager.getUIRes(UIType.RADIO_BUTTON, "cross"), --选中状态覆盖图
-			crossDisabled ="",-- ResManager.getUIRes(UIType.RADIO_BUTTON, "cross_disabled"), --选中不可用状态
+			bgNormal = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.RADIO_BUTTON, "bg_normal"), --未选中状态底图
+			bgDisabled ="",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.RADIO_BUTTON, "bg_disabled"), --不可用状态底图
+			cross = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.RADIO_BUTTON, "cross"), --选中状态覆盖图
+			crossDisabled ="",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.RADIO_BUTTON, "cross_disabled"), --选中不可用状态
 		},
 		label = {
 			normal = UI.newTextStyle(),

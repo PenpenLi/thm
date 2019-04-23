@@ -14,11 +14,11 @@ SLIDE_SWITCH_DEFAULT_PARAMS = {
 	style = {
 		padding = {left = 2, right = 2, top = 2, bottom = 2},
 		thumbSkin = {
-			src = "",-- ResManager.getUIRes(UIType.SWITCH, "switch_cover"),
+			src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.SWITCH, "switch_cover"),
 			scale9Rect = {left = 6, right = 6, top = 6, bottom = 6}
 		},
 		bgSkin = {
-			src = "",-- ResManager.getUIRes(UIType.SWITCH, "switch_bg"),
+			src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.SWITCH, "switch_bg"),
 			scale9Rect = {left = 5, right = 5, top = 5, bottom = 5}
 		},
 		text = {

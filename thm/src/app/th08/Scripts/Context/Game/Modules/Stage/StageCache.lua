@@ -1,4 +1,6 @@
 module(..., package.seeall)
+local M = class("StageCache", THSTG.CORE.Cache)
+
 local EEntityType = GameDef.Stage.EEntityType
 local ERoleType = GameDef.Stage.ERoleType
 local EModeType = GameDef.Stage.EModeType
@@ -9,83 +11,85 @@ local _eGroupType = false
 local _eRoleType = ERoleType.Reimu
 local _eStageMode = EModeType.BossRush
 
-function setGroupType(val)
+function M:setGroupType(val)
     _eGroupType = val
 end
 
-function getGroupType()
+function M:getGroupType()
     return _eGroupType
 end
 
-function setRoleType(val)
+function M:setRoleType(val)
     _eRoleType = val
 end
 
-function getRoleType()
+function M:getRoleType()
     return _eRoleType
 end
 
-function isTeam()
+function M:isTeam()
     return _bIsTeam
 end
 
-function isInStage()
+function M:isInStage()
     return _bIsInStage
 end
 
-function setInStage(state)
+function M:setInStage(state)
     _bIsInStage = state
 end
-function getStageMode()
+function M:getStageMode()
     return _eStageMode
 end
 
-function setStageMode(mode)
+function M:setStageMode(mode)
     _eStageMode = mode
 end
 
 ---
 
-function getStageId()
+function M:getStageId()
     return 5
 end
 
-function getMapId()
+function M:getMapId()
     return getStageId()
 end
 
 ----
 local _allEntities = {}
-function addToEntityCache(entity)
+function M:addToEntityCache(entity)
     local entityType = entity:getScript("EntityController").entityType
     _allEntities = _allEntities or {}
     _allEntities[entityType] = _allEntities[entityType] or {}
     _allEntities[entityType][entity] = entity
 end
 
-function removeToEntityCache(entity)
+function M:removeToEntityCache(entity)
     local entityType = entity:getScript("EntityController").entityType
     _allEntities = _allEntities or {}
     _allEntities[entityType] = _allEntities[entityType] or {}
     _allEntities[entityType][entity] = nil
 end
 
-function getEntities(category)
+function M:getEntities(category)
     local tb = _allEntities[category]
     return tb
  end
 
-function getBossEntity()
+function M:getBossEntity()
     local tb = getEntities(EEntityType.Boss)
     return tb and tb[1]
 end
 
-function getPlayerEntity()
+function M:getPlayerEntity()
     local tb = getEntities(EEntityType.Player)
     return tb and tb[1]
 end
 
 ----
-function clear()
+function M:clear()
     _allEntities = {}
 end
+
+return M

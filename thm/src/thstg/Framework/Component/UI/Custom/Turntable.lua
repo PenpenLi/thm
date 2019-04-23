@@ -93,7 +93,7 @@ TURNTABLE_DEFAULT_PARAMS = {
     sectors = 4,
     midPoint = cc.p(0.5,0.5),
     offset = 0,
-    fgSrc = "", --ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_radial_hp"),
+    fgSrc = "", --ResManager.getResSub(ResType.UIBASE,UIBaseType.PROGRESS_BAR, "prog_radial_hp"),
     bgSrc = false,
 }
 

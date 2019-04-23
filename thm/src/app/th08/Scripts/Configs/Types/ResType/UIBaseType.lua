@@ -1,4 +1,4 @@
-module("UIPublicType")
+module("UIBaseType")
 
 BUTTON = "button"
 

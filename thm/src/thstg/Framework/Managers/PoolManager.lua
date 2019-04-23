@@ -1,2 +1,8 @@
-module("FlowManager", package.seeall)
+module("PoolManager", package.seeall)
 --TODO:
+function init()
+    
+end
+function clear( ... )
+    
+end

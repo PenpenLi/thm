@@ -47,12 +47,21 @@ function M:_onStart()
 
     self._transComp = self:getComponent("TransformComponent")
     self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
+
+    self:_onSetup()
 end
 ------------------
 --[[以下由子类重载]]
+function M:_onSetup()
+    --动画装配器,通过配置装配动画
+    
+
+end
+
 function M:_onState()
 
 end
+
 --cc.Move无法主动调用,这里由自身进行判断
 function M:_onMove(dx,dy)
 

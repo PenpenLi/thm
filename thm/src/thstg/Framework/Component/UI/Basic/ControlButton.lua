@@ -16,7 +16,7 @@ local default = {
 			width = 100,
 			height = 30,
 			style = {
-				src = "",--ResManager.getUIRes(UIType.BUTTON, "default_normal"),
+				src = "",--ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "default_normal"),
 				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10},
 			},
 		})
@@ -432,14 +432,14 @@ BASEBUTTON_DEFAULT = {
 		normal = {
 			label = UI.newTextStyle({size = UI.FONT_SIZE_NORMAL, color = UI.htmlColor2C4b("#b5c8df")}),
 			skin = {
-				src = "",-- ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+				src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_yellow"),
 				scale9Rect = {left = 30, right = 30, top = 12, bottom = 17}
 			}
 		},
 		pressed = {
 			label = UI.newTextStyle({size = UI.FONT_SIZE_NORMAL, color = UI.htmlColor2C4b("#b5c8df")}),
 			skin = {
-				src = "",-- ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+				src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_yellow"),
 				scale9Rect = {left = 30, right = 30, top = 12, bottom = 17}
 			}
 		},
@@ -453,7 +453,7 @@ BASEBUTTON_DEFAULT = {
 		selected = {
 			label = UI.newTextStyle({size = UI.FONT_SIZE_NORMAL, color = UI.htmlColor2C4b("#b5c8df")}),
 			skin = {
-				src = "",-- ResManager.getUIRes(UIType.BUTTON, "btn_base_yellow"),
+				src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "btn_base_yellow"),
 				scale9Rect = {left = 30, right = 30, top = 12, bottom = 17}
 			}
 		},
@@ -919,7 +919,7 @@ ARTBUTTON_DEFAULT = {
 				color = UI.COLOR_WHITE,
 			},
 			skin = {
-				src = "",-- ResManager.getUIRes(UIType.BUTTON, "default_normal"),
+				src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "default_normal"),
 				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		},
@@ -928,7 +928,7 @@ ARTBUTTON_DEFAULT = {
 				color = UI.COLOR_YELLOW,
 			},
 			skin = {
-				src = "",-- ResManager.getUIRes(UIType.BUTTON, "default_selected"),
+				src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "default_selected"),
 				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		},
@@ -937,7 +937,7 @@ ARTBUTTON_DEFAULT = {
 				color = UI.COLOR_GRAY_C,
 			},
 			skin = {
-				src = "",-- ResManager.getUIRes(UIType.BUTTON, "default_disabled"),
+				src = "",-- ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON, "default_disabled"),
 				scale9Rect = {left = 10, right = 10, top = 10, bottom = 10}
 			}
 		},

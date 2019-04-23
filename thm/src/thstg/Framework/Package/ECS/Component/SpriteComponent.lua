@@ -10,7 +10,6 @@ function M:getContentSize()
     return self:_getSprite():getContentSize()
 end
 
-
 function M:setContentSize(size)
     return self:_getSprite():setContentSize(size)
 end
@@ -21,6 +20,14 @@ end
 
 function M:setRotation(val)
     return self:_getSprite():setRotation(val)
+end
+
+function M:setScale(val)
+    return self:_getSprite():setScale(val)
+end
+
+function M:getScale(val)
+    return self:_getSprite():getScale()
 end
 
 function M:setFlippedX(val)

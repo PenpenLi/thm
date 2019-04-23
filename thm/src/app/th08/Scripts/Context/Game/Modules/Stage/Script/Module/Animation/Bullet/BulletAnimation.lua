@@ -20,13 +20,28 @@ function M:_onStart()
     self.bulletType = bulletControScript.bulletType
 
     --进行碰撞点与贴图的位置修正
-    local spriteComp =  self:getComponent("SpriteComponent")
+    local spriteComp = self:getComponent("SpriteComponent")
     spriteComp:setAnchorPoint(self.centerPoint)
     spriteComp:setRotation(self.rotation)
 end
 
 ---
+function M:_onState()
+    return {
+        initial = "Idle",
+        events  = {
+        
+            {name = "Idle", from = {},  to = "Idle"},
+        },
+        callbacks = {
+            onIdle = handler(self,self._onIdle),
+        },
+    }
+end
 
+function M:_onIdle(event)
+    self:getSprite():runAction(cc.Animate:create(AnimationCache.getResBySheet("etama","bullet_big_jade_idle_4")))
+end
 
 ----
 
