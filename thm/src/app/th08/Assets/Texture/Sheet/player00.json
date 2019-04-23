@@ -1,0 +1,260 @@
+{
+    "SubTexture": [
+        {
+            "height": 48,
+            "name": "reimu_idle_01",
+            "width": 32,
+            "x": 0,
+            "y": 0
+        },
+        {
+            "height": 48,
+            "name": "reimu_idle_02",
+            "width": 32,
+            "x": 32,
+            "y": 0
+        },
+        {
+            "height": 48,
+            "name": "reimu_idle_03",
+            "width": 32,
+            "x": 64,
+            "y": 0
+        },
+        {
+            "height": 48,
+            "name": "reimu_idle_04",
+            "width": 32,
+            "x": 96,
+            "y": 0
+        },
+        {
+            "height": 48,
+            "name": "yukari_idle_01",
+            "width": 32,
+            "x": 128,
+            "y": 0
+        },
+        {
+            "height": 48,
+            "name": "yukari_idle_02",
+            "width": 32,
+            "x": 160,
+            "y": 0
+        },
+        {
+            "height": 48,
+            "name": "yukari_idle_03",
+            "width": 32,
+            "x": 192,
+            "y": 0
+        },
+        {
+            "height": 48,
+            "name": "yukari_idle_04",
+            "width": 32,
+            "x": 224,
+            "y": 0
+        },
+        {
+            "height": 48,
+            "name": "reimu_move_left_01",
+            "width": 32,
+            "x": 0,
+            "y": 48
+        },
+        {
+            "height": 48,
+            "name": "reimu_move_left_02",
+            "width": 32,
+            "x": 32,
+            "y": 48
+        },
+        {
+            "height": 48,
+            "name": "reimu_move_left_03",
+            "width": 32,
+            "x": 64,
+            "y": 48
+        },
+        {
+            "height": 48,
+            "name": "reimu_move_left_04",
+            "width": 32,
+            "x": 96,
+            "y": 48
+        },
+        {
+            "height": 48,
+            "name": "reimu_move_left_05",
+            "width": 32,
+            "x": 128,
+            "y": 48
+        },
+        {
+            "height": 48,
+            "name": "reimu_move_left_06",
+            "width": 32,
+            "x": 160,
+            "y": 48
+        },
+        {
+            "height": 48,
+            "name": "reimu_move_left_07",
+            "width": 32,
+            "x": 192,
+            "y": 48
+        },
+        {
+            "height": 48,
+            "name": "yukari_move_left_01",
+            "width": 32,
+            "x": 0,
+            "y": 96
+        },
+        {
+            "height": 48,
+            "name": "yukari_move_left_02",
+            "width": 32,
+            "x": 32,
+            "y": 96
+        },
+        {
+            "height": 48,
+            "name": "yukari_move_left_03",
+            "width": 32,
+            "x": 64,
+            "y": 96
+        },
+        {
+            "height": 48,
+            "name": "yukari_move_left_04",
+            "width": 32,
+            "x": 96,
+            "y": 96
+        },
+        {
+            "height": 48,
+            "name": "yukari_move_left_05",
+            "width": 32,
+            "x": 128,
+            "y": 96
+        },
+        {
+            "height": 48,
+            "name": "yukari_move_left_06",
+            "width": 32,
+            "x": 160,
+            "y": 96
+        },
+        {
+            "height": 48,
+            "name": "yukari_move_left_07",
+            "width": 32,
+            "x": 192,
+            "y": 96
+        },
+        {
+            "height": 48,
+            "name": "ran_idle_01",
+            "width": 32,
+            "x": 128,
+            "y": 144
+        },
+        {
+            "height": 48,
+            "name": "ran_idle_02",
+            "width": 32,
+            "x": 160,
+            "y": 144
+        },
+        {
+            "height": 48,
+            "name": "ran_idle_03",
+            "width": 32,
+            "x": 192,
+            "y": 144
+        },
+        {
+            "height": 48,
+            "name": "ran_idle_04",
+            "width": 32,
+            "x": 224,
+            "y": 144
+        },
+        {
+            "height": 48,
+            "name": "ran_move_left_01",
+            "width": 32,
+            "x": 128,
+            "y": 192
+        },
+        {
+            "height": 48,
+            "name": "ran_move_left_02",
+            "width": 32,
+            "x": 160,
+            "y": 192
+        },
+        {
+            "height": 48,
+            "name": "ran_move_left_03",
+            "width": 32,
+            "x": 192,
+            "y": 192
+        },
+        {
+            "height": 48,
+            "name": "ran_move_left_04",
+            "width": 32,
+            "x": 224,
+            "y": 192
+        },
+        {
+            "height": 48,
+            "name": "ran_invaid_01",
+            "width": 64,
+            "x": 64,
+            "y": 144
+        },
+        {
+            "height": 16,
+            "name": "reimu_bullet_01_01",
+            "width": 64,
+            "x": 0,
+            "y": 144
+        },
+        {
+            "height": 16,
+            "name": "yukari_bullet_01_01",
+            "width": 64,
+            "x": 0,
+            "y": 160
+        },
+        {
+            "height": 32,
+            "name": "reimu_skill_01_01",
+            "width": 32,
+            "x": 0,
+            "y": 176
+        },
+        {
+            "height": 16,
+            "name": "reimu_bullet_02_01",
+            "width": 16,
+            "x": 32,
+            "y": 176
+        },
+        {
+            "height": 16,
+            "name": "yukari_bullet_01_01",
+            "width": 64,
+            "x": 0,
+            "y": 208
+        }
+    ],
+    "height": 256,
+    "imagePath": "player00.png",
+    "name": "player00",
+    "width": 256
+}

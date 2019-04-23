@@ -1,0 +1,1485 @@
+{
+    "SubTexture": [
+        {
+            "height": 32,
+            "name": "etama2_09",
+            "width": 32,
+            "x": 256,
+            "y": 0
+        },
+        {
+            "height": 32,
+            "name": "etama2_10",
+            "width": 32,
+            "x": 288,
+            "y": 0
+        },
+        {
+            "height": 32,
+            "name": "etama2_11",
+            "width": 32,
+            "x": 320,
+            "y": 0
+        },
+        {
+            "height": 32,
+            "name": "etama2_12",
+            "width": 32,
+            "x": 352,
+            "y": 0
+        },
+        {
+            "height": 32,
+            "name": "etama2_13",
+            "width": 32,
+            "x": 384,
+            "y": 0
+        },
+        {
+            "height": 32,
+            "name": "etama2_14",
+            "width": 32,
+            "x": 416,
+            "y": 0
+        },
+        {
+            "height": 32,
+            "name": "etama2_15",
+            "width": 32,
+            "x": 448,
+            "y": 0
+        },
+        {
+            "height": 32,
+            "name": "etama2_24",
+            "width": 32,
+            "x": 256,
+            "y": 32
+        },
+        {
+            "height": 32,
+            "name": "etama2_25",
+            "width": 32,
+            "x": 288,
+            "y": 32
+        },
+        {
+            "height": 32,
+            "name": "etama2_26",
+            "width": 32,
+            "x": 320,
+            "y": 32
+        },
+        {
+            "height": 32,
+            "name": "etama2_27",
+            "width": 32,
+            "x": 352,
+            "y": 32
+        },
+        {
+            "height": 32,
+            "name": "etama2_28",
+            "width": 32,
+            "x": 384,
+            "y": 32
+        },
+        {
+            "height": 32,
+            "name": "etama2_29",
+            "width": 32,
+            "x": 416,
+            "y": 32
+        },
+        {
+            "height": 32,
+            "name": "etama2_30",
+            "width": 32,
+            "x": 448,
+            "y": 32
+        },
+        {
+            "height": 32,
+            "name": "etama2_39",
+            "width": 32,
+            "x": 256,
+            "y": 64
+        },
+        {
+            "height": 32,
+            "name": "etama2_40",
+            "width": 32,
+            "x": 288,
+            "y": 64
+        },
+        {
+            "height": 32,
+            "name": "etama2_41",
+            "width": 32,
+            "x": 320,
+            "y": 64
+        },
+        {
+            "height": 32,
+            "name": "etama2_42",
+            "width": 32,
+            "x": 352,
+            "y": 64
+        },
+        {
+            "height": 32,
+            "name": "etama2_43",
+            "width": 32,
+            "x": 384,
+            "y": 64
+        },
+        {
+            "height": 32,
+            "name": "etama2_44",
+            "width": 32,
+            "x": 416,
+            "y": 64
+        },
+        {
+            "height": 32,
+            "name": "etama2_45",
+            "width": 32,
+            "x": 448,
+            "y": 64
+        },
+        {
+            "height": 32,
+            "name": "etama2_54",
+            "width": 32,
+            "x": 256,
+            "y": 96
+        },
+        {
+            "height": 32,
+            "name": "etama2_55",
+            "width": 32,
+            "x": 288,
+            "y": 96
+        },
+        {
+            "height": 32,
+            "name": "etama2_56",
+            "width": 32,
+            "x": 320,
+            "y": 96
+        },
+        {
+            "height": 32,
+            "name": "etama2_57",
+            "width": 32,
+            "x": 352,
+            "y": 96
+        },
+        {
+            "height": 32,
+            "name": "etama2_58",
+            "width": 32,
+            "x": 384,
+            "y": 96
+        },
+        {
+            "height": 32,
+            "name": "etama2_59",
+            "width": 32,
+            "x": 416,
+            "y": 96
+        },
+        {
+            "height": 32,
+            "name": "etama2_60",
+            "width": 32,
+            "x": 448,
+            "y": 96
+        },
+        {
+            "height": 32,
+            "name": "etama2_69",
+            "width": 32,
+            "x": 256,
+            "y": 128
+        },
+        {
+            "height": 32,
+            "name": "etama2_70",
+            "width": 32,
+            "x": 288,
+            "y": 128
+        },
+        {
+            "height": 32,
+            "name": "etama2_71",
+            "width": 32,
+            "x": 320,
+            "y": 128
+        },
+        {
+            "height": 32,
+            "name": "etama2_72",
+            "width": 32,
+            "x": 352,
+            "y": 128
+        },
+        {
+            "height": 32,
+            "name": "etama2_73",
+            "width": 32,
+            "x": 384,
+            "y": 128
+        },
+        {
+            "height": 32,
+            "name": "etama2_74",
+            "width": 32,
+            "x": 416,
+            "y": 128
+        },
+        {
+            "height": 32,
+            "name": "etama2_75",
+            "width": 32,
+            "x": 448,
+            "y": 128
+        },
+        {
+            "height": 32,
+            "name": "etama2_84",
+            "width": 32,
+            "x": 256,
+            "y": 160
+        },
+        {
+            "height": 32,
+            "name": "etama2_85",
+            "width": 32,
+            "x": 288,
+            "y": 160
+        },
+        {
+            "height": 32,
+            "name": "etama2_86",
+            "width": 32,
+            "x": 320,
+            "y": 160
+        },
+        {
+            "height": 32,
+            "name": "etama2_87",
+            "width": 32,
+            "x": 352,
+            "y": 160
+        },
+        {
+            "height": 32,
+            "name": "etama2_88",
+            "width": 32,
+            "x": 384,
+            "y": 160
+        },
+        {
+            "height": 32,
+            "name": "etama2_89",
+            "width": 32,
+            "x": 416,
+            "y": 160
+        },
+        {
+            "height": 32,
+            "name": "etama2_90",
+            "width": 32,
+            "x": 448,
+            "y": 160
+        },
+        {
+            "height": 32,
+            "name": "etama2_99",
+            "width": 32,
+            "x": 256,
+            "y": 192
+        },
+        {
+            "height": 32,
+            "name": "etama2_100",
+            "width": 32,
+            "x": 288,
+            "y": 192
+        },
+        {
+            "height": 32,
+            "name": "etama2_101",
+            "width": 32,
+            "x": 320,
+            "y": 192
+        },
+        {
+            "height": 32,
+            "name": "etama2_102",
+            "width": 32,
+            "x": 352,
+            "y": 192
+        },
+        {
+            "height": 32,
+            "name": "etama2_103",
+            "width": 32,
+            "x": 384,
+            "y": 192
+        },
+        {
+            "height": 32,
+            "name": "etama2_104",
+            "width": 32,
+            "x": 416,
+            "y": 192
+        },
+        {
+            "height": 32,
+            "name": "etama2_105",
+            "width": 32,
+            "x": 448,
+            "y": 192
+        },
+        {
+            "height": 32,
+            "name": "etama2_114",
+            "width": 32,
+            "x": 256,
+            "y": 224
+        },
+        {
+            "height": 32,
+            "name": "etama2_115",
+            "width": 32,
+            "x": 288,
+            "y": 224
+        },
+        {
+            "height": 32,
+            "name": "etama2_116",
+            "width": 32,
+            "x": 320,
+            "y": 224
+        },
+        {
+            "height": 32,
+            "name": "etama2_117",
+            "width": 32,
+            "x": 352,
+            "y": 224
+        },
+        {
+            "height": 32,
+            "name": "etama2_118",
+            "width": 32,
+            "x": 384,
+            "y": 224
+        },
+        {
+            "height": 32,
+            "name": "etama2_119",
+            "width": 32,
+            "x": 416,
+            "y": 224
+        },
+        {
+            "height": 32,
+            "name": "etama2_120",
+            "width": 32,
+            "x": 448,
+            "y": 224
+        },
+        {
+            "height": 32,
+            "name": "etama2_121",
+            "width": 32,
+            "x": 0,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_122",
+            "width": 32,
+            "x": 32,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_123",
+            "width": 32,
+            "x": 64,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_124",
+            "width": 32,
+            "x": 96,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_125",
+            "width": 32,
+            "x": 128,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_126",
+            "width": 32,
+            "x": 160,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_127",
+            "width": 32,
+            "x": 192,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_128",
+            "width": 32,
+            "x": 224,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_129",
+            "width": 32,
+            "x": 256,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_130",
+            "width": 32,
+            "x": 288,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_131",
+            "width": 32,
+            "x": 320,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_132",
+            "width": 32,
+            "x": 352,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_133",
+            "width": 32,
+            "x": 384,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_134",
+            "width": 32,
+            "x": 416,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_135",
+            "width": 32,
+            "x": 448,
+            "y": 256
+        },
+        {
+            "height": 32,
+            "name": "etama2_136",
+            "width": 32,
+            "x": 0,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_137",
+            "width": 32,
+            "x": 32,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_138",
+            "width": 32,
+            "x": 64,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_139",
+            "width": 32,
+            "x": 96,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_140",
+            "width": 32,
+            "x": 128,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_141",
+            "width": 32,
+            "x": 160,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_142",
+            "width": 32,
+            "x": 192,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_143",
+            "width": 32,
+            "x": 224,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_144",
+            "width": 32,
+            "x": 256,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_145",
+            "width": 32,
+            "x": 288,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_146",
+            "width": 32,
+            "x": 320,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_147",
+            "width": 32,
+            "x": 352,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_148",
+            "width": 32,
+            "x": 384,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_149",
+            "width": 32,
+            "x": 416,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_150",
+            "width": 32,
+            "x": 448,
+            "y": 288
+        },
+        {
+            "height": 32,
+            "name": "etama2_151",
+            "width": 32,
+            "x": 0,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_152",
+            "width": 32,
+            "x": 32,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_153",
+            "width": 32,
+            "x": 64,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_154",
+            "width": 32,
+            "x": 96,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_155",
+            "width": 32,
+            "x": 128,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_156",
+            "width": 32,
+            "x": 160,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_157",
+            "width": 32,
+            "x": 192,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_158",
+            "width": 32,
+            "x": 224,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_159",
+            "width": 32,
+            "x": 256,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_160",
+            "width": 32,
+            "x": 288,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_161",
+            "width": 32,
+            "x": 320,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_162",
+            "width": 32,
+            "x": 352,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_163",
+            "width": 32,
+            "x": 384,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_164",
+            "width": 32,
+            "x": 416,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_165",
+            "width": 32,
+            "x": 448,
+            "y": 320
+        },
+        {
+            "height": 32,
+            "name": "etama2_166",
+            "width": 32,
+            "x": 0,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_167",
+            "width": 32,
+            "x": 32,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_168",
+            "width": 32,
+            "x": 64,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_169",
+            "width": 32,
+            "x": 96,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_170",
+            "width": 32,
+            "x": 128,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_171",
+            "width": 32,
+            "x": 160,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_172",
+            "width": 32,
+            "x": 192,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_173",
+            "width": 32,
+            "x": 224,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_174",
+            "width": 32,
+            "x": 256,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_175",
+            "width": 32,
+            "x": 288,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_176",
+            "width": 32,
+            "x": 320,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_177",
+            "width": 32,
+            "x": 352,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_178",
+            "width": 32,
+            "x": 384,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_179",
+            "width": 32,
+            "x": 416,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_180",
+            "width": 32,
+            "x": 448,
+            "y": 352
+        },
+        {
+            "height": 32,
+            "name": "etama2_181",
+            "width": 32,
+            "x": 0,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_182",
+            "width": 32,
+            "x": 32,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_183",
+            "width": 32,
+            "x": 64,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_184",
+            "width": 32,
+            "x": 96,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_185",
+            "width": 32,
+            "x": 128,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_186",
+            "width": 32,
+            "x": 160,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_187",
+            "width": 32,
+            "x": 192,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_188",
+            "width": 32,
+            "x": 224,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_189",
+            "width": 32,
+            "x": 256,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_190",
+            "width": 32,
+            "x": 288,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_191",
+            "width": 32,
+            "x": 320,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_192",
+            "width": 32,
+            "x": 352,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_193",
+            "width": 32,
+            "x": 384,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_194",
+            "width": 32,
+            "x": 416,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_195",
+            "width": 32,
+            "x": 448,
+            "y": 384
+        },
+        {
+            "height": 32,
+            "name": "etama2_196",
+            "width": 32,
+            "x": 0,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_197",
+            "width": 32,
+            "x": 32,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_198",
+            "width": 32,
+            "x": 64,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_199",
+            "width": 32,
+            "x": 96,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_200",
+            "width": 32,
+            "x": 128,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_201",
+            "width": 32,
+            "x": 160,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_202",
+            "width": 32,
+            "x": 192,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_203",
+            "width": 32,
+            "x": 224,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_204",
+            "width": 32,
+            "x": 256,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_205",
+            "width": 32,
+            "x": 288,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_206",
+            "width": 32,
+            "x": 320,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_207",
+            "width": 32,
+            "x": 352,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_208",
+            "width": 32,
+            "x": 384,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_209",
+            "width": 32,
+            "x": 416,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_210",
+            "width": 32,
+            "x": 448,
+            "y": 416
+        },
+        {
+            "height": 32,
+            "name": "etama2_211",
+            "width": 32,
+            "x": 0,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_212",
+            "width": 32,
+            "x": 32,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_213",
+            "width": 32,
+            "x": 64,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_214",
+            "width": 32,
+            "x": 96,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_215",
+            "width": 32,
+            "x": 128,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_216",
+            "width": 32,
+            "x": 160,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_217",
+            "width": 32,
+            "x": 192,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_218",
+            "width": 32,
+            "x": 224,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_219",
+            "width": 32,
+            "x": 256,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_220",
+            "width": 32,
+            "x": 288,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_221",
+            "width": 32,
+            "x": 320,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_222",
+            "width": 32,
+            "x": 352,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_223",
+            "width": 32,
+            "x": 384,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_224",
+            "width": 32,
+            "x": 416,
+            "y": 448
+        },
+        {
+            "height": 32,
+            "name": "etama2_225",
+            "width": 32,
+            "x": 448,
+            "y": 448
+        },
+        {
+            "height": 64,
+            "name": "etama2_01",
+            "width": 64,
+            "x": 0,
+            "y": 0
+        },
+        {
+            "height": 64,
+            "name": "etama2_02",
+            "width": 64,
+            "x": 64,
+            "y": 0
+        },
+        {
+            "height": 64,
+            "name": "etama2_03",
+            "width": 64,
+            "x": 128,
+            "y": 0
+        },
+        {
+            "height": 64,
+            "name": "etama2_04",
+            "width": 64,
+            "x": 192,
+            "y": 0
+        },
+        {
+            "height": 16,
+            "name": "etama2_109",
+            "width": 16,
+            "x": 0,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_110",
+            "width": 16,
+            "x": 16,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_111",
+            "width": 16,
+            "x": 32,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_112",
+            "width": 16,
+            "x": 48,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_113",
+            "width": 16,
+            "x": 64,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_114",
+            "width": 16,
+            "x": 80,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_115",
+            "width": 16,
+            "x": 96,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_116",
+            "width": 16,
+            "x": 112,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_117",
+            "width": 16,
+            "x": 128,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_118",
+            "width": 16,
+            "x": 144,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_119",
+            "width": 16,
+            "x": 160,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_120",
+            "width": 16,
+            "x": 176,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_121",
+            "width": 16,
+            "x": 192,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_122",
+            "width": 16,
+            "x": 208,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_123",
+            "width": 16,
+            "x": 224,
+            "y": 240
+        },
+        {
+            "height": 16,
+            "name": "etama2_124",
+            "width": 16,
+            "x": 240,
+            "y": 240
+        },
+        {
+            "height": 64,
+            "name": "etama2_79",
+            "width": 64,
+            "x": 0,
+            "y": 176
+        },
+        {
+            "height": 64,
+            "name": "etama2_84",
+            "width": 64,
+            "x": 192,
+            "y": 176
+        },
+        {
+            "height": 64,
+            "name": "etama2_49",
+            "width": 64,
+            "x": 0,
+            "y": 112
+        },
+        {
+            "height": 64,
+            "name": "etama2_50",
+            "width": 64,
+            "x": 64,
+            "y": 112
+        },
+        {
+            "height": 64,
+            "name": "etama2_51",
+            "width": 64,
+            "x": 128,
+            "y": 112
+        },
+        {
+            "height": 64,
+            "name": "etama2_52",
+            "width": 64,
+            "x": 192,
+            "y": 112
+        },
+        {
+            "height": 32,
+            "name": "etama2_68",
+            "width": 32,
+            "x": 64,
+            "y": 176
+        },
+        {
+            "height": 32,
+            "name": "etama2_69",
+            "width": 32,
+            "x": 96,
+            "y": 176
+        },
+        {
+            "height": 32,
+            "name": "etama2_82",
+            "width": 32,
+            "x": 64,
+            "y": 208
+        },
+        {
+            "height": 32,
+            "name": "etama2_83",
+            "width": 32,
+            "x": 96,
+            "y": 208
+        },
+        {
+            "height": 16,
+            "name": "etama2_34",
+            "width": 16,
+            "x": 0,
+            "y": 96
+        },
+        {
+            "height": 16,
+            "name": "etama2_35",
+            "width": 16,
+            "x": 16,
+            "y": 96
+        },
+        {
+            "height": 32,
+            "name": "etama2_85",
+            "width": 32,
+            "x": 128,
+            "y": 208
+        },
+        {
+            "height": 16,
+            "name": "etama2_86",
+            "width": 16,
+            "x": 160,
+            "y": 224
+        },
+        {
+            "height": 16,
+            "name": "etama2_33",
+            "width": 16,
+            "x": 224,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_31",
+            "width": 16,
+            "x": 192,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_32",
+            "width": 16,
+            "x": 208,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_29",
+            "width": 16,
+            "x": 160,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_30",
+            "width": 16,
+            "x": 176,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_27",
+            "width": 16,
+            "x": 128,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_28",
+            "width": 16,
+            "x": 144,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_25",
+            "width": 16,
+            "x": 96,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_26",
+            "width": 16,
+            "x": 112,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_23",
+            "width": 16,
+            "x": 64,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_24",
+            "width": 16,
+            "x": 80,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_21",
+            "width": 16,
+            "x": 32,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_22",
+            "width": 16,
+            "x": 48,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_19",
+            "width": 16,
+            "x": 0,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_20",
+            "width": 16,
+            "x": 16,
+            "y": 64
+        },
+        {
+            "height": 16,
+            "name": "etama2_42",
+            "width": 16,
+            "x": 0,
+            "y": 80
+        }
+    ],
+    "height": 256,
+    "imagePath": "etama2.png",
+    "name": "etama2",
+    "width": 256
+}
