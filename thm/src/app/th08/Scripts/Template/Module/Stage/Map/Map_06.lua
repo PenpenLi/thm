@@ -36,17 +36,17 @@ function M.create(params)
     -- })
     -- node:addChild(sprite)
     
-    -- THSTG.ANIMATION.DBXManager.loadDBXFile(
-    --     ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_tex"),
-    --     ResManager.getResMul(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_ske")
-    -- )
-    -- local anime = THSTG.ANIMATION.DBXManager.createAnime("player00","reimu_idle")
-    -- local tex = THSTG.ANIMATION.DBXManager.createTexture("player00","reimu_idle_01")
+    THSTG.ANIMATION.DBXManager.loadDBXFile(
+        ResManager.getResMul(ResType.TEXTURE,TexType.SHEET,"player00"),
+        ResManager.getResMul(ResType.ANIMATION,AnimType.SEQUENCE,"reimu_base_ani")
+    )
+    local anime = THSTG.ANIMATION.DBXManager.createAnime("player00","reimu_base_ani","idle")
+    local tex = THSTG.ANIMATION.DBXManager.createTexture("player00","reimu_idle_01")
 
-    -- local sprite = cc.Sprite:createWithTexture(tex)
-    -- sprite:setPosition(cc.p(display.cx,display.cy))
-    -- sprite:runAction(anime)
-    -- node:addChild(sprite)
+    local sprite = cc.Sprite:createWithTexture(tex)
+    sprite:setPosition(cc.p(display.cx,display.cy))
+    sprite:runAction(anime)
+    node:addChild(sprite)
     -------Controller-------
     node:onNodeEvent("enter", function ()
         -- music:play()

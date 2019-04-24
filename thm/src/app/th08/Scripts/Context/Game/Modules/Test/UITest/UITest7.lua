@@ -12,7 +12,7 @@ function M.create(params)
     -- local skeletonNode = THSTG.ANIMATION.newSpineAnimation({
     --     x = display.cx,
     --     y = display.cy,
-    --     src = ResManager.getResMul(ResType.ANIMATION,AnimationType.TWEEN,"spine_dragonborn_logo"),
+    --     src = ResManager.getResMul(ResType.ANIMATION,AnimType.TWEEN,"spine_dragonborn_logo"),
     --     default = "newAnimation",
     -- })
     -- skeletonNode:setScale(0.4)
@@ -21,7 +21,7 @@ function M.create(params)
     local sp0 = GlobalUtil.playEffect({
         x = display.cx,
         y = display.cy,
-        src = ResManager.getResMul(ResType.ANIMATION,AnimationType.TWEEN,"spine_boss_spellcard_attack"),
+        src = ResManager.getResMul(ResType.ANIMATION,AnimType.TWEEN,"spine_boss_spellcard_attack"),
         animation = "default",
         isLoop = false,
         scale = 0.4,

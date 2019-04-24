@@ -16,7 +16,7 @@ function M.create(params)
           _uiEffect = THSTG.ANIMATION.newSpineAnimation({
             x = display.cx,
             y = display.cy,
-            src = ResManager.getResMul(ResType.ANIMATION,AnimationType.TWEEN,"spine_boss_spellcard_attack"),
+            src = ResManager.getResMul(ResType.ANIMATION,AnimType.TWEEN,"spine_boss_spellcard_attack"),
             onComplete = function(sender)
                 node:setVisible(false)
             end,

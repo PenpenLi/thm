@@ -12,10 +12,11 @@ function M:load(path)
 
     local jsonStr = DBXUtil.loadJsonFile(path)
     self._oriInfo = DBXUtil.parseSkeletonMap(jsonStr)
-    
+ 
     if self._oriInfo then
         return true
     end
+
     return false
 end
 ----
@@ -25,11 +26,12 @@ function M:getSkeletonName()
     end
     return ""
 end
+
 function M:getAnimationInfos(name)
     if self._oriInfo then 
         return self._oriInfo.armature and self._oriInfo.armature[name]
     end
-    return nil
+    return false
 end
 
 function M:getAnimationRate(name)
@@ -74,12 +76,14 @@ end
 function M:createFrames(atlas,name)
     if atlas then
         local displayFrameList = self:getDisPlayFrames(name)
-        local frames = {}
-        for i,v in ipairs(displayFrameList) do
-            local frame = atlas:createFrame(v.name)
-            table.insert( frames,frame )
+        if displayFrameList then
+            local frames = {}
+            for i,v in ipairs(displayFrameList) do
+                local frame = atlas:createFrame(v.name)
+                table.insert( frames,frame )
+            end
+            return frames
         end
-        return frames
     end
     return false
 end

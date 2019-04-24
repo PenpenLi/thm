@@ -19,7 +19,7 @@ function loadJsonFile(path)
 end
 
 function parseAtlasMap(jsonStr)
-    local oriTb = {}
+    local oriTb = false
     if nil ~= jsonStr and "" ~= jsonStr then
         local atlasTb = json.decode(jsonStr)
         if atlasTb then
@@ -38,7 +38,7 @@ function parseAtlasMap(jsonStr)
 end
 
 function parseSkeletonMap(jsonStr)
-    local oriTb = {}
+    local oriTb = false
     if nil ~= jsonStr and "" ~= jsonStr then
         local skeletonTb = json.decode(jsonStr)
         if skeletonTb then
@@ -49,7 +49,7 @@ function parseSkeletonMap(jsonStr)
             end
             oriTb = skeletonTb
             oriTb.armature = newArmature
-
+            
             return oriTb
         end
     end

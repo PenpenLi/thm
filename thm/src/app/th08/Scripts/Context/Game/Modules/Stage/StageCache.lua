@@ -49,7 +49,7 @@ end
 ---
 
 function M:getStageId()
-    return 5
+    return 6
 end
 
 function M:getMapId()

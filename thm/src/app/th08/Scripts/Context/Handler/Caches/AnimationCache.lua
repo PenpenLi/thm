@@ -4,7 +4,7 @@ local function getNameKey(...)
     local keys = {...}
     local keyName = ""
     for _,v in ipairs(keys) do
-        keyName = keyName .. v .. "#"
+        keyName = keyName .. (v or "") .. "#"
     end
     keyName = THSTG.MD5.string(keyName)
 

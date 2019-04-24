@@ -5,7 +5,7 @@ local function getNameKey(...)
     local keys = {...}
     local keyName = ""
     for _,v in ipairs(keys) do
-        keyName = keyName .. v .. "#"
+        keyName = keyName .. (v or "") .. "#"
     end
     keyName = THSTG.MD5.string(keyName)
 
@@ -85,11 +85,11 @@ function getResSub(resType, subType, resName)
 end
 ------------------------------------------------------------------------
 --带缓存的对象创建
-function createAnimation(altasName,aniName)
-	local nameKey = getNameKey(altasName,aniName)
+function createAnimation(altasName,skeName,aniName)
+	local nameKey = getNameKey(altasName,skeName,aniName)
     local animation = display.getAnimationCache(nameKey)
     if not animation then
-		local ret = THSTG.AnimationSystem.createAnimation(altasName,aniName)
+		local ret = THSTG.AnimationSystem.createAnimation(altasName,skeName,aniName)
         if not ret then return nil
         else
             display.setAnimationCache(nameKey,ret)

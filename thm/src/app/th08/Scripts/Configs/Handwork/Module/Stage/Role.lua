@@ -18,11 +18,13 @@ return {
             health = 100,                       --血量
 
         },
+        
         animation = {
             src = {
-                tex = ResManager.getResSub(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_tex"),
-                ske = ResManager.getResSub(ResType.ANIMATION,AnimationType.SEQUENCE,"player00_ske"),
+                tex = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),
+                ske = ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,"reimu_base_ani"),
             },
+            --TODO:
             animations = {
                 move_left_start = {"player00","reimu_move_left_start"},
                 move_left_sustain = {"player00","reimu_move_left_sustain"},

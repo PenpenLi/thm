@@ -1,4 +1,4 @@
-module("AnimationType")
+module("AnimType")
 
 SKELETON = "skeleton"
 

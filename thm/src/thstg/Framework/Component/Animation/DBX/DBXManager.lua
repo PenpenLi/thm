@@ -33,26 +33,26 @@ function getSkeleton(name)
     return _skeletonCahce[name]
 end
 ---
-function createTexture(altasName,texName)
+function createTexture(altasName,frameName)
     local atlas = getAtlas(altasName)
     if atlas then
-        return atlas:createTexture(texName)
+        return atlas:createTexture(frameName)
     end
     return nil
 end
 
-function createFrame(altasName,texName)
+function createFrame(altasName,frameName)
     local atlas = getAtlas(altasName)
     if atlas then
-        return atlas:createFrame(texName)
+        return atlas:createFrame(frameName)
     end
     return nil
 end
 
-function createFrames(altasName,aniName)
+function createFrames(altasName,skeName,aniName)
     local atlas = getAtlas(altasName)
     if atlas then
-       local skeleton = getSkeleton(altasName)
+       local skeleton = getSkeleton(skeName)
        if skeleton then
             return skeleton:createFrames(atlas,aniName)
        end
@@ -60,35 +60,36 @@ function createFrames(altasName,aniName)
     return nil
 end
 
-function createAnimation(altasName,aniName)
+function createAnimation(altasName,skeName,aniName)
+    if (aniName == nil) then aniName,skeName = skeName,altasName end
     local atlas = getAtlas(altasName)
     if atlas then
-        local skeleton = getSkeleton(altasName)
+        local skeleton = getSkeleton(skeName)
         if skeleton then
             local animation = skeleton:createAnimation(atlas,aniName)
-            _animationCache[altasName] = _animationCache[altasName] or {}
-            _animationCache[altasName][aniName] = animation
-            animation:retain()
+            return animation
         end
     end
     
     return nil
 end
 
-function createAnimate(altasName,aniName)
-    local animation = createAnimation(altasName,aniName)
+function createAnimate(altasName,skeName,aniName)
+    if (aniName == nil) then aniName,skeName = skeName,altasName end
+    local animation = createAnimation(altasName,skeName,aniName)
     if animation then
         return cc.Animate:create(animation)
     end
     return nil
 end
 
-function createAnime(altasName,name)
+function createAnime(altasName,skeName,aniName)
+    if (aniName == nil) then aniName,skeName = skeName,altasName end
     local atlas = getAtlas(altasName)
     if atlas then
-       local skeleton = getSkeleton(altasName)
+       local skeleton = getSkeleton(skeName)
        if skeleton then
-            local animate = createAnimate(altasName,name)
+            local animate = createAnimate(altasName,skeName,aniName)
             local times =  skeleton:getAnimationTimes()
             if times > 0 then
                 local seq = {}

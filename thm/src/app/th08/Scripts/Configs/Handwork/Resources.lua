@@ -25,11 +25,15 @@ return {
     {
         sheet = 
         {
-            loading = "Assets/Texture/Sheet/loading.plist" ,
+            player00 = "Assets/Texture/Sheet/player00.json" ,
         },
         image = 
         {
             stg1bg = "Assets/Texture/Image/stg1bg.jpg" ,
+        },
+        plist = 
+        {
+            loading = "Assets/Texture/Sheet/loading.plist" ,
         }
     },
 
@@ -46,10 +50,10 @@ return {
         },
         sequence = 
         {
-            player00_tex = "Assets/Animation/Sequence/player00_tex.json",
-            player00_ske = "Assets/Animation/Sequence/player00_ske.json",
+            player00_ske = "Assets/Animation/Sequence/player00_ske.json" ,
+            reimu_base_ani = "Assets/Animation/Sequence/reimu_base_ani.json" ,
+            yukari_base_ani = "Assets/Animation/Sequence/yukari_base_ani.json" ,
         }
-
     },
     
     sfx = 
