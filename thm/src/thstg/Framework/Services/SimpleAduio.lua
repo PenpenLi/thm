@@ -1,4 +1,4 @@
-module("SoundManager", package.seeall)
+module("SimpleAduio", package.seeall)
 local CCSAudioEngine = cc.SimpleAudioEngine:getInstance()
 
 function preloadMusic(filePath)

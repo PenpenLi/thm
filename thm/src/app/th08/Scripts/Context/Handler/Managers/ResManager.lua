@@ -1,6 +1,6 @@
 ﻿module("ResManager", package.seeall)
 local Resources = require "Scripts.Configs.Handwork.Resources"
-local PreLoadRes = require "Scripts.Configs.Handwork.PreLoadRes"
+
 local function getNameKey(...)
     local keys = {...}
     local keyName = ""
@@ -23,14 +23,14 @@ function getResMul(...)
 	for i = 1, #params do
 		path = path and path[params[i]] or Resources[params[i]]
 		if not path then
-			if __DEBUG_RESOURCES__ then
+			-- if __DEBUG_RESOURCES__ then
 				error(string.format("ResManager.getRes ERROR: can't found: %s",pathStr))
-			end
+			-- end
 			break
 		else
-			if __DEBUG_RESOURCES__ then
+			-- if __DEBUG_RESOURCES__ then
 				pathStr = pathStr .. "." ..  params[i]
-			end
+			-- end
 		end
 	end
 	
@@ -50,14 +50,14 @@ function getRes(resType, resName)
 
 	local t = Resources[resType]
 	if t then
-		return t[resName]
+		path = t[resName]
 	end
 
 	if not path then
 		-- path = ResManager.getEmptyImg()
-		if __DEBUG_RESOURCES__ then
+		-- if __DEBUG_RESOURCES__ then
 			error(string.format("ResManager.getRes ERROR: can't found: %s.%s", tostring(resType), tostring(resName)))
-		end
+		-- end
 	end
 
 	return path
@@ -74,7 +74,7 @@ function getResSub(resType, subType, resName)
 
 	local t = getRes(resType, subType)
 	if t then
-		return t[resName]
+		path =  t[resName]
 	end
 
 	if not path then
@@ -84,41 +84,4 @@ function getResSub(resType, subType, resName)
 	return path
 end
 ------------------------------------------------------------------------
---带缓存的对象创建
-function createAnimation(altasName,skeName,aniName)
-	local nameKey = getNameKey(altasName,skeName,aniName)
-    local animation = display.getAnimationCache(nameKey)
-    if not animation then
-		local ret = THSTG.AnimationSystem.createAnimation(altasName,skeName,aniName)
-        if not ret then return nil
-        else
-            display.setAnimationCache(nameKey,ret)
-        end
-        return ret
-    end
-    return animation
-end
-
-function cleanAnimationCache()
-	cc.SpriteFrameCache:getInstance():removeUnusedSpriteFrames()
-end
-------------------------------------------------------------------------
---TODO:资源预加载
-local defCallback = function(...) end
-function preload(name,callback)
-	callback = callback or defCallback
-	if name ~= nil then
-		if type(PreLoadRes[name]) == "function" then
-			PreLoadRes[name](callback)
-		end
-	end
-end
-
-function release( ... )
-	
-end
-
------------------------------------------------------------------------
-function init()
-	preload("_Global",defCallback)
-end
+--其他资源路径获取

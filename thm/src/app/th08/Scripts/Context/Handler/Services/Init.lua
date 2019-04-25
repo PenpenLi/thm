@@ -1,3 +1,7 @@
 Schedule = THSTG.Schedule
 Dispatcher = THSTG.Dispatcher
-AudioSystem = THSTG.AudioSystem
+EffectSystem = THSTG.EffectSystem
+
+--替换掉服务
+SoundEngine = "Scripts.Context.Handler.Services.SoundEngine"            --THSTG.AudioEngine
+AnimationSystem = "Scripts.Context.Handler.Services.AnimationSystem"    --THSTG.AnimationSystem

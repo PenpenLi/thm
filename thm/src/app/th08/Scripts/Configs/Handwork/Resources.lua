@@ -51,8 +51,6 @@ return {
         sequence = 
         {
             player00_ske = "Assets/Animation/Sequence/player00_ske.json" ,
-            reimu_base_ani = "Assets/Animation/Sequence/reimu_base_ani.json" ,
-            yukari_base_ani = "Assets/Animation/Sequence/yukari_base_ani.json" ,
         }
     },
     

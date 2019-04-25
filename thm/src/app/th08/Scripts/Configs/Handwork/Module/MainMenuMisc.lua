@@ -3,8 +3,8 @@ return {
     menus = 
     {
         {
-            title = Language.getString(100101),
-            desc = Language.getString(100111), 
+            title = "Start",
+            desc = "开始游戏", 
             offsetPos = cc.p(0,0),
             moveBy = cc.p(20,0) ,
             file = "Scripts.Context.Game.Modules.Selection.Layer.SelectionLayer",
@@ -13,8 +13,8 @@ return {
             end,
         },
         {
-            title = Language.getString(100102),
-            desc = Language.getString(100112), 
+            title = "Extra Start",
+            desc = "开始EX关卡", 
             offsetPos = cc.p(0,0),
             moveBy = cc.p(-20,0) ,
             file = "",
@@ -23,8 +23,8 @@ return {
             end,
         },
         {
-            title = Language.getString(100103),
-            desc = Language.getString(100113), 
+            title = "Spell Practice",
+            desc = "和敌人进行符卡战斗", 
             offsetPos = cc.p(0,0),
             moveBy = cc.p(15,0) ,
             file = "",
@@ -33,8 +33,8 @@ return {
             end,
         },
         {
-            title = Language.getString(100104),
-            desc = Language.getString(100114), 
+            title = "Practice Start",
+            desc = "选择关卡开始练习", 
             offsetPos = cc.p(0,0),
             moveBy = cc.p(-15,0) ,
             file = "",
@@ -43,8 +43,8 @@ return {
             end,
         },
         {
-            title = Language.getString(100105),
-            desc = Language.getString(100115), 
+            title = "Replay",
+            desc = "可以欣赏录像",
             offsetPos = cc.p(0,0),
             moveBy = cc.p(20,0) ,
             file = "",
@@ -53,8 +53,8 @@ return {
             end,
         },
         {
-            title = Language.getString(100106),
-            desc = Language.getString(100116), 
+            title = "Result",
+            desc = "查看过去游戏中分数和符卡的取得情况",
             offsetPos = cc.p(0,0),
             moveBy = cc.p(-15,0) ,
             file = "",
@@ -63,8 +63,8 @@ return {
             end,
         },
         {
-            title = Language.getString(100107),
-            desc = Language.getString(100117), 
+            title = "Music Room",
+            desc = "可以欣赏音乐",
             offsetPos = cc.p(0,0),
             moveBy = cc.p(20,0) ,
             file = "",
@@ -73,8 +73,8 @@ return {
             end,
         },
         {
-            title = Language.getString(100108),
-            desc = Language.getString(100118), 
+            title = "Option",
+            desc = "可以进行各种设定", 
             offsetPos = cc.p(0,0),
             moveBy = cc.p(-15,0) ,
             file = "",
@@ -83,8 +83,8 @@ return {
             end,
         },
         {
-            title = Language.getString(100109),
-            desc = Language.getString(100119), 
+            title = "Quit",
+            desc = "退出游戏", 
             offsetPos = cc.p(0,0),
             moveBy = cc.p(20,0) ,
             file = "",

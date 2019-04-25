@@ -50,7 +50,6 @@ OnmyouGyokuBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Pre
 OnmyouGyoku = require("Scripts.Context.Game.Modules.Stage.Entity.OnmyouGyoku")
 Reimu = require("Scripts.Context.Game.Modules.Stage.Entity.Reimu")
 Marisa = require("Scripts.Context.Game.Modules.Stage.Entity.Marisa")
-HealthBar = require("Scripts.Context.Game.Modules.Stage.Entity.HealthBar")
 StageGame = require("Scripts.Context.Game.Modules.Stage.Entity.StageGame")
 
 ---[[脚本]]----

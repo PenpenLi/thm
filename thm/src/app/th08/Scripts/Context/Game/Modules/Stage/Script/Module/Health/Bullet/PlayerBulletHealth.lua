@@ -28,7 +28,7 @@ function M:_onDead()
             self:destroyEntity()
         end)
     }))
-    SoundManager.playEffect(200103)
+    -- SoundManager.playEffect(200103)
 end
 
 

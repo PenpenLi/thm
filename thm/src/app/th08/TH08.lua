@@ -18,7 +18,6 @@ end
 
 function M:_onRun()
 
-    ResManager.init()
 end
 
 return M

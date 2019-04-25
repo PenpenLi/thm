@@ -43,3 +43,15 @@ function getComponentUID()
     _componentId = _componentId + 1
     return _componentId
 end
+
+---
+function getStrMd5(...)
+    local keys = {...}
+    local keyName = ""
+    for _,v in ipairs(keys) do
+        keyName = keyName .. (v or "") .. "#"
+    end
+    keyName = MD5.string(keyName)
+
+    return keyName
+end

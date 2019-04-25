@@ -20,11 +20,7 @@ return {
         },
         
         animation = {
-            src = {
-                tex = ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),
-                ske = ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,"reimu_base_ani"),
-            },
-            --TODO:
+            
             animations = {
                 move_left_start = {"player00","reimu_move_left_start"},
                 move_left_sustain = {"player00","reimu_move_left_sustain"},

@@ -10,7 +10,6 @@ function setupResDict(path)
 end
 
 
-
 -----------------
 -- 多层资源获取
 -- @param	...		[string]	资源类型
