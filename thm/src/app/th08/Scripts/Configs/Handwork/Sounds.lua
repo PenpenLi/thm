@@ -1,9 +1,9 @@
 return {
-    ---背景音乐(大地图）----------------------
+    ---背景音乐----------------------
     [100101] = {name = "幻視の夜 ～ Ghostly Eyes", src = "Assets/Sound/Music/stg1_enbg_01.mp3", desc = "莉格道中1" },
     [100102] = {name = "蠢々秋月 ～ Mooned Insect", src = "Assets/Sound/Music/stg1_boss_01.mp3", desc = "莉格露Boss战" },
 
-    --STAGE效音
+    ---音效----------------------
     [200101] = {name = "", src = "Assets/Sound/Effect/se_plst00.wav", desc = "自机发射子弹音效1" },
     [200102] = {name = "", src = "Assets/Sound/Effect/damage1.wav", desc = "Batman击中1" },
     [200103] = {name = "", src = "Assets/Sound/Effect/damage2.wav", desc = "Batman击中2" },

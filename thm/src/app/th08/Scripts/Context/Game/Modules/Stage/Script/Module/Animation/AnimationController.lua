@@ -25,14 +25,14 @@ function M:getSprite()
 end
 ----
 function M:_onLateUpdate()
-    local posPoint = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
+    local posPoint = self._transComp:getWorldPosition()
     
     self:_onAction({
         dx = posPoint.x - self._prevPos.x,
         dy = posPoint.y - self._prevPos.y,
     })
 
-    self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
+    self._prevPos = self._transComp:getWorldPosition()
 end
 
 ------------------

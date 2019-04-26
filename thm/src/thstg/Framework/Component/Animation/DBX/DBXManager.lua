@@ -4,10 +4,12 @@ local DBXSkeleton = require "thstg.Framework.Component.Animation.DBX.DBXSkeleton
 module(..., package.seeall)
 local _atlasCahce = {}
 local _skeletonCahce = {}
+local _skeletonTexMap = {} --图集映射
 
 function loadDBXFile(texPath,skePath)
+    local atlas = false
     if texPath ~= "" then
-        local atlas = DBXAtlas.new(texPath)
+        atlas = DBXAtlas.new(texPath)
         if atlas then
             local name = atlas:getAtlasName()
             _atlasCahce[name] = atlas
@@ -20,7 +22,9 @@ function loadDBXFile(texPath,skePath)
         if sketloe then
             local name = sketloe:getSkeletonName()
             _skeletonCahce[name] = sketloe
-
+            if atlas then
+                _skeletonTexMap[name] = atlas
+            end
         end
     end
 end
@@ -49,8 +53,9 @@ function createFrame(altasName,frameName)
     return nil
 end
 
-function createFrames(altasName,skeName,aniName)
-    local atlas = getAtlas(altasName)
+
+function createFrames(skeName,aniName)
+    local atlas = _skeletonTexMap[skeName]
     if atlas then
        local skeleton = getSkeleton(skeName)
        if skeleton then
@@ -60,9 +65,8 @@ function createFrames(altasName,skeName,aniName)
     return nil
 end
 
-function createAnimation(altasName,skeName,aniName)
-    if (aniName == nil) then aniName,skeName = skeName,altasName end
-    local atlas = getAtlas(altasName)
+function createAnimation(skeName,aniName)
+    local atlas = _skeletonTexMap[skeName]
     if atlas then
         local skeleton = getSkeleton(skeName)
         if skeleton then
@@ -74,22 +78,20 @@ function createAnimation(altasName,skeName,aniName)
     return nil
 end
 
-function createAnimate(altasName,skeName,aniName)
-    if (aniName == nil) then aniName,skeName = skeName,altasName end
-    local animation = createAnimation(altasName,skeName,aniName)
+function createAnimate(skeName,aniName)
+    local animation = createAnimation(skeName,aniName)
     if animation then
         return cc.Animate:create(animation)
     end
     return nil
 end
 
-function createAnime(altasName,skeName,aniName)
-    if (aniName == nil) then aniName,skeName = skeName,altasName end
-    local atlas = getAtlas(altasName)
+function createAnime(skeName,aniName)
+    local atlas = _skeletonTexMap[skeName]
     if atlas then
        local skeleton = getSkeleton(skeName)
        if skeleton then
-            local animate = createAnimate(altasName,skeName,aniName)
+            local animate = createAnimate(skeName,aniName)
             local times =  skeleton:getAnimationTimes()
             if times > 0 then
                 local seq = {}
@@ -108,4 +110,5 @@ end
 function clear()
     _atlasCahce = {}
     _skeletonCahce = {}
+    _skeletonTexMap = {}
 end

@@ -38,9 +38,9 @@ function M.create(params)
 
     THSTG.ANIMATION.DBXManager.loadDBXFile(
         ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"player00"),
-        ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,"player00_ske")
+        ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,"reimu_base_ani")
     )
-    local anime = THSTG.ANIMATION.DBXManager.createAnime("player00","reimu_idle")
+    local anime = THSTG.ANIMATION.DBXManager.createAnime("reimu_base_ani","idle")
     local tex = THSTG.ANIMATION.DBXManager.createTexture("player00","reimu_idle_01")
   
     local sprite = cc.Sprite:createWithTexture(tex)
