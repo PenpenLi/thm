@@ -5,7 +5,7 @@ local _dict = nil
 local function getDict()
 	if not _dict then
 		_dict = {}
-		local t_const = require "Scripts.Configs.Handwork.Const"
+		local t_const = require "Scripts.Configs.Handwork.H_Const"
 		for k, v in ipairs(t_const) do
 			_dict[v.constName] = v
 		end

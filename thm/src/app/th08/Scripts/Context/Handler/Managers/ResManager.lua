@@ -1,5 +1,5 @@
 ﻿module("ResManager", package.seeall)
-local Resources = require "Scripts.Configs.Handwork.Resources"
+local Resources = require "Scripts.Configs.Handwork.H_Resources"
 
 local function getNameKey(...)
     local keys = {...}

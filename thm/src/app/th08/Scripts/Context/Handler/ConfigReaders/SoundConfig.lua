@@ -4,7 +4,7 @@ local FileUtils = cc.FileUtils:getInstance()
 local _dict = nil
 local function getDict()
 	if not _dict then
-		_dict = require "Scripts.Configs.Handwork.Sounds"
+		_dict = require "Scripts.Configs.Handwork.H_Sounds"
 	end
 	return _dict
 end

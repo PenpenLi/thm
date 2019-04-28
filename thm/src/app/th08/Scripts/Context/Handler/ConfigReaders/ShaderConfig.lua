@@ -3,7 +3,7 @@ module("ShaderConfig", package.seeall)
 local _dict = false
 local function getDict()
     if not _dict then
-        _dict = require "Scripts.Configs.Handwork.Shader"
+        _dict = require "Scripts.Configs.Handwork.H_Shader"
     end
     return _dict
 end

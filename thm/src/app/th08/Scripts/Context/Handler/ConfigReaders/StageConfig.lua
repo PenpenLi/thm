@@ -1,15 +1,15 @@
 module("StageConfig", package.seeall)
 
 
-local ROLE_FILE = "Scripts.Configs.Handwork.Module.Stage.Role"
-local BOSS_FILE = "Scripts.Configs.Handwork.Module.Stage.Boss"
-local BATMAN_FILE = "Scripts.Configs.Handwork.Module.Stage.Batman"
-local BULLET_PLAYER_FILE = "Scripts.Configs.Handwork.Module.Stage.PlayerBullet"
-local BULLET_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.EnemyBullet"
-local PROP_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.Prop"
+local ROLE_FILE = "Scripts.Configs.Handwork.Module.Stage.H_Role"
+local BOSS_FILE = "Scripts.Configs.Handwork.Module.Stage.H_Boss"
+local BATMAN_FILE = "Scripts.Configs.Handwork.Module.Stage.H_Batman"
+local BULLET_PLAYER_FILE = "Scripts.Configs.Handwork.Module.Stage.H_PlayerBullet"
+local BULLET_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.H_EnemyBullet"
+local PROP_ENEMY_FILE = "Scripts.Configs.Handwork.Module.Stage.H_Prop"
 
-local ENTITY_MAP_FILE = "Scripts.Configs.Handwork.Module.Stage.EntityMap"
-local LAYER_MAP_FILE = "Scripts.Configs.Handwork.Module.Stage.LayerMap"
+local ENTITY_MAP_FILE = "Scripts.Configs.Handwork.Module.Stage.H_EntityMap"
+local LAYER_MAP_FILE = "Scripts.Configs.Handwork.Module.Stage.H_LayerMap"
 
 local function getDictByFile(path)
     local pathFile = string.format(path)

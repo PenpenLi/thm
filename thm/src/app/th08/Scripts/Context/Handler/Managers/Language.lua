@@ -4,7 +4,7 @@ local _dict = nil
 
 local function getDict()
 	if not _dict then
-		_dict = require "Scripts.Configs.Handwork.Description"
+		_dict = require "Scripts.Configs.Handwork.H_Description"
 	end
 	return _dict
 end
