@@ -1,0 +1,1 @@
+module("PlayerConfig", package.seeall)

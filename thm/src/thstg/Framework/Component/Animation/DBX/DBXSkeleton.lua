@@ -27,31 +27,57 @@ function M:getSkeletonName()
     return ""
 end
 
-function M:getAnimationInfos(name)
+function M:getArmatureInfos(name)
     if self._oriInfo then 
         return self._oriInfo.armature and self._oriInfo.armature[name]
     end
     return false
 end
 
+function M:getAnimationNameList()
+    local names = {}
+    local info = self:getArmatureInfos(name)
+    if info then
+        for k,_ in pairs(info) do
+            table.insert( names, k)
+        end
+    end
+    return names
+end
+
 function M:getAnimationRate(name)
-    local info = self:getAnimationInfos(name)
+    local info = self:getArmatureInfos(name)
     if info then
         return info.frameRate
     end
-    return false
+    return 0
 end
 
 function M:getAnimationTimes(name)
-    local info = self:getAnimationInfos(name)
+    local info = self:getArmatureInfos(name)
     if info then
         return info.animation[1].playTimes
     end
     return 0
 end
 
+function M:getAnimationLength(name)
+    local info = self:getArmatureInfos(name)
+    if info then
+        return info.animation[1].duration
+    end
+    return 0
+end
+
+function M:getAnimationDuration(name)
+    if self:getAnimationRate(name) == 0 then
+        return 0
+    end
+    return self:getAnimationLength()/self:getAnimationRate(name)
+end
+
 function M:getAABBSize(name)
-    local info = self:getAnimationInfos(name)
+    local info = self:getArmatureInfos(name)
     if info then
         return info.aabb
     end
@@ -59,7 +85,7 @@ function M:getAABBSize(name)
 end
 
 function M:getDisPlayFrames(name)
-    local info = self:getAnimationInfos(name)
+    local info = self:getArmatureInfos(name)
     if info then
         local list = {}
         local displayFrame = info.animation[1].slot[1].displayFrame

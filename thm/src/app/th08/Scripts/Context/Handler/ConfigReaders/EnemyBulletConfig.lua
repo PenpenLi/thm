@@ -1,0 +1,1 @@
+module("EnemyBulletConfig", package.seeall)

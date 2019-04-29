@@ -1,0 +1,1 @@
+module("BatmanConfig", package.seeall)

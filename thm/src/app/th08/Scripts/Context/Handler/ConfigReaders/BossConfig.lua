@@ -1,0 +1,1 @@
+module("BossConfig", package.seeall)
