@@ -1,6 +1,6 @@
-programPath:../../../XlsxToLua/bin/Debug/XlsxToLua.exe
-excelFolderPath:../../../../../Stage
-exportLuaFolderPath:../../../../../Export
+programPath:../XlsxToLua/XlsxToLua.exe
+excelFolderPath:../../../Stage
+exportLuaFolderPath:../../../Stage
 clientFolderPath:-noClient
 langFilePath:-noLang
 -exportCsvParam_extension:csv
