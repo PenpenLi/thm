@@ -30,6 +30,7 @@ EEntityType = {
     PlayerBullet = 5,
     EnemyBullet = 6,
     WingmanBullet = 7,
+    Prop = 8,
 }
 
 ERoleType = {
