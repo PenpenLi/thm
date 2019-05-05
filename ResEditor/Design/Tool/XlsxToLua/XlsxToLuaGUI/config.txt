@@ -1,6 +1,6 @@
 programPath:../XlsxToLua/XlsxToLua.exe
 excelFolderPath:../../../Stage
-exportLuaFolderPath:../../../Stage
+exportLuaFolderPath:../../../../../thm/src/app/th08/Scripts/Configs/Generate
 clientFolderPath:-noClient
 langFilePath:-noLang
 -exportCsvParam_extension:csv
