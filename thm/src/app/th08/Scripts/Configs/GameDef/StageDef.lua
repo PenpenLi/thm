@@ -59,9 +59,9 @@ EPropType = {
     Bomb = 2,                       --B弹
 }
 
-EBulletCategory = {                 --子弹类型
-    Dot,
-    Laser,
+EBulletCategory = {                 --子弹种类
+    Dot,                            --点
+    Laser,                          --激光
 }
 
 EBulletColor = {                    --子弹颜色
