@@ -3,7 +3,7 @@ return {
     {
         time = 0,
         callback  = function (sender,task,params)
-            curBoss = StageDefine.WrigglePrefab.new()
+            curBoss = StageDefine.Wriggle.new()
             local posComp = curBoss:getComponent("TransformComponent")
             posComp:setPositionX(40)
             posComp:setPositionY(display.width + 100)

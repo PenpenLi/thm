@@ -40,23 +40,13 @@ ERoleType = {
     Sakuya = 4,
 }
 
+EPropType = {
+    Consumables = 1,    --消耗品
+}
+
 -------
 EBossType = {
-    WriggleNightbug = 1,     --莉格露
-}
-
-EWingmanType = {
-    OnmyouGyoku = 1,
-}
-
-EBatmanType = {
-    Fairy01 = 1,
-    Cyclone01 = 2,
-}
-
-EPropType = {
-    Power = 1,                      --P弹
-    Bomb = 2,                       --B弹
+    Wriggle = 1,     --莉格露
 }
 
 EBulletCategory = {                 --子弹种类
@@ -65,18 +55,24 @@ EBulletCategory = {                 --子弹种类
 }
 
 EBulletColor = {                    --子弹颜色
-
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
+    _7 = 7,
+    _8 = 8,
+    _9 = 9,
+    _10 = 10,
+    _11 = 11,
+    _12 = 12,
+    _13 = 13,
+    _14 = 14,
+    _15 = 15,
+    _16 = 16,
 }
 
-EPlaerBulletType = {
-    JiAmulet = 1,               --咒符·集
-    SanAmulet = 2,              --咒符·散
-}
-
-EEnemyBulletType = {
-    SmallJade = 301,      --小玉
-    BigJade = 303,        --大玉,
-}
 
 ESpellCardCategory = {
     Non,--非符

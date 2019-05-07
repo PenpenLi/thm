@@ -7,3 +7,7 @@ local function getInfoTb()
     end
     return _infoTb
 end
+
+function getAllInfo(code)
+    return getInfoTb()[code]
+end

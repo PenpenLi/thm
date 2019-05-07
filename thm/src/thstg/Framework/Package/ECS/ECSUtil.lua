@@ -1,5 +1,5 @@
 module(..., package.seeall)
-local _COMPONENT_SEPARATE_CHAR_ = "@"
+local _COMPONENT_SEPARATE_CHAR_ = "/"
 
 ----
 function trans2Name(...)
@@ -61,6 +61,8 @@ end
 function find2ClassWithChild(nameArgs,...)
     local argsA = nameArgs
     local argsB = {...}
+
+    -- if #argsB == 1 then argsB = trans2Args(argsB) end
 
     local lengthA,lengthB = #argsA,#argsB
     local i,j = lengthA,lengthB

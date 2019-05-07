@@ -37,10 +37,16 @@ function M:ctor()
     
     self.helthController = StageDefine.BossHealth.new()
     self:addScript(self.helthController)
+
+    self.animationController = StageDefine.BossAnimation.new()
+    self:addScript(self.animationController)
+
+    self.bossController = StageDefine.BossController.new()
+    self:addScript(self.bossController)
     ---
 
     --
-    self.entityCtrl.entityType = GameDef.Stage.EEntityType.Boss
+    self.entityData.entityType = GameDef.Stage.EEntityType.Boss
 end
 ----------
 

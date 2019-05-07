@@ -19,9 +19,14 @@ end
 
 ----
 function M:_addEntity(e,entity,layerType)
-    local entityType = entity:getScript("EntityController").entityType
+    local entityType = entity:getScript("EntityBasedata"):getEntityType()
     layerType = layerType or StageConfig.getEntityLayerType(entityType)
 
+    --数据装配
+
+    --初始化
+
+    --送入图层显示
     if layerType then
         if layerType == EEntityLayerType.Player then
             entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).playerLayer)

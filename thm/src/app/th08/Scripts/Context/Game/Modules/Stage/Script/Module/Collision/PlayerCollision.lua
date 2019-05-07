@@ -15,7 +15,7 @@ function M:_onFilter()
 end
 
 function M:_onCollision(collider,collision)
-    -- local colliderEntityType = collider:getScript("EntityController"):getEntityType()
+    -- local colliderEntityType = collider:getScript("EntityBasedata"):getEntityType()
     -- if colliderEntityType == EEntityType.Prop then
     
     -- else

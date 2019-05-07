@@ -34,3 +34,9 @@ EBusyType = {
     Waiting = 3,
 }
 
+--
+ECategory = {
+    Entity = 1,
+
+    
+}

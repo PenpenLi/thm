@@ -16,25 +16,25 @@ function M:_onState()
     }
 end
 
-function M:getWingmanType()
-    return self.wingmanType
-end
 ----
 function M:_onStart()
     M.super._onStart(self)
   
-    local wingmanControScript = self:getScript("WingmanController")
-    self.wingmanType = wingmanControScript.wingmanType
 end
 ----
 function M:_onMove(dx,dy)
  
 end
 
-
-
 function M:_onIdle(event)
-    self:getSprite():playAnimationForever(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self:getRoleType(),"stand_normal")))
+    -- self:getSprite():runAction(cc.Sequence:create({
+    --     cc.Animate:create(AnimationCache.getResBySheet("enemy","onmyou_gyoku_r")),
+    --     cc.CallFunc:create(function() 
+    --         self:getSprite():runAction(cc.RepeatForever:create(
+    --             cc.RotateBy:create(1,360)   --阴阳玉自旋
+    --         ))
+    --     end)
+    -- }))
 end
 
 ----

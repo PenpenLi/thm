@@ -6,18 +6,10 @@ function M:_onInit()
     self.rotation = 0                   --初始角度  
     self.centerPoint = cc.p(0.5,0.5)    --中心点
 end
---
-function M:getBulletType()
-    local bulletControScript = self:getScript("BulletController")
-    return bulletControScript.bulletType
-end
 
 ---
 function M:_onStart()
     M.super._onStart(self)
-  
-    local bulletControScript = self:getScript("BulletController")
-    self.bulletType = bulletControScript.bulletType
 
     --进行碰撞点与贴图的位置修正
     local spriteComp = self:getComponent("SpriteComponent")
@@ -40,7 +32,7 @@ function M:_onState()
 end
 
 function M:_onIdle(event)
-    self:getSprite():runAction(cc.Animate:create(AnimationCache.getResBySheet("etama","bullet_big_jade_idle_4")))
+    -- self:getSprite():runAction(cc.Animate:create(AnimationCache.getResBySheet("etama","bullet_big_jade_idle_4")))
 end
 
 ----

@@ -14,7 +14,7 @@ function M:ctor()
     self:addChild(self.gyoku2)
 
     ----
-    self.emitterMainCtrl.objectPrefab = StageDefine.ReimuBulletPrefab
+    self.emitterMainCtrl.objectPrefab = StageDefine.ReimuBullet
     ----
     self.animationController = StageDefine.PlayerAnimation.new()
     self.spriteNode:addScript(self.animationController)

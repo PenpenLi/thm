@@ -12,7 +12,6 @@ AudioComponent = THSTG.ECS.AudioComponent
 SchedulerComponent = require("Scripts.Context.Game.Modules.Stage.Component.SchedulerComponent")
 BoxColliderComponent = THSTG.ECS.BoxColliderComponent
 CircleColliderComponent = THSTG.ECS.CircleColliderComponent
-
 ----
 
 ---[[实体]]----
@@ -35,21 +34,15 @@ WingmanBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.
 BossPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Base.BossPrefab")
 PropPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Base.PropPrefab")
 
-
+--预制体
 EmitterPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.EmitterPrefab")--发射口预制体
+ReimuBullet = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.Player.ReimuBullet")---自机子弹
+OnmyouGyokuBullet = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.Player.OnmyouGyokuBullet")--僚机子弹
+Wriggle = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Boss.Wriggle")
+OnmyouGyoku = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Wingman.OnmyouGyoku")
+Reimu = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Player.Reimu")
+Marisa = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Player.Marisa")
 
---Bullet预制体
----自机子弹
-ReimuBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.Player.ReimuBulletPrefab")
-OnmyouGyokuBulletPrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.Player.OnmyouGyokuBulletPrefab")
----敌机子弹
--- BigJadePrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Bullet.Enemy.BigJadePrefab")
---Boss预制体
--- WrigglePrefab = require("Scripts.Context.Game.Modules.Stage.Entity.Prefab.Boss.WrigglePrefab")
-
-OnmyouGyoku = require("Scripts.Context.Game.Modules.Stage.Entity.OnmyouGyoku")
-Reimu = require("Scripts.Context.Game.Modules.Stage.Entity.Reimu")
-Marisa = require("Scripts.Context.Game.Modules.Stage.Entity.Marisa")
 StageGame = require("Scripts.Context.Game.Modules.Stage.Entity.StageGame")
 
 ---[[脚本]]----
@@ -57,9 +50,7 @@ StageGame = require("Scripts.Context.Game.Modules.Stage.Entity.StageGame")
 BaseController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BaseController")
 StageGameController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.StageGameController")
 BatmanController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.BatmanController")
-
 BossController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Boss.BossController")
-WriggleController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Boss.WriggleController")
 
 BulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.BulletController")---子弹控制器
 EnemyBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.EnemyBulletController")
@@ -115,33 +106,21 @@ PlayerInput = require("Scripts.Context.Game.Modules.Stage.Script.Module.Input.Pl
 --动画控制
 AnimationController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.AnimationController")
 BatmanAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.BatmanAnimation")
-BossAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Boss.BossAnimation")
-WriggleAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Boss.WriggleAnimation")
-
+BossAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.BossAnimation")
 PlayerAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.PlayerAnimation")
-
-WingmanAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Wingman.WingmanAnimation")
-OnmyouGyokuAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Wingman.OnmyouGyokuAnimation")
-
-BulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.BulletAnimation")
-EnemyBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.EnemyBulletAnimation")
-PlayerBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.PlayerBulletAnimation")
-ReimuBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.ReimuBulletAnimation")
-MarisaBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.MarisaBulletAnimation")
-OnmyouGyokuBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.Bullet.OnmyouGyokuBulletAnimation")
+WingmanAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.WingmanAnimation")
+BulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.BulletAnimation")
+EnemyBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.EnemyBulletAnimation")
+PlayerBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.PlayerBulletAnimation")
 PropAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.PropAnimation")
 
 --公共脚本
+EntityBasedata = require("Scripts.Context.Game.Modules.Stage.Script.Public.EntityBasedata")
 EntityController = require("Scripts.Context.Game.Modules.Stage.Script.Public.EntityController")
 DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByBorder")
 DestroyByTime = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByTime")
 ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
 ManageByPool = require("Scripts.Context.Game.Modules.Stage.Script.Public.ManageByPool")
-
----[[工具]]-----
-AnimationUtil = require("Scripts.Context.Game.Modules.Stage.Util.AnimationUtil")  
-ScenarioUtil = require("Scripts.Context.Game.Modules.Stage.Util.ScenarioUtil")  
-EntityUtil = require("Scripts.Context.Game.Modules.Stage.Util.EntityUtil")  
 
 
 ------

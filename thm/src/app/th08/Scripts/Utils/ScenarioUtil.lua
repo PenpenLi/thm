@@ -1,4 +1,4 @@
-module(..., package.seeall)
+module("ScenarioUtil", package.seeall)
 
 
 function calculateBoundX(node,index,gap,isLeftToRight)

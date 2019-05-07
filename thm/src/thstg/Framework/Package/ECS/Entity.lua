@@ -83,6 +83,12 @@ local function _remveComponent(self,...)
 	end
 end
 
+local function _replaceComponent(self,oldComponentNamesTb,newComponent,params)
+	if type(oldComponentNamesTb) == "string" then oldComponentNamesTb = {oldComponentNamesTb} end
+	_remveComponent(self,unpack(oldComponentNamesTb))
+	_addComponent(self,newComponent,params)
+end
+
 function M:addComponent(component,params)
 	return _addComponent(self,component,params)
 end
@@ -91,6 +97,11 @@ end
 function M:removeComponent(...)
 	_remveComponent(self,...)
 end
+
+function M:replaceComponent(oldComponentName,newComponent,params)
+	return _replaceComponent(self,oldComponentName,newComponent,params)
+end
+
 
 --移除组件列表
 function M:removeComponents(...)
@@ -168,11 +179,15 @@ end
 
 --[[脚本模块]]
 function M:addScript(scprit,params)
-	_addComponent(self,scprit,params)
+	return _addComponent(self,scprit,params)
 end
 
 function M:removeScript(...)
 	_remveComponent(self,...)
+end
+
+function M:replaceScript(oldScriptName,newScript,params)
+	return _replaceComponent(self,oldScriptName,newScript,params)
 end
 
 function M:getScript(...)

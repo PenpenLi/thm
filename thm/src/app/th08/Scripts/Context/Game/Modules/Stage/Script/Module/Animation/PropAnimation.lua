@@ -5,15 +5,10 @@ function M:_onInit()
 end
 
 ---
-function M:getBossType()
-    return self.propType
-end
 
 function M:_onStart()
     M.super._onStart(self)
 
-    local propControScript = self:getScript("PropController")
-    self.propType = propControScript.propType
 end
 
 ---

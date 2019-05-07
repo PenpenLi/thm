@@ -5,7 +5,7 @@ function M:ctor()
     M.super.ctor(self)
 
     ----
-    self.emitterMainCtrl.objectPrefab = StageDefine.MarisaBulletPrefab
+    self.emitterMainCtrl.objectPrefab = StageDefine.MarisaBullet
     ----
     self.animationController = StageDefine.PlayerAnimation.new()
     self.spriteNode:addScript(self.animationController)

@@ -59,14 +59,14 @@ end
 ----
 local _allEntities = {}
 function M:addToEntityCache(entity)
-    local entityType = entity:getScript("EntityController").entityType
+    local entityType = entity:getScript("EntityBasedata"):getEntityType()
     _allEntities = _allEntities or {}
     _allEntities[entityType] = _allEntities[entityType] or {}
     _allEntities[entityType][entity] = entity
 end
 
 function M:removeToEntityCache(entity)
-    local entityType = entity:getScript("EntityController").entityType
+    local entityType = entity:getScript("EntityBasedata"):getEntityType()
     _allEntities = _allEntities or {}
     _allEntities[entityType] = _allEntities[entityType] or {}
     _allEntities[entityType][entity] = nil

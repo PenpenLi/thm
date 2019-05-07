@@ -1,19 +1,8 @@
 local M = class("EntityController",THSTG.ECS.Script)
-
+--实体信息
 function M:_onInit()
-    self.entityType = false
-    
-end
----
-function M:setEntityType(type)
-    self.entityType = type
-end
 
-function M:getEntityType()
-    return self.entityType
 end
-
----
 
 function M:_onStart()
  

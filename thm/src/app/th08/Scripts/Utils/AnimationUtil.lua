@@ -1,4 +1,4 @@
-module(..., package.seeall)
+module("AnimationUtil", package.seeall)
 
 function playMoveLeft()
     self.sprite:setFlippedX(false)
