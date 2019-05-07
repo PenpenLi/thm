@@ -6,10 +6,6 @@ return {
 		ability = "操纵虫子程度的能力",
 		type = 1,
 		life = 10000,
-		box = {
-			width = 32,
-			height = 48,
-		},
 	},
 	[10300002] = {
 		code = 10300002,
@@ -18,9 +14,5 @@ return {
 		ability = "用歌声使人迷惑程度的能力",
 		type = 1,
 		life = 11000,
-		box = {
-			width = 32,
-			height = 48,
-		},
 	},
 }

@@ -1,17 +1,13 @@
 return {
 	[10100001] = {
 		code = 10100001,
-		name = "博丽霊梦",
+		name = "博丽 霊梦",
 		nickname = "楽园の素敌な巫女",
 		ability = "在天空中飞行的能力",
 		type = 1,
 		life = 1,
 		speed = 2,
 		extra = "",
-		decisionPoint = {
-			width = 32,
-			height = 48,
-		},
 	},
 	[10100002] = {
 		code = 10100002,
@@ -22,10 +18,6 @@ return {
 		life = 1,
 		speed = 2,
 		extra = "",
-		decisionPoint = {
-			width = 32,
-			height = 48,
-		},
 	},
 	[10100003] = {
 		code = 10100003,
@@ -36,10 +28,6 @@ return {
 		life = 1,
 		speed = 2,
 		extra = "",
-		decisionPoint = {
-			width = 32,
-			height = 48,
-		},
 	},
 	[10100004] = {
 		code = 10100004,
@@ -50,9 +38,5 @@ return {
 		life = 1,
 		speed = 2,
 		extra = "",
-		decisionPoint = {
-			width = 32,
-			height = 48,
-		},
 	},
 }
