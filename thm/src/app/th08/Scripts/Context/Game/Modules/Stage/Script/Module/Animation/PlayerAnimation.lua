@@ -3,8 +3,6 @@ local M = class("PlayerAnimation",StageDefine.AnimationController)
 function M:_onInit()
     M.super._onInit(self)
     
-
-
 end
 
 function M:_onState()
@@ -28,6 +26,13 @@ end
 function M:_onStart()
     M.super._onStart(self)
 
+
+end
+
+function M:_onSetup()
+    M.super._onSetup(self)
+
+
 end
 ----
 function M:_onMove(dx,dy)
@@ -41,47 +46,37 @@ function M:_onMove(dx,dy)
 end
 
 function M:_onMoveLeft(event)
-    -- self.spriteComp:setFlippedX(false)
-    -- self.animaComp:stop()
-    -- self.animaComp:playCustom(cc.Sequence:create({
-    --     cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left_start"))),
-    --     cc.CallFunc:create(function() 
-    --         self.animaComp:playCustom(cc.RepeatForever:create(
-    --             cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left_sustain")))
-    --         ))
-    --     end)
-    -- }))
+    self.spriteComp:setFlippedX(false)
+    self.animaComp:stop()
+    self.animaComp:playCustom({
+        {AnimStatus.MOVE_LEFT_START,nil,nil,1},
+        {AnimStatus.MOVE_LEFT_SUSTAIN,nil,nil,-1},
+    })
+
 end
 
 function M:_onMoveRight(event)
-    -- self.spriteComp:setFlippedX(true)
-    -- self.animaComp:stop()
-    -- self.animaComp:playCustom(cc.Sequence:create({
-    --     cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left_start"))),
-    --     cc.CallFunc:create(function() 
-    --         self.animaComp:playCustom(cc.RepeatForever:create(
-    --             cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left_sustain")))
-    --         ))
-    --     end)
-    -- }))
+    self.spriteComp:setFlippedX(true)
+    self.animaComp:stop()
+    self.animaComp:playCustom({
+        {AnimStatus.MOVE_LEFT_START,nil,nil,1},
+        {AnimStatus.MOVE_LEFT_SUSTAIN,nil,nil,-1},
+    })
 end
 
-
 function M:_onIdle(event)
-    -- local actions = {}
-    -- if event.from == "MoveRight" or event.from == "MoveLeft" then
-    --     local animation = AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"move_left"))
-    --     animation:setDelayPerUnit(1/26)
-    --     table.insert( actions,cc.Animate:create(animation):reverse())
-    --     table.insert( actions,cc.CallFunc:create(function() 
-    --         self.spriteComp:setFlippedX(not self.spriteComp:isFlippedX())
-    --     end))
-    -- end
-    -- table.insert(actions,cc.CallFunc:create(function() 
-    --     self.animaComp:playCustom(cc.RepeatForever:create(cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getRoleAnimationArgs(self.roleType,"stand_normal")))))
-    -- end))
-    -- self.animaComp:stop()
-    -- self.animaComp:playCustom(cc.Sequence:create(actions))
+    self.animaComp:stop()
+    if event.from == "MoveRight" or event.from == "MoveLeft" then
+        self.animaComp:playCustom({
+            {AnimStatus.MOVE_LEFT_SUSTAIN,nil,nil,1,-1},
+            {AnimStatus.MOVE_LEFT_START,nil,nil,1,-1,function()
+                self.spriteComp:setFlippedX(not self.spriteComp:isFlippedX())
+            end},
+            {AnimStatus.IDLE,nil,nil,-1},
+        })
+    else
+        self.animaComp:playForever(AnimStatus.IDLE)
+    end
 end
 
 ----

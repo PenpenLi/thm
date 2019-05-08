@@ -14,11 +14,6 @@ function M:ctor()
     self:addChild(self.gyoku2)
 
     ----
-    self.emitterMainCtrl.objectPrefab = StageDefine.ReimuBullet
-    ----
-    self.animationController = StageDefine.PlayerAnimation.new()
-    self.spriteNode:addScript(self.animationController)
-
     self.wipeController = StageDefine.ReimuWipeController.new()
     self:addScript(self.wipeController)
 
@@ -28,6 +23,12 @@ function M:ctor()
     self.playerController = StageDefine.ReimuController.new()
     self.playerController.roleType = GameDef.Stage.ERoleType.Reimu
     self:addScript(self.playerController)
+
+    ----
+    self.emitterMainCtrl.objectPrefab = StageDefine.ReimuBullet
+    self.entityData:setDataByCode(10100001)
+    self.spriteNode.entityData:setData(self.entityData:getData()) --共用一份数据
+    
 
 end
 

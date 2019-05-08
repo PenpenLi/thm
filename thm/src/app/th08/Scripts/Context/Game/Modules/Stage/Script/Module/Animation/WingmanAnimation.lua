@@ -21,20 +21,10 @@ function M:_onStart()
     M.super._onStart(self)
   
 end
-----
-function M:_onMove(dx,dy)
- 
-end
 
 function M:_onIdle(event)
-    -- self:getSprite():runAction(cc.Sequence:create({
-    --     cc.Animate:create(AnimationCache.getResBySheet("enemy","onmyou_gyoku_r")),
-    --     cc.CallFunc:create(function() 
-    --         self:getSprite():runAction(cc.RepeatForever:create(
-    --             cc.RotateBy:create(1,360)   --阴阳玉自旋
-    --         ))
-    --     end)
-    -- }))
+    self.animaComp:stop()
+    self.animaComp:playForever(AnimStatus.DEFAULT)
 end
 
 ----

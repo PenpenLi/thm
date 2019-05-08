@@ -19,7 +19,6 @@ EModeType = {
 EEntityLayerType = {
     Player = 1,
     Barrage = 2,
-    
 }
 
 EEntityType = {
@@ -33,6 +32,11 @@ EEntityType = {
     Prop = 8,
 }
 
+EEntityFlag = {
+    Player = 1,
+    Enemy = 2, 
+}
+
 ERoleType = {
     Reimu = 1,          --Reimu
     Yukari = 2,         --Yukari
@@ -40,18 +44,29 @@ ERoleType = {
     Sakuya = 4,
 }
 
-EPropType = {
-    Consumables = 1,    --消耗品
-}
-
--------
 EBossType = {
     Wriggle = 1,     --莉格露
 }
 
-EBulletCategory = {                 --子弹种类
-    Dot,                            --点
-    Laser,                          --激光
+--道具种类
+EPropCategory = {
+    Card = 1,           --卡片
+}
+
+EPropCardType = {
+    Power = 1,          --火力
+    Bomb = 2,           --Bomb
+    Flag = 3,           --F???
+    OneUp = 4,          --1Up
+    Da = 5,             --???
+    Water = 6,          --???
+    Point = 7,          --点数
+
+}
+
+EBulletCategory = {                     --子弹种类
+    Dot = 1,                            --点
+    Laser = 2,                          --激光
 }
 
 EBulletColor = {                    --子弹颜色
@@ -71,11 +86,4 @@ EBulletColor = {                    --子弹颜色
     _14 = 14,
     _15 = 15,
     _16 = 16,
-}
-
-
-ESpellCardCategory = {
-    Non,--非符
-    Time,--时符
-    Final,--终符
 }

@@ -10,6 +10,7 @@ require "Scripts.Context.Handler.ConfigReaders.PropConfig"
 require "Scripts.Context.Handler.ConfigReaders.EnemyBulletConfig"
 require "Scripts.Context.Handler.ConfigReaders.PlayerBulletConfig"
 require "Scripts.Context.Handler.ConfigReaders.BatmanConfig"
+require "Scripts.Context.Handler.ConfigReaders.WingmanConfig"
 require "Scripts.Context.Handler.ConfigReaders.PlayerConfig"
 require "Scripts.Context.Handler.ConfigReaders.StageConfig"
 

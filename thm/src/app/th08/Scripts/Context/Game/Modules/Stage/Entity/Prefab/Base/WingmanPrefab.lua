@@ -11,8 +11,7 @@ function M:ctor()
     self.wingmanController = StageDefine.WingmanController.new()
     self:addScript(self.wingmanController)
 
-    --
-    self.entityData.entityType = GameDef.Stage.EEntityType.Wingman
+
 end
 
 ----------

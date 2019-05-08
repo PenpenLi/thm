@@ -9,9 +9,11 @@ function M:_onInit()
     self._fsm = THSTG.UTIL.newStateMachine() --状态机
     self.animaComp = nil
     self.spriteComp = nil
+    self._baseData = nil
 
     self._transComp = nil
     self._prevPos = cc.p(0,0)
+
 end
 --
 function M:play(actionType)
@@ -37,24 +39,60 @@ end
 
 ------------------
 function M:_onStart()
+    self._baseData = self:getScript("EntityBasedata")
+
     self.animaComp = self:getComponent("AnimationComponent")
     self.spriteComp = self:getComponent("SpriteComponent")
-
-    local cfg = self:_onState()
-    if cfg and next(cfg) then
-        self._fsm:setupState(cfg)
-    end
 
     self._transComp = self:getComponent("TransformComponent")
     self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
 
     self:_onSetup()
+    
+    local cfg = self:_onState()
+    if cfg and next(cfg) then
+        self._fsm:setupState(cfg)
+    end
 end
 ------------------
 --[[以下由子类重载]]
 function M:_onSetup()
+   --加载动画配置
+    local entityCode = self._baseData:getEntityCode()
+    local animCfg = AnimationConfig.getAllInfo(entityCode)
     --动画装配器,通过配置装配动画
-    
+    self.animaComp:removeAllAnimations()
+    if animCfg then
+        if animCfg.skeleton ~= "" then
+            --TODO:是序列帧动画
+            --这里可以预加载
+            THSTG.ANIMATION.DBXManager.loadDBXFile(
+                ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas),
+                ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,animCfg.skeleton)
+            )
+            
+            local skeleton = THSTG.ANIMATION.DBXManager.getSkeleton(animCfg.skeleton)
+            for _,v in ipairs(skeleton:getAnimationNameList()) do 
+                local animation = THSTG.ANIMATION.DBXManager.createAnimation(animCfg.skeleton,v)
+                self.animaComp:addAnimation(v,animation)
+            end
+        elseif animCfg.atlas ~= "" then
+            THSTG.ANIMATION.DBXManager.loadDBXFile(
+                ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas)
+            )
+            --是一帧,需要转为帧动画
+            local frame = THSTG.ANIMATION.DBXManager.createFrame(animCfg.atlas,tostring(entityCode))
+            if frame then
+                self.animaComp:addAnimation(AnimStatus.DEFAULT,display.newAnimation({frame},1/12))
+            end
+        end
+
+        --精灵修正
+        self.spriteComp:setAnchorPoint(animCfg.anchorPoint)
+        self.spriteComp:setRotation(animCfg.rotation)
+        self.spriteComp:setScaleX(animCfg.scale.x)
+        self.spriteComp:setScaleY(animCfg.scale.y)
+    end
 
 end
 

@@ -12,6 +12,9 @@ function M:ctor()
     self.emitterMainCtrl.shotInterval = 0.4
     self:addChild(self.emitter)
 
+    --
+    self.entityData:setDataByCode(10200001)
+
 end
 
 

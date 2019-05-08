@@ -16,18 +16,11 @@ end
 function M:addAnimation(name,animation)
     self._animations = self._animations or {}
     self._animations[name] = animation
+    animation:retain()  --TODO:
 end
 
 function M:getAnimation(name)
     return self._animations and self._animations[name]
-end
-
-function M:getAnimae(name)
-    local animation = self:getAnimation(name)
-    if animation then
-        return cc.Animate:create(animation)
-    end
-    return nil
 end
 
 function M:removeAnimation(name)
@@ -37,33 +30,122 @@ function M:removeAnimation(name)
             self:stop()
         end
         self._animations[name] = nil
+        animation:release()
+    end
+end
+
+function M:removeAllAnimations()
+    if self._animations then
+        for _,v in pairs(self._animations) do
+            v:release()
+        end
+        self._animations = false
+    end
+end
+
+--item = {name,startIndex,endIndex,times,speed,callback}
+function M:playCustom(list)
+    if type(list) == "table" then
+        local actions = {}
+        for _,v in ipairs(list) do
+            local infoTb = v
+            if type(v) == "string" then
+                infoTb = {v}
+            end
+            local actionName = infoTb[1] or false
+            local callback = infoTb[6] or false
+            if actionName then
+                local animation = self:getAnimation(actionName) or false
+                if animation then
+                    local startIndex = infoTb[2] or false
+                    local endIndex = infoTb[3] or -1
+                    local times = infoTb[4] or 1
+                    local speed = infoTb[5] or false
+                    
+                    local newAnimation = animation
+                    if type(startIndex) == "number" then
+                        local frames = animation:getFrames()
+                        if endIndex == -1 then endIndex = #frames end
+                        local length = endIndex - startIndex
+                        if length > 0 then
+                            local frameArray = {}
+                            local time = 1/math.abs(speed) or animation:getDelayPerUnit()
+                            for i = startIndex, (startIndex + length) do
+                                table.insert(frameArray,frames[i]:getSpriteFrame())
+                            end
+                            newAnimation = display.newAnimation(frameArray, time)
+                        end
+                    end
+
+                    if times < 0 then
+                        table.insert(actions, cc.CallFunc:create(function()
+                            local anime = cc.Animate:create(newAnimation)
+                            if type(speed) == "number" then
+                                if speed < 0 then
+                                    anime:reverse()
+                                end
+                            end
+                            self._curAction = cc.RepeatForever:create(anime)
+                            self:_getSprite():runAction(self._curAction)
+                        end))
+                        break
+                    elseif times > 0 then
+                        local anime = cc.Animate:create(newAnimation)
+                        if type(speed) == "number" then
+                            if speed < 0 then
+                                anime:reverse()
+                            end
+                        end
+                        for i = 1, times do table.insert(actions, anime) end
+                    end
+                end
+            end
+            if type(callback) == "function" then table.insert(actions, cc.CallFunc:create(callback)) end
+        end
+        
+        if #actions > 0 then 
+            self._curAction = cc.Sequence:create(actions)
+            self:_getSprite():runAction(self._curAction)
+            return self._curAction
+        end
+    end
+end
+
+function M:playTimes(name,times,callback)
+    times = times or 1
+    if self._animations then
+        local animation = self:getAnimation(name)
+        if animation then
+            local actions = {}
+            if times > 0 then
+                local anime = cc.Animate:create(animation)
+                for i = 1, times do table.insert(actions, anime) end
+            elseif times < 0 then
+                table.insert(actions, cc.CallFunc:create(function()
+                    local anime = cc.Animate:create(animation)
+                    self._curAction = cc.RepeatForever:create(anime)
+                    self:_getSprite():runAction(self._curAction)
+                end))
+            end
+            if type(callback) == "function" then table.insert(actions, cc.CallFunc:create(callback)) end
+            if #actions > 0 then 
+                self._curAction = cc.Sequence:create(actions)
+                self:_getSprite():runAction(self._curAction)
+                return self._curAction
+            end
+        end
     end
 end
 
 function M:playOnce(name,callback)
-    if self._animations then
-        local animation = self._animations[name]
-        if animation then
-            local anime = cc.Animate:create(animation)
-            self._curAction = cc.RepeatForever:create(anime)
-            self:_getSprite():runAction(self._curAction)
-            return self._curAction
-        end
-    end
+    return self:playTimes(name,1,callback)
 end
 
 function M:playForever(name)
-    if self._animations then
-        local animation = self._animations[name]
-        if animation then
-            self._curAction = cc.Animate:create(animation)
-            self:_getSprite():runAction(self._curAction)
-            return self._curAction
-        end
-    end
+    return self:playTimes(name,-1,callback)
 end
 
-function M:playCustom(action)
+function M:playAction(action)
     self:_getSprite():runAction(action)
     self._curAction = action
 end
@@ -80,25 +162,6 @@ function M:stop()
     -- end
 end
 
--- -----
--- function M:play(action)
---     self:_getSprite():runAction(action)
--- end
-
--- function M:playForever(animation,params)
---     local action = cc.RepeatForever:create(cc.Animate:create(animation))
---     self:play(action)
--- end
-
--- function M:playOnce(animation,params)
---     local action = cc.Animate:create(animation)
---     self:play(action)
--- end
-
--- function M:stopAll()
---     self:_getSprite():stopAllActions()
--- end
----
 function M:_onAdded(entity)
     self._spriteComp = entity:getComponent("SpriteComponent")
     if not self._spriteComp then
@@ -108,7 +171,7 @@ function M:_onAdded(entity)
 end
 
 function M:_onRemoved(entity)
-    
+    self:removeAllAnimations()
 end
 
 return M

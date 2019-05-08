@@ -2,28 +2,34 @@ local DBXAtlas = require "thstg.Framework.Component.Animation.DBX.DBXAtlas"
 local DBXSkeleton = require "thstg.Framework.Component.Animation.DBX.DBXSkeleton"
 
 module(..., package.seeall)
+local _fileCache = {}
 local _atlasCahce = {}
 local _skeletonCahce = {}
 local _skeletonTexMap = {} --图集映射
 
 function loadDBXFile(texPath,skePath)
     local atlas = false
-    if texPath ~= "" then
-        atlas = DBXAtlas.new(texPath)
-        if atlas then
-            local name = atlas:getAtlasName()
-            _atlasCahce[name] = atlas
-
+    if texPath and texPath ~= "" then
+        if not _fileCache[texPath] then
+            atlas = DBXAtlas.new(texPath)
+            if atlas then
+                local name = atlas:getAtlasName()
+                _atlasCahce[name] = atlas
+                _fileCache[texPath] = true
+            end
         end
     end
 
-    if skePath ~= "" then
-        local sketloe = DBXSkeleton.new(skePath)
-        if sketloe then
-            local name = sketloe:getSkeletonName()
-            _skeletonCahce[name] = sketloe
-            if atlas then
-                _skeletonTexMap[name] = atlas
+    if skePath and skePath ~= "" then
+        if not _fileCache[skePath] then
+            local sketloe = DBXSkeleton.new(skePath)
+            if sketloe then
+                local name = sketloe:getSkeletonName()
+                _skeletonCahce[name] = sketloe
+                if atlas then
+                    _skeletonTexMap[name] = atlas
+                    _fileCache[skePath] = true
+                end
             end
         end
     end
@@ -108,6 +114,7 @@ function createAnime(skeName,aniName)
 end
 
 function clear()
+    _fileCache = {}
     _atlasCahce = {}
     _skeletonCahce = {}
     _skeletonTexMap = {}

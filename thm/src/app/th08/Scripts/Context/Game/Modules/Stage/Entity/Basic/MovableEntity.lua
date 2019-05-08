@@ -14,12 +14,7 @@ function M:ctor()
 
     self:addComponent(StageDefine.BoxColliderComponent.new())
 
-    --精灵动画实体
-    self.spriteNode = StageDefine.BaseEntity.new()
-    self.spriteNode:addComponent(StageDefine.SpriteComponent.new())
-    self.spriteNode:addComponent(StageDefine.AnimationComponent.new())
-    self.spriteNode:setName("SPRITE_NODE")
-    self:addChild(self.spriteNode)
+
 
     ---XXX:TEST
     -- local ccrigibbodyComp = THSTG.ECS.CCRigidbodyComponent.new()

@@ -22,6 +22,22 @@ function M:setRotation(val)
     return self:_getSprite():setRotation(val)
 end
 
+function M:setScaleX(val)
+    return self:_getSprite():setScaleX(val)
+end
+
+function M:getScaleX(val)
+    return self:_getSprite():getScaleX()
+end
+
+function M:setScaleY(val)
+    return self:_getSprite():setScaleY(val)
+end
+
+function M:getScaleY(val)
+    return self:_getSprite():getScaleY()
+end
+
 function M:setScale(val)
     return self:_getSprite():setScale(val)
 end

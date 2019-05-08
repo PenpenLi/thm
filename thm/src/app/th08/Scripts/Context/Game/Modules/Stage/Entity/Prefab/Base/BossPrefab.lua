@@ -44,9 +44,6 @@ function M:ctor()
     self.bossController = StageDefine.BossController.new()
     self:addScript(self.bossController)
     ---
-
-    --
-    self.entityData.entityType = GameDef.Stage.EEntityType.Boss
 end
 ----------
 

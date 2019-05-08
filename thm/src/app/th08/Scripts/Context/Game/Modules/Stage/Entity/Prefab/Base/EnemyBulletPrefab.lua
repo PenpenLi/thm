@@ -14,8 +14,7 @@ function M:ctor()
 
     self.bulletController = StageDefine.EnemyBulletController.new()
     self:addScript(self.bulletController)
-    --
-    self.entityData.entityType = GameDef.Stage.EEntityType.EnemyBullet
+
 end
 
 return M

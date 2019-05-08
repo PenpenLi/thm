@@ -5,10 +5,6 @@ function M:ctor()
     M.super.ctor(self)
 
     ----
-    self.emitterMainCtrl.objectPrefab = StageDefine.MarisaBullet
-    ----
-    self.animationController = StageDefine.PlayerAnimation.new()
-    self.spriteNode:addScript(self.animationController)
 
     self.wipeController = StageDefine.MarisaWipeController.new()
     self:addScript(self.wipeController)
@@ -20,6 +16,9 @@ function M:ctor()
     self.playerController.roleType = GameDef.Stage.ERoleType.Marisa
     self:addScript(self.playerController)
 
+    --
+    self.entityData:setDataByCode(10100002)
+    
 end
 
 

@@ -36,10 +36,10 @@ end
 
 function M:getAnimationNameList()
     local names = {}
-    local info = self:getArmatureInfos(name)
-    if info then
-        for k,_ in pairs(info) do
-            table.insert( names, k)
+    local armatureInfo = self._oriInfo.armature
+    if armatureInfo then
+        for k,_ in pairs(armatureInfo) do
+            table.insert(names, k)
         end
     end
     return names

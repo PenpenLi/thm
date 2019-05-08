@@ -43,45 +43,34 @@ end
 
 ----
 function M:_onMoveLeft(event)
-    -- self:getSprite():setFlippedX(true)
-    -- self:getSprite():stopAllActions()
-    -- local actions = {}
-    -- if event.from == "MoveRight" or event.from == "MoveLeft" then
-    --     local animation = AnimationCache.getResBySheet(StageConfig.getBatmanAnimSheetArgs(self:getBatmanType(),"move_turn"))
-    --     table.insert(actions,cc.Animate:create(animation))
-    -- end
-    -- table.insert(actions,cc.CallFunc:create(function() 
-    --     self:getSprite():runAction(cc.RepeatForever:create(
-    --         cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getBatmanAnimSheetArgs(self:getBatmanType(),"move_right")))
-    --     ))
-    -- end))
-    -- self:getSprite():runAction(cc.Sequence:create(actions))
+    self.spriteComp:setFlippedX(true)
+    self.animaComp:stop()
+    if event.from == "MoveRight" or event.from == "MoveLeft" then
+        self.animaComp:playCustom({
+            {AnimStatus.MOVE_RIGHT_TURN,nil,nil,1},
+            {AnimStatus.MOVE_RIGHT_SUSTAIN,nil,nil,-1},
+        })
+    else
+        self.animaComp:playForever(AnimStatus.MOVE_RIGHT_SUSTAIN)
+    end
 end
 
 function M:_onMoveRight(event)
-    -- self:getSprite():setFlippedX(false)
-    -- self:getSprite():stopAllActions()
-    -- local actions = {}
-    -- if event.from == "MoveRight" or event.from == "MoveLeft" then
-    --     local animation = AnimationCache.getResBySheet(StageConfig.getBatmanAnimSheetArgs(self:getBatmanType(),"move_turn"))
-    --     table.insert(actions,cc.Animate:create(animation))
-    -- end
-    -- table.insert(actions,cc.CallFunc:create(function() 
-    --     self:getSprite():runAction(cc.RepeatForever:create(
-    --         cc.Animate:create(AnimationCache.getResBySheet(StageConfig.getBatmanAnimSheetArgs(self:getBatmanType(),"move_right")))
-    --     ))
-    -- end))
-    -- self:getSprite():runAction(cc.Sequence:create(actions))
+    self.spriteComp:setFlippedX(false)
+    self.animaComp:stop()
+    if event.from == "MoveRight" or event.from == "MoveLeft" then
+        self.animaComp:playCustom({
+            {AnimStatus.MOVE_RIGHT_TURN,nil,nil,1},
+            {AnimStatus.MOVE_RIGHT_SUSTAIN,nil,nil,-1},
+        })
+    else
+        self.animaComp:playForever(AnimStatus.MOVE_RIGHT_SUSTAIN)
+    end
 end
 
 function M:_onIdle(event)
-    -- local actions = {}
-  
-    -- table.insert( actions,cc.CallFunc:create(function() 
-    --     self:getSprite():playAnimationForever(AnimationCache.getResBySheet(StageConfig.getBatmanAnimSheetArgs(self:getBatmanType(),"stand_normal")))
-    -- end))
-    -- self:getSprite():stopAllActions()
-    -- self:getSprite():runAction(cc.Sequence:create(actions))
+    self.animaComp:stop()
+    self.animaComp:playForever(AnimStatus.IDLE)
 end
 
 --

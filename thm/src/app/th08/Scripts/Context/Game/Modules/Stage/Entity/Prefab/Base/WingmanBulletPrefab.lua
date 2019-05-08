@@ -12,8 +12,7 @@ function M:ctor()
     self.collisionController = StageDefine.WingmanBulletCollision.new()
     self:addScript(self.collisionController)
 
-    --
-    self.entityData.entityType = GameDef.Stage.EEntityType.WingmanBullet
+
 end
 
 

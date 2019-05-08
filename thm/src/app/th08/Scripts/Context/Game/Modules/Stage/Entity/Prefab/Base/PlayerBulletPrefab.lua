@@ -18,8 +18,7 @@ function M:ctor()
     self.bulletController = StageDefine.PlayerBulletController.new()
     self:addScript(self.bulletController)
 
-    --
-    self.entityData.entityType = GameDef.Stage.EEntityType.PlayerBullet
+
 
 end
 

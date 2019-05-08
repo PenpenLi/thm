@@ -14,6 +14,16 @@ function M:ctor(...)
     self.emitterMainCtrl.shotSpeed = cc.p(0,20)
     self:addChild(self.emitter)
 
+    --精灵动画实体,这个另外一个实体,不会影响到两个僚机
+    self.spriteNode = StageDefine.BaseEntity.new()
+    self.spriteNode:addComponent(StageDefine.SpriteComponent.new())
+    self.spriteNode:addComponent(StageDefine.AnimationComponent.new())
+    self.spriteNode:setName("SPRITE_NODE")
+    self:addChild(self.spriteNode)
+
+    self.animationController = StageDefine.PlayerAnimation.new()
+    self.spriteNode:addScript(self.animationController)
+    
     ---
     self.healthController = StageDefine.PlayerHealth.new()
     self:addScript(self.healthController)
@@ -33,8 +43,6 @@ function M:ctor(...)
     self.constraintByBorder = StageDefine.ConstraintByBorder.new()
     self:addScript(self.constraintByBorder)
 
-    --
-    self.entityData.entityType = GameDef.Stage.EEntityType.Player
 end
 
 
