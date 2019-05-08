@@ -2,6 +2,7 @@ return {
 	[10800001] = {
 		code = 10800001,
 		name = "Power",
+		category = 1,
 		type = 1,
 		effect = 3,
 		effectEx = 0,
@@ -10,6 +11,7 @@ return {
 	[10800002] = {
 		code = 10800002,
 		name = "Point",
+		category = 1,
 		type = 7,
 		effect = 2,
 		effectEx = 0,
@@ -18,6 +20,7 @@ return {
 	[10800003] = {
 		code = 10800003,
 		name = "BigPower",
+		category = 1,
 		type = 1,
 		effect = 4,
 		effectEx = 0,
@@ -26,6 +29,7 @@ return {
 	[10800004] = {
 		code = 10800004,
 		name = "BigBomb",
+		category = 1,
 		type = 2,
 		effect = 4,
 		effectEx = 0,
@@ -34,6 +38,7 @@ return {
 	[10800005] = {
 		code = 10800005,
 		name = "BigF",
+		category = 1,
 		type = 3,
 		effect = 4,
 		effectEx = 0,
@@ -42,6 +47,7 @@ return {
 	[10800006] = {
 		code = 10800006,
 		name = "Big1Up",
+		category = 1,
 		type = 4,
 		effect = 4,
 		effectEx = 0,
@@ -50,6 +56,7 @@ return {
 	[10800007] = {
 		code = 10800007,
 		name = "Da",
+		category = 1,
 		type = 5,
 		effect = 2,
 		effectEx = 0,
@@ -58,6 +65,7 @@ return {
 	[10800008] = {
 		code = 10800008,
 		name = "Water",
+		category = 1,
 		type = 6,
 		effect = 1,
 		effectEx = 0,
@@ -66,6 +74,7 @@ return {
 	[10800009] = {
 		code = 10800009,
 		name = "SmallPower",
+		category = 1,
 		type = 1,
 		effect = 1,
 		effectEx = 0,
@@ -74,6 +83,7 @@ return {
 	[10800010] = {
 		code = 10800010,
 		name = "SmallPoint",
+		category = 1,
 		type = 2,
 		effect = 1,
 		effectEx = 0,
@@ -82,6 +92,7 @@ return {
 	[10800011] = {
 		code = 10800011,
 		name = "MiddlePower",
+		category = 1,
 		type = 1,
 		effect = 2,
 		effectEx = 0,
@@ -90,6 +101,7 @@ return {
 	[10800012] = {
 		code = 10800012,
 		name = "MiddleBomb",
+		category = 1,
 		type = 2,
 		effect = 2,
 		effectEx = 0,
@@ -98,6 +110,7 @@ return {
 	[10800013] = {
 		code = 10800013,
 		name = "MiddleF",
+		category = 1,
 		type = 3,
 		effect = 2,
 		effectEx = 0,
@@ -106,6 +119,7 @@ return {
 	[10800014] = {
 		code = 10800014,
 		name = "Middle1Up",
+		category = 1,
 		type = 4,
 		effect = 2,
 		effectEx = 0,
@@ -114,6 +128,7 @@ return {
 	[10800015] = {
 		code = 10800015,
 		name = "SmallDa",
+		category = 1,
 		type = 5,
 		effect = 1,
 		effectEx = 0,
@@ -122,6 +137,7 @@ return {
 	[10800016] = {
 		code = 10800016,
 		name = "MiddlePoint",
+		category = 1,
 		type = 7,
 		effect = 1,
 		effectEx = 0,
