@@ -3,7 +3,7 @@ module(..., package.seeall)
 local M = class("Reimu",StageDefine.PlayerPrefab)
 function M:ctor()
     M.super.ctor(self)
-
+    
     --添加两个僚机的实体
     self.gyoku1 = StageDefine.OnmyouGyoku.new()
     self.gyoku1:setName("GYOKU1")
@@ -12,6 +12,11 @@ function M:ctor()
     self.gyoku2 = StageDefine.OnmyouGyoku.new()
     self.gyoku2:setName("GYOKU2")
     self:addChild(self.gyoku2)
+
+    --普通子弹的发射口
+    self.emitter = StageDefine.EmitterPrefab.new()
+    self.emitterMainCtrl = self.emitter:getScript("EmitterController")
+    self:addChild(self.emitter)
 
     ----
     self.wipeController = StageDefine.ReimuWipeController.new()

@@ -5,7 +5,7 @@ module("EntityManager", package.seeall)
 local objectPool = THSTG.UTIL.newObjectPool()
 ------
 local function loadEntityClass(category,type)
-    local class = StageConfig.getEntityClass(category,type)
+    local class = EntityMapConfig.tryGetClass(category,type)
     assert(class, string.format("[EntityManager] Class is not finded (%s,%s)!",category,type))
     return class
 end
@@ -49,10 +49,10 @@ local function initEntity(entity,params)
     end
     
 
-    Dispatcher.dispatchEvent(EventType.STAGE_ADD_ENTITY,entity,layerType)
+    Dispatcher.dispatchEvent(EventType.STAGE_ADD_ENTITY,entity)
 end
 
-function createEntityObject(class,isReusable,layerType)
+function createEntityObject(class,isReusable)
     local entity = createObject(class,isReusable)
     initEntity(entity,{
         isReusable = isReusable

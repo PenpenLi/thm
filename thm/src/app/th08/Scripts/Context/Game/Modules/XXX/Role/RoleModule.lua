@@ -4,7 +4,7 @@ local M = class("RoleModule", Controller)
 function M:_onView()
 
     local layer = cc.Layer:create()
-    layer:addTo(THSTG.SceneManager.get(SceneType.STAGE))
+    layer:addTo(THSTG.SceneManager.get(SceneType.MAIN))
 
     return layer
 

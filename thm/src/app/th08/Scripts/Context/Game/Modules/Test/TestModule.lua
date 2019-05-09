@@ -80,11 +80,8 @@ end
 
 function M:__keyBoadrControl(keyCode, event)
     if keyCode == cc.KeyCode.KEY_F1 then
-        THSTG.SceneManager.replace(SceneType.MAIN)
-    elseif keyCode == cc.KeyCode.KEY_F2 then
-        THSTG.SceneManager.replace(SceneType.MENU)
-    elseif keyCode == cc.KeyCode.KEY_F3 then
-        THSTG.SceneManager.replace(SceneType.STAGE)
+   
+    
     end
 end
 

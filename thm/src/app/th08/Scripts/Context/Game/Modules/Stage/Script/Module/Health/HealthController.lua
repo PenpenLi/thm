@@ -7,8 +7,14 @@ function M:_onInit()
     self._isInvincible = false
     self._isDead = false
 
+    self._basedata = nil
 end
 --
+function M:_onStart()
+    self._basedata = self:getScript("EntityBasedata")
+    
+end
+
 function M:hit(damage)
     if self._isInvincible then return end
 
@@ -90,5 +96,8 @@ function M:_onBlood(old,val)
 end
 
 function M:_onInvincible(val)
+
 end
+
+
 return M

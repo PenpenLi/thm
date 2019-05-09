@@ -13,3 +13,4 @@ end
 -----------
 --由于有时序关系,在这里添加也行
 register("stageCache","Scripts.Context.Game.Modules.Stage.StageCache")
+register("mainUICache","Scripts.Context.Game.Modules.MainUI.MainUICache")

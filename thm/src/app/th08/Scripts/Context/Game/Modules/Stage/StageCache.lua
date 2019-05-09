@@ -65,7 +65,7 @@ function M:addToEntityCache(entity)
     _allEntities[entityType][entity] = entity
 end
 
-function M:removeToEntityCache(entity)
+function M:removeFromEntityCache(entity)
     local entityType = entity:getScript("EntityBasedata"):getEntityType()
     _allEntities = _allEntities or {}
     _allEntities[entityType] = _allEntities[entityType] or {}

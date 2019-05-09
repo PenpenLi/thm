@@ -7,14 +7,7 @@ function M:ctor(...)
     --初始化变量
     self:setName("PLAYER")
 
-    --普通子弹的发射口
-    self.emitter = StageDefine.EmitterPrefab.new()
-    self.emitterMainCtrl = self.emitter:getScript("EmitterController")
-    self.emitterMainCtrl.shotInterval = 0.10
-    self.emitterMainCtrl.shotSpeed = cc.p(0,20)
-    self:addChild(self.emitter)
-
-    --精灵动画实体,这个另外一个实体,不会影响到两个僚机
+    --精灵动画实体,这个另外一个实体,不会影响到僚机
     self.spriteNode = StageDefine.BaseEntity.new()
     self.spriteNode:addComponent(StageDefine.SpriteComponent.new())
     self.spriteNode:addComponent(StageDefine.AnimationComponent.new())

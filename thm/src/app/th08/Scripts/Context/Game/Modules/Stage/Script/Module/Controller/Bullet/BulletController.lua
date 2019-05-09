@@ -4,7 +4,9 @@ function M:_onInit()
     M.super._onInit(self)
 
     self.bulletType = nil               --子弹类型
-    self.lethality = 10                 --杀伤力               
+    self.lethality = 10                 --杀伤力        
+    
+    self._basedata = nil
 end
 ---
 function M:getBulletType()
@@ -38,7 +40,8 @@ end
 function M:_onStart()
     M.super._onStart(self)
 
- 
+    self._basedata = self:getScript("EntityBasedata")
+    self:setLethality(self._basedata:getData().harm)
 end
 
 

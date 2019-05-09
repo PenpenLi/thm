@@ -55,12 +55,17 @@ BossController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Contr
 BulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.BulletController")---子弹控制器
 EnemyBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.EnemyBulletController")
 PlayerBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.PlayerBulletController")
+WingmanBulletController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Bullet.WingmanBulletController")
+
 PlayerController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Player.PlayerController")---自机控制
 ReimuController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Player.ReimuController")
 MarisaController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Player.MarisaController")
 PropController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.PropController")---道具控制
 EmitterController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.EmitterController")---发射器控制器
-WingmanController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.WingmanController")---僚机控制器
+WingmanController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Controller.Wingman.WingmanController")---僚机控制器
+--其他
+AutoRotationScript = require("Scripts.Context.Game.Modules.Stage.Script.Module.Function.AutoRotationScript")
+TraceBulletScript = require("Scripts.Context.Game.Modules.Stage.Script.Module.Function.TraceBulletScript")
 
 --生命控制
 HealthController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Health.HealthController")
@@ -112,6 +117,7 @@ WingmanAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Ani
 BulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.BulletAnimation")
 EnemyBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.EnemyBulletAnimation")
 PlayerBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.PlayerBulletAnimation")
+WingmanBulletAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.WingmanBulletAnimation")
 PropAnimation = require("Scripts.Context.Game.Modules.Stage.Script.Module.Animation.PropAnimation")
 
 --公共脚本

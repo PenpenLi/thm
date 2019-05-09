@@ -3,20 +3,18 @@ local M = class("OnmyouGyoku",StageDefine.WingmanPrefab)
 function M:ctor()
     M.super.ctor(self)
     --初始化变量
-    --阴阳玉有拖尾的效果
-
+    self.spriteNode:addScript(StageDefine.AutoRotationScript.new()) --让僚机动画自旋
+    
     --普通子弹的发射口
     self.emitter = StageDefine.EmitterPrefab.new()
     self.emitterMainCtrl = self.emitter:getScript("EmitterController")
-    self.emitterMainCtrl.objectPrefab = StageDefine.OnmyouGyokuBullet
-    self.emitterMainCtrl.shotInterval = 0.4
     self:addChild(self.emitter)
 
     --
+    self.emitterMainCtrl.objectPrefab = StageDefine.OnmyouGyokuBullet
     self.entityData:setDataByCode(10200001)
+    self.spriteNode.entityData:setData(self.entityData:getData()) --共用一份数据
 
 end
-
-
 
 return M

@@ -83,10 +83,14 @@ local function _remveComponent(self,...)
 	end
 end
 
-local function _replaceComponent(self,oldComponentNamesTb,newComponent,params)
-	if type(oldComponentNamesTb) == "string" then oldComponentNamesTb = {oldComponentNamesTb} end
-	_remveComponent(self,unpack(oldComponentNamesTb))
-	_addComponent(self,newComponent,params)
+local function _remveComponents(self,...)
+	local name = ECSUtil.trans2Name(...)
+	for k,v in pairs(self.__components__) do
+		local className,classArgs = v:getClass()
+		if ECSUtil.find2ClassWithChild(classArgs,...) then
+			_remveComponent(self,unpack(classArgs))
+		end
+	end
 end
 
 function M:addComponent(component,params)
@@ -98,19 +102,16 @@ function M:removeComponent(...)
 	_remveComponent(self,...)
 end
 
-function M:replaceComponent(oldComponentName,newComponent,params)
-	return _replaceComponent(self,oldComponentName,newComponent,params)
-end
-
-
 --移除组件列表
 function M:removeComponents(...)
-	local name = ECSUtil.trans2Name(...)
-	for k,v in pairs(self.__components__) do
-		local className,classArgs = v:getClass()
-		if ECSUtil.find2ClassWithChild(classArgs,...) then
-			self:removeComponent(unpack(classArgs))
-		end
+	_remveComponents(self,...)
+end
+
+function M:replaceComponent(oldComponentNamesTb,newComponent,params)
+	if type(oldComponentNamesTb) == "string" then oldComponentNamesTb = {oldComponentNamesTb} end
+	self:removeComponents(unpack(oldComponentNamesTb))
+	if newComponent then
+		return self:addComponent(self,newComponent,params)
 	end
 end
 
@@ -183,15 +184,29 @@ function M:addScript(scprit,params)
 end
 
 function M:removeScript(...)
-	_remveComponent(self,...)
-end
-
-function M:replaceScript(oldScriptName,newScript,params)
-	return _replaceComponent(self,oldScriptName,newScript,params)
+	_remveComponents(self,...)
 end
 
 function M:getScript(...)
 	return self:getComponent(...)
+end
+
+function M:replaceScript(a1,a2)
+	local class = a1
+	local comp = a2
+	if a2 == nil then
+		comp = a1
+		params = a2
+		local _,classList = comp:getClass()
+		class = clone(classList)
+		table.remove(class,#class)
+	else
+		if type(class) == "string" then class = {class} end
+	end
+	self:removeScript(unpack(class))
+	if comp then
+		self:addScript(comp)
+	end
 end
 
 --[[系统模块]]
@@ -220,17 +235,7 @@ function M:update(dTime)
 	self:_onLateUpdate(dTime)
 
 end
-----
--- local oldAddChild = cc.Node.addChild
--- local oldAddTo = cc.Node.addTo
--- function M:addChild(obj,...)
--- 	assert(tolua.iskindof(obj,"Entity"), "[Entity] You much add a entity object")
--- 	oldAddChild(self,obj,...)
--- end
--- function M:addTo(obj,...)
--- 	assert(tolua.iskindof(obj,"Entity"), "[Entity] You much add a entity object")
--- 	oldAddTo(self,obj,...)
--- end
+
 ----
 function M:clear()
 	self:removeAllComponents()

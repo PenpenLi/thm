@@ -14,13 +14,13 @@ function M:initStage()
     schedulerComp:setTasks(StageFactory.getScenario(stageID))
 
     local map = StageFactory.getMap(stageID).create()
-    map:addTo(THSTG.SceneManager.get(SceneType.STAGE).backgroundLayer)
+    map:addTo(THSTG.SceneManager.get(SceneType.MAIN).backgroundLayer)
 end
 
 function M:initPlayer()
     local roleType = Cache.stageCache:getRoleType()
     self._ePlayer = EntityManager.createPlayer(roleType)
-
+    
     self._ePlayer:getScript("PlayerController"):reset()
 end
 

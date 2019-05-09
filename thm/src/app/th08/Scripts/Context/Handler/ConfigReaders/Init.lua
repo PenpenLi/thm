@@ -16,3 +16,6 @@ require "Scripts.Context.Handler.ConfigReaders.StageConfig"
 
 require "Scripts.Context.Handler.ConfigReaders.AnimationConfig"
 require "Scripts.Context.Handler.ConfigReaders.ShapeConfig"
+
+require "Scripts.Context.Handler.ConfigReaders.EntityMapConfig"
+require "Scripts.Context.Handler.ConfigReaders.EntityLayerMapConfig"

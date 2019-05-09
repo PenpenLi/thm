@@ -1,6 +1,5 @@
 module(..., package.seeall)
 local EEntityType = GameDef.Stage.EEntityType
-local EEntityLayerType = GameDef.Stage.EEntityLayerType
 local M = class("StageController", THSTG.MVC.Controller)
 
 function M:_onInit()
@@ -18,27 +17,23 @@ function M:_onClose()
 end
 
 ----
-function M:_addEntity(e,entity,layerType)
+function M:_addEntity(e,entity)
     local entityType = entity:getScript("EntityBasedata"):getEntityType()
-    layerType = layerType or StageConfig.getEntityLayerType(entityType)
+    local layer = EntityLayerMapConfig.tryGetLayer(entityType)
 
     --数据装配
 
     --初始化
 
     --送入图层显示
-    if layerType then
-        if layerType == EEntityLayerType.Player then
-            entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).playerLayer)
-        elseif layerType == EEntityLayerType.Barrage then
-            entity:addTo(THSTG.SceneManager.get(SceneType.STAGE).barrageLayer)
-        end
+    if layer then
+        entity:addTo(layer)
         Cache.stageCache:addToEntityCache(entity)
     end
 end
 
 function M:_removEntity(e,entity)
-    Cache.stageCache:removeToEntityCache(entity)
+    Cache.stageCache:removeFromEntityCache(entity)
 end
 
 return M

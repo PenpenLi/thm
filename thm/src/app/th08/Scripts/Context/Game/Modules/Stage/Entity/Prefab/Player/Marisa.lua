@@ -5,7 +5,6 @@ function M:ctor()
     M.super.ctor(self)
 
     ----
-
     self.wipeController = StageDefine.MarisaWipeController.new()
     self:addScript(self.wipeController)
 

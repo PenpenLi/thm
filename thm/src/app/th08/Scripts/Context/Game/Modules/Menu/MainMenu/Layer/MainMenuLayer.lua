@@ -146,7 +146,7 @@ function M.create(params)
            
             if index == 1 then
 
-                THSTG.SceneManager.replace(SceneType.STAGE)
+                THSTG.SceneManager.replace(SceneType.MAIN)
             end
         end
     end

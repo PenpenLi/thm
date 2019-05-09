@@ -25,7 +25,15 @@ return {
     {
         sheet = 
         {
+            enemy = "Assets/Texture/Sheet/enemy.json" ,
+            etama = "Assets/Texture/Sheet/etama.json" ,
+            etama2 = "Assets/Texture/Sheet/etama2.json" ,
+            etama6 = "Assets/Texture/Sheet/etama6.json" ,
             player00 = "Assets/Texture/Sheet/player00.json" ,
+            player01 = "Assets/Texture/Sheet/player01.json" ,
+            stg1enm = "Assets/Texture/Sheet/stg1enm.json" ,
+            stg2enm = "Assets/Texture/Sheet/stg2enm.json" ,
+
         },
         image = 
         {
@@ -50,9 +58,13 @@ return {
         },
         sequence = 
         {
-            player00_ske = "Assets/Animation/Sequence/player00_ske.json" ,
+            _10400001_base_ani = "Assets/Animation/Sequence/_10400001_base_ani.json" ,
+            alice_base_ani = "Assets/Animation/Sequence/alice_base_ani.json" ,
+            marisa_base_ani = "Assets/Animation/Sequence/marisa_base_ani.json" ,
             reimu_base_ani = "Assets/Animation/Sequence/reimu_base_ani.json" ,
+            wriggle_base_ani = "Assets/Animation/Sequence/wriggle_base_ani.json" ,
             yukari_base_ani = "Assets/Animation/Sequence/yukari_base_ani.json" ,
+
 
         }
     },

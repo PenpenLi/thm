@@ -29,15 +29,24 @@ function M:shot()
         bulletControlScript:reset()
 
         self._nextShotTime = THSTG.TimeUtil.time() + self.shotInterval
-        
-        
     end
 end
 
 
 function M:_onStart()
     M.super._onStart(self)
-    EntityManager.expandEntityObject(self.objectPrefab,self.prefabNum)
+
+    if self.objectPrefab then
+        EntityManager.expandEntityObject(self.objectPrefab,self.prefabNum)
+        
+        local bulletTemp = self.objectPrefab.new()--随便拿一个出来赋值
+        if bulletTemp then
+            local bulletBasedata = bulletTemp:getScript("EntityBasedata"):getData()
+            self.shotInterval = bulletBasedata.freq or self.shotInterval
+            self.shotSpeed = cc.p(0,bulletBasedata.speed or self.shotSpeed.y)
+
+        end
+    end
 end
 
 return M

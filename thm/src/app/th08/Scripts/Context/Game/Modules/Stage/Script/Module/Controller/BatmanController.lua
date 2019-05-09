@@ -3,7 +3,6 @@ local M = class("BatmanController",StageDefine.BaseController)
 function M:_onInit()
     M.super._onInit(self)
 
-    self.batmanType = GameDef.Stage.EBatmanType.Fairy01
 end
 ----
 function M:_onStart()

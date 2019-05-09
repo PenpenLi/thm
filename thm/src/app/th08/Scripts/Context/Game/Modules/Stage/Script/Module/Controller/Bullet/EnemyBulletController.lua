@@ -12,6 +12,8 @@ function M:_onAdded(entity)
     
 end
 ---
+function M:_onStart()
 
+end
 
 return M

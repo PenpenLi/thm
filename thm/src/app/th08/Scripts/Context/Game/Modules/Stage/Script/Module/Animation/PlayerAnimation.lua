@@ -48,7 +48,7 @@ end
 function M:_onMoveLeft(event)
     self.spriteComp:setFlippedX(false)
     self.animaComp:stop()
-    self.animaComp:playCustom({
+    self.animaComp:playOnce({
         {AnimStatus.MOVE_LEFT_START,nil,nil,1},
         {AnimStatus.MOVE_LEFT_SUSTAIN,nil,nil,-1},
     })
@@ -58,7 +58,7 @@ end
 function M:_onMoveRight(event)
     self.spriteComp:setFlippedX(true)
     self.animaComp:stop()
-    self.animaComp:playCustom({
+    self.animaComp:playOnce({
         {AnimStatus.MOVE_LEFT_START,nil,nil,1},
         {AnimStatus.MOVE_LEFT_SUSTAIN,nil,nil,-1},
     })
@@ -67,7 +67,7 @@ end
 function M:_onIdle(event)
     self.animaComp:stop()
     if event.from == "MoveRight" or event.from == "MoveLeft" then
-        self.animaComp:playCustom({
+        self.animaComp:playOnce({
             {AnimStatus.MOVE_LEFT_SUSTAIN,nil,nil,1,-1},
             {AnimStatus.MOVE_LEFT_START,nil,nil,1,-1,function()
                 self.spriteComp:setFlippedX(not self.spriteComp:isFlippedX())

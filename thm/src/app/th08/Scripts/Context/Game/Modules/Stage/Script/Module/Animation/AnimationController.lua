@@ -65,8 +65,7 @@ function M:_onSetup()
     if animCfg then
         if animCfg.atlas ~= "" then
             if animCfg.skeName ~= "" then
-                --TODO:是序列帧动画
-                --这里可以预加载
+                --XXX:这里可以预加载
                 THSTG.ANIMATION.DBXManager.loadDBXFile(
                     ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas),
                     ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,animCfg.skeName)

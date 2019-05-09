@@ -16,11 +16,6 @@ EModeType = {
     BossRush = 2,
 }
 
-EEntityLayerType = {
-    Player = 1,
-    Barrage = 2,
-}
-
 EEntityType = {
     Player = 1,
     Wingman = 2,

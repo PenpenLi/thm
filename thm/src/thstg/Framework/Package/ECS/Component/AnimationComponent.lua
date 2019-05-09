@@ -16,7 +16,7 @@ end
 function M:addAnimation(name,animation)
     self._animations = self._animations or {}
     self._animations[name] = animation
-    animation:retain()  --TODO:
+    animation:retain()
 end
 
 function M:getAnimation(name)
@@ -43,8 +43,14 @@ function M:removeAllAnimations()
     end
 end
 
---item = {name,startIndex,endIndex,times,speed,callback}
-function M:playCustom(list)
+--list = item{name,startIndex,endIndex,count,speed,callback}
+function M:playTimes(list,times)
+    if type(list) == "string" then
+        local newList = {}
+        table.insert(newList, {list,false,false,false,false,false})
+        list = newList
+    end
+
     if type(list) == "table" then
         local actions = {}
         for _,v in ipairs(list) do
@@ -59,7 +65,7 @@ function M:playCustom(list)
                 if animation then
                     local startIndex = infoTb[2] or false
                     local endIndex = infoTb[3] or -1
-                    local times = infoTb[4] or 1
+                    local count = infoTb[4] or 1
                     local speed = infoTb[5] or false
                     
                     local newAnimation = animation
@@ -77,7 +83,7 @@ function M:playCustom(list)
                         end
                     end
 
-                    if times < 0 then
+                    if count < 0 then
                         table.insert(actions, cc.CallFunc:create(function()
                             local anime = cc.Animate:create(newAnimation)
                             if type(speed) == "number" then
@@ -89,14 +95,14 @@ function M:playCustom(list)
                             self:_getSprite():runAction(self._curAction)
                         end))
                         break
-                    elseif times > 0 then
+                    elseif count > 0 then
                         local anime = cc.Animate:create(newAnimation)
                         if type(speed) == "number" then
                             if speed < 0 then
                                 anime:reverse()
                             end
                         end
-                        for i = 1, times do table.insert(actions, anime) end
+                        for i = 1, count do table.insert(actions, anime) end
                     end
                 end
             end
@@ -104,32 +110,14 @@ function M:playCustom(list)
         end
         
         if #actions > 0 then 
-            self._curAction = cc.Sequence:create(actions)
-            self:_getSprite():runAction(self._curAction)
-            return self._curAction
-        end
-    end
-end
-
-function M:playTimes(name,times,callback)
-    times = times or 1
-    if self._animations then
-        local animation = self:getAnimation(name)
-        if animation then
-            local actions = {}
-            if times > 0 then
-                local anime = cc.Animate:create(animation)
-                for i = 1, times do table.insert(actions, anime) end
-            elseif times < 0 then
-                table.insert(actions, cc.CallFunc:create(function()
-                    local anime = cc.Animate:create(animation)
-                    self._curAction = cc.RepeatForever:create(anime)
-                    self:_getSprite():runAction(self._curAction)
-                end))
-            end
-            if type(callback) == "function" then table.insert(actions, cc.CallFunc:create(callback)) end
-            if #actions > 0 then 
-                self._curAction = cc.Sequence:create(actions)
+            if times < 0 then
+                self._curAction = cc.RepeatForever:create(cc.Sequence:create(actions))
+                self:_getSprite():runAction(self._curAction)
+                return self._curAction
+            elseif times > 0 then
+                local array = {}
+                for i = 1,times do table.insert(array, cc.Sequence:create(actions)) end
+                self._curAction = cc.Sequence:create(array)
                 self:_getSprite():runAction(self._curAction)
                 return self._curAction
             end
@@ -137,15 +125,15 @@ function M:playTimes(name,times,callback)
     end
 end
 
-function M:playOnce(name,callback)
-    return self:playTimes(name,1,callback)
+function M:playOnce(list)
+    return self:playTimes(list,1)
 end
 
-function M:playForever(name)
-    return self:playTimes(name,-1,callback)
+function M:playForever(list)
+    return self:playTimes(list,-1)
 end
 
-function M:playAction(action)
+function M:playCustom(action)
     self:_getSprite():runAction(action)
     self._curAction = action
 end

@@ -12,6 +12,7 @@ SELECTION = "selection"
 
 STAGE = "stage"
 
+MAIN_UI = "mainUI"
 
 
 

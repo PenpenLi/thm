@@ -3,13 +3,10 @@ local M = class("PropController",StageDefine.BaseController)
 function M:_onInit()
     M.super._onInit(self)
 
-    self.propType = false
+
 end
 ---
 
-function M:getPropType()
-    return self.propType
-end
 
 function M:effect(refEntity)
     --被拾取

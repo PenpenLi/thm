@@ -1,4 +1,4 @@
-local M = class("PlayerBulletController",THSTG.ECS.Script)
+local M = class("WingmanBulletController",StageDefine.BulletController)
 
 function M:_onInit()
     M.super._onInit(self)
@@ -10,8 +10,9 @@ function M:_onAdded(entity)
 
 end
 
-function M:_onUpdate()
-    --TODO:追踪弹
+function M:_onStart()
+
+    
 end
 
 return M
