@@ -18,7 +18,7 @@ return {
 	[10100002] = {
 		code = 10100002,
 		atlas = "player01",
-		skeName = "",
+		skeName = "marisa_base_ani",
 		frameName = "",
 		anchorPoint = {
 			x = 0.5,
@@ -50,7 +50,7 @@ return {
 	[10100004] = {
 		code = 10100004,
 		atlas = "player01",
-		skeName = "",
+		skeName = "alice_base_ani",
 		frameName = "",
 		anchorPoint = {
 			x = 0.5,
@@ -98,7 +98,7 @@ return {
 	[10300001] = {
 		code = 10300001,
 		atlas = "stg1enm",
-		skeName = "",
+		skeName = "wriggle_base_ani",
 		frameName = "",
 		anchorPoint = {
 			x = 0.5,
@@ -130,7 +130,7 @@ return {
 	[10400001] = {
 		code = 10400001,
 		atlas = "enemy",
-		skeName = "",
+		skeName = "_10400001_base_ani",
 		frameName = "",
 		anchorPoint = {
 			x = 0.5,
