@@ -11,9 +11,7 @@ function M:ctor()
     self:addChild(self.emitter)
 
     --
-    self.emitterMainCtrl.objectPrefab = StageDefine.OnmyouGyokuBullet
-    self.entityData:setDataByCode(10200001)
-    self.spriteNode.entityData:setData(self.entityData:getData()) --共用一份数据
+    self.emitterMainCtrl.bulletCode = 10500002
 
 end
 

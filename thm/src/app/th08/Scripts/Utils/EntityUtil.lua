@@ -3,28 +3,35 @@ module("EntityUtil", package.seeall)
 local EEntityType = GameDef.Stage.EEntityType
 
 function code2Type(code)
-    return math.floor((code / 100000) % 100)
+    return math.floor((code / 100000) % 100),math.floor(code / 10000)
 end
 
-function getRealData(code)
+function type2Code(type,id)
+    return tonumber(string.format("1%02d0%04d",type,id))
+end
+
+function getDatas(code)
     local type = code2Type(code)
+    local entityData = {}
+    local animData = AnimationConfig.getAllInfo(code)
     if type == EEntityType.Player then
-        return PlayerConfig.getAllInfo(code)
+        entityData = PlayerConfig.getAllInfo(code)
     elseif type == EEntityType.Wingman then
-        return WingmanConfig.getAllInfo(code)
+        entityData = WingmanConfig.getAllInfo(code)
     elseif type == EEntityType.Boss then
-        return BossConfig.getAllInfo(code)
+        entityData = BossConfig.getAllInfo(code)
     elseif type == EEntityType.Batman then
-        return BatmanConfig.getAllInfo(code)
+        entityData = BatmanConfig.getAllInfo(code)
     elseif type == EEntityType.PlayerBullet then
-        return PlayerBulletConfig.getAllInfo(code)
+        entityData = PlayerBulletConfig.getAllInfo(code)
     elseif type == EEntityType.EnemyBullet then
-        return EnemyBulletConfig.getAllInfo(code)
+        entityData = EnemyBulletConfig.getAllInfo(code)
     elseif type == EEntityType.WingmanBullet then
-        return {}
+        entityData = {}
     elseif type == EEntityType.Prop then
-        return PropConfig.getAllInfo(code)
+        entityData = PropConfig.getAllInfo(code)
     end
+    return entityData,animData
 end
 
 ---
@@ -34,6 +41,14 @@ function isBullet(entity)
         entityType == EEntityType.EnemyBullet or
         entityType == EEntityType.WingmanBullet
     then
+        return true
+    end
+    return false
+end
+
+function isPlayer(entity)
+    local entityType = entity:getScript("EntityBasedata"):getEntityType()
+    if entityType == EEntityType.Player then
         return true
     end
     return false

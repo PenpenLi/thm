@@ -58,8 +58,7 @@ end
 --[[以下由子类重载]]
 function M:_onSetup()
    --加载动画配置
-    local entityCode = self._baseData:getEntityCode()
-    local animCfg = AnimationConfig.getAllInfo(entityCode)
+    local _,animCfg = self._baseData:getData()
     --动画装配器,通过配置装配动画
     self.animaComp:removeAllAnimations()
     if animCfg then

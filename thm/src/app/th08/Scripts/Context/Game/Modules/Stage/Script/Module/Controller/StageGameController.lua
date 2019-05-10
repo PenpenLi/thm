@@ -20,7 +20,8 @@ end
 function M:initPlayer()
     local roleType = Cache.stageCache:getRoleType()
     self._ePlayer = EntityManager.createPlayer(roleType)
-    
+    Dispatcher.dispatchEvent(EventType.STAGE_ADD_ENTITY,self._ePlayer)
+
     self._ePlayer:getScript("PlayerController"):reset()
 end
 

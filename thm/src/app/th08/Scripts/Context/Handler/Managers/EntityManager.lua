@@ -1,42 +1,15 @@
 local EEntityType = GameDef.Stage.EEntityType
-local EEntityLayerType = GameDef.Stage.EEntityLayerType
 module("EntityManager", package.seeall)
 
 local objectPool = THSTG.UTIL.newObjectPool()
 ------
-local function loadEntityClass(category,type)
-    local class = EntityMapConfig.tryGetClass(category,type)
-    assert(class, string.format("[EntityManager] Class is not finded (%s,%s)!",category,type))
+local function _loadEntityClass(code)
+    local class = EntityClassMapConfig.tryGetClass(code)
+    assert(class, string.format("[EntityManager] Class is not finded (%s)!",code))
     return class
 end
 
-local function createObject(class,isReusable)
-    local entity = nil
-    if isReusable then
-        entity = objectPool:create(class)
-    else
-        entity = class.new()
-    end
-    return entity
-end
-
-local function initEntity(entity,params)
-    params = params or {}
-    if params.pos then
-        local transComp = entity:getComponent("TransformComponent")
-        transComp:setPosition(params.pos)
-    end
-
-    if params.speed then
-        local rigidComp = entity:getComponent("RigidbodyComponent")
-        rigidComp:setSpeed(params.speed)
-    end
-
-    if params.action then
-        local actionComp = entity:getComponent("ActionComponent")
-        actionComp:runOnce(params.action)
-    end
-
+local function _initEntity(entity,params)
     if params.isReusable then
         -- 防止二次添加
         -- 添加对象管理组件
@@ -47,67 +20,99 @@ local function initEntity(entity,params)
             entity:addScript(poolMgr)
         end
     end
-    
 
-    Dispatcher.dispatchEvent(EventType.STAGE_ADD_ENTITY,entity)
+    if params.code then
+        local type = EntityUtil.code2Type(params.code)
+        if type == EEntityType.Player then 
+            entity:getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
+            entity:getChildByName("SPRITE_NODE"):getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
+        elseif type == EEntityType.Wingman then
+            entity:getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
+            entity:getChildByName("SPRITE_NODE"):getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
+        elseif type == EEntityType.EnemyBullet then
+            --敌机子弹有点特殊,后两位是颜色,可能对应一个模板
+            local srcCode = code
+            local baseCode = math.floor(srcCode/100) * 100
+            local data = EntityUtil.getDatas(srcCode) or EntityUtil.getDatas(baseCode)
+            entity:getScript("EntityBasedata"):setData(data)
+        else
+            entity:getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
+        end
+    end
+
+end
+
+local function _createEntity(code,isReusable)
+    local class = _loadEntityClass(code)
+    if not class then return end
+
+    local entity = createObject(class,isReusable)
+    _initEntity(entity,{
+        isReusable = isReusable,
+        code = code,
+    })
+
+    return entity
+end
+
+
+function createObject(class,isReusable)
+    local entity = nil
+    if isReusable then
+        entity = objectPool:create(class)
+    else
+        entity = class.new()
+    end
+    return entity
 end
 
 function createEntityObject(class,isReusable)
     local entity = createObject(class,isReusable)
-    initEntity(entity,{
+    _initEntity(entity,{
         isReusable = isReusable
     })
 
     return entity
 end
 
-function createEntity(category,type,isReusable,initPos,initSpeed,initAction)
-    local class = loadEntityClass(category,type)
-    if not class then return end
-
-    local entity = createObject(class,isReusable)
-    initEntity(entity,{
-        pos = initPos,
-        speed = initSpeed,
-        action = initAction,
-        isReusable = isReusable,
-    })
-
-    return entity
+function createEntity(a1,a2,a3)
+    if a3 == nil then
+        if a2 == nil then
+            return _createEntity(a1,a2)
+        else
+            if type(a2) == "boolean" then
+                return _createEntity(a1,a2)
+            else
+                local code = EntityUtil.type2Code(a1,a2)
+                return _createEntity(code,a3)
+            end
+        end
+    end
+    local code = EntityUtil.type2Code(a1,a2)
+    return _createEntity(code,a3)
 end
 
 function releaseEntity(entity)
     objectPool:release(entity)
 end
 
-function createEntities(category,type,num,isReusable,initFunc)
-    local class = loadEntityClass(category,type)
-    if not class then return end
-
-    for i = 1,num do
-        local entity = createObject(class,isReusable)
-        entity:setLocalZOrder(i)
-
-        local initPos,initSpeed,initAction = initFunc(i,entity)
-        initEntity(entity,{
-            pos = initPos,
-            speed = initSpeed,
-            action = initAction,
-            isReusable = isReusable,
-        })
-    end
-end
-
 ---
-function expandEntityObject(class,num)
+function expandObject(class,num)
     return objectPool:expand(class,num)
 end
 
 function expandEntity(category,type,num)
-    local class = loadEntityClass(category,type)
+    local code = category
+    if num ~= nil then 
+        code = EntityUtil.type2Code(category,type) 
+    else
+        num = type 
+    end
+        
+    local class = _loadEntityClass(code)
     if not class then return end
     
-    expandEntityObject(class,num)
+    expandObject(class,num)
 end
 
 function clearEntities()
@@ -115,34 +120,27 @@ function clearEntities()
 end
 
 --
-function createEnemyBullet(type,initPos,initSpeed)
-    return createEntity(EEntityType.EnemyBullet,type,true,initPos,initSpeed)
+function createEnemyBullet(type)
+    return createEntity(EEntityType.EnemyBullet,type,true)
 end
 
-function createEnemyBullets(type,num,initFunc)
-    return createEntities(EEntityType.EnemyBullet,type,num,true,initFunc)
+function createBatman(type)
+    return createEntity(EEntityType.Batman,type,true)
 end
 
-function createBatman(type,initPos,initSpeed)
-    return createEntity(EEntityType.Batman,type,true,initPos,initSpeed)
+function createProp(type)
+    return createEntity(EEntityType.Prop,type,true)
 end
 
-function createBatmans(type,num,initFunc)
-    return createEntities(EEntityType.Batman,type,num,true,initFunc)
-end
-
-function createProp(type,initPos,initSpeed)
-    return createEntity(EEntityType.Prop,type,true,initPos,initSpeed)
-end
-
-function createProps(type,num,initFunc)
-    return createEntities(EEntityType.Prop,type,num,true,initFunc)
-end
 -----
 --防止二次创建
-function createBoss(type,initPos,initSpeed)
-    return createEntity(EEntityType.Boss,type,false,initPos,initSpeed) 
+function createBoss(type)
+    return createEntity(EEntityType.Boss,type,false) 
 end
-function createPlayer(type,initPos,initSpeed)
-    return createEntity(EEntityType.Player,type,false,initPos,initSpeed)
+function createPlayer(type)
+    return createEntity(EEntityType.Player,type,false)
 end
+function createWingman(type)
+    return createEntity(EEntityType.Wingman,type,false)
+end
+

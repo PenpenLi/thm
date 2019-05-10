@@ -1,6 +1,58 @@
 module("ScenarioUtil", package.seeall)
+----------------------------------------
+
+local function _initEntity(entity,curI,initFunc)
+    entity:setLocalZOrder(curI)
+
+    local initPos,initSpeed,initAction = false,false,false
+    if type(initFunc) == "function" then
+        initPos,initSpeed,initAction = initFunc(curI,entity)
+    end
+
+    if initPos then
+        local transComp = entity:getComponent("TransformComponent")
+        transComp:setPosition(initPos)
+    end
+
+    if initSpeed then
+        local rigidComp = entity:getComponent("RigidbodyComponent")
+        rigidComp:setSpeed(initSpeed)
+    end
+
+    if initAction then
+        local actionComp = entity:getComponent("ActionComponent")
+        actionComp:runOnce(initAction)
+    end
+
+    Dispatcher.dispatchEvent(EventType.STAGE_ADD_ENTITY,entity)
+end
 
 
+function takeEnemyBullets(type,num,initFunc)
+    num = num or 1
+    for i = 1,num do
+        local entity = EntityManager.createEnemyBullet(type)
+        _initEntity(entity,initFunc)
+    end
+end
+
+
+function takeBatmans(type,num,initFunc)
+    num = num or 1
+    for i = 1,num do
+        local entity = EntityManager.createBatman(type)
+        _initEntity(entity,initFunc)
+    end
+end
+
+function takeProps(type,num,initFunc)
+    num = num or 1
+    for i = 1,num do
+        local entity = EntityManager.createProp(type)
+        _initEntity(entity,initFunc)
+    end
+end
+----------------------------------------
 function calculateBoundX(node,index,gap,isLeftToRight)
     if isLeftToRight then
         local ret = display.width + (((1-node:getAnchorPoint().x) * node:getContentSize().width) + (index - 1) * (gap + node:getContentSize().width))

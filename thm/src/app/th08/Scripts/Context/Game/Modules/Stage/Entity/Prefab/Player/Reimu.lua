@@ -5,11 +5,11 @@ function M:ctor()
     M.super.ctor(self)
     
     --添加两个僚机的实体
-    self.gyoku1 = StageDefine.OnmyouGyoku.new()
+    self.gyoku1 = EntityManager.createEntity(10200001)
     self.gyoku1:setName("GYOKU1")
     self:addChild(self.gyoku1)
 
-    self.gyoku2 = StageDefine.OnmyouGyoku.new()
+    self.gyoku2 = EntityManager.createEntity(10200001)
     self.gyoku2:setName("GYOKU2")
     self:addChild(self.gyoku2)
 
@@ -30,9 +30,7 @@ function M:ctor()
     self:addScript(self.playerController)
 
     ----
-    self.emitterMainCtrl.objectPrefab = StageDefine.ReimuBullet
-    self.entityData:setDataByCode(10100001)
-    self.spriteNode.entityData:setData(self.entityData:getData()) --共用一份数据
+    self.emitterMainCtrl.bulletCode = 10500001
     
 
 end

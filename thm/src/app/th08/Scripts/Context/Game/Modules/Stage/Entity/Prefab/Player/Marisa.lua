@@ -15,8 +15,6 @@ function M:ctor()
     self.playerController.roleType = GameDef.Stage.ERoleType.Marisa
     self:addScript(self.playerController)
 
-    --
-    self.entityData:setDataByCode(10100002)
     
 end
 
