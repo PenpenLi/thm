@@ -1,5 +1,16 @@
 module("StageDefine", package.seeall)
 
+------
+---[[数据]]----
+BaseEntityData = require("Scripts.Context.Game.Modules.Stage.Data.Entity.BaseEntityData")
+PlayerEntityData = require("Scripts.Context.Game.Modules.Stage.Data.Entity.PlayerEntityData")
+WingmanEntityData = require("Scripts.Context.Game.Modules.Stage.Data.Entity.WingmanEntityData")
+BossEntityData = require("Scripts.Context.Game.Modules.Stage.Data.Entity.BossEntityData")
+BatmanEntityData = require("Scripts.Context.Game.Modules.Stage.Data.Entity.BatmanEntityData")
+PlayerBulletEntityData = require("Scripts.Context.Game.Modules.Stage.Data.Entity.PlayerBulletEntityData")
+EnemyBulletEntityData = require("Scripts.Context.Game.Modules.Stage.Data.Entity.EnemyBulletEntityData")
+WingmanBulletEntityData = require("Scripts.Context.Game.Modules.Stage.Data.Entity.WingmanBulletEntityData")
+PropEntityData = require("Scripts.Context.Game.Modules.Stage.Data.Entity.PropEntityData")
 ---[[组件]]----
 TransformComponent = THSTG.ECS.TransformComponent
 SpriteComponent = THSTG.ECS.SpriteComponent
@@ -12,8 +23,8 @@ AudioComponent = THSTG.ECS.AudioComponent
 SchedulerComponent = require("Scripts.Context.Game.Modules.Stage.Component.SchedulerComponent")
 BoxColliderComponent = THSTG.ECS.BoxColliderComponent
 CircleColliderComponent = THSTG.ECS.CircleColliderComponent
-----
 
+------
 ---[[实体]]----
 BaseEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.BaseEntity")
 MovableEntity = require("Scripts.Context.Game.Modules.Stage.Entity.Basic.MovableEntity")
@@ -127,7 +138,6 @@ DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.Dest
 DestroyByTime = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByTime")
 ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
 ManageByPool = require("Scripts.Context.Game.Modules.Stage.Script.Public.ManageByPool")
-
 
 ------
 --[[轮询的系统注册]]---

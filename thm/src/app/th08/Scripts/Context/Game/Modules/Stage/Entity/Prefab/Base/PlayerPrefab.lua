@@ -15,7 +15,7 @@ function M:ctor(...)
     self:addChild(self.spriteNode)
 
     self.animationController = StageDefine.PlayerAnimation.new()
-    self.spriteNode:addScript(self.animationController)
+    self:addScript(self.animationController)
     
     ---
     self.healthController = StageDefine.PlayerHealth.new()

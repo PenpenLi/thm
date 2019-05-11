@@ -22,24 +22,8 @@ local function _initEntity(entity,params)
     end
 
     if params.code then
-        local type = EntityUtil.code2Type(params.code)
-        if type == EEntityType.Player then 
-            entity:getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
-            entity:getChildByName("SPRITE_NODE"):getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
-        elseif type == EEntityType.Wingman then
-            entity:getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
-            entity:getChildByName("SPRITE_NODE"):getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
-        elseif type == EEntityType.EnemyBullet then
-            --敌机子弹有点特殊,后两位是颜色,可能对应一个模板
-            local srcCode = code
-            local baseCode = math.floor(srcCode/100) * 100
-            local data = EntityUtil.getDatas(srcCode) or EntityUtil.getDatas(baseCode)
-            entity:getScript("EntityBasedata"):setData(data)
-        else
-            entity:getScript("EntityBasedata"):setData(EntityUtil.getDatas(params.code))
-        end
+        entity:getScript("EntityBasedata"):setData(EntityUtil.newData(params.code))
     end
-
 end
 
 local function _createEntity(code,isReusable)
@@ -54,7 +38,6 @@ local function _createEntity(code,isReusable)
 
     return entity
 end
-
 
 function createObject(class,isReusable)
     local entity = nil

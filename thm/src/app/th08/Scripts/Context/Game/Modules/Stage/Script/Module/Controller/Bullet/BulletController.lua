@@ -40,8 +40,8 @@ end
 function M:_onStart()
     M.super._onStart(self)
 
-    self._basedata = self:getScript("EntityBasedata")
-    self:setLethality(self._basedata:getData().harm)
+    self._basedata = self:getScript("EntityBasedata"):getData()
+    self:setLethality(self._basedata:getConfigData().harm)
 end
 
 

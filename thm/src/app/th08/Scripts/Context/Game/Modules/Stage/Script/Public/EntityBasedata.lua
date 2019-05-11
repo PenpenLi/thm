@@ -1,22 +1,20 @@
 local M = class("EntityBasedata",THSTG.ECS.Script)
 --实体信息
 function M:_onInit()
-    self._entityData = false
-    self._animData = false
+    self._data = false
 end
 
-function M:setData(entityDta,animData)
-    self._entityData = entityDta
-    self._animData = animData
+function M:setData(data)
+    self._data = data
 end
 
 function M:getData()
-    return self._entityData,self._animData
+    return self._data
 end
 
+--有可能Code不是同一个,这里的话以Config的为标准
 function M:getEntityCode()
-    local data = self:getData() or {}
-    return data.code
+    return self:getData():getConfigData().code
 end
 
 function M:getEntityType()

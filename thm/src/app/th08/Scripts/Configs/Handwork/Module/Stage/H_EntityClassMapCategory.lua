@@ -1,12 +1,12 @@
 
 -- 实体映射表
 local EEntityType = GameDef.Stage.EEntityType
-local ERoleType = GameDef.Stage.ERoleType
+local EPlayerType = GameDef.Stage.EPlayerType
 local EBossType = GameDef.Stage.EBossType
 
 return {
     [EEntityType.Player] = {
-        [ERoleType.Reimu] = "Scripts.Context.Game.Modules.Stage.Entity.Prefab.Player.Reimu",
+        [EPlayerType.Reimu] = "Scripts.Context.Game.Modules.Stage.Entity.Prefab.Player.Reimu",
     },
     [EEntityType.Wingman] = {
 

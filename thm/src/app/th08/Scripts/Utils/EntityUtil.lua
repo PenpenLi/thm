@@ -10,28 +10,32 @@ function type2Code(type,id)
     return tonumber(string.format("1%02d0%04d",type,id))
 end
 
-function getDatas(code)
-    local type = code2Type(code)
-    local entityData = {}
-    local animData = AnimationConfig.getAllInfo(code)
-    if type == EEntityType.Player then
-        entityData = PlayerConfig.getAllInfo(code)
-    elseif type == EEntityType.Wingman then
-        entityData = WingmanConfig.getAllInfo(code)
-    elseif type == EEntityType.Boss then
-        entityData = BossConfig.getAllInfo(code)
-    elseif type == EEntityType.Batman then
-        entityData = BatmanConfig.getAllInfo(code)
-    elseif type == EEntityType.PlayerBullet then
-        entityData = PlayerBulletConfig.getAllInfo(code)
-    elseif type == EEntityType.EnemyBullet then
-        entityData = EnemyBulletConfig.getAllInfo(code)
-    elseif type == EEntityType.WingmanBullet then
-        entityData = {}
-    elseif type == EEntityType.Prop then
-        entityData = PropConfig.getAllInfo(code)
+function newData(params)
+    local code = params
+    if type(params) == "table" then 
+        code = params.code or params.cfgCode 
+    else
+        params = {code = params}
     end
-    return entityData,animData
+
+    local type = code2Type(code)
+    if type == EEntityType.Player then
+        return StageDefine.PlayerEntityData.new(params)
+    elseif type == EEntityType.Wingman then
+        return StageDefine.WingmanEntityData.new(params)
+    elseif type == EEntityType.Boss then
+        return StageDefine.BossEntityData.new(params)
+    elseif type == EEntityType.Batman then
+        return StageDefine.BatmanEntityData.new(params)
+    elseif type == EEntityType.PlayerBullet then
+        return StageDefine.PlayerBulletEntityData.new(params)
+    elseif type == EEntityType.EnemyBullet then
+        return StageDefine.EnemyBulletEntityData.new(params)
+    elseif type == EEntityType.WingmanBullet then
+        return StageDefine.WingmanBulletEntityData.new(params)
+    elseif type == EEntityType.Prop then
+        return StageDefine.PropEntityData.new(params)
+    end
 end
 
 ---

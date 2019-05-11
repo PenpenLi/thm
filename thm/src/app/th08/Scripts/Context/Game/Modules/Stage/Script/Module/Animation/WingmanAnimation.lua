@@ -20,6 +20,9 @@ end
 function M:_onStart()
     M.super._onStart(self)
   
+    --重定向组件
+    self.animaComp = self:getEntity():getChildByName("SPRITE_NODE"):getComponent("AnimationComponent")
+    self.spriteComp = self:getEntity():getChildByName("SPRITE_NODE"):getComponent("SpriteComponent")
 end
 
 function M:_onIdle(event)

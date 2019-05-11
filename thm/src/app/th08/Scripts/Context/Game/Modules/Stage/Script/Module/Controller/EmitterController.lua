@@ -39,15 +39,15 @@ end
 function M:_onStart()
     M.super._onStart(self)
 
-    -- local bulletCode = self:getEntity():getParent():getScript("EntityBasedata"):getData().bulletCode --TODO:
+    -- local bulletCode = self:getEntity():getParent():getScript("EntityBasedata"):getData():getConfigData().bulletCode --TODO:
     if self.bulletCode then
         EntityManager.expandEntity(self.bulletCode,self.prefabNum)
 
         local bulletTemp = EntityManager.createEntity(self.bulletCode)--随便拿一个出来赋值
         if bulletTemp then
             local bulletBasedata = bulletTemp:getScript("EntityBasedata"):getData()
-            self.shotInterval = bulletBasedata.freq or self.shotInterval
-            self.shotSpeed = cc.p(0,bulletBasedata.speed or self.shotSpeed.y)
+            self.shotInterval = bulletBasedata:getConfigData().freq or self.shotInterval
+            self.shotSpeed = cc.p(0,bulletBasedata:getConfigData().speed or self.shotSpeed.y)
 
         end
     end

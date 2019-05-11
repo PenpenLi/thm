@@ -1,12 +1,12 @@
 
-local ERoleType = GameDef.Stage.ERoleType
+local EPlayerType = GameDef.Stage.EPlayerType
 local M = class("MarisaController",StageDefine.PlayerController)
 
 
 function M:_onInit()
     M.super._onInit(self)
 
-    self.roleType = ERoleType.Marisa
+    self.roleType = EPlayerType.Marisa
 end
 
 function M:shot()

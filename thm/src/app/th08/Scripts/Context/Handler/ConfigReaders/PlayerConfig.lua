@@ -1,4 +1,5 @@
 module("PlayerConfig", package.seeall)
+local _misc = require("Scripts.Configs.Handwork.Module.Stage.H_PlayerMisc")
 local _infoTb = false
 
 local function getInfoTb()
@@ -10,4 +11,8 @@ end
 
 function getAllInfo(code)
     return getInfoTb()[code]
+end
+
+function getBulletCode( code )
+    return _misc[code].bulletCode
 end

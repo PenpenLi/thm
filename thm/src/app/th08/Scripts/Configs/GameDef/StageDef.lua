@@ -32,7 +32,7 @@ EEntityFlag = {
     Enemy = 2, 
 }
 
-ERoleType = {
+EPlayerType = {
     Reimu = 1,          --Reimu
     Yukari = 2,         --Yukari
     Marisa = 3,         --Marisa

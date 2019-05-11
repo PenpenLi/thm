@@ -39,7 +39,7 @@ end
 
 ------------------
 function M:_onStart()
-    self._baseData = self:getScript("EntityBasedata")
+    self._baseData = self:getScript("EntityBasedata"):getData()
 
     self.animaComp = self:getComponent("AnimationComponent")
     self.spriteComp = self:getComponent("SpriteComponent")
@@ -58,7 +58,7 @@ end
 --[[以下由子类重载]]
 function M:_onSetup()
    --加载动画配置
-    local _,animCfg = self._baseData:getData()
+    local animCfg = self._baseData:getAnimationData()
     --动画装配器,通过配置装配动画
     self.animaComp:removeAllAnimations()
     if animCfg then

@@ -2,13 +2,13 @@ module(..., package.seeall)
 local M = class("StageCache", THSTG.CORE.Cache)
 
 local EEntityType = GameDef.Stage.EEntityType
-local ERoleType = GameDef.Stage.ERoleType
+local EPlayerType = GameDef.Stage.EPlayerType
 local EModeType = GameDef.Stage.EModeType
 --
 local _bIsInStage = false
 local _bIsTeam = false
 local _eGroupType = false
-local _eRoleType = ERoleType.Reimu
+local _eRoleType = EPlayerType.Reimu
 local _eStageMode = EModeType.BossRush
 
 function M:setGroupType(val)

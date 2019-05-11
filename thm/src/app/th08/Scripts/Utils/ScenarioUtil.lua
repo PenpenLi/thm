@@ -2,8 +2,6 @@ module("ScenarioUtil", package.seeall)
 ----------------------------------------
 
 local function _initEntity(entity,curI,initFunc)
-    entity:setLocalZOrder(curI)
-
     local initPos,initSpeed,initAction = false,false,false
     if type(initFunc) == "function" then
         initPos,initSpeed,initAction = initFunc(curI,entity)
@@ -24,6 +22,7 @@ local function _initEntity(entity,curI,initFunc)
         actionComp:runOnce(initAction)
     end
 
+    entity:setLocalZOrder(curI)
     Dispatcher.dispatchEvent(EventType.STAGE_ADD_ENTITY,entity)
 end
 
@@ -32,7 +31,7 @@ function takeEnemyBullets(type,num,initFunc)
     num = num or 1
     for i = 1,num do
         local entity = EntityManager.createEnemyBullet(type)
-        _initEntity(entity,initFunc)
+        _initEntity(entity,i,initFunc)
     end
 end
 
@@ -41,7 +40,7 @@ function takeBatmans(type,num,initFunc)
     num = num or 1
     for i = 1,num do
         local entity = EntityManager.createBatman(type)
-        _initEntity(entity,initFunc)
+        _initEntity(entity,i,initFunc)
     end
 end
 
@@ -49,7 +48,7 @@ function takeProps(type,num,initFunc)
     num = num or 1
     for i = 1,num do
         local entity = EntityManager.createProp(type)
-        _initEntity(entity,initFunc)
+        _initEntity(entity,i,initFunc)
     end
 end
 ----------------------------------------
