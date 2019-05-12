@@ -50,8 +50,8 @@ function M:_initWingman()
 end
 
 function M:wingmanReset()
-    self._wingman1ActionComp:stop()
-    self._wingman2ActionComp:stop()
+    self._wingman1ActionComp:stopAll()
+    self._wingman2ActionComp:stopAll()
     self._wingman1ActionComp:runCustom(cc.Sequence:create({
         cc.MoveTo:create(0.1,cc.p(-M.WINGMAN_INIT_POS.x,M.WINGMAN_INIT_POS.y)),
         cc.DelayTime:create(1.0),

@@ -11,9 +11,9 @@ end
 
 function M:_onStart()
     M.super._onStart(self)
-
+    
     local actionComp = self:getComponent("ActionComponent")
-    actionComp:stop()
+    actionComp:stopAll()
     actionComp:runForever(cc.RotateBy:create(1,360))  --永久自旋
 end
 

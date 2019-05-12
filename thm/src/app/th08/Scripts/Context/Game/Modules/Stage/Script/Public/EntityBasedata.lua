@@ -1,7 +1,7 @@
 local M = class("EntityBasedata",THSTG.ECS.Script)
 --实体信息
 function M:_onInit()
-    self._data = false
+    self._data = false  
 end
 
 function M:setData(data)
@@ -12,13 +12,16 @@ function M:getData()
     return self._data
 end
 
---有可能Code不是同一个,这里的话以Config的为标准
 function M:getEntityCode()
-    return self:getData():getConfigData().code
+    if self:getData() then
+        return self:getData():getCode()
+    end
 end
 
 function M:getEntityType()
-    return EntityUtil.code2Type(self:getEntityCode())
+    if self:getData() then
+        return EntityUtil.code2Type(self:getEntityCode())
+    end
 end
 
 return M

@@ -7,7 +7,7 @@ return {
         time = 1,
         callback  = function (sender,task)
             Scheduler.schedule(function(delay,times)
-                ScenarioUtil.takeEnemyBullets(105,1,function(index,entity)
+                ScenarioUtil.takeEnemyBullets(1604,1,function(index,entity)
                     local theta = 10*times*math.pi/180
                     local radius = 80
                     local initPosX = display.cx + radius * math.cos(theta)

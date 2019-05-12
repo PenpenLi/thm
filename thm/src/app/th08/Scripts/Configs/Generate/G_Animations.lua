@@ -207,11 +207,11 @@ return {
 		rotation = -90,
 		exInfo = "",
 	},
-	[10600101] = {
-		code = 10600101,
+	[10600100] = {
+		code = 10600100,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600101",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -223,11 +223,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600102] = {
-		code = 10600102,
+	[10600200] = {
+		code = 10600200,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600102",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -239,11 +239,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600103] = {
-		code = 10600103,
+	[10600300] = {
+		code = 10600300,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600103",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -255,11 +255,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600104] = {
-		code = 10600104,
+	[10600400] = {
+		code = 10600400,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600104",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -271,11 +271,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600105] = {
-		code = 10600105,
+	[10600500] = {
+		code = 10600500,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600105",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -287,11 +287,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600106] = {
-		code = 10600106,
+	[10600600] = {
+		code = 10600600,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600106",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -303,11 +303,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600107] = {
-		code = 10600107,
+	[10600700] = {
+		code = 10600700,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600107",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -319,11 +319,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600108] = {
-		code = 10600108,
+	[10600800] = {
+		code = 10600800,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600108",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -335,11 +335,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600109] = {
-		code = 10600109,
+	[10600900] = {
+		code = 10600900,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600109",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -351,11 +351,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600110] = {
-		code = 10600110,
+	[10601000] = {
+		code = 10601000,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600110",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -367,11 +367,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600111] = {
-		code = 10600111,
+	[10601100] = {
+		code = 10601100,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600111",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -383,11 +383,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600112] = {
-		code = 10600112,
+	[10601200] = {
+		code = 10601200,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600112",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -399,11 +399,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600113] = {
-		code = 10600113,
+	[10601300] = {
+		code = 10601300,
 		atlas = "etama",
 		skeName = "",
-		frameName = "10600113",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -415,11 +415,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600114] = {
-		code = 10600114,
-		atlas = "etama",
+	[10601400] = {
+		code = 10601400,
+		atlas = "etama6",
 		skeName = "",
-		frameName = "10600114",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -431,11 +431,11 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600115] = {
-		code = 10600115,
-		atlas = "etama",
+	[10601500] = {
+		code = 10601500,
+		atlas = "etama6",
 		skeName = "",
-		frameName = "10600115",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,
@@ -447,11 +447,107 @@ return {
 		rotation = 0,
 		exInfo = "",
 	},
-	[10600116] = {
-		code = 10600116,
-		atlas = "etama",
+	[10601600] = {
+		code = 10601600,
+		atlas = "etama6",
 		skeName = "",
-		frameName = "10600116",
+		frameName = "%s",
+		anchorPoint = {
+			x = 0.5,
+			y = 0.5,
+		},
+		scale = {
+			x = 1,
+			y = 1,
+		},
+		rotation = 0,
+		exInfo = "",
+	},
+	[10601700] = {
+		code = 10601700,
+		atlas = "etama6",
+		skeName = "",
+		frameName = "%s",
+		anchorPoint = {
+			x = 0.5,
+			y = 0.5,
+		},
+		scale = {
+			x = 1,
+			y = 1,
+		},
+		rotation = 0,
+		exInfo = "",
+	},
+	[10601800] = {
+		code = 10601800,
+		atlas = "etama6",
+		skeName = "",
+		frameName = "%s",
+		anchorPoint = {
+			x = 0.5,
+			y = 0.5,
+		},
+		scale = {
+			x = 1,
+			y = 1,
+		},
+		rotation = 0,
+		exInfo = "",
+	},
+	[10601900] = {
+		code = 10601900,
+		atlas = "etama6",
+		skeName = "",
+		frameName = "%s",
+		anchorPoint = {
+			x = 0.5,
+			y = 0.5,
+		},
+		scale = {
+			x = 1,
+			y = 1,
+		},
+		rotation = 0,
+		exInfo = "",
+	},
+	[10602000] = {
+		code = 10602000,
+		atlas = "etama6",
+		skeName = "",
+		frameName = "%s",
+		anchorPoint = {
+			x = 0.5,
+			y = 0.5,
+		},
+		scale = {
+			x = 1,
+			y = 1,
+		},
+		rotation = 0,
+		exInfo = "",
+	},
+	[10602100] = {
+		code = 10602100,
+		atlas = "etama6",
+		skeName = "",
+		frameName = "%s",
+		anchorPoint = {
+			x = 0.5,
+			y = 0.5,
+		},
+		scale = {
+			x = 1,
+			y = 1,
+		},
+		rotation = 0,
+		exInfo = "",
+	},
+	[10602200] = {
+		code = 10602200,
+		atlas = "etama6",
+		skeName = "",
+		frameName = "%s",
 		anchorPoint = {
 			x = 0.5,
 			y = 0.5,

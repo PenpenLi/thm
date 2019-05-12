@@ -88,7 +88,7 @@ function M:playTimes(list,times)
                             local anime = cc.Animate:create(newAnimation)
                             if type(speed) == "number" then
                                 if speed < 0 then
-                                    anime:reverse()
+                                    anime = anime:reverse()
                                 end
                             end
                             self._curAction = cc.RepeatForever:create(anime)
@@ -99,7 +99,7 @@ function M:playTimes(list,times)
                         local anime = cc.Animate:create(newAnimation)
                         if type(speed) == "number" then
                             if speed < 0 then
-                                anime:reverse()
+                                anime = anime:reverse()
                             end
                         end
                         for i = 1, count do table.insert(actions, anime) end

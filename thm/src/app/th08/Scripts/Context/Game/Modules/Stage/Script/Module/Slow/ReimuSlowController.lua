@@ -36,8 +36,8 @@ end
 
 
 function M:_onSlowOpen()
-    self._wingman1ActionComp:stop()
-    self._wingman2ActionComp:stop()
+    self._wingman1ActionComp:stopAll()
+    self._wingman2ActionComp:stopAll()
 
     self._wingman1ActionComp:runOnce(cc.MoveTo:create(0.1,cc.p(-M.WINGMAN_SLOW_POS.x,M.WINGMAN_SLOW_POS.y)))
     self._wingman2ActionComp:runOnce(cc.MoveTo:create(0.1,cc.p(M.WINGMAN_SLOW_POS.x,M.WINGMAN_SLOW_POS.y)))

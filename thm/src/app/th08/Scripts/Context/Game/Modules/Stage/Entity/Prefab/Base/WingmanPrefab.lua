@@ -12,7 +12,7 @@ function M:ctor()
     self.spriteNode:setName("SPRITE_NODE")
     self:addChild(self.spriteNode)
 
-    self.animationController = StageDefine.WingmanBulletAnimation.new()
+    self.animationController = StageDefine.WingmanAnimation.new()
     self:addScript(self.animationController)
 
     self.wingmanController = StageDefine.WingmanController.new()

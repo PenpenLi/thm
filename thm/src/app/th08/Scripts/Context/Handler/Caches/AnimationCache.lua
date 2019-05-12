@@ -11,6 +11,18 @@ local function getNameKey(...)
     return keyName
 end
 
+function addAnimation(...)
+end
+
+function getAnimation(...)
+end
+
+function clearAnimation(...)
+end
+
+function clearAll()
+end
+
 function getRes(type,fileName,name)
     local nameKey = getNameKey(type,fileName,name)
     local animation = display.getAnimationCache(nameKey)
@@ -27,10 +39,4 @@ function getRes(type,fileName,name)
         return ret
     end
     return animation
-end
-
-----
-
-function clear()
-   
 end

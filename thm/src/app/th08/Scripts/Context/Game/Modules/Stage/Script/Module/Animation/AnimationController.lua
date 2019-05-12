@@ -18,7 +18,7 @@ end
 --
 function M:play(actionType)
     if self._fsm:cannotDoEvent(actionType) then return end
-
+    
     self._fsm:doEvent(actionType)
 end
 
@@ -39,7 +39,7 @@ end
 
 ------------------
 function M:_onStart()
-    self._baseData = self:getScript("EntityBasedata"):getData()
+    self._baseData = self:getScript("EntityBasedata")
 
     self.animaComp = self:getComponent("AnimationComponent")
     self.spriteComp = self:getComponent("SpriteComponent")
@@ -58,29 +58,41 @@ end
 --[[以下由子类重载]]
 function M:_onSetup()
    --加载动画配置
-    local animCfg = self._baseData:getAnimationData()
+    local code = self._baseData:getEntityCode()
+    local animCfg = self._baseData:getData():getAnimationData()
     --动画装配器,通过配置装配动画
     self.animaComp:removeAllAnimations()
     if animCfg then
         if animCfg.atlas ~= "" then
             if animCfg.skeName ~= "" then
-                --XXX:这里可以预加载
-                THSTG.ANIMATION.DBXManager.loadDBXFile(
-                    ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas),
-                    ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,animCfg.skeName)
-                )
-                
-                local skeleton = THSTG.ANIMATION.DBXManager.getSkeleton(animCfg.skeName)
-                for _,v in ipairs(skeleton:getAnimationNameList()) do 
-                    local animation = THSTG.ANIMATION.DBXManager.createAnimation(animCfg.skeName,v)
-                    self.animaComp:addAnimation(v,animation)
+                local atlasArray = string.split(animCfg.atlas ,";")
+                local skeNameArray = string.split(animCfg.skeName ,";")
+                local atals = false
+                local skeName = false
+                local count = (#atlasArray > #skeNameArray) and #atlasArray or #skeNameArray
+                for i = 1, count do
+                    atals = atlasArray[i] or atals
+                    skeName = skeNameArray[i] or skeName
+
+                    --XXX:这里可以预加载
+                    THSTG.ANIMATION.DBXManager.loadDBXFile(
+                        ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,atals),
+                        ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,skeName)
+                    )
+                    
+                    local skeleton = THSTG.ANIMATION.DBXManager.getSkeleton(skeName)
+                    for _,v in ipairs(skeleton:getAnimationNameList()) do 
+                        local animation = THSTG.ANIMATION.DBXManager.createAnimation(skeName,v)
+                        self.animaComp:addAnimation(v,animation)
+                    end
                 end
             elseif animCfg.frameName ~= "" then
+                local frameName = string.format(animCfg.frameName, code)
                 THSTG.ANIMATION.DBXManager.loadDBXFile(
                     ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas)
                 )
                 --是一帧,需要转为帧动画
-                local frame = THSTG.ANIMATION.DBXManager.createFrame(animCfg.atlas,animCfg.frameName)
+                local frame = THSTG.ANIMATION.DBXManager.createFrame(animCfg.atlas,frameName)
                 if frame then
                     self.animaComp:addAnimation(AnimStatus.DEFAULT,display.newAnimation({frame},1/12))
                 end

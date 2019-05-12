@@ -27,11 +27,12 @@ end
 
 function M:_initData(params)
     --如果第一次没有找到,则往上找模板,直到完全找不到为止
+    --XXX:这里可以加缓存,防止重复查找
     local function tryGetInfo(code,func)
         local curCode = code
         local infoTb = nil
         local count = 1
-        while(infoTb == nil and count <=4) do
+        while(infoTb == nil and curCode > 0) do
             infoTb = func(curCode)
             if infoTb == nil then
                 local bitNum = math.floor(math.pow(10,count))
@@ -73,6 +74,9 @@ function M:_initData(params)
     elseif type == EEntityType.Prop then
         cfgData = tryGetInfo(cfgCode,function(code) return PropConfig.getAllInfo(code) end)
     end
+
+    assert(cfgData,string.format("Can't not find the cfgData:%s",code))
+    assert(animData,string.format("Can't not find the animData:%s",code))
 
     self._data.cfgData = cfgData
     self._data.animaData = animData

@@ -4,6 +4,10 @@ function M:_onInit()
     self._action = false
 end
 
+function M:getCurAction( )
+    return self._action
+end
+
 function M:runTimes(list,times)
     if list then
         if type(list) ~= "table" then
@@ -37,16 +41,19 @@ function M:runCustom(action)
     self._action = action 
 end
 
-function M:stop()
+function M:stop(action)
+    action = action or self._action
+    if action then
+        if not tolua.isnull(action) then
+            self:getEntity():stopAction(action)
+            if action == self._action then self._action = false end
+        end
+    end
+end
+
+function M:stopAll()
     self:getEntity():stopAllActions()
     self._action = false
-
-    -- if self._action then
-    --     if not tolua.isnull(self._action) then
-    --         self:getEntity():stopAction(self._action)
-    --         self._action = false
-    --     end
-    -- end
 end
 
 ----

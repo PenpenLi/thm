@@ -9,7 +9,7 @@ end
 function M:_onStart()
    M.super._onStart(self)
 
-   self:setMaxBlood(self._basedata:getData().life)
+   self:setMaxBlood(self._basedata:getData():getLife())
    
    
 end

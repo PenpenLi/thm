@@ -60,16 +60,20 @@ end
 local _allEntities = {}
 function M:addToEntityCache(entity)
     local entityType = entity:getScript("EntityBasedata"):getEntityType()
-    _allEntities = _allEntities or {}
-    _allEntities[entityType] = _allEntities[entityType] or {}
-    _allEntities[entityType][entity] = entity
+    if entityType then
+        _allEntities = _allEntities or {}
+        _allEntities[entityType] = _allEntities[entityType] or {}
+        _allEntities[entityType][entity] = entity
+    end
 end
 
 function M:removeFromEntityCache(entity)
     local entityType = entity:getScript("EntityBasedata"):getEntityType()
-    _allEntities = _allEntities or {}
-    _allEntities[entityType] = _allEntities[entityType] or {}
-    _allEntities[entityType][entity] = nil
+    if entityType then
+        _allEntities = _allEntities or {}
+        _allEntities[entityType] = _allEntities[entityType] or {}
+        _allEntities[entityType][entity] = nil
+    end
 end
 
 function M:getEntities(category)
