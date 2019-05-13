@@ -7,7 +7,7 @@ function M:_onInit()
     --消息注册
 end
 
-function M:_onUpdate(delay)
+function M:_onFrameUpdate(delay)
     local rigidbodyComps = self:getComponents("RigidbodyComponent")
     for _,vRigidComp in pairs(rigidbodyComps) do
         --重力加速度叠加
@@ -23,15 +23,11 @@ function M:_onUpdate(delay)
         local vTransComp = vRigidComp:getEntity():getComponent("TransformComponent")
         vTransComp:setPositionX(vTransComp:getPositionX() + vRigidComp.speed.x)
         vTransComp:setPositionY(vTransComp:getPositionY() + vRigidComp.speed.y)
+
+        -- 非持续力,每帧清空
+        vRigidComp.retForce = cc.p(0,0)
     end
 end
 
-function M:_onLateUpdate()
-    local rigidbodyComps = self:getComponents("RigidbodyComponent")
-    for _,v in pairs(rigidbodyComps) do
-        -- 非持续力,每帧清空
-        v.retForce = cc.p(0,0)
-    end
-end
 
 return M

@@ -19,12 +19,12 @@ end
 
 function M:_addEntity(e,entity)
     self:getView():addEntity2Layer(entity)
-    Cache.stageCache:addToEntityCache(entity)
+    ModuleCache.Stage:addToEntityCache(entity)
 
 end
 
 function M:_removEntity(e,entity)
-    Cache.stageCache:removeFromEntityCache(entity)
+    ModuleCache.Stage:removeFromEntityCache(entity)
 end
 
 return M

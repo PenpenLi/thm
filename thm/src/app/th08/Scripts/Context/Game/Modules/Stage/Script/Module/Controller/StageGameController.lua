@@ -9,7 +9,7 @@ function M:_onInit()
 end
 
 function M:initStage()
-    local stageID = Cache.stageCache:getStageId()
+    local stageID = ModuleCache.Stage:getStageId()
     local schedulerComp = self:getComponent("SchedulerComponent")
     schedulerComp:setTasks(StageFactory.getScenario(stageID))
 
@@ -18,7 +18,7 @@ function M:initStage()
 end
 
 function M:initPlayer()
-    local roleType = Cache.stageCache:getRoleType()
+    local roleType = ModuleCache.Stage:getRoleType()
     self._ePlayer = EntityManager.createPlayer(roleType)
     Dispatcher.dispatchEvent(EventType.STAGE_ADD_ENTITY,self._ePlayer)
 

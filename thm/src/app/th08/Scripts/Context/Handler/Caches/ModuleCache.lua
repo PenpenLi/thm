@@ -1,7 +1,7 @@
-module("Cache", package.seeall)
+module("ModuleCache", package.seeall)
 local CacheManager = THSTG.CacheManager
 
-setmetatable(Cache, {
+setmetatable(ModuleCache, {
 	__index = function(_, k)
 		return CacheManager.getCache(k)
 	end
@@ -10,7 +10,11 @@ setmetatable(Cache, {
 function register(name,classPath)
     CacheManager.addCache(name,classPath)
 end
+
+function clear()
+	CacheManager.clearAll()
+end
 -----------
 --由于有时序关系,在这里添加也行
-register("stageCache","Scripts.Context.Game.Modules.Stage.StageCache")
-register("mainUICache","Scripts.Context.Game.Modules.MainUI.MainUICache")
+register("Stage","Scripts.Context.Game.Modules.Stage.StageCache")
+register("MainUI","Scripts.Context.Game.Modules.MainUI.MainUICache")

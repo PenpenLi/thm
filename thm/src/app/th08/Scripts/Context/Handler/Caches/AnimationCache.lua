@@ -1,7 +1,8 @@
 module("AnimationCache", package.seeall)
 
-local function getNameKey(...)
-    local keys = {...}
+local function getNameKey(tags)
+    if type(tags) ~= "table" then tags = {tags} end
+    local keys = tags
     local keyName = ""
     for _,v in ipairs(keys) do
         keyName = keyName .. v .. "#"
@@ -11,32 +12,21 @@ local function getNameKey(...)
     return keyName
 end
 
-function addAnimation(...)
+function addAnimation(tags,animation)
+    local nameKey = getNameKey(tags)
+    display.setAnimationCache(nameKey,animation)
 end
 
-function getAnimation(...)
+function getAnimation(tags)
+    local nameKey = getNameKey(tags)
+    return display.getAnimationCache(nameKey)
 end
 
-function clearAnimation(...)
+function removeAnimation(tags)
+    local nameKey = getNameKey(tags)
+    display.removeAnimationCache(nameKey)
 end
 
-function clearAll()
-end
+function clear()
 
-function getRes(type,fileName,name)
-    local nameKey = getNameKey(type,fileName,name)
-    local animation = display.getAnimationCache(nameKey)
-    if not animation then
-        local ret = ScenePublic.newAnimation({
-            texType = type,
-            fileName = fileName,
-            keyName = name,
-        })
-        if not ret then return nil
-        else
-            display.setAnimationCache(nameKey,ret)
-        end
-        return ret
-    end
-    return animation
 end

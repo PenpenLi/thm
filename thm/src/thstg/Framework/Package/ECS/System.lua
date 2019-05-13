@@ -31,14 +31,22 @@ function M:getClass()
 end
 
 --每帧更新
-function M:update(delay)
-    ---
+function M:frameUpdate(delay)
+    self:_onFrameUpdate(delay)
+end
 
-    self:_onUpdate(delay)
-    self:_onLateUpdate(delay)
+function M:frameLateUpdate(delay)
+    self:_onFrameLateUpdate(delay)
+end
 
-    ---
-
+--TODO:
+--立马更新
+function M:instantUpdate()
+    self:_onInstantUpdate()
+end
+--有变化才更新
+function M:modifiedUpdate(delay)
+    self:_onModifiedUpdate(delay)
 end
 
 --发送事件
@@ -105,12 +113,20 @@ function M:_onInit(...)
 end
 
 --[[以下需要被重载]]
-function M:_onUpdate(delay)
+function M:_onFrameUpdate(delay)
     --通过对Entity获取到相应的Component
 end
 
-function M:_onLateUpdate(delay)
-    --通过对Entity获取到相应的Component
+function M:_onFrameLateUpdate(delay)
+
+end
+
+function M:_onInstantUpdate()
+
+end
+
+function M:_onModifiedUpdate(delay)
+
 end
 
 function M:_onEvent(event,params)

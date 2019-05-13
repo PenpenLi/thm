@@ -1,5 +1,9 @@
 local ECSUtil = require "thstg.Framework.Package.ECS.ECSUtil"
 local M = class("Entity",cc.Node)
+M.EEntityFlag = {
+	AddComponent = 1,
+	RemoveComponent = 2,
+}
 
 function M.find(id) return ECSManager.findEntityById(id) end
 function M.findEntitiesByTag(tag) return ECSManager.findEntitiesByTag(tag) end
@@ -215,6 +219,7 @@ function M:getSystem(name)
 end
 ---
 function M:update(dTime)
+	--TODO:更新顺序问题
 	if not self:isActive() then return end
 	--先control,然后才是Script
 	
@@ -234,6 +239,8 @@ function M:update(dTime)
 	
 	self:_onLateUpdate(dTime)
 
+	--脏队列处理
+	self:_purge()
 end
 
 ----
@@ -334,6 +341,10 @@ function M:_onEvent(event,params)
 
 end
 ---
+function M:_purge()
+	--TODO:组件移除(可能System也会用到,应该帧后处理),组件添加
+end
+
 function M:_event(event,params)
 	self:_onEvent(event,params)
 	for _,v in pairs(self.__components__) do

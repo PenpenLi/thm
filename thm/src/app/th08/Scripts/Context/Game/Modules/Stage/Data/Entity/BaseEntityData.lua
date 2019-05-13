@@ -49,6 +49,15 @@ function M:_initData(params)
     local cfgCode = params.cfgCode or code
     local animaCode = params.animaCode or code
 
+    self._code = code
+
+    --先找缓存
+    local data = EntityDataCache.get(code)
+    if data then 
+        self._data = data 
+        return 
+    end
+
     local animData = false
     local cfgData = false
 
@@ -81,7 +90,7 @@ function M:_initData(params)
     self._data.cfgData = cfgData
     self._data.animaData = animData
 
-    self._code = code
+    EntityDataCache.add(code, self._data)
 end
 
 return M
