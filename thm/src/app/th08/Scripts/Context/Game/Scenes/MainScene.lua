@@ -15,6 +15,7 @@ function M:ctor()
     self.playerLayer = cc.Layer:create()--主角层
     self.barrageLayer = cc.Layer:create()--弹幕层
     self.preEffectLayer = cc.Layer:create()--前置特效层
+    self.hudLayer = cc.Layer:create()--HUD层
     --------UI层--------
     self.backUILayer = cc.Layer:create()--UI底层
     self.mainUILayer = cc.Layer:create()--UI层
@@ -29,6 +30,7 @@ function M:ctor()
     self:addChild(self.playerLayer)
     self:addChild(self.barrageLayer)
     self:addChild(self.preEffectLayer)
+    self:addChild(self.hudLayer)
     --
     self:addChild(self.backUILayer)
     self:addChild(self.mainUILayer)

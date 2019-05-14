@@ -31,22 +31,12 @@ function M:getClass()
 end
 
 --每帧更新
-function M:frameUpdate(delay)
-    self:_onFrameUpdate(delay)
+function M:update(delay)
+    self:_onUpdate(delay)
 end
 
-function M:frameLateUpdate(delay)
-    self:_onFrameLateUpdate(delay)
-end
-
---TODO:
---立马更新
-function M:instantUpdate()
-    self:_onInstantUpdate()
-end
---有变化才更新
-function M:modifiedUpdate(delay)
-    self:_onModifiedUpdate(delay)
+function M:lateUpdate(delay)
+    self:_onLateUpdate(delay)
 end
 
 --发送事件
@@ -57,7 +47,7 @@ end
 function M:clear()
     self:_onClear()
 end
-
+---------------------废弃函数(下)---------------------------
 --取得所有实体
 function M:getAllEntities()
     if not _entitiesAllList then
@@ -106,6 +96,35 @@ function M:getComponents(isForces,...)
     end
     return _entitiesComponents[name]
 end
+---------------------废弃函数(上)---------------------------
+--只关心Components
+
+--查找包含某一组组件的组
+--TODO:(实体过多会很卡)待优化,应该注册一种过滤器,监听组件变化
+function M:getGroups(componentNames)
+    if type(componentNames) ~= "table" then componentNames = {componentNames} end
+    local retList = {}
+    local entities = self:getAllEntities()
+    for _,entity in pairs(entities) do
+        local ret = {}
+        local isOk = true
+        for i = 1,#componentNames do
+            local compName = componentNames[i]
+            if type(compName) == "table" then compName = ECSUtil.trans2Name(unpack(compName)) end
+            ret[compName] = entity:getComponent(compName)
+            if not ret[compName] then 
+                isOk = false
+                break
+            end
+        end
+        if isOk then
+            ret._entity = entity
+            table.insert(retList,ret)
+        end
+    end
+    return retList
+end
+
 ---
 --[[系统生命周期]]
 function M:_onInit(...)
@@ -113,19 +132,16 @@ function M:_onInit(...)
 end
 
 --[[以下需要被重载]]
-function M:_onFrameUpdate(delay)
+function M:_onUpdate(delay)
     --通过对Entity获取到相应的Component
 end
 
-function M:_onFrameLateUpdate(delay)
+function M:_onLateUpdate(delay)
 
 end
 
-function M:_onInstantUpdate()
-
-end
-
-function M:_onModifiedUpdate(delay)
+--TODO:过滤出需要组件的实体
+function M:_onFilter()
 
 end
 

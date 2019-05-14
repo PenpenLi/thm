@@ -7,10 +7,10 @@ function M:_onInit()
     --消息注册
 end
 
-function M:_onFrameUpdate(delay)
-    local rigidbodyComps = self:getComponents("RigidbodyComponent")
-    for _,vRigidComp in pairs(rigidbodyComps) do
-        --重力加速度叠加
+function M:_onUpdate(delay)
+    for _,item in ipairs(self:getGroups("RigidbodyComponent")) do
+        local vRigidComp = item.RigidbodyComponent
+        -- 重力加速度叠加
         if vRigidComp:isGravityEnabled() then
             local retForce = cc.p(0, -M.GRAVITY * vRigidComp.gravityScale)
             vRigidComp:addForce(retForce)

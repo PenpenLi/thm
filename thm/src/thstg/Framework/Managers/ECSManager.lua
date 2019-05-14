@@ -229,10 +229,10 @@ local function _handleSystems(delay)
     end
     local function _updateSystems()
         visitSystem(function(v)
-            v:frameUpdate(delay)
+            v:update(delay)
         end)
         visitSystem(function(v)
-            v:frameLateUpdate(delay)
+            v:lateUpdate(delay)
         end)
     end
     local function _handleSystemsEvent()

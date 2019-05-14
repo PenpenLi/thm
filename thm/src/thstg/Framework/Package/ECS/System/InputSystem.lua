@@ -72,7 +72,7 @@ function M:getTouchPosition()
     return self.touchPos
 end
 
-function M:_onFrameUpdate(delay)
+function M:_onUpdate(delay)
     if self.touchState ~= "onMoved" then
         self.touchState = ""
         self.touchPos = nil

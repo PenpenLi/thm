@@ -53,7 +53,7 @@ end
 function M:getGridCompId(comp)
     --当Script时序>System导致没有更新到位置出错
     if _gridIDs[comp] == nil then
-        self:_onFrameUpdate(0)
+        self:_onUpdate(0)
     end
     return _gridIDs[comp]
 end
@@ -196,7 +196,7 @@ function M:_onInit()
     THSTG.Dispatcher.addEventListener(THSTG.TYPES.EVENT.ECS_ENTITY_REMOVED, self._entityRemoveHandle, self)
 end
 
-function M:_onFrameUpdate(delay)
+function M:_onUpdate(delay)
     local collComps = self:getComponents("ColliderComponent")
     for _,v in pairs(collComps) do
         local rect = v:getRect()

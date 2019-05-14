@@ -9,6 +9,7 @@ function M:ctor()
     self._backgroundLayer = false
     self._backEffectLayer = false
     self._preEffectLayer = false
+    self._hudLayer = false
 end
 
 function M:_onInit()
@@ -32,6 +33,10 @@ function M:_onRealView()
     --前置特效层
     self._preEffectLayer = require("Scripts.Context.Game.Modules.Stage.View.StagePreEffectLayer").create()
     self._preEffectLayer:addTo(THSTG.SceneManager.get(SceneType.MAIN).backgroundLayer)
+
+    --HUD 层
+    self._hudLayer = require("Scripts.Context.Game.Modules.Stage.View.StageHUDLayer").create()
+    self._hudLayer:addTo(THSTG.SceneManager.get(SceneType.MAIN).hudLayer)
 end
 
 function M:addEntity2Layer(entity)
