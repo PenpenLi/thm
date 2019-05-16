@@ -75,24 +75,24 @@ function M:_onSetup()
                     skeName = skeNameArray[i] or skeName
 
                     --XXX:这里可以预加载
-                    THSTG.ANIMATION.DBXManager.loadDBXFile(
+                    AnimationSystem.loadFile(
                         ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,atals),
                         ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,skeName)
                     )
                     
-                    local skeleton = THSTG.ANIMATION.DBXManager.getSkeleton(skeName)
+                    local skeleton = AnimationSystem.getSkeleton(skeName)
                     for _,v in ipairs(skeleton:getAnimationNameList()) do 
-                        local animation = THSTG.ANIMATION.DBXManager.createAnimation(skeName,v)
+                        local animation = AnimationSystem.createAnimation(skeName,v)
                         self.animaComp:addAnimation(v,animation)
                     end
                 end
             elseif animCfg.frameName ~= "" then
                 local frameName = string.format(animCfg.frameName, code)
-                THSTG.ANIMATION.DBXManager.loadDBXFile(
+                AnimationSystem.loadFile(
                     ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas)
                 )
                 --是一帧,需要转为帧动画
-                local frame = THSTG.ANIMATION.DBXManager.createFrame(animCfg.atlas,frameName)
+                local frame = AnimationSystem.createFrame(animCfg.atlas,frameName)
                 if frame then
                     self.animaComp:addAnimation(AnimStatus.DEFAULT,display.newAnimation({frame},1/12))
                 end

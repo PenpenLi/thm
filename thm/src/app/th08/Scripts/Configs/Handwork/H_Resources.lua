@@ -38,6 +38,37 @@ return {
         image = 
         {
             stg1bg = "Assets/Texture/Image/stg1bg.jpg" ,
+            eff01 = "Assets/Texture/Image/eff01.png" ,
+            eff01b = "Assets/Texture/Image/eff01b.png" ,
+            eff02 = "Assets/Texture/Image/eff02.png" ,
+            eff02b = "Assets/Texture/Image/eff02b.png" ,
+            eff03 = "Assets/Texture/Image/eff03.png" ,
+            eff03b = "Assets/Texture/Image/eff03b.png" ,
+            eff04_b = "Assets/Texture/Image/eff04_b.png" ,
+            eff04_bb = "Assets/Texture/Image/eff04_bb.png" ,
+            eff04 = "Assets/Texture/Image/eff04.png" ,
+            eff04b = "Assets/Texture/Image/eff04b.png" ,
+            eff05 = "Assets/Texture/Image/eff05.png" ,
+            eff05b = "Assets/Texture/Image/eff05b.png" ,
+            eff06 = "Assets/Texture/Image/eff06.png" ,
+            eff06b = "Assets/Texture/Image/eff06b.png" ,
+            eff07 = "Assets/Texture/Image/eff07.png" ,
+            eff07b = "Assets/Texture/Image/eff07b.png" ,
+            eff08 = "Assets/Texture/Image/eff08.png" ,
+            eff08b = "Assets/Texture/Image/eff08b.png" ,
+            eff08ma = "Assets/Texture/Image/eff08ma.png" ,
+            eff08mb = "Assets/Texture/Image/eff08mb.png" ,
+            eff09al = "Assets/Texture/Image/eff09al.png" ,
+            eff09rm0 = "Assets/Texture/Image/eff09rm0.png" ,
+            eff09rm1 = "Assets/Texture/Image/eff09rm1.png" ,
+            eff09sk0 = "Assets/Texture/Image/eff09sk0.png" ,
+            eff09sk1 = "Assets/Texture/Image/eff09sk1.png" ,
+            eff09yk0 = "Assets/Texture/Image/eff09yk0.png" ,
+            eff09yk1 = "Assets/Texture/Image/eff09yk1.png" ,
+            eff09ym0 = "Assets/Texture/Image/eff09ym0.png" ,
+            eff09ym1 = "Assets/Texture/Image/eff09ym1.png" ,
+            eff09yy0 = "Assets/Texture/Image/eff09yy0.png" ,
+            eff09yy1 = "Assets/Texture/Image/eff09yy1.png" ,
         },
         plist = 
         {
@@ -97,8 +128,11 @@ return {
 
     shader = 
     {
-        default_vs = "Assets/Shader/default.vs",
-        default_fs = "Assets/Shader/default.fs",
+        v_default = "Assets/Shader/v_default.vs",
+        f_default = "Assets/Shader/f_default.fs",
+        v_grey = "Assets/Shader/v_grey.vs",
+        f_grey = "Assets/Shader/f_grey.fs",
+        f_uvRoll = "Assets/Shader/f_uvRoll.fs",
     },
 
     ui = 

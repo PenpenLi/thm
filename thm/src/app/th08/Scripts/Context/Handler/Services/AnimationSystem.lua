@@ -1,24 +1,21 @@
-module("AnimationSystem", package.seeall)
-local System = THSTG.AnimationSystem
+local M = {}
+local DBXManager = THSTG.ANIMATION.DBXManager
+setmetatable(M, {__index = THSTG.DBXSystem})
 
-function playTween()
+function M.loadDBXFile(...) DBXManager.loadDBXFile(...) end
 
-end
-
-function createAnimation(altasName,skeName,aniName)
-	local nameKey = getNameKey(altasName,skeName,aniName)
-    local animation = display.getAnimationCache(nameKey)
+function M.createAnimation(altasName,skeName,aniName)
+    local animation = AnimationCache.get({altasName,skeName,aniName})
     if not animation then
-		local ret = THSTG.AnimationSystem.createAnimation(altasName,skeName,aniName)
-        if not ret then return nil
-        else
-            display.setAnimationCache(nameKey,ret)
-        end
-        return ret
+		animation = DBXManager.createAnimation(altasName,skeName,aniName)
+        if not animation then return nil end
+        
+        AnimationCache.add({altasName,skeName,aniName},animation)
     end
     return animation
 end
 
-function clearCache()
-	display.removeUnusedSpriteFrames()
-end
+function getSkeleton(...) return DBXManager.getSkeleton(...) end
+
+
+return M

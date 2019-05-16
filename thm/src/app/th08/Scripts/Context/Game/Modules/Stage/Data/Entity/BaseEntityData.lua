@@ -26,23 +26,6 @@ function M:getAnimationData()
 end
 
 function M:_initData(params)
-    --如果第一次没有找到,则往上找模板,直到完全找不到为止
-    --XXX:这里可以加缓存,防止重复查找
-    local function tryGetInfo(code,func)
-        local curCode = code
-        local infoTb = nil
-        local count = 1
-        while(infoTb == nil and curCode > 0) do
-            infoTb = func(curCode)
-            if infoTb == nil then
-                local bitNum = math.floor(math.pow(10,count))
-                curCode = math.floor((curCode / bitNum)) * bitNum
-                count = count + 1
-            end
-        end
-        return infoTb
-    end
-
     params = params or {}
 
     local code = params.code or params.cfgCode
@@ -51,46 +34,62 @@ function M:_initData(params)
 
     self._code = code
 
-    --先找缓存
+    --这里加缓存,防止重复查找
     local data = EntityDataCache.get(code)
     if data then 
         self._data = data 
         return 
+    else
+        --如果第一次没有找到,则往上找模板,直到完全找不到为止
+        local function tryGetInfo(code,func)
+            local curCode = code
+            local infoTb = nil
+            local count = 1
+            while(infoTb == nil and curCode > 0) do
+                infoTb = func(curCode)
+                if infoTb == nil then
+                    local bitNum = math.floor(math.pow(10,count))
+                    curCode = math.floor((curCode / bitNum)) * bitNum
+                    count = count + 1
+                end
+            end
+            return infoTb
+        end
+
+        local animData = false
+        local cfgData = false
+
+        --动画信息
+        animData = tryGetInfo(animaCode,function(code) return AnimationConfig.getAllInfo(code) end)
+
+        --主配信息
+        local type = EntityUtil.code2Type(code)
+        if type == EEntityType.Player then
+            cfgData = tryGetInfo(cfgCode,function(code) return PlayerConfig.getAllInfo(code) end)
+        elseif type == EEntityType.Wingman then
+            cfgData = tryGetInfo(cfgCode,function(code) return WingmanConfig.getAllInfo(code) end)
+        elseif type == EEntityType.Boss then
+            cfgData = tryGetInfo(cfgCode,function(code) return BossConfig.getAllInfo(code) end)
+        elseif type == EEntityType.Batman then
+            cfgData = tryGetInfo(cfgCode,function(code) return BatmanConfig.getAllInfo(code) end)
+        elseif type == EEntityType.PlayerBullet then
+            cfgData = tryGetInfo(cfgCode,function(code) return PlayerBulletConfig.getAllInfo(code) end)
+        elseif type == EEntityType.EnemyBullet then
+            cfgData = tryGetInfo(cfgCode,function(code) return EnemyBulletConfig.getAllInfo(code) end)
+        elseif type == EEntityType.WingmanBullet then
+            cfgData = {}
+        elseif type == EEntityType.Prop then
+            cfgData = tryGetInfo(cfgCode,function(code) return PropConfig.getAllInfo(code) end)
+        end
+
+        assert(cfgData,string.format("Can't not find the cfgData:%s",code))
+        assert(animData,string.format("Can't not find the animData:%s",code))
+
+        self._data.cfgData = cfgData
+        self._data.animaData = animData
+
+        EntityDataCache.add(code, self._data)
     end
-
-    local animData = false
-    local cfgData = false
-
-    --动画信息
-    animData = tryGetInfo(animaCode,function(code) return AnimationConfig.getAllInfo(code) end)
-
-    --主配信息
-    local type = EntityUtil.code2Type(code)
-    if type == EEntityType.Player then
-        cfgData = tryGetInfo(cfgCode,function(code) return PlayerConfig.getAllInfo(code) end)
-    elseif type == EEntityType.Wingman then
-        cfgData = tryGetInfo(cfgCode,function(code) return WingmanConfig.getAllInfo(code) end)
-    elseif type == EEntityType.Boss then
-        cfgData = tryGetInfo(cfgCode,function(code) return BossConfig.getAllInfo(code) end)
-    elseif type == EEntityType.Batman then
-        cfgData = tryGetInfo(cfgCode,function(code) return BatmanConfig.getAllInfo(code) end)
-    elseif type == EEntityType.PlayerBullet then
-        cfgData = tryGetInfo(cfgCode,function(code) return PlayerBulletConfig.getAllInfo(code) end)
-    elseif type == EEntityType.EnemyBullet then
-        cfgData = tryGetInfo(cfgCode,function(code) return EnemyBulletConfig.getAllInfo(code) end)
-    elseif type == EEntityType.WingmanBullet then
-        cfgData = {}
-    elseif type == EEntityType.Prop then
-        cfgData = tryGetInfo(cfgCode,function(code) return PropConfig.getAllInfo(code) end)
-    end
-
-    assert(cfgData,string.format("Can't not find the cfgData:%s",code))
-    assert(animData,string.format("Can't not find the animData:%s",code))
-
-    self._data.cfgData = cfgData
-    self._data.animaData = animData
-
-    EntityDataCache.add(code, self._data)
 end
 
 return M

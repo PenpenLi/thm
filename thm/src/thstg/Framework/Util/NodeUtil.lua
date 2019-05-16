@@ -361,9 +361,10 @@ function applyShader(node,params)
             local fragShaderStr = DEFAULT_FRAGMENT_SHADER
 			if params.vsSrc then vertShaderStr = FileUtil.readFile(params.vsSrc)
 			elseif params.vsStr then vertShaderStr = params.vsStr end
+			
 
 			if params.fsSrc then fragShaderStr = FileUtil.readFile(params.fsSrc)
-			elseif params.fsStr then  fragShaderStr = params.fsStr end
+			elseif params.fsStr then fragShaderStr = params.fsStr end
 			
 			glProgram = cc.GLProgram:createWithByteArrays(vertShaderStr, fragShaderStr)
 			if shaderKey then
@@ -375,7 +376,16 @@ function applyShader(node,params)
             local glProgramState = cc.GLProgramState:getOrCreateWithGLProgram(glProgram)
 
             if type(params.onState) == "function" then
-                params.onState(node,glProgramState,glProgram)
+				params.onState(node,glProgramState,glProgram)
+			elseif type(params.uniform) == "table" then
+				for k,v in pairs(params.uniform) do
+					if type(v) == "string" then
+					elseif type(v) == "number" then
+						glProgramState:setUniformFloat(k,v)
+					elseif type(v) == "table" then
+						glProgramState:setUniformVec2(k,cc.vec3(v.x or 0,v.y or 0,v.z or 0))
+					end
+				end
             end
 
             node:setGLProgramState(glProgramState)

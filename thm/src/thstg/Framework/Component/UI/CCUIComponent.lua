@@ -43,6 +43,12 @@ function newSprite(params)
 	if params.rect then
 		sp:setTextureRect(params.rect)
 	end
+	if params.isTile then
+		sp:setScale(1)
+        local size = sp:getContentSize()
+        sp:getTexture():setTexParameters(gl.LINEAR,gl.LINEAR,gl.REPEAT,gl.REPEAT)
+        sp:setTextureRect(cc.rect(0, 0, params.width or size.width, params.height or size.height))
+    end
 
 	function sp:setSource(src)
 		if type(src) == "string" then

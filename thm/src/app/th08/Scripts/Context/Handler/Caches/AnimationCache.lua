@@ -1,29 +1,20 @@
 module("AnimationCache", package.seeall)
+local CacheUtil = require("Scripts.Context.Handler.Caches.CacheUtil")
 
-local function getNameKey(tags)
-    if type(tags) ~= "table" then tags = {tags} end
-    local keys = tags
-    local keyName = ""
-    for _,v in ipairs(keys) do
-        keyName = keyName .. v .. "#"
+function add(tags,animation)
+    if animation then
+        local nameKey = CacheUtil.getNameKey(tags)
+        display.setAnimationCache(nameKey,animation)
     end
-    keyName = THSTG.MD5.string(keyName)
-
-    return keyName
 end
 
-function addAnimation(tags,animation)
-    local nameKey = getNameKey(tags)
-    display.setAnimationCache(nameKey,animation)
-end
-
-function getAnimation(tags)
-    local nameKey = getNameKey(tags)
+function get(tags)
+    local nameKey = CacheUtil.getNameKey(tags)
     return display.getAnimationCache(nameKey)
 end
 
-function removeAnimation(tags)
-    local nameKey = getNameKey(tags)
+function remove(tags)
+    local nameKey = CacheUtil.getNameKey(tags)
     display.removeAnimationCache(nameKey)
 end
 

@@ -108,11 +108,10 @@ function newShaderSprite(params)
     function sprite:setShaderEnabled(val)
         if val then
             if not params.shaderKey then return end
-            local vsStr,fsStr = ShaderConfig.getShader(params.shaderKey)
             THSTG.NodeUtil.applyShader(sprite,{
                 shaderKey = params.shaderKey,
-                vsStr = vsStr,
-                fsStr = fsStr,
+                vsSrc = params.vsSrc,
+                fsSrc = params.fsSrc,
                 onState = params.onState,
             })
         else

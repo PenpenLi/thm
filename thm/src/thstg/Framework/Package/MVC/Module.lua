@@ -108,9 +108,6 @@ function M:isOpend()
 end
 
 function M:getName() return self.__moduleName__ end
-function M:setName(name)
-	self.__moduleName__ = name
-end
 
 ------
 function M:addTo(parent)

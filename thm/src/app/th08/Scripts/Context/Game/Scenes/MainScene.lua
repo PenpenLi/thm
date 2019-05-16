@@ -38,10 +38,14 @@ function M:ctor()
     self:addChild(self.topLayer)
     --
     self:onNodeEvent("enter", function ()
+        THSTG.MVCManager.openModule(ModuleType.TEST)
+        THSTG.MVCManager.openModule(ModuleType.MAINUI)
         THSTG.MVCManager.openModule(ModuleType.STAGE)
     end)
 
     self:onNodeEvent("exit", function ()
+        THSTG.MVCManager.closeModule(ModuleType.TEST)
+        THSTG.MVCManager.closeModule(ModuleType.MAINUI)
         THSTG.MVCManager.closeModule(ModuleType.STAGE)
     end)
 end

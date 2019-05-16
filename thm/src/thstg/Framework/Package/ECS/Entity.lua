@@ -83,6 +83,7 @@ local function _remveComponent(self,...)
 	if component then
 		if component:_removed(self) ~= false then
 			self.__components__[name] = nil
+			return component
 		end
 	end
 end
@@ -97,13 +98,17 @@ local function _remveComponents(self,...)
 	end
 end
 
+--FIXME:用name有BUG
 function M:addComponent(component,params)
-	return _addComponent(self,component,params)
+	local comp = _addComponent(self,component,params)
+	self[comp:getName()] = comp
+	return comp
 end
 
 --移除组件
 function M:removeComponent(...)
-	_remveComponent(self,...)
+	local comp = _remveComponent(self,...)
+	self[comp:getName()] = nil
 end
 
 --移除组件列表

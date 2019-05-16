@@ -4,7 +4,7 @@ local M = class("Component")
 function M:ctor(...)
     --用于标识组件类别
     self.__id__ = UIDUtil.getComponentUID()
-    self.__compName__ = nil
+    self.__compName__ = self.__cname
     self.__entity__ = nil
     self.__isEnabled__ = true
     self.__className__,self.__classArgs__ = self:_getClass(...)
@@ -18,10 +18,6 @@ end
 
 function M:getName()
     return self.__compName__ 
-end
-
-function M:setName(name)
-    self.__compName__ = name
 end
 
 function M:getID()
