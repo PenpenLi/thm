@@ -5,7 +5,7 @@ local SpriteFrameCache = cc.SpriteFrameCache:getInstance()
 function add(tags,frame)
     if frame then
         local nameKey = CacheUtil.getNameKey(tags)
-        SpriteFrameCache:addSpriteFrame(nameKey,frame)
+        SpriteFrameCache:addSpriteFrame(frame,nameKey)
     end
 end
 

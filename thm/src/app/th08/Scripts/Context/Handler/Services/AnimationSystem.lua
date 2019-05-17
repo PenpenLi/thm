@@ -1,6 +1,6 @@
 local M = {}
 local DBXManager = THSTG.ANIMATION.DBXManager
-setmetatable(M, {__index = THSTG.DBXSystem})
+-- setmetatable(M, {__index = THSTG.DBXSystem})
 
 function M.loadDBXFile(...) DBXManager.loadDBXFile(...) end
 
@@ -15,7 +15,7 @@ function M.createAnimation(altasName,skeName,aniName)
     return animation
 end
 
-function getSkeleton(...) return DBXManager.getSkeleton(...) end
+function M.getSkeleton(...) return DBXManager.getSkeleton(...) end
 
 
 return M

@@ -75,7 +75,7 @@ function M:_onSetup()
                     skeName = skeNameArray[i] or skeName
 
                     --XXX:这里可以预加载
-                    AnimationSystem.loadFile(
+                    AnimationSystem.loadDBXFile(
                         ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,atals),
                         ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,skeName)
                     )
@@ -88,11 +88,11 @@ function M:_onSetup()
                 end
             elseif animCfg.frameName ~= "" then
                 local frameName = string.format(animCfg.frameName, code)
-                AnimationSystem.loadFile(
+                SpriteFrameSystem.loadDBXFile(
                     ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas)
                 )
                 --是一帧,需要转为帧动画
-                local frame = AnimationSystem.createFrame(animCfg.atlas,frameName)
+                local frame = SpriteFrameSystem.createFrame(animCfg.atlas,frameName)
                 if frame then
                     self.animaComp:addAnimation(AnimStatus.DEFAULT,display.newAnimation({frame},1/12))
                 end
