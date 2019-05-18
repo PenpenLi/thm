@@ -1,18 +1,10 @@
 local M = {}
+setmetatable(M, {__index = THSTG.EffectSystem})
 
---播放补间动画
-function playTween( ... )
-    -- body
+--播放Action行为特效
+function playSFX(params)
+
 end
 
---播放特效
-function playEffect( ... )
-    -- body
-end
-
---播放
-function playSFX( ... )
-    -- body
-end
 
 return M

@@ -379,7 +379,9 @@ function applyShader(node,params)
 				params.onState(node,glProgramState,glProgram)
 			elseif type(params.uniform) == "table" then
 				for k,v in pairs(params.uniform) do
-					if type(v) == "string" then
+					if tolua.type(v) == "cc.Texture2D" then
+						--Tex需要retain()或从Cache中取
+						glProgramState:setUniformTexture(k,v)
 					elseif type(v) == "number" then
 						glProgramState:setUniformFloat(k,v)
 					elseif type(v) == "table" then

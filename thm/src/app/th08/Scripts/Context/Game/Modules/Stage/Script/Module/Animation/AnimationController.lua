@@ -88,11 +88,11 @@ function M:_onSetup()
                 end
             elseif animCfg.frameName ~= "" then
                 local frameName = string.format(animCfg.frameName, code)
-                SpriteFrameSystem.loadDBXFile(
+                SpriteSystem.loadDBXFile(
                     ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas)
                 )
                 --是一帧,需要转为帧动画
-                local frame = SpriteFrameSystem.createFrame(animCfg.atlas,frameName)
+                local frame = SpriteSystem.createFrame(animCfg.atlas,frameName)
                 if frame then
                     self.animaComp:addAnimation(AnimStatus.DEFAULT,display.newAnimation({frame},1/12))
                 end

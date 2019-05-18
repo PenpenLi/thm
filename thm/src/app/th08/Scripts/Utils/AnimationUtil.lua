@@ -1,2 +1,0 @@
-module("AnimationUtil", package.seeall)
-

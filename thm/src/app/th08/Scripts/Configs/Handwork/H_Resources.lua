@@ -130,9 +130,9 @@ return {
     {
         v_default = "Assets/Shader/v_default.vs",
         f_default = "Assets/Shader/f_default.fs",
-        v_grey = "Assets/Shader/v_grey.vs",
         f_grey = "Assets/Shader/f_grey.fs",
         f_uvRoll = "Assets/Shader/f_uvRoll.fs",
+        f_uvVortex = "Assets/Shader/f_uvVortex.fs",
     },
 
     ui = 

@@ -1,4 +1,5 @@
 require "Scripts.Context.Handler.Caches.ModuleCache"
-require "Scripts.Context.Handler.Caches.AnimationCache"
+require "Scripts.Context.Handler.Caches.TextureCache"
 require "Scripts.Context.Handler.Caches.SpriteFrameCache"
+require "Scripts.Context.Handler.Caches.AnimationCache"
 require "Scripts.Context.Handler.Caches.EntityDataCache"

@@ -1,28 +1,38 @@
 module(..., package.seeall)
 
-local _shadeCache = {}
+--播放粒子特效
+function playParticle(params)
+    local node = THSTG.EFFECT.newParticleSystem(params)
 
-function loadShaderByFile(vertexPath,fragmentPath,shaderKey)
+    if params.father then
+        params.father:addChild(node)
+    elseif params.refNode then
+        node:setPositionX(params.refNode:getPositionX())
+        node:setPositionY(params.refNode:getPositionY())
+        node:setAnchorPoint(cc.p(0.5,0.5))
+        params.refNode:getParent():addChild(node)
+    end
+    if params.scale then
+        node:setScale(params.scale)
+    end
     
+    node:play()
+    
+    return node
 end
 
-function loadShaderByString(vertexStr,fragmentStr,shaderKey)
-    
+--
+function applyShader(node,params)
+    return THSTG.NodeUtil.applyShader(node,params)
 end
 
-function loadShaderByKey(shaderKey)
-    
-end
+function applyAction(node,params)
+    --生成一个格子作为载体
+    local node = THSTG.EFFECT.newNodeGrid()
 
-function playParticleEffect(params)
-    
-end
 
-function playShaderEffect(params)
-    
-end
 
-function playActionEffect(params)
-    
-end
+    if params.targetNode then
 
+    end
+end

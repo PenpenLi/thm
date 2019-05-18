@@ -2,9 +2,19 @@ local M = {}
 local DBXManager = THSTG.ANIMATION.DBXManager
 
 function M.loadDBXFile(texSrc) DBXManager.loadDBXFile(texSrc) end
+function M.loadPlistFile(plistPath)
+    return THSTG.SCENE.loadPlistFile(plistPath)
+end
 
 function M.createTexture(altasName,frameName)
-    return DBXManager.createTexture(altasName,frameName)
+    local texture = TextureCache.get({altasName,frameName})
+    if not texture then
+		texture = DBXManager.createTexture(altasName,frameName)
+        if not texture then return nil end
+        
+        TextureCache.add({altasName,frameName},texture)
+    end
+    return frame
 end
 
 function M.createFrame(altasName,frameName)

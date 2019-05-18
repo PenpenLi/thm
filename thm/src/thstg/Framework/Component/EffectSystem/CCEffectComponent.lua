@@ -1,6 +1,33 @@
 --TODO:
-function newEffectNode(params)
-    return cc.NodeGrid:create()   --特效的载体
+function newNodeGrid(action)
+    local node = cc.NodeGrid:create()
+    node._effect = action
+
+    --
+    function node:play()
+        node:runAction(self._effect)
+    end
+
+    function node:reset()
+    
+    end
+
+    function node:attack(child)
+        local parent = child:getParent()
+        child:setParent(parent)
+        child:setParent(self)
+    end
+
+    function node:setEffect(effect)
+        self._effect = effect
+    end
+
+    function node:getEffect()
+        return self._effect
+    end
+
+    return node
+
 end
 ----------
 ----------

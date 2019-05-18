@@ -1,6 +1,7 @@
 local M = {}
+setmetatable(M, {__index = THSTG.AnimationSystem})
 local DBXManager = THSTG.ANIMATION.DBXManager
--- setmetatable(M, {__index = THSTG.DBXSystem})
+
 
 function M.loadDBXFile(...) DBXManager.loadDBXFile(...) end
 
