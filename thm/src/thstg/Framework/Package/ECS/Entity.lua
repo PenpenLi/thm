@@ -77,13 +77,15 @@ local function _addComponent(self,component,params)
 	end
 end
 
-local function _remveComponent(self,...)
+local function _remveComponent(self,params,...)
 	local name = ECSUtil.trans2Name(...)
 	local component = self.__components__[name]
 	if component then
 		if component:_removed(self) ~= false then
 			self.__components__[name] = nil
-			return component
+			if params then
+				params.comp = component
+			end
 		end
 	end
 end
@@ -93,7 +95,7 @@ local function _remveComponents(self,...)
 	for k,v in pairs(self.__components__) do
 		local className,classArgs = v:getClass()
 		if ECSUtil.find2ClassWithChild(classArgs,...) then
-			_remveComponent(self,unpack(classArgs))
+			_remveComponent(self,false,unpack(classArgs))
 		end
 	end
 end
@@ -107,8 +109,9 @@ end
 
 --移除组件
 function M:removeComponent(...)
-	local comp = _remveComponent(self,...)
-	self[comp:getName()] = nil
+	local params = {}
+	_remveComponent(self,params,...)
+	self[params.comp:getName()] = nil
 end
 
 --移除组件列表

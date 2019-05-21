@@ -1,6 +1,6 @@
 module("TextureCache", package.seeall)
 local CacheUtil = require("Scripts.Context.Handler.Caches.CacheUtil")
-local TextureCache = cc.TextureCache:getInstance()
+local TextureCache = cc.Director:getInstance():getTextureCache()
 
 function add(tags,texture)
     if texture then
