@@ -297,8 +297,9 @@ function creatEnum(tbl, index)
     return enumtbl 
 end 
 
+
 --安全取得key内容
-function safeGetValue(default,table,...)
+function M.safeGetValue(default,table,...)
 	local params = {...}
 	if table then
 		if type(table) == "table" then
@@ -316,7 +317,7 @@ function safeGetValue(default,table,...)
 end
 
 --安全设置值
-function safeSetValue(value,table,...)
+function M.safeSetValue(value,table,...)
 	local params = {...}
 	if table then
 		if type(table) == "table" then
@@ -344,7 +345,7 @@ function safeSetValue(value,table,...)
 end
 
 --强制设置值
-function forceSetValue(value,table,...)
+function M.forceSetValue(value,table,...)
 	local params = {...}
 	if table then
 		if type(table) == "table" then
@@ -367,7 +368,7 @@ function forceSetValue(value,table,...)
 end
 
 --安全移除,解决在循环中移除造成的错位问题
-function safeRemoveItem(list, item, removeAll)
+function M.safeRemoveItem(list, item, removeAll)
 	local rmCount = 0
 	local defaultFunc = function (v)
 		return v == item
@@ -391,7 +392,7 @@ end
 
 --pairs顺序遍历 table(按key从小到大遍历) 
 --迭代器
-function pairsByKeys(t,desc)
+function M.pairsByKeys(t,desc)
     local a = {}
     for n in pairs(t) do
         a[#a+1] = n
@@ -408,19 +409,36 @@ function pairsByKeys(t,desc)
     end
 end
 
+--有序数组二分法查找
+function M.searchByBinary(t,func)
+    if type(t) == "table" and type(func) == "function" then
+        local low,high = 1,#t
+        local mid = -1
+        while (low <= high) do
+			mid = math.floor((low + high)/2)
+            if func(t[mid]) == 0 then
+                return t[mid],mid
+			elseif func(t[mid]) < 0 then
+				high = mid - 1
+            elseif func(t[mid]) > 0 then
+                low = mid + 1
+            end
+        end
+    end
+    return nil,-1
+end
+
 --取得table真实长度
-function getLength(t)
+function M.getLength(t)
+	t = t or {}
 	local length = 0
 	for _,_ in pairs(t) do length = length + 1 end
 	return length
 end
 
---创建enum
-function newEnums(tbl, index) 
-    local enumtbl = {} 
-    local enumindex = index or 0 
-    for i, v in ipairs(tbl) do 
-        enumtbl[v] = enumindex + i 
-    end 
-    return enumtbl 
+--输出所有键
+function M.keys2Array(tb)
+	local array = {}
+	for k,_ in pairs(tb) do table.insert(array, k) end
+	return array
 end
