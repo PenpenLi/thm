@@ -1,11 +1,10 @@
 local M = class("AnimatorStateTransition")
-M.EConditionMode = 
-{
+M.EConditionMode = {
     If,
     IfNot,
 }
 function M:ctor()
-    self._conditionList_ = false
+    self._conditions_ = false
     self.hasExitTime = false
 end
 
