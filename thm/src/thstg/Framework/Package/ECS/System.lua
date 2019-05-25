@@ -47,7 +47,7 @@ end
 function M:clear()
     self:_onClear()
 end
----------------------废弃函数(下)---------------------------
+
 --取得所有实体
 function M:getAllEntities()
     if not _entitiesAllList then
@@ -56,52 +56,9 @@ function M:getAllEntities()
     return _entitiesAllList
 end
 
-function M:getAllComponents(isForces)
-    isForces = isForces or false
-    if not _entitiesAllComponents then
-        local ret = {}
-        local entitys = self:getAllEntities()
-        for _,v in pairs(entitys) do
-            if isForces or (not isForces and v:isActive()) then
-                local comps = v:getAllComponents()
-                for _,vv in pairs(comps) do
-                    table.insert( ret, vv )
-                end
-            end
-        end
-        _entitiesAllComponents = ret
-    end
-    return _entitiesAllComponents
-end
-
---取得所有某类组件
-function M:getComponents(isForces,...)
-    local params = {...}
-    if type(isForces) ~= "boolean" then 
-        table.insert(params, 1, isForces)
-    end
-    local name = ECSUtil.trans2Name(unpack(params))
-    if not _entitiesComponents[name] then
-        local ret = {}
-        local entitys = self:getAllEntities()
-        for _,v in pairs(entitys) do
-            if isForces or (not isForces and v:isActive()) then
-                local comp = v:getComponent(name)
-                if comp then
-                    table.insert(ret, comp)
-                end
-            end
-        end
-        _entitiesComponents[name] = ret
-    end
-    return _entitiesComponents[name]
-end
----------------------废弃函数(上)---------------------------
---只关心Components
-
 --查找包含某一组组件的组
 --TODO:(实体过多会很卡)待优化,应该注册一种过滤器,监听组件变化
-function M:getGroups(componentNames)
+function M:getCompsGroups(componentNames)
     if type(componentNames) ~= "table" then componentNames = {componentNames} end
     local retList = {}
     local entities = self:getAllEntities()
@@ -125,6 +82,10 @@ function M:getGroups(componentNames)
     return retList
 end
 
+--TODO:
+function M:getGroups(groupClass)
+    
+end
 ---
 --[[系统生命周期]]
 function M:_onInit(...)
@@ -137,11 +98,6 @@ function M:_onUpdate(delay)
 end
 
 function M:_onLateUpdate(delay)
-
-end
-
---TODO:过滤出需要组件的实体
-function M:_onFilter()
 
 end
 

@@ -8,10 +8,11 @@ function M:_onEnv()
 end
 
 function M:_onInit()
-
     --随机数种子
     math.randomseed(os.time())
 
+    --资源加载
+    ResManager.init()
 
     return true
 end

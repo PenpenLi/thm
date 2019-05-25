@@ -1,5 +1,5 @@
 local M = {}
-setmetatable(M, {__index = THSTG.AnimationSystem})
+setmetatable(M, {__index = THSTG.AnimationServer})
 local DBXManager = THSTG.ANIMATION.DBXManager
 
 

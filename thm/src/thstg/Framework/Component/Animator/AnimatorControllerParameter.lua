@@ -5,7 +5,7 @@ M.EParameterType = {
     Trigger,
 }
 function M:ctor()
-    self.type = false
+    self.type = M.EParameterType.Bool
     self.defaultValue = false
 end
 

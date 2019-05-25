@@ -1,5 +1,5 @@
 module("ECSManager", package.seeall)
-
+local _dispatcher = THSTG.ECSDispatcher
 
 --实体flag
 local EEntityFlag = {
@@ -12,17 +12,6 @@ local ESystemFlag = {
    
 }
 
-EEventType = {
-    DestroyEntity = 1,
-    EntityActive = 2,
-    EntityReset = 3,
-    CleanupEntity = 4,
-}
-
-EEventCacheType = {
-    Entity = 1,
-    System = 2
-}
 --
 local _handle = nil
 local _entityCache = {}
@@ -31,25 +20,13 @@ local _dirtySystems = {}
 local _systemClass = {}
 local _systemCache = {}
 
-local _eventQueue = {
-    [EEventCacheType.Entity] = {},
-    [EEventCacheType.System] = {}
-}
 ---
 --[[事件管理]]
-function dispatchEvent(cacheType,event,params)
-    local info = {
-        event = event,
-        params = params,
-    }
-    table.insert(_eventQueue[cacheType], info )
+----
+function getDispatcher()
+    return _dispatcher
 end
---全局广播巨TM低性能,能不用最好不用
-function broadcastEvent(event,params)
-    for _,cacheType in pairs(EEventCacheType) do
-        dispatchEvent(cacheType,event,params)
-    end
-end
+----
 --[[实体管理]]
 local function dirtyEntity(entity,flag)
     local id = entity:getID()
@@ -65,7 +42,7 @@ function addEntity(entity)
     if not realEntity then
         _entityCache[id] = entity
         dirtyEntity(entity,EEntityFlag.Init)
-        Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_ADDED,entity)
+        getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_ADDED,entity)
     end
 end
 
@@ -73,7 +50,7 @@ function removeEntity(entity)
     local id = entity:getID()
     local realEntity = _entityCache[id]
     if realEntity then
-        Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_REMOVED,realEntity)
+        getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_REMOVED,realEntity)
         _entityCache[id] = nil
         
     end
@@ -91,12 +68,12 @@ function isEntityDestroyed(entity)
     return (entity and _entityCache[id]) and true or false
 end
 
-function getAllEntities(exEntity)
+function getAllEntities()
     local ret = {}
     
     --法一:
-    ret = clone(_entityCache)
-    if ret[exEntity] then ret[exEntity] = nil end
+    -- ret = clone(_entityCache)
+    -- if ret[exEntity] then ret[exEntity] = nil end
 
     --法二:
     -- visitEntity(function (v)
@@ -104,6 +81,9 @@ function getAllEntities(exEntity)
     --         table.insert( ret, v )
     --     end
     -- end)
+
+    --法三:
+    ret = _entityCache
 
     return ret
 end
@@ -161,17 +141,8 @@ local function _handleEntities(delay)
     local function _updateEntities()
         
     end
-    local function _handleEntitiesEvent()
-        for _,v in ipairs(_eventQueue[EEventCacheType.Entity]) do
-            visitEntity(function(entity)
-                entity:_event(v.event,v.params)
-            end)
-        end
-        _eventQueue[EEventCacheType.Entity] = {}
-    end
     
     _rinseEntities()
-    _handleEntitiesEvent()
     _updateEntities()
 
     ECS.Entity._purge()
@@ -188,7 +159,7 @@ end
 function addSystem(system)
     local className = system:getClass()
     _systemCache[className] = system
-    Dispatcher.dispatchEvent(TYPES.EVENT.ECS_SYSTEM_ADDED,system)
+    getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_SYSTEM_ADDED,system)
 end
 
 function getSystem(name)
@@ -197,7 +168,7 @@ end
 
 function removeSystem(system)
     local className = system:getClass()
-    Dispatcher.dispatchEvent(TYPES.EVENT.ECS_SYSTEM_REMOVEd,_systemCache[system])
+    getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_SYSTEM_REMOVEd,_systemCache[system])
     _systemCache[system] = nil
 end
 
@@ -235,18 +206,9 @@ local function _handleSystems(delay)
             v:lateUpdate(delay)
         end)
     end
-    local function _handleSystemsEvent()
-        for _,v in ipairs(_eventQueue[EEventCacheType.System]) do
-            visitSystem(function(system)
-                system:_onEvent(v.event,v.params)
-            end)
-        end
-        _eventQueue[EEventCacheType.System] = {}
-    end
 
     _rinseSystems()
     _updateSystems()
-    _handleSystemsEvent()
 
     ECS.System._purge()
 end
@@ -260,10 +222,13 @@ function destroyEntity(entity)
     dirtyEntity(entity,EEntityFlag.Destroy)
 
     --通知所有对象被移除
-    Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_DESTROY,entity)
+    getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_DESTROY,entity)
 end
 
-
+----
+local function _handleManager(delay)
+    
+end
 ----
 
 function update(delay)
@@ -271,6 +236,7 @@ function update(delay)
     ---
     _handleSystems(delay)
     _handleEntities(delay)
+    _handleManager(delay)
     ---
 
 end

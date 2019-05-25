@@ -27,7 +27,7 @@ end
 
 function M:_onDead()
    --一个击破动画
-   GlobalUtil.playParticle({
+   EffectServer.playParticle({
       refNode = self:getEntity(),
       src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_st_boss_down"),
    })

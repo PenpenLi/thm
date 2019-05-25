@@ -27,7 +27,7 @@ function EngineEx:run()
 
     --初始化环境
     if Game:createEnv(self._configs.gameRoot) then
-        Game:run()
+        Game:exec()
     end
    
 end

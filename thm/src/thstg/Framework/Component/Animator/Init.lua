@@ -1,0 +1,8 @@
+Animator = require("thstg.Framework.Component.Animator.Animator")
+AnimatorController = require("thstg.Framework.Component.Animator.AnimatorController")
+AnimatorControllerParameter = require("thstg.Framework.Component.Animator.AnimatorControllerParameter")
+AnimatorMotion = require("thstg.Framework.Component.Animator.AnimatorMotion")
+AnimatorState = require("thstg.Framework.Component.Animator.AnimatorState")
+AnimatorStateMachine = require("thstg.Framework.Component.Animator.AnimatorStateMachine")
+AnimatorStateTransition = require("thstg.Framework.Component.Animator.AnimatorStateTransition")
+AnimatorStateTransitionCondition = require("thstg.Framework.Component.Animator.AnimatorStateTransitionCondition")

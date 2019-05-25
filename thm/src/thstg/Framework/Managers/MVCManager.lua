@@ -1,5 +1,6 @@
 module("MVCManager", package.seeall)
 
+local _dispatcher = THSTG.MVCDispatcher
 --[[ 常驻模块
 主界面ui
 ]]
@@ -14,7 +15,9 @@ local _residentModules = {}
 local _openedModules = {}
 
 -----------------------------------
-
+function getDispatcher()
+	return _dispatcher
+end
 function registerModule(moduleType, classPath)
 	assert(moduleType, string.format("[MVCManager] ModuleType is not finded"))
 	assert(classPath, string.format("[MVCManager] ModuleClassPath is not finded"))
@@ -46,7 +49,7 @@ function openModule(moduleType,params)
 	local function residentShow()
 		_residentModules[moduleType] = true
 		module:open(params)
-		Dispatcher.dispatchEvent(TYPES.EVENT.MVC_MODULE_OPENED, moduleType)
+		getDispatcher():dispatchEvent(TYPES.MVCEVENT.MVC_MODULE_OPENED, moduleType)
 	end
 
 	local function noResidentShow()
@@ -58,7 +61,7 @@ function openModule(moduleType,params)
 		
 		_openedModules[moduleType] = true
 		module:open(params)
-		Dispatcher.dispatchEvent(TYPES.EVENT.MVC_MODULE_CLOSED, moduleType)
+		getDispatcher():dispatchEvent(TYPES.MVCEVENT.MVC_MODULE_CLOSED, moduleType)
 	end
 
 
@@ -150,8 +153,8 @@ function init()
 			closeModule(pmoduleType,params)
 		end
 	end
-	Dispatcher.addEventListener(TYPES.EVENT.MVC_OPEN_MODULE, openModule)
-    Dispatcher.addEventListener(TYPES.EVENT.MVC_CLOSE_MODULE, closeModule)
+	getDispatcher():addEventListener(TYPES.MVCEVENT.MVC_OPEN_MODULE, openModule)
+    getDispatcher():addEventListener(TYPES.MVCEVENT.MVC_CLOSE_MODULE, closeModule)
 
 	---实例化所有模块
 	for _,v in pairs(_modulesClass) do

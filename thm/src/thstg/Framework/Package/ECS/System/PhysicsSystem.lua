@@ -8,7 +8,7 @@ function M:_onInit()
 end
 
 function M:_onUpdate(delay)
-    for _,item in ipairs(self:getGroups("RigidbodyComponent")) do
+    for _,item in ipairs(self:getCompsGroups({"TransformComponent","RigidbodyComponent"})) do
         local vRigidComp = item.RigidbodyComponent
         -- 重力加速度叠加
         if vRigidComp:isGravityEnabled() then
@@ -20,7 +20,7 @@ function M:_onUpdate(delay)
         vRigidComp.speed.x = vRigidComp.speed.x + accSpeed.x * M.GRAVITY_PIXEL_RATE        
         vRigidComp.speed.y = vRigidComp.speed.y + accSpeed.y * M.GRAVITY_PIXEL_RATE       
 
-        local vTransComp = vRigidComp:getEntity():getComponent("TransformComponent")
+        local vTransComp = item.TransformComponent
         vTransComp:setPositionX(vTransComp:getPositionX() + vRigidComp.speed.x)
         vTransComp:setPositionY(vTransComp:getPositionY() + vRigidComp.speed.y)
 

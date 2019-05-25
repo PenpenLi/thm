@@ -24,7 +24,7 @@ end
 
 function M:_onDead()
     --这里代表击中,而不是对象消亡
-    SEXFactory.playEffect({
+    EffectServer.playSEXEffect({
         refNode = self:getEntity(),
         source = {"ccle_enemy_die_magic_01"}
     })

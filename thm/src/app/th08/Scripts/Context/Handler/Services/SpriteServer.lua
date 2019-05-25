@@ -28,6 +28,18 @@ function M.createFrame(altasName,frameName)
     return frame
 end
 
+function M.createAnimation(altasName,frameName)
+    local animation = AnimationCache.get({altasName,frameName})
+    if not animation then
+        local frame = M.createFrame(altasName,frameName)
+        if frame then
+            animation = display.newAnimation({frame},1/12)
+            AnimationCache.add({altasName,frameName},animation)
+        end
+    end
+    return animation
+end
+
 function M.getAtlas(...) return DBXManager.getAtlas(...) end
 
 return M

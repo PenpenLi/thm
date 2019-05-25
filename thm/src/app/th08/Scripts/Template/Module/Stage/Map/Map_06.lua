@@ -46,7 +46,7 @@ function M.create(params)
             _vRange = {x = 0, y = 1} ,
         }
     })
-    -- node:addChild(mainBg)
+    node:addChild(mainBg)
 
 
     --------

@@ -16,7 +16,12 @@ function getNewId()
 	_dispatcherUID = _dispatcherUID + 1
 	local d = EventDispatcher.new()
 	_dispatchers[_dispatcherUID] = d
-	return _dispatcherUID, d
+	return _dispatcherUID,d
+end
+
+function getNew()
+	local _,dispatcher = getNewId()
+	return dispatcher
 end
 
 --[[

@@ -20,6 +20,7 @@ function loadDBXFile(texPath,skePath)
         end
     end
 
+    local sketloe = false
     if skePath and skePath ~= "" then
         if not _fileCache[skePath] then
             local sketloe = DBXSkeleton.new(skePath)
@@ -33,6 +34,8 @@ function loadDBXFile(texPath,skePath)
             end
         end
     end
+
+    return atlas,sketloe
 end
 
 function getAtlas(name)

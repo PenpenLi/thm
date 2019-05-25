@@ -1,5 +1,5 @@
 module(..., package.seeall)
---播放补间动画特效
+--播放补间动画
 function playTween(params)
     params = params or {}
     params.isLoop = params.isLoop or false

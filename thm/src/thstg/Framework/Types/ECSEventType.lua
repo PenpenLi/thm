@@ -1,0 +1,8 @@
+module("ECSEVENT", package.seeall)
+--ECS模块
+ECS_ENTITY_ADDED = UIDUtil.getEventUID()
+ECS_ENTITY_DESTROY = UIDUtil.getEventUID()
+ECS_ENTITY_REMOVED = UIDUtil.getEventUID()
+ECS_ENTITY_CLEANUP = UIDUtil.getEventUID()
+ECS_SYSTEM_ADDED = UIDUtil.getEventUID()
+ECS_SYSTEM_REMOVEd = UIDUtil.getEventUID()

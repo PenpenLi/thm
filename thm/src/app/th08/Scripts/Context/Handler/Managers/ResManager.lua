@@ -1,6 +1,6 @@
 ﻿module("ResManager", package.seeall)
-local Resources = require "Scripts.Configs.Handwork.H_Resources"
-
+local H_Resources = require "Scripts.Configs.Handwork.H_Resources"
+local F_Respreload = require "Scripts.Template.F_Respreload"
 local function getNameKey(...)
     local keys = {...}
     local keyName = ""
@@ -10,6 +10,12 @@ local function getNameKey(...)
     keyName = THSTG.MD5.string(keyName)
 
     return keyName
+end
+
+-------
+function init()
+	local preload = F_Respreload["_Global"]
+	preload()
 end
 --------------
 -- 多层资源获取
@@ -21,7 +27,7 @@ function getResMul(...)
 	local params = {...}
 	local pathStr = ""
 	for i = 1, #params do
-		path = path and path[params[i]] or Resources[params[i]]
+		path = path and path[params[i]] or H_Resources[params[i]]
 		if not path then
 			-- if __DEBUG_RESOURCES__ then
 				error(string.format("ResManager.getRes ERROR: can't found: %s",pathStr))
@@ -48,7 +54,7 @@ function getRes(resType, resName)
 
 	local path = nil
 
-	local t = Resources[resType]
+	local t = H_Resources[resType]
 	if t then
 		path = t[resName]
 	end

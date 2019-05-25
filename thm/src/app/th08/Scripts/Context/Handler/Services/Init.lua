@@ -2,7 +2,7 @@ Schedule = THSTG.Schedule
 Dispatcher = THSTG.Dispatcher
 
 --替换掉服务
-SoundSystem = require "Scripts.Context.Handler.Services.SoundSystem"                --THSTG.AudioEngine
-AnimationSystem = require "Scripts.Context.Handler.Services.AnimationSystem"        --THSTG.AnimationSystem
-SpriteSystem = require "Scripts.Context.Handler.Services.SpriteSystem"    --THSTG.SpriteFrameSystem
-EffectSystem = require "Scripts.Context.Handler.Services.EffectSystem" --THSTG.EffectSystem
+SoundServer = require "Scripts.Context.Handler.Services.SoundServer"                --THSTG.AudioEngine
+AnimationServer = require "Scripts.Context.Handler.Services.AnimationServer"        --THSTG.AnimationServer
+SpriteServer = require "Scripts.Context.Handler.Services.SpriteServer"
+EffectServer = require "Scripts.Context.Handler.Services.EffectServer" --THSTG.EffectServer

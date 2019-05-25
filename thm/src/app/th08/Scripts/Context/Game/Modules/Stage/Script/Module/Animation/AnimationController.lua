@@ -75,24 +75,24 @@ function M:_onSetup()
                     skeName = skeNameArray[i] or skeName
 
                     --XXX:这里可以预加载
-                    AnimationSystem.loadDBXFile(
+                    AnimationServer.loadDBXFile(
                         ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,atals),
                         ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,skeName)
                     )
                     
-                    local skeleton = AnimationSystem.getSkeleton(skeName)
+                    local skeleton = AnimationServer.getSkeleton(skeName)
                     for _,v in ipairs(skeleton:getAnimationNameList()) do 
-                        local animation = AnimationSystem.createAnimation(skeName,v)
+                        local animation = AnimationServer.createAnimation(skeName,v)
                         self.animaComp:addAnimation(v,animation)
                     end
                 end
             elseif animCfg.frameName ~= "" then
                 local frameName = string.format(animCfg.frameName, code)
-                SpriteSystem.loadDBXFile(
+                SpriteServer.loadDBXFile(
                     ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas)
                 )
                 --是一帧,需要转为帧动画
-                local frame = SpriteSystem.createFrame(animCfg.atlas,frameName)
+                local frame = SpriteServer.createFrame(animCfg.atlas,frameName)
                 if frame then
                     self.animaComp:addAnimation(AnimStatus.DEFAULT,display.newAnimation({frame},1/12))
                 end
@@ -102,6 +102,9 @@ function M:_onSetup()
             self.spriteComp:setRotation(animCfg.rotation)
             self.spriteComp:setScaleX(animCfg.scale.x)
             self.spriteComp:setScaleY(animCfg.scale.y)
+            
+            --通知更新贴图范围
+
         end  
     end
 end

@@ -11,7 +11,6 @@ function M.findByTag(tag) return ECSManager.findEntityWithTag(tag) end
 function M.findEntitiesByName(name) return ECSManager.findEntitiesByName(name) end
 function M.findByName(name) return ECSManager.findEntityWithName(name) end
 function M.getAll() return ECSManager.getAllEntities() end
-function M.getAllEx(entity) return ECSManager.getAllEntities(entity) end
 
 -- local ECompType = {Control = 1,Script = 2}	--组件类型
 -----
@@ -51,7 +50,7 @@ function M:ctor()
 	local function onCleanup()
 		--XXX:若父节点count>1,而子节点若父节点count<=1,会被干掉
 		if (self:getReferenceCount() <= 1) then
-			Dispatcher.dispatchEvent(TYPES.EVENT.ECS_ENTITY_CLEANUP,self)
+			ECSManager.getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_CLEANUP,self)
 			self:_cleanup()
 		end
 	end
@@ -63,6 +62,7 @@ function M:ctor()
 end
 --
 --[[component模块]]
+--FIXME:组件的添加,移除应该设置在帧后
 local function _addComponent(self,component,params)
 	assert(not tolua.iskindof(component, "ECS.Component"), "[Entity] the addChild function param value must be a THSTG ECS.Component object!!")
 
@@ -76,6 +76,7 @@ local function _addComponent(self,component,params)
 		return component
 	end
 end
+
 
 local function _remveComponent(self,params,...)
 	local name = ECSUtil.trans2Name(...)
@@ -100,10 +101,10 @@ local function _remveComponents(self,...)
 	end
 end
 
---FIXME:用name有BUG
 function M:addComponent(component,params)
 	local comp = _addComponent(self,component,params)
-	self[comp:getName()] = comp
+	local className= comp:getClass()
+	self[className] = comp
 	return comp
 end
 
@@ -111,7 +112,8 @@ end
 function M:removeComponent(...)
 	local params = {}
 	_remveComponent(self,params,...)
-	self[params.comp:getName()] = nil
+	local className= params.comp:getClass()
+	self[className] = nil
 end
 
 --移除组件列表
@@ -246,9 +248,6 @@ function M:update(dTime)
 	end
 	
 	self:_onLateUpdate(dTime)
-
-	--脏队列处理
-	self:_purge()
 end
 
 ----
@@ -290,11 +289,6 @@ function M:clearFlags()
 	self.__flags__ = {}
 end
 
-
---发送事件
-function M:dispatch(e,params)
-	ECSManager.dispatchEvent(ECSManager.EEventCacheType.Entity,e,params)
-end
 ---
 --[[
     以下函数不建议重载,违反了设计模式的思想
@@ -341,23 +335,6 @@ end
 --逻辑更新完成
 function M:_onLateUpdate(dTime)
     
-end
---
-
---消息
-function M:_onEvent(event,params)
-
-end
----
-function M:_purge()
-	--TODO:组件移除(可能System也会用到,应该帧后处理),组件添加
-end
-
-function M:_event(event,params)
-	self:_onEvent(event,params)
-	for _,v in pairs(self.__components__) do
-		v:_onEvent(event,params)
-	end
 end
 
 function M:_enter()

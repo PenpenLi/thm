@@ -7,7 +7,7 @@ local s_needClear = false
 
 
 --开始运行
-function run()
+function init()
 
 	SceneManager.init()
 	MVCManager.init()

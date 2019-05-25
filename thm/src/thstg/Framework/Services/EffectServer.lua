@@ -21,6 +21,9 @@ function playParticle(params)
     return node
 end
 
+function playEffect(params)
+    return AnimatioSystem.playTween(params)
+end
 --
 function applyShader(node,params)
     return THSTG.NodeUtil.applyShader(node,params)

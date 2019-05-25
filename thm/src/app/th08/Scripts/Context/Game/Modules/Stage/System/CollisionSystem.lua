@@ -193,14 +193,15 @@ end
 -----
 function M:_onInit()
     --消息注册
-    THSTG.Dispatcher.addEventListener(THSTG.TYPES.EVENT.ECS_ENTITY_REMOVED, self._entityRemoveHandle, self)
+    THSTG.ECSManager:getDispatcher():addEventListener(THSTG.TYPES.ECSEVENT.ECS_ENTITY_REMOVED, self._entityRemoveHandle, self)
 end
 
 function M:_onUpdate(delay)
-    local collComps = self:getComponents("ColliderComponent")
-    for _,v in pairs(collComps) do
-        local rect = v:getRect()
-        updateGrids(v,rect)
+    local compsGroups = self:getCompsGroups("ColliderComponent")
+    for _,group in pairs(compsGroups) do
+        local collComp = group.ColliderComponent
+        local rect = collComp:getRect()
+        updateGrids(collComp,rect)
     end
 end
 

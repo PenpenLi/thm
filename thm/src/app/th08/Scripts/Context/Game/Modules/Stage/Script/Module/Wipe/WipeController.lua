@@ -56,7 +56,7 @@ function M:_wipeBreaked()
     --音效
     --TODO:晃屏
     --爆裂特效
-    GlobalUtil.playParticle({
+    EffectServer.playParticle({
         refNode = self:getEntity(),
         src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_star03"),
         scale = 1.5
@@ -69,7 +69,7 @@ function M:_onWipeInvalid()
     self:_wipeClose()
 end
 function M:_onWipeTimeout()
-    GlobalUtil.playParticle({
+    EffectServer.playParticle({
         refNode = self:getEntity(),
         src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_star03"),
         scale = 1.5

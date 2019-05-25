@@ -1,6 +1,5 @@
 ﻿module("TableUtil", package.seeall)
 
-
 -- 如果a和b的key值都有，a的值会覆盖b的值。
 -- 得到新的tb，不改变原来的a和b。
 function mergeTable(a, b, isInit)
@@ -299,7 +298,7 @@ end
 
 
 --安全取得key内容
-function M.safeGetValue(default,table,...)
+function safeGetValue(default,table,...)
 	local params = {...}
 	if table then
 		if type(table) == "table" then
@@ -317,7 +316,7 @@ function M.safeGetValue(default,table,...)
 end
 
 --安全设置值
-function M.safeSetValue(value,table,...)
+function safeSetValue(value,table,...)
 	local params = {...}
 	if table then
 		if type(table) == "table" then
@@ -345,7 +344,7 @@ function M.safeSetValue(value,table,...)
 end
 
 --强制设置值
-function M.forceSetValue(value,table,...)
+function forceSetValue(value,table,...)
 	local params = {...}
 	if table then
 		if type(table) == "table" then
@@ -368,7 +367,7 @@ function M.forceSetValue(value,table,...)
 end
 
 --安全移除,解决在循环中移除造成的错位问题
-function M.safeRemoveItem(list, item, removeAll)
+function safeRemoveItem(list, item, removeAll)
 	local rmCount = 0
 	local defaultFunc = function (v)
 		return v == item
@@ -392,7 +391,7 @@ end
 
 --pairs顺序遍历 table(按key从小到大遍历) 
 --迭代器
-function M.pairsByKeys(t,desc)
+function pairsByKeys(t,desc)
     local a = {}
     for n in pairs(t) do
         a[#a+1] = n
@@ -410,7 +409,7 @@ function M.pairsByKeys(t,desc)
 end
 
 --有序数组二分法查找
-function M.searchByBinary(t,func)
+function searchByBinary(t,func)
     if type(t) == "table" and type(func) == "function" then
         local low,high = 1,#t
         local mid = -1
@@ -429,7 +428,7 @@ function M.searchByBinary(t,func)
 end
 
 --取得table真实长度
-function M.getLength(t)
+function getLength(t)
 	t = t or {}
 	local length = 0
 	for _,_ in pairs(t) do length = length + 1 end
@@ -437,7 +436,7 @@ function M.getLength(t)
 end
 
 --输出所有键
-function M.keys2Array(tb)
+function keys2Array(tb)
 	local array = {}
 	for k,_ in pairs(tb) do table.insert(array, k) end
 	return array

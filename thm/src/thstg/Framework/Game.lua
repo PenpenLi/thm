@@ -5,13 +5,11 @@ function Game:ctor()
 
 end
 
-function Game:run()
-    
+function Game:exec()
+    FlowManager.init()
+
     if self:_onInit() then
-
-        FlowManager.run()
         self:_onRun()
-
     end
 end
 
@@ -45,6 +43,7 @@ function Game:_onInit()
 end
 
 function Game:_onRun()
+    --每帧执行
     
 end
 
