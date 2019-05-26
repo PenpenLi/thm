@@ -6,7 +6,8 @@ function trans2Name(...)
     local tags = {...}
     local name = ""
     for _,v in ipairs(tags) do
-        name = name .. _COMPONENT_SEPARATE_CHAR_ .. tostring(v)
+        --不要使用..,影响性能
+        name = string.format("%s%s%s", name, _COMPONENT_SEPARATE_CHAR_, v)
     end
     name = string.sub(name, 2)
     return name
@@ -82,6 +83,12 @@ function find2ClassWithChild(nameArgs,...)
         end
     end
     return (j ~= lengthB)
+end
+
+function isKindof(childClassNameArgs,fatherClassName)
+    local args = childClassNameArgs
+    if type(args) == "string"  then args = trans2Args(childClassNameArgs) end
+    return find2ClassWithChild(args,fatherClassName)
 end
 
 function match2Class(name,...)

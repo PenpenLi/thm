@@ -24,7 +24,7 @@ return {
                     }
                     return cc.p(initPosX,initPosY),cc.p(initSpeedX,initSpeedY),cc.Sequence:create(actions)
                 end)
-            end,0.08,100/0.08)
+            end,0.08)
         end
     },
 

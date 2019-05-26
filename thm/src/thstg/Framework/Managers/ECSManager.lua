@@ -52,8 +52,24 @@ function removeEntity(entity)
     if realEntity then
         getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_REMOVED,realEntity)
         _entityCache[id] = nil
-        
     end
+end
+
+--TODO:
+function initEntity(entity)
+    getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_INIT,entity)
+end
+
+function cleanupEntity(entity)
+    getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_CLEANUP,entity)
+end
+
+function addEntityComponent(comp)
+    getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_COMPONENT_ADDED,comp)
+end
+
+function removeEntityComponent(comp)
+    getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_COMPONENT_REMOVED,comp)
 end
 
 function visitEntity(func)
@@ -66,6 +82,10 @@ end
 function isEntityDestroyed(entity)
     local id = entity:getID()
     return (entity and _entityCache[id]) and true or false
+end
+
+function isEntityInScene(entity)
+    return _entityCache[entity] and true or false
 end
 
 function getAllEntities()
@@ -159,6 +179,7 @@ end
 function addSystem(system)
     local className = system:getClass()
     _systemCache[className] = system
+    system:_onAdded()
     getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_SYSTEM_ADDED,system)
 end
 
@@ -168,12 +189,19 @@ end
 
 function removeSystem(system)
     local className = system:getClass()
-    getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_SYSTEM_REMOVEd,_systemCache[system])
+    getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_SYSTEM_REMOVED,_systemCache[system])
+    system:_onRemoved()
     _systemCache[system] = nil
 end
 
+function removeAllSystems()
+    for _,v in pairs(_systemCache) do
+        removeSystem(v)
+    end
+end
+
 function registerSystem(path)
-    table.insert( _systemClass, {classPath = path})
+    table.insert(_systemClass, {classPath = path})
 end
 
 local function dirtySystem(system,flag)
@@ -257,7 +285,8 @@ end
 function clear()
     local scheduler = cc.Director:getInstance():getScheduler()
     scheduler:unschedule(_handle)
-   
+    getDispatcher():clear()
+
     _clearEntities()
     _clearSystems()
    

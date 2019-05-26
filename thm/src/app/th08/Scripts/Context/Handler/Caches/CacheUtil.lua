@@ -6,7 +6,7 @@ function getNameKey(tags)
     local keys = tags
     local keyName = ""
     for _,v in ipairs(keys) do
-        keyName = keyName .. v .. "#"
+        keyName = string.format("%s%s%s", keyName, v, "#")
     end
     keyName = THSTG.MD5.string(keyName)
 

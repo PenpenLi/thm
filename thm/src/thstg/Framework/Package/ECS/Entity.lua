@@ -12,7 +12,6 @@ function M.findEntitiesByName(name) return ECSManager.findEntitiesByName(name) e
 function M.findByName(name) return ECSManager.findEntityWithName(name) end
 function M.getAll() return ECSManager.getAllEntities() end
 
--- local ECompType = {Control = 1,Script = 2}	--组件类型
 -----
 function M._purge()
 
@@ -23,13 +22,17 @@ function M:ctor()
 	self.__components__ = {}
 	self.__flags__ = nil
 	self.__isActive__ = true
+	self.__isUpdating__ = false
 
-	
+	--组件更新队列
+	self.__compsUpdateQueue__ = {}
 	----
 	--CCNode的回调
 	--从节点进入
 	--addEntity与removeEntity本该放到构造和析构里的,当时析构调用除了问题
 	--由于析构有问题,因此_cleanup函数目前不能用
+	ECSManager.initEntity(self)
+
 	local function onEnter()
 		function onUpdate(dTime)
 			self:update(dTime)
@@ -50,7 +53,7 @@ function M:ctor()
 	local function onCleanup()
 		--XXX:若父节点count>1,而子节点若父节点count<=1,会被干掉
 		if (self:getReferenceCount() <= 1) then
-			ECSManager.getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_CLEANUP,self)
+			ECSManager.cleanupEntity(self)
 			self:_cleanup()
 		end
 	end
@@ -66,44 +69,62 @@ end
 local function _addComponent(self,component,params)
 	assert(not tolua.iskindof(component, "ECS.Component"), "[Entity] the addChild function param value must be a THSTG ECS.Component object!!")
 
-	-- 有些组件可以被多次添加,有些不行
-	local componentName = component:getClass()
-	assert(componentName, "[Entity] The component must have a unique name!")
-	assert(not self.__components__[componentName], "[Entity] component already added. It can't be added again!")
-	
-	if component:_added(self,params) ~= false then
-		self.__components__[componentName] = component
-		return component
+	if not self.__isUpdating__ then
+		-- 有些组件可以被多次添加,有些不行
+		local componentName = component:getClass()
+		assert(componentName, "[Entity] The component must have a unique name!")
+		assert(not self.__components__[componentName], "[Entity] component already added. It can't be added again!")
+		
+		if component:_added(self,params) ~= false then
+			self.__components__[componentName] = component
+			local priority = component:getPriority()
+			if priority > #self.__compsUpdateQueue__ then priority = #self.__compsUpdateQueue__ end
+			if priority < 1 then priority = 1 end
+			table.insert(self.__compsUpdateQueue__, component:getPriority(), component)
+			ECSManager.addEntityComponent(component)
+			return component
+		end
+	else
+		error("T:不能在更新時动态添加")
 	end
 end
 
-
 local function _remveComponent(self,params,...)
-	local name = ECSUtil.trans2Name(...)
-	local component = self.__components__[name]
-	if component then
-		if component:_removed(self) ~= false then
-			self.__components__[name] = nil
-			if params then
-				params.comp = component
+	if not self.__isUpdating__ then
+		local name = ECSUtil.trans2Name(...)
+		local component = self.__components__[name]
+		if component then
+			if component:_removed(self) ~= false then
+				ECSManager.removeEntityComponent(component)
+				self.__components__[name] = nil
+				for i,v in ipairs(self.__compsUpdateQueue__) do if v == component then table.remove(self.__compsUpdateQueue__, i) break end end
+				if params then
+					params.comp = component
+				end
 			end
 		end
+	else
+		error("T:不能在更新時动态添加")
 	end
 end
 
 local function _remveComponents(self,...)
-	local name = ECSUtil.trans2Name(...)
-	for k,v in pairs(self.__components__) do
-		local className,classArgs = v:getClass()
-		if ECSUtil.find2ClassWithChild(classArgs,...) then
-			_remveComponent(self,false,unpack(classArgs))
+	if not self.__isUpdating__ then
+		local name = ECSUtil.trans2Name(...)
+		for k,v in pairs(self.__components__) do
+			local className,classArgs = v:getClass()
+			if ECSUtil.find2ClassWithChild(classArgs,...) then
+				_remveComponent(self,false,unpack(classArgs))
+			end
 		end
+	else
+		error("不能在更新時动态添加")
 	end
 end
 
 function M:addComponent(component,params)
 	local comp = _addComponent(self,component,params)
-	local className= comp:getClass()
+	local className = comp:getClass()
 	self[className] = comp
 	return comp
 end
@@ -187,8 +208,14 @@ function M:isHaveComponent(...)
 end
 
 function M:removeAllComponents()
-	for name,_ in pairs(self.__components__) do
-		self:removeComponent(name)
+	if not self.__isUpdating__ then
+		self:_visitComps(function(comp)
+			comp:_removed(self)
+			ECSManager.removeEntityComponent(comp)
+		end)
+
+		self.__components__ = {}
+		self.__compsUpdateQueue__ = {}
 	end
 end
 
@@ -222,32 +249,29 @@ function M:replaceScript(a1,a2)
 		self:addScript(comp)
 	end
 end
-
---[[系统模块]]
-function M:getSystem(name)
-	return ECSManager.getSystem(name)
-end
 ---
 function M:update(dTime)
-	--TODO:更新顺序问题
 	if not self:isActive() then return end
 	--先control,然后才是Script
-	
-	for k,v in pairs(self.__components__) do
-		if v:isEnabled() then
-			v:_onUpdate(dTime,self)
+	self.__isUpdating__ = true
+
+	self:_visitComps(function(comp)
+		if comp:isEnabled() then
+			comp:_onUpdate(dTime,self)
 		end
-	end
+	end)
 	
 	self:_onUpdate(dTime)
 
-	for k,v in pairs(self.__components__) do
-		if v:isEnabled() then
-			v:_onLateUpdate(dTime,self)
+	self:_visitComps(function(comp)
+		if comp:isEnabled() then
+			comp:_onLateUpdate(dTime,self)
 		end
-	end
+	end)
 	
 	self:_onLateUpdate(dTime)
+
+	self.__isUpdating__ = false
 end
 
 ----
@@ -272,6 +296,7 @@ function M:setActive(isActive)
 	self.__isActive__ = isActive
 	self:_active(isActive)
 end
+
 function M:isActive()
 	return self.__isActive__ 
 end
@@ -337,6 +362,15 @@ function M:_onLateUpdate(dTime)
     
 end
 
+function M:_visitComps(func)
+	if type(func) == "function" then
+		for index = #self.__compsUpdateQueue__,1,-1 do
+			local comp = self.__compsUpdateQueue__[index]
+			func(comp,index)
+		end
+	end
+end
+
 function M:_enter()
 	self:_onEnter()
 	for _,v in pairs(self.__components__) do
@@ -362,6 +396,25 @@ function M:_active(isActive)
 	self:_onActive()
 	for k,v in pairs(self.__components__) do
 		v:_onActive(isActive)
+	end
+end
+
+function M:_adjustComponentPriority(component)
+	if not self.__isUpdating__ then
+		--从队列中移除在插入
+		for i = #self.__compsUpdateQueue__,1,-1 do 
+			local pComp = self.__compsUpdateQueue__[i]
+			if pComp == component then 
+				table.remove(self.__compsUpdateQueue__, i) 
+				local priority = component:getPriority()
+				if priority > #self.__compsUpdateQueue__ then priority = #self.__compsUpdateQueue__ end
+				if priority < 1 then priority = 1 end
+				table.insert(self.__compsUpdateQueue__, priority, component)
+				break 
+			end 
+		end
+	else
+		error("T:不能在更新時动态添加")
 	end
 end
 -------

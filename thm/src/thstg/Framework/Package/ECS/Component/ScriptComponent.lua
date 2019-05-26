@@ -2,7 +2,7 @@
 local M = class("ScriptComponent",ECS.Component)
 function M:ctor(...)
     M.super.ctor(self)
-    
+    self.__type__ = M.EType.Script
 end
 
 --如果不支持定时器只能手动执行了
@@ -20,7 +20,7 @@ end
 ----
 --以下不能被重写
 function M:_onClass(className,id)
-    return className
+    return {className}
 end
 
 function M:_onEnter()

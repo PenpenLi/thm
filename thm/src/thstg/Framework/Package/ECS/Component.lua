@@ -1,12 +1,17 @@
 local ECSUtil = require "thstg.Framework.Package.ECS.ECSUtil"
 local M = class("Component")
-
+M.EType = {--组件类型
+    Control = 1,
+    Script = 2
+}	
 function M:ctor(...)
     --用于标识组件类别
     self.__id__ = UIDUtil.getComponentUID()
+    self.__type__= M.EType.Control
     self.__compName__ = self.__cname
     self.__entity__ = nil
     self.__isEnabled__ = true
+    self.__priority__ = 1
     self.__className__,self.__classArgs__ = self:_getClass(...)
 
     self:_onInit(...)
@@ -16,6 +21,10 @@ function M:getClass()
     return self.__className__,self.__classArgs__
 end
 
+function M:getType()
+    return self.__type__
+end
+
 function M:getName()
     return self.__compName__ 
 end
@@ -23,11 +32,22 @@ end
 function M:getID()
     return self.__id__
 end
+
 function M:isEnabled()
 	return self.__isEnabled__
 end
+
 function M:setEnabled(val)
 	self.__isEnabled__ = val
+end
+
+function M:getPriority()
+    return self.__priority__
+end
+
+function M:setPriority(val)
+    self.__priority__ = val
+    self:getEntity():_adjustComponentPriority(self)
 end
 
 function M:getEntity()
@@ -50,10 +70,6 @@ end
 --获取组件
 function M:getComponent(...)
 	return self:getEntity():getComponent(...)
-end
---
-function M:getSystem(...)
-	return self:getEntity():getSystem(...)
 end
 ---
 --[[扩展]]
@@ -109,7 +125,7 @@ end
 
 function M:_onClass(className, id, ctorArgs)
     --能够决定是否可以多次被添加
-    return className
+    return {className}
 end
 
 --[[
@@ -176,9 +192,9 @@ function M:_getClass(...)
     local this = self
     while this do
         if not this.super then break end    --不包括最顶层,没有意义
-        local keys = {this:_onClass( this.__cname or "UnknowComponent" , this.__id__ , {...})}
+        local keys = this:_onClass(this.__cname or "UnknowComponent" , this.__id__ , {...})
         for i = #keys,1,-1 do
-            table.insert( classList, keys[i])
+            table.insert(classList, keys[i])
         end
         this = this.super
         

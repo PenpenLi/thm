@@ -193,16 +193,33 @@ end
 -----
 function M:_onInit()
     --消息注册
-    THSTG.ECSManager:getDispatcher():addEventListener(THSTG.TYPES.ECSEVENT.ECS_ENTITY_REMOVED, self._entityRemoveHandle, self)
+    THSTG.ECSManager.getDispatcher():addEventListener(THSTG.TYPES.ECSEVENT.ECS_ENTITY_REMOVED, self._entityRemoveHandle, self)
 end
 
 function M:_onUpdate(delay)
-    local compsGroups = self:getCompsGroups("ColliderComponent")
+    local compsGroups = self:getGroups("ColliderComponent")
     for _,group in pairs(compsGroups) do
         local collComp = group.ColliderComponent
         local rect = collComp:getRect()
         updateGrids(collComp,rect)
     end
+end
+
+function M:_onLateUpdate()
+    --越界判断更高效
+    local compsGroups = self:getGroups("CollisionController")
+    for _,group in pairs(compsGroups) do
+        local colliderCtrl = group.CollisionController
+        local filterStr = colliderCtrl:getFilter()
+        local isCollision,collision = self:isCollidedByGrids(colliderCtrl:getEntity(),filterStr)
+        if isCollision then
+            colliderCtrl:collide(collision.collider,collision)
+        end
+    end
+end
+
+function M:_onFilter( ... )
+    return false
 end
 
 ----

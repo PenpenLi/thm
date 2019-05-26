@@ -167,6 +167,7 @@ function init()
 end
 
 function clear()
+	getDispatcher():clear()
 	closeAllModules()
 	for k, v in pairs(_modules) do
 		v:close()
