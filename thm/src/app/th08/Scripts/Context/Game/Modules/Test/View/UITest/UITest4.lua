@@ -338,14 +338,14 @@ function M.create(params)
       
     end
     node:onNodeEvent("enter", function ()
-         THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(_varKeyboardListener, node)
-         THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(_varTouchAllListener, node)
+         THSTG.CCEventDispatcher:addEventListenerWithSceneGraphPriority(_varKeyboardListener, node)
+         THSTG.CCEventDispatcher:addEventListenerWithSceneGraphPriority(_varTouchAllListener, node)
          node:scheduleUpdateWithPriorityLua(updateFrame,0)
     end)
 
     node:onNodeEvent("exit", function ()
-        THSTG.CCDispatcher:removeEventListener(_varKeyboardListener)
-        THSTG.CCDispatcher:removeEventListener(_varTouchAllListener)
+        THSTG.CCEventDispatcher:removeEventListener(_varKeyboardListener)
+        THSTG.CCEventDispatcher:removeEventListener(_varTouchAllListener)
         node:unscheduleUpdate()
     end)
 

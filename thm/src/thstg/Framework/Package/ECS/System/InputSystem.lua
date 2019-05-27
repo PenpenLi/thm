@@ -57,8 +57,8 @@ end
 
 function M:_addListenerHandle(e,params)
     local node = params
-    CCDispatcher:addEventListenerWithSceneGraphPriority(self._keyboardListener, node)
-    CCDispatcher:addEventListenerWithSceneGraphPriority(self._touchListener, node)
+    CCEventDispatcher:addEventListenerWithSceneGraphPriority(self._keyboardListener, node)
+    CCEventDispatcher:addEventListenerWithSceneGraphPriority(self._touchListener, node)
 end
 
 function M:isKeyDown(keyCode)
@@ -78,4 +78,5 @@ function M:_onUpdate(delay)
         self.touchPos = nil
     end
 end
+
 return M

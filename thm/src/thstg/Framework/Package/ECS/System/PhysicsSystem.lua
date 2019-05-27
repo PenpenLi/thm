@@ -8,7 +8,7 @@ function M:_onInit()
 end
 
 function M:_onUpdate(delay)
-    local compsGroups = self:getGroups({"TransformComponent","RigidbodyComponent"})
+    local compsGroups = self:getGroups()
     for _,group in pairs(compsGroups) do
         local vRigidComp = group.RigidbodyComponent
         -- 重力加速度叠加
@@ -31,7 +31,7 @@ function M:_onUpdate(delay)
 end
 
 function M:_onFilter()
-    return false
+    return {"TransformComponent","RigidbodyComponent"}
 end
 
 return M

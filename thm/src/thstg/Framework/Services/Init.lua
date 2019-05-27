@@ -7,6 +7,4 @@ EffectServer = require "thstg.Framework.Services.EffectServer"
 
 ----
 --调用时用冒号
-CCDispatcher = EVENT.getEventDispatcher()
-MVCDispatcher = EVENT.DispatcherManager.getNew()
-ECSDispatcher = EVENT.DispatcherManager.getNew()
+CCEventDispatcher = cc.Director:getInstance():getEventDispatcher()

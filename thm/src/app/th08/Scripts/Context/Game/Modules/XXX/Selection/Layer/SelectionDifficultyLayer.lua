@@ -152,12 +152,12 @@ function M.create(params)
     node:onNodeEvent("enter", function ()
         node.updateLayer()
         Dispatcher.addEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.updateData)
-        THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(_varKeyboardListener, node)
+        THSTG.CCEventDispatcher:addEventListenerWithSceneGraphPriority(_varKeyboardListener, node)
     end)
 
     node:onNodeEvent("exit", function ()
         Dispatcher.removeEventListener(EventType.STARTITEM_SELECTROLE_CANCEL,node.updateData)
-        THSTG.CCDispatcher:removeEventListener(_varKeyboardListener)
+        THSTG.CCEventDispatcher:removeEventListener(_varKeyboardListener)
     end)
 
     

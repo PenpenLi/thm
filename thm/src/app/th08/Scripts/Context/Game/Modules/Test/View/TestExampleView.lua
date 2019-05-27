@@ -65,7 +65,7 @@ function M.create(params)
                 end
             end,
         })
-        THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, node)
+        THSTG.CCEventDispatcher:addEventListenerWithSceneGraphPriority(listener, node)
 
         -- changeTest(#TEST_EXAMPLE_TABLE)
         changeTest(1 + 1)

@@ -1,6 +1,6 @@
 module("MVCManager", package.seeall)
 
-local _dispatcher = THSTG.MVCDispatcher
+local _dispatcher = EVENT.DispatcherManager.getNew()
 --[[ 常驻模块
 主界面ui
 ]]

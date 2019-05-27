@@ -3,7 +3,7 @@ module(..., package.seeall)
 local M = class("TestController", THSTG.MVC.Controller)
 
 function M:_onInit()
-    THSTG.CCDispatcher:addEventListenerWithFixedPriority(THSTG.EVENT.newKeyboardListener({onPressed = function(keyCode, event) self:__keyBoadrControl(keyCode, event) end}), 1)
+    THSTG.CCEventDispatcher:addEventListenerWithFixedPriority(THSTG.EVENT.newKeyboardListener({onPressed = function(keyCode, event) self:__keyBoadrControl(keyCode, event) end}), 1)
 end
 
 function M:_onOpen()

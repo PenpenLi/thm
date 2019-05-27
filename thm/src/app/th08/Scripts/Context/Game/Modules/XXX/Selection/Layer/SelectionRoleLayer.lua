@@ -68,11 +68,11 @@ function M.create(params)
     end
 
     node:onNodeEvent("enter", function ()
-        THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(_varKeyboardListener, node)
+        THSTG.CCEventDispatcher:addEventListenerWithSceneGraphPriority(_varKeyboardListener, node)
 	end)
 
     node:onNodeEvent("exit", function ()
-        THSTG.CCDispatcher:removeEventListener(_varKeyboardListener)
+        THSTG.CCEventDispatcher:removeEventListener(_varKeyboardListener)
     end)
 
     return node

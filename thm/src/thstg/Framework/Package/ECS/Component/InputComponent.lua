@@ -86,13 +86,13 @@ function M:_onAdded(entity)
     })
 
 
-    CCDispatcher:addEventListenerWithSceneGraphPriority(self._keyboardListener, entity)
-    CCDispatcher:addEventListenerWithSceneGraphPriority(self._touchListener, entity)
+    CCEventDispatcher:addEventListenerWithSceneGraphPriority(self._keyboardListener, entity)
+    CCEventDispatcher:addEventListenerWithSceneGraphPriority(self._touchListener, entity)
 end
 
 function M:_onRemoved(entity)
-    CCDispatcher:removeEventListener(self._keyboardListener)
-    CCDispatcher:removeEventListener(self._touchListener)
+    CCEventDispatcher:removeEventListener(self._keyboardListener)
+    CCEventDispatcher:removeEventListener(self._touchListener)
 end
 
 function M:_onLateUpdate()

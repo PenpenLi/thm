@@ -67,7 +67,7 @@ function M:onCreate()
             end
         end,
     })
-    THSTG.CCDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
+    THSTG.CCEventDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
 
     changeTest(2)
 end

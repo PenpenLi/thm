@@ -1,5 +1,6 @@
 module("ECSManager", package.seeall)
-local _dispatcher = THSTG.ECSDispatcher
+
+local _dispatcher = EVENT.DispatcherManager.getNew()
 
 --实体flag
 local EEntityFlag = {
