@@ -13,8 +13,8 @@ end
 ---
 function M:ctor(...)
     self.__id__ = UIDUtil.getSystemUID()
-    self.__groups__ = {}
-    self.__groupsReady__ = {}
+    self.__groupsAll__ = {}
+    self.__groupsQueue__ = {}
     self.__listenedClass__ = self:_getFilter()
 
     self:_onInit(...)
@@ -83,7 +83,7 @@ function M:getGroups(args)
 
     --新的实体收集
     local function newCollectGroups()
-        local ret = self.__groups__
+        local ret = self.__groupsQueue__
         return ret
     end
 
@@ -118,6 +118,7 @@ function M:_onRemoved()
 
         ECSManager.getDispatcher():removeEventListener(TYPES.ECSEVENT.ECS_ENTITY_ADDED, self._handleGroups, self)
         ECSManager.getDispatcher():removeEventListener(TYPES.ECSEVENT.ECS_ENTITY_REMOVED, self._handleGroups, self)
+        
     end
 end
 
@@ -180,7 +181,7 @@ function M:_collectGroup(e,comp)
     if isListenerClass(className,classArgs) then
         if e == ECSEVENT.ECS_ENTITY_COMPONENT_ADDED then
             --是否已经有了,没有就要添加
-            if not self.__groupsReady__[entityId] then
+            if not self.__groupsAll__[entityId] then
                 local ret = {}
                 local isOk = true
                 for _,name in pairs(self.__listenedClass__) do
@@ -193,16 +194,19 @@ function M:_collectGroup(e,comp)
                 if isOk then
                     --包括那些没进入场景的,在池中的实体
                     ret._entity = entity
-                    self.__groupsReady__[entityId] = ret
+                    self.__groupsAll__[entityId] = ret
+                    if entity:getParent() then
+                        self.__groupsQueue__[entityId] = ret
+                    end
                 end
             end
         elseif e == ECSEVENT.ECS_ENTITY_COMPONENT_REMOVED then
             --是否已经有了,有了就要移除
-            if self.__groupsReady__[entityId] then
-                self.__groupsReady__[entityId] = nil
+            if self.__groupsAll__[entityId] then
+                self.__groupsAll__[entityId] = nil
             end
-            if self.__groups__[entityId] then
-                self.__groups__[entityId] = nil
+            if self.__groupsQueue__[entityId] then
+                self.__groupsQueue__[entityId] = nil
             end
         end
     end
@@ -211,13 +215,13 @@ end
 function M:_handleGroups(e,entity)
     local entityId = entity:getID()
     if e == TYPES.ECSEVENT.ECS_ENTITY_ADDED then --从预备组转到可用组
-        if not self.__groups__[entityId] then
-            self.__groups__[entityId] = self.__groupsReady__[entityId]
+        if not self.__groupsQueue__[entityId] then
+            self.__groupsQueue__[entityId] = self.__groupsAll__[entityId]
         end
     
     elseif e == TYPES.ECSEVENT.ECS_ENTITY_REMOVED then --从可用组转到预备组
-        if self.__groups__[entityId] then
-            self.__groups__[entityId] = nil
+        if self.__groupsQueue__[entityId] then
+            self.__groupsQueue__[entityId] = nil
         end
     end
 end

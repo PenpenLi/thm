@@ -3,10 +3,6 @@ local M = class("PhysicsSystem",ECS.System)
 M.GRAVITY_PIXEL_RATE = 1/60                        --米与像素的比率/每帧
 M.GRAVITY = 9.8                                    --重力加速度
 
-function M:_onInit()
-    --消息注册
-end
-
 function M:_onUpdate(delay)
     local compsGroups = self:getGroups()
     for _,group in pairs(compsGroups) do
