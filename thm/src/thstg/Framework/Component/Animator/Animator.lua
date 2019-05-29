@@ -13,7 +13,7 @@ function M:play(stateName)
 end
 
 function M:crossFade(stateName,fadeTime)
-    --过渡
+    --过渡,等待当前状态结束采取切换
 end
 
 function M:setValue(paramName,value)

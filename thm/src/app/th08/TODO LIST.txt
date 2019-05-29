@@ -136,6 +136,7 @@ TODO LIST:
 2019-5-28
 1:[]getClass查找父类可以保存为Table,不用保存为List,提高查找效率
 2:[]全部改用消息派发来访问其他Table
+3:[-]添加component可以记录插入位,方便增删,(过于动态不可行)
 
 --遗留bug
 1:[-]_onAdded()中不能使用addChild()/addTo(),会触发_onStart(),如要使用需要手动调整addScript()顺序

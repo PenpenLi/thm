@@ -1,4 +1,4 @@
-local EventDispatcher = require "thstg.Framework.Component.Event.EventDispatcher"
+local EventDispatcher = require "thstg.Framework.Component.EventSystem.EventDispatcher"
 
 module("DispatcherManager", package.seeall)
 

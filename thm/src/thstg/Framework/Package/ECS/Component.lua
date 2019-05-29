@@ -1,13 +1,8 @@
 local ECSUtil = require "thstg.Framework.Package.ECS.ECSUtil"
 local M = class("Component")
-M.EType = {--组件类型
-    Control = 1,
-    Script = 2
-}	
 function M:ctor(...)
     --用于标识组件类别
     self.__id__ = UIDUtil.getComponentUID()
-    self.__type__= M.EType.Control
     self.__compName__ = self.__cname
     self.__entity__ = nil
     self.__isEnabled__ = true
@@ -19,10 +14,6 @@ end
 
 function M:getClass()
     return self.__className__,self.__classArgs__
-end
-
-function M:getType()
-    return self.__type__
 end
 
 function M:getName()
@@ -188,6 +179,7 @@ function M:_getClass(...)
         return tmp
     end
 
+    local classTable = {}
     local classList = {}
     local this = self
     while this do
@@ -195,12 +187,13 @@ function M:_getClass(...)
         local keys = this:_onClass(this.__cname or "UnknowComponent" , this.__id__ , {...})
         for i = #keys,1,-1 do
             table.insert(classList, keys[i])
+            classTable[keys[i]] = keys[i]
         end
         this = this.super
         
     end
     classList = reverseTable(classList)
-    return ECSUtil.trans2Name(unpack(classList)),classList
+    return ECSUtil.trans2Name(unpack(classList)),classList,classTable
 end
 
 return M

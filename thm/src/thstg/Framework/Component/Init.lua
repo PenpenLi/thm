@@ -1,6 +1,6 @@
 
 ---事件
-require "thstg.Framework.Component.Event.Init"
+require "thstg.Framework.Component.EventSystem.Init"
 
 --定时器
 require "thstg.Framework.Component.Schedule.Init"

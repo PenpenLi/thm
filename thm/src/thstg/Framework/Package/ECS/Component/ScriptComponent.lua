@@ -2,7 +2,6 @@
 local M = class("ScriptComponent",ECS.Component)
 function M:ctor(...)
     M.super.ctor(self)
-    self.__type__ = M.EType.Script
 end
 
 --如果不支持定时器只能手动执行了
