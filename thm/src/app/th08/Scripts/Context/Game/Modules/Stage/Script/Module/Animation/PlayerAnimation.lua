@@ -31,8 +31,8 @@ end
 
 function M:_onSetup()
     --重定向组件
-    self.animaComp = self:getEntity():getChildByName("SPRITE_NODE"):getComponent("AnimationComponent")
-    self.spriteComp = self:getEntity():getChildByName("SPRITE_NODE"):getComponent("SpriteComponent")
+    self.animaComp = self:getEntity():findChild("SPRITE_NODE"):getComponent("AnimationComponent")
+    self.spriteComp = self:getEntity():findChild("SPRITE_NODE"):getComponent("SpriteComponent")
     
     M.super._onSetup(self)
 end

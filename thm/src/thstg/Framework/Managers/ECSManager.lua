@@ -51,12 +51,11 @@ function removeEntity(entity)
     local id = entity:getID()
     local realEntity = _entityCache[id]
     if realEntity then
-        getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_REMOVED,realEntity)
         _entityCache[id] = nil
+        getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_REMOVED,realEntity)
     end
 end
 
---TODO:
 function initEntity(entity)
     getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_ENTITY_INIT,entity)
 end
@@ -178,8 +177,8 @@ end
 -----
 --[[系统管理]]
 function addSystem(system)
-    local className = system:getClass()
-    _systemCache[className] = system
+    local classPath = system:getClassPath()
+    _systemCache[classPath] = system
     system:_onAdded()
     getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_SYSTEM_ADDED,system)
 end
@@ -189,7 +188,7 @@ function getSystem(name)
 end
 
 function removeSystem(system)
-    local className = system:getClass()
+    local classPath = system:getClassPath()
     getDispatcher():dispatchEvent(TYPES.ECSEVENT.ECS_SYSTEM_REMOVED,_systemCache[system])
     system:_onRemoved()
     _systemCache[system] = nil

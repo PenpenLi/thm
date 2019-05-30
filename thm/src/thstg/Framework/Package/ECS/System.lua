@@ -13,8 +13,10 @@ end
 ---
 function M:ctor(...)
     self.__id__ = UIDUtil.getSystemUID()
+    self.__sysName__ = self.__cname or "UnknowSystem"
     self.__groupsAll__ = {}
     self.__groupsQueue__ = {}
+    self.__classPath__,self.__classList__,self.__classMap__ = ECSUtil.trans2ClassInfo(self,{...})
     self.__listenedClass__ = self:_getFilter()
 
     self:_onInit(...)
@@ -24,8 +26,24 @@ function M:getID()
     return self.__id__
 end
 
-function M:getClass()
-    return self:_onClass( self.__cname )
+function M:getClassPath()
+    return self.__classPath__
+end
+
+function M:getClassList()
+    return self.__classList__
+end
+
+function M:getClassMap()
+    return self.__classMap_
+end
+
+function M:getClassName()
+    return self.__cname
+end
+
+function M:getName()
+    return self.__sysName__ 
 end
 
 --每帧更新
@@ -35,11 +53,6 @@ end
 
 function M:lateUpdate(delay)
     self:_onLateUpdate(delay)
-end
-
---发送事件
-function M:dispatch(e,params)
-	ECSManager.dispatchEvent(ECSManager.EEventCacheType.System,e,params)
 end
 
 function M:clear()
@@ -66,7 +79,7 @@ function M:getGroups(args)
             local isOk = true
             for i = 1,#componentNames do
                 local compName = componentNames[i]
-                if type(compName) == "table" then compName = ECSUtil.trans2Name(unpack(compName)) end
+                if type(compName) == "table" then compName = ECSUtil.trans2Path(unpack(compName)) end
                 ret[compName] = entity:getComponent(compName)
                 if not ret[compName] then 
                     isOk = false
@@ -150,7 +163,7 @@ function M:_getFilter()
         local map = {}
         for _,v in ipairs(list) do
             local name = v
-            if type(name) == "table" then name = ECSUtil.trans2Name(unpack(name)) end
+            if type(name) == "table" then name = ECSUtil.trans2Path(unpack(name)) end
             map[name] = name
         end
         return map
@@ -160,10 +173,10 @@ end
 
 --TODO:在ColliderSystem使用有问题
 function M:_collectGroup(e,comp)
-    local function isListenerClass(className,classArgs)
-        if not self.__listenedClass__[className] then
+    local function isListenerClass(classPath,classMap)
+        if not self.__listenedClass__[classPath] then
             for _,v in pairs(self.__listenedClass__) do
-                if ECSUtil.isKindof(classArgs,v) then
+                if ECSUtil.find2ClassWithChildByClassMap(classMap,v) then
                     return true
                 end
             end
@@ -175,10 +188,10 @@ function M:_collectGroup(e,comp)
     end
 
     local entity = comp:getEntity()
-    local className,classArgs = comp:getClass()
+    local classPath,classMap = comp:getClassPath(),comp:getClassMap()
     local entityId = entity:getID()
     
-    if isListenerClass(className,classArgs) then
+    if isListenerClass(classPath,classMap) then
         if e == ECSEVENT.ECS_ENTITY_COMPONENT_ADDED then
             --是否已经有了,没有就要添加
             if not self.__groupsAll__[entityId] then

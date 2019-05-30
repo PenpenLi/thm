@@ -48,7 +48,7 @@ end
 function M:_onStart()
     M.super._onStart(self)
     --取得动画节点
-    self._spriteNode = self:getEntity():getChildByName("SPRITE_NODE")
+    self._spriteNode = self:getEntity():findChild("SPRITE_NODE")
     self._spriteNodeActionComp = self._spriteNode:getComponent("ActionComponent")
 end
 

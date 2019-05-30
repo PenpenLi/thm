@@ -6,7 +6,7 @@ function M:_onInit()
 end
 ----
 function M:_onStart()
-    self.breakDownEffect = self:getEntity():getChildByName("breakDownEffect")
+    self.breakDownEffect = self:getEntity():findChild("breakDownEffect")
 end
 ----
 function M:_onHurt()

@@ -110,10 +110,10 @@ function M:_onStart()
     self._slowCtrl = self:getEntity():getScript("SlowController")
     
     --取得主发射口脚本节点
-    self._shotCtrl = self:getEntity():getChildByName("EMITTER"):getScript("EmitterController")
+    self._shotCtrl = self:getEntity():findChild("EMITTER"):getScript("EmitterController")
 
     --取得动画节点
-    self._spriteNode = self:getEntity():getChildByName("SPRITE_NODE")
+    self._spriteNode = self:getEntity():findChild("SPRITE_NODE")
 
 end
 

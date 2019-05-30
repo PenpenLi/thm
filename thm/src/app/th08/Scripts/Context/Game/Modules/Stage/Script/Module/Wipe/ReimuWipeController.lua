@@ -21,8 +21,8 @@ function M:_onStart()
     --
     self.reimuCtrl = self:getScript("ReimuController")
     --取得僚机实体
-    self.wingman1 = self:getEntity():getChildByName("GYOKU1")
-    self.wingman2 = self:getEntity():getChildByName("GYOKU2")
+    self.wingman1 = self:getEntity():findChild("GYOKU1")
+    self.wingman2 = self:getEntity():findChild("GYOKU2")
 
     self._wingman1ActionComp = self.wingman1:getComponent("ActionComponent")
     self._wingman2ActionComp = self.wingman2:getComponent("ActionComponent")

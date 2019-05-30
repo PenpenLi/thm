@@ -6,14 +6,18 @@ end
 ------
 function M:setPosition(x,y)
     if type(x) == "table" then
+        if x.x == self:getPositionX() and x.y == self:getPositionY() then return end
         return self:getEntity():setPosition(x)
     end
+    if x == self:getPositionX() and x == self:getPositionY() then return end
     return self:getEntity():setPosition(x,y)
 end
 function M:setPositionX(x)
+    if x == self:getPositionX() then return end
     self:getEntity():setPositionX(x)
 end
 function M:setPositionY(y)
+    if y == self:getPositionY() then return end
     self:getEntity():setPositionY(y)
 end
 function M:getPositionX()

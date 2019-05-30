@@ -24,8 +24,9 @@ function M:ctor()
 	self.__isActive__ = true
 	self.__isUpdating__ = false
 
-	--组件更新队列
-	self.__compsUpdateQueue__ = {}
+	
+	self.__compsUpdateQueue__ = {}--组件更新队列
+	self.__lateEventsHandle__ = false--延后事件队列
 	----
 	--CCNode的回调
 	--从节点进入
@@ -65,18 +66,18 @@ function M:ctor()
 end
 --
 --[[component模块]]
---FIXME:组件的添加,移除应该设置在帧后
+--组件的添加,移除应该设置在帧后
 local function _addComponent(self,component,params)
 	assert(not tolua.iskindof(component, "ECS.Component"), "[Entity] the addChild function param value must be a THSTG ECS.Component object!!")
 
 	if not self.__isUpdating__ then
 		-- 有些组件可以被多次添加,有些不行
-		local componentName = component:getClass()
-		assert(componentName, "[Entity] The component must have a unique name!")
-		assert(not self.__components__[componentName], "[Entity] component already added. It can't be added again!")
+		local componentPath = component:getClassPath()
+		assert(componentPath, "[Entity] The component must have a unique name!")
+		assert(not self.__components__[componentPath], "[Entity] component already added. It can't be added again!")
 		
 		if component:_added(self,params) ~= false then
-			self.__components__[componentName] = component
+			self.__components__[componentPath] = component
 			local priority = component:getPriority()
 			if priority > #self.__compsUpdateQueue__ then priority = #self.__compsUpdateQueue__ end
 			if priority < 1 then priority = 1 end
@@ -85,18 +86,18 @@ local function _addComponent(self,component,params)
 			return component
 		end
 	else
-		error("T:不能在更新時动态添加")
+		self:_doEventLate(_addComponent,{self,component,params})
 	end
 end
 
 local function _remveComponent(self,params,...)
 	if not self.__isUpdating__ then
-		local name = ECSUtil.trans2Name(...)
-		local component = self.__components__[name]
+		local componentPath = ECSUtil.trans2Path(...)
+		local component = self.__components__[componentPath]
 		if component then
 			if component:_removed(self) ~= false then
 				ECSManager.removeEntityComponent(component)
-				self.__components__[name] = nil
+				self.__components__[componentPath] = nil
 				for i,v in ipairs(self.__compsUpdateQueue__) do if v == component then table.remove(self.__compsUpdateQueue__, i) break end end
 				if params then
 					params.comp = component
@@ -104,28 +105,28 @@ local function _remveComponent(self,params,...)
 			end
 		end
 	else
-		error("T:不能在更新時动态添加")
+		self:_doEventLate(_remveComponent,{self,params,...})
 	end
 end
 
 local function _remveComponents(self,...)
 	if not self.__isUpdating__ then
-		local name = ECSUtil.trans2Name(...)
+		local name = ECSUtil.trans2Path(...)
 		for k,v in pairs(self.__components__) do
-			local className,classArgs = v:getClass()
-			if ECSUtil.find2ClassWithChild(classArgs,...) then
-				_remveComponent(self,false,unpack(classArgs))
+			local classMap = v:getClassMap()
+			if ECSUtil.find2ClassWithChildByClassMap(classMap,...) then
+				_remveComponent(self,false,...)
 			end
 		end
 	else
-		error("不能在更新時动态添加")
+		self:_doEventLate(_remveComponents,{self,...})
 	end
 end
 
 function M:addComponent(component,params)
 	local comp = _addComponent(self,component,params)
-	local className = comp:getClass()
-	self[className] = comp
+	local classPath = comp:getClassPath()
+	self[classPath] = comp
 	return comp
 end
 
@@ -133,8 +134,8 @@ end
 function M:removeComponent(...)
 	local params = {}
 	_remveComponent(self,params,...)
-	local className= params.comp:getClass()
-	self[className] = nil
+	local classPath= params.comp:getClassPath()
+	self[classPath] = nil
 end
 
 --移除组件列表
@@ -154,7 +155,7 @@ end
 function M:getAllComponents()
 	local ret = {}
 	for _,v in pairs(self.__components__) do
-		table.insert( ret, v )
+		table.insert(ret, v)
 	end
 	return ret
 end
@@ -163,9 +164,9 @@ end
 function M:getComponents(...)
 	local ret = {}
 	for k,v in pairs(self.__components__) do
-		local _,classArgs = v:getClass()
-		if ECSUtil.find2ClassWithChild(classArgs,...) then
-			table.insert( ret, v )
+		local classMap = v:getClassMap()
+		if ECSUtil.find2ClassWithChildByClassMap(classMap, ...) then
+			table.insert(ret, v)
 		end
 	end
 	
@@ -174,7 +175,7 @@ end
 
 --获取组件
 function M:getComponent(...)
-	local name = ECSUtil.trans2Name(...)
+	local name = ECSUtil.trans2Path(...)
 	local comp = self.__components__[name]
 	return comp or self:getComponents(...)[1]
 end
@@ -219,7 +220,7 @@ function M:removeAllComponents()
 	end
 end
 
---[[脚本模块]]
+--[[Script模块]]
 function M:addScript(scprit,params)
 	return _addComponent(self,scprit,params)
 end
@@ -238,7 +239,7 @@ function M:replaceScript(a1,a2)
 	if a2 == nil then
 		comp = a1
 		params = a2
-		local _,classList = comp:getClass()
+		local classList = comp:getClassList()
 		class = clone(classList)
 		table.remove(class,#class)
 	else
@@ -272,6 +273,7 @@ function M:update(dTime)
 	self:_onLateUpdate(dTime)
 
 	self.__isUpdating__ = false
+	self:_handleLateEvents()
 end
 
 ----
@@ -312,6 +314,17 @@ end
 
 function M:clearFlags()
 	self.__flags__ = {}
+end
+
+--[CCNode扩展]
+function M:findChild(nodePath)
+	local nameArray = string.split(nodePath,"/")
+	local node = nil
+	for i,v in ipairs(nameArray) do
+		node = self:getChildByName(v)
+		if not node then break end
+	end
+	return node
 end
 
 ---
@@ -399,6 +412,23 @@ function M:_active(isActive)
 	end
 end
 
+function M:_doEventLate(func,params)
+	self.__lateEventsHandle__ = self.__lateEventsHandle__ or {}
+	table.insert(self.__lateEventsHandle__,{
+		func = func,
+		params = params,
+	})
+end
+
+function M:_handleLateEvents()
+	if self.__lateEventsHandle__ then
+		for i,v in iparis(self.__lateEventsHandle__) do
+			v.func(unpack(v.params))
+		end
+		self.__lateEventsHandle__ = false
+	end
+end
+
 function M:_adjustComponentPriority(component)
 	if not self.__isUpdating__ then
 		--从队列中移除在插入
@@ -414,7 +444,7 @@ function M:_adjustComponentPriority(component)
 			end 
 		end
 	else
-		error("T:不能在更新時动态添加")
+		self:_doEventLate(self._adjustComponentPriority, {self,component})
 	end
 end
 -------

@@ -3,17 +3,29 @@ local M = class("Component")
 function M:ctor(...)
     --用于标识组件类别
     self.__id__ = UIDUtil.getComponentUID()
-    self.__compName__ = self.__cname
+    self.__compName__ = self.__cname or "UnknowComponent"
     self.__entity__ = nil
     self.__isEnabled__ = true
     self.__priority__ = 1
-    self.__className__,self.__classArgs__ = self:_getClass(...)
+    self.__classPath__,self.__classList__,self.__classMap__ = ECSUtil.trans2ClassInfo(self,{...})
 
     self:_onInit(...)
 end
 
-function M:getClass()
-    return self.__className__,self.__classArgs__
+function M:getClassPath()
+    return self.__classPath__
+end
+
+function M:getClassList()
+    return self.__classList__
+end
+
+function M:getClassMap()
+    return self.__classMap__
+end
+
+function M:getClassName()
+    return self.__cname
 end
 
 function M:getName()
@@ -164,36 +176,11 @@ function M:_added(entity,param)
     self.__entity__ = entity
     self:_onAdded(entity,param)
 end
+
 function M:_removed(entity,force)
     if self:_onRemoved(entity) then
         self.__entity__ = nil
     end
-end
-function M:_getClass(...)
-    local function reverseTable(tab)
-        local tmp = {}
-        for i = 1, #tab do
-            local key = #tab
-            tmp[i] = table.remove(tab)
-        end
-        return tmp
-    end
-
-    local classTable = {}
-    local classList = {}
-    local this = self
-    while this do
-        if not this.super then break end    --不包括最顶层,没有意义
-        local keys = this:_onClass(this.__cname or "UnknowComponent" , this.__id__ , {...})
-        for i = #keys,1,-1 do
-            table.insert(classList, keys[i])
-            classTable[keys[i]] = keys[i]
-        end
-        this = this.super
-        
-    end
-    classList = reverseTable(classList)
-    return ECSUtil.trans2Name(unpack(classList)),classList,classTable
 end
 
 return M

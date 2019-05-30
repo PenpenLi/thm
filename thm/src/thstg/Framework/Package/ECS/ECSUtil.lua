@@ -2,7 +2,7 @@ module(..., package.seeall)
 local _COMPONENT_SEPARATE_CHAR_ = "/"
 
 ----
-function trans2Name(...)
+function trans2Path(...)
     local tags = {...}
     local name = ""
     for _,v in ipairs(tags) do
@@ -33,34 +33,10 @@ function find2Class(name,...)
     return isMatch
 end
 
---
---使能够找到子类
--- function find2ClassWithChild(name,...)
---     local argsA = trans2Args(name)
---     local argsB = {...}
---     local length = #argsB
---     if length <= 2 then 
---         for i = #argsA,1,-1 do
---             if argsA[i] == argsB[length] then
---                 return true
---             end
---         end
---     else
---         for i = 1,length do
---             if argsA[i] ~= argsB[i] then
---                 return false
---             end
---         end
---         return true
---     end
-
---     return false
--- end
-
 --使能够找到子类
 --模式匹配,改进算法
-function find2ClassWithChild(nameArgs,...)
-    local argsA = nameArgs
+function find2ClassWithChildByClassList(classList,...)
+    local argsA = classList
     local argsB = {...}
 
     -- if #argsB == 1 then argsB = trans2Args(argsB) end
@@ -85,10 +61,14 @@ function find2ClassWithChild(nameArgs,...)
     return (j ~= lengthB)
 end
 
-function isKindof(childClassNameArgs,fatherClassName)
-    local args = childClassNameArgs
-    if type(args) == "string"  then args = trans2Args(childClassNameArgs) end
-    return find2ClassWithChild(args,fatherClassName)
+function find2ClassWithChildByClassMap(classMap,...)
+    local argsB = {...}
+    for i = #argsB,1,-1 do
+        if classMap[argsB[i]] then
+            return true
+        end
+    end
+    return false
 end
 
 function match2Class(name,...)
@@ -105,154 +85,29 @@ function match2Class(name,...)
     return isMatch
 end
 
------
----考虑到Entity拥有的脚本数不会很多,因此没有必要使用多重map的形式
-local function createNode(data)
-    if not data then return nil end
-    local Node = {
-        isNode = true,
-        data = date
-    }
-    function Node:getDate()
-        return self.data
-    end
-    return Node
-end
-
-function add2Value(tb,val,...)
-    local tags = {...}
-    tb = tb or {}
-    local isArgs = tags and next(tags)
-    local isAdded = false
-    if isArgs then
-        if val then
-            local ret = tb
-            local prevKey = nil
-            for _,v in ipairs(tags) do
-                if prevKey then
-                    ret = ret[prevKey] or {}
-                end
-                prevKey = v
-            end
-            if prevKey then
-                if ret[prevKey] ~= nil then 
-                    isAdded = true 
-                else
-                    -- table.insert( ret, createNode(val) )
-                    ret[prevKey] = createNode(val)
-                end
-            end
+function trans2ClassInfo(obj,ctorArgs)
+    local function reverseTable(tab)
+        local tmp = {}
+        for i = 1, #tab do
+            local key = #tab
+            tmp[i] = table.remove(tab)
         end
-    end
-    
-    return tb,isArgs,isAdded
-end
-
-function get2Value(tb,...)
-    local tags = {...}
-    local ret = nil
-    if tb then
-        ret = tb
-        for _,v in ipairs(tags) do
-            ret = ret[v]
-            if ret == nil then return ret end
-        end
+        return tmp
     end
 
-    if ret.isNode then
-        return ret:getData()
+    local classTable = {}
+    local classList = {}
+    local this = obj
+    while this do
+        if not this.super then break end    --不包括最顶层,没有意义
+        local keys = this:_onClass(this.__cname or "UnknowClass" , this.__id__ , ctorArgs)
+        for i = #keys,1,-1 do
+            table.insert(classList, keys[i])
+            classTable[keys[i]] = keys[i]
+        end
+        this = this.super
+        
     end
-    return ret
-end
-
-function set2Value(tb,val,...)
-    local tags = {...}
-    if tb then
-        local ret = tb
-        local prevKey = nil
-        for _,v in ipairs(tags) do
-            if prevKey then
-                ret = ret[prevKey]
-                if ret == nil then return false end
-            end
-            prevKey = v
-        end
-
-        if prevKey then
-            ret[prevKey] = createNode(val)
-            return true
-        end
-    end
-end
-----
-function get2Value2(tb,...)
-    local tags = {...}
-    if tb then
-        local ret = tb
-        local prevKey = nil
-        for _,v in ipairs(tags) do
-            if prevKey then
-                ret = ret[prevKey]
-                if ret == nil then return false end
-            end
-            prevKey = v
-        end
-       
-        if ret[1] then
-            if ret[1].isNode then
-                for i = #ret , 1, -1 do
-                    if ret[i]:getData():getClass() == prevKey then
-                        return ret[i]:getData()
-                    end
-                end
-            else
-                return ret[prevKey]
-            end
-        end
-
-    end
-    return nil
-end
-
-
-function remove2Value(tb,...)
-    local tags = {...}
-    if tb then
-        local ret = tb
-        local prevKey = nil
-        for _,v in ipairs(tags) do
-            if prevKey then
-                ret = ret[prevKey]
-                if ret == nil then return false end
-            end
-            prevKey = v
-        end
-       
-        if ret[1] then
-            if ret[1].isNode then
-                for i = #ret , 1, -1 do
-                    if ret[i]:getData():getClass() == prevKey then
-                        table.remove( ret,i )
-                        return true
-                    end
-                end
-            else
-                ret[prevKey] = nil
-                return true
-            end
-        end
-
-    end
-    return false
-end
-
-function visit2Value(val,func)
-    --只遍历所有的叶子
-    for _,v in pairs(val) do
-        if v.isNode then --判断是否为叶子????
-            func(val:getData())
-        else
-            visit2Value(v,func)
-        end
-    end
+    classList = reverseTable(classList)
+    return trans2Path(unpack(classList)),classList,classTable
 end
