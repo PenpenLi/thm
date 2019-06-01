@@ -9,11 +9,11 @@ function M:ctor()
     self.helthController = StageDefine.PlayerBulletHealth.new()
     self:addScript(self.helthController)
 
-    self.collisionController = StageDefine.PlayerBulletCollision.new()
-    self:addScript(self.collisionController)
-
     self.animationController = StageDefine.PlayerBulletAnimation.new()
     self:addScript(self.animationController)
+
+    self.collisionController = StageDefine.PlayerBulletCollision.new()
+    self:addScript(self.collisionController)
     
     self.bulletController = StageDefine.PlayerBulletController.new()
     self:addScript(self.bulletController)

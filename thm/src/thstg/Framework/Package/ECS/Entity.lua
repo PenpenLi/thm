@@ -21,6 +21,7 @@ function M:ctor()
     self.__id__ = UIDUtil.getEntityUID()
 	self.__components__ = {}
 	self.__flags__ = nil
+	self.__isAwake = false
 	self.__isActive__ = true
 	self.__isUpdating__ = false
 
@@ -39,7 +40,7 @@ function M:ctor()
 			self:update(dTime)
 		end
 		ECSManager.addEntity(self)
-		self:scheduleUpdateWithPriorityLua(onUpdate,-1)	--system的优先级要比实体更新高
+		self:scheduleUpdateWithPriorityLua(onUpdate,1)	--system的优先级要比实体更新高
 		self:_enter()
 	end
 
@@ -334,6 +335,10 @@ end
 function M:_onInit(...)
 
 end
+--初始化一次之后执行
+function M:_onAwake()
+
+end
 
 --进入场景回调
 function M:_onEnter()
@@ -384,17 +389,27 @@ function M:_visitComps(func)
 	end
 end
 
+function M:_awake()
+	self:_onAwake()
+	self:_visitComps(function(comp)
+		comp:_onAwake()
+	end)
+	self.__isAwake = true
+end
+
 function M:_enter()
+	if not self.__isAwake then self:_awake() end
+	
 	self:_onEnter()
-	for _,v in pairs(self.__components__) do
-		v:_onEnter()
-	end
+	self:_visitComps(function(comp)
+		comp:_onEnter()
+	end)
 end
 
 function M:_exit()
-	for _,v in pairs(self.__components__) do
-		v:_onExit()
-	end
+	self:_visitComps(function(comp)
+		comp:_onExit()
+	end)
 	self:_onExit()
 
 end

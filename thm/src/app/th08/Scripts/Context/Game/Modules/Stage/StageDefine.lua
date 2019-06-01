@@ -95,6 +95,7 @@ PorpCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collis
 ---子弹的碰撞控制
 BulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.BulletCollision")
 PlayerBulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.PlayerBulletCollision")
+EnemyBulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.EnemyBulletCollision")
 WingmanBulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.WingmanBulletCollision")
 
 --消弹系统

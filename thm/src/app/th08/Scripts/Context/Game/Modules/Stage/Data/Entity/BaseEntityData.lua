@@ -25,12 +25,17 @@ function M:getAnimationData()
     return self._data.animaData
 end
 
+function M:getShapeData()
+    return self._data.shapeData
+end
+
 function M:_initData(params)
     params = params or {}
 
     local code = params.code or params.cfgCode
     local cfgCode = params.cfgCode or code
     local animaCode = params.animaCode or code
+    local shapeCode = params.shapeCode or code
 
     self._code = code
 
@@ -58,6 +63,7 @@ function M:_initData(params)
 
         local animData = false
         local cfgData = false
+        local shapeData = false
 
         --动画信息
         animData = tryGetInfo(animaCode,function(code) return AnimationConfig.getAllInfo(code) end)
@@ -82,11 +88,15 @@ function M:_initData(params)
             cfgData = tryGetInfo(cfgCode,function(code) return PropConfig.getAllInfo(code) end)
         end
 
+        --形状信息
+        shapeData = tryGetInfo(shapeCode,function(code) return ShapeConfig.getAllInfo(code) end)
+
         assert(cfgData,string.format("Can't not find the cfgData:%s",code))
         assert(animData,string.format("Can't not find the animData:%s",code))
 
         self._data.cfgData = cfgData
         self._data.animaData = animData
+        self._data.shapeData = shapeData
 
         EntityDataCache.add(code, self._data)
     end

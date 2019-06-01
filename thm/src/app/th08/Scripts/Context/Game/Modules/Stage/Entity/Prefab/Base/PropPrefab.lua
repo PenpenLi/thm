@@ -13,14 +13,16 @@ function M:ctor()
     self.destroyByTime = StageDefine.DestroyByTime.new()
     self:addScript(self.destroyByTime)
 
+    self.animationController = StageDefine.PropAnimation.new()
+    self:addScript(self.animationController)
+
     self.collisionController = StageDefine.PropCollision.new()
     self:addScript(self.collisionController)
 
     self.propController = StageDefine.PropController.new()
     self:addScript(self.propController)
 
-    self.animationController = StageDefine.PropAnimation.new()
-    self:addScript(self.animationController)
+
 
 
 end

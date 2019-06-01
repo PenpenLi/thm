@@ -65,10 +65,14 @@ end
 function M:setVisible(val)
     return self:_getSprite():setVisible(val)
 end
+
 function M:isVisible()
     return self:_getSprite():isVisible()
 end
 
+function M:setSpriteFrame(frame)
+    return self:_getSprite():setSpriteFrame(frame)
+end
 ---
 function M:_onAdded(entity)
     self._sprite = self._sprite or SCENE.newSprite()

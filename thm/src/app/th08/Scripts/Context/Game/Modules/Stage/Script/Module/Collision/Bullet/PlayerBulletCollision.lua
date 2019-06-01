@@ -28,13 +28,13 @@ end
 function M:_onCollision(collider,collision)
     M.super._onCollision(self,collider,collision)
     
-    local myHealthScript = self:getScript("HealthController")         --子弹自身
+    local myHealthScript = self:getScript("HealthController")               --子弹自身
     if not myHealthScript:isDead() then
-        local colliderHealthScript = collider:getScript("HealthController")--被击中物
+        local colliderHealthScript = collider:getScript("HealthController") --被击中物
         local bulletCtrl = self:getScript("BulletController")
-        colliderHealthScript:hit(bulletCtrl:getLethality())      --伤害值由计算得出
+        colliderHealthScript:hit(bulletCtrl:getLethality())                 --伤害值由计算得出
 
-        myHealthScript:die()                                --子弹阵亡
+        myHealthScript:die()                                                --子弹阵亡
     end
     
     --停止移动

@@ -18,7 +18,7 @@ end
 --
 function M:play(actionType)
     if self._fsm:cannotDoEvent(actionType) then return end
-    
+
     self._fsm:doEvent(actionType)
 end
 
@@ -38,7 +38,7 @@ function M:_onLateUpdate()
 end
 
 ------------------
-function M:_onStart()
+function M:_onAwake()
     self._baseData = self:getScript("EntityBasedata")
 
     self.animaComp = self:getComponent("AnimationComponent")
@@ -58,6 +58,7 @@ end
 --[[以下由子类重载]]
 function M:_onSetup()
    --加载动画配置
+   --精灵全部设置第一帧
     local code = self._baseData:getEntityCode()
     local animCfg = self._baseData:getData():getAnimationData()
     --动画装配器,通过配置装配动画
@@ -95,6 +96,7 @@ function M:_onSetup()
                 local frame = SpriteServer.createFrame(animCfg.atlas,frameName)
                 if frame then
                     self.animaComp:addAnimation(AnimStatus.DEFAULT,display.newAnimation({frame},1/12))
+                    self.spriteComp:setSpriteFrame(frame)
                 end
             end
             --精灵修正
@@ -102,9 +104,6 @@ function M:_onSetup()
             self.spriteComp:setRotation(animCfg.rotation)
             self.spriteComp:setScaleX(animCfg.scale.x)
             self.spriteComp:setScaleY(animCfg.scale.y)
-            
-            --通知更新贴图范围
-
         end  
     end
 end

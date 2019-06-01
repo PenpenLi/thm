@@ -9,11 +9,11 @@ function M:ctor()
     self.helthController = StageDefine.WingmanBulletHealth.new()
     self:addScript(self.helthController)
 
-    self.collisionController = StageDefine.WingmanBulletCollision.new()
-    self:addScript(self.collisionController)
-
     self.animationController = StageDefine.WingmanBulletAnimation.new()
     self:addScript(self.animationController)
+    
+    self.collisionController = StageDefine.WingmanBulletCollision.new()
+    self:addScript(self.collisionController)
 
     self.bulletController = StageDefine.WingmanBulletController.new()
     self:addScript(self.bulletController)

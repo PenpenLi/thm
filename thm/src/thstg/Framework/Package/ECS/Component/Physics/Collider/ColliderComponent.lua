@@ -11,6 +11,10 @@ function M:_onInit()
     self._rigidComp = nil
 end
 ------
+function M:getType()
+    return self._type
+end
+
 function M:collide(collder)
     return self:_onCollide(collder)
 end
