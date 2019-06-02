@@ -1,5 +1,5 @@
 
-module("AnimStatus", package.seeall)
+module("AnimaState", package.seeall)
 DEFAULT = "default"             --默认动作
 
 IDLE = "idle"                           --闲置

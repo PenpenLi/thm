@@ -5,10 +5,7 @@ function M:_onInit()
 end
 
 function M:bomb()
-    --TODO:触发立绘
-    --TODO:触发特效
-    --TODO:触发
-    Dispatcher.dispatchEvent(EventType.STAGE_SPELLCARD_EFFECT_WND,{isBoss = true,isOpen = true})
+    Dispatcher.dispatchEvent(EventType.STAGE_VIEW_PREEFFECT_PLAYER_SPELLCARDATTACK,{entityData = self._baseData})
 end
 
 -------

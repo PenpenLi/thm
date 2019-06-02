@@ -32,7 +32,7 @@ end
 
 function M:_onIdle(event)
     self.animaComp:stop()
-    self.animaComp:playForever(AnimStatus.DEFAULT)
+    self.animaComp:playForever(AnimaState.DEFAULT)
 end
 
 ----

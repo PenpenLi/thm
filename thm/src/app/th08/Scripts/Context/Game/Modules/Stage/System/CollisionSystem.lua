@@ -197,7 +197,7 @@ function M:_onInit()
 end
 
 function M:_onUpdate(delay)
-    local compsGroups = self:getGroups("ColliderComponent")
+    local compsGroups = self:getGroups()
     for _,group in pairs(compsGroups) do
         local collComp = group.ColliderComponent
         local rect = collComp:getRect()
@@ -207,7 +207,7 @@ end
 
 function M:_onLateUpdate()
     --越界判断更高效
-    local compsGroups = self:getGroups("CollisionController")
+    local compsGroups = self:getGroups()
     for _,group in pairs(compsGroups) do
         local colliderCtrl = group.CollisionController
         local filterStr = colliderCtrl:getFilter()
@@ -219,13 +219,13 @@ function M:_onLateUpdate()
 end
 
 function M:_onFilter( ... )
-    return false
+    return {"ColliderComponent","CollisionController"}
 end
 
 ----
 function M:_entityRemoveHandle(e,entity)
     local collComps = entity:getComponents("ColliderComponent")
-    for k,v in pairs(collComps) do
+    for _,v in pairs(collComps) do
         removeGridObjs(v)
     end
 end

@@ -171,7 +171,6 @@ function M:_getFilter()
     return false
 end
 
---TODO:在ColliderSystem使用有问题
 function M:_collectGroup(e,comp)
     local function isListenerClass(classPath,classMap)
         if not self.__listenedClass__[classPath] then

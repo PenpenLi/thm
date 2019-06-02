@@ -1,10 +1,10 @@
-module(..., package.seeall)
 
 local M = {}
+
 function M.create(params)
     params = params or {}
     -------Model-------
-
+    local uiSpellCardAttackNode = false
    
     -------View-------
     local node = THSTG.UI.newNode()

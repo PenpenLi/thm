@@ -47,11 +47,11 @@ function M:_onMoveLeft(event)
     self.animaComp:stop()
     if event.from == "MoveRight" or event.from == "MoveLeft" then
         self.animaComp:playOnce({
-            {AnimStatus.MOVE_RIGHT_TURN,nil,nil,1},
-            {AnimStatus.MOVE_RIGHT_SUSTAIN,nil,nil,-1},
+            {AnimaState.MOVE_RIGHT_TURN,nil,nil,1},
+            {AnimaState.MOVE_RIGHT_SUSTAIN,nil,nil,-1},
         })
     else
-        self.animaComp:playForever(AnimStatus.MOVE_RIGHT_SUSTAIN)
+        self.animaComp:playForever(AnimaState.MOVE_RIGHT_SUSTAIN)
     end
 end
 
@@ -60,17 +60,17 @@ function M:_onMoveRight(event)
     self.animaComp:stop()
     if event.from == "MoveRight" or event.from == "MoveLeft" then
         self.animaComp:playOnce({
-            {AnimStatus.MOVE_RIGHT_TURN,nil,nil,1},
-            {AnimStatus.MOVE_RIGHT_SUSTAIN,nil,nil,-1},
+            {AnimaState.MOVE_RIGHT_TURN,nil,nil,1},
+            {AnimaState.MOVE_RIGHT_SUSTAIN,nil,nil,-1},
         })
     else
-        self.animaComp:playForever(AnimStatus.MOVE_RIGHT_SUSTAIN)
+        self.animaComp:playForever(AnimaState.MOVE_RIGHT_SUSTAIN)
     end
 end
 
 function M:_onIdle(event)
     self.animaComp:stop()
-    self.animaComp:playForever(AnimStatus.IDLE)
+    self.animaComp:playForever(AnimaState.IDLE)
 end
 
 --

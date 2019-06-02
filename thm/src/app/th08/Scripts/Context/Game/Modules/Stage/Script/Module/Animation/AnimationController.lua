@@ -45,10 +45,12 @@ function M:_onAwake()
     self.spriteComp = self:getComponent("SpriteComponent")
 
     self._transComp = self:getComponent("TransformComponent")
-    self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
 
+end
+
+function M:_onStart()
+    self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
     self:_onSetup()
-    
     local cfg = self:_onState()
     if cfg and next(cfg) then
         self._fsm:setupState(cfg)
@@ -78,7 +80,7 @@ function M:_onSetup()
                     --XXX:这里可以预加载
                     AnimationServer.loadDBXFile(
                         ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,atals),
-                        ResManager.getResSub(ResType.ANIMATION,AnimType.SEQUENCE,skeName)
+                        ResManager.getResSub(ResType.ANIMATION,AnimaType.SEQUENCE,skeName)
                     )
                     
                     local skeleton = AnimationServer.getSkeleton(skeName)
@@ -95,7 +97,7 @@ function M:_onSetup()
                 --是一帧,需要转为帧动画
                 local frame = SpriteServer.createFrame(animCfg.atlas,frameName)
                 if frame then
-                    self.animaComp:addAnimation(AnimStatus.DEFAULT,display.newAnimation({frame},1/12))
+                    self.animaComp:addAnimation(AnimaState.DEFAULT,display.newAnimation({frame},1/12))
                     self.spriteComp:setSpriteFrame(frame)
                 end
             end

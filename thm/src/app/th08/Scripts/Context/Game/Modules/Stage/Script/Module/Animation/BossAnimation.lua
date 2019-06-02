@@ -54,10 +54,10 @@ function M:_onAttack()
     self.spriteComp:setFlippedX(false)
     self.animaComp:stop()
     self.animaComp:playOnce({
-        {AnimStatus.ATTACK_START,nil,nil,1},
-        {AnimStatus.ATTACK_SUSBIN,nil,nil,5},   --循环5次
-        {AnimStatus.ATTACK_START,nil,nil,1,-1},
-        {AnimStatus.ATTACK_SUSBIN,nil,nil,1,-1},
+        {AnimaState.ATTACK_START,nil,nil,1},
+        {AnimaState.ATTACK_SUSBIN,nil,nil,5},   --循环5次
+        {AnimaState.ATTACK_START,nil,nil,1,-1},
+        {AnimaState.ATTACK_SUSBIN,nil,nil,1,-1},
     })
 end
 
@@ -65,8 +65,8 @@ function M:_onMoveLeft(event)
     self.spriteComp:setFlippedX(false)
     self.animaComp:stop()
     self.animaComp:playOnce({
-        {AnimStatus.MOVE_LEFT_START,nil,nil,1},
-        {AnimStatus.MOVE_LEFT_SUSTAIN,nil,nil,-1},
+        {AnimaState.MOVE_LEFT_START,nil,nil,1},
+        {AnimaState.MOVE_LEFT_SUSTAIN,nil,nil,-1},
     })
     
 end
@@ -75,8 +75,8 @@ function M:_onMoveRight(event)
     self.spriteComp:setFlippedX(true)
     self.animaComp:stop()
     self.animaComp:playOnce({
-        {AnimStatus.MOVE_LEFT_START,nil,nil,1},
-        {AnimStatus.MOVE_LEFT_SUSTAIN,nil,nil,-1},
+        {AnimaState.MOVE_LEFT_START,nil,nil,1},
+        {AnimaState.MOVE_LEFT_SUSTAIN,nil,nil,-1},
     })
 end
 
@@ -84,15 +84,15 @@ function M:_onIdle(event)
     if event.from == "MoveRight" or event.from == "MoveLeft" then
         self.animaComp:stop()
         self.animaComp:playOnce({
-            {AnimStatus.MOVE_LEFT_SUSTAIN,nil,nil,1,-1},
-            {AnimStatus.MOVE_LEFT_START,nil,nil,1,-1,function()
+            {AnimaState.MOVE_LEFT_SUSTAIN,nil,nil,1,-1},
+            {AnimaState.MOVE_LEFT_START,nil,nil,1,-1,function()
                 self.spriteComp:setFlippedX(not self.spriteComp:isFlippedX())
             end},
-            {AnimStatus.IDLE,nil,nil,-1},
+            {AnimaState.IDLE,nil,nil,-1},
         })
     else
         self.animaComp:stop()
-        self.animaComp:playForever(AnimStatus.IDLE)
+        self.animaComp:playForever(AnimaState.IDLE)
     end
 end
 ---
