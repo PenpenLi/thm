@@ -4,24 +4,24 @@ local M = class("BossHealth",StageDefine.HealthController)
 function M:_onInit()
    M.super._onInit(self)
 
-   self._healthBar = nil
+   self._hud = nil
 end
 ----
 function M:_onAdded()
    M.super._onAdded(self)
 
-   self._healthBar = self:getEntity():findChild("HEALTH_BAR").uiPrgBar
+   self._hud = self:getEntity():findChild("HUD").uiPrgBar
 end
 
 function M:_onHurt()
 
-   local animationComp = self:getComponent("AnimationComponent")
-   animationComp:play(cc.Sequence:create({
+   local animationComp = self:getEntity():findChild("BODY").sprite:getComponent("AnimationComponent")
+   animationComp:playOnce({
       cc.Blink:create(0.1, 2),
       cc.CallFunc:create(function()
          animationComp:getSprite():setVisible(true)
       end)
-   }))
+   })
    
 end
 
@@ -38,7 +38,7 @@ function M:_onDead()
 end
 
 function M:_onBlood(oldVal,newVal)
-   self._healthBar:refresh(newVal,self:getMaxBlood())
+   self._hud:refresh(newVal,self:getMaxBlood())
 end
 
 return M

@@ -11,9 +11,14 @@ end
 
 function M:_onStart()
     M.super._onStart(self)
+end
 
-    local bossControScript = self:getScript("BossController")
-    self.bossType = bossControScript.bossType
+function M:_onSetup()
+    --重定向组件
+    self.animaComp = self:getEntity():findChild("BODY").sprite:getComponent("AnimationComponent")
+    self.spriteComp = self:getEntity():findChild("BODY").sprite:getComponent("SpriteComponent")
+    
+    M.super._onSetup(self)
 end
 
 ---

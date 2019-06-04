@@ -51,6 +51,14 @@ function takeProps(type,num,initFunc)
         _initEntity(entity,i,initFunc)
     end
 end
+
+function takeBoss(type,num,initFunc)
+    num = num or 1
+    for i = 1,num do
+        local entity = EntityManager.createBoss(type)
+        _initEntity(entity,i,initFunc)
+    end
+end
 ----------------------------------------
 function calculateBoundX(node,index,gap,isLeftToRight)
     if isLeftToRight then

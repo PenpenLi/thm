@@ -71,6 +71,7 @@ function M:getFramePos(name)
 end
 
 ---
+--TODO:好像没用
 function M:createTexture(name)
     local frame = self:createFrame(name)
     local sprite = cc.Sprite:createWithSpriteFrame(frame)

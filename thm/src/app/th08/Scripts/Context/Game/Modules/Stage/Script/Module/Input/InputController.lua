@@ -6,7 +6,7 @@ function M:_onInit()
     self.keyMapper = THSTG.UTIL.newControlMapper()
 end
 --
-function M:_onStart()
+function M:_onAwake()
     local inputComp = self:getComponent("InputComponent")
     local keyMapper = inputComp.keyMapper
 

@@ -8,20 +8,9 @@ function M:_onAwake()
     --重新设置下
     self._collider = self:getComponent("ColliderComponent")
     self._baseData = self:getScript("EntityBasedata")
-    local code = self._baseData:getEntityCode()
-    local shapeCfg = self._baseData:getData():getShapeData()
-    if shapeCfg then
-        if self._collider:getType() == 1 then
-            self._collider.size = cc.size(shapeCfg.collider.width,shapeCfg.collider.height)
-        elseif self._collider:getType() == 2 then
-            self._collider.radius = shapeCfg.radius
-        end
-    else
-        --按照
-        local aminaCtrl = self:getScript("AnimationController")
-        local size = aminaCtrl:getSprite():getContentSize() --FIXME:纯动画的大小无法通过第一帧获取到
-        self._collider.size = size
-    end
+    self._aminaCtrl = self:getScript("AnimationController")
+    
+    self:_onBody()
 
 end
 
@@ -39,6 +28,21 @@ end
 
 
 ---
+function M:_onBody()
+    local code = self._baseData:getEntityCode()
+    local shapeCfg = self._baseData:getData():getShapeData()
+    if shapeCfg then
+        if self._collider:getType() == 1 then
+            self._collider.size = cc.size(shapeCfg.collider.width,shapeCfg.collider.height)
+        elseif self._collider:getType() == 2 then
+            self._collider.radius = shapeCfg.radius
+        end
+    else
+        --按照
+        local size = self._aminaCtrl:getSprite():getContentSize() --FIXME:纯动画的大小无法通过第一帧获取到
+        self._collider.size = size
+    end
+end
 --屏蔽Tag
 function M:_onFilter()
 

@@ -64,7 +64,7 @@ end
 function M:getAnimationLength(name)
     local info = self:getArmatureInfos(name)
     if info then
-        return info.animation[1].duration
+        return info.animation[1].duration or 0
     end
     return 0
 end
@@ -88,7 +88,13 @@ function M:getDisPlayFrames(name)
     local info = self:getArmatureInfos(name)
     if info then
         local list = {}
-        local displayFrame = info.animation[1].slot[1].displayFrame
+        local duration = info.animation[1].duration or 0
+        local displayFrame = false
+        if duration > 0 then
+            displayFrame = info.animation[1].slot[1].displayFrame
+        else
+            displayFrame = {{}}
+        end
         local display = info.skin[1].slot[1].display
         for i,v in ipairs(displayFrame) do
             local value = v.value and (v.value + 1) or 1

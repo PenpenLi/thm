@@ -10,6 +10,6 @@ return {
     [10200001] = "Scripts.Context.Game.Modules.Stage.Entity.Prefab.Wingman.OnmyouGyoku",
     [10200002] = false,
 
-    [10300001] = false,
+    [10300001] = "Scripts.Context.Game.Modules.Stage.Entity.Prefab.Boss.Wriggle",
     [10300002] = false,
 }

@@ -4,12 +4,50 @@ local M = class("BossPrefab",StageDefine.BossEntity)
 
 function M:ctor()
     M.super.ctor(self)
-
-    ----
     self:setName("BOSS")
+
+    self.animationController = false
+    self.spellController = false
+    self.helthController = false
+    self.bossController = false
+
+    self.hud = false
+    self.body = false
+
+    self:_initNode()
+    self:_initScprit()
+
+end
+----------
+function M:_initScprit()
+    self.animationController = StageDefine.BossAnimation.new()
+    self:addScript(self.animationController)
+
+    self.spellController = StageDefine.EnemySpellController.new()
+    self:addScript(self.spellController)
+    
+    self.helthController = StageDefine.BossHealth.new()
+    self:addScript(self.helthController)
+
+    self.bossController = StageDefine.BossController.new()
+    self:addScript(self.bossController)
+end
+
+function M:_initNode()
+    --[[
+        Node
+         hud
+          ui*...
+         body
+          sprite
+          ui*...
+    ]]
     --BOSS血条
-    self.healthBar = StageDefine.BaseEntity.new()
-    self.healthBar.uiPrgBar = THSTG.UI.newRadialProgressBar({
+    self.hud = StageDefine.BaseEntity.new()
+    self.hud:setName("HUD")
+    self:addChild(self.hud)
+    
+    self.hud.uiPrgBar = THSTG.UI.newRadialProgressBar({
         x = self:getContentSize().width/2,
         y = self:getContentSize().height/2, --半径
         anchorPoint = THSTG.UI.POINT_CENTER,
@@ -26,25 +64,39 @@ function M:ctor()
             }
         }
     })
-    self.healthBar:addChild(self.healthBar.uiPrgBar)
+    self.hud:addChild(self.hud.uiPrgBar)
 
-    self.healthBar:setName("HEALTH_BAR")
-    self:addChild(self.healthBar)
-    -------------
-    self.animationController = StageDefine.BossAnimation.new()
-    self:addScript(self.animationController)
+    --
+    self.body = StageDefine.BaseEntity.new()
+    self.body:setName("BODY")
+    self:addChild(self.body)
 
-    self.spellController = StageDefine.EnemySpellController.new()
-    self:addScript(self.spellController)
-    
-    self.helthController = StageDefine.BossHealth.new()
-    self:addScript(self.helthController)
+    self.body.sprite = StageDefine.BaseEntity.new()
+    self.body.sprite:addComponent(StageDefine.SpriteComponent.new())
+    self.body.sprite:addComponent(StageDefine.AnimationComponent.new())
+    self.body.sprite:setName("SPRITE")
+    self:addChild(self.body.sprite)
 
-    self.bossController = StageDefine.BossController.new()
-    self:addScript(self.bossController)
-    ---
+    self.body.uiMagicCircle = THSTG.UI.newSprite({
+        x = self:getContentSize().width/2,
+        y = self:getContentSize().height/2, --半径
+        anchorPoint = THSTG.UI.POINT_CENTER,
+        src = SpriteServer.createFrame("etama2","etama2_51"),
+        scale = 1.5,
+    })
+    self.body.uiMagicCircle:runAction(cc.RepeatForever:create(cc.Sequence:create({
+        cc.Spawn:create({
+            cc.RotateBy:create(5.0, 360),
+            cc.ScaleTo:create(3.0,2),
+        }),
+        cc.Spawn:create({
+            cc.RotateBy:create(5.0, 360),
+            cc.ScaleTo:create(3.0,1.5),
+        }),
+    })))
+
+    self.body:addChild(self.body.uiMagicCircle,-1)    --至于底层
+
 end
-----------
-
 
 return M
