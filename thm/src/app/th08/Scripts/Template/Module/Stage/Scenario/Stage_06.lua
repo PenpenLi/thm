@@ -3,18 +3,18 @@ local EEntityType = GameDef.Stage.EEntityType
 local ScenarioUtil = StageDefine.ScenarioUtil
 EntityManager.expandEntity(EEntityType.EnemyBullet,0,70)
 return {
-    {
-        time = 1,
-        callback  = function (sender,task)
-            ScenarioUtil.takeBoss(1,1,function(index,entity)
-                local initPosX = display.cx
-                local initPosY = display.cy
-                local initSpeedX = 0
-                local initSpeedY = 0
-                return cc.p(initPosX,initPosY),cc.p(initSpeedX,initSpeedY)
-            end)
-        end
-    },
+    -- {
+    --     time = 1,
+    --     callback  = function (sender,task)
+    --         ScenarioUtil.takeBoss(1,1,function(index,entity)
+    --             local initPosX = display.cx
+    --             local initPosY = display.cy
+    --             local initSpeedX = 0
+    --             local initSpeedY = 0
+    --             return cc.p(initPosX,initPosY),cc.p(initSpeedX,initSpeedY)
+    --         end)
+    --     end
+    -- },
 
     -- {
     --     time = 1,
