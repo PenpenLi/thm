@@ -28,7 +28,7 @@ function M:ctor()
     --------Ex层--------
     self.topLayer = false           --最顶层
 
-    self:_onInitCamera()
+    -- self:_onInitCamera()         -TODO:有BUG
     self:_onInitLayer()
     self:_onInitCallback()
 end

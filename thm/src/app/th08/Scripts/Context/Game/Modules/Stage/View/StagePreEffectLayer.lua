@@ -4,10 +4,15 @@ local M = {}
 function M.create(params)
     params = params or {}
     -------Model-------
+    local uiBossComeOnNode = false
     local uiSpellCardAttackNode = false
    
     -------View-------
     local node = THSTG.UI.newNode()
+
+    uiBossComeOnNode = require("Scripts.Context.Game.Modules.Stage.View.Components.BossComeOnEffect").create()
+    node:addChild(uiBossComeOnNode)
+
     uiSpellCardAttackNode = require("Scripts.Context.Game.Modules.Stage.View.Components.SpellCardEffect").create()
     node:addChild(uiSpellCardAttackNode)
 

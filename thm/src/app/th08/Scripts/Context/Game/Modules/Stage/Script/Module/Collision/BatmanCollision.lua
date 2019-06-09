@@ -4,7 +4,6 @@ local M = class("PorpCollision",StageDefine.CollisionController)
 function M:_onInit()
     M.super._onInit(self)
 
-    self._basedata = nil
 end
 
 function M:_onFilter()
@@ -21,7 +20,7 @@ function M:_onCollision(collider,collision)
 end
 
 function M:_onStart()
-    self._basedata = self:getScript("EntityBasedata")
+
 end
 
 return M

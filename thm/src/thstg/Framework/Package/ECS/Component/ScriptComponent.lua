@@ -43,6 +43,11 @@ end
 function M:_onRemoved(entity)
     
 end
+----
+--初始化一次之后执行
+function M:_onAwake()
+
+end
 --执行start()时回调
 function M:_onStart()
 

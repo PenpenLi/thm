@@ -91,6 +91,8 @@ WingmanBulletHealth = require("Scripts.Context.Game.Modules.Stage.Script.Module.
 --碰撞控制
 CollisionController = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.CollisionController")
 PlayerCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.PlayerCollision")
+BossCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.BossCollision")
+BatmanCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.BatmanCollision")
 PorpCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.PorpCollision")
 ---子弹的碰撞控制
 BulletCollision = require("Scripts.Context.Game.Modules.Stage.Script.Module.Collision.Bullet.BulletCollision")
@@ -139,7 +141,8 @@ DestroyByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.Dest
 DestroyByTime = require("Scripts.Context.Game.Modules.Stage.Script.Public.DestroyByTime")
 ConstraintByBorder = require("Scripts.Context.Game.Modules.Stage.Script.Public.ConstraintByBorder")
 ManageByPool = require("Scripts.Context.Game.Modules.Stage.Script.Public.ManageByPool")
-
+----
+StageEntityManager = require("Scripts.Context.Game.Modules.Stage.StageEntityManager") --实体管理
 ------
 --[[轮询的系统注册]]---
 THSTG.ECSManager.registerSystem("Scripts.Context.Game.Modules.Stage.System.CollisionSystem")

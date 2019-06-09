@@ -85,7 +85,8 @@ return {
         tween = 
         {
             spine_dragonborn_logo = "Assets/Animation/Tween/DragonOpening/DragonOpening.json",
-            spine_boss_spellcard_attack = "Assets/Animation/Tween/SpellCardAttack/SpellCardAttack.json"
+            spine_boss_spellcard_attack = "Assets/Animation/Tween/SpellCardAttack/SpellCardAttack.json",
+            spine_wriggle_comeon = "Assets/Animation/Tween/WriggleComeOn/WriggleComeOn.json",
         },
         sequence = 
         {

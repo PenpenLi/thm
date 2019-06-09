@@ -1,11 +1,11 @@
 local EEntityType = GameDef.Stage.EEntityType
-module("EntityManager", package.seeall)
+local M = {}
 
 local objectPool = THSTG.UTIL.newObjectPool()
 ------
 local function _loadEntityClass(code)
     local class = EntityClassMapConfig.tryGetClass(code)
-    assert(class, string.format("[EntityManager] Class is not finded (%s)!",code))
+    assert(class, string.format("[StageDefine.StageEntityManager] Class is not finded (%s)!",code))
     return class
 end
 
@@ -30,7 +30,7 @@ local function _createEntity(code,isReusable)
     local class = _loadEntityClass(code)
     if not class then return end
 
-    local entity = createObject(class,isReusable)
+    local entity = M.createObject(class,isReusable)
     _initEntity(entity,{
         isReusable = isReusable,
         code = code,
@@ -39,7 +39,7 @@ local function _createEntity(code,isReusable)
     return entity
 end
 
-function createObject(class,isReusable)
+function M.createObject(class,isReusable)
     local entity = nil
     if isReusable then
         entity = objectPool:create(class)
@@ -49,8 +49,8 @@ function createObject(class,isReusable)
     return entity
 end
 
-function createEntityObject(class,isReusable)
-    local entity = createObject(class,isReusable)
+function M.createEntityObject(class,isReusable)
+    local entity = M.createObject(class,isReusable)
     _initEntity(entity,{
         isReusable = isReusable
     })
@@ -58,7 +58,7 @@ function createEntityObject(class,isReusable)
     return entity
 end
 
-function createEntity(a1,a2,a3)
+function M.createEntity(a1,a2,a3)
     if a3 == nil then
         if a2 == nil then
             return _createEntity(a1,a2)
@@ -75,16 +75,16 @@ function createEntity(a1,a2,a3)
     return _createEntity(code,a3)
 end
 
-function releaseEntity(entity)
+function M.releaseEntity(entity)
     objectPool:release(entity)
 end
 
 ---
-function expandObject(class,num)
+function M.expandObject(class,num)
     return objectPool:expand(class,num)
 end
 
-function expandEntity(category,type,num)
+function M.expandEntity(category,type,num)
     local code = category
     if num ~= nil then 
         code = EntityUtil.type2Code(category,type) 
@@ -95,35 +95,37 @@ function expandEntity(category,type,num)
     local class = _loadEntityClass(code)
     if not class then return end
     
-    expandObject(class,num)
+    M.expandObject(class,num)
 end
 
-function clearEntities()
+function M.clearEntities()
     objectPool:clearAll()
 end
 
 --
-function createEnemyBullet(type)
-    return createEntity(EEntityType.EnemyBullet,type,true)
+function M.createEnemyBullet(type)
+    return M.createEntity(EEntityType.EnemyBullet,type,true)
 end
 
-function createBatman(type)
-    return createEntity(EEntityType.Batman,type,true)
+function M.createBatman(type)
+    return M.createEntity(EEntityType.Batman,type,true)
 end
 
-function createProp(type)
-    return createEntity(EEntityType.Prop,type,true)
+function M.createProp(type)
+    return M.createEntity(EEntityType.Prop,type,true)
 end
 
 -----
 --防止二次创建
-function createBoss(type)
-    return createEntity(EEntityType.Boss,type,false) 
+function M.createBoss(type)
+    return M.createEntity(EEntityType.Boss,type,false) 
 end
-function createPlayer(type)
-    return createEntity(EEntityType.Player,type,false)
+function M.createPlayer(type)
+    return M.createEntity(EEntityType.Player,type,false)
 end
-function createWingman(type)
-    return createEntity(EEntityType.Wingman,type,false)
+function M.createWingman(type)
+    return M.createEntity(EEntityType.Wingman,type,false)
 end
 
+
+return M

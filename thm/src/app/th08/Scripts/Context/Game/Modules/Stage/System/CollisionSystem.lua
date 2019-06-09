@@ -19,47 +19,27 @@ M.EDirectionType = {
 ]]
 -----
 --通过坐标获取网格ID
-local _GRID_NUM_ = cc.p(8,6)
-local _GRID_SIZE_ = cc.size(STAGE_VIEW_SIZE.width/_GRID_NUM_.x,STAGE_VIEW_SIZE.height/_GRID_NUM_.y)--XXX:格子大小,决定碰撞检测的精度(格子越大,碰撞检测越精确,但是耗能越大,反之亦然)
-local _gridComps = {}
-local _gridIDs = {}
-local function getGridId(rect)
-    local x = math.floor(rect.x / _GRID_SIZE_.width) + 1
-    local y = math.floor(rect.y / _GRID_SIZE_.height)
-
-    return (y * _GRID_NUM_.y + x)
-end
-
-local function updateGrids(comp,rect)
-    local gridId = _gridIDs[comp] or -1
-
-    _gridComps[gridId] = _gridComps[gridId] or {}
-    _gridComps[gridId][comp] = nil
-    gridId = getGridId(rect)
-    _gridComps[gridId] = _gridComps[gridId] or {}
-    _gridComps[gridId][comp] = comp
-    
-    _gridIDs[comp] = gridId
-end
-
-local function removeGridObjs(comp)
-    local gridId = _gridIDs[comp]
-    if gridId then
-        _gridComps[gridId][comp] = nil
-    end
-end
+local GRID_NUM_ = cc.p(8,6)
+local GRID_SIZE = cc.size(STAGE_VIEW_SIZE.width/GRID_NUM_.x,STAGE_VIEW_SIZE.height/GRID_NUM_.y)--XXX:格子大小,决定碰撞检测的精度(格子越大,碰撞检测越精确,但是耗能越大,反之亦然)
 
 -----
+function M:ctor()
+    M.super.ctor(self)
+    
+    self._gridComps = {}
+    self._gridIDs = {}
+end
+
 function M:getGridCompId(comp)
     --当Script时序>System导致没有更新到位置出错
-    if _gridIDs[comp] == nil then
+    if self._gridIDs[comp] == nil then
         self:_onUpdate(0)
     end
-    return _gridIDs[comp]
+    return self._gridIDs[comp]
 end
 
 function M:getGridComps(id)
-    return _gridComps[id] or {}
+    return self._gridComps[id] or {}
 end
 --
 function M:getCollisionGridIds(id,directions)
@@ -72,17 +52,17 @@ function M:getCollisionGridIds(id,directions)
         elseif v == M.EDirectionType.Right then
             table.insert( list, id + 1)
         elseif v == M.EDirectionType.Up then
-            table.insert( list, id + _GRID_NUM_.y)
+            table.insert( list, id + GRID_NUM_.y)
         elseif v == M.EDirectionType.Down then
-            table.insert( list, id - _GRID_NUM_.y)
+            table.insert( list, id - GRID_NUM_.y)
         elseif v == M.EDirectionType.LeftTop then
-            table.insert( list, id + _GRID_NUM_.y - 1)
+            table.insert( list, id + GRID_NUM_.y - 1)
         elseif v == M.EDirectionType.RightTop then
-            table.insert( list, id + _GRID_NUM_.y + 1)
+            table.insert( list, id + GRID_NUM_.y + 1)
         elseif v == M.EDirectionType.LeftBottom then
-            table.insert( list, id - _GRID_NUM_.y - 1)
+            table.insert( list, id - GRID_NUM_.y - 1)
         elseif v == M.EDirectionType.RightBottom then
-            table.insert( list, id - _GRID_NUM_.y + 1)
+            table.insert( list, id - GRID_NUM_.y + 1)
         end
     end
     return list
@@ -201,7 +181,7 @@ function M:_onUpdate(delay)
     for _,group in pairs(compsGroups) do
         local collComp = group.ColliderComponent
         local rect = collComp:getRect()
-        updateGrids(collComp,rect)
+        self:_updateGrids(collComp,rect)
     end
 end
 
@@ -222,11 +202,44 @@ function M:_onFilter( ... )
     return {"ColliderComponent","CollisionController"}
 end
 
-----
+
+function M:_getGridId(rect)
+    local x = math.floor(rect.x / GRID_SIZE.width) + 1
+    local y = math.floor(rect.y / GRID_SIZE.height)
+
+    return (y * GRID_NUM_.y + x)
+end
+
+function M:_updateGrids(comp,rect)
+    local function _getGridId(rect)
+        local x = math.floor(rect.x / GRID_SIZE.width) + 1
+        local y = math.floor(rect.y / GRID_SIZE.height)
+    
+        return (y * GRID_NUM_.y + x)
+    end
+
+    local gridId = self._gridIDs[comp] or -1
+
+    self._gridComps[gridId] = self._gridComps[gridId] or {}
+    self._gridComps[gridId][comp] = nil
+    gridId = _getGridId(rect)
+    self._gridComps[gridId] = self._gridComps[gridId] or {}
+    self._gridComps[gridId][comp] = comp
+    
+    self._gridIDs[comp] = gridId
+end
+
+function M:_removeGridObjs(comp)
+    local gridId = self._gridIDs[comp]
+    if gridId then
+        self._gridComps[gridId][comp] = nil
+    end
+end
+
 function M:_entityRemoveHandle(e,entity)
     local collComps = entity:getComponents("ColliderComponent")
     for _,v in pairs(collComps) do
-        removeGridObjs(v)
+        self:_removeGridObjs(v)
     end
 end
 

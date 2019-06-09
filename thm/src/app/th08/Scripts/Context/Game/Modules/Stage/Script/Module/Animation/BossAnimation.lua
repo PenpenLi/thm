@@ -9,17 +9,18 @@ function M:getBossType()
     return self.bossType
 end
 
-function M:_onStart()
-    M.super._onStart(self)
-end
-
-function M:_onSetup()
+function M:_onAwake()
+    M.super._onAwake(self)
     --重定向组件
     self.animaComp = self:getEntity():findChild("BODY").sprite:getComponent("AnimationComponent")
     self.spriteComp = self:getEntity():findChild("BODY").sprite:getComponent("SpriteComponent")
     
-    M.super._onSetup(self)
 end
+
+function M:_onStart()
+    M.super._onStart(self)
+end
+
 
 ---
 function M:_onState()

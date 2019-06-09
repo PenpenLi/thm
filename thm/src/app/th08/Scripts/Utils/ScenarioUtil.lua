@@ -19,7 +19,7 @@ local function _initEntity(entity,curI,initFunc)
 
     if initAction then
         local actionComp = entity:getComponent("ActionComponent")
-        actionComp:runOnce(initAction)
+        actionComp:runCustom(initAction)
     end
 
     entity:setLocalZOrder(curI)
@@ -30,7 +30,7 @@ end
 function takeEnemyBullets(type,num,initFunc)
     num = num or 1
     for i = 1,num do
-        local entity = EntityManager.createEnemyBullet(type)
+        local entity = StageDefine.StageEntityManager.createEnemyBullet(type)
         _initEntity(entity,i,initFunc)
     end
 end
@@ -39,7 +39,7 @@ end
 function takeBatmans(type,num,initFunc)
     num = num or 1
     for i = 1,num do
-        local entity = EntityManager.createBatman(type)
+        local entity = StageDefine.StageEntityManager.createBatman(type)
         _initEntity(entity,i,initFunc)
     end
 end
@@ -47,7 +47,7 @@ end
 function takeProps(type,num,initFunc)
     num = num or 1
     for i = 1,num do
-        local entity = EntityManager.createProp(type)
+        local entity = StageDefine.StageEntityManager.createProp(type)
         _initEntity(entity,i,initFunc)
     end
 end
@@ -55,7 +55,7 @@ end
 function takeBoss(type,num,initFunc)
     num = num or 1
     for i = 1,num do
-        local entity = EntityManager.createBoss(type)
+        local entity = StageDefine.StageEntityManager.createBoss(type)
         _initEntity(entity,i,initFunc)
     end
 end

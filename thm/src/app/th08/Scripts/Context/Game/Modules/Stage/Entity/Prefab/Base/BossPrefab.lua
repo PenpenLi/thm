@@ -23,14 +23,17 @@ function M:_initScprit()
     self.animationController = StageDefine.BossAnimation.new()
     self:addScript(self.animationController)
 
-    self.spellController = StageDefine.EnemySpellController.new()
-    self:addScript(self.spellController)
+    self.collisionController = StageDefine.BossCollision.new()
+    self:addScript(self.collisionController)
     
     self.helthController = StageDefine.BossHealth.new()
     self:addScript(self.helthController)
 
     self.bossController = StageDefine.BossController.new()
     self:addScript(self.bossController)
+
+    self.spellController = StageDefine.EnemySpellController.new()
+    self:addScript(self.spellController)
 end
 
 function M:_initNode()

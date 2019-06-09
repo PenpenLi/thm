@@ -3,13 +3,13 @@ local EEntityType = GameDef.Stage.EEntityType
 local EEnemyBulletType = GameDef.Stage.EEnemyBulletType
 local EBatmanType = GameDef.Stage.EBatmanType
 local ScenarioUtil = StageDefine.ScenarioUtil
-EntityManager.expandEntity(EEntityType.EnemyBullet,EEnemyBulletType.BigJade,300)
+StageDefine.StageEntityManager.expandEntity(EEntityType.EnemyBullet,EEnemyBulletType.BigJade,300)
 return {
     {
         time = 1,
         callback  = function (sender,task)
             Scheduler.schedule(function(delay,times)
-                EntityManager.createEnemyBullets(EEnemyBulletType.BigJade,1,function(index,entity)
+                StageDefine.StageEntityManager.createEnemyBullets(EEnemyBulletType.BigJade,1,function(index,entity)
                     local theta = 10*times*math.pi/180
                     local radius = 80
                     local initPosX = display.cx + radius * math.cos(theta)
@@ -35,7 +35,7 @@ return {
         time = 10,
         callback  = function (sender,task)
             Scheduler.schedule(function(delay,times)
-                EntityManager.createEnemyBullets(EEnemyBulletType.BigJade,1,function(index,entity)
+                StageDefine.StageEntityManager.createEnemyBullets(EEnemyBulletType.BigJade,1,function(index,entity)
                     local theta = 10*times*math.pi/180
                     local initPosX = display.cx + math.pow(2.71828,theta) * math.cos(theta)
                     local initPosY = display.cy + math.pow(2.71828,theta) * math.sin(theta)
@@ -59,7 +59,7 @@ return {
         time = 15,
         callback  = function (sender,task)
             Scheduler.schedule(function(delay,times)
-                EntityManager.createEnemyBullets(EEnemyBulletType.BigJade,1,function(index,entity)
+                StageDefine.StageEntityManager.createEnemyBullets(EEnemyBulletType.BigJade,1,function(index,entity)
                     local aTime = 0
                     local actions = {
                         cc.CallFunc:create(function()

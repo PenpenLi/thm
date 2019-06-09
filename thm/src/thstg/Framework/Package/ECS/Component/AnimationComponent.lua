@@ -4,6 +4,7 @@ function M:_onInit()
     self._spriteComp = nil
     --
     self._curAction = false
+    self._animations = false
 end
 ---
 function M:_getSprite()
@@ -21,6 +22,10 @@ end
 
 function M:getAnimation(name)
     return self._animations and self._animations[name]
+end
+
+function M:getAllAnimations()
+    return self._animations
 end
 
 function M:removeAnimation(name)

@@ -5,11 +5,11 @@ function M:ctor()
     M.super.ctor(self)
     
     --添加两个僚机的实体
-    self.gyoku1 = EntityManager.createEntity(10200001)
+    self.gyoku1 = StageDefine.StageEntityManager.createEntity(10200001)
     self.gyoku1:setName("GYOKU1")
     self:addChild(self.gyoku1)
 
-    self.gyoku2 = EntityManager.createEntity(10200001)
+    self.gyoku2 = StageDefine.StageEntityManager.createEntity(10200001)
     self.gyoku2:setName("GYOKU2")
     self:addChild(self.gyoku2)
 

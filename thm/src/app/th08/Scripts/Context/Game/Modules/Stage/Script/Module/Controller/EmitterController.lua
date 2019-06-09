@@ -15,7 +15,7 @@ function M:shot()
     if THSTG.TimeUtil.time() >= (self._nextShotTime or 0) then
         if not self.bulletCode then return end
 
-        local bullet = EntityManager.createEntity(self.bulletCode,true)
+        local bullet = StageDefine.StageEntityManager.createEntity(self.bulletCode,true)
         local myTransComp = self:getComponent("TransformComponent")
         local bulletTransComp = bullet:getComponent("TransformComponent")
 
@@ -41,9 +41,9 @@ function M:_onStart()
 
     -- local bulletCode = self:getEntity():getParent():getScript("EntityBasedata"):getData():getConfigData().bulletCode --TODO:
     if self.bulletCode then
-        EntityManager.expandEntity(self.bulletCode,self.prefabNum)
+        StageDefine.StageEntityManager.expandEntity(self.bulletCode,self.prefabNum)
 
-        local bulletTemp = EntityManager.createEntity(self.bulletCode)--随便拿一个出来赋值
+        local bulletTemp = StageDefine.StageEntityManager.createEntity(self.bulletCode)--随便拿一个出来赋值
         if bulletTemp then
             local bulletBasedata = bulletTemp:getScript("EntityBasedata"):getData()
             self.shotInterval = bulletBasedata:getConfigData().freq or self.shotInterval

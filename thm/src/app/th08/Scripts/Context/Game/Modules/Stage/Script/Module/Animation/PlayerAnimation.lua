@@ -23,19 +23,20 @@ function M:_onState()
 end
 
 ----
+
+function M:_onAwake()
+    M.super._onAwake(self)
+    --重定向组件
+    self.animaComp = self:getEntity():findChild("SPRITE_NODE"):getComponent("AnimationComponent")
+    self.spriteComp = self:getEntity():findChild("SPRITE_NODE"):getComponent("SpriteComponent")
+    
+end
 function M:_onStart()
     M.super._onStart(self)
 
     
 end
 
-function M:_onSetup()
-    --重定向组件
-    self.animaComp = self:getEntity():findChild("SPRITE_NODE"):getComponent("AnimationComponent")
-    self.spriteComp = self:getEntity():findChild("SPRITE_NODE"):getComponent("SpriteComponent")
-    
-    M.super._onSetup(self)
-end
 ----
 function M:_onMove(dx,dy)
     if dx < 0 then 

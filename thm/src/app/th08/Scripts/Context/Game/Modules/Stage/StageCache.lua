@@ -7,16 +7,16 @@ local EModeType = GameDef.Stage.EModeType
 --
 local _bIsInStage = false
 local _bIsTeam = false
-local _eGroupType = false
+local _eTeamType = false
 local _eRoleType = EPlayerType.Reimu
 local _eStageMode = EModeType.BossRush
 
-function M:setGroupType(val)
-    _eGroupType = val
+function M:setTeamType(val)
+    _eTeamType = val
 end
 
-function M:getGroupType()
-    return _eGroupType
+function M:getTeamType()
+    return _eTeamType
 end
 
 function M:setRoleType(val)
@@ -59,20 +59,22 @@ end
 ----
 local _allEntities = {}
 function M:addToEntityCache(entity)
+    local entityId = entity:getID()
     local entityType = entity:getScript("EntityBasedata"):getEntityType()
     if entityType then
         _allEntities = _allEntities or {}
         _allEntities[entityType] = _allEntities[entityType] or {}
-        _allEntities[entityType][entity] = entity
+        _allEntities[entityType][entityId] = entity
     end
 end
 
 function M:removeFromEntityCache(entity)
+    local entityId = entity:getID()
     local entityType = entity:getScript("EntityBasedata"):getEntityType()
     if entityType then
         _allEntities = _allEntities or {}
         _allEntities[entityType] = _allEntities[entityType] or {}
-        _allEntities[entityType][entity] = nil
+        _allEntities[entityType][entityId] = nil
     end
 end
 
@@ -81,14 +83,29 @@ function M:getEntities(category)
     return tb
  end
 
+function M:getBatmanEntities()
+    local tb = self:getEntities(EEntityType.Batman)
+    return tb
+end
+
+function M:getEnemyBulletEntities()
+    local tb = self:getEntities(EEntityType.EnemyBullet)
+    return tb
+end
+
+function M:getPlayerBulletEntities()
+    local tb = self:getEntities(EEntityType.PlayerBullet)
+    return tb
+end
+
 function M:getBossEntity()
-    local tb = getEntities(EEntityType.Boss)
-    return tb and tb[1]
+    local tb = self:getEntities(EEntityType.Boss)
+    return tb and tb[next(tb)]
 end
 
 function M:getPlayerEntity()
-    local tb = getEntities(EEntityType.Player)
-    return tb and tb[1]
+    local tb = self:getEntities(EEntityType.Player)
+    return tb and tb[next(tb)]
 end
 
 ----

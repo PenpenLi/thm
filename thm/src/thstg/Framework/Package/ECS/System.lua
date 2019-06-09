@@ -207,7 +207,7 @@ function M:_collectGroup(e,comp)
                     --包括那些没进入场景的,在池中的实体
                     ret._entity = entity
                     self.__groupsAll__[entityId] = ret
-                    if entity:getParent() then
+                    if entity:isRunning() then
                         self.__groupsQueue__[entityId] = ret
                     end
                 end

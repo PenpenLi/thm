@@ -5,6 +5,7 @@ function M:_onInit()
    M.super._onInit(self)
 
    self._hud = nil
+   self._bodyActionComp = false
 end
 ----
 function M:_onAdded()
@@ -12,17 +13,19 @@ function M:_onAdded()
 
    self._hud = self:getEntity():findChild("HUD").uiPrgBar
 end
-
+function M:_onAwake()
+   M.super._onAwake()
+   self._bodyActionComp = self:getEntity():findChild("BODY/SPRITE"):getComponent("ActionComponent")
+end
 function M:_onHurt()
-
-   local animationComp = self:getEntity():findChild("BODY").sprite:getComponent("AnimationComponent")
-   animationComp:playOnce({
-      cc.Blink:create(0.1, 2),
-      cc.CallFunc:create(function()
-         animationComp:getSprite():setVisible(true)
-      end)
-   })
-   
+   if self._bodyActionComp then
+      self._bodyActionComp:runOnce({
+         cc.Blink:create(0.1, 2),
+         cc.CallFunc:create(function()
+            self._bodyActionComp:getEntity():setVisible(true)
+         end)
+      })
+   end
 end
 
 function M:_onDead()
@@ -31,7 +34,7 @@ function M:_onDead()
       refNode = self:getEntity(),
       src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_st_boss_down"),
    })
-
+   --震屏动画
    self:destroyEntity()
 
    --TODO:爆道具

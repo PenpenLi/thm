@@ -4,10 +4,17 @@ local M = class("PlayerBulletCollision",StageDefine.BulletCollision)
 function M:_onInit()
     M.super._onInit(self)
 
-    -- self:setEnabled(false)
+    self.rigidbodyComp = false
+    self.healthScript = false
+
 end
 
 ---
+function M:_onAwake()
+    self.rigidbodyComp = self:getComponent("RigidbodyComponent")
+    self.healthScript = self:getScript("HealthController")               --子弹自身
+end
+
 function M:_onFilter()
     --特异性
     return {
@@ -28,18 +35,16 @@ end
 function M:_onCollision(collider,collision)
     M.super._onCollision(self,collider,collision)
     
-    local myHealthScript = self:getScript("HealthController")               --子弹自身
-    if not myHealthScript:isDead() then
+    if not self.healthScript:isDead() then
         local colliderHealthScript = collider:getScript("HealthController") --被击中物
         local bulletCtrl = self:getScript("BulletController")
         colliderHealthScript:hit(bulletCtrl:getLethality())                 --伤害值由计算得出
 
-        myHealthScript:die()                                                --子弹阵亡
+        self.healthScript:die()                                                --子弹阵亡
     end
     
     --停止移动
-    local rigidbodyComp = self:getComponent("RigidbodyComponent")
-    rigidbodyComp:setSpeed(0,0)
+    self.rigidbodyComp:setSpeed(0,0)
 end
 
 return M

@@ -5,13 +5,14 @@ function M:_onInit()
 end
 
 function M:_onAwake()
-    --重新设置下
+
+end
+
+function M:_onStart()
     self._collider = self:getComponent("ColliderComponent")
     self._baseData = self:getScript("EntityBasedata")
     self._aminaCtrl = self:getScript("AnimationController")
-    
     self:_onBody()
-
 end
 
 function M:_onEnd()
@@ -38,8 +39,8 @@ function M:_onBody()
             self._collider.radius = shapeCfg.radius
         end
     else
-        --按照
-        local size = self._aminaCtrl:getSprite():getContentSize() --FIXME:纯动画的大小无法通过第一帧获取到
+        -- 取动画组件的大小
+        local size = self._aminaCtrl:getSize()
         self._collider.size = size
     end
 end
@@ -47,6 +48,7 @@ end
 function M:_onFilter()
 
 end
+
 --碰撞回调
 function M:_onCollision(collider,collision)
 

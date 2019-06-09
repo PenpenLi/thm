@@ -1,4 +1,4 @@
-local M = class("PorpCollision",StageDefine.CollisionController)
+local M = class("BossCollision",StageDefine.CollisionController)
 
 ---
 function M:_onInit()
@@ -17,7 +17,7 @@ function M:_onFilter()
 end
 
 function M:_onCollision(collider,collision)
-    
+
 end
 
 function M:_onStart()

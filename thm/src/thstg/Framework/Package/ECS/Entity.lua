@@ -394,11 +394,13 @@ function M:_awake()
 	self:_visitComps(function(comp)
 		comp:_onAwake()
 	end)
-	self.__isAwake = true
 end
 
 function M:_enter()
-	if not self.__isAwake then self:_awake() end
+	if not self.__isAwake then 
+		self:_awake()
+		self.__isAwake = true
+	end
 	
 	self:_onEnter()
 	self:_visitComps(function(comp)

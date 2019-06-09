@@ -19,7 +19,7 @@ end
 
 function M:initPlayer()
     local roleType = ModuleCache.Stage:getRoleType()
-    self._ePlayer = EntityManager.createPlayer(roleType)
+    self._ePlayer = StageDefine.StageEntityManager.createPlayer(roleType)
     Dispatcher.dispatchEvent(EventType.STAGE_ADD_ENTITY,self._ePlayer)
 
     self._ePlayer:getScript("PlayerController"):reset()

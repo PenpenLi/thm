@@ -9,7 +9,9 @@ function M:_onInit()
     self._fsm = THSTG.UTIL.newStateMachine() --状态机
     self.animaComp = nil
     self.spriteComp = nil
+
     self._baseData = nil
+    self._animaSize = false
 
     self._transComp = nil
     self._prevPos = cc.p(0,0)
@@ -24,6 +26,10 @@ end
 
 function M:getSprite()
     return self.animaComp:_getSprite()
+end
+
+function M:getSize()
+    return self._animaSize or cc.size(0,0)
 end
 ----
 function M:_onLateUpdate()
@@ -40,7 +46,6 @@ end
 ------------------
 function M:_onAwake()
     self._baseData = self:getScript("EntityBasedata")
-
     self.animaComp = self:getComponent("AnimationComponent")
     self.spriteComp = self:getComponent("SpriteComponent")
 
@@ -49,7 +54,10 @@ function M:_onAwake()
 end
 
 function M:_onStart()
+    
     self._prevPos = cc.p(self._transComp:getPositionX(),self._transComp:getPositionY())
+    self._animaSize = false
+    
     self:_onSetup()
     local cfg = self:_onState()
     if cfg and next(cfg) then
@@ -60,7 +68,6 @@ end
 --[[以下由子类重载]]
 function M:_onSetup()
    --加载动画配置
-   --精灵全部设置第一帧
     local code = self._baseData:getEntityCode()
     local animCfg = self._baseData:getData():getAnimationData()
     --动画装配器,通过配置装配动画
@@ -87,6 +94,9 @@ function M:_onSetup()
                     for _,v in ipairs(skeleton:getAnimationNameList()) do 
                         local animation = AnimationServer.createAnimation(skeName,v)
                         self.animaComp:addAnimation(v,animation)
+                        if not self._animaSize then
+                           self:_setupAnimationSize(animation)
+                        end
                     end
                 end
             elseif animCfg.frameName ~= "" then
@@ -97,15 +107,19 @@ function M:_onSetup()
                 --是一帧,需要转为帧动画
                 local frame = SpriteServer.createFrame(animCfg.atlas,frameName)
                 if frame then
-                    self.animaComp:addAnimation(AnimaState.DEFAULT,display.newAnimation({frame},1/12))
-                    self.spriteComp:setSpriteFrame(frame)
+                    local animation = display.newAnimation({frame},1/12)
+                    self.animaComp:addAnimation(AnimaState.DEFAULT,animation)
+                    -- self.spriteComp:setSpriteFrame(frame)
+                    if not self._animaSize then
+                        self:_setupAnimationSize(animation)
+                    end
                 end
             end
             --精灵修正
-            self.spriteComp:setAnchorPoint(animCfg.anchorPoint)
-            self.spriteComp:setRotation(animCfg.rotation)
-            self.spriteComp:setScaleX(animCfg.scale.x)
-            self.spriteComp:setScaleY(animCfg.scale.y)
+            self.spriteComp:setAnchorPoint(animCfg.anchorPoint or cc.p(0.5,0.5))
+            self.spriteComp:setRotation(animCfg.rotation or 0)
+            self.spriteComp:setScaleX(animCfg.scale.x or 1)
+            self.spriteComp:setScaleY(animCfg.scale.y or 1)
         end  
     end
 end
@@ -123,5 +137,12 @@ function M:_onAction(params)
     self:_onMove(params.dx,params.dy)
 end
 --
+function M:_setupAnimationSize(animation)
+    local frames = animation:getFrames() 
+    local firstFrame = frames[1] and frames[1]:getSpriteFrame()
+    if firstFrame then
+        self._animaSize = firstFrame:getOriginalSize()
+    end
+end
 
 return M
