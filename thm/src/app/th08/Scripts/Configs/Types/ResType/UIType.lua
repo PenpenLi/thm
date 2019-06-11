@@ -1,13 +1,5 @@
 module("UIType")
 
-PUBLIC = "public"
+BUTTON = "button"
 
-MENU = "menu"
-
-ROLE = "role"
-
-LOADING = "loading"
-
-SELECTION = "selection"
-
-STAGE = "stage"
+PROGRESS_BAR = "progressBar"

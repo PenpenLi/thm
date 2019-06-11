@@ -63,7 +63,7 @@ function M:_initNode()
             bgSkin = false,
             --进度条皮肤
             progressSkin = {
-                src = ResManager.getResSub(ResType.UIBASE,UIBaseType.PROGRESS_BAR, "prog_radial_boss_hp"),
+                src = ResManager.getUIRes(UIType.PROGRESS_BAR, "prog_radial_boss_hp"),
             }
         }
     })

@@ -26,7 +26,7 @@ function M.create(params)
             y = node:getContentSize().height/2,
             anchorPoint = THSTG.UI.POINT_CENTER,
             style = {
-                font = ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_black"),
+                font = ResManager.getRes(ResType.FONT, FontType.FNT, "menu_font_black"),
             },
             
         })
@@ -61,16 +61,16 @@ function M.create(params)
             --
             --只是选中,并非进入
             if data.__isClick == true then
-                title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_white"))
+                title:setFntFile(ResManager.getRes(ResType.FONT, FontType.FNT, "menu_font_white"))
             else
-                title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_black"))
+                title:setFntFile(ResManager.getRes(ResType.FONT, FontType.FNT, "menu_font_black"))
             end
         end
         function node:_onCellClick(data)
             if data.value.__isClick == true then
-                title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_white"))
+                title:setFntFile(ResManager.getRes(ResType.FONT, FontType.FNT, "menu_font_white"))
             else
-                title:setFntFile(ResManager.getResSub(ResType.FONT, FontType.FNT, "menu_font_black"))
+                title:setFntFile(ResManager.getRes(ResType.FONT, FontType.FNT, "menu_font_black"))
             end
         end
 
@@ -83,7 +83,7 @@ function M.create(params)
         x = display.cx,
         y = display.cy,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        src = ResManager.getResSub(ResType.UI, ModuleType.MENU, "main_menu_main_bg")
+        src = ResManager.getModuleRes(ModuleType.MENU, "main_menu_main_bg")
 
     })
     node:addChild(mainBg)

@@ -1,6 +1,7 @@
 ﻿module("ResManager", package.seeall)
 local H_Resources = require "Scripts.Configs.Handwork.H_Resources"
 local F_Respreload = require "Scripts.Template.F_Respreload"
+
 local function getNameKey(...)
     local keys = {...}
     local keyName = ""
@@ -21,73 +22,31 @@ end
 -- 多层资源获取
 -- @param	...		[string]	资源类型
 -- @return	资源路径
-function getResMul(...)
-	
+function getRes(...)
 	local path = nil
 	local params = {...}
-	local pathStr = ""
+	
 	for i = 1, #params do
 		path = path and path[params[i]] or H_Resources[params[i]]
 		if not path then
 			-- if __DEBUG_RESOURCES__ then
+				local pathStr = ""
+				for j = 1, #params do
+					pathStr = string.format("%s/%s",pathStr,params[j])
+				end
+				pathStr = string.sub(pathStr, 2)
 				error(string.format("ResManager.getRes ERROR: can't found: %s",pathStr))
 			-- end
 			break
-		else
-			-- if __DEBUG_RESOURCES__ then
-				pathStr = pathStr .. "." ..  params[i]
-			-- end
 		end
 	end
-	
 	return path
 end
 
---[[
-获取资源
-@param	resType		[string]资源类型	(对应ResTypes中的项)
-@param	resName		[string]资源名
-@return 资源路径
-]]
-function getRes(resType, resName)
-	--ResourceManager:getInstance():getDefaultLoadingImage() -- 重置加载图
-
-	local path = nil
-
-	local t = H_Resources[resType]
-	if t then
-		path = t[resName]
-	end
-
-	if not path then
-		-- path = ResManager.getEmptyImg()
-		-- if __DEBUG_RESOURCES__ then
-			error(string.format("ResManager.getRes ERROR: can't found: %s.%s", tostring(resType), tostring(resName)))
-		-- end
-	end
-
-	return path
+function getUIRes(UIType,...)
+	return getRes(ResType.MODULE,ModuleType.UI,UIType,...)
 end
 
---------------------------
--- 子层资源获取
--- @param	resType		[string]	资源类型
--- @param	subType		[string]	子级资源类型
--- @param	resName		[string]	资源名
--- @return	资源路径
-function getResSub(resType, subType, resName)
-	local path = nil
-
-	local t = getRes(resType, subType)
-	if t then
-		path =  t[resName]
-	end
-
-	if not path then
-		error(string.format("ResManager.getResSub error: can't found: %s.%s.%s", tostring(resType), tostring(subType), tostring(resName)))
-	end
-
-	return path
+function getModuleRes(moduleType,...)
+	return getRes(ResType.MODULE,moduleType,...)
 end
-------------------------------------------------------------------------
---其他资源路径获取

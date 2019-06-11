@@ -38,37 +38,7 @@ return {
         image = 
         {
             stg1bg = "Assets/Texture/Image/stg1bg.jpg" ,
-            eff01 = "Assets/Texture/Image/eff01.png" ,
-            eff01b = "Assets/Texture/Image/eff01b.png" ,
-            eff02 = "Assets/Texture/Image/eff02.png" ,
-            eff02b = "Assets/Texture/Image/eff02b.png" ,
-            eff03 = "Assets/Texture/Image/eff03.png" ,
-            eff03b = "Assets/Texture/Image/eff03b.png" ,
-            eff04_b = "Assets/Texture/Image/eff04_b.png" ,
-            eff04_bb = "Assets/Texture/Image/eff04_bb.png" ,
-            eff04 = "Assets/Texture/Image/eff04.png" ,
-            eff04b = "Assets/Texture/Image/eff04b.png" ,
-            eff05 = "Assets/Texture/Image/eff05.png" ,
-            eff05b = "Assets/Texture/Image/eff05b.png" ,
-            eff06 = "Assets/Texture/Image/eff06.png" ,
-            eff06b = "Assets/Texture/Image/eff06b.png" ,
-            eff07 = "Assets/Texture/Image/eff07.png" ,
-            eff07b = "Assets/Texture/Image/eff07b.png" ,
-            eff08 = "Assets/Texture/Image/eff08.png" ,
-            eff08b = "Assets/Texture/Image/eff08b.png" ,
-            eff08ma = "Assets/Texture/Image/eff08ma.png" ,
-            eff08mb = "Assets/Texture/Image/eff08mb.png" ,
-            eff09al = "Assets/Texture/Image/eff09al.png" ,
-            eff09rm0 = "Assets/Texture/Image/eff09rm0.png" ,
-            eff09rm1 = "Assets/Texture/Image/eff09rm1.png" ,
-            eff09sk0 = "Assets/Texture/Image/eff09sk0.png" ,
-            eff09sk1 = "Assets/Texture/Image/eff09sk1.png" ,
-            eff09yk0 = "Assets/Texture/Image/eff09yk0.png" ,
-            eff09yk1 = "Assets/Texture/Image/eff09yk1.png" ,
-            eff09ym0 = "Assets/Texture/Image/eff09ym0.png" ,
-            eff09ym1 = "Assets/Texture/Image/eff09ym1.png" ,
-            eff09yy0 = "Assets/Texture/Image/eff09yy0.png" ,
-            eff09yy1 = "Assets/Texture/Image/eff09yy1.png" ,
+           
         },
         plist = 
         {
@@ -80,11 +50,10 @@ return {
     {
         skeleton = 
         {
-            spine_player_dragon = "Assets/Animation/Skeleton/Dragon/Dragon.json",
+            
         },
         tween = 
         {
-            spine_dragonborn_logo = "Assets/Animation/Tween/DragonOpening/DragonOpening.json",
             spine_boss_spellcard_attack = "Assets/Animation/Tween/SpellCardAttack/SpellCardAttack.json",
             spine_wriggle_comeon = "Assets/Animation/Tween/WriggleComeOn/WriggleComeOn.json",
         },
@@ -136,8 +105,23 @@ return {
         f_uvVortex = "Assets/Shader/f_uvVortex.fs",
     },
 
-    ui = 
+    -----------------
+    module = 
     {
+        ui = 
+        {
+            button =  
+            {
+                btn_base_yellow = "Assets/UIBase/Button/btn_base_yellow.png" ,
+            },
+            progressBar =  
+            {
+                prog_radial_bg = "Assets/UIBase/ProgressBar/prog_radial_bg.png" ,
+                prog_radial_hp = "Assets/UIBase/ProgressBar/prog_radial_hp.png" ,
+                prog_radial_boss_hp = "Assets/UIBase/ProgressBar/prog_radial_boss_hp.png" ,
+                prog_radial_boss_spell = "Assets/UIBase/ProgressBar/prog_radial_boss_spell.png" ,
+            }
+        },
         role = 
         {
 
@@ -195,25 +179,46 @@ return {
             loading_word_cn = "Assets/UI/GUI/PublicUI/Loading/loading_word_cn.png" ,
             loading_word_en = "Assets/UI/GUI/PublicUI/Loading/loading_word_en.png" ,
         },
-        map = 
+        stage = 
         {
-            stg4_1_f = "Assets/UI/Stage/Map/stg4_1_f.png" ,
+            --特效
+            eff01 = "Assets/Module/Stage/Effect/eff01.png" ,
+            eff01b = "Assets/Module/Stage/Effect/eff01b.png" ,
+            eff02 = "Assets/Module/Stage/Effect/eff02.png" ,
+            eff02b = "Assets/Module/Stage/Effect/eff02b.png" ,
+            eff03 = "Assets/Module/Stage/Effect/eff03.png" ,
+            eff03b = "Assets/Module/Stage/Effect/eff03b.png" ,
+            eff04_b = "Assets/Module/Stage/Effect/eff04_b.png" ,
+            eff04_bb = "Assets/Module/Stage/Effect/eff04_bb.png" ,
+            eff04 = "Assets/Module/Stage/Effect/eff04.png" ,
+            eff04b = "Assets/Module/Stage/Effect/eff04b.png" ,
+            eff05 = "Assets/Module/Stage/Effect/eff05.png" ,
+            eff05b = "Assets/Module/Stage/Effect/eff05b.png" ,
+            eff06 = "Assets/Module/Stage/Effect/eff06.png" ,
+            eff06b = "Assets/Module/Stage/Effect/eff06b.png" ,
+            eff07 = "Assets/Module/Stage/Effect/eff07.png" ,
+            eff07b = "Assets/Module/Stage/Effect/eff07b.png" ,
+            eff08 = "Assets/Module/Stage/Effect/eff08.png" ,
+            eff08b = "Assets/Module/Stage/Effect/eff08b.png" ,
+            eff08ma = "Assets/Module/Stage/Effect/eff08ma.png" ,
+            eff08mb = "Assets/Module/Stage/Effect/eff08mb.png" ,
+            eff09al = "Assets/Module/Stage/Effect/eff09al.png" ,
+            eff09rm0 = "Assets/Module/Stage/Effect/eff09rm0.png" ,
+            eff09rm1 = "Assets/Module/Stage/Effect/eff09rm1.png" ,
+            eff09sk0 = "Assets/Module/Stage/Effect/eff09sk0.png" ,
+            eff09sk1 = "Assets/Module/Stage/Effect/eff09sk1.png" ,
+            eff09yk0 = "Assets/Module/Stage/Effect/eff09yk0.png" ,
+            eff09yk1 = "Assets/Module/Stage/Effect/eff09yk1.png" ,
+            eff09ym0 = "Assets/Module/Stage/Effect/eff09ym0.png" ,
+            eff09ym1 = "Assets/Module/Stage/Effect/eff09ym1.png" ,
+            eff09yy0 = "Assets/Module/Stage/Effect/eff09yy0.png" ,
+            eff09yy1 = "Assets/Module/Stage/Effect/eff09yy1.png" ,
+            
+            --背景
+            stg4_1_f = "Assets/Module/Stage/Map/stg4_1_f.png" ,
+            
         },
-    },
-
-    uibase = 
-    {
-        button =  
-        {
-            btn_base_yellow = "Assets/UIBase/Button/btn_base_yellow.png" ,
-        },
-        progressBar =  
-        {
-            prog_radial_bg = "Assets/UIBase/ProgressBar/prog_radial_bg.png" ,
-            prog_radial_hp = "Assets/UIBase/ProgressBar/prog_radial_hp.png" ,
-            prog_radial_boss_hp = "Assets/UIBase/ProgressBar/prog_radial_boss_hp.png" ,
-            prog_radial_boss_spell = "Assets/UIBase/ProgressBar/prog_radial_boss_spell.png" ,
-        }
     }
+    
 
 }

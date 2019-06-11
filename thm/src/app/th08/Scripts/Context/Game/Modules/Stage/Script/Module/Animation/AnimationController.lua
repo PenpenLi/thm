@@ -86,8 +86,8 @@ function M:_onSetup()
 
                     --XXX:这里可以预加载
                     AnimationServer.loadDBXFile(
-                        ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,atals),
-                        ResManager.getResSub(ResType.ANIMATION,AnimaType.SEQUENCE,skeName)
+                        ResManager.getRes(ResType.TEXTURE,TexType.SHEET,atals),
+                        ResManager.getRes(ResType.ANIMATION,AnimaType.SEQUENCE,skeName)
                     )
                     
                     local skeleton = AnimationServer.getSkeleton(skeName)
@@ -102,7 +102,7 @@ function M:_onSetup()
             elseif animCfg.frameName ~= "" then
                 local frameName = string.format(animCfg.frameName, code)
                 SpriteServer.loadDBXFile(
-                    ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,animCfg.atlas)
+                    ResManager.getRes(ResType.TEXTURE,TexType.SHEET,animCfg.atlas)
                 )
                 --是一帧,需要转为帧动画
                 local frame = SpriteServer.createFrame(animCfg.atlas,frameName)

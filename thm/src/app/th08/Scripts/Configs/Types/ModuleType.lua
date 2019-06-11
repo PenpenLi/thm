@@ -1,5 +1,7 @@
 module("ModuleType")
 
+UI = "ui"
+
 TEST = "test"
 
 MENU = "menu"

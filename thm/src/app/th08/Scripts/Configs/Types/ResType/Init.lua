@@ -4,7 +4,6 @@ require "Scripts.Configs.Types.ResType.ResType"
 --资源子类型
 require "Scripts.Configs.Types.ResType.FontType"
 require "Scripts.Configs.Types.ResType.UIType"
-require "Scripts.Configs.Types.ResType.UIBaseType"
 require "Scripts.Configs.Types.ResType.TexType"
 require "Scripts.Configs.Types.ResType.AnimaType"
 require "Scripts.Configs.Types.ResType.SFXType"

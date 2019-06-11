@@ -2,7 +2,7 @@ return {
     --全局预加载
     _Global = function ( ... )
         --图片资源预加载
-        SpriteServer.loadDBXFile(ResManager.getResSub(ResType.TEXTURE,TexType.SHEET,"etama2"))
+        SpriteServer.loadDBXFile(ResManager.getRes(ResType.TEXTURE,TexType.SHEET,"etama2"))
 
     end,
 

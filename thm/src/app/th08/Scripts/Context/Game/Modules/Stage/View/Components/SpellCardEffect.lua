@@ -10,7 +10,7 @@ function M.create(params)
     uiMainAnimation = THSTG.ANIMATION.newSpineAnimation({
         x = display.cx,
         y = display.cy,
-        src = ResManager.getResMul(ResType.ANIMATION,AnimaType.TWEEN,"spine_boss_spellcard_attack"),
+        src = ResManager.getRes(ResType.ANIMATION,AnimaType.TWEEN,"spine_boss_spellcard_attack"),
     })
     uiMainAnimation:setScale(0.4)
     node:addChild(uiMainAnimation)

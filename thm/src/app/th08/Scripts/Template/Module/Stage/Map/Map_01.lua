@@ -19,7 +19,7 @@ function M.create(params)
         width = display.width,
         height = display.height,
         anchorPoint = THSTG.UI.POINT_CENTER,
-        src = ResManager.getResSub(ResType.TEXTURE,TexType.IMAGE,"stg1bg"),
+        src = ResManager.getRes(ResType.TEXTURE,TexType.IMAGE,"stg1bg"),
         isTile = true,
         uniforms = {
             speedX = 0,

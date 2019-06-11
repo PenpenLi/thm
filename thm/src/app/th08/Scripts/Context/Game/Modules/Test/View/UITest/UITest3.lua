@@ -101,17 +101,17 @@ function M.create(params)
         style = {
             normal = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON,"btn_base_yellow")
+                    src = ResManager.getUIRes(UIType.BUTTON,"btn_base_yellow")
                 } 
             },
             pressed = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON,"btn_base_yellow")
+                    src = ResManager.getUIRes(UIType.BUTTON,"btn_base_yellow")
                 }
             },
             disabled = {
                 skin = {
-                    src = ResManager.getResSub(ResType.UIBASE,UIBaseType.BUTTON,"btn_base_yellow")
+                    src = ResManager.getUIRes(UIType.BUTTON,"btn_base_yellow")
                 } 
             },
         },

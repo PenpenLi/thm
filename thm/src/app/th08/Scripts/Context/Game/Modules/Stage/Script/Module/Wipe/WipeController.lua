@@ -14,7 +14,7 @@ function M:_onInit()
         y = 0,
         anchorPoint = cc.p(0.5,0.5),
         isLoop = true,
-        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_protected"),
+        src = ResManager.getRes(ResType.SFX,SFXType.PARTICLE,"ccp_gk_protected"),
     })
     self.__effectNode:setCascadeOpacityEnabled(false)
     self.__effectNode:setScale(0.6)
@@ -58,7 +58,7 @@ function M:_wipeBreaked()
     --爆裂特效
     EffectServer.playParticle({
         refNode = self:getEntity(),
-        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_star03"),
+        src = ResManager.getRes(ResType.SFX,SFXType.PARTICLE,"ccp_gk_star03"),
         scale = 1.5
      })
     self:_wipeClose()
@@ -71,7 +71,7 @@ end
 function M:_onWipeTimeout()
     EffectServer.playParticle({
         refNode = self:getEntity(),
-        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_star03"),
+        src = ResManager.getRes(ResType.SFX,SFXType.PARTICLE,"ccp_gk_star03"),
         scale = 1.5
      })
     --音效

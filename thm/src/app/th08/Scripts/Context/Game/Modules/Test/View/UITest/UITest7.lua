@@ -12,7 +12,7 @@ function M.create(params)
     -- local skeletonNode = THSTG.ANIMATION.newSpineAnimation({
     --     x = display.cx,
     --     y = display.cy,
-    --     src = ResManager.getResMul(ResType.ANIMATION,AnimaType.TWEEN,"spine_dragonborn_logo"),
+    --     src = ResManager.getRes(ResType.ANIMATION,AnimaType.TWEEN,"spine_dragonborn_logo"),
     --     default = "newAnimation",
     -- })
     -- skeletonNode:setScale(0.4)
@@ -21,7 +21,7 @@ function M.create(params)
     local sp0 = GlobalUtil.playEffect({
         x = display.cx,
         y = display.cy,
-        src = ResManager.getResMul(ResType.ANIMATION,AnimaType.TWEEN,"spine_boss_spellcard_attack"),
+        src = ResManager.getRes(ResType.ANIMATION,AnimaType.TWEEN,"spine_boss_spellcard_attack"),
         animation = "default",
         isLoop = false,
         scale = 0.4,
@@ -43,7 +43,7 @@ function M.create(params)
         y = display.height/2,
         anchorPoint = cc.p(0.5,0.5),
         isLoop = true,
-        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_leaf"),
+        src = ResManager.getRes(ResType.SFX,SFXType.PARTICLE,"ccp_gk_leaf"),
     })
     p1:play()
     node:addChild(p1)
@@ -53,7 +53,7 @@ function M.create(params)
         y = display.height/2,
         anchorPoint = cc.p(0.5,0.5),
         isLoop = true,
-        src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_gk_protected"),
+        src = ResManager.getRes(ResType.SFX,SFXType.PARTICLE,"ccp_gk_protected"),
     })
     node:addChild(p2)
 

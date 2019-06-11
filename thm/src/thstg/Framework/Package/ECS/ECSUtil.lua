@@ -99,7 +99,7 @@ function trans2ClassInfo(obj,ctorArgs)
     local classList = {}
     local this = obj
     while this do
-        if not this.super then break end    --不包括最顶层,没有意义
+        -- if not this.super then break end    --不包括最顶层,没有意义
         local keys = this:_onClass(this.__cname or "UnknowClass" , this.__id__ , ctorArgs)
         for i = #keys,1,-1 do
             table.insert(classList, keys[i])

@@ -1,5 +1,5 @@
 module("ResType")
-
+--按照资源类型划分
 FONT = "font"
 
 SOUND = "sound"
@@ -14,6 +14,5 @@ SHADER = "shader"
 
 MODEL = "model"
 
-UI = "ui"
-
-UIBASE = "uibase"
+--按模块划分
+MODULE = "module"

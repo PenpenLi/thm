@@ -32,7 +32,7 @@ function M:_onDead()
    --一个击破动画
    EffectServer.playParticle({
       refNode = self:getEntity(),
-      src = ResManager.getResMul(ResType.SFX,SFXType.PARTICLE,"ccp_st_boss_down"),
+      src = ResManager.getRes(ResType.SFX,SFXType.PARTICLE,"ccp_st_boss_down"),
    })
    --震屏动画
    self:destroyEntity()

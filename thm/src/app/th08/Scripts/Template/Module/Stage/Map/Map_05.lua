@@ -30,8 +30,8 @@ function M.create(params)
     -- local sprite = cc.Sprite:create()
     -- sprite:setPosition(cc.p(display.cx,display.cy))
     -- THSTG.ANIMATION.DBXManager.loadDBXFile(
-    --     ResManager.getResMul(ResType.ANIMATION,AnimaType.SEQUENCE,"player00_tex"),
-    --     ResManager.getResMul(ResType.ANIMATION,AnimaType.SEQUENCE,"player00_ske")
+    --     ResManager.getRes(ResType.ANIMATION,AnimaType.SEQUENCE,"player00_tex"),
+    --     ResManager.getRes(ResType.ANIMATION,AnimaType.SEQUENCE,"player00_ske")
     -- )
     -- local anime = THSTG.ANIMATION.DBXManager.createAnime("player00","reimu_idle")
     -- sprite:runAction(cc.RepeatForever:create(anime))
