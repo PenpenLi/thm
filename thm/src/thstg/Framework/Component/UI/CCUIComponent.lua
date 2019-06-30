@@ -562,3 +562,4 @@ function newTouchLayer(params)
 
 	return layer
 end
+

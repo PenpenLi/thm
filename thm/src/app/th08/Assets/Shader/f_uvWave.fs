@@ -5,7 +5,7 @@ precision lowp float;
 varying vec4 v_fragmentColor;                                           
 varying vec2 v_texCoord;       
                                             
-uniform float _speed;    //1.0                                                                
+uniform float _speed;    //5.0                                                                
 uniform float _scale;    //3.0
 uniform float _identity; //80.0                                                                                                  
 void main()                                                             

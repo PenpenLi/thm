@@ -4,36 +4,36 @@ local ScenarioUtil = StageDefine.ScenarioUtil
 local bossEntity = false
 StageDefine.StageEntityManager.expandEntity(EEntityType.EnemyBullet,0,70)
 return {
-    -- {
-    --     time = 1,
-    --     callback  = function (sender,task)
-    --         --播放Boss出场动画
-    --         AnimationServer.playTween({
-    --             x = display.cx,
-    --             y = display.cy,
-    --             scale = 0.6,
-    --             animation = "default",
-    --             src = ResManager.getRes(ResType.ANIMATION,AnimaType.TWEEN,"spine_wriggle_comeon"),
-    --             father = THSTG.SceneManager.get(SceneType.MAIN).preEffectLayer
-    --         })
-    --     end
-    -- },
-    -- {
-    --     time = 2,
-    --     callback = function (sender,task)
-    --         ScenarioUtil.takeBoss(1,1,function(index,entity)
-    --             local initPosX = display.cx
-    --             local initPosY = display.width + 60
-    --             local initSpeedX = 0
-    --             local initSpeedY = 0
-    --             local actions = {
-    --                 cc.MoveTo:create(2,cc.p(display.cx,display.cy)),
-    --             }
-    --             return cc.p(initPosX,initPosY),cc.p(initSpeedX,initSpeedY),cc.RepeatForever:create(cc.Sequence:create(actions))
-    --         end)
-    --         bossEntity = ModuleCache.Stage:getBossEntity()
-    --     end
-    -- },
+    {
+        time = 1,
+        callback  = function (sender,task)
+            --播放Boss出场动画
+            AnimationServer.playTween({
+                x = display.cx,
+                y = display.cy,
+                scale = 0.6,
+                animation = "default",
+                src = ResManager.getRes(ResType.ANIMATION,AnimaType.TWEEN,"spine_wriggle_comeon"),
+                father = THSTG.SceneManager.get(SceneType.MAIN).preEffectLayer
+            })
+        end
+    },
+    {
+        time = 2,
+        callback = function (sender,task)
+            ScenarioUtil.takeBoss(1,1,function(index,entity)
+                local initPosX = display.cx
+                local initPosY = display.width + 60
+                local initSpeedX = 0
+                local initSpeedY = 0
+                local actions = {
+                    cc.MoveTo:create(2,cc.p(display.cx,display.cy)),
+                }
+                return cc.p(initPosX,initPosY),cc.p(initSpeedX,initSpeedY),cc.RepeatForever:create(cc.Sequence:create(actions))
+            end)
+            bossEntity = ModuleCache.Stage:getBossEntity()
+        end
+    },
 
     -- {
     --     time = 4,

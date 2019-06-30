@@ -103,6 +103,8 @@ return {
         f_grey = "Assets/Shader/f_grey.fs",
         f_uvRoll = "Assets/Shader/f_uvRoll.fs",
         f_uvVortex = "Assets/Shader/f_uvVortex.fs",
+        f_uvWave = "Assets/Shader/f_uvWave.fs",
+        f_uvRipple = "Assets/Shader/f_uvRipple.fs",
     },
 
     -----------------
@@ -112,14 +114,14 @@ return {
         {
             button =  
             {
-                btn_base_yellow = "Assets/UIBase/Button/btn_base_yellow.png" ,
+                btn_base_yellow = "Assets/Module/UI/Button/btn_base_yellow.png" ,
             },
             progressBar =  
             {
-                prog_radial_bg = "Assets/UIBase/ProgressBar/prog_radial_bg.png" ,
-                prog_radial_hp = "Assets/UIBase/ProgressBar/prog_radial_hp.png" ,
-                prog_radial_boss_hp = "Assets/UIBase/ProgressBar/prog_radial_boss_hp.png" ,
-                prog_radial_boss_spell = "Assets/UIBase/ProgressBar/prog_radial_boss_spell.png" ,
+                prog_radial_bg = "Assets/Module/UI/ProgressBar/prog_radial_bg.png" ,
+                prog_radial_hp = "Assets/Module/UI/ProgressBar/prog_radial_hp.png" ,
+                prog_radial_boss_hp = "Assets/Module/UI/ProgressBar/prog_radial_boss_hp.png" ,
+                prog_radial_boss_spell = "Assets/Module/UI/ProgressBar/prog_radial_boss_spell.png" ,
             }
         },
         role = 
@@ -134,50 +136,50 @@ return {
         
         selection = 
         {
-            selection_bg = "Assets/UI/Selection/selection_bg",
+            selection_bg = "Assets/Selection/selection_bg",
             
-            diff_1_off = "Assets/UI/Selection/SelectDifficulty/diff_1_off.png" ,
-            diff_1_on = "Assets/UI/Selection/SelectDifficulty/diff_1_on.png" ,
-            diff_2_off = "Assets/UI/Selection/SelectDifficulty/diff_2_off.png" ,
-            diff_2_on = "Assets/UI/Selection/SelectDifficulty/diff_2_on.png" ,
-            diff_3_off = "Assets/UI/Selection/SelectDifficulty/diff_3_off.png" ,
-            diff_3_on = "Assets/UI/Selection/SelectDifficulty/diff_3_on.png" ,
-            diff_4_off = "Assets/UI/Selection/SelectDifficulty/diff_4_off.png" ,
-            diff_4_on = "Assets/UI/Selection/SelectDifficulty/diff_4_on.png" ,
-            diff_5_off = "Assets/UI/Selection/SelectDifficulty/diff_5_off.png" ,
-            diff_5_on = "Assets/UI/Selection/SelectDifficulty/diff_5_on.png" ,
-            diff_title = "Assets/UI/Selection/SelectDifficulty/diff_title.png" ,
+            diff_1_off = "Assets/Selection/SelectDifficulty/diff_1_off.png" ,
+            diff_1_on = "Assets/Selection/SelectDifficulty/diff_1_on.png" ,
+            diff_2_off = "Assets/Selection/SelectDifficulty/diff_2_off.png" ,
+            diff_2_on = "Assets/Selection/SelectDifficulty/diff_2_on.png" ,
+            diff_3_off = "Assets/Selection/SelectDifficulty/diff_3_off.png" ,
+            diff_3_on = "Assets/Selection/SelectDifficulty/diff_3_on.png" ,
+            diff_4_off = "Assets/Selection/SelectDifficulty/diff_4_off.png" ,
+            diff_4_on = "Assets/Selection/SelectDifficulty/diff_4_on.png" ,
+            diff_5_off = "Assets/Selection/SelectDifficulty/diff_5_off.png" ,
+            diff_5_on = "Assets/Selection/SelectDifficulty/diff_5_on.png" ,
+            diff_title = "Assets/Selection/SelectDifficulty/diff_title.png" ,
     
-            sl_pl00a = "Assets/UI/Selection/SelectRole/sl_pl00a.png" ,
-            sl_pl00h = "Assets/UI/Selection/SelectRole/sl_pl00h.png" ,
-            sl_pl01a = "Assets/UI/Selection/SelectRole/sl_pl01a.png" ,
-            sl_pl01h = "Assets/UI/Selection/SelectRole/sl_pl01h.png" ,
-            sl_pl02a = "Assets/UI/Selection/SelectRole/sl_pl02a.png" ,
-            sl_pl02h = "Assets/UI/Selection/SelectRole/sl_pl02h.png" ,
-            sl_pl03a = "Assets/UI/Selection/SelectRole/sl_pl03a.png" ,
-            sl_pl03h = "Assets/UI/Selection/SelectRole/sl_pl03h.png" ,
-            sl_pltxt0 = "Assets/UI/Selection/SelectRole/sl_pltxt0.png" ,
-            sl_pltxt1 = "Assets/UI/Selection/SelectRole/sl_pltxt1.png" ,
-            sl_pltxt2 = "Assets/UI/Selection/SelectRole/sl_pltxt2.png" ,
-            sl_pltxt3 = "Assets/UI/Selection/SelectRole/sl_pltxt3.png" ,
-            sl_pltxt4 = "Assets/UI/Selection/SelectRole/sl_pltxt4.png" ,
-            sl_pltxt5 = "Assets/UI/Selection/SelectRole/sl_pltxt5.png" ,
-            sl_pltxt6 = "Assets/UI/Selection/SelectRole/sl_pltxt6.png" ,
-            sl_pltxt7 = "Assets/UI/Selection/SelectRole/sl_pltxt7.png" ,
-            sl_pltxt8 = "Assets/UI/Selection/SelectRole/sl_pltxt8.png" ,
-            sl_pltxt9 = "Assets/UI/Selection/SelectRole/sl_pltxt9.png" ,
-            sl_pltxt10 = "Assets/UI/Selection/SelectRole/sl_pltxt10.png" ,
-            sl_pltxt11 = "Assets/UI/Selection/SelectRole/sl_pltxt11.png" ,
-            sl_text = "Assets/UI/Selection/SelectRole/sl_text.png" ,
+            sl_pl00a = "Assets/Selection/SelectRole/sl_pl00a.png" ,
+            sl_pl00h = "Assets/Selection/SelectRole/sl_pl00h.png" ,
+            sl_pl01a = "Assets/Selection/SelectRole/sl_pl01a.png" ,
+            sl_pl01h = "Assets/Selection/SelectRole/sl_pl01h.png" ,
+            sl_pl02a = "Assets/Selection/SelectRole/sl_pl02a.png" ,
+            sl_pl02h = "Assets/Selection/SelectRole/sl_pl02h.png" ,
+            sl_pl03a = "Assets/Selection/SelectRole/sl_pl03a.png" ,
+            sl_pl03h = "Assets/Selection/SelectRole/sl_pl03h.png" ,
+            sl_pltxt0 = "Assets/Selection/SelectRole/sl_pltxt0.png" ,
+            sl_pltxt1 = "Assets/Selection/SelectRole/sl_pltxt1.png" ,
+            sl_pltxt2 = "Assets/Selection/SelectRole/sl_pltxt2.png" ,
+            sl_pltxt3 = "Assets/Selection/SelectRole/sl_pltxt3.png" ,
+            sl_pltxt4 = "Assets/Selection/SelectRole/sl_pltxt4.png" ,
+            sl_pltxt5 = "Assets/Selection/SelectRole/sl_pltxt5.png" ,
+            sl_pltxt6 = "Assets/Selection/SelectRole/sl_pltxt6.png" ,
+            sl_pltxt7 = "Assets/Selection/SelectRole/sl_pltxt7.png" ,
+            sl_pltxt8 = "Assets/Selection/SelectRole/sl_pltxt8.png" ,
+            sl_pltxt9 = "Assets/Selection/SelectRole/sl_pltxt9.png" ,
+            sl_pltxt10 = "Assets/Selection/SelectRole/sl_pltxt10.png" ,
+            sl_pltxt11 = "Assets/Selection/SelectRole/sl_pltxt11.png" ,
+            sl_text = "Assets/Selection/SelectRole/sl_text.png" ,
     
         },
         loading = 
         {
-            loading_icon_1 = "Assets/UI/GUI/PublicUI/Loading/loading_icon_1.png" ,
-            loading_icon_2 = "Assets/UI/GUI/PublicUI/Loading/loading_icon_2.png" ,
-            loading_logo = "Assets/UI/GUI/PublicUI/Loading/loading_logo.jpg" ,
-            loading_word_cn = "Assets/UI/GUI/PublicUI/Loading/loading_word_cn.png" ,
-            loading_word_en = "Assets/UI/GUI/PublicUI/Loading/loading_word_en.png" ,
+            loading_icon_1 = "Assets/Loading/loading_icon_1.png" ,
+            loading_icon_2 = "Assets/Loading/loading_icon_2.png" ,
+            loading_logo = "Assets/Loading/loading_logo.jpg" ,
+            loading_word_cn = "Assets/Loading/loading_word_cn.png" ,
+            loading_word_en = "Assets/Loading/loading_word_en.png" ,
         },
         stage = 
         {
@@ -215,7 +217,8 @@ return {
             eff09yy1 = "Assets/Module/Stage/Effect/eff09yy1.png" ,
             
             --背景
-            stg4_1_f = "Assets/Module/Stage/Map/stg4_1_f.png" ,
+            stg1_sea = "Assets/Module/Stage/Map/stg1_sea.png" ,
+            stg1_sky = "Assets/Module/Stage/Map/stg1_sky.jpg" ,
             
         },
     }

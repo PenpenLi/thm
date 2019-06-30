@@ -46,7 +46,7 @@ require "thstg.Framework.Component.UI.Basic.TabBar"
 require "thstg.Framework.Component.UI.Basic.LayerStack"
 
 --[[扩展部件extends]]--
-
+require "thstg.Framework.Component.UI.Extends.Shader"
 
 --[[自定义部件custom]]--
 require "thstg.Framework.Component.UI.Custom.DropDown"

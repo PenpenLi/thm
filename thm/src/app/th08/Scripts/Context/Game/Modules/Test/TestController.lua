@@ -14,10 +14,10 @@ function M:_onClose()
 
 end
 --
-
+local depth = 0
 function M:__keyBoadrControl(keyCode, event)
-    if keyCode == cc.KeyCode.KEY_F1 then
    
+    if keyCode == cc.KeyCode.KEY_F1 then
     
     end
 end

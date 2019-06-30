@@ -126,8 +126,8 @@ end
 
 function M:addComponent(component,params)
 	local comp = _addComponent(self,component,params)
-	local classPath = comp:getClassPath()
-	self[classPath] = comp
+	local className = comp:getClassName()
+	self[className] = comp
 	return comp
 end
 
@@ -135,8 +135,8 @@ end
 function M:removeComponent(...)
 	local params = {}
 	_remveComponent(self,params,...)
-	local classPath= params.comp:getClassPath()
-	self[classPath] = nil
+	local className = params.comp:getClassName()
+	self[className] = nil
 end
 
 --移除组件列表
